@@ -1,5 +1,20 @@
 {
   "mcpServers": {
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp",
+      "description": "Atlassian (official) - Jira, Confluence, Compass via OAuth 2.1"
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp",
+      "description": "Figma design system access (OAuth) - read components, styles, variables, and layouts"
+    },
+    "stitch": {
+      "type": "http",
+      "url": "https://stitch.googleapis.com/mcp",
+      "description": "Google Stitch (official) - AI UI generation, mockups, design context, screen code. Setup: https://stitch.withgoogle.com/docs/mcp/setup. Note: Claude Desktop requires DCR; Stitch uses Google Cloud auth, so you may see 'Incompatible auth server: does not support dynamic client registration'. See mockup.md troubleshooting."
+    },
     "github": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
