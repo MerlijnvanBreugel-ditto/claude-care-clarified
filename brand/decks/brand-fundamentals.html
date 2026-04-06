@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Fundamentals — A Founder's Operating Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Primary palette */
+    --navy: #0D164F;
+    --mint: #E0FBD5;
+    --teal: #58B6D2;
+    --yellow: #F3DE70;
+    --orange: #E8916E;
+    --lavender: #BEAEF8;
+    /* Secondary palette */
+    --cream: #EFE9DE;
+    --light-blue: #B2DCF5;
+    --light-gray: #F1F1F1;
+    /* Functional */
+    --text-light: #7C8297;
+    --red: #D94F4F;
+    --divider: #EAEAEA;
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: #FFFFFF;
+    color: var(--navy);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vh 8vw;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  /* Slide surfaces */
+  .slide--default { background: #FFFFFF; color: var(--navy); }
+  .slide--navy { background: var(--navy); color: #F8F7F4; }
+
+  /* Brand O overlay */
+  .brand-o {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .brand-o img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .slide > *:not(.brand-o) { position: relative; z-index: 1; }
+
+  /* Typography */
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 0.4em;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 0.5em;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.3;
+    margin-bottom: 0.4em;
+  }
+
+  p, li {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  .subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #7C8297;
+    max-width: 42em;
+  }
+
+  .slide--navy .subtitle { opacity: 0.75; }
+
+  .label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 12px;
+    color: #7C8297;
+  }
+
+  .slide--navy .label { color: var(--teal); }
+  .slide--default .label { color: var(--teal); }
+  .slide--default .label { color: var(--teal); }
+
+  /* Quote */
+  blockquote {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    line-height: 1.3;
+    padding-left: 1.2em;
+    margin: 1em 0;
+    max-width: 36em;
+    border-left: 4px solid var(--teal);
+  }
+
+  .slide--navy blockquote { border-left-color: var(--yellow); }
+  .slide--default blockquote { border-left-color: var(--yellow); }
+
+  .quote-attr {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    opacity: 0.5;
+    margin-top: 0.5em;
+    padding-left: 1.5em;
+  }
+
+  /* Layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; margin-top: 1.5em; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3vw; margin-top: 1.5em; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin-top: 1em; font-size: clamp(0.85rem, 1.1vw, 1rem); }
+  th, td { text-align: left; padding: 0.6em 1em; font-weight: 500; }
+  th {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+    border-bottom: 2px solid rgba(88,182,210,0.25);
+  }
+  td { border-bottom: 1px solid rgba(13,22,79,0.06); }
+  .slide--navy th { color: var(--teal); border-bottom-color: rgba(88,182,210,0.3); }
+  .slide--navy td { border-bottom-color: rgba(255,255,255,0.08); }
+
+  /* Card */
+  .card {
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-bottom: 0.8em;
+    background: rgba(13,22,79,0.03);
+    border: 1px solid rgba(13,22,79,0.06);
+  }
+
+  .slide--navy .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.08); }
+  .slide--default .card { background: rgba(255,255,255,0.6); border-color: rgba(88,182,210,0.12); }
+  .slide--default .card { background: #fff; border-color: rgba(30,36,50,0.06); }
+
+  /* Lists */
+  ul, ol { padding-left: 1.2em; margin-top: 0.5em; }
+  li { margin-bottom: 0.4em; }
+  li::marker { color: var(--teal); }
+  .slide--navy li::marker { color: var(--teal); }
+
+  /* Emphasis */
+  .highlight { color: var(--teal); }
+  .slide--navy .highlight { color: var(--yellow); }
+  .slide--default .highlight { color: var(--teal); }
+  strong { font-weight: 700; }
+
+  /* Flow diagram */
+  .flow { display: flex; align-items: center; gap: 0.8em; margin: 1.5em 0; flex-wrap: wrap; }
+  .flow-item {
+    background: rgba(88,182,210,0.1);
+    border: 1px solid rgba(88,182,210,0.2);
+    border-radius: 10px;
+    padding: 0.7em 1.2em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    white-space: nowrap;
+  }
+  .flow-arrow { color: var(--teal); font-size: 1.3rem; opacity: 0.5; }
+  .slide--navy .flow-item { background: rgba(88,182,210,0.15); border-color: rgba(88,182,210,0.3); }
+
+  /* Pill */
+  .pill {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.25em 0.8em;
+    border-radius: 100px;
+    margin-right: 0.4em;
+    margin-bottom: 0.3em;
+  }
+  .pill--teal { background: rgba(88,182,210,0.15); color: var(--teal); }
+  .pill--gold { background: rgba(212,168,50,0.1); color: var(--teal); }
+  .pill--red { background: rgba(217,79,79,0.12); color: var(--red); }
+  .pill--green { background: rgba(74,180,120,0.12); color: #2D8A50; }
+
+  /* Progress */
+  .progress {
+    position: fixed; bottom: 0; left: 0;
+    height: 3px; background: var(--teal);
+    transition: width 0.4s ease; z-index: 100;
+  }
+
+  .counter {
+    position: fixed; bottom: 1.5em; right: 2em;
+    font-family: var(--font-body);
+    font-weight: 500; font-size: 0.85rem;
+    opacity: 0.35; z-index: 100;
+  }
+
+  /* Spacing */
+  .mt-1 { margin-top: 0.5em; }
+  .mt-2 { margin-top: 1em; }
+  .mt-3 { margin-top: 1.5em; }
+  .mt-4 { margin-top: 2em; }
+  .mb-1 { margin-bottom: 0.5em; }
+  .small { font-size: clamp(0.8rem, 1vw, 0.9rem); opacity: 0.5; }
+
+  /* VS block */
+  .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2em; align-items: start; margin-top: 1.5em; }
+  .vs-divider { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; opacity: 0.25; padding-top: 1em; }
+  .vs-bad { opacity: 0.45; }
+
+  /* Layers diagram */
+  .layers { display: flex; flex-direction: column; gap: 0.4em; margin-top: 1.5em; max-width: 36em; }
+  .layer-row {
+    display: grid; grid-template-columns: 10em 1fr; gap: 1.5em;
+    align-items: center; padding: 0.7em 1.2em;
+    border-radius: 10px; font-weight: 500;
+  }
+  .layer-row .layer-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(1rem, 1.3vw, 1.15rem); }
+  .layer-row .layer-q { font-size: clamp(0.9rem, 1.1vw, 1rem); opacity: 0.6; }
+
+  .slide--default .layer-row:nth-child(1) { background: rgba(88,182,210,0.18); }
+  .slide--default .layer-row:nth-child(2) { background: rgba(88,182,210,0.13); }
+  .slide--default .layer-row:nth-child(3) { background: rgba(88,182,210,0.09); }
+  .slide--default .layer-row:nth-child(4) { background: rgba(88,182,210,0.06); }
+  .slide--default .layer-row:nth-child(5) { background: rgba(88,182,210,0.03); }
+
+  .slide--navy .layer-row:nth-child(1) { background: rgba(88,182,210,0.2); }
+  .slide--navy .layer-row:nth-child(2) { background: rgba(88,182,210,0.15); }
+  .slide--navy .layer-row:nth-child(3) { background: rgba(88,182,210,0.11); }
+  .slide--navy .layer-row:nth-child(4) { background: rgba(88,182,210,0.07); }
+  .slide--navy .layer-row:nth-child(5) { background: rgba(88,182,210,0.04); }
+
+  /* Checklist */
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding: 0.5em 0; padding-left: 1.8em; position: relative; }
+  .checklist li::before {
+    content: ''; position: absolute; left: 0; top: 0.7em;
+    width: 1em; height: 1em; border: 2px solid var(--teal); border-radius: 4px;
+  }
+
+  /* Messaging architecture diagram */
+  .msg-top {
+    background: var(--navy); color: #F8F7F4;
+    padding: 1em 1.5em; border-radius: 12px 12px 0 0; text-align: center;
+  }
+  .msg-pillars {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid rgba(13,22,79,0.08); border-top: none;
+  }
+  .msg-pillars > div { padding: 1em; }
+  .msg-pillars > div:not(:last-child) { border-right: 1px solid rgba(13,22,79,0.08); }
+  .msg-audiences {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px solid rgba(13,22,79,0.08); border-top: none;
+    border-radius: 0 0 12px 12px; background: rgba(13,22,79,0.02);
+  }
+  .msg-audiences > div { padding: 0.8em; text-align: center; }
+  .msg-audiences > div:not(:last-child) { border-right: 1px solid rgba(13,22,79,0.08); }
+
+  @media (max-width: 768px) {
+    .slide { padding: 4vh 6vw; }
+    .two-col, .three-col { grid-template-columns: 1fr; gap: 1.5em; }
+    .vs { grid-template-columns: 1fr; }
+    .vs-divider { text-align: center; }
+    .layers .layer-row { grid-template-columns: 1fr; gap: 0.2em; }
+    .msg-pillars { grid-template-columns: 1fr; }
+    .msg-audiences { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- SLIDE 1: Title -->
+<div class="slide slide--default active" data-slide="0">
+  <div class="brand-o" style="right: -8%; top: 8%; width: 52vh; height: 52vh; opacity: 0.045;">
+    <img src="logo/Ditto_darkblue_bigo.svg" alt="">
+  </div>
+  <div class="label">Ditto Care</div>
+  <h1>Brand Fundamentals</h1>
+  <p class="subtitle mt-2">A founder's operating manual for building a brand that patients trust, families love, and competitors can't copy.</p>
+  <p class="small mt-4">Navigate: arrow keys or click</p>
+</div>
+
+<!-- SLIDE 2: What Brand Is -->
+<div class="slide slide--default" data-slide="1">
+  <div class="label">The Starting Point</div>
+  <h2>Brand is not what you say.<br>It's what people <span class="highlight">feel</span>.</h2>
+  <blockquote class="mt-3">"A brand is a person's gut feeling about a product, service, or company."</blockquote>
+  <p class="quote-attr">Marty Neumeier, The Brand Gap</p>
+  <p class="subtitle mt-3">You can't control a gut feeling directly. You can only shape the inputs that create it: what you say, how you look, what it feels like to use your product, and whether you keep your promises.</p>
+</div>
+
+<!-- SLIDE 3: The 5 Layers -->
+<div class="slide slide--default" data-slide="2">
+  <div class="label">The Architecture</div>
+  <h2>The 5 Layers of Brand</h2>
+  <p class="subtitle mb-1">Inside-out. Each layer must be true before the next one works.</p>
+  <div class="two-col">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <!-- Concentric rings in pure CSS -->
+      <div style="position: relative; width: 320px; height: 320px;">
+        <div style="position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(88,182,210,0.25); display: flex; align-items: flex-start; justify-content: center; padding-top: 12px;">
+          <span style="font-size: 0.7rem; font-weight: 600; color: var(--teal); opacity: 0.6;">EXPERIENCE</span>
+        </div>
+        <div style="position: absolute; inset: 30px; border-radius: 50%; border: 2px solid rgba(88,182,210,0.3); background: rgba(88,182,210,0.03); display: flex; align-items: flex-start; justify-content: center; padding-top: 12px;">
+          <span style="font-size: 0.7rem; font-weight: 600; color: var(--teal); opacity: 0.7;">EXPRESSION</span>
+        </div>
+        <div style="position: absolute; inset: 60px; border-radius: 50%; border: 2px solid rgba(88,182,210,0.35); background: rgba(88,182,210,0.05); display: flex; align-items: flex-start; justify-content: center; padding-top: 14px;">
+          <span style="font-size: 0.7rem; font-weight: 600; color: var(--teal); opacity: 0.8;">PERSONALITY</span>
+        </div>
+        <div style="position: absolute; inset: 90px; border-radius: 50%; border: 2px solid rgba(88,182,210,0.4); background: rgba(88,182,210,0.07); display: flex; align-items: flex-start; justify-content: center; padding-top: 16px;">
+          <span style="font-size: 0.7rem; font-weight: 600; color: var(--teal); opacity: 0.9;">POSITIONING</span>
+        </div>
+        <div style="position: absolute; inset: 120px; border-radius: 50%; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: #F8F7F4;">PURPOSE</span>
+          <span style="font-size: 0.6rem; font-weight: 500; color: var(--teal); margin-top: 2px;">WHY</span>
+        </div>
+      </div>
+    </div>
+    <div class="layers" style="margin-top: 0;">
+      <div class="layer-row">
+        <span class="layer-name">1. Purpose</span>
+        <span class="layer-q">Why do you exist beyond money?</span>
+      </div>
+      <div class="layer-row">
+        <span class="layer-name">2. Positioning</span>
+        <span class="layer-q">What space do you own in someone's mind?</span>
+      </div>
+      <div class="layer-row">
+        <span class="layer-name">3. Personality</span>
+        <span class="layer-q">How do you show up?</span>
+      </div>
+      <div class="layer-row">
+        <span class="layer-name">4. Expression</span>
+        <span class="layer-q">What do people see and hear?</span>
+      </div>
+      <div class="layer-row">
+        <span class="layer-name">5. Experience</span>
+        <span class="layer-q">What do people actually feel using it?</span>
+      </div>
+    </div>
+  </div>
+  <p class="small mt-2">Work top-down. Start at Expression (logo, colors) without the upper layers, and you're decorating without direction.</p>
+</div>
+
+<!-- SLIDE 4: Purpose -->
+<div class="slide slide--default" data-slide="3">
+  <div class="label">Layer 1</div>
+  <h2>Purpose</h2>
+  <p class="subtitle mt-1">The core. Everything radiates from here. If this is fuzzy, everything downstream will be too. <span class="small" style="opacity: 0.4;">&mdash; Arielle Jackson, First Round Capital</span></p>
+  <div class="card mt-3">
+    <h3>Ditto's Purpose</h3>
+    <p style="font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.8rem); margin-top: 0.3em;">Making healthcare understandable.</p>
+    <p class="mt-1" style="font-size: 0.95rem;">The test: Would you still do this work if it wasn't profitable? If yes, you've found purpose.</p>
+  </div>
+  <p class="mt-2"><strong>Care. Clarified.</strong> &mdash; Two words that capture the purpose and the promise in one breath.</p>
+</div>
+
+<!-- SLIDE 5: Positioning Intro -->
+<div class="slide slide--default" data-slide="4">
+  <div class="label">Layer 2</div>
+  <h2>Positioning</h2>
+  <p class="subtitle">The space you own in someone's mind. Most startups describe what they do instead of claiming a space. <span class="small" style="opacity: 0.4;">&mdash; April Dunford, Obviously Awesome</span></p>
+  <div class="two-col mt-3">
+    <div>
+      <h3 class="highlight">Positioning is NOT</h3>
+      <ul>
+        <li>Features</li>
+        <li>Taglines</li>
+        <li>Messaging</li>
+        <li>A mission statement</li>
+        <li>What you say about yourself</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="highlight">Positioning IS</h3>
+      <p>How your product is the <strong>leader</strong> at delivering something a <strong>specific audience</strong> cares deeply about.</p>
+      <p class="mt-2">It's the context that makes your value obvious.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Dunford Framework -->
+<div class="slide slide--default" data-slide="5">
+  <div class="label">Framework &mdash; April Dunford</div>
+  <h2>The 5 Components of Positioning</h2>
+  <p class="subtitle mb-1">Work through these sequentially. Never skip a step.</p>
+  <table>
+    <tr><th>#</th><th>Component</th><th>Question</th><th>Ditto</th></tr>
+    <tr>
+      <td><strong>1</strong></td>
+      <td><strong>Competitive alternatives</strong></td>
+      <td>What would they do without you?</td>
+      <td>Forget, misunderstand, Google it, ask family</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td><strong>Unique attributes</strong></td>
+      <td>What do you have that they lack?</td>
+      <td>AI conversation capture + plain-language + family sharing</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td><strong>Customer value</strong></td>
+      <td>So what?</td>
+      <td>Understand care, remember everything, share with family</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td><strong>Best-fit customers</strong></td>
+      <td>Who cares most?</td>
+      <td>Chronic/complex conditions, elderly, caregivers</td>
+    </tr>
+    <tr>
+      <td><strong>5</strong></td>
+      <td><strong>Market category</strong></td>
+      <td>What context makes it obvious?</td>
+      <td>Patient empowerment (NOT transcription)</td>
+    </tr>
+  </table>
+  <div class="flow mt-2">
+    <span class="flow-item" style="background: rgba(88,182,210,0.12);"><strong style="color: var(--teal);">1</strong> Alternatives</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item" style="background: rgba(88,182,210,0.1);"><strong style="color: var(--teal);">2</strong> Attributes</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item" style="background: rgba(88,182,210,0.08);"><strong style="color: var(--teal);">3</strong> Value</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item" style="background: rgba(88,182,210,0.06);"><strong style="color: var(--teal);">4</strong> Customers</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item" style="background: var(--navy); color: #F8F7F4;"><strong style="color: var(--teal);">5</strong> Category</span>
+  </div>
+  <p class="small mt-1">Start with competitive alternatives. Your real competition isn't Otter.ai &mdash; it's forgetting.</p>
+</div>
+
+<!-- SLIDE 7: Onlyness Test -->
+<div class="slide slide--default" data-slide="6">
+  <div class="brand-o" style="right: 4%; top: 50%; transform: translateY(-50%); width: 44vh; height: 44vh; opacity: 0.04;">
+    <img src="logo/Ditto_darkblue_bigo.svg" alt="">
+  </div>
+  <div class="label">Framework &mdash; Marty Neumeier</div>
+  <h2>The Onlyness Test</h2>
+  <p class="subtitle">The most powerful test of a strategic position.</p>
+  <div style="margin: 1.5em 0; padding: 1.2em 1.5em; border-left: 5px solid var(--yellow); background: rgba(30,36,50,0.04); border-radius: 0 12px 12px 0; max-width: 36em;">
+    <p style="font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 2.5vw, 2.2rem); line-height: 1.3;">"Ditto is the <span style="color: var(--teal);">ONLY</span> _______ that _______."</p>
+  </div>
+  <p class="subtitle">If a competitor can say the same thing, you haven't found your position.</p>
+  <div class="card mt-3" style="max-width: 42em;">
+    <p style="font-weight: 600;">Try it:</p>
+    <p class="mt-1">"Ditto is the <strong>only patient empowerment tool</strong> that <strong>turns medical conversations into plain-language summaries families can share</strong>."</p>
+    <p class="small mt-1">Can Otter say this? Can Google say this? If not, you've found Onlyness.</p>
+  </div>
+</div>
+
+<!-- SLIDE 8: Positioning Traps -->
+<div class="slide slide--default" data-slide="7">
+  <div class="label">Positioning</div>
+  <h2>Four Traps to Avoid</h2>
+  <div class="two-col mt-2">
+    <div>
+      <div class="card">
+        <h3><span class="pill pill--red">Trap</span> Phantom Competitors</h3>
+        <p>Don't position against companies you never compete with. Ditto vs. Otter is a phantom fight.</p>
+      </div>
+      <div class="card">
+        <h3><span class="pill pill--red">Trap</span> Overly Broad</h3>
+        <p>"For everyone who visits a doctor" is too wide. Narrow = sharp. Start with complex conditions.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3><span class="pill pill--red">Trap</span> Category Creation Too Early</h3>
+        <p>Don't invent a new category until you dominate your niche. Position in "patient empowerment" first.</p>
+      </div>
+      <div class="card">
+        <h3><span class="pill pill--red">Trap</span> Product Pessimism</h3>
+        <p>Teams that focus on lost deals miss why they win. Talk to users who love Ditto.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: Personality -->
+<div class="slide slide--default" data-slide="8">
+  <div class="label">Layer 3</div>
+  <h2>Personality</h2>
+  <p class="subtitle">If Ditto were a person, who would they be?</p>
+  <div class="three-col mt-3">
+    <div class="card">
+      <h3>Clear &amp; Direct</h3>
+      <p>Eliminates jargon. Rejects fluff. When healthcare feels like a maze, we're the straight path.</p>
+    </div>
+    <div class="card">
+      <h3>Empathetic &amp; Personal</h3>
+      <p>We've been the confused patient. We've been the worried family member. We get it.</p>
+    </div>
+    <div class="card">
+      <h3>Bold &amp; Trustworthy</h3>
+      <p>Conventions that don't serve patients? We challenge them. But we earn trust through privacy, not marketing.</p>
+    </div>
+  </div>
+  <p class="mt-3 small">The sharpness test: "Friendly and professional" could be any brand. "The calm, confident friend who explains your medical visit over coffee" &mdash; that's a real personality.</p>
+</div>
+
+<!-- SLIDE 10: Voice & Tone -->
+<div class="slide slide--default" data-slide="9">
+  <div class="label">Layer 4 &mdash; Verbal</div>
+  <h2>Voice &amp; Tone</h2>
+  <p class="subtitle">One voice. Many tones. The voice is constant; the tone adapts. <span class="small" style="opacity: 0.4;">&mdash; Headspace voice scaling model</span></p>
+  <table class="mt-2">
+    <tr><th>Context</th><th>Tone</th><th>Example</th></tr>
+    <tr>
+      <td><strong>Onboarding</strong></td>
+      <td>Warm, encouraging</td>
+      <td>"Your first summary is ready. Take a look."</td>
+    </tr>
+    <tr>
+      <td><strong>Summary</strong></td>
+      <td>Clear, calm</td>
+      <td>"Here's what your doctor discussed today."</td>
+    </tr>
+    <tr>
+      <td><strong>Care Circle</strong></td>
+      <td>Personal, gentle</td>
+      <td>"Share with someone you trust."</td>
+    </tr>
+    <tr>
+      <td><strong>Error</strong></td>
+      <td>Honest, reassuring</td>
+      <td>"We couldn't process this. Try a quieter spot."</td>
+    </tr>
+    <tr>
+      <td><strong>Marketing</strong></td>
+      <td>Bold, direct</td>
+      <td>"You shouldn't need a medical degree to understand your health."</td>
+    </tr>
+    <tr>
+      <td><strong>B2B/Insurer</strong></td>
+      <td>Professional, evidence-led</td>
+      <td>"35,000+ patients. Reduced follow-up calls."</td>
+    </tr>
+  </table>
+  <!-- Voice spectrum bar -->
+  <div style="margin-top: 1.2em; max-width: 600px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4em;">
+      <span style="font-size: 0.75rem; font-weight: 700; color: var(--teal);">CLINICAL</span>
+      <span style="font-size: 0.65rem; font-weight: 500; opacity: 0.4;">ONE VOICE &mdash; MANY TONES</span>
+      <span style="font-size: 0.75rem; font-weight: 700; color: var(--teal);">WARM</span>
+    </div>
+    <div style="height: 32px; border-radius: 16px; background: linear-gradient(to right, rgba(88,182,210,0.15), rgba(30,36,50,0.06) 50%, rgba(88,182,210,0.08)); border: 1px solid rgba(88,182,210,0.2); position: relative;">
+      <div style="position: absolute; left: 12%; top: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--teal);"></div>
+      <div style="position: absolute; left: 32%; top: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--teal);"></div>
+      <div style="position: absolute; left: 52%; top: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--navy);"></div>
+      <div style="position: absolute; left: 72%; top: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--yellow);"></div>
+      <div style="position: absolute; left: 88%; top: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--teal);"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 0.4em; font-size: 0.7rem; font-weight: 600; opacity: 0.5;">
+      <span style="width: 20%; text-align: left;">Error</span>
+      <span style="width: 20%; text-align: center;">Summary</span>
+      <span style="width: 20%; text-align: center;">Marketing</span>
+      <span style="width: 20%; text-align: center;">Care Circle</span>
+      <span style="width: 20%; text-align: right;">Onboarding</span>
+    </div>
+  </div>
+  <p class="small mt-1">Inspired by Headspace &mdash; clinical to playful, always recognizably them.</p>
+</div>
+
+<!-- SLIDE 11: The Apple Whisper -->
+<div class="slide slide--default" data-slide="10">
+  <div class="label">Verbal Identity</div>
+  <h2>The Apple Whisper</h2>
+  <p class="subtitle">In an attention economy where everyone shouts, Apple whispers. Say less. Mean more.</p>
+  <div class="vs mt-3">
+    <div class="vs-bad">
+      <h3 style="color: var(--red);">Too much</h3>
+      <p>"Our advanced AI-powered transcription and summarization engine processes medical conversations in real-time to generate comprehensive patient-friendly summaries."</p>
+    </div>
+    <div class="vs-divider">vs.</div>
+    <div>
+      <h3 class="highlight">Just enough</h3>
+      <p style="font-family: var(--font-display); font-weight: 700; font-size: 1.4rem;">"You talk to your doctor. We make sure you remember."</p>
+    </div>
+  </div>
+  <div class="mt-4">
+    <h3>Writing rules</h3>
+    <div class="flow mt-1">
+      <span class="flow-item">Plain language</span>
+      <span class="flow-arrow">&rarr;</span>
+      <span class="flow-item">Short sentences</span>
+      <span class="flow-arrow">&rarr;</span>
+      <span class="flow-item">Active voice</span>
+      <span class="flow-arrow">&rarr;</span>
+      <span class="flow-item">Specific numbers</span>
+      <span class="flow-arrow">&rarr;</span>
+      <span class="flow-item">Evidence for bold claims</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Visual Identity -->
+<div class="slide slide--default" data-slide="11">
+  <div class="label">Layer 4 &mdash; Visual</div>
+  <h2>Visual Identity</h2>
+  <p class="subtitle">The visual system exists to serve the human, not showcase the technology. <span class="small" style="opacity: 0.4;">&mdash; DixonBaxi / Heidi Health</span></p>
+  <div class="two-col mt-2">
+    <div>
+      <h3>The System</h3>
+      <table>
+        <tr><td><strong>Anchor</strong></td><td><span style="display:inline-block;width:1em;height:1em;background:#0D164F;border-radius:4px;vertical-align:middle;"></span> Navy #0D164F</td></tr>
+        <tr><td><strong>Action</strong></td><td><span style="display:inline-block;width:1em;height:1em;background:#58B6D2;border-radius:4px;vertical-align:middle;"></span> Teal #58B6D2</td></tr>
+        <tr><td><strong>Warmth</strong></td><td><span style="display:inline-block;width:1em;height:1em;background:#D4A832;border-radius:4px;vertical-align:middle;"></span> Gold #D4A832</td></tr>
+        <tr><td><strong>Headings</strong></td><td>Bricolage Grotesque</td></tr>
+        <tr><td><strong>Body</strong></td><td>Inter</td></tr>
+        <tr><td><strong>Photos</strong></td><td>Real people, warm light, film grain</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>The Principles</h3>
+      <ul>
+        <li><strong>Navy for text &amp; UI</strong> &mdash; not backgrounds. It anchors through weight, not volume.</li>
+        <li><strong>Photography carries emotion</strong> &mdash; color supports, never competes</li>
+        <li><strong>Max 3 brand colors</strong> per composition</li>
+        <li><strong>Weight 500+</strong> for patient-facing type</li>
+        <li><strong>The flexible 'o'</strong> &mdash; signature, not wallpaper</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: Experience -->
+<div class="slide slide--default" data-slide="12">
+  <div class="label">Layer 5</div>
+  <h2>Experience</h2>
+  <p class="subtitle">Not what you say about yourself &mdash; what it <strong>feels like</strong> to use your product, read your email, see your ad.</p>
+  <div class="card mt-3">
+    <h3>Brand breaks at the weakest touchpoint</h3>
+    <p class="mt-1">A beautiful website means nothing if the app feels like a different company. A warm onboarding means nothing if the error state is cold and confusing.</p>
+  </div>
+  <div class="mt-3">
+    <h3>The DixonBaxi / Heidi Health Principle</h3>
+    <p>Heidi Health's brand is "centred on the humanity it serves." Not the AI. Not the technology.</p>
+    <p class="mt-1"><strong>Ditto equivalent:</strong> Every touchpoint should make a tired, anxious patient feel understood and cared for. That's the experience. Everything else is aesthetics.</p>
+  </div>
+</div>
+
+<!-- SLIDE 14: Bar Test -->
+<div class="slide slide--default" data-slide="13">
+  <div class="label">Framework &mdash; Arielle Jackson</div>
+  <h2>The Bar Test</h2>
+  <p class="subtitle">Arielle Jackson (Google, Square) uses this to validate any positioning or messaging.</p>
+  <blockquote class="mt-3">"Read it aloud. If someone at a bar wouldn't immediately understand what you do and why it matters, rewrite it."</blockquote>
+  <div class="mt-4">
+    <h3>Apply it</h3>
+    <div class="two-col mt-1">
+      <div class="card" style="opacity: 0.5;">
+        <p class="small mb-1" style="color: var(--red); opacity: 1;">Fails the bar test</p>
+        <p>"Ditto leverages proprietary AI to transform unstructured medical dialogue into actionable, patient-centric health summaries."</p>
+      </div>
+      <div class="card">
+        <p class="small mb-1" style="color: var(--teal);">Passes the bar test</p>
+        <p>"Ditto records your doctor visit and gives you a summary you can actually understand. You can share it with family."</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15: Messaging Architecture -->
+<div class="slide slide--default" data-slide="14">
+  <div class="label">Framework</div>
+  <h2>Messaging Architecture</h2>
+  <p class="subtitle">One promise. A few pillars. Proof for each. Adapted per audience.</p>
+  <div class="two-col mt-2">
+    <div style="max-width: 28em;">
+      <div class="msg-top">
+        <p style="font-size: 0.7rem; color: var(--teal); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Brand Promise</p>
+        <p style="font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin-top: 0.2em;">Care. Clarified.</p>
+      </div>
+      <div class="msg-pillars">
+        <div>
+          <p style="font-weight: 700; font-size: 0.85rem;">Understand</p>
+          <p style="font-size: 0.75rem; opacity: 0.55; margin-top: 0.2em;">AI summaries in plain language</p>
+        </div>
+        <div>
+          <p style="font-weight: 700; font-size: 0.85rem;">Remember</p>
+          <p style="font-size: 0.75rem; opacity: 0.55; margin-top: 0.2em;">Never forget what was said</p>
+        </div>
+        <div>
+          <p style="font-weight: 700; font-size: 0.85rem;">Share</p>
+          <p style="font-size: 0.75rem; opacity: 0.55; margin-top: 0.2em;">Care Circle for family</p>
+        </div>
+      </div>
+      <div class="msg-audiences">
+        <div><p style="font-size: 0.7rem; font-weight: 600;">Patients</p></div>
+        <div><p style="font-size: 0.7rem; font-weight: 600;">Caregivers</p></div>
+        <div><p style="font-size: 0.7rem; font-weight: 600;">Insurers</p></div>
+        <div><p style="font-size: 0.7rem; font-weight: 600;">Providers</p></div>
+      </div>
+    </div>
+    <div>
+      <h3>How it works</h3>
+      <ul>
+        <li><strong>Promise</strong> is emotional and enduring &mdash; rarely changes</li>
+        <li><strong>Pillars</strong> are strategic (3-4 max) &mdash; every message maps to one</li>
+        <li><strong>Proof points</strong> are specific, updated as you grow</li>
+        <li><strong>Audiences</strong> get the same pillars, different emphasis</li>
+      </ul>
+      <p class="small mt-2">If a message doesn't connect to a pillar, the message is wrong.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16: Brand Narrative -->
+<div class="slide slide--default" data-slide="15">
+  <div class="brand-o" style="left: -6%; bottom: -10%; width: 48vh; height: 48vh; opacity: 0.035;">
+    <img src="logo/Ditto_darkblue_bigo.svg" alt="">
+  </div>
+  <div class="label">Narrative</div>
+  <h2>The Story Arc</h2>
+  <p class="subtitle">Every brand has a story. The key insight: <strong>the patient is the hero, not Ditto.</strong></p>
+  <!-- Story arc as HTML steps -->
+  <div style="display: flex; align-items: flex-end; gap: 0; margin-top: 1.5em; max-width: 600px; height: 200px;">
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
+      <span style="font-weight: 700; font-size: 0.8rem; color: var(--navy);">Tension</span>
+      <span style="font-size: 0.7rem; opacity: 0.5; text-align: center; margin-top: 2px;">Patients confused</span>
+      <div style="width: 4px; height: 40px; background: linear-gradient(to top, var(--teal), transparent); border-radius: 2px; margin-top: 8px;"></div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; padding-bottom: 40px;">
+      <span style="font-weight: 700; font-size: 0.8rem; color: var(--red);">Villain</span>
+      <span style="font-size: 0.7rem; opacity: 0.5; text-align: center; margin-top: 2px;">The system</span>
+      <div style="width: 4px; height: 70px; background: linear-gradient(to top, var(--red), transparent); border-radius: 2px; margin-top: 8px;"></div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%;">
+      <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 1.2rem;">&#9733;</span>
+      </div>
+      <span style="font-weight: 800; font-size: 0.85rem; color: var(--navy); margin-top: 6px;">Hero</span>
+      <span style="font-size: 0.7rem; opacity: 0.5; text-align: center; margin-top: 2px;">The patient</span>
+      <span style="font-size: 0.65rem; color: var(--teal); margin-top: 2px;">(not Ditto)</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; padding-bottom: 40px;">
+      <span style="font-weight: 700; font-size: 0.8rem; color: var(--teal);">Gift</span>
+      <span style="font-size: 0.7rem; opacity: 0.5; text-align: center; margin-top: 2px;">Clarity + Connection</span>
+      <div style="width: 4px; height: 70px; background: linear-gradient(to top, var(--teal), transparent); border-radius: 2px; margin-top: 8px;"></div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
+      <span style="font-weight: 700; font-size: 0.8rem; color: var(--navy);">Resolution</span>
+      <span style="font-size: 0.75rem; font-weight: 600; margin-top: 2px;">Care. Clarified.</span>
+      <div style="width: 4px; height: 40px; background: linear-gradient(to top, var(--navy), transparent); border-radius: 2px; margin-top: 8px;"></div>
+    </div>
+  </div>
+  <!-- Ditto's role -->
+  <div style="margin-top: 0.8em; padding: 0.5em 1em; background: rgba(88,182,210,0.1); border-radius: 8px; display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--teal);">
+    Ditto = the guide, not the hero
+  </div>
+  <p class="mt-2">Headspace positions the <em>user</em> as the hero on "a lifelong journey of better mental health." Ditto should do the same &mdash; the patient is empowered, we're the tool that makes it possible.</p>
+</div>
+
+<!-- SLIDE 17: Three Separators -->
+<div class="slide slide--default" data-slide="16">
+  <div class="label">Patterns</div>
+  <h2>What Separates Great Brands</h2>
+  <p class="subtitle">Apple, Headspace, Heidi Health &mdash; three patterns.</p>
+  <div class="three-col mt-3">
+    <div class="card">
+      <h3>1. Radical clarity about who they serve</h3>
+      <p>Apple isn't for everyone. Headspace isn't for skeptics. Heidi builds for clinicians. Narrowing sharpens everything.</p>
+    </div>
+    <div class="card">
+      <h3>2. Brand = Product</h3>
+      <p>No gap between promise and experience. Headspace's app <em>feels</em> like a hug for your mind. When brand and product are one, you don't need marketing.</p>
+    </div>
+    <div class="card">
+      <h3>3. Discipline over inspiration</h3>
+      <p>Built by saying no &mdash; to the off-brand campaign, the clever name, the color that doesn't fit. Consistency compounds.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 18: Where Ditto Is Now -->
+<div class="slide slide--default" data-slide="17">
+  <div class="label">Audit</div>
+  <h2>Where Ditto Is Now</h2>
+  <p class="subtitle">Strong foundations. Clear gaps.</p>
+  <table class="mt-2">
+    <tr><th>Layer</th><th>Status</th><th>Gap</th></tr>
+    <tr>
+      <td><strong>Purpose</strong></td>
+      <td><span class="pill pill--green">Solid</span></td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td><strong>Positioning</strong></td>
+      <td><span class="pill pill--gold">Implicit</span></td>
+      <td>Needs to be formalized. Run Dunford's 5-component exercise.</td>
+    </tr>
+    <tr>
+      <td><strong>Personality</strong></td>
+      <td><span class="pill pill--gold">Defined</span></td>
+      <td>Could be sharper. What makes Ditto's empathy different from every other health app?</td>
+    </tr>
+    <tr>
+      <td><strong>Expression</strong></td>
+      <td><span class="pill pill--gold">Mid-transition</span></td>
+      <td>Voice is good. Visual evolving: photography, new colors, illustration role need formalizing.</td>
+    </tr>
+    <tr>
+      <td><strong>Experience</strong></td>
+      <td><span class="pill pill--red">Unaudited</span></td>
+      <td>Does the app <em>feel</em> like "Care. Clarified."? Brand-product alignment check needed.</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SLIDE 19: Checklist -->
+<div class="slide slide--default" data-slide="18">
+  <div class="label">Tool</div>
+  <h2>Brand Audit Checklist</h2>
+  <p class="subtitle">Run this against anything before it ships.</p>
+  <div class="two-col mt-2">
+    <div>
+      <ul class="checklist">
+        <li><strong>Onlyness</strong> &mdash; Could only be said by Ditto</li>
+        <li><strong>Bar Test</strong> &mdash; Instantly understandable</li>
+        <li><strong>Pillar</strong> &mdash; Connects to Understand, Remember, or Share</li>
+        <li><strong>Voice</strong> &mdash; Clear, empathetic, bold, trustworthy</li>
+        <li><strong>Hero</strong> &mdash; Patient is the hero, Ditto is the guide</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="checklist">
+        <li><strong>No jargon</strong> &mdash; No corporate speak</li>
+        <li><strong>Specific</strong> &mdash; Numbers, outcomes, evidence</li>
+        <li><strong>Peer test</strong> &mdash; At home next to Headspace or Heidi</li>
+        <li><strong>Subtraction</strong> &mdash; Is anything removable?</li>
+        <li><strong>Emotion</strong> &mdash; What does the reader feel?</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 20: Next Steps -->
+<div class="slide slide--default" data-slide="19">
+  <div class="label">What's Next</div>
+  <h2>Where to Start</h2>
+  <p class="subtitle">Highest leverage first.</p>
+  <div class="mt-2">
+    <div class="card">
+      <h3>1. Formalize positioning</h3>
+      <p>Run the Dunford exercise. Fill in all 5 components. Write the positioning statement. Test with Onlyness and Bar tests.</p>
+    </div>
+    <div class="card">
+      <h3>2. Sharpen personality</h3>
+      <p>Move from "Clear & Empathetic" (generic) to something only Ditto would say. Write the "person at a dinner party" description.</p>
+    </div>
+    <div class="card">
+      <h3>3. Close the visual gaps</h3>
+      <p>Photography guidelines. New color roles. Illustration boundaries. Typography rules documented.</p>
+    </div>
+    <div class="card">
+      <h3>4. Audit the experience</h3>
+      <p>Walk through every touchpoint as a patient. Does it feel like "Care. Clarified."? Flag the gaps.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 21: Sources & References -->
+<div class="slide slide--default" data-slide="20">
+  <div class="label">References</div>
+  <h2>Sources &amp; Further Reading</h2>
+  <div class="two-col mt-2">
+    <div>
+      <h3>Frameworks</h3>
+      <table>
+        <tr><td><strong>Marty Neumeier</strong></td><td>The Brand Gap, Zag &mdash; Onlyness test, radical differentiation</td></tr>
+        <tr><td><strong>April Dunford</strong></td><td>Obviously Awesome &mdash; 5-component positioning</td></tr>
+        <tr><td><strong>Arielle Jackson</strong></td><td>The Bar Test, brand purpose, naming methodology</td></tr>
+        <tr><td><strong>Emily Kramer</strong></td><td>GACCS framework for marketing briefs</td></tr>
+        <tr><td><strong>Bob Baxley</strong></td><td>Design tenets vs. platitudes, 35 yrs at Apple/Pinterest</td></tr>
+        <tr><td><strong>Jessica Hische</strong></td><td>Typography psychology, visual coherence</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Brand Inspirations</h3>
+      <table>
+        <tr><td><strong>Apple</strong></td><td>Whisper strategy, obsessive consistency, say less mean more</td></tr>
+        <tr><td><strong>Headspace</strong></td><td>Voice scaling, clinical-to-playful spectrum, custom type</td></tr>
+        <tr><td><strong>Heidi Health</strong></td><td>DixonBaxi rebrand &mdash; humanity over technology, Halo/Orb system</td></tr>
+      </table>
+      <h3 class="mt-2">Key Articles (Lenny's Newsletter)</h3>
+      <ul style="font-size: 0.85rem;">
+        <li>A quickstart guide to positioning</li>
+        <li>The art of building legendary brands</li>
+        <li>How to see like a designer</li>
+        <li>35 years of product design wisdom</li>
+        <li>A guide to advanced B2B positioning</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+let current = 0;
+
+function showSlide(n) {
+  if (n < 0 || n >= slides.length) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  progress.style.width = ((current + 1) / slides.length * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+  counter.style.color = 'var(--navy)';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); showSlide(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); showSlide(current - 1); }
+});
+
+document.addEventListener('click', e => {
+  const x = e.clientX / window.innerWidth;
+  if (x > 0.5) showSlide(current + 1); else showSlide(current - 1);
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) { if (diff > 0) showSlide(current + 1); else showSlide(current - 1); }
+});
+
+showSlide(0);
+</script>
+
+</body>
+</html>

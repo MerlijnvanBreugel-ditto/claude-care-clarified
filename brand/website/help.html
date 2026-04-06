@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help | Ditto Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D164F;--teal:#58B6D2;--gold:#E8B520;--gold-warm:#F0C840;--teal-light:#7DD4E8;--soft-bg:#F7F6F3;--white:#FFF;--text:#0D164F;--text-light:#6B7094;--text-muted:#9BA0B8;--heading:'Bricolage Grotesque',sans-serif;--body:'Inter',-apple-system,sans-serif;--radius:20px;--max-width:1200px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--body);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}.pro-bar{background:var(--navy);color:rgba(255,255,255,0.7);text-align:center;padding:8px 20px;font-size:13px;font-weight:500}.pro-bar a{color:var(--teal-light);text-decoration:none}nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(13,22,79,0.06);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}.nav-logo img{height:22px}.nav-links{display:flex;align-items:center;gap:32px}.nav-links a{font-size:14px;font-weight:500;color:var(--text-light);text-decoration:none}.nav-links a:hover{color:var(--navy)}.nav-links a.active{color:var(--navy);font-weight:700}.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.25s;cursor:pointer}.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:#1a2570}.btn-secondary{background:transparent;color:var(--navy);border:1.5px solid rgba(13,22,79,0.15)}.btn-secondary:hover{border-color:var(--navy)}.btn-teal{background:var(--teal);color:#fff}section{padding:80px 48px}.container{max-width:var(--max-width);margin:0 auto}.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--teal);margin-bottom:16px}footer{background:var(--navy);color:rgba(248,247,244,0.5);padding:64px 48px 32px}.footer-grid{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}.footer-brand img{height:24px;margin-bottom:16px}.footer-brand p{font-size:14px;line-height:1.6;max-width:280px}.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(248,247,244,0.25);margin-bottom:16px}.footer-col a{display:block;font-size:14px;color:rgba(248,247,244,0.5);text-decoration:none;margin-bottom:10px}.footer-col a:hover{color:rgba(248,247,244,0.8)}.footer-bottom{max-width:var(--max-width);margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(248,247,244,0.06);display:flex;justify-content:space-between;font-size:12px;color:rgba(248,247,244,0.25)}
+
+.help-hero{max-width:720px;margin:0 auto;padding:80px 48px 40px;text-align:center}
+.help-hero h1{font-family:var(--heading);font-size:48px;font-weight:700;color:var(--navy)}
+.help-hero p{font-size:18px;color:var(--text-light);margin-top:12px}
+
+.tab-bar{display:flex;gap:4px;justify-content:center;margin-bottom:40px;background:var(--soft-bg);border-radius:12px;padding:4px;max-width:600px;margin-left:auto;margin-right:auto}
+.tab-btn{padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;color:var(--text-muted);background:none;border:none;cursor:pointer;transition:all 0.2s}
+.tab-btn.active{background:var(--white);color:var(--navy);box-shadow:0 1px 4px rgba(13,22,79,0.08)}
+.tab-btn:hover{color:var(--navy)}
+
+.faq-grid{max-width:700px;margin:0 auto}
+.faq-group{display:none}.faq-group.active{display:block}
+.faq-item{border-bottom:1px solid rgba(13,22,79,0.08)}
+.faq-question{padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--body);font-size:16px;font-weight:600;color:var(--navy);background:none;border:none;width:100%;text-align:left}
+.faq-question:hover{color:var(--teal)}
+.faq-question .faq-arrow{transition:transform 0.3s;font-size:18px;color:var(--text-muted)}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.faq-answer-inner{padding:0 0 20px;font-size:15px;color:var(--text-light);line-height:1.65}
+.faq-item.open .faq-answer{max-height:400px}
+
+.contact-section{max-width:600px;margin:0 auto;text-align:center}
+.contact-section h2{font-family:var(--heading);font-size:32px;font-weight:600;color:var(--navy);margin-bottom:12px}
+.contact-section p{font-size:15px;color:var(--text-light);margin-bottom:24px}
+.contact-info{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.contact-info a{color:var(--teal);font-weight:600;text-decoration:none;font-size:14px}
+
+@media(max-width:900px){section{padding:60px 24px}.help-hero{padding:60px 24px 20px}.help-hero h1{font-size:34px}.tab-bar{flex-wrap:wrap}.footer-grid{grid-template-columns:1fr 1fr}.nav-links a:not(.btn){display:none}}
+</style>
+</head>
+<body>
+
+<div class="pro-bar">Are you a healthcare professional? <a href="professionals.html">Learn how Ditto supports your practice →</a></div>
+<nav>
+  <a class="nav-logo" href="index.html"><img src="../decks/logo/Ditto_darkblue.svg" alt="Ditto"></a>
+  <div class="nav-links">
+    <a href="professionals.html">For Professionals</a>
+    <a href="our-story.html">Our Story</a>
+    <a href="trust-privacy.html">Trust & Privacy</a>
+    <a href="help.html" class="active">Help</a>
+    <a href="index.html#download" class="btn btn-primary">Download Ditto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="help-hero">
+  <h1>How can we help?</h1>
+  <p>Find answers below, or get in touch directly.</p>
+</div>
+
+<!-- FAQ -->
+<section style="background:var(--white);padding-top:0">
+  <div class="container">
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="patients">Patients</button>
+      <button class="tab-btn" data-tab="professionals">Professionals</button>
+      <button class="tab-btn" data-tab="privacy">Privacy & Data</button>
+    </div>
+
+    <div class="faq-grid">
+      <!-- PATIENTS -->
+      <div class="faq-group active" id="tab-patients">
+        <div class="faq-item"><button class="faq-question">What is Ditto? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Ditto is a free app that helps you understand and manage your healthcare. Record your doctor's visit, get a clear summary in plain language, understand medical letters, and share your health information with the people who matter to you.</div></div></div>
+        <div class="faq-item"><button class="faq-question">How do I record a consultation? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Open Ditto, tap the record button before your appointment starts, and tap stop when it's finished. Within minutes, you'll have a plain-language summary of everything that was discussed.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Do I need my doctor's permission to record? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">In the Netherlands, patients have the legal right to record their own medical consultations. We recommend letting your doctor know — most are supportive, and many already recommend Ditto to their patients.</div></div></div>
+        <div class="faq-item"><button class="faq-question">How do I share a summary with my family? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Open any summary and tap "Share." You can invite people to your Care Circle — your partner, children, parents, or anyone you choose. Each person sees what you decide to share with them.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Can I share different info with different people? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Yes. Your Care Circle lets you control who sees what. Your partner might get the full summary. Your child might get only the key updates. You're always in control.</div></div></div>
+        <div class="faq-item"><button class="faq-question">How much does it cost? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Ditto is free. No subscriptions, no trial periods, no hidden costs.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Is Ditto available in my language? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Ditto currently works best in Dutch and English. The app can process conversations in other languages — the summary will be generated in your preferred language.</div></div></div>
+      </div>
+
+      <!-- PROFESSIONALS -->
+      <div class="faq-group" id="tab-professionals">
+        <div class="faq-item"><button class="faq-question">How does Ditto work in my practice? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Patients use Ditto on their own phone. There's nothing to install, integrate, or configure on your end. Your workflow doesn't change.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Is the AI summary accurate? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Ditto's AI generates summaries that capture the key points of a consultation in plain language. We collaborate with medical professionals and academic institutions (including UMCG) to continuously validate and improve accuracy.</div></div></div>
+        <div class="faq-item"><button class="faq-question">What about patient consent? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Patients control their own recordings. In the Netherlands, patients have the legal right to record consultations. Ditto encourages patients to inform their doctor.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Do I need to do anything differently? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">No. Speak naturally. The AI handles medical terminology, multiple speakers, and varying audio quality.</div></div></div>
+        <div class="faq-item"><button class="faq-question">I'd like to try it myself. How? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Book a conversation with one of our medical team members — they're fellow doctors who can walk you through it. <a href="#" style="color:var(--teal);font-weight:600;text-decoration:none">Talk to a fellow doctor →</a></div></div></div>
+      </div>
+
+      <!-- PRIVACY -->
+      <div class="faq-group" id="tab-privacy">
+        <div class="faq-item"><button class="faq-question">Where is my data stored? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">On your device. Summaries, documents, and Care Circle connections live on your phone, not on our servers.</div></div></div>
+        <div class="faq-item"><button class="faq-question">What happens to my audio recording? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">The audio is temporarily sent to secure EU servers for processing. After your summary is generated, the audio is deleted. We can't replay it.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Can Ditto read my summaries? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">No. We don't have technical access to your summaries. They're stored on your device, encrypted, and under your control.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Can I delete my data? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Yes. You can delete any summary, recording, or your entire account at any time. Deletion is immediate and permanent.</div></div></div>
+        <div class="faq-item"><button class="faq-question">Does my insurer see my data? <span class="faq-arrow">+</span></button><div class="faq-answer"><div class="faq-answer-inner">No. Even if your insurer partners with Ditto, they cannot access your personal health information. Your data is yours.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section style="background:var(--soft-bg)">
+  <div class="contact-section">
+    <h2>Can't find what you're looking for?</h2>
+    <p>We're here to help.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="mailto:info@ditto.care" class="btn btn-primary">Email us →</a>
+      <a href="professionals.html#cta" class="btn btn-secondary">Talk to a doctor →</a>
+    </div>
+    <div class="contact-info">
+      <a href="mailto:info@ditto.care">info@ditto.care</a>
+      <a href="tel:+31851155421">+31 85 115 5421</a>
+      <a href="mailto:press@ditto.care">press@ditto.care</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><img src="../decks/logo/Ditto_white.svg" alt="Ditto"><p>We turn medical conversations into clarity.</p></div>
+    <div class="footer-col"><h4>Product</h4><a href="index.html">How it works</a><a href="index.html#download">Download</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="our-story.html">Our Story</a><a href="professionals.html">For Professionals</a><a href="help.html">Contact</a></div>
+    <div class="footer-col"><h4>Trust</h4><a href="trust-privacy.html">Trust & Privacy</a><a href="#">Terms</a><a href="#">Privacy Policy</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Ditto Care B.V. · Rotterdam</span><span>press@ditto.care</span></div>
+</footer>
+
+<script>
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    item.closest('.faq-group').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>

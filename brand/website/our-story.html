@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story | Ditto Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D164F;--teal:#58B6D2;--gold:#E8B520;--gold-warm:#F0C840;--teal-light:#7DD4E8;--soft-bg:#F7F6F3;--white:#FFF;--text:#0D164F;--text-light:#6B7094;--text-muted:#9BA0B8;--heading:'Bricolage Grotesque',sans-serif;--body:'Inter',-apple-system,sans-serif;--radius:20px;--max-width:1200px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--body);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}.pro-bar{background:var(--navy);color:rgba(255,255,255,0.7);text-align:center;padding:8px 20px;font-size:13px;font-weight:500}.pro-bar a{color:var(--teal-light);text-decoration:none}nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(13,22,79,0.06);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}.nav-logo img{height:22px}.nav-links{display:flex;align-items:center;gap:32px}.nav-links a{font-size:14px;font-weight:500;color:var(--text-light);text-decoration:none}.nav-links a:hover{color:var(--navy)}.nav-links a.active{color:var(--navy);font-weight:700}.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.25s}.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:#1a2570}section{padding:100px 48px}.container{max-width:var(--max-width);margin:0 auto}.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--teal);margin-bottom:16px}.hl-gold{color:var(--gold-warm)}.inset-image{padding:16px;background:var(--white)}.inset-frame{border-radius:var(--radius);overflow:hidden;position:relative;height:65vh;min-height:400px;display:flex;align-items:flex-end}.inset-frame img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}.inset-image .img-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(13,22,79,0.72) 0%,rgba(13,22,79,0.06) 55%)}.inset-image .img-content{position:relative;z-index:2;padding:48px 56px;color:#F8F7F4}.inset-image .img-content h2{font-family:var(--heading);font-size:36px;font-weight:600;line-height:1.2;max-width:560px}.inset-image .img-content p{font-size:16px;color:rgba(248,247,244,0.5);margin-top:10px}footer{background:var(--navy);color:rgba(248,247,244,0.5);padding:64px 48px 32px}.footer-grid{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}.footer-brand img{height:24px;margin-bottom:16px}.footer-brand p{font-size:14px;line-height:1.6;max-width:280px}.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(248,247,244,0.25);margin-bottom:16px}.footer-col a{display:block;font-size:14px;color:rgba(248,247,244,0.5);text-decoration:none;margin-bottom:10px}.footer-col a:hover{color:rgba(248,247,244,0.8)}.footer-bottom{max-width:var(--max-width);margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(248,247,244,0.06);display:flex;justify-content:space-between;font-size:12px;color:rgba(248,247,244,0.25)}
+
+.manifesto{max-width:720px;margin:0 auto}
+.manifesto .opening{font-family:var(--heading);font-size:38px;font-weight:600;line-height:1.15;color:var(--navy);margin-bottom:32px}
+.manifesto .body p{font-size:17px;color:var(--text-light);line-height:1.75;margin-bottom:20px}
+.manifesto .signature{font-size:15px;font-weight:600;color:var(--navy);margin-top:32px}
+
+.beliefs{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.belief{background:var(--soft-bg);padding:32px;border-radius:16px}
+.belief h3{font-family:var(--heading);font-size:20px;font-weight:600;color:var(--navy);margin-bottom:10px}
+.belief p{font-size:14px;color:var(--text-light);line-height:1.6}
+
+.team-placeholder{text-align:center;padding:48px;background:var(--soft-bg);border-radius:16px;margin-top:40px}
+.team-placeholder p{font-size:15px;color:var(--text-muted)}
+
+.press-section{display:flex;gap:32px;align-items:center;margin-top:32px;flex-wrap:wrap}
+.press-section span{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--navy);opacity:0.5}
+
+@media(max-width:900px){section{padding:60px 24px}.manifesto .opening{font-size:28px}.beliefs{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.nav-links a:not(.btn){display:none}}
+</style>
+</head>
+<body>
+
+<div class="pro-bar">Are you a healthcare professional? <a href="professionals.html">Learn how Ditto supports your practice →</a></div>
+<nav>
+  <a class="nav-logo" href="index.html"><img src="../decks/logo/Ditto_darkblue.svg" alt="Ditto"></a>
+  <div class="nav-links">
+    <a href="professionals.html">For Professionals</a>
+    <a href="our-story.html" class="active">Our Story</a>
+    <a href="trust-privacy.html">Trust & Privacy</a>
+    <a href="help.html">Help</a>
+    <a href="index.html#download" class="btn btn-primary">Download Ditto</a>
+  </div>
+</nav>
+
+<!-- HERO IMAGE -->
+<section class="inset-image">
+  <div class="inset-frame">
+    <img src="../decks/images/89ed73da68380a26b963138a1714041b.jpg" alt="">
+    <div class="img-overlay"></div>
+    <div class="img-content">
+      <div class="section-label" style="color:rgba(248,247,244,0.35)">Our Story</div>
+      <h2>A small team in Rotterdam building the <span class="hl-gold">consumer layer in healthcare.</span></h2>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section style="background:var(--white)">
+  <div class="manifesto">
+    <div class="opening">It's easier to follow your niece's gap year than your mother's healthcare journey.</div>
+    <div class="body">
+      <p>That's the sentence that started everything.</p>
+      <p>We built Ditto because we saw what happens when healthcare gets serious. People leave the doctor's office confused. They call their partner and can't explain what was said. One family member becomes the unofficial project manager — coordinating between specialists, keeping notes, managing everyone's anxiety. And the tools they use? WhatsApp groups. Shared Google Docs. Phone calls after every appointment.</p>
+      <p>There's a Strava for fitness. A Flo for women's health. A Revolut for banking. There's nothing for the thing that matters most: understanding your own healthcare and bringing the people around you into the picture.</p>
+      <p>That's what Ditto is. We turn medical conversations into clarity. We connect patients with the people who care about them. We believe healthcare information belongs to the person it's about — and to the people they choose to share it with.</p>
+      <p>We're just getting started.</p>
+    </div>
+    <div class="signature">— Merlijn van Breugel, Co-founder</div>
+  </div>
+</section>
+
+<!-- IMAGE -->
+<section class="inset-image">
+  <div class="inset-frame">
+    <img src="../decks/images/34699eca0b59961a9490f5279181afe4.jpg" alt="">
+    <div class="img-overlay" style="background:linear-gradient(to top,rgba(13,22,79,0.5) 0%,rgba(13,22,79,0.02) 40%)"></div>
+  </div>
+</section>
+
+<!-- BELIEFS -->
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">What we believe</div>
+    <div class="beliefs">
+      <div class="belief">
+        <h3>The patient is the hero, not the technology.</h3>
+        <p>We build for people navigating healthcare, not for the system serving them. Our AI exists to clarify — not to diagnose, advise, or replace doctors.</p>
+      </div>
+      <div class="belief">
+        <h3>Understanding is a right, not a luxury.</h3>
+        <p>If you're living through it, you deserve to understand it. Healthcare information should be clear, complete, and in your language.</p>
+      </div>
+      <div class="belief">
+        <h3>Care is multi-person.</h3>
+        <p>Healthcare doesn't happen in isolation. Your partner, your children, your parents — they're part of your journey. The tools should reflect that.</p>
+      </div>
+      <div class="belief">
+        <h3>Privacy is architecture, not policy.</h3>
+        <p>We don't promise to protect your data — we build systems that make it impossible for us to access it in the first place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section style="background:var(--soft-bg)">
+  <div class="container">
+    <div class="section-label">The Team</div>
+    <h2 style="font-family:var(--heading);font-size:36px;font-weight:600;color:var(--navy)">A small team with one big mission.</h2>
+    <p style="font-size:17px;color:var(--text-light);margin-top:12px">Make healthcare make sense.</p>
+    <div class="team-placeholder">
+      <p>Team photos and bios go here.<br>Consistent color grading. Name, role, one personal line per person.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section style="background:var(--white)">
+  <div class="container" style="text-align:center">
+    <div class="section-label">Careers</div>
+    <h2 style="font-family:var(--heading);font-size:36px;font-weight:600;color:var(--navy);margin-bottom:12px">We're growing</h2>
+    <p style="font-size:17px;color:var(--text-light);max-width:480px;margin:0 auto 28px">Ditto is building something that doesn't exist yet. If that excites you, we'd love to hear from you.</p>
+    <a href="#" class="btn btn-primary">See open positions →</a>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section style="background:var(--soft-bg)">
+  <div class="container">
+    <div class="section-label">Ditto in the media</div>
+    <div class="press-section">
+      <span>NOS</span><span>AD</span><span>Hart van Nederland</span><span>Quote</span><span>3FM</span><span>NPO Radio 5</span><span>RTL</span>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:var(--text-muted)">For press inquiries: <a href="mailto:press@ditto.care" style="color:var(--teal);text-decoration:none;font-weight:600">press@ditto.care</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><img src="../decks/logo/Ditto_white.svg" alt="Ditto"><p>We turn medical conversations into clarity.</p></div>
+    <div class="footer-col"><h4>Product</h4><a href="index.html">How it works</a><a href="index.html#download">Download</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="our-story.html">Our Story</a><a href="professionals.html">For Professionals</a><a href="help.html">Contact</a></div>
+    <div class="footer-col"><h4>Trust</h4><a href="trust-privacy.html">Trust & Privacy</a><a href="#">Terms</a><a href="#">Privacy Policy</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Ditto Care B.V. · Rotterdam</span><span>press@ditto.care</span></div>
+</footer>
+</body>
+</html>

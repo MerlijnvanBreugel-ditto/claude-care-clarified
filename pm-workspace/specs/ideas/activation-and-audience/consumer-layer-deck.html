@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto — The Consumer Layer in Healthcare</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');
+
+  :root {
+    --text: #0D164F;
+    --text-light: #7C8297;
+    --bg: #FFFFFF;
+    --brand: #0D164F;
+    --blue: #58B6D2;
+    --gold: #D4A832;
+    --gold-light: #7DD4E8;
+    --red: #D94F4F;
+    --divider: #EAEAEA;
+    --soft-bg: #F7F6F3;
+    --heading: 'Bricolage Grotesque', sans-serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius: 20px;
+    --pad: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow: hidden; height: 100%; }
+  body {
+    font-family: var(--body);
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 128px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease;
+    background: var(--bg);
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide.active .a { animation: fadeUp 0.55s ease both; }
+  .slide.active .a1 { animation-delay: 0.1s; }
+  .slide.active .a2 { animation-delay: 0.2s; }
+  .slide.active .a3 { animation-delay: 0.3s; }
+  .slide.active .a4 { animation-delay: 0.4s; }
+  .slide.active .a5 { animation-delay: 0.5s; }
+  .slide.active .a6 { animation-delay: 0.6s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(1.04); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .slide.active .anim-scale { animation: scaleIn 1.2s ease both; }
+
+  .content { max-width: 880px; width: 100%; }
+
+  /* Color highlights — red = negative, gold/yellow = positive, teal blue = accent, brand blue = default */
+  .hl-gold { color: var(--gold); }
+  .hl-blue { color: var(--blue); }
+  .hl-gold-light { color: var(--gold-light); } /* for dark slides */
+  .hl-red { color: var(--red); }
+
+  /* Logo */
+  .deck-logo {
+    position: fixed; top: 28px; right: 36px;
+    height: 24px; z-index: 1000;
+    transition: opacity 0.4s ease;
+  }
+
+  /* ---- SLIDE TYPES ---- */
+
+  /* Dark = Brand Blue */
+  .slide-dark { background: var(--brand); color: #F8F7F4; }
+  .slide-dark .text-light { color: rgba(248,247,244,0.4); }
+  .slide-dark .label { color: rgba(248,247,244,0.3); }
+  .slide-dark .compare-row { border-color: rgba(248,247,244,0.08); }
+  .slide-dark .compare-label { color: rgba(248,247,244,0.65); }
+  .slide-dark .compare-value { color: rgba(248,247,244,0.35); }
+
+  /* Soft background (replaces cream) */
+  .slide-soft { background: var(--soft-bg); }
+
+  /* Full bleed hero photo */
+  .slide-hero {
+    padding: 0; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide-hero .hero-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .slide-hero .hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(160deg, rgba(13,22,79,0.78) 0%, rgba(13,22,79,0.3) 100%);
+  }
+  .slide-hero .content {
+    position: relative; z-index: 2; color: #F8F7F4; padding: 0 128px;
+  }
+  .slide-hero .label { color: rgba(248,247,244,0.45); }
+  .slide-hero .body-text { color: rgba(248,247,244,0.6); }
+
+  /* Inset photo with rounded corners */
+  .slide-inset {
+    padding: var(--pad);
+    display: flex; flex-direction: column; justify-content: stretch;
+  }
+  .slide-inset .inset-frame {
+    flex: 1; border-radius: var(--radius); overflow: hidden;
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .slide-inset .inset-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .slide-inset .inset-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(13,22,79,0.72) 0%, rgba(13,22,79,0.08) 55%);
+  }
+  .slide-inset .inset-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 52px 68px; color: #F8F7F4; z-index: 2;
+  }
+  .slide-inset .inset-content.inset-top {
+    bottom: auto; top: 0;
+  }
+  .slide-inset .inset-content .label { color: rgba(248,247,244,0.45); }
+  .slide-inset .inset-content .body-text { color: rgba(248,247,244,0.55); }
+
+  /* Split photo + text */
+  .slide-split {
+    padding: var(--pad);
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--pad);
+  }
+  .slide-split .split-photo {
+    border-radius: var(--radius); overflow: hidden; position: relative;
+  }
+  .slide-split .split-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .slide-split .split-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 52px;
+  }
+
+  /* ---- TYPOGRAPHY ---- */
+  .hero-text {
+    font-family: var(--heading);
+    font-size: 66px; font-weight: 600;
+    letter-spacing: -1.5px; line-height: 1.06;
+  }
+  .big-text {
+    font-family: var(--heading);
+    font-size: 46px; font-weight: 600;
+    letter-spacing: -0.8px; line-height: 1.14;
+  }
+  .medium-text {
+    font-family: var(--heading);
+    font-size: 30px; font-weight: 500;
+    line-height: 1.28;
+  }
+  .body-text {
+    font-family: var(--body);
+    font-size: 18px; font-weight: 400;
+    line-height: 1.6; color: var(--text-light);
+  }
+  .label {
+    font-family: var(--body);
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2.5px;
+    color: var(--text-light); margin-bottom: 12px;
+  }
+  .text-light { color: var(--text-light); }
+
+  .spacer-sm { height: 14px; }
+  .spacer-md { height: 28px; }
+  .spacer-lg { height: 44px; }
+
+  /* Stats */
+  .stat-row { display: flex; gap: 52px; margin-top: 40px; }
+  .stat { flex: 1; }
+  .stat-number {
+    font-family: var(--heading);
+    font-size: 50px; font-weight: 600;
+    letter-spacing: -1px; line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--text-light); margin-top: 6px; line-height: 1.45; }
+
+  /* Grids */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 28px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 28px; }
+  .grid-item h3 { font-family: var(--body); font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+  .grid-item p { font-size: 13px; color: var(--text-light); line-height: 1.55; }
+
+  /* Pillar cards */
+  .pillar-card {
+    padding: 28px; border-radius: 14px; background: #fff;
+    box-shadow: 0 1px 4px rgba(13,22,79,0.06);
+  }
+  .pillar-card h3 { font-family: var(--heading); font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+  .pillar-card p { font-size: 13px; color: var(--text-light); line-height: 1.55; }
+  .pillar-tag {
+    font-family: var(--body); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 8px; display: inline-block;
+  }
+
+  /* Compare rows */
+  .compare-row {
+    display: flex; align-items: baseline;
+    padding: 14px 0; border-bottom: 1px solid var(--divider);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-label { font-size: 15px; font-weight: 600; width: 180px; flex-shrink: 0; }
+  .compare-value { font-size: 14px; color: var(--text-light); flex: 1; }
+
+  /* Timeline */
+  .timeline { margin-top: 28px; }
+  .timeline-phase { display: flex; gap: 24px; padding: 22px 0; border-top: 1px solid var(--divider); }
+  .timeline-when { font-size: 13px; font-weight: 600; color: var(--blue); width: 140px; flex-shrink: 0; }
+  .timeline-what h3 { font-family: var(--body); font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-what p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+  /* Quote */
+  .quote {
+    font-family: var(--heading);
+    font-size: 30px; font-weight: 400; font-style: italic;
+    line-height: 1.35; max-width: 520px;
+  }
+  .quote-attr { font-family: var(--body); font-size: 13px; color: var(--text-light); font-style: normal; margin-top: 14px; }
+
+  /* Moat */
+  .moat-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(248,247,244,0.07); }
+  .moat-item:last-child { border-bottom: none; }
+  .moat-num { font-family: var(--heading); font-size: 26px; font-weight: 600; color: rgba(248,247,244,0.18); width: 32px; flex-shrink: 0; line-height: 1; }
+  .moat-content h3 { font-family: var(--body); font-size: 15px; font-weight: 600; color: #F8F7F4; margin-bottom: 2px; }
+  .moat-content p { font-size: 12px; color: rgba(248,247,244,0.4); line-height: 1.5; }
+
+  /* Why Now points */
+  .why-now-point { margin-bottom: 24px; }
+  .why-now-point:last-child { margin-bottom: 0; }
+  .why-now-point h3 { font-family: var(--body); font-size: 15px; font-weight: 600; color: #F8F7F4; margin-bottom: 4px; }
+  .why-now-point p { font-size: 13px; color: rgba(248,247,244,0.45); line-height: 1.55; }
+
+  /* Progress + counter */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--brand); z-index: 1000;
+    transition: width 0.4s ease;
+  }
+  .counter {
+    position: fixed; bottom: 24px; right: 36px;
+    font-size: 11px; font-weight: 500; color: #C0C0C0;
+    z-index: 1000; transition: color 0.4s ease; letter-spacing: 0.5px;
+  }
+  .counter.on-dark { color: rgba(248,247,244,0.2); }
+  .counter.on-photo { color: rgba(255,255,255,0.3); }
+
+  .click-prev, .click-next { position: fixed; top: 0; height: 100vh; z-index: 500; cursor: pointer; }
+  .click-prev { left: 0; width: 25%; }
+  .click-next { right: 0; width: 75%; }
+
+  .hint {
+    position: fixed; bottom: 24px; left: 36px;
+    font-size: 11px; color: #C8C8C8; z-index: 1000;
+    opacity: 1; transition: opacity 1s ease;
+  }
+  .hint.hidden { opacity: 0; }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+<img class="deck-logo" id="deckLogo" src="logo/Ditto_darkblue.svg" alt="Ditto">
+<div class="click-prev" id="clickPrev"></div>
+<div class="click-next" id="clickNext"></div>
+<div class="hint" id="hint">Click or press arrow keys</div>
+
+<div class="deck">
+
+<!-- 1. TITLE — full bleed golden field -->
+<div class="slide slide-hero" data-theme="photo">
+  <img class="hero-bg anim-scale" src="images/89ed73da68380a26b963138a1714041b.jpg" alt="">
+  <div class="hero-overlay"></div>
+  <div class="content">
+    <div class="label a">Ditto Care</div>
+    <h1 class="hero-text a a1">The Consumer Layer<br>in <span class="hl-gold-light">Healthcare</span></h1>
+    <div class="spacer-md"></div>
+    <p class="body-text a a2">There is no consumer product that helps people<br>navigate healthcare. We're building it.</p>
+  </div>
+</div>
+
+<!-- 2. THE GAP -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">The Opportunity</div>
+    <p class="big-text a a1">Banking has Revolut.<br>Women's health has Flo.<br>Fitness has Strava.</p>
+    <div class="spacer-md"></div>
+    <p class="big-text a a2" style="color: var(--text-light);">Healthcare has your hospital's<br>patient portal from <span class="hl-red">2008.</span></p>
+  </div>
+</div>
+
+<!-- 3. PROBLEM — inset grandmother + granddaughter -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/e476dd8b49d234e5258fae18aed4d33c.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay"></div>
+    <div class="inset-content">
+      <div class="label a">The Problem</div>
+      <h2 class="big-text a a1">When healthcare gets serious,<br>people are <span class="hl-gold-light">lost, overwhelmed,<br>and feel alone.</span></h2>
+    </div>
+  </div>
+</div>
+
+<!-- 4. HOW FAMILIES COPE — inset kitchen -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/Untitled_Candid_Interior_Scene_2026-03-23_14-40.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay"></div>
+    <div class="inset-content">
+      <div class="label a">How families cope today</div>
+      <h2 class="medium-text a a1" style="max-width: 580px;">WhatsApp groups. Phone calls. Shared Google Docs. One family member who becomes the unofficial project manager.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">The need is massive. The <span class="hl-gold-light">category doesn't exist.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- 5. MARKET -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">Market</div>
+    <h2 class="big-text a a1"><span class="hl-blue">250-400M</span> people in the EU<br>are navigating care right now.</h2>
+    <div class="stat-row">
+      <div class="stat a a2">
+        <div class="stat-number">80-100M</div>
+        <div class="stat-label">in a care journey at any<br>given time in the EU</div>
+      </div>
+      <div class="stat a a3">
+        <div class="stat-number">3-5x</div>
+        <div class="stat-label">circle members per patient<br>who need to understand</div>
+      </div>
+      <div class="stat a a4">
+        <div class="stat-number" style="color: var(--brand);">0</div>
+        <div class="stat-label">products built for how families<br>navigate care together</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. LIFE MOMENTS — inset family group -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/38daf1e4a7004a6cc07eecc1d80b6b66.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.72) 0%, rgba(13,22,79,0.08) 55%);"></div>
+    <div class="inset-content inset-top">
+      <div class="label a">Focus</div>
+      <h2 class="big-text a a1">We target <span class="hl-gold-light">life moments</span>,<br>not demographics.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">It feels personal, routines break down, something is at stake.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 7. DITTO WORKS — split with elderly man -->
+<div class="slide slide-split" data-theme="split">
+  <div class="split-photo">
+    <img src="images/6a397c56d57ed464b03002d42f620716.jpg" alt="" class="anim-scale">
+  </div>
+  <div class="split-text">
+    <div class="label a">Where we are</div>
+    <h2 class="big-text a a1" style="font-size: 38px;">Ditto already <span class="hl-gold">works.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="grid-item a a2" style="margin-bottom: 18px;">
+      <h3>75,000 users</h3>
+      <p>First signal: oncology and cardiology are the dominant domains.</p>
+    </div>
+    <div class="grid-item a a3" style="margin-bottom: 18px;">
+      <h3>AI summaries + documents</h3>
+      <p>Record a visit, get a summary. Photo a letter, get an explanation.</p>
+    </div>
+    <div class="grid-item a a4" style="margin-bottom: 18px;">
+      <h3>B2B traction</h3>
+      <p>2M insurance members and hundreds of doctors advocating Ditto.</p>
+    </div>
+    <div class="grid-item a a5">
+      <h3>Care Circle V2 is live</h3>
+      <p>The care graph foundation is shipped.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 8. QUOTE — split with couple embracing -->
+<div class="slide slide-split" data-theme="split">
+  <div class="split-text" style="background: var(--soft-bg); border-radius: var(--radius); padding: 52px;">
+    <div class="quote a">"My daughter calls every day asking how I am. I <span class="hl-gold">love it</span> and I <span class="hl-red">hate it.</span> I'm exhausted from retelling."</div>
+    <div class="spacer-sm"></div>
+    <div class="quote-attr a a1">The core tension of serious illness:<br>needing connection while carrying the burden.</div>
+  </div>
+  <div class="split-photo">
+    <img src="images/eb83e52565a37c025334d194de29e477.jpg" alt="" class="anim-scale">
+  </div>
+</div>
+
+<!-- 9. THREE PILLARS -->
+<div class="slide slide-soft">
+  <div class="content">
+    <div class="label a">Product Vision</div>
+    <h2 class="big-text a a1">Understand. <span class="hl-blue">Prepare.</span> <span class="hl-gold">Share.</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2">Three pillars. One promise.</p>
+    <div class="grid-3" style="margin-top: 28px;">
+      <div class="pillar-card a a3">
+        <div class="pillar-tag" style="color: var(--brand);">Clarity</div>
+        <h3>You understand<br>what's happening</h3>
+        <p>Plain language. Explained terms. What was said, what it means, what's next.</p>
+      </div>
+      <div class="pillar-card a a4">
+        <div class="pillar-tag" style="color: var(--blue);">Convenience</div>
+        <h3>You're prepared<br>for what's next</h3>
+        <p>Everything in one place. Smart questions. Your journey, organized.</p>
+      </div>
+      <div class="pillar-card a a5">
+        <div class="pillar-tag" style="color: var(--gold);">Connection</div>
+        <h3>Your people<br>can actually help</h3>
+        <p>Share without retelling. Circle stays informed. Support flows naturally.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10. CARE CIRCLE NOT CHATBOT — inset -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/31e50e608883796284d8e7f929951582.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.75) 0%, rgba(13,22,79,0.15) 60%);"></div>
+    <div class="inset-content">
+      <div class="label a">The Insight</div>
+      <h2 class="hero-text a a1" style="font-size: 58px;">It's a <span class="hl-gold-light">care circle</span>,<br>not a chatbot.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">The defensible asset is not the AI. It's the Care Circle —<br>who cares about whom, what they need to know.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 11. CARE CIRCLE EXPLAINED -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">The Care Circle</div>
+    <h2 class="medium-text a a1">Different people need <span class="hl-gold">different things.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="compare-row a a2">
+      <div class="compare-label">The partner</div>
+      <div class="compare-value">Full summary, action items, medication changes, emotional context</div>
+    </div>
+    <div class="compare-row a a3">
+      <div class="compare-label">The adult child</div>
+      <div class="compare-value">Key decisions, next appointments, how parent is feeling</div>
+    </div>
+    <div class="compare-row a a4">
+      <div class="compare-label">The elderly parent</div>
+      <div class="compare-value">Simplified update, reassurance, what matters most</div>
+    </div>
+    <div class="compare-row a a5">
+      <div class="compare-label">The friend abroad</div>
+      <div class="compare-value">High-level status, what would actually help</div>
+    </div>
+    <div class="spacer-md"></div>
+    <p class="body-text a a6">Not "share one post to everyone." The <span class="hl-blue">right information</span>,<br>to the right person, in the right format.</p>
+  </div>
+</div>
+
+<!-- 12. AI STRATEGY -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">AI Strategy</div>
+    <h2 class="big-text a a1">Not a do-it-all <span class="hl-blue">chatbot.</span></h2>
+    <div class="spacer-md"></div>
+    <p class="body-text a a2">Technology that makes sense of what matters. It translates the doctor's words<br>into what each person in the circle needs to understand.</p>
+    <div class="spacer-lg"></div>
+    <div class="grid-2">
+      <div class="grid-item a a3">
+        <h3 style="color: var(--text-light);">What Big Tech builds</h3>
+        <p>One person, one chatbot, one screen. Personal health AI. General-purpose knowledge.</p>
+      </div>
+      <div class="grid-item a a4">
+        <h3>What Ditto builds</h3>
+        <p>One patient, many people who care, many contexts. Useless without your data — which is the point.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 13. COMPETITIVE LANDSCAPE -->
+<div class="slide slide-dark" data-theme="dark">
+  <div class="content">
+    <div class="label a">Competitive Landscape</div>
+    <h2 class="big-text a a1">Everyone is building<br>personal health AI.</h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2" style="color: rgba(248,247,244,0.35);">None of them are building the <span class="hl-gold-light">social layer.</span></p>
+    <div class="spacer-md"></div>
+    <div class="compare-row a a3">
+      <div class="compare-label">Apple</div>
+      <div class="compare-value">Health+ AI Coach. Wearables + wellness. Not journeys.</div>
+    </div>
+    <div class="compare-row a a3">
+      <div class="compare-label">OpenAI</div>
+      <div class="compare-value">ChatGPT Health + $100M acquisition. Generic Q&A.</div>
+    </div>
+    <div class="compare-row a a3">
+      <div class="compare-label">Microsoft</div>
+      <div class="compare-value">Copilot Health. EHR aggregation. Enterprise.</div>
+    </div>
+    <div class="compare-row a a3">
+      <div class="compare-label">Google</div>
+      <div class="compare-value">b.well partnership. Search-based health answers.</div>
+    </div>
+    <div class="spacer-lg"></div>
+    <p class="medium-text a a4">They build for individuals.<br>Care is fundamentally <span class="hl-gold-light">multi-person.</span></p>
+  </div>
+</div>
+
+<!-- 14. MOAT -->
+<div class="slide slide-dark" data-theme="dark">
+  <div class="content">
+    <div class="label a">Defensibility</div>
+    <h2 class="big-text a a1">Five layers of <span class="hl-gold-light">moat.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="moat-item a a2">
+      <div class="moat-num">1</div>
+      <div class="moat-content"><h3>Care Circle</h3><p>Who cares about whom. Nobody else has this.</p></div>
+    </div>
+    <div class="moat-item a a3">
+      <div class="moat-num">2</div>
+      <div class="moat-content"><h3>Journey History</h3><p>Every data point enriches everything before it.</p></div>
+    </div>
+    <div class="moat-item a a3">
+      <div class="moat-num">3</div>
+      <div class="moat-content"><h3>Trust</h3><p>Earned at vulnerable moments. You don't switch mid-treatment.</p></div>
+    </div>
+    <div class="moat-item a a4">
+      <div class="moat-num">4</div>
+      <div class="moat-content"><h3>EHDS First-Mover</h3><p>EU health data portability by 2029. Regulatory moat.</p></div>
+    </div>
+    <div class="moat-item a a4">
+      <div class="moat-num">5</div>
+      <div class="moat-content"><h3>Network Density</h3><p>1 patient brings 3-7 circle members. The graph compounds.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 15. 50+ AUDIENCE — inset man face to sun -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/061b9b0b289cb231dc6009fac66d1fa3.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.72) 0%, rgba(13,22,79,0.06) 50%);"></div>
+    <div class="inset-content inset-top">
+      <div class="label a">Our Audience</div>
+      <h2 class="big-text a a1">50+ users are behind on AI.<br>That's our <span class="hl-gold-light">advantage.</span></h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">Lower bar. Higher delight. Voice in, visual out.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 16. DATA — inset two people lying in field -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/d2df969db5995fe4dd33ec6a1e61d45f.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.72) 0%, rgba(13,22,79,0.04) 55%);"></div>
+    <div class="inset-content">
+      <div class="label a">Challenge</div>
+      <h2 class="big-text a a1">Data doesn't need to be complete.<br>It needs to be <span class="hl-gold-light">sufficient.</span></h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">Conversations + documents + voice = 80% of what families need.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 17. GROWTH MODEL -->
+<div class="slide slide-soft">
+  <div class="content">
+    <div class="label a">Growth Model</div>
+    <h2 class="big-text a a1">Multiple paths to <span class="hl-blue">scale.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="compare-row a a2">
+      <div class="compare-label">B2C Subscription</div>
+      <div class="compare-value">Freemium core. Premium for full circle + journey features.</div>
+    </div>
+    <div class="compare-row a a3">
+      <div class="compare-label">B2B2C Insurers</div>
+      <div class="compare-value">Per-member pricing. Menzis is proof. 50M insured lives across EU.</div>
+    </div>
+    <div class="compare-row a a4">
+      <div class="compare-label">EHDS Data</div>
+      <div class="compare-value">Anonymized care journey insights. Patient-consented. 2028+.</div>
+    </div>
+    <div class="compare-row a a5">
+      <div class="compare-label">Providers</div>
+      <div class="compare-value">Hospitals offer Ditto at diagnosis. Better experience, fewer calls.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 18. GTM -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">Go-to-Market</div>
+    <h2 class="big-text a a1">From <span class="hl-blue">75K</span> to <span class="hl-gold">10M.</span></h2>
+    <div class="timeline">
+      <div class="timeline-phase a a2">
+        <div class="timeline-when">Now — 6 months</div>
+        <div class="timeline-what">
+          <h3>Own cancer + cardiology + cognitive decline in NL</h3>
+          <p>Deepen the product. Menzis activation. Hospital partnerships.</p>
+        </div>
+      </div>
+      <div class="timeline-phase a a3">
+        <div class="timeline-when">6 — 12 months</div>
+        <div class="timeline-what">
+          <h3>Expand life moments in NL</h3>
+          <p>Chronic conditions, new diagnoses, elderly care coordination.</p>
+        </div>
+      </div>
+      <div class="timeline-phase a a4">
+        <div class="timeline-when">12 — 18 months</div>
+        <div class="timeline-what">
+          <h3>First EU markets (Germany, Belgium)</h3>
+          <p>Insurer partnerships. Localized product. Cross-border care journeys.</p>
+        </div>
+      </div>
+      <div class="timeline-phase a a5">
+        <div class="timeline-when">18+ months</div>
+        <div class="timeline-what">
+          <h3>EU-wide + EHDS integration</h3>
+          <p>Health data portability live. Multi-country insurer partnerships.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 19. NETWORK EFFECTS -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">Growth Model</div>
+    <h2 class="big-text a a1">1 patient = <span class="hl-gold">5 users.</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2">Every patient brings their circle. Circle members bring their own journeys.</p>
+    <div class="stat-row">
+      <div class="stat a a3">
+        <div class="stat-number">75K</div>
+        <div class="stat-label">users today<br>NL only</div>
+      </div>
+      <div class="stat a a4">
+        <div class="stat-number">500K</div>
+        <div class="stat-label">Year 2 target<br>compound growth</div>
+      </div>
+      <div class="stat a a5">
+        <div class="stat-number">5M+</div>
+        <div class="stat-label">Year 5<br>EHDS live, 10+ markets</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 20. WHY NOW — split with runner -->
+<div class="slide slide-split" data-theme="split">
+  <div class="split-text">
+    <div class="label a">Timing</div>
+    <h2 class="big-text a a1" style="font-size: 38px;">The window is open.<br>It won't stay <span class="hl-gold">open.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="grid-item a a2" style="margin-bottom: 18px;">
+      <h3>Big Tech skepticism</h3>
+      <p>Big promises, zero healthcare trust.</p>
+    </div>
+    <div class="grid-item a a3" style="margin-bottom: 18px;">
+      <h3>Legacy too slow</h3>
+      <p>Health IT moves in 5-year cycles.</p>
+    </div>
+    <div class="grid-item a a4">
+      <h3>Ditto's position</h3>
+      <p>75K users, live product, shipping weekly.</p>
+    </div>
+  </div>
+  <div class="split-photo">
+    <img src="images/9f9f2bf61cf0cf65b87fc03654add163.jpg" alt="" class="anim-scale">
+  </div>
+</div>
+
+<!-- 21. PITCH — full bleed woman with flower -->
+<div class="slide slide-hero" data-theme="photo">
+  <img class="hero-bg anim-scale" src="images/1037fa00b9b0c392f29b4d3b45c10ab7.jpg" alt="">
+  <div class="hero-overlay"></div>
+  <div class="content">
+    <div class="label a">The Vision</div>
+    <h2 class="hero-text a a1">Ditto is building the<br><span class="hl-gold-light">care circle</span> for Europe.</h2>
+    <div class="spacer-md"></div>
+    <p class="body-text a a2">Starting in the Netherlands.</p>
+    <div class="spacer-lg"></div>
+    <p class="medium-text a a3" style="color: #F8F7F4;">Care. <span class="hl-gold-light">Clarified.</span></p>
+  </div>
+</div>
+
+<!-- 22. CLOSE — inset runner -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/34699eca0b59961a9490f5279181afe4.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.55) 0%, rgba(13,22,79,0.03) 35%);"></div>
+    <div class="inset-content" style="text-align: center; padding: 44px;">
+      <p class="medium-text a" style="font-style: italic; color: #F8F7F4;">Care. <span class="hl-gold-light">Clarified.</span></p>
+      <div class="spacer-md"></div>
+      <p class="label a a1" style="color: rgba(248,247,244,0.35);">Ditto Care B.V. — Rotterdam</p>
+      <p class="body-text a a2" style="font-size: 12px; color: rgba(248,247,244,0.25);">March 2026</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+  const hint = document.getElementById('hint');
+  const logo = document.getElementById('deckLogo');
+  let current = 0;
+  const total = slides.length;
+
+  function goTo(i) {
+    if (i < 0 || i >= total) return;
+    slides[current].querySelectorAll('.a,.anim-scale').forEach(e => { e.style.animation = 'none'; e.offsetHeight; e.style.animation = ''; });
+    slides[current].classList.remove('active');
+    current = i;
+    slides[current].querySelectorAll('.a,.anim-scale').forEach(e => { e.style.animation = 'none'; e.offsetHeight; e.style.animation = ''; });
+    slides[current].classList.add('active');
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    counter.textContent = (current + 1) + ' / ' + total;
+    const t = slides[current].getAttribute('data-theme');
+    counter.className = 'counter';
+    if (t === 'dark') { counter.classList.add('on-dark'); progress.style.background = 'rgba(248,247,244,0.15)'; }
+    else if (t === 'photo' || t === 'split') { counter.classList.add('on-photo'); progress.style.background = 'rgba(255,255,255,0.25)'; }
+    else { progress.style.background = 'var(--brand)'; }
+    // Logo: white on dark/photo slides, dark blue on light slides
+    if (t === 'dark' || t === 'photo' || t === 'split') {
+      logo.src = 'logo/Ditto_white.svg';
+    } else {
+      logo.src = 'logo/Ditto_darkblue.svg';
+    }
+    if (current > 0) hint.classList.add('hidden');
+  }
+  goTo(0);
+  document.getElementById('clickNext').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('clickPrev').addEventListener('click', () => goTo(current - 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+  });
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].clientX; if (Math.abs(d) > 50) d > 0 ? goTo(current + 1) : goTo(current - 1); });
+</script>
+</body>
+</html>

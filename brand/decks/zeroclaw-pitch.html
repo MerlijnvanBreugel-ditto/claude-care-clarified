@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZeroClaw — From Summarizer to Health Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D164F;
+    --mint: #E0FBD5;
+    --teal: #58B6D2;
+    --yellow: #F3DE70;
+    --orange: #E8916E;
+    --lavender: #BEAEF8;
+    --cream: #EFE9DE;
+    --light-blue: #B2DCF5;
+    --light-gray: #F1F1F1;
+    --text-light: #7C8297;
+    --red: #D94F4F;
+    --divider: #EAEAEA;
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: #FFFFFF;
+    color: var(--navy);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vh 8vw;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  .slide--default { background: #FFFFFF; color: var(--navy); }
+  .slide--navy { background: var(--navy); color: #F8F7F4; }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 0.4em;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 0.5em;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.3;
+    margin-bottom: 0.4em;
+  }
+
+  p, li {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  .subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #7C8297;
+    max-width: 42em;
+  }
+
+  .slide--navy .subtitle { opacity: 0.75; color: #F8F7F4; }
+
+  .label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 12px;
+    color: var(--teal);
+  }
+
+  .slide--navy .label { color: var(--teal); }
+
+  blockquote {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    line-height: 1.3;
+    padding-left: 1.2em;
+    margin: 1em 0;
+    max-width: 36em;
+    border-left: 4px solid var(--teal);
+  }
+
+  .slide--navy blockquote { border-left-color: var(--yellow); }
+  .slide--default blockquote { border-left-color: var(--yellow); }
+
+  .quote-attr {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    opacity: 0.5;
+    margin-top: 0.5em;
+    padding-left: 1.5em;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; margin-top: 1.5em; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3vw; margin-top: 1.5em; }
+  .four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2vw; margin-top: 1.5em; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 1em; font-size: clamp(0.85rem, 1.1vw, 1rem); }
+  th, td { text-align: left; padding: 0.6em 1em; font-weight: 500; }
+  th {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+    border-bottom: 2px solid rgba(88,182,210,0.25);
+  }
+  td { border-bottom: 1px solid rgba(13,22,79,0.06); }
+  .slide--navy th { color: var(--teal); border-bottom-color: rgba(88,182,210,0.3); }
+  .slide--navy td { border-bottom-color: rgba(255,255,255,0.08); }
+
+  .card {
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-bottom: 0.8em;
+    background: rgba(13,22,79,0.03);
+    border: 1px solid rgba(13,22,79,0.06);
+  }
+
+  .slide--navy .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.08); }
+  .slide--default .card { background: #fff; border-color: rgba(30,36,50,0.06); }
+
+  ul, ol { padding-left: 1.2em; margin-top: 0.5em; }
+  li { margin-bottom: 0.4em; }
+  li::marker { color: var(--teal); }
+  .slide--navy li::marker { color: var(--teal); }
+
+  .highlight { color: var(--teal); }
+  .slide--navy .highlight { color: var(--yellow); }
+  .slide--default .highlight { color: var(--teal); }
+  strong { font-weight: 700; }
+
+  .flow { display: flex; align-items: center; gap: 0.8em; margin: 1.5em 0; flex-wrap: wrap; }
+  .flow-item {
+    background: rgba(88,182,210,0.1);
+    border: 1px solid rgba(88,182,210,0.2);
+    border-radius: 10px;
+    padding: 0.7em 1.2em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    white-space: nowrap;
+  }
+  .flow-arrow { color: var(--teal); font-size: 1.3rem; opacity: 0.5; }
+  .slide--navy .flow-item { background: rgba(88,182,210,0.15); border-color: rgba(88,182,210,0.3); }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.25em 0.8em;
+    border-radius: 100px;
+    margin-right: 0.4em;
+    margin-bottom: 0.3em;
+  }
+  .pill--teal { background: rgba(88,182,210,0.15); color: var(--teal); }
+  .pill--gold { background: rgba(243,222,112,0.25); color: #8A7A20; }
+  .pill--red { background: rgba(217,79,79,0.12); color: var(--red); }
+  .pill--green { background: rgba(74,180,120,0.12); color: #2D8A50; }
+  .pill--navy { background: rgba(13,22,79,0.08); color: var(--navy); }
+  .pill--orange { background: rgba(232,145,110,0.15); color: #B5603A; }
+
+  .progress {
+    position: fixed; bottom: 0; left: 0;
+    height: 3px; background: var(--teal);
+    transition: width 0.4s ease; z-index: 100;
+  }
+
+  .counter {
+    position: fixed; bottom: 1.5em; right: 2em;
+    font-family: var(--font-body);
+    font-weight: 500; font-size: 0.85rem;
+    opacity: 0.35; z-index: 100;
+  }
+
+  .mt-1 { margin-top: 0.5em; }
+  .mt-2 { margin-top: 1em; }
+  .mt-3 { margin-top: 1.5em; }
+  .mt-4 { margin-top: 2em; }
+  .mb-1 { margin-bottom: 0.5em; }
+  .small { font-size: clamp(0.8rem, 1vw, 0.9rem); opacity: 0.5; }
+
+  .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2em; align-items: start; margin-top: 1.5em; }
+  .vs-divider { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; opacity: 0.25; padding-top: 1em; }
+  .vs-bad { opacity: 0.45; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5em; margin-top: 1.5em; }
+  .stat {
+    text-align: center;
+    padding: 1.2em;
+    border-radius: 12px;
+  }
+  .stat-number {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    line-height: 1;
+    color: var(--teal);
+  }
+  .slide--navy .stat-number { color: var(--yellow); }
+  .stat-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.4em;
+    opacity: 0.6;
+  }
+
+  .job-row {
+    display: grid;
+    grid-template-columns: 2.5em 1fr auto;
+    gap: 0.8em;
+    align-items: center;
+    padding: 0.5em 0;
+    border-bottom: 1px solid rgba(13,22,79,0.05);
+  }
+  .job-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--teal);
+    text-align: center;
+  }
+  .slide--navy .job-num { color: var(--yellow); }
+  .slide--navy .job-row { border-bottom-color: rgba(255,255,255,0.06); }
+
+  .cluster-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  }
+  .cluster-count {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 768px) {
+    .slide { padding: 4vh 6vw; }
+    .two-col, .three-col, .four-col { grid-template-columns: 1fr; gap: 1.5em; }
+    .vs { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- SLIDE 1: Title -->
+<div class="slide slide--navy active" data-slide="0">
+  <div class="label">Internal Pitch &mdash; March 2026</div>
+  <h1>From Summarizer<br>to Health <span class="highlight">Companion</span></h1>
+  <p class="subtitle mt-2">What happens when Ditto runs on Claude and borrows the agent principles behind ZeroClaw and NanoClaw?</p>
+  <p class="small mt-4">Navigate: arrow keys or click &middot; For discussion, not for building</p>
+</div>
+
+<!-- SLIDE 2: The Tension -->
+<div class="slide slide--default" data-slide="1">
+  <div class="label">The Tension</div>
+  <h2>We do <span class="highlight">one thing</span> well.<br>Patients need <span class="highlight">thirty</span>.</h2>
+  <p class="subtitle mt-2">Ditto summarizes doctor conversations. That's valuable. But between appointments, patients are alone with their questions, their medications, their worried families, and their next appointment they're not prepared for.</p>
+  <div class="card mt-3" style="max-width: 40em;">
+    <p style="font-weight: 600;">What patients actually need:</p>
+    <div class="flow mt-1">
+      <span class="flow-item">Understand</span>
+      <span class="flow-item">Remember</span>
+      <span class="flow-item">Prepare</span>
+      <span class="flow-item">Track</span>
+      <span class="flow-item">Share</span>
+      <span class="flow-item">Act</span>
+    </div>
+    <p class="mt-1 small" style="opacity: 0.6;">We cover "Understand" and "Remember." The rest is a blank canvas.</p>
+  </div>
+</div>
+
+<!-- SLIDE 3: What's Changing in AI -->
+<div class="slide slide--default" data-slide="2">
+  <div class="label">What's Happening in AI</div>
+  <h2>The Agent Era</h2>
+  <p class="subtitle">Open-source projects like ZeroClaw and NanoClaw are proving a new paradigm: AI assistants that don't just respond &mdash; they <strong>remember, anticipate, and act</strong>.</p>
+  <div class="three-col mt-3">
+    <div class="card">
+      <h3>Persistent Memory</h3>
+      <p>The assistant remembers everything. Your meds, your doctors, your worries. Not "start from scratch" every time.</p>
+    </div>
+    <div class="card">
+      <h3>Proactive Tasks</h3>
+      <p>It doesn't wait for you to ask. It reminds, nudges, flags, checks in. The assistant comes to you.</p>
+    </div>
+    <div class="card">
+      <h3>Tool Use</h3>
+      <p>It calls external services: drug databases, calendars, translation. The AI orchestrates, not just generates.</p>
+    </div>
+  </div>
+  <p class="mt-2" style="font-weight: 600;">We don't need to build ZeroClaw. We need to bring these <em>principles</em> into Ditto.</p>
+</div>
+
+<!-- SLIDE 4: The Concept -->
+<div class="slide slide--navy" data-slide="3">
+  <div class="label">The Concept</div>
+  <h2>Ditto becomes a <span class="highlight">personal health companion</span></h2>
+  <p class="subtitle">Same app. Same brand. But powered by Claude's intelligence, with agent capabilities that make every interaction smarter than the last.</p>
+  <div class="flow mt-3">
+    <span class="flow-item">Patient speaks</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item">Claude understands</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item">Profile builds</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-item">Ditto acts</span>
+  </div>
+  <div class="two-col mt-3">
+    <div>
+      <p style="font-weight: 600; margin-bottom: 0.5em;">Claude is the brain:</p>
+      <ul>
+        <li>Summarizes, explains, extracts</li>
+        <li>Holds your full care journey in context (1M tokens)</li>
+        <li>Generates personalized content per audience</li>
+        <li>Detects patterns and flags changes</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight: 600; margin-bottom: 0.5em;">The app is the body:</p>
+      <ul>
+        <li>Stores the living health profile</li>
+        <li>Delivers notifications and reminders</li>
+        <li>Manages permissions and sharing</li>
+        <li>Provides the interface patients trust</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: The Numbers -->
+<div class="slide slide--default" data-slide="4">
+  <div class="label">The Scope</div>
+  <h2>37 Jobs. 8 Clusters. 4 Priority Tiers.</h2>
+  <p class="subtitle">Every job a patient or caregiver needs between diagnosis and recovery, mapped against what Claude can actually deliver.</p>
+  <div class="stat-grid">
+    <div class="stat" style="background: rgba(88,182,210,0.08);">
+      <div class="stat-number">37</div>
+      <div class="stat-label">Jobs to be done</div>
+    </div>
+    <div class="stat" style="background: rgba(74,180,120,0.08);">
+      <div class="stat-number" style="color: #2D8A50;">22</div>
+      <div class="stat-label">Claude can do natively or with app infra</div>
+    </div>
+    <div class="stat" style="background: rgba(243,222,112,0.15);">
+      <div class="stat-number" style="color: #8A7A20;">7</div>
+      <div class="stat-label">Needs external data augmentation</div>
+    </div>
+    <div class="stat" style="background: rgba(217,79,79,0.08);">
+      <div class="stat-number" style="color: var(--red);">1</div>
+      <div class="stat-label">Hard no (medical triage)</div>
+    </div>
+  </div>
+  <div class="mt-3" style="display: flex; flex-wrap: wrap; gap: 0.6em;">
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">7</span> Understanding</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">5</span> Conversing</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">7</span> Extracting</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">5</span> Preparing</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">8</span> Monitoring</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">4</span> Translating</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">4</span> Sharing</div>
+    <div class="cluster-badge" style="background: rgba(88,182,210,0.08);"><span class="cluster-count" style="color: var(--teal);">5</span> Navigating</div>
+  </div>
+</div>
+
+<!-- SLIDE 6: The Top 10 -->
+<div class="slide slide--default" data-slide="5">
+  <div class="label">Priority 1 &mdash; Build First</div>
+  <h2>The Top 10 Jobs</h2>
+  <p class="subtitle">High user pain. Strong Claude fit. Builds the care graph moat.</p>
+  <div style="margin-top: 1em;">
+    <div class="job-row"><span class="job-num">1</span><span><strong>Summarize doctor conversations</strong> &mdash; already core, Claude upgrade = cross-appointment awareness</span><span class="pill pill--green">Exists</span></div>
+    <div class="job-row"><span class="job-num">2</span><span><strong>Answer follow-up questions</strong> &mdash; "What did she mean by 'monitor the markers'?" Grounded in YOUR data</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">3</span><span><strong>Explain medical documents</strong> &mdash; already exists, extend with journey context</span><span class="pill pill--green">Exists</span></div>
+    <div class="job-row"><span class="job-num">4</span><span><strong>Adapt updates per audience</strong> &mdash; partner gets full detail, friend gets "she's doing okay"</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">5</span><span><strong>Build a living health profile</strong> &mdash; every interaction enriches it. Foundation for everything else.</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">6</span><span><strong>Generate appointment questions</strong> &mdash; based on full journey, not a generic checklist</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">7</span><span><strong>Extract action items</strong> &mdash; "Blood test in 3 weeks. Increase walking to 30 min/day."</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">8</span><span><strong>Generate shareable updates</strong> &mdash; one tap, the whole Care Circle knows what happened</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">9</span><span><strong>Extract medication data</strong> &mdash; from conversations, populates profile automatically</span><span class="pill pill--teal">New</span></div>
+    <div class="job-row"><span class="job-num">10</span><span><strong>Explain lab results in context</strong> &mdash; "Your HbA1c dropped from 7.2 to 6.8 &mdash; that's good news"</span><span class="pill pill--teal">New</span></div>
+  </div>
+</div>
+
+<!-- SLIDE 7: Three Killer Examples -->
+<div class="slide slide--navy" data-slide="6">
+  <div class="label">What This Feels Like</div>
+  <h2>Three Moments That <span class="highlight">Change Everything</span></h2>
+  <div class="three-col mt-3">
+    <div class="card">
+      <p style="font-size: 0.75rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8em;">After the Oncologist</p>
+      <p style="font-size: 0.95rem;">Patient records the visit. Ditto summarizes it, extracts the medication change, generates 3 personalized updates &mdash; full detail for partner, simplified for elderly parent, "she's okay" for friend abroad &mdash; and prepares questions for the follow-up in 3 weeks.</p>
+      <p class="small mt-2">Jobs 1, 4, 7, 8, 6</p>
+    </div>
+    <div class="card">
+      <p style="font-size: 0.75rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8em;">Tuesday Night, 11pm</p>
+      <p style="font-size: 0.95rem;">Patient can't sleep. "What did the doctor mean by 'we'll monitor the markers'?" Opens Ditto, asks the question. Gets an answer grounded in their actual conversation &mdash; not a Google rabbit hole. Understands. Sleeps.</p>
+      <p class="small mt-2">Job 2 &mdash; contextual Q&A</p>
+    </div>
+    <div class="card">
+      <p style="font-size: 0.75rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8em;">Before the Follow-Up</p>
+      <p style="font-size: 0.95rem;">"You have an appointment in 2 days. Since your last visit: chemo protocol changed, you reported nausea 4 times, and your GP prescribed new anti-nausea meds. Here are 3 questions worth asking."</p>
+      <p class="small mt-2">Jobs 6, 5, 9</p>
+    </div>
+  </div>
+  <p class="mt-2 small">None of this requires the user to "talk to an AI." The AI works behind the scenes on the care journey.</p>
+</div>
+
+<!-- SLIDE 8: Before / After -->
+<div class="slide slide--default" data-slide="7">
+  <div class="label">The Shift</div>
+  <h2>Ditto Today vs. Ditto with ZeroClaw</h2>
+  <table class="mt-2">
+    <tr><th>Capability</th><th>Today (Azure OpenAI)</th><th>With Claude + Agent Principles</th></tr>
+    <tr>
+      <td><strong>Summarization</strong></td>
+      <td>Single conversation &rarr; summary</td>
+      <td>Cross-appointment awareness, references previous visits</td>
+    </tr>
+    <tr>
+      <td><strong>Q&A</strong></td>
+      <td>None</td>
+      <td>Follow-up questions grounded in your journey data</td>
+    </tr>
+    <tr>
+      <td><strong>Proactive</strong></td>
+      <td>None &mdash; user must open app</td>
+      <td>Medication reminders, appointment prep, check-ins</td>
+    </tr>
+    <tr>
+      <td><strong>Sharing</strong></td>
+      <td>One summary, share as-is</td>
+      <td>Audience-adapted versions, auto-generated</td>
+    </tr>
+    <tr>
+      <td><strong>Health profile</strong></td>
+      <td>None</td>
+      <td>Living profile from every interaction</td>
+    </tr>
+    <tr>
+      <td><strong>Extraction</strong></td>
+      <td>Conversation &rarr; summary</td>
+      <td>Voice, photos, documents &rarr; structured profile</td>
+    </tr>
+    <tr>
+      <td><strong>Pattern detection</strong></td>
+      <td>None</td>
+      <td>"Nausea correlates with chemo Tuesdays"</td>
+    </tr>
+    <tr>
+      <td><strong>Multi-language</strong></td>
+      <td>None</td>
+      <td>Translate + adapt for non-Dutch family</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SLIDE 9: Why Claude -->
+<div class="slide slide--default" data-slide="8">
+  <div class="label">Why Claude Specifically</div>
+  <h2>Not Just "Better AI"<br>&mdash; <span class="highlight">Different Capabilities</span></h2>
+  <div class="two-col mt-2">
+    <div>
+      <div class="card">
+        <h3>1M Token Context</h3>
+        <p>Hold an entire care journey in memory during one interaction. 18 months of cancer treatment context, all available at once. No summarization loss.</p>
+      </div>
+      <div class="card">
+        <h3>Tool Use &amp; MCP</h3>
+        <p>Claude doesn't just generate text &mdash; it calls drug databases, checks calendars, queries translation APIs. Orchestration, not just generation.</p>
+      </div>
+      <div class="card">
+        <h3>Nuanced Communication</h3>
+        <p>Same information, five different audiences. Partner gets clinical detail. Elderly parent gets simplified Dutch. Friend abroad gets English. Claude adapts tone, not just words.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Extended Thinking</h3>
+        <p>For complex medical reasoning: "This new prescription + your existing meds + the conversation last month = something worth flagging." Careful, step-by-step reasoning.</p>
+      </div>
+      <div class="card">
+        <h3>Strong Dutch</h3>
+        <p>Medical terminology, code-switching between Dutch and English medical terms, dialect variation. Needs validation, but the foundation is strong.</p>
+      </div>
+      <div class="card">
+        <h3>Constitutional Safety</h3>
+        <p>Built-in refusal to diagnose, triage, or provide medical advice. In healthcare, the AI that knows what NOT to say is more valuable than the one that says more.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Hard Limits -->
+<div class="slide slide--navy" data-slide="9">
+  <div class="label">Eyes Wide Open</div>
+  <h2>What Claude <span class="highlight">Cannot</span> Do</h2>
+  <p class="subtitle">Credibility comes from knowing the limits. These aren't problems to solve &mdash; they're boundaries to design around.</p>
+  <div class="two-col mt-2">
+    <div>
+      <div class="card">
+        <h3 style="color: var(--red);">Medical Triage</h3>
+        <p>Never determine urgency. Never assess severity. Always: "Contact your GP or 112." Hardcoded, not prompt-engineered.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--red);">Drug Safety</h3>
+        <p>Medication interactions must come from verified databases (KNMP G-Standaard), not LLM knowledge. Claude explains the result &mdash; it doesn't generate it.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--orange);">Push Notifications</h3>
+        <p>Claude is an API &mdash; it responds, it doesn't initiate. App owns the scheduling layer. Claude decides what/when; app delivers.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3 style="color: var(--orange);">EHR Access</h3>
+        <p>Can't log into hospital systems. Until EHDS (2029): recording + documents + voice = the input layer.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--orange);">Persistent Memory</h3>
+        <p>Every API call starts fresh. The app IS the memory layer &mdash; health profile, conversation history, context injection.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--orange);">100% Dutch Medical NLP</h3>
+        <p>Medication names, abbreviations, code-switching. Strong but not perfect. Validation step mandatory for anything safety-critical.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: Key Risks -->
+<div class="slide slide--default" data-slide="10">
+  <div class="label">Risks</div>
+  <h2>Four Things We Must Get Right</h2>
+  <div class="two-col mt-2">
+    <div>
+      <div class="card" style="border-left: 4px solid var(--red);">
+        <h3>GDPR &amp; Data Residency</h3>
+        <p>Health data is GDPR special category (Art. 9). Sending it to Claude's API needs: data processing agreement with Anthropic, EU endpoint confirmation, explicit patient consent. <strong>This is the first thing to validate.</strong></p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--red);">
+        <h3>Medical Hallucination</h3>
+        <p>Claude must never present general knowledge as fact about YOUR health. Every answer grounded in: "based on your conversation with Dr. X" or "according to your lab results." Data, not inference.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="border-left: 4px solid var(--orange);">
+        <h3>Over-Trust</h3>
+        <p>Users will treat Ditto as a medical authority. Design must reinforce: "I organize your health information. Doctors make decisions." Clear, consistent, unavoidable.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--orange);">
+        <h3>Cost at Scale</h3>
+        <p>1M context window per interaction is expensive. 35K users &times; multiple daily interactions = significant API cost. Smart context management, caching, and tiered usage are essential.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Roadmap -->
+<div class="slide slide--default" data-slide="11">
+  <div class="label">Priority Tiers</div>
+  <h2>What to Build, and When</h2>
+  <div class="two-col mt-2">
+    <div>
+      <div class="card" style="border-left: 4px solid var(--teal);">
+        <p class="pill pill--teal mb-1">P1 &mdash; Build First</p>
+        <h3>10 jobs</h3>
+        <p>Contextual Q&A, audience-adapted sharing, living health profile, appointment prep, action extraction. High value, strong Claude fit, builds the moat.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--lavender);">
+        <p class="pill pill--navy mb-1">P2 &mdash; Build Next</p>
+        <h3>10 jobs</h3>
+        <p>Medication reminders, voice extraction, symptom pattern detection, proactive check-ins. High value but needs app infrastructure beyond Claude.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="border-left: 4px solid var(--mint);">
+        <p class="pill pill--green mb-1">P3 &mdash; Easy Wins</p>
+        <h3>13 jobs</h3>
+        <p>Simplify leaflets, emotional support, "dumb questions" safe space, procedure explainers, employer letter drafts. Claude handles natively, ship fast.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--orange);">
+        <p class="pill pill--orange mb-1">P4 &mdash; Cautious Bets</p>
+        <h3>4 jobs</h3>
+        <p>Drug interaction flagging, contradictory advice detection. High value but high risk &mdash; needs external data, careful positioning, regulatory clarity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: Validation Steps -->
+<div class="slide slide--default" data-slide="12">
+  <div class="label">Next Steps</div>
+  <h2>Five Things to Validate</h2>
+  <p class="subtitle">Before building anything. Cheap tests, expensive answers.</p>
+  <div style="margin-top: 1.5em;">
+    <div class="card">
+      <h3>1. GDPR &amp; Data Residency</h3>
+      <p>Does Anthropic offer EU-hosted Claude endpoints? What does the data processing agreement look like for health data?</p>
+    </div>
+    <div class="card">
+      <h3>2. Claude vs. Azure OpenAI on Dutch Medical Text</h3>
+      <p>Run the same 50 conversations through both. Compare: summarization quality, extraction accuracy, medication name accuracy, cost per call.</p>
+    </div>
+    <div class="card">
+      <h3>3. Contextual Q&A Prototype</h3>
+      <p>Take 10 real summaries. Let Claude answer follow-up questions. Is the quality good enough to ship? This is the lowest-infrastructure, highest-wow job.</p>
+    </div>
+    <div class="card">
+      <h3>4. Cost Modeling</h3>
+      <p>Project Claude API costs at current usage patterns. How does 1M context pricing work? What's the per-user monthly cost?</p>
+    </div>
+    <div class="card">
+      <h3>5. User Appetite</h3>
+      <p>Show 5 patients the top 10 jobs list. Which ones make their eyes light up? Which ones do they not care about? Test before you build.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: Closing -->
+<div class="slide slide--navy" data-slide="13">
+  <div class="label">The Opportunity</div>
+  <h1>From <span style="opacity: 0.4;">summarizer</span><br>to <span class="highlight">companion</span>.</h1>
+  <blockquote class="mt-3" style="border-left-color: var(--yellow);">"The app that helps you through cancer earns trust no ad campaign can buy."</blockquote>
+  <p class="quote-attr">Unicorn Thesis, March 2026</p>
+  <p class="subtitle mt-3">The care graph is the moat. Claude is the intelligence that makes it work. ZeroClaw's principles show us the architecture. The question isn't whether &mdash; it's <strong>how fast</strong>.</p>
+  <p class="small mt-4">Full JTBD analysis: pm-workspace/specs/ideas/health-agent/zeroclaw-jtbd-discovery.md</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+let current = 0;
+
+function showSlide(n) {
+  if (n < 0 || n >= slides.length) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  progress.style.width = ((current + 1) / slides.length * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+  const isNavy = slides[current].classList.contains('slide--navy');
+  counter.style.color = isNavy ? '#F8F7F4' : 'var(--navy)';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); showSlide(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); showSlide(current - 1); }
+});
+
+document.addEventListener('click', e => {
+  const x = e.clientX / window.innerWidth;
+  if (x > 0.5) showSlide(current + 1); else showSlide(current - 1);
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) { if (diff > 0) showSlide(current + 1); else showSlide(current - 1); }
+});
+
+showSlide(0);
+</script>
+
+</body>
+</html>

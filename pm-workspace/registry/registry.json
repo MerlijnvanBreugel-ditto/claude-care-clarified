@@ -1,0 +1,664 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-04-04",
+  "description": "Live registry of all Mewtwo artifacts. Updated on every create/modify/archive. Summaries enable efficient context loading without reading full files.",
+  "artifacts": [
+    {
+      "id": "ctx-001",
+      "path": "pm-workspace/context/product-context.md",
+      "type": "context",
+      "title": "Ditto Care Product Context",
+      "summary": "Foundation document with company info, product description, strategic priorities, team structure, and product principles. Contains TODOs for north star metric, tech stack, and team structure.",
+      "status": "draft",
+      "created": "2026-02-17",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "ctx-002",
+      "path": "pm-workspace/context/DG-Brand positioning-020226-220424.pdf",
+      "type": "context",
+      "title": "Ditto Brand Positioning",
+      "summary": "Brand positioning document for Ditto Care.",
+      "status": "active",
+      "created": "2026-02-02",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "ctx-003",
+      "path": "pm-workspace/context/DG-Care Circle-020226-220454.pdf",
+      "type": "context",
+      "title": "Care Circle Overview",
+      "summary": "Care Circle feature documentation and strategy.",
+      "status": "active",
+      "created": "2026-02-02",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "ctx-005",
+      "path": "pm-workspace/context/tracking-approach.md",
+      "type": "context",
+      "title": "Ditto Tracking Approach",
+      "summary": "Placeholder for dual tracking approach: granular UI tracking (every button) and business insight tracking (aggregate events like Onboarding Complete). Merlijn to expand.",
+      "status": "placeholder",
+      "created": "2026-03-03",
+      "updated": "2026-03-03"
+    },
+    {
+      "id": "ctx-004",
+      "path": "pm-workspace/context/DG-Product Canonical Description-101225-141554.pdf",
+      "type": "context",
+      "title": "Product Canonical Description",
+      "summary": "Canonical product description for Ditto Care.",
+      "status": "active",
+      "created": "2025-12-10",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "proc-001",
+      "path": "pm-workspace/how-we-run-product/README.md",
+      "type": "process",
+      "title": "How We Run Product",
+      "summary": "Top-level overview linking to product strategy, discovery, experimentation & learning, and shipping & release.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-002",
+      "path": "pm-workspace/how-we-run-product/product-strategy/README.md",
+      "type": "process",
+      "title": "Product Strategy",
+      "summary": "North Star metric, IDEA Board process, roadmap statuses, and anti-patterns. Links to decision-making and planning subpages.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-003",
+      "path": "pm-workspace/how-we-run-product/product-strategy/how-we-make-decisions.md",
+      "type": "process",
+      "title": "How We Make Decisions",
+      "summary": "Explore/Exploit framework replacing Feature Tiering, RISCE scoring, Delight x Effort quick filter, Go/No-Go gate, evidence bars by mode.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-004",
+      "path": "pm-workspace/how-we-run-product/product-strategy/how-we-plan.md",
+      "type": "process",
+      "title": "How We Plan",
+      "summary": "Weekly Thursday cadence meeting structure (learning, roadmap, delivery), prep by role, roadmap rhythm (Now/Next/Later), quarterly check.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-005",
+      "path": "pm-workspace/how-we-run-product/discovery/README.md",
+      "type": "process",
+      "title": "Discovery: How We Do User Research",
+      "summary": "Double Diamond method, research decision tree, 6 user insight channels, interview process, tools (Lyssna, Granola, NotebookLM), discovery phase steps.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-006",
+      "path": "pm-workspace/how-we-run-product/discovery/idea-template.md",
+      "type": "template",
+      "title": "Idea Template",
+      "summary": "Template for adding ideas to IDEA Board: problem, segment, solution, area of improvement, evidence, RISCE estimate, mode (Explore/Exploit/Polish).",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-007",
+      "path": "pm-workspace/how-we-run-product/discovery/hypothesis-template.md",
+      "type": "template",
+      "title": "Hypothesis Template",
+      "summary": "Template for Go/No-Go gate: hypothesis with mechanism, metrics with kill thresholds, four risks assessment. Downstream from Idea Template.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-008",
+      "path": "pm-workspace/how-we-run-product/experimentation-and-learning/README.md",
+      "type": "process",
+      "title": "Experimentation & Learning",
+      "summary": "Product-level iteration: Week 1/2 post-launch evaluation, Learning Log, continuous discovery during Build. Distinct from growth experimentation (Statsig/A/B testing).",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-009",
+      "path": "pm-workspace/how-we-run-product/shipping-and-release/README.md",
+      "type": "process",
+      "title": "Shipping & Release",
+      "summary": "Product activation: communication matrix by mode (Explore/Exploit/Polish), video guidelines, release notes template, shipping checklist. Build/QC refs to Ways of Working.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "proc-010",
+      "path": "pm-workspace/how-we-run-product/lenny-insights.md",
+      "type": "reference",
+      "title": "Lenny & Friends: Insights for Ditto",
+      "summary": "Curated frameworks from Lenny's Newsletter applied to Ditto: Explore/Exploit, Racecar Growth, North Star, problem-first thinking, MLP. Plus insights from Cagan, Perri, Torres, Doshi, Biddle.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "ref-001",
+      "path": "pm-workspace/data/design-system/ditto-figma-reference.md",
+      "type": "reference",
+      "title": "Ditto Figma Design System Reference",
+      "summary": "Extracted design tokens, colors, typography, and component catalog from Ditto's Figma file.",
+      "status": "active",
+      "created": "2026-02-18",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "ref-002",
+      "path": "pm-workspace/data/references/warm-human-style-guide.md",
+      "type": "reference",
+      "title": "Warm/Human Style Guide",
+      "summary": "Design aesthetic guide: Duolingo-for-health approach with corner radius, background, shadow, typography, and illustration specs.",
+      "status": "active",
+      "created": "2026-02-18",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "ref-003",
+      "path": "pm-workspace/data/research/feature-ideas-overview.md",
+      "type": "research",
+      "title": "Feature Ideas Overview",
+      "summary": "Overview of feature ideas surfaced from research and discovery.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "ref-004",
+      "path": "pm-workspace/data/research/feature-ideas-user-insights.md",
+      "type": "research",
+      "title": "Feature Ideas from User Insights",
+      "summary": "Feature ideas extracted from NotebookLM user insights analysis.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "ref-005",
+      "path": "pm-workspace/data/completed-features-jan2025-feb2026.md",
+      "type": "reference",
+      "title": "Completed Features (Jan 2025 - Feb 2026)",
+      "summary": "Log of all shipped features over the past year for reference and evaluation.",
+      "status": "active",
+      "created": "2026-02-19",
+      "updated": "2026-02-19"
+    },
+    {
+      "id": "idea-001",
+      "path": "pm-workspace/specs/ideas/DPMA-1964-enhanced-sharing-personalization.md",
+      "type": "idea",
+      "title": "Enhanced Sharing Personalization",
+      "summary": "Jira DPMA-1964 — idea for enhanced sharing and personalization features.",
+      "status": "refined",
+      "created": "2026-02-08",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "idea-002",
+      "path": "pm-workspace/specs/ideas/activation-strategy/",
+      "type": "idea",
+      "title": "Activation Strategy",
+      "summary": "Multi-part activation strategy exploration: user research synthesis, market research, concept selection, with mockups for care-circle-pulse, medication-reminders, and voice-health-checkin.",
+      "status": "refined",
+      "created": "2026-02-03",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "idea-010",
+      "path": "pm-workspace/specs/ideas/activation-and-audience/",
+      "type": "idea",
+      "title": "Activation & Audience — Strategic Brainstorm",
+      "summary": "Strategic reframing of activation problem. Cancer as primary life moment to own. Three pillars (Clarity/Convenience/Connection) mapped to Sense of Coherence framework. Four layers of patient need (informational, psychological, relational, existential). Three workstreams: fix funnel, deepen cancer journey, make sharing effortless. Research-backed emotional promises.",
+      "status": "in-progress",
+      "created": "2026-03-20",
+      "updated": "2026-03-22"
+    },
+    {
+      "id": "idea-011",
+      "path": "pm-workspace/specs/ideas/activation-and-audience/unicorn-thesis-consumer-layer-healthcare.md",
+      "type": "idea",
+      "title": "Unicorn Thesis — The Consumer Layer in Healthcare",
+      "summary": "VC-perspective analysis of unicorn path. Care Graph as the defensible moat (not AI). Competitive landscape: Big Tech entering health AI (Apple Health+, ChatGPT Health, Copilot Health) but none building social care layer. EHDS as regulatory tailwind. GTM: cancer in NL → EU expansion via insurer partnerships. Network effect math: 1 patient → 4 circle members. Revenue: B2C + B2B2C + EHDS data services. AI as connective tissue, not chatbot.",
+      "status": "draft",
+      "created": "2026-03-22",
+      "updated": "2026-03-22"
+    },
+    {
+      "id": "idea-003",
+      "path": "pm-workspace/specs/ideas/care-circle-v2/",
+      "type": "idea",
+      "title": "Care Circle v2",
+      "summary": "Care Circle v2 design decisions, meeting transcript, and 6 user flow specs (follower activation, patient activation, invitation card, first connection, reactions, profile page).",
+      "status": "refined",
+      "created": "2026-02-03",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "idea-004",
+      "path": "pm-workspace/specs/ideas/voice-health-checkin/",
+      "type": "idea",
+      "title": "Voice Health Check-in",
+      "summary": "Full feature exploration: PRD, competitive analysis, market research, implementation spec, technical architecture, wireframes (v1+v2), work breakdown, and multiple mockup directions with panel reviews.",
+      "status": "refined",
+      "created": "2026-02-05",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "idea-005",
+      "path": "pm-workspace/specs/ideas/onboarding-to-aha.md",
+      "type": "idea",
+      "title": "Onboarding to Aha",
+      "summary": "BIGB-335 refinement. 6 creative directions for bridging install-to-first-value gap. Primary recommendation: 'Tell Ditto About Your Health' (voice-first health overview using core AI). Includes RISCE scoring, multi-perspective review, and 2-week validation plan.",
+      "status": "refined",
+      "created": "2026-02-25",
+      "updated": "2026-02-25"
+    },
+    {
+      "id": "idea-007",
+      "path": "pm-workspace/specs/ideas/activation-improvement/260306-voice-roast-sesh-synthesis.md",
+      "type": "idea",
+      "title": "Activation Improvement — Voice & Roast Sesh Synthesis",
+      "summary": "Meeting synthesis (Merlijn + Nick, 2026-03-06). Activation funnel data (90% drop-off), voice-first profile building, smart appointment questions, Care Circle timing A/B, Ditto Chat concept, health integrations as signal layer, intent onboarding question. Cross-references existing ideas with new signals.",
+      "status": "raw",
+      "created": "2026-03-06",
+      "updated": "2026-03-06"
+    },
+    {
+      "id": "idea-006",
+      "path": "pm-workspace/specs/ideas/direction-b-speak-to-ditto.md",
+      "type": "idea",
+      "title": "Direction B: Speak to Ditto — Feature Considerations",
+      "summary": "Deep dive on Direction B from Onboarding to Aha. Cross-domain research (Fantastical, Noom, Flo, Ada Health), extraction reliability strategy (confirm-don't-assume), profile-to-content mapping architecture, must-have specs, and 6 open questions for Merlijn.",
+      "status": "draft",
+      "created": "2026-02-26",
+      "updated": "2026-02-26"
+    },
+    {
+      "id": "spec-001",
+      "path": "pm-workspace/specs/cc-v2-p1-tracking-rows.md",
+      "type": "spec",
+      "title": "CC V2 — P1 Tracking Events (Sheet Format)",
+      "summary": "CSV-formatted P1 tracking events across all 4 CC V2 epics, ready to paste into the Care Circle tracking sheet. 10 events: 7 new, 3 extend, 1 confirm.",
+      "status": "active",
+      "created": "2026-03-06",
+      "updated": "2026-03-06"
+    },
+    {
+      "id": "meeting-001",
+      "path": "confluence:DG/863502338",
+      "type": "meeting",
+      "title": "260320 - Product Strat",
+      "summary": "Weekly strategy session. Theme: 'Do fewer things better.' Explore→Exploit shift. CC v2 soft launch evaluation, AI quality regression (98%→95%), user awareness mapping (Five Stages of Awareness), P1 user profile differentiation gap.",
+      "status": "active",
+      "created": "2026-03-16",
+      "updated": "2026-03-16"
+    },
+    {
+      "id": "eval-001",
+      "path": "confluence:DG/863371266",
+      "type": "evaluation",
+      "title": "User Awareness Mapping — Five Stages of Awareness (Schwartz)",
+      "summary": "Maps Ditto user segments against Schwartz's 5 awareness stages. Identifies P1 gap: can't differentiate users who don't understand vs don't need vs forget. Links initiatives to stages. Living document.",
+      "status": "active",
+      "created": "2026-03-16",
+      "updated": "2026-03-16"
+    },
+    {
+      "id": "mockup-001",
+      "path": "pm-workspace/data/mockups/care-circle-v2/",
+      "type": "mockup",
+      "title": "Care Circle v2 Mockups",
+      "summary": "Direction A mockup, expert panel review, and comparison for Care Circle v2.",
+      "status": "active",
+      "created": "2026-02-18",
+      "updated": "2026-02-18"
+    },
+    {
+      "id": "eval-002",
+      "path": "pm-workspace/specs/user-profiling-canvas.html",
+      "type": "evaluation",
+      "title": "User Profiling Canvas — Interactive Overview",
+      "summary": "Consolidated user profiling across all sources (Confluence, local specs, research). 10 personas, 24 problems, 37 features mapped. Coverage matrix and gap analysis. Interactive HTML dashboard.",
+      "status": "active",
+      "created": "2026-03-16",
+      "updated": "2026-03-16"
+    },
+    {
+      "id": "eval-003",
+      "path": "pm-workspace/specs/user-profiling-corrections-backtrack.md",
+      "type": "evaluation",
+      "title": "User Profiling — Corrections & Documentation Gap Analysis",
+      "summary": "7 corrections to canvas output. Root cause: documentation is behind shipped product state. Lists Confluence and local file updates needed. Process improvements for keeping docs in sync with shipped features.",
+      "status": "active",
+      "created": "2026-03-16",
+      "updated": "2026-03-16"
+    },
+    {
+      "id": "idea-009",
+      "path": "jira:BIGB-235",
+      "type": "idea",
+      "title": "Push/Pull Calendar Integration",
+      "summary": "BIGB-235 Phase 1a complete. Push (Exploit, V1): add-to-calendar with deeplink back. Pull (Explore, V2): connect external calendar, auto-detect medical appointments, resolve empty state. Linked epic DPMA-1009. User-requested feature.",
+      "status": "described",
+      "created": "2025-09-08",
+      "updated": "2026-03-16"
+    },
+    {
+      "id": "research-001",
+      "path": "pm-workspace/specs/website-design-research.md",
+      "type": "research",
+      "title": "Website Design Pattern Research",
+      "summary": "Structural analysis of 4 reference websites (Hims, Heidi Health, Tandem, Polarsteps). Covers site structure, hero approach, dual audience handling, CTA strategy, content patterns, and distinctiveness. Cross-site comparison table. Takeaways for Ditto Care website.",
+      "status": "active",
+      "created": "2026-03-26",
+      "updated": "2026-03-26"
+    },
+    {
+      "id": "ref-006",
+      "path": "pm-workspace/data/references/website-copy-nl.md",
+      "type": "reference",
+      "title": "Ditto Care Website Copy (Dutch) — Full Scrape",
+      "summary": "Complete Dutch copy from dittocare.com/nl and all 19 Dutch subpages. Organized by page with headings, body copy, CTAs, navigation, footer, App Store listing, and key statistics. Extracted via search index + partner pages due to Wix CSR.",
+      "status": "active",
+      "created": "2026-04-03",
+      "updated": "2026-04-03"
+    },
+    {
+      "id": "idea-008",
+      "path": "pm-workspace/specs/ideas/recording-permission-support.md",
+      "type": "idea",
+      "title": "Recording Permission Support — Reducing the Fear Barrier",
+      "summary": "Feature idea: in-app permission script + printable doctor info sheet to help patients (esp. elderly, language barrier) overcome fear of asking to record. 4 directions, RISCE 540. Extends existing BIGB doctor explainer sheet idea.",
+      "status": "draft",
+      "created": "2026-03-16",
+      "updated": "2026-03-16"
+    },
+    {
+      "id": "idea-012",
+      "path": "pm-workspace/specs/ideas/health-agent/zeroclaw-jtbd-discovery.md",
+      "type": "idea",
+      "title": "ZeroClaw — Claude-Powered Health Assistant JTBD Discovery",
+      "summary": "37 jobs-to-be-done for Claude-powered personal health assistant, prioritized in 4 tiers. Claude capability assessment per job (native/augmented/hard limit). Key architectural principles from ZeroClaw/NanoClaw: persistent memory, scheduled tasks, agent specialization, tool use. Identifies 8 hard limits and 8 key risks. Top priority: contextual Q&A, audience-adapted sharing, living health profile.",
+      "status": "superseded",
+      "created": "2026-03-29",
+      "updated": "2026-04-04"
+    },
+    {
+      "id": "idea-013",
+      "path": "pm-workspace/specs/care-brain/care-brain-strategy.md",
+      "type": "idea",
+      "title": "Care Brain Strategy — From Summarization to Care Intelligence Platform",
+      "summary": "Strategic spec superseding ZeroClaw. Critical review of 37-JTBD approach. April 2026 market intelligence. Model-agnostic care brain architecture with 7 bespoke interface surfaces. 6-month phased plan. Unicorn thesis: 'One recording, everyone understands.' Multi-perspective review from VC, Steve Jobs, patient.",
+      "status": "approved",
+      "created": "2026-04-04",
+      "updated": "2026-04-05"
+    },
+    {
+      "id": "spec-002",
+      "path": "pm-workspace/specs/care-brain/care-brain-phase1-smart-suggestions.md",
+      "type": "spec",
+      "title": "Smart Suggestions — Contextual Q&A on Summaries",
+      "summary": "Phase 1 of Care Brain. Smart suggestion chips below summaries: brain generates 2-3 contextual questions, user taps for grounded inline answers. Guided intelligence, not chatbot. A/B test plan. Targets 20%+ suggestion tap rate.",
+      "status": "active",
+      "created": "2026-04-04",
+      "updated": "2026-04-05"
+    },
+    {
+      "id": "spec-005",
+      "path": "pm-workspace/specs/care-brain/business-case.md",
+      "type": "spec",
+      "title": "Care Brain Business Case",
+      "summary": "Financial model, TAM (80-100M EU patients + 250-400M circle), revenue scenarios (B2C EUR 7.99/mo + B2B2C EUR 0.50-1.00 PMPM). AI cost $0.07/interaction, negligible at scale. Moat stack: care graph > journey history > trust > regulatory > network density. Path to unicorn at EUR 50-100M ARR (year 4-5). Persona critiques from VC, CTO, CMO, patient.",
+      "status": "draft",
+      "created": "2026-04-05",
+      "updated": "2026-04-05"
+    },
+    {
+      "id": "spec-006",
+      "path": "pm-workspace/specs/care-brain/competitive-analysis.md",
+      "type": "spec",
+      "title": "Care Brain Competitive Analysis",
+      "summary": "Head-to-head analysis: ChatGPT Health, Copilot Health, Apple Health AI, Hippocratic AI, b.well bailey, Ambience, CaringBridge. Confirms no one builds audience-adapted health sharing for care circles. 18-24 month window before Big Tech adds social layer. Strategic implications: don't compete on individual Q&A, own the European care circle space.",
+      "status": "draft",
+      "created": "2026-04-05",
+      "updated": "2026-04-05"
+    },
+    {
+      "id": "spec-007",
+      "path": "pm-workspace/specs/care-brain/presentation.html",
+      "type": "spec",
+      "title": "Care Brain Presentation — 20 Slides",
+      "summary": "Internal strategy deck. 20 slides: problem, current product, commoditization threat, market gap, vision, brain vs chatbot, concrete example, smart suggestions, 7 intelligence surfaces, unicorn feature, 3 architecture directions, moat stack, network effects, business model, GTM, roadmap, risks, the pitch.",
+      "status": "draft",
+      "created": "2026-04-05",
+      "updated": "2026-04-05"
+    },
+    {
+      "id": "spec-004",
+      "path": "pm-workspace/specs/care-brain/direction-a-concierge.md",
+      "type": "spec",
+      "title": "Direction A: The Concierge — Single Orchestrator Agent",
+      "summary": "Prototype-ready architecture spec for single-agent Care Brain direction. One Claude agent with rich system prompt and 8 MCP tools handles all brain operations. Full system prompt with identity, grounding rules, safety guardrails, audience adaptation rules. Health Profile JSON Schema with source attribution. 8 tool definitions (summarize, extract, suggest, answer, adapt, prep, patterns, translate). 3 end-to-end request flow scenarios. REST API contract with SSE streaming. Cost model: ~$0.94/user/month at scale. Prototype scope: 4 tools + CLI, 2-week build.",
+      "status": "draft",
+      "created": "2026-04-04",
+      "updated": "2026-04-04"
+    },
+    {
+      "id": "spec-003",
+      "path": "pm-workspace/specs/care-brain/direction-b-clinic.md",
+      "type": "spec",
+      "title": "Direction B: The Clinic — Multi-Agent Specialist Network",
+      "summary": "Prototype-ready architecture spec for multi-agent Care Brain direction. Orchestrator routes to 6 specialist agents (Summary, Extraction, Q&A, Sharing, Profile, Prep), each with dedicated system prompt, I/O schema, model selection, and quality guardrails. Health Profile Store with provenance, conflict detection, and versioning. 3 end-to-end request flow scenarios. Cost model: ~$0.18/appointment, 25-65% more than Direction A. Prototype scope: 3 agents (Summary, Extraction, Q&A) + CLI + eval harness, ~18 hours build.",
+      "status": "draft",
+      "created": "2026-04-04",
+      "updated": "2026-04-04"
+    },
+    {
+      "id": "spec-008",
+      "path": "pm-workspace/specs/care-brain/direction-c-nervous-system.md",
+      "type": "spec",
+      "title": "Direction C: The Nervous System — Event-Driven Reactive Architecture",
+      "summary": "Prototype-ready architecture spec for event-driven Care Brain direction. No central orchestrator. Events trigger processing pipelines. Health Profile Store as central nervous system. 8 event types, 7 pipeline definitions with step-by-step sequences, 9 stateless agent workers (summarize, extract, explain, suggest, answer, adapt, prep, detect_changes, translate) each with model selection, system prompts, I/O schemas. Full Health Profile JSON schema with versioning, audit log, conflict resolution. 3 end-to-end request flow scenarios with actual JSON payloads. Cost model: ~$0.124/user/month, lowest of 3 directions due to model-per-task optimization. 5-phase migration path from current Azure OpenAI architecture. Prototype scope: event emitter + SQLite + 4 core workers + CLI, 2-3 day build.",
+      "status": "draft",
+      "created": "2026-04-04",
+      "updated": "2026-04-04"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "wf-001",
+      "path": "pm-workspace/workflows/functional-scoping.md",
+      "name": "Functional Scoping",
+      "summary": "Transforms product ideas into delivery-ready specs with epics and Jira tickets. 7 steps: problem clarification, impact assessment, spec, multi-perspective review, ticket breakdown, documentation, feedback.",
+      "created": "2026-02-17"
+    },
+    {
+      "id": "wf-002",
+      "path": "pm-workspace/workflows/product-idea-refinement.md",
+      "name": "Product Idea Refinement",
+      "summary": "Shapes raw ideas into structured backlog items with scoring, validation, and placement recommendations. Supports batch processing.",
+      "created": "2026-02-17"
+    },
+    {
+      "id": "wf-003",
+      "path": "pm-workspace/workflows/prepare-product-strategy-session.md",
+      "name": "Prepare Product Strategy Session",
+      "summary": "Weekly Thursday meeting prep: create Confluence page, pull Jira release data, carry forward unresolved items, pre-fill signal prompts, publish and notify team.",
+      "created": "2026-02-19"
+    },
+    {
+      "id": "wf-004",
+      "path": "pm-workspace/workflows/feature-measurement.md",
+      "name": "Feature Measurement",
+      "summary": "Given a refined epic, generates 3 measurement Jira tickets (business metrics, tracking plan, implement tracking). Depth varies by Explore/Exploit/Polish classification. Auto-pulls Mixpanel baselines.",
+      "created": "2026-03-03"
+    }
+  ],
+  "commands": [
+    {
+      "id": "cmd-001",
+      "path": "pm-workspace/commands/refine-idea.md",
+      "name": "refine-idea",
+      "summary": "Slash command for refining raw product ideas into structured backlog items."
+    },
+    {
+      "id": "cmd-002",
+      "path": "pm-workspace/commands/scope-feature.md",
+      "name": "scope-feature",
+      "summary": "Slash command for scoping features into delivery-ready specs."
+    },
+    {
+      "id": "cmd-003",
+      "path": "pm-workspace/commands/review.md",
+      "name": "review",
+      "summary": "Slash command for multi-perspective review or periodic review."
+    },
+    {
+      "id": "cmd-004",
+      "path": "pm-workspace/commands/mockup.md",
+      "name": "mockup",
+      "summary": "Slash command for generating design mockups via product-designer agent."
+    },
+    {
+      "id": "cmd-005",
+      "path": "pm-workspace/commands/measure-feature.md",
+      "name": "measure-feature",
+      "summary": "Slash command for generating measurement tickets (metrics, tracking plan, implementation) for a refined epic."
+    },
+    {
+      "id": "cmd-006",
+      "path": "pm-workspace/commands/visualize.md",
+      "name": "visualize",
+      "summary": "Generates the Ditto Productivity Powerhouse dashboard. Scans all files, extracts metadata, outputs dashboard.html to repo root."
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl-001",
+      "path": "pm-workspace/templates/prd-lean.md",
+      "name": "PRD (Lean)",
+      "summary": "Lightweight PRD template for small features."
+    },
+    {
+      "id": "tpl-002",
+      "path": "pm-workspace/templates/prd-comprehensive.md",
+      "name": "PRD (Comprehensive)",
+      "summary": "Full PRD template for complex features."
+    },
+    {
+      "id": "tpl-003",
+      "path": "pm-workspace/templates/competitive-analysis.md",
+      "name": "Competitive Analysis",
+      "summary": "Template for competitor analysis."
+    },
+    {
+      "id": "tpl-004",
+      "path": "pm-workspace/templates/user-insights.md",
+      "name": "User Insights",
+      "summary": "Template for user research synthesis."
+    },
+    {
+      "id": "tpl-005",
+      "path": "pm-workspace/specs/measurement-templates/01-define-business-metrics.md",
+      "name": "Define Business Metrics",
+      "summary": "Template for measurement ticket 1: hypothesis, metrics table with baselines/targets, classification-aware depth."
+    },
+    {
+      "id": "tpl-006",
+      "path": "pm-workspace/specs/measurement-templates/02-define-tracking-plan.md",
+      "name": "Define Tracking Plan",
+      "summary": "Template for measurement ticket 2: dual-layer event catalog (extend existing + new business events), dashboard spec."
+    },
+    {
+      "id": "tpl-007",
+      "path": "pm-workspace/specs/measurement-templates/03-implement-tracking.md",
+      "name": "Implement Tracking",
+      "summary": "Template for measurement ticket 3: implementation spec for engineering, blocks release gate."
+    }
+  ],
+  "learnings": [
+    {
+      "id": "learn-001",
+      "path": "pm-workspace/learnings/2026-02-19-shipping-release-brainstorm.md",
+      "title": "Shipping & Release Brainstorm",
+      "summary": "Tables > subsections for meeting templates. Connect workflow outputs to inputs. Explore/Exploit/Polish drives communication strategy.",
+      "verdict": "perfect",
+      "created": "2026-02-19"
+    },
+    {
+      "id": "learn-002",
+      "path": "pm-workspace/learnings/2026-03-03-jira-ticket-naming.md",
+      "title": "Jira Ticket Naming & Descriptions",
+      "summary": "Don't repeat epic context in child ticket titles or descriptions. Jira shows the parent — keep titles short and action-oriented, descriptions jump straight into content.",
+      "verdict": "corrected",
+      "created": "2026-03-03"
+    }
+  ],
+  "backlog_count": 7,
+  "measurement_tickets": [
+    {
+      "epic": "DPMA-1966",
+      "epic_title": "CC V2 | Social Engagement (Emoji Reactions)",
+      "classification": "Explore",
+      "tickets": [
+        { "key": "DPMA-2230", "title": "Define Business Metrics", "status": "updated" },
+        { "key": "DPMA-2231", "title": "Define Tracking Plan", "status": "updated" },
+        { "key": "DPMA-2232", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+      ],
+      "created": "2026-03-06"
+    },
+    {
+      "epic": "DPMA-1964",
+      "epic_title": "CC V2 | Enhanced Sharing Options",
+      "classification": "Exploit",
+      "tickets": [
+        { "key": "DPMA-2221", "title": "Define Business Metrics", "status": "updated" },
+        { "key": "DPMA-2222", "title": "Define Tracking Plan", "status": "updated" },
+        { "key": "DPMA-2223", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+      ],
+      "created": "2026-03-06"
+    },
+    {
+      "epic": "DPMA-1963",
+      "epic_title": "CC V2 | Enhanced follower user profiles",
+      "classification": "Explore",
+      "tickets": [
+        { "key": "DPMA-2267", "title": "Define Business Metrics", "status": "updated" },
+        { "key": "DPMA-2268", "title": "Define Tracking Plan", "status": "updated" },
+        { "key": "DPMA-2269", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+      ],
+      "created": "2026-03-06"
+    },
+    {
+      "epic": "DPMA-1903",
+      "epic_title": "CC V2 | Improved Invitation Flow",
+      "classification": "Exploit",
+      "tickets": [
+        { "key": "DPMA-2236", "title": "Define Business Metrics", "status": "updated" },
+        { "key": "DPMA-2237", "title": "Define Tracking Plan", "status": "updated" },
+        { "key": "DPMA-2238", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+      ],
+      "created": "2026-03-06"
+    }
+  ]
+}

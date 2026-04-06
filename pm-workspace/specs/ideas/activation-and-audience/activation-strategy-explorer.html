@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto — Activation & Audience Strategy</title>
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #E8E6E1;
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --accent: #2563EB;
+    --accent-light: #EFF6FF;
+    --clarity: #7C3AED;
+    --clarity-light: #F5F3FF;
+    --convenience: #0891B2;
+    --convenience-light: #ECFEFF;
+    --connection: #DB2777;
+    --connection-light: #FDF2F8;
+    --red: #DC2626;
+    --yellow: #D97706;
+    --green: #16A34A;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
+  .header p { color: rgba(255,255,255,0.7); font-size: 15px; margin-top: 8px; }
+  .header .statement {
+    margin-top: 24px;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.95);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  .header .three-words {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 20px;
+  }
+  .header .three-words span {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.12);
+  }
+  .header .three-words .w-clarity { color: #C4B5FD; }
+  .header .three-words .w-convenience { color: #67E8F9; }
+  .header .three-words .w-connection { color: #F9A8D4; }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navigation */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    box-shadow: var(--shadow);
+  }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: none;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* Sections */
+  .section { display: none; padding: 40px 0 60px; }
+  .section.active { display: block; }
+  .section-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
+  .section-subtitle { font-size: 15px; color: var(--text-secondary); margin-bottom: 32px; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); }
+  .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* Grid layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* Problem section */
+  .problem-card {
+    position: relative;
+    padding-left: 40px;
+  }
+  .problem-card::before {
+    content: attr(data-num);
+    position: absolute;
+    left: 0;
+    top: 24px;
+    width: 28px;
+    height: 28px;
+    background: var(--red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .funnel { margin-top: 32px; }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--border);
+    margin-left: 16px;
+    position: relative;
+    cursor: default;
+  }
+  .funnel-step:hover { background: #FAFAFA; border-radius: 0 8px 8px 0; }
+  .funnel-bar {
+    height: 8px;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.8s ease;
+  }
+  .funnel-bar-wrap { flex: 1; background: #F3F4F6; border-radius: 4px; overflow: hidden; }
+  .funnel-label { font-size: 13px; font-weight: 600; min-width: 180px; }
+  .funnel-pct { font-size: 13px; color: var(--text-secondary); min-width: 60px; text-align: right; }
+  .funnel-drop { font-size: 11px; color: var(--red); font-weight: 600; min-width: 80px; }
+
+  /* Holes section */
+  .hole-card { cursor: pointer; }
+  .hole-card .hole-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .hole-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .hole-1 .hole-icon { background: #FEF2F2; }
+  .hole-2 .hole-icon { background: #FFF7ED; }
+  .hole-3 .hole-icon { background: #FFFBEB; }
+  .hole-fixes {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .hole-card.expanded .hole-fixes { display: block; }
+  .fix-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;
+  }
+  .fix-item::before { content: "->"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .click-hint { font-size: 11px; color: var(--text-secondary); font-style: italic; margin-top: 8px; }
+
+  /* Life moments */
+  .moment-card { cursor: pointer; position: relative; overflow: hidden; }
+  .moment-card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(37,99,235,0.2); }
+  .moment-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .moment-card.primary .moment-badge { background: #DCFCE7; color: #166534; }
+  .moment-card:not(.primary) .moment-badge { background: #F3F4F6; color: #6B7280; }
+  .moment-detail { margin-top: 16px; font-size: 13px; }
+  .moment-detail dt { font-weight: 600; margin-top: 8px; }
+  .moment-detail dd { color: var(--text-secondary); }
+
+  /* Pillars */
+  .pillar-card { position: relative; overflow: hidden; cursor: pointer; }
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .pillar-clarity::before { background: var(--clarity); }
+  .pillar-convenience::before { background: var(--convenience); }
+  .pillar-connection::before { background: var(--connection); }
+  .pillar-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .pillar-clarity .pillar-tag { background: var(--clarity-light); color: var(--clarity); }
+  .pillar-convenience .pillar-tag { background: var(--convenience-light); color: var(--convenience); }
+  .pillar-connection .pillar-tag { background: var(--connection-light); color: var(--connection); }
+
+  .pillar-layers {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .pillar-card.expanded .pillar-layers { display: block; }
+  .layer-item { margin-bottom: 12px; }
+  .layer-item .layer-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); }
+  .layer-item .layer-text { font-size: 13px; margin-top: 2px; }
+
+  /* Stacking diagram */
+  .stack {
+    margin: 32px auto;
+    max-width: 520px;
+  }
+  .stack-layer {
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .stack-layer:hover { transform: scale(1.02); }
+  .stack-layer:first-child { border-radius: 12px 12px 0 0; }
+  .stack-layer:last-child { border-radius: 0 0 12px 12px; }
+  .stack-l4 { background: var(--connection-light); color: var(--connection); border: 1px solid #FBCFE8; }
+  .stack-l3 { background: var(--connection-light); color: var(--connection); border: 1px solid #FBCFE8; border-top: none; }
+  .stack-l2 { background: var(--convenience-light); color: var(--convenience); border: 1px solid #A5F3FC; border-top: none; }
+  .stack-l1 { background: var(--clarity-light); color: var(--clarity); border: 1px solid #DDD6FE; border-top: none; }
+  .stack-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .stack-arrow {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 12px;
+    padding: 4px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* Needs layers */
+  .need-card { cursor: pointer; }
+  .need-card .need-depth {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .need-quote {
+    font-style: italic;
+    color: var(--text);
+    font-size: 15px;
+    margin: 8px 0;
+    padding-left: 12px;
+    border-left: 3px solid var(--border);
+  }
+  .need-evidence {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .need-card.expanded .need-evidence { display: block; }
+  .need-ditto {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .need-ditto.clarity { background: var(--clarity-light); color: var(--clarity); }
+  .need-ditto.convenience { background: var(--convenience-light); color: var(--convenience); }
+  .need-ditto.connection { background: var(--connection-light); color: var(--connection); }
+
+  /* Workstreams */
+  .ws-card { position: relative; padding-left: 44px; }
+  .ws-num {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--border);
+  }
+  .ws-horizon {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .ws-now { background: #DCFCE7; color: #166534; }
+  .ws-next { background: #FEF3C7; color: #92400E; }
+  .ws-parallel { background: #E0E7FF; color: #3730A3; }
+
+  /* Decision tree */
+  .tree-container { overflow-x: auto; padding: 20px 0; }
+  .tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-width: 700px;
+  }
+  .tree-node {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+    max-width: 200px;
+  }
+  .tree-node:hover { transform: scale(1.05); }
+  .tree-node.blue { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; }
+  .tree-node.pink { background: #FCE7F3; color: #9D174D; border: 1px solid #F9A8D4; }
+  .tree-node.yellow { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
+  .tree-node.green { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+
+  .tree-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 24px;
+    position: relative;
+  }
+  .tree-connector {
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+  .tree-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .tree-branch-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    font-weight: 600;
+  }
+
+  /* Ideas table */
+  .ideas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .ideas-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border);
+  }
+  .ideas-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .ideas-table tr:hover { background: #FAFAFA; }
+  .status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .status-draft { background: #FEF3C7; color: #92400E; }
+  .status-refined { background: #DCFCE7; color: #166534; }
+  .status-raw { background: #F3F4F6; color: #6B7280; }
+  .status-designed { background: #E0E7FF; color: #3730A3; }
+  .pillar-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+  .dot-clarity { background: var(--clarity); }
+  .dot-convenience { background: var(--convenience); }
+  .dot-connection { background: var(--connection); }
+
+  /* Open questions */
+  .question-item {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .question-item:last-child { border-bottom: none; }
+  .q-num {
+    width: 28px;
+    height: 28px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .q-text { font-size: 14px; font-weight: 500; }
+  .q-priority {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .q-critical { color: var(--red); }
+  .q-high { color: var(--yellow); }
+  .q-medium { color: var(--text-secondary); }
+
+  /* Emotional promises */
+  .promise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 20px; }
+  .promise-cell {
+    padding: 16px;
+    font-size: 13px;
+    background: var(--card);
+  }
+  .promise-cell.header {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    background: #F9FAFB;
+  }
+  .promise-cell.pillar-label {
+    font-weight: 700;
+    background: #F9FAFB;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  .expand-hint {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Activation & Audience Strategy</h1>
+  <p>Ditto Care — Strategic brainstorm, March 2026</p>
+  <div class="statement">Ditto helps you face your care journey as yourself — informed, prepared, and surrounded by people who understand.</div>
+  <div class="three-words">
+    <span class="w-clarity">Understand</span>
+    <span class="w-convenience">Prepare</span>
+    <span class="w-connection">Share</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-section="problem">The Problem</button>
+    <button class="nav-btn" data-section="focus">Life Moments</button>
+    <button class="nav-btn" data-section="pillars">Three Pillars</button>
+    <button class="nav-btn" data-section="needs">Patient Needs</button>
+    <button class="nav-btn" data-section="tree">Decision Tree</button>
+    <button class="nav-btn" data-section="workstreams">Workstreams</button>
+    <button class="nav-btn" data-section="ideas">Idea Board</button>
+    <button class="nav-btn" data-section="questions">Open Questions</button>
+  </div>
+</nav>
+
+<!-- PROBLEM -->
+<div class="section active" id="problem">
+  <div class="container">
+    <h2 class="section-title">Two Problems, One Root Cause</h2>
+    <p class="section-subtitle">The activation funnel leaks through three holes, each needing a different fix.</p>
+
+    <div class="grid-2" style="margin-bottom: 32px;">
+      <div class="card problem-card" data-num="1">
+        <h3>Acquisition Mismatch</h3>
+        <p>Performance marketing acquires too broad a group. Many users are "too healthy" — they're not in a life moment window, so Ditto doesn't feel urgent or relevant.</p>
+      </div>
+      <div class="card problem-card" data-num="2">
+        <h3>Activation Dependency</h3>
+        <p>Even for the right users, the aha moment requires an external event (a doctor appointment) that Ditto doesn't control. No appointment = no value = no retention.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Three Holes in the Bucket</h3>
+    <p class="expand-hint">Click each to see interventions</p>
+    <div class="grid-3" style="margin-bottom: 32px;">
+      <div class="card hole-card hole-1" onclick="this.classList.toggle('expanded')">
+        <div class="hole-header">
+          <div class="hole-icon">1</div>
+          <h3 style="margin: 0;">Wrong people come in</h3>
+        </div>
+        <p>Performance marketing casts too wide. Many aren't in a life moment window.</p>
+        <div class="hole-fixes">
+          <div class="fix-item">Target life moments, not demographics</div>
+          <div class="fix-item">Cancer-first acquisition strategy</div>
+          <div class="fix-item">Brand building over performance marketing</div>
+          <div class="fix-item">Intent question in onboarding to segment</div>
+        </div>
+      </div>
+      <div class="card hole-card hole-2" onclick="this.classList.toggle('expanded')">
+        <div class="hole-header">
+          <div class="hole-icon">2</div>
+          <h3 style="margin: 0;">Right people, wrong time</h3>
+        </div>
+        <p>They're in a life moment but have no appointment this week.</p>
+        <div class="hole-fixes">
+          <div class="fix-item">"Speak to Ditto" — voice health overview</div>
+          <div class="fix-item">"Understand your letter" — document explanation</div>
+          <div class="fix-item">Content and trusted resources</div>
+          <div class="fix-item">Ditto Chat — guided AI interactions</div>
+        </div>
+      </div>
+      <div class="card hole-card hole-3" onclick="this.classList.toggle('expanded')">
+        <div class="hole-header">
+          <div class="hole-icon">3</div>
+          <h3 style="margin: 0;">Right people, right time, still don't activate</h3>
+        </div>
+        <p>They HAVE an appointment but don't record.</p>
+        <div class="hole-fixes">
+          <div class="fix-item">Recording permission support (fear barrier)</div>
+          <div class="fix-item">Calendar integration with deeplink</div>
+          <div class="fix-item">Smart reminders via Customer.io</div>
+          <div class="fix-item">Appointment prep to build commitment</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Activation Funnel</h3>
+    <div class="card">
+      <div class="funnel">
+        <div class="funnel-step">
+          <span class="funnel-label">Started activation</span>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width: 100%;"></div></div>
+          <span class="funnel-pct">1,251</span>
+          <span class="funnel-drop"></span>
+        </div>
+        <div class="funnel-step">
+          <span class="funnel-label">Set appointment</span>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width: 10%; background: var(--yellow);"></div></div>
+          <span class="funnel-pct">124</span>
+          <span class="funnel-drop">-90%</span>
+        </div>
+        <div class="funnel-step">
+          <span class="funnel-label">Completed next step</span>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width: 4%; background: var(--red);"></div></div>
+          <span class="funnel-pct">51</span>
+          <span class="funnel-drop">-59%</span>
+        </div>
+        <div class="funnel-step">
+          <span class="funnel-label">Started Geert's video</span>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width: 2.2%; background: var(--red);"></div></div>
+          <span class="funnel-pct">28</span>
+          <span class="funnel-drop">-45%</span>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-secondary); margin-top: 16px;">Note: 124 is a tracking floor — actual completions are higher but unmeasured. Benchmark: ~17% trial start rate in comparable apps.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LIFE MOMENTS -->
+<div class="section" id="focus">
+  <div class="container">
+    <h2 class="section-title">Life Moments, Not Personas</h2>
+    <p class="section-subtitle">Ditto targets teachable moments — windows when someone is unusually receptive. Three conditions: it feels personal, routines break down, something is at stake.</p>
+
+    <div class="grid-3" style="margin-bottom: 32px;">
+      <div class="card moment-card primary selected" onclick="selectMoment(this)">
+        <span class="moment-badge">Primary focus</span>
+        <h3>Facing Serious Illness</h3>
+        <p>Cancer, heart attack, serious chronic escalation. Fear suppresses recall. Care circle activates immediately.</p>
+        <dl class="moment-detail">
+          <dt>Appointment frequency</dt>
+          <dd>2-4/month across specialists</dd>
+          <dt>Care circle</dt>
+          <dd>Partner, adult children, close family — immediate activation</dd>
+          <dt>Journey length</dt>
+          <dd>Months to years</dd>
+          <dt>Why primary</dt>
+          <dd>Largest active user group. Highest stakes. Strongest product-market pull already exists.</dd>
+        </dl>
+      </div>
+      <div class="card moment-card" onclick="selectMoment(this)">
+        <span class="moment-badge">Future expansion</span>
+        <h3>Becoming Parents</h3>
+        <p>Most appointment-dense period. Both partners open to new habits. Health = gain, not threat.</p>
+        <dl class="moment-detail">
+          <dt>Appointment frequency</dt>
+          <dd>High — prenatal, postnatal, pediatric</dd>
+          <dt>Care circle</dt>
+          <dd>Fully activated — both partners, grandparents</dd>
+          <dt>Journey length</dt>
+          <dd>~18 months (pregnancy + first year)</dd>
+          <dt>Window</dt>
+          <dd>Long, habit-forming</dd>
+        </dl>
+      </div>
+      <div class="card moment-card" onclick="selectMoment(this)">
+        <span class="moment-badge">Future expansion</span>
+        <h3>Losing Cognitive Capacity</h3>
+        <p>Dementia, Alzheimer's, Parkinson's. Family progressively takes over cognitive work.</p>
+        <dl class="moment-detail">
+          <dt>Appointment frequency</dt>
+          <dd>Moderate but increasing</dd>
+          <dt>Care circle</dt>
+          <dd>Gradual takeover — often one primary caregiver + siblings coordinating</dd>
+          <dt>Journey length</dt>
+          <dd>Years — progressive trajectory</dd>
+          <dt>Unique angle</dt>
+          <dd>The user may be the caregiver, not the patient</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="card" style="text-align: center;">
+      <div style="display: flex; justify-content: center; gap: 48px; padding: 12px 0;">
+        <div>
+          <div style="font-size: 36px; font-weight: 800; color: var(--accent);">~95-98%</div>
+          <div style="font-size: 13px; color: var(--text-secondary);">of Dutch adults pass through at least one life moment</div>
+        </div>
+        <div>
+          <div style="font-size: 36px; font-weight: 800; color: var(--accent);">~20%</div>
+          <div style="font-size: 13px; color: var(--text-secondary);">are actively in a life moment window right now</div>
+        </div>
+        <div>
+          <div style="font-size: 36px; font-weight: 800; color: var(--accent);">1 in 2</div>
+          <div style="font-size: 13px; color: var(--text-secondary);">Dutch adults go through all three</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">The Flo Analogy</h3>
+    <p style="font-size: 14px; color: var(--text-secondary); max-width: 640px;">Flo started as a period tracker, not a "women's health platform." They nailed one life moment (menstrual cycle), built trust, then expanded to pregnancy, fertility, menopause. Each expansion was natural because trust was already earned. Ditto should do the same: own cancer, then expand.</p>
+  </div>
+</div>
+
+<!-- PILLARS -->
+<div class="section" id="pillars">
+  <div class="container">
+    <h2 class="section-title">Three Pillars</h2>
+    <p class="section-subtitle">What Ditto delivers. Pillars describe WHAT you build. Layers describe the ORDER you build it and how value compounds.</p>
+
+    <p class="expand-hint">Click each pillar to see the full promise</p>
+
+    <div class="grid-3" style="margin-bottom: 40px;">
+      <div class="card pillar-card pillar-clarity" onclick="this.classList.toggle('expanded')">
+        <span class="pillar-tag">Clarity</span>
+        <h3>You understand what's happening</h3>
+        <p>Plain language summaries, explained terms, organized information. The patient is never lost in their own care journey.</p>
+        <div class="pillar-layers">
+          <div class="layer-item">
+            <div class="layer-label">Functional</div>
+            <div class="layer-text">You understand what was said, what it means, and what's next</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Emotional</div>
+            <div class="layer-text">Navigate your care with confidence, not fear</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Existential</div>
+            <div class="layer-text">You're not lost in your own care journey</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Sense of Coherence</div>
+            <div class="layer-text">Comprehensibility — "I can understand what's happening"</div>
+          </div>
+        </div>
+      </div>
+      <div class="card pillar-card pillar-convenience" onclick="this.classList.toggle('expanded')">
+        <span class="pillar-tag">Convenience</span>
+        <h3>You're prepared for what's next</h3>
+        <p>Everything in one place — your journey, questions, decisions. The patient is in the driver's seat, not a passenger.</p>
+        <div class="pillar-layers">
+          <div class="layer-item">
+            <div class="layer-label">Functional</div>
+            <div class="layer-text">Everything in one place, prepared for appointments, trusted resources</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Emotional</div>
+            <div class="layer-text">Feel prepared, not overwhelmed</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Existential</div>
+            <div class="layer-text">You're in the driver's seat, not a passenger</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Sense of Coherence</div>
+            <div class="layer-text">Manageability — "I have the resources to deal with this"</div>
+          </div>
+        </div>
+      </div>
+      <div class="card pillar-card pillar-connection" onclick="this.classList.toggle('expanded')">
+        <span class="pillar-tag">Connection</span>
+        <h3>Your people are informed and can help</h3>
+        <p>Share without retelling. Your circle stays updated. Supportive messages flow both ways. Nobody is helpless.</p>
+        <div class="pillar-layers">
+          <div class="layer-item">
+            <div class="layer-label">Functional</div>
+            <div class="layer-text">Circle stays informed, can act without asking, support on patient's terms</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Emotional</div>
+            <div class="layer-text">Never carry it alone</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Existential</div>
+            <div class="layer-text">You're not carrying this alone — and they're not helpless</div>
+          </div>
+          <div class="layer-item">
+            <div class="layer-label">Sense of Coherence</div>
+            <div class="layer-text">Meaningfulness — "This matters, I matter, I'm not just a case number"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px; text-align: center;">Build Order: Bottom Up</h3>
+
+    <div class="stack">
+      <div class="stack-layer stack-l4">
+        Layer 3: Shared Understanding
+        <div class="stack-label">Circle sees, helps, supports</div>
+      </div>
+      <div class="stack-layer stack-l3">
+        Layer 2: Sharing
+        <div class="stack-label">Patient pushes context outward, zero effort</div>
+      </div>
+      <div class="stack-layer stack-l2">
+        Layer 1.5: Habit
+        <div class="stack-label">Everything organized, reasons to return between appointments</div>
+      </div>
+      <div class="stack-layer stack-l1">
+        Layer 1: Patient Clarity
+        <div class="stack-label">I understand what's happening to me</div>
+      </div>
+      <div class="stack-arrow">BUILD FROM HERE ^</div>
+    </div>
+  </div>
+</div>
+
+<!-- PATIENT NEEDS -->
+<div class="section" id="needs">
+  <div class="container">
+    <h2 class="section-title">Four Layers of Patient Need</h2>
+    <p class="section-subtitle">Most health tech only addresses Layer 1. Ditto's opportunity is going deeper. Based on psychosocial research on cancer and serious illness.</p>
+
+    <p class="expand-hint">Click each layer for evidence and Ditto's role</p>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="card need-card" onclick="this.classList.toggle('expanded')">
+        <div class="need-depth">Layer 1 — Informational (surface)</div>
+        <h3>I need to know what the doctor said</h3>
+        <div class="need-quote">What did they say about the scan results? Was it stage 2 or 3?</div>
+        <div class="need-evidence">
+          <p>Table stakes for any health information tool. Necessary but not differentiating on its own.</p>
+          <div class="need-ditto clarity">Ditto today: AI-powered summaries in plain language. This is where the product already delivers.</div>
+        </div>
+      </div>
+
+      <div class="card need-card" onclick="this.classList.toggle('expanded')">
+        <div class="need-depth">Layer 2 — Psychological</div>
+        <h3>I need to feel less anxious, less overwhelmed, more in control</h3>
+        <div class="need-quote">I don't even know what questions to ask. I feel like things are happening TO me.</div>
+        <div class="need-evidence">
+          <p><strong>58%</strong> of cancer patients feel their emotional needs get less attention than physical needs. Strengthening Sense of Coherence directly improves resilience, self-efficacy, and quality of life.</p>
+          <p style="margin-top: 8px;">35-80% of cancer patients experience significant psychological distress — not just about the disease, but about not understanding and not knowing what comes next.</p>
+          <div class="need-ditto clarity">Clarity: Comprehensibility — plain language, explained terms, "here's what this means for you"</div>
+          <div class="need-ditto convenience" style="margin-top: 8px;">Convenience: Manageability — everything organized, prepared for next appointment, trusted resources at hand</div>
+        </div>
+      </div>
+
+      <div class="card need-card" onclick="this.classList.toggle('expanded')">
+        <div class="need-depth">Layer 3 — Relational</div>
+        <h3>I need to not be alone — but I don't want to be a burden</h3>
+        <div class="need-quote">My daughter calls every day asking how I am. I love it and I hate it. I'm exhausted from retelling.</div>
+        <div class="need-evidence">
+          <p>The most painful tension in serious illness. Caregivers suffer from <strong>information deficits, helplessness, and psychological strain</strong> — not because they don't care, but because they don't know enough to help effectively.</p>
+          <p style="margin-top: 8px;">The patient sees this and feels guilty. Research frames this as <strong>existential isolation</strong>: the awareness of facing this alone, in tension with a deep need for belonging.</p>
+          <div class="need-ditto connection">Connection: Share without retelling. Circle can act without asking. Supportive messages flow naturally. The burden lifts from the patient without them having to manage it.</div>
+        </div>
+      </div>
+
+      <div class="card need-card" onclick="this.classList.toggle('expanded')">
+        <div class="need-depth">Layer 4 — Existential (deepest)</div>
+        <h3>Who am I now? Do I still matter? Am I still me?</h3>
+        <div class="need-quote">I used to be a teacher, a mother, a friend. Now I'm just "a cancer patient."</div>
+        <div class="need-evidence">
+          <p>Two core drivers of existential distress: <strong>self-discontinuity</strong> ("I don't recognize my life") and <strong>loss of personal autonomy</strong> ("I can't make my own choices").</p>
+          <p style="margin-top: 8px;">Patients report a desire to affirm aspects of their lives unrelated to their illness — strengths, roles, ability to contribute. Most health tech treats the patient as a data subject.</p>
+          <div class="need-ditto clarity">Ditto's opportunity: the patient is the <strong>author of their care story</strong>, not a passive recipient. They curate, they share on their terms, they decide. Ditto preserves agency in a system that takes it away.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Emotional Promises</h3>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <tr>
+          <td style="padding: 12px 16px; background: #F9FAFB; font-weight: 700; width: 140px; border-bottom: 1px solid var(--border);"></td>
+          <td style="padding: 12px 16px; background: #F9FAFB; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 1px solid var(--border);">Functional</td>
+          <td style="padding: 12px 16px; background: #F9FAFB; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 1px solid var(--border);">Existential</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; font-weight: 700; border-bottom: 1px solid var(--border);"><span class="pillar-dot dot-clarity"></span> Clarity</td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border);">You understand what's happening</td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border);">You're not lost in your own care journey</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; font-weight: 700; border-bottom: 1px solid var(--border);"><span class="pillar-dot dot-convenience"></span> Convenience</td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border);">You're prepared for what's next</td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border);">You're in the driver's seat, not a passenger</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; font-weight: 700;"><span class="pillar-dot dot-connection"></span> Connection</td>
+          <td style="padding: 12px 16px;">Your people are informed and can help</td>
+          <td style="padding: 12px 16px;">You're not carrying this alone — and they're not helpless</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- DECISION TREE -->
+<div class="section" id="tree">
+  <div class="container">
+    <h2 class="section-title">Why People Don't Activate</h2>
+    <p class="section-subtitle">Diagnostic tree for understanding where and why users drop off. Pink = blind spots. Yellow = research needed. Green = interventions.</p>
+
+    <div class="card">
+      <div class="tree-container">
+        <div class="tree">
+          <!-- Row 1 -->
+          <div class="tree-row">
+            <div class="tree-branch">
+              <div class="tree-node blue">Inflow</div>
+              <div class="tree-branch-label" style="color: var(--yellow);">Who are these people?</div>
+            </div>
+            <div style="display: flex; align-items: center; color: var(--border); font-size: 20px; padding-top: 0;">&#8594;</div>
+            <div class="tree-branch">
+              <div class="tree-node blue">Activation Funnel</div>
+            </div>
+            <div style="display: flex; align-items: center; color: var(--border); font-size: 20px;">&#8594;</div>
+            <div class="tree-branch">
+              <div class="tree-node blue" style="font-size: 15px;">Has Appointment?</div>
+              <div class="tree-branch-label" style="color: var(--yellow);">Analyze timing</div>
+            </div>
+          </div>
+
+          <div style="height: 16px;"></div>
+
+          <!-- Row 2: branches from appointment -->
+          <div class="tree-row" style="gap: 16px;">
+
+            <!-- YES branch -->
+            <div class="tree-branch" style="flex: 1;">
+              <div class="tree-branch-label" style="color: var(--green);">Yes</div>
+              <div class="tree-node blue">Planned in Ditto?</div>
+              <div class="tree-connector"></div>
+              <div class="tree-row" style="gap: 12px;">
+                <div class="tree-branch">
+                  <div class="tree-branch-label" style="color: var(--green);">Yes</div>
+                  <div class="tree-node blue">Actually Recorded?</div>
+                  <div class="tree-connector"></div>
+                  <div class="tree-row" style="gap: 12px;">
+                    <div class="tree-branch">
+                      <div class="tree-branch-label" style="color: var(--green);">Yes</div>
+                      <div class="tree-node green">Follow-up planned?</div>
+                    </div>
+                    <div class="tree-branch">
+                      <div class="tree-branch-label" style="color: var(--red);">No</div>
+                      <div class="tree-node pink">Why not?</div>
+                      <div style="font-size: 11px; color: var(--text-secondary); text-align: center; margin-top: 4px;">Fear? Forgot?<br>Friction?</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tree-branch">
+                  <div class="tree-branch-label" style="color: var(--red);">No</div>
+                  <div class="tree-node pink">Why not?</div>
+                  <div class="tree-connector"></div>
+                  <div class="tree-node green" style="font-size: 11px;">Calendar integration<br>+ deeplink to record</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNKNOWN branch -->
+            <div class="tree-branch" style="flex: 0.7;">
+              <div class="tree-branch-label" style="color: var(--yellow);">Unknown</div>
+              <div class="tree-node yellow">How to know?</div>
+              <div class="tree-connector"></div>
+              <div class="tree-node yellow" style="font-size: 11px;">Customer.io +<br>Typeform survey</div>
+            </div>
+
+            <!-- NO branch -->
+            <div class="tree-branch" style="flex: 1;">
+              <div class="tree-branch-label" style="color: var(--red);">No appointment</div>
+              <div class="tree-node pink" style="font-size: 12px;">Current dead end:<br>"follow up later"</div>
+              <div class="tree-connector"></div>
+              <div class="tree-node green" style="font-size: 11px; max-width: 240px;">Missing branch: what value<br>can we give RIGHT NOW?</div>
+              <div style="font-size: 11px; color: var(--text-secondary); text-align: center; margin-top: 4px; max-width: 200px;">Voice profile, letter<br>explanation, content,<br>appointment prep</div>
+            </div>
+          </div>
+
+          <div style="height: 24px;"></div>
+
+          <!-- Care Circle branch -->
+          <div class="tree-row">
+            <div class="tree-branch">
+              <div class="tree-branch-label">Parallel track for all users</div>
+              <div class="tree-node blue">Care Circle Activation</div>
+              <div class="tree-connector"></div>
+              <div class="tree-node blue">Follow request sent?</div>
+              <div class="tree-connector"></div>
+              <div class="tree-row" style="gap: 12px;">
+                <div class="tree-branch">
+                  <div class="tree-branch-label" style="color: var(--green);">Yes</div>
+                  <div class="tree-node green" style="font-size: 11px;">Multiplier active:<br>each user = 2-5<br>circle members</div>
+                </div>
+                <div class="tree-branch">
+                  <div class="tree-branch-label" style="color: var(--red);">No</div>
+                  <div class="tree-node pink">Why not?</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORKSTREAMS -->
+<div class="section" id="workstreams">
+  <div class="container">
+    <h2 class="section-title">Three Workstreams</h2>
+    <p class="section-subtitle">Each phase feeds the next. Clarity creates something worth coming back to. Convenience creates the habit. Connection creates the growth loop.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="card ws-card">
+        <span class="ws-num">1</span>
+        <span class="ws-horizon ws-now">Now (weeks)</span>
+        <h3>Fix the funnel for cancer patients</h3>
+        <p>Diagnose and remove specific blockers. Right people, still don't activate — why?</p>
+        <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 12px; padding: 4px 10px; background: var(--clarity-light); color: var(--clarity); border-radius: 20px; font-weight: 600;">Clarity</span>
+        </div>
+        <ul style="margin-top: 12px; font-size: 13px; color: var(--text-secondary); padding-left: 20px;">
+          <li>Customer.io + Typeform: survey drop-offs to understand WHY</li>
+          <li>Mixpanel: funnel analysis segmented by user type</li>
+          <li>Recording permission support (reduce fear barrier)</li>
+          <li>Calendar integration with deeplink to start recording</li>
+          <li>Intent question in onboarding (BIGB-2190)</li>
+        </ul>
+      </div>
+
+      <div class="card ws-card">
+        <span class="ws-num">2</span>
+        <span class="ws-horizon ws-next">Next (months)</span>
+        <h3>Deepen the cancer journey</h3>
+        <p>Beyond recording: give reasons to open Ditto BETWEEN appointments. Build the habit layer.</p>
+        <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 12px; padding: 4px 10px; background: var(--convenience-light); color: var(--convenience); border-radius: 20px; font-weight: 600;">Convenience</span>
+          <span style="font-size: 12px; padding: 4px 10px; background: var(--clarity-light); color: var(--clarity); border-radius: 20px; font-weight: 600;">Clarity</span>
+        </div>
+        <ul style="margin-top: 12px; font-size: 13px; color: var(--text-secondary); padding-left: 20px;">
+          <li>"Speak to Ditto" — voice health overview (bridge-to-value)</li>
+          <li>"Understand your letter" — document explanation at home</li>
+          <li>Smart appointment questions (pre- and end-of-conversation)</li>
+          <li>Journey overview — visualize care across providers and decisions</li>
+          <li>Symptom tracking between appointments</li>
+        </ul>
+      </div>
+
+      <div class="card ws-card">
+        <span class="ws-num">3</span>
+        <span class="ws-horizon ws-parallel">Parallel with CC v2</span>
+        <h3>Make sharing effortless and valuable</h3>
+        <p>Care Circle as distribution + emotional support layer. Turn every active patient into 2-5 activated circle members.</p>
+        <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 12px; padding: 4px 10px; background: var(--connection-light); color: var(--connection); border-radius: 20px; font-weight: 600;">Connection</span>
+        </div>
+        <ul style="margin-top: 12px; font-size: 13px; color: var(--text-secondary); padding-left: 20px;">
+          <li>Effortless sharing (one-tap, automatic circle updates)</li>
+          <li>Follower-first aha (see a real summary before installing)</li>
+          <li>Supportive messages (heartwarming, practical help offers)</li>
+          <li>Care Circle timing A/B test (appointment-first vs circle-first)</li>
+          <li>Caregiver-specific features for cognitive decline life moment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IDEAS -->
+<div class="section" id="ideas">
+  <div class="container">
+    <h2 class="section-title">Activation Idea Board</h2>
+    <p class="section-subtitle">All ideas that touch activation, mapped to pillars and current status.</p>
+
+    <div class="card" style="padding: 0; overflow: hidden; overflow-x: auto;">
+      <table class="ideas-table">
+        <thead>
+          <tr>
+            <th>Idea</th>
+            <th>Pillar</th>
+            <th>Hole it fixes</th>
+            <th>Status</th>
+            <th>Activation impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Voice-first profile ("Speak to Ditto")</strong></td>
+            <td><span class="pillar-dot dot-clarity"></span><span class="pillar-dot dot-convenience"></span></td>
+            <td>Hole 2 (wrong time)</td>
+            <td><span class="status-badge status-draft">Draft</span></td>
+            <td>Removes timing dependency; demonstrates AI immediately</td>
+          </tr>
+          <tr>
+            <td><strong>Smart appointment questions</strong></td>
+            <td><span class="pillar-dot dot-convenience"></span></td>
+            <td>Hole 2 + 3</td>
+            <td><span class="status-badge status-raw">Discussed</span></td>
+            <td>Pre-appointment value; builds commitment to record</td>
+          </tr>
+          <tr>
+            <td><strong>Recording permission support</strong></td>
+            <td><span class="pillar-dot dot-clarity"></span></td>
+            <td>Hole 3 (don't record)</td>
+            <td><span class="status-badge status-draft">Draft</span></td>
+            <td>Reduces fear barrier, especially for elderly</td>
+          </tr>
+          <tr>
+            <td><strong>Calendar integration + deeplink</strong></td>
+            <td><span class="pillar-dot dot-convenience"></span></td>
+            <td>Hole 3 (don't record)</td>
+            <td><span class="status-badge status-refined">Described</span></td>
+            <td>Bridges planned appointment to actually recording</td>
+          </tr>
+          <tr>
+            <td><strong>"Understand your letter"</strong></td>
+            <td><span class="pillar-dot dot-clarity"></span></td>
+            <td>Hole 2 (wrong time)</td>
+            <td><span class="status-badge status-raw">Concept</span></td>
+            <td>Micro-value between appointments; extends document scan</td>
+          </tr>
+          <tr>
+            <td><strong>Care Circle timing A/B</strong></td>
+            <td><span class="pillar-dot dot-connection"></span></td>
+            <td>Hole 1 + 2</td>
+            <td><span class="status-badge status-raw">Proposed</span></td>
+            <td>Tests if circle-first activates different segment</td>
+          </tr>
+          <tr>
+            <td><strong>Intent question (BIGB-2190)</strong></td>
+            <td><span class="pillar-dot dot-convenience"></span></td>
+            <td>Hole 1 (wrong people)</td>
+            <td><span class="status-badge status-designed">Designed</span></td>
+            <td>Segments users by intent at entry; routes to right path</td>
+          </tr>
+          <tr>
+            <td><strong>Ditto Chat (contextual AI)</strong></td>
+            <td><span class="pillar-dot dot-clarity"></span><span class="pillar-dot dot-convenience"></span></td>
+            <td>Hole 2 (wrong time)</td>
+            <td><span class="status-badge status-raw">New</span></td>
+            <td>Guided AI interactions; pinnable health components</td>
+          </tr>
+          <tr>
+            <td><strong>Health integrations (Apple Health)</strong></td>
+            <td><span class="pillar-dot dot-convenience"></span></td>
+            <td>Hole 2 (wrong time)</td>
+            <td><span class="status-badge status-refined">Built (Apple)</span></td>
+            <td>Signal layer — interpretation of health data in context</td>
+          </tr>
+          <tr>
+            <td><strong>Follower-first aha</strong></td>
+            <td><span class="pillar-dot dot-connection"></span></td>
+            <td>Hole 1 (channel-specific)</td>
+            <td><span class="status-badge status-raw">Concept</span></td>
+            <td>Highest quality aha for Care Circle invites</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- OPEN QUESTIONS -->
+<div class="section" id="questions">
+  <div class="container">
+    <h2 class="section-title">Open Questions</h2>
+    <p class="section-subtitle">What we need to answer before committing to specific initiatives.</p>
+
+    <div class="card" style="padding: 0;">
+      <div class="question-item">
+        <div class="q-num">1</div>
+        <div>
+          <div class="q-text">What's the actual split between "has appointment soon" vs "no appointment" among new users?</div>
+          <div class="q-priority q-critical">Critical — sizes both holes</div>
+        </div>
+      </div>
+      <div class="question-item">
+        <div class="q-num">2</div>
+        <div>
+          <div class="q-text">What specific blockers prevent cancer patients who HAVE appointments from recording?</div>
+          <div class="q-priority q-critical">Critical — drives Workstream 1</div>
+        </div>
+      </div>
+      <div class="question-item">
+        <div class="q-num">3</div>
+        <div>
+          <div class="q-text">If acquisition targets cancer patients specifically, does the "no appointment" problem mostly disappear?</div>
+          <div class="q-priority q-high">High — determines investment in bridge-to-value features</div>
+        </div>
+      </div>
+      <div class="question-item">
+        <div class="q-num">4</div>
+        <div>
+          <div class="q-text">What's the current install-to-first-summary conversion rate, segmented by channel and user type?</div>
+          <div class="q-priority q-critical">Critical — baseline for all activation work</div>
+        </div>
+      </div>
+      <div class="question-item">
+        <div class="q-num">5</div>
+        <div>
+          <div class="q-text">What's the minimum viable "between appointments" value that creates a reason to return?</div>
+          <div class="q-priority q-high">High — scopes Workstream 2</div>
+        </div>
+      </div>
+      <div class="question-item">
+        <div class="q-num">6</div>
+        <div>
+          <div class="q-text">How does the existential layer (identity, agency, being the author) translate into concrete product decisions?</div>
+          <div class="q-priority q-medium">Medium — strategic differentiation</div>
+        </div>
+      </div>
+      <div class="question-item">
+        <div class="q-num">7</div>
+        <div>
+          <div class="q-text">Can the existing AI pipeline handle freeform health narratives (not doctor-patient conversations)?</div>
+          <div class="q-priority q-high">High — gates "Speak to Ditto" feasibility</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 40px; text-align: center; color: var(--text-secondary); font-size: 12px;">
+  Ditto Care — Activation & Audience Strategy Explorer — March 2026
+</div>
+
+<script>
+  // Navigation
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.section).classList.add('active');
+    });
+  });
+
+  // Life moment selection
+  function selectMoment(el) {
+    document.querySelectorAll('.moment-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto Care — User Profiling Canvas</title>
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #4a6fa5;
+    --green: #2d8a4e;
+    --yellow: #c4960c;
+    --red: #c0392b;
+    --orange: #d4762c;
+    --blue: #2980b9;
+    --purple: #7b2d8e;
+    --teal: #1abc9c;
+    --border: #e0ddd8;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+
+  /* Header */
+  .header { background:#fff; border-bottom:1px solid var(--border); padding:20px 32px; position:sticky; top:0; z-index:100; }
+  .header h1 { font-size:22px; font-weight:700; }
+  .header p { color:var(--muted); font-size:13px; margin-top:4px; }
+
+  /* Navigation */
+  .nav { display:flex; gap:8px; padding:12px 32px; background:#fff; border-bottom:1px solid var(--border); position:sticky; top:66px; z-index:99; flex-wrap:wrap; }
+  .nav button { padding:8px 16px; border:1px solid var(--border); background:#fff; border-radius:20px; cursor:pointer; font-size:13px; transition:all .2s; }
+  .nav button:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .nav button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  /* Sections */
+  .section { display:none; padding:24px 32px; max-width:1600px; margin:0 auto; }
+  .section.active { display:block; }
+  .section-title { font-size:18px; font-weight:700; margin-bottom:4px; }
+  .section-subtitle { color:var(--muted); font-size:13px; margin-bottom:20px; }
+
+  /* Stats bar */
+  .stats-bar { display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
+  .stat { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; min-width:140px; box-shadow:var(--shadow); }
+  .stat-value { font-size:28px; font-weight:700; }
+  .stat-label { font-size:12px; color:var(--muted); margin-top:2px; }
+
+  /* Persona cards */
+  .persona-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:16px; }
+  .persona-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; box-shadow:var(--shadow); cursor:pointer; transition:all .2s; }
+  .persona-card:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(0,0,0,0.12); }
+  .persona-card.expanded { grid-column: span 2; }
+  .persona-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .persona-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .persona-name { font-size:16px; font-weight:700; }
+  .persona-subtitle { font-size:12px; color:var(--muted); }
+  .persona-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  .tag { padding:3px 10px; border-radius:12px; font-size:11px; font-weight:600; }
+  .tag-documented { background:#e8f5e9; color:var(--green); }
+  .tag-partial { background:#fff3e0; color:var(--orange); }
+  .tag-gap { background:#ffebee; color:var(--red); }
+  .tag-focus { background:#e3f2fd; color:var(--blue); }
+  .tag-new { background:#f3e5f5; color:var(--purple); }
+  .persona-problems { font-size:13px; margin-top:8px; }
+  .persona-problems ul { padding-left:18px; }
+  .persona-problems li { margin-bottom:4px; }
+  .persona-detail { display:none; margin-top:16px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+  .persona-card.expanded .persona-detail { display:block; }
+
+  /* Coverage badge */
+  .coverage { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; }
+  .coverage-high { background:#e8f5e9; color:var(--green); }
+  .coverage-medium { background:#fff3e0; color:var(--orange); }
+  .coverage-low { background:#ffebee; color:var(--red); }
+  .coverage-none { background:#f5f5f5; color:var(--muted); }
+
+  /* Problem map */
+  .problem-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; }
+  .problem-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; box-shadow:var(--shadow); }
+  .problem-category { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+  .problem-title { font-size:15px; font-weight:600; margin-bottom:6px; }
+  .problem-desc { font-size:13px; color:var(--muted); margin-bottom:10px; }
+  .problem-personas { display:flex; gap:4px; flex-wrap:wrap; }
+  .mini-tag { padding:2px 8px; border-radius:8px; font-size:10px; font-weight:600; background:#f0f0f0; }
+
+  /* Coverage matrix */
+  .matrix-container { overflow-x:auto; }
+  table.matrix { border-collapse:collapse; width:100%; min-width:900px; font-size:12px; }
+  table.matrix th { background:#f8f7f5; padding:10px 8px; text-align:left; font-weight:600; border-bottom:2px solid var(--border); position:sticky; top:0; }
+  table.matrix th.rotate { writing-mode:vertical-rl; text-orientation:mixed; white-space:nowrap; height:140px; padding:8px 4px; font-size:11px; }
+  table.matrix td { padding:8px; border-bottom:1px solid var(--border); text-align:center; }
+  table.matrix td:first-child { text-align:left; font-weight:600; white-space:nowrap; }
+  .dot { width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; }
+  .dot-green { background:var(--green); }
+  .dot-yellow { background:var(--yellow); }
+  .dot-red { background:var(--red); }
+  .dot-gray { background:#ccc; }
+  .dot-blue { background:var(--blue); }
+
+  /* Gap analysis */
+  .gap-list { display:flex; flex-direction:column; gap:12px; }
+  .gap-item { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; box-shadow:var(--shadow); display:flex; align-items:flex-start; gap:16px; }
+  .gap-severity { flex-shrink:0; width:8px; height:100%; min-height:40px; border-radius:4px; }
+  .gap-content { flex:1; }
+  .gap-title { font-weight:600; font-size:14px; margin-bottom:4px; }
+  .gap-desc { font-size:13px; color:var(--muted); }
+  .gap-actions { margin-top:8px; font-size:12px; }
+  .gap-actions span { display:inline-block; padding:2px 8px; border-radius:6px; background:#f0f0f0; margin-right:4px; }
+
+  /* Feature ideas */
+  .feature-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; }
+  .feature-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; box-shadow:var(--shadow); font-size:13px; }
+  .feature-card h4 { font-size:14px; margin-bottom:6px; }
+  .feature-evidence { display:flex; align-items:center; gap:6px; margin-top:8px; }
+  .evidence-bar { height:6px; border-radius:3px; flex:1; background:#eee; overflow:hidden; }
+  .evidence-fill { height:100%; border-radius:3px; }
+
+  /* Filters */
+  .filters { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .filter-btn { padding:6px 12px; border:1px solid var(--border); background:#fff; border-radius:16px; cursor:pointer; font-size:12px; transition:all .15s; }
+  .filter-btn:hover, .filter-btn.active { background:var(--text); color:#fff; border-color:var(--text); }
+
+  /* Legend */
+  .legend { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; font-size:12px; color:var(--muted); }
+  .legend-item { display:flex; align-items:center; gap:4px; }
+  .legend-dot { width:12px; height:12px; border-radius:50%; }
+
+  /* Summary panel */
+  .summary-panel { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; box-shadow:var(--shadow); margin-bottom:24px; }
+  .summary-panel h3 { font-size:15px; font-weight:700; margin-bottom:10px; }
+  .summary-panel p { font-size:13px; color:var(--muted); margin-bottom:8px; }
+
+  /* Responsive */
+  @media (max-width:768px) {
+    .persona-grid, .problem-grid, .feature-grid { grid-template-columns:1fr; }
+    .persona-card.expanded { grid-column:span 1; }
+    .stats-bar { flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Ditto Care — User Profiling Canvas</h1>
+  <p>Consolidated view of all user segments, problems, coverage, and gaps &middot; Sources: Confluence (11 pages), NotebookLM (15 research sources), local specs (37 ideas), Jira BIGB board &middot; Updated 2026-03-16 v2</p>
+</div>
+
+<div class="nav" id="nav">
+  <button class="active" data-section="overview">Overview</button>
+  <button data-section="personas">User Personas</button>
+  <button data-section="problems">Problem Map</button>
+  <button data-section="coverage">Coverage Matrix</button>
+  <button data-section="gaps">Gap Analysis</button>
+  <button data-section="features">Feature → Persona Map</button>
+  <button data-section="sources">Sources & Methodology</button>
+</div>
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="section active" id="overview">
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-value">10</div><div class="stat-label">User Personas</div></div>
+    <div class="stat"><div class="stat-value">24</div><div class="stat-label">Core Problems</div></div>
+    <div class="stat"><div class="stat-value">37</div><div class="stat-label">Feature Ideas</div></div>
+    <div class="stat"><div class="stat-value" style="color:var(--green)">3</div><div class="stat-label">Well-Covered Personas</div></div>
+    <div class="stat"><div class="stat-value" style="color:var(--yellow)">5</div><div class="stat-label">Partially Covered</div></div>
+    <div class="stat"><div class="stat-value" style="color:var(--red)">2</div><div class="stat-label">Major Gaps</div></div>
+  </div>
+
+  <div class="summary-panel">
+    <h3>Executive Summary</h3>
+    <p><strong>What we have:</strong> Rich qualitative research (15+ interviews, Lyssna panels, Typeform feedback). NotebookLM reveals significantly more evidence than local docs captured — cardiology IS mentioned, neurodegenerative has 3 sub-conditions, caregivers split into 4 distinct types with 5 proxy usage examples, and chronic patients report specific AI accuracy issues. Several capabilities are more mature than documentation suggests: <strong>PDF upload, multi-language translation (TR/AR/EN), section-level sharing controls, and basic medication management are all shipped.</strong></p>
+    <p><strong>What's missing:</strong> No formal persona documents exist anywhere. Disease-specific user profiles are absent but <em>evidence exists for all segments in the research</em> — it was just never structured. The gap is in strategy and product positioning, not in raw research. Four caregiver sub-types need distinct product treatment.</p>
+    <p><strong>Key insight:</strong> The research is richer than anyone realized — NotebookLM surfaced evidence that was buried in interviews but never extracted into strategy docs. The real gap is <strong>structuring what we already know into actionable personas</strong> and <strong>translating that into differentiated product experiences</strong>.</p>
+  </div>
+
+  <div class="section-title">Persona Coverage at a Glance</div>
+  <div class="section-subtitle">Click any row to jump to the full persona</div>
+  <table class="matrix" style="min-width:auto;">
+    <thead>
+      <tr>
+        <th style="width:200px;">Persona</th>
+        <th style="width:100px;">Research Depth</th>
+        <th style="width:100px;">Product Coverage</th>
+        <th style="width:100px;">Feature Pipeline</th>
+        <th>Key Gap</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr onclick="goTo('personas','cancer')">
+        <td>Cancer / Severe Care Patient</td>
+        <td><span class="coverage coverage-medium">Moderate</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td><span class="coverage coverage-high">Strong</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">No disease-specific profile; journey complexity unaddressed</td>
+      </tr>
+      <tr onclick="goTo('personas','pregnancy')">
+        <td>Pregnancy Patient</td>
+        <td><span class="coverage coverage-medium">Moderate</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Named as focus area but no tailored features or content</td>
+      </tr>
+      <tr onclick="goTo('personas','neuro')">
+        <td>Neurodegenerative Patient</td>
+        <td><span class="coverage coverage-medium">Moderate</span></td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">NotebookLM has dementia/MS/brain injury evidence; no dedicated features or UX</td>
+      </tr>
+      <tr onclick="goTo('personas','cardio')">
+        <td>Cardiology Patient</td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td><span class="coverage coverage-low">Generic</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Evidence exists in NotebookLM; no tailored features; AI med accuracy critical</td>
+      </tr>
+      <tr onclick="goTo('personas','chronic')">
+        <td>Chronic Disease Patient</td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td><span class="coverage coverage-low">Generic</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Medication & tracking ideas fit, but no specific positioning</td>
+      </tr>
+      <tr onclick="goTo('personas','language')">
+        <td>Language Barrier Patient</td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td><span class="coverage coverage-none">None</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Translations exist (TR/AR/EN) but no dedicated UX, content, or onboarding</td>
+      </tr>
+      <tr onclick="goTo('personas','primary-carer')">
+        <td>Primary Caregiver</td>
+        <td><span class="coverage coverage-high">Strong</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td><span class="coverage coverage-high">Strong</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">CC v2 addresses sharing; logistics coordination not built</td>
+      </tr>
+      <tr onclick="goTo('personas','extended-network')">
+        <td>Extended Network (friends)</td>
+        <td><span class="coverage coverage-medium">Moderate</span></td>
+        <td><span class="coverage coverage-low">Weak</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Low-friction engagement features not shipped yet</td>
+      </tr>
+      <tr onclick="goTo('personas','self-manager')">
+        <td>Self-Manager (25-55)</td>
+        <td><span class="coverage coverage-medium">Moderate</span></td>
+        <td><span class="coverage coverage-high">Good</span></td>
+        <td><span class="coverage coverage-high">Strong</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Core product fits well (incl. PDF upload, translations); activation gap is the main issue</td>
+      </tr>
+      <tr onclick="goTo('personas','elderly')">
+        <td>Elderly / Low-Digital Patient</td>
+        <td><span class="coverage coverage-high">Strong</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td><span class="coverage coverage-medium">Partial</span></td>
+        <td style="text-align:left;font-weight:400;font-size:12px;">Voice-first helps; proxy setup by children is common</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== PERSONAS ==================== -->
+<div class="section" id="personas">
+  <div class="section-title">User Personas</div>
+  <div class="section-subtitle">Framework: Jobs-to-be-Done + Awareness Stage + Disease Context. Click a card to expand. Personas are ordered by estimated TAM within NL.</div>
+
+  <div class="filters" id="persona-filters">
+    <button class="filter-btn active" data-filter="all">All (10)</button>
+    <button class="filter-btn" data-filter="documented">Documented (6)</button>
+    <button class="filter-btn" data-filter="gap">Gap / Undocumented (4)</button>
+    <button class="filter-btn" data-filter="patient">Patients (7)</button>
+    <button class="filter-btn" data-filter="supporter">Supporters (3)</button>
+  </div>
+
+  <div class="persona-grid" id="persona-grid">
+
+    <!-- P1: Cancer / Severe Care -->
+    <div class="persona-card" data-type="patient documented" data-id="cancer" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#ffebee;">🎗</div>
+        <div>
+          <div class="persona-name">Cancer / Severe Care Patient</div>
+          <div class="persona-subtitle">High info load, frequent specialist visits, life-changing decisions</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-focus">Focus Area: Oncology</span>
+        <span class="tag tag-partial">Partially Documented</span>
+        <span class="coverage coverage-medium">Moderate Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems (validated by NotebookLM):</strong>
+        <ul>
+          <li>Overwhelmed by volume and complexity across many specialists — long consultations hard to recall</li>
+          <li>Granular sharing needs: want to hide vulnerable details (audio, organ removal, stoma) from broader circle</li>
+          <li>Chemo medication schedules: "half an hour to puzzle out what to take next" from paper lists</li>
+          <li>Emotional exhaustion from "dumb questions" — need to inform people without repeating themselves</li>
+          <li>AYA patients (young adults) want a "summary of summaries" — consolidated journey overview after treatment ends</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Understand what my doctors tell me across multiple specialties<br>
+        2. Keep my family informed without repeating traumatic information<br>
+        3. Control exactly what vulnerable information I share with whom<br>
+        4. Make sense of my chemo medication schedule<br>
+        5. Have one place where my entire care journey lives (especially post-treatment for AYA)<br><br>
+        <strong>Awareness stage:</strong> Most Aware — they know they need help managing care complexity<br><br>
+        <strong>Evidence (NotebookLM):</strong> Extensive — cancer mentioned across most sources. Breast cancer chemo patients need help with complex med schedules. Granular privacy: "want to hide organ removal, stoma issues from broader circle." Emotional boundaries: "suffer from being asked too many dumb or exhausting questions." AYA-specific: "need a consolidated overview of their entire healthcare journey so they can archive it without sifting through 50 separate appointment notes." Father records on behalf of adult son with cancer.<br><br>
+        <strong>What Ditto covers today:</strong> Recording, AI summaries, section-level sharing controls, basic medication, Care Circle v1<br>
+        <strong>What's in pipeline:</strong> CC v2, voice health check-in, who-to-share-with controls, advanced medication<br>
+        <strong>What's missing:</strong> No "summary of summaries" (journey consolidation), no chemo schedule parser, no disease-specific privacy presets, no peer connection (lotgenoten), no treatment timeline visualization
+      </div>
+    </div>
+
+    <!-- P2: Pregnancy -->
+    <div class="persona-card" data-type="patient documented" data-id="pregnancy" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#fce4ec;">🤰</div>
+        <div>
+          <div class="persona-name">Pregnancy Patient (+ Partner)</div>
+          <div class="persona-subtitle">Positive journey, high eagerness to share, frequent checkups</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-focus">Focus Area: Pregnancy</span>
+        <span class="tag tag-partial">Partially Documented</span>
+        <span class="coverage coverage-medium">Partial Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems:</strong>
+        <ul>
+          <li>Many checkups with lots of new information each time</li>
+          <li>Want to share pregnancy updates with extended family (95% share naturally)</li>
+          <li>Complicated pregnancies create anxiety and information overload</li>
+          <li>Partner often can't attend all appointments</li>
+          <li>Want visual milestones (echo photos) alongside medical information</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Remember what the midwife/OB said at each checkup<br>
+        2. Share pregnancy updates with family without repeating<br>
+        3. Keep track of measurements, test results, and milestones<br>
+        4. Inform my partner about appointments they missed<br>
+        5. Understand medical terminology in my own language<br><br>
+        <strong>Awareness stage:</strong> Problem Aware — know info gets lost, but may not know there's a solution<br><br>
+        <strong>Evidence (NotebookLM + Confluence):</strong> Named as #1 focus disease area. High information load across many appointments (e.g., 20-week ultrasound). 95% share pregnancy updates; over 50% share with 6+ people — highest sharing intent of any segment. Marketing segments defined (25-38, Instagram). BIGB-56 mentions pregnancy echo photos.<br><br>
+        <strong>What Ditto covers today:</strong> Recording, AI summaries, basic sharing<br>
+        <strong>What's in pipeline:</strong> CC v2 (good fit for family sharing), photo previews (BIGB-56)<br>
+        <strong>What's missing:</strong> No pregnancy-specific journey template, no milestone tracking, no partner-specific experience, no midwife integration, no trimester-aware content. This is named a focus area but has no tailored product experience.
+      </div>
+    </div>
+
+    <!-- P3: Neurodegenerative -->
+    <div class="persona-card" data-type="patient gap" data-id="neuro" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#e8eaf6;">🧠</div>
+        <div>
+          <div class="persona-name">Neurodegenerative Disease Patient</div>
+          <div class="persona-subtitle">Parkinson's, Alzheimer's, MS — memory loss is the core challenge</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-focus">Focus Area: Neurodegeneration</span>
+        <span class="tag tag-gap">Major Gap</span>
+        <span class="coverage coverage-low">Weak Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems:</strong>
+        <ul>
+          <li>Progressive memory loss makes recalling medical info impossible</li>
+          <li>Caregiver (partner/child) often becomes the primary information manager</li>
+          <li>Need a "single source of truth" that loved ones can always reference</li>
+          <li>Disease progression means increasing dependency on others for app usage</li>
+          <li>Want social circle to understand the basics of their condition</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Have a record of what was discussed because I will forget<br>
+        2. Let my family access my care information when I can't manage it myself<br>
+        3. Review and process summaries at my own pace (slower information processing)<br>
+        4. Have an emergency profile that explains my condition to others<br>
+        5. Maintain dignity and independence as long as possible<br><br>
+        <strong>Awareness stage:</strong> Solution Aware — know they need memory support, may not know Ditto exists<br><br>
+        <strong>Evidence (NotebookLM):</strong> Richer than local docs suggested. <strong>Dementia:</strong> User's mother has dementia, "cannot understand the care process herself" — family needs to manage on her behalf. <strong>MS:</strong> User with MS for 24 years needs "organized, to-the-point visit reports" for long-term care tracking. <strong>Brain injury:</strong> User says "information processing is slower" — specifically needs to review summaries at own pace because they "cannot easily retain information on the spot." Also: Parkinson's patient wanting "one place where friends can find the basics about my disease."<br><br>
+        <strong>What Ditto covers today:</strong> Recording, AI summaries (general)<br>
+        <strong>What's in pipeline:</strong> Emergency info (BIGB-98), profile page (CC v2)<br>
+        <strong>What's missing:</strong> No caregiver-as-primary-user flow, no progressive access handover, no cognitive accessibility features (low-stimulus UI, simplified output), no "review at own pace" mode. <strong>This is arguably Ditto's most natural use case (memory loss → memory tool) but has zero dedicated investment.</strong>
+      </div>
+    </div>
+
+    <!-- P4: Cardiology -->
+    <div class="persona-card" data-type="patient gap" data-id="cardio" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#ffebee;">❤️</div>
+        <div>
+          <div class="persona-name">Cardiology Patient</div>
+          <div class="persona-subtitle">Heart conditions, cardiac rehab, ongoing monitoring with medication-heavy regimens</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-partial">Evidence Exists (NotebookLM)</span>
+        <span class="tag tag-gap">No Tailored Features</span>
+        <span class="coverage coverage-low">Generic Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems (from NotebookLM research):</strong>
+        <ul>
+          <li>Stressful consultations — recording provides "peace of mind" during cardiac visits</li>
+          <li>Need to understand lab results: blood tests, blood pressure, cholesterol numbers</li>
+          <li>Strict medication timing — "a few hours' delay every day significantly reduces effectiveness"</li>
+          <li>AI medication errors are dangerous: heart/vascular meds misinterpreted as psychiatric drugs</li>
+          <li>Remote sharing with siblings/relatives who can't attend appointments</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Understand what my cardiologist told me and what the numbers mean<br>
+        2. Keep my medication schedule precisely — timing is critical<br>
+        3. Share updates with family members who can't attend<br>
+        4. Track blood pressure, cholesterol, and other metrics over time<br>
+        5. Understand medication interactions (cardiac patients often on 5+ meds)<br><br>
+        <strong>Awareness stage:</strong> Problem Aware — know care is complex, may not know Ditto exists<br><br>
+        <strong>Evidence (NotebookLM):</strong> Cardiology IS mentioned across research — heart clinics, cardiologist visits, blood pressure monitoring. One user's heart/vascular medications were misinterpreted by AI as psychiatric drugs. Medication timing quote: "Certain medications must be taken neatly every 24 hours... if you vary that by a few hours every day, it has much less effect." Peace of mind during stressful consultations specifically mentioned.<br><br>
+        <strong>What Ditto covers today:</strong> Recording, AI summaries, basic medication feature, translations<br>
+        <strong>What's in pipeline:</strong> Advanced medication management, health integrations (Apple Health for heart rate/BP)<br>
+        <strong>What's missing:</strong> No cardiology-specific content, no metric tracking/visualization, no medication timing precision. AI medication accuracy is critical — misidentifying cardiac meds has real safety implications.
+      </div>
+    </div>
+
+    <!-- P5: Chronic Disease -->
+    <div class="persona-card" data-type="patient gap" data-id="chronic" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#e0f2f1;">♾️</div>
+        <div>
+          <div class="persona-name">Chronic Disease Patient</div>
+          <div class="persona-subtitle">Diabetes, COPD, autoimmune, rheumatology — ongoing management, not crisis</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-new">Not Specifically Documented</span>
+        <span class="tag tag-gap">Gap</span>
+        <span class="coverage coverage-low">Generic Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems (validated by NotebookLM):</strong>
+        <ul>
+          <li>AI accuracy issue: COPD/ACOS patient reports AI focused on chronic background instead of actual medication changes discussed</li>
+          <li>Long COVID: cognitive overload — need low-stimulus UI, calm colors, highly simplified text</li>
+          <li>Diabetes patients ask if app can explain their disease-specific documents</li>
+          <li>Multiple providers with fragmented info — patients maintain their own Excel spreadsheets</li>
+          <li>Disease fatigue — "want to stop being a patient" resonates strongly here</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Track my condition over time without it being a burden<br>
+        2. Have a clear overview across all my care providers<br>
+        3. Manage medications across multiple conditions (some maintain Excel sheets)<br>
+        4. Get AI summaries that focus on what changed THIS visit, not my chronic background<br>
+        5. Keep my medical history in one place for new providers<br><br>
+        <strong>Awareness stage:</strong> Problem Aware — managing complexity daily, seeking tools<br><br>
+        <strong>Evidence (NotebookLM):</strong> Richer than local docs. <strong>COPD/ACOS:</strong> AI "focused too heavily on chronic ACOS background rather than the actual medication changes discussed during that specific visit." <strong>Long COVID:</strong> patients need "low-stimulus interfaces, calm colors, and highly simplified text" due to cognitive overload. <strong>Diabetes:</strong> user asks "can I use this to explain documents related to diabetes?" <strong>ADHD:</strong> "I would like extra tips on how to remember my medicines." Multiple patients manage medications in Excel because they see multiple specialists.<br><br>
+        <strong>What Ditto covers today:</strong> Recording, AI summaries, PDF upload, basic medication management, multi-language translations<br>
+        <strong>What's in pipeline:</strong> Voice health check-in (BIGB-62), advanced medication features, health integrations (Apple Health), event labeling<br>
+        <strong>What's missing:</strong> No chronic-disease positioning (Ditto appears as "appointment tool," not "daily companion"), AI doesn't prioritize "what changed" over background, no cognitive accessibility mode (Long COVID), no condition-specific tracking, no symptom diary
+      </div>
+    </div>
+
+    <!-- P6: Language Barrier -->
+    <div class="persona-card" data-type="patient gap" data-id="language" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#fff3e0;">🌍</div>
+        <div>
+          <div class="persona-name">Language Barrier Patient</div>
+          <div class="persona-subtitle">Refugees, immigrants, non-native speakers struggling with medical Dutch/English</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-partial">Named, Partially Served</span>
+        <span class="tag tag-gap">Research Gap</span>
+        <span class="coverage coverage-medium">Partial Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems (validated by NotebookLM):</strong>
+        <ul>
+          <li>Healthcare providers report patients need A1/A2/B1 reading levels — current B1 may still be too complex</li>
+          <li>Non-native speakers and lower-educated patients: specific need to toggle language output down</li>
+          <li>Cultural differences in healthcare navigation (unfamiliar with Dutch system)</li>
+          <li>Often rely on family members (including children) as interpreters</li>
+          <li>Reverse use case: Dutch patients abroad want foreign-language consultations translated back to Dutch</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Understand what my doctor said in my own language<br>
+        2. Navigate the Dutch healthcare system<br>
+        3. Explain my symptoms accurately to providers<br>
+        4. Share medical information with family who may speak a different language<br>
+        5. Keep records I can reference and share with interpreters<br><br>
+        <strong>Awareness stage:</strong> Unaware — may not know tools like Ditto exist<br><br>
+        <strong>Evidence (NotebookLM):</strong> Named in brand positioning. Healthcare provider specifically requests toggle for A1/A2/B1 reading levels: "many of their patients are non-native speakers or have lower education levels." Reverse use case discovered: Dutch patients abroad in Spanish-speaking countries want foreign → Dutch translation. Farsi, Polish, German in development.<br><br>
+        <strong>What Ditto covers today:</strong> Summaries translated to Turkish, Arabic, and English. Transcription supports Dutch and English conversations. PDF upload and document scanning.<br>
+        <strong>What's in pipeline:</strong> Farsi, Polish, German translations in development<br>
+        <strong>What's missing:</strong> Adjustable reading level (A1/A2 option below current B1), culturally adapted content, healthcare system navigation help, dedicated onboarding for non-native speakers, transcription beyond Dutch/English, reverse translation (foreign consultations → Dutch). <strong>Translation exists but the experience isn't tailored to this segment's actual literacy needs.</strong>
+      </div>
+    </div>
+
+    <!-- P7: Self-Manager -->
+    <div class="persona-card" data-type="patient documented" data-id="self-manager" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#e8f5e9;">💪</div>
+        <div>
+          <div class="persona-name">Self-Manager (25-55)</div>
+          <div class="persona-subtitle">Digitally savvy adults navigating their own diagnoses and treatments</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-documented">Documented (B2C Playbook)</span>
+        <span class="coverage coverage-high">Good Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems:</strong>
+        <ul>
+          <li>"You deserve to understand what's happening to you"</li>
+          <li>Want to be informed and empowered, not passive</li>
+          <li>Expect digital-first experiences (frustrated by paper processes)</li>
+          <li>Need fast, clear information they can act on</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Understand my diagnosis and treatment options clearly<br>
+        2. Be prepared for every appointment<br>
+        3. Have my medical history organized and accessible<br>
+        4. Make informed decisions about my care<br><br>
+        <strong>Awareness stage:</strong> Problem/Solution Aware — actively looking for tools<br><br>
+        <strong>Evidence:</strong> B2C Content Strategy segment. AYA interview. This is the segment that Ditto's core product best serves today — recording, AI summaries, document scanning.<br><br>
+        <strong>What Ditto covers today:</strong> Core product fits well — record, summarize, store, share, PDF upload, multi-language translations, section-level sharing controls, basic medication management<br>
+        <strong>What's in pipeline:</strong> Onboarding-to-aha, voice profile, Ditto Chat, who-to-share-with controls<br>
+        <strong>What's missing:</strong> Activation gap (90% drop-off). The product is good once they use it — getting them to first value is the problem.
+      </div>
+    </div>
+
+    <!-- P8: Elderly -->
+    <div class="persona-card" data-type="patient documented" data-id="elderly" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#efebe9;">👴</div>
+        <div>
+          <div class="persona-name">Elderly / Low-Digital Patient</div>
+          <div class="persona-subtitle">55+, comprehension difficulties, often set up by children</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-documented">Well Documented</span>
+        <span class="coverage coverage-medium">Partial Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems:</strong>
+        <ul>
+          <li>Difficulty understanding medical conditions and instructions</li>
+          <li>Digital insecurity — feel lost on platforms</li>
+          <li>Fear of authority — afraid to ask doctors for permission to record</li>
+          <li>Children often manage the app on their behalf (proxy usage)</li>
+          <li>Long text-heavy summaries overwhelm — need simpler output</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Remember what the doctor said (or have my child help me)<br>
+        2. Not have to repeat information to family members<br>
+        3. Use the app without complex navigation<br>
+        4. Feel confident in appointments without asking "dumb questions"<br><br>
+        <strong>Awareness stage:</strong> Unaware to Problem Aware — often introduced by children<br><br>
+        <strong>Evidence:</strong> Strong. Proxy recording documented (children/neighbors). Fear of authority documented. Cognitive load issues documented (Long Covid patients, seniors). Facebook marketing segment (55+). QR-to-record (BIGB-104) directly addresses "can't find the app."<br><br>
+        <strong>What Ditto covers today:</strong> Voice recording (no typing needed), AI simplification<br>
+        <strong>What's in pipeline:</strong> QR-to-record, voice-first onboarding, narration improvements<br>
+        <strong>What's missing:</strong> No simplified UI mode, no assisted setup flow, no visual/infographic summaries, no audio summary playback
+      </div>
+    </div>
+
+    <!-- P9: Primary Caregiver -->
+    <div class="persona-card" data-type="supporter documented" data-id="primary-carer" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#e3f2fd;">🫂</div>
+        <div>
+          <div class="persona-name">Primary Caregiver</div>
+          <div class="persona-subtitle">Partner, adult child managing a loved one's care — 5 million in NL</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-documented">Well Documented</span>
+        <span class="tag tag-focus">CC v2 Target</span>
+        <span class="coverage coverage-medium">Partial Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems (validated by NotebookLM — 4 distinct sub-types identified):</strong>
+        <ul>
+          <li><strong>Partners:</strong> Need "shared memory" — attend appointments together, review later. Often act as tech proxy for less digital spouse</li>
+          <li><strong>Adult children:</strong> Rotate attending visits across siblings — need shared agenda ("who is going to which appointment") + centralized summaries</li>
+          <li><strong>Friends/neighbors/volunteers:</strong> Need practical updates (when is chemo?) to offer help. Term "dierbaren" feels wrong — prefer "naasten"</li>
+          <li><strong>Professional caregivers:</strong> Need specific clinical data (e.g., lung function tests). Suffer from "massive administrative gap" between institutions</li>
+          <li>5 explicit proxy usage examples: father records for son, husband installs on wife's phone, child preps for parent, volunteer manages everything for elderly neighbor</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Get accurate, timely information about my loved one's care<br>
+        2. Coordinate care logistics with other family members (sibling rotation)<br>
+        3. Set up and manage the app for someone who can't do it themselves<br>
+        4. Have one place where everything about their care lives<br>
+        5. Filter information by role — partners get full detail, friends get high-level<br><br>
+        <strong>Awareness stage:</strong> Problem Aware — actively frustrated by information fragmentation<br><br>
+        <strong>Evidence (NotebookLM):</strong> Strongest evidence across all segments (10+ of 15 sources). Four distinct caregiver sub-types identified with different needs. 5 explicit proxy usage quotes: "I record this for my son" (father), "app installed unasked on wife's phone" (husband), "I arranged everything for her... I was the first point of contact" (volunteer for elderly neighbor). Professional caregivers (physiotherapists, home care) need objective clinical data, not emotional context. Terminology friction: "dierbaren" rejected for volunteer/neighbor relationships.<br><br>
+        <strong>What Ditto covers today:</strong> Care Circle v1, section-level sharing<br>
+        <strong>What's in pipeline:</strong> CC v2 (invitation cards, reactions, profiles, enhanced sharing), Care Circle Pulse, who-to-share-with controls<br>
+        <strong>What's missing:</strong> Proxy account management (set up on behalf of someone else), logistics coordination (shared agenda, task rotation), role-based information filtering, professional caregiver access to clinical data, caregiver-specific dashboard
+      </div>
+    </div>
+
+    <!-- P10: Extended Network -->
+    <div class="persona-card" data-type="supporter documented" data-id="extended-network" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:#f3e5f5;">💜</div>
+        <div>
+          <div class="persona-name">Extended Network (Friends, Neighbors, Colleagues)</div>
+          <div class="persona-subtitle">Want to show they care, don't need clinical detail</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="tag tag-partial">Partially Documented</span>
+        <span class="coverage coverage-low">Weak Coverage</span>
+      </div>
+      <div class="persona-problems">
+        <strong>Core problems:</strong>
+        <ul>
+          <li>Don't know what to say or how to help</li>
+          <li>Want to show support without being intrusive</li>
+          <li>Need brief, filtered updates — not clinical details</li>
+          <li>"Safe to call" — want to know when it's okay to reach out</li>
+        </ul>
+      </div>
+      <div class="persona-detail">
+        <strong>Jobs to be Done:</strong><br>
+        1. Stay informed about my friend/colleague's health at a high level<br>
+        2. Show I care without demanding emotional labor from the patient<br>
+        3. Offer practical help (cooking, transport) when it's actually needed<br>
+        4. Know when it's appropriate to reach out<br><br>
+        <strong>Awareness stage:</strong> Unaware — this persona doesn't seek tools; they arrive through invitations<br><br>
+        <strong>Evidence:</strong> Lyssna research: "send hearts, flowers without expecting reply" (8 mentions). "Show when I'm available to talk" (6 mentions). Information tiering (inner vs. outer circle) requested across interviews.<br><br>
+        <strong>What Ditto covers today:</strong> Very little — basic CC v1 sharing<br>
+        <strong>What's in pipeline:</strong> CC v2 reactions (emoji), support cards, help offers, profile page<br>
+        <strong>What's missing:</strong> Follower-first activation (see summary without installing), lightweight web experience
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== PROBLEMS ==================== -->
+<div class="section" id="problems">
+  <div class="section-title">Problem Map</div>
+  <div class="section-subtitle">All documented user problems, organized by theme. Color = coverage status.</div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Addressed by shipped feature</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div> In pipeline / partially addressed</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Unaddressed</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ccc;"></div> Hypothesized (no research)</div>
+  </div>
+
+  <div class="problem-grid">
+
+    <!-- Understanding -->
+    <div class="problem-card" style="border-left:4px solid var(--green);">
+      <div class="problem-category" style="color:var(--green);">Understanding</div>
+      <div class="problem-title">Can't understand what the doctor said</div>
+      <div class="problem-desc">75% of patients don't understand their care. 60% of consultation content forgotten within an hour. Medical jargon creates barrier.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">🤰 Pregnancy</span><span class="mini-tag">🧠 Neuro</span><span class="mini-tag">❤️ Cardio</span><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🌍 Language</span><span class="mini-tag">👴 Elderly</span><span class="mini-tag">💪 Self-mgr</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-high">✓ Core product (AI summaries)</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--green);">
+      <div class="problem-category" style="color:var(--green);">Understanding</div>
+      <div class="problem-title">Medical documents are unreadable</div>
+      <div class="problem-desc">Doctor's letters, lab results, and discharge notes use clinical language patients can't parse.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">All patients</span><span class="mini-tag">🌍 esp. Language barrier</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-high">✓ Document scan + AI explainer</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Understanding</div>
+      <div class="problem-title">Can't understand care in my own language</div>
+      <div class="problem-desc">Non-native speakers need summaries in their mother tongue. Cultural context and system navigation also missing.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🌍 Language barrier</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ Translations to Turkish, Arabic, English shipped. Transcription: Dutch + English only. No dedicated UX.</span></div>
+    </div>
+
+    <!-- Memory & Records -->
+    <div class="problem-card" style="border-left:4px solid var(--green);">
+      <div class="problem-category" style="color:var(--green);">Memory & Records</div>
+      <div class="problem-title">Forget what was discussed in appointments</div>
+      <div class="problem-desc">"The app is a safety net." Especially acute for elderly and neurodegenerative patients.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🧠 Neuro</span><span class="mini-tag">👴 Elderly</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">All</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-high">✓ Recording + summarization</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Memory & Records</div>
+      <div class="problem-title">Health information scattered everywhere</div>
+      <div class="problem-desc">Medical info across WhatsApp, email, patient portals, paper folders. No single source of truth.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🫂 Primary carer</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">👴 Elderly</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ Partially — BIGB-58 (vault), BIGB-50 (historical records) in parking lot</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--green);">
+      <div class="problem-category" style="color:var(--green);">Memory & Records</div>
+      <div class="problem-title">Can't upload PDFs and existing documents</div>
+      <div class="problem-desc">"I have digital letters — why must I print to scan?" Was a top functional complaint — now resolved.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">💪 Self-mgr</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-high">✓ Shipped — PDF upload is built</span></div>
+    </div>
+
+    <!-- Sharing & Communication -->
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Sharing & Communication</div>
+      <div class="problem-title">"Chinese whispers" — information distorted through retelling</div>
+      <div class="problem-desc">Patient tells partner, partner tells children, children tell neighbor — each step loses accuracy.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🫂 Primary carer</span><span class="mini-tag">💜 Extended</span><span class="mini-tag">🎗 Cancer</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ CC v1 basic sharing → CC v2 in progress</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Sharing & Communication</div>
+      <div class="problem-title">Can't control WHO sees shared updates</div>
+      <div class="problem-desc">Users CAN select which sections to share and add personal messages (shipped). But all followers see the same thing — can't differentiate between inner circle and outer circle.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">All patients</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ What-to-share: shipped. Who-to-share-with: gap (DPMA-1964 addresses this)</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--red);">
+      <div class="problem-category" style="color:var(--red);">Sharing & Communication</div>
+      <div class="problem-title">Don't know what to say / how to help</div>
+      <div class="problem-desc">Followers want to support but feel helpless. No mechanism for showing care without burden.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">💜 Extended</span><span class="mini-tag">🫂 Primary carer</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ CC v2 reactions + support cards in pipeline</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--red);">
+      <div class="problem-category" style="color:var(--red);">Sharing & Communication</div>
+      <div class="problem-title">Logistical coordination is manual</div>
+      <div class="problem-desc">"Who is going with mom? Who is cooking?" Caregivers coordinate via WhatsApp groups.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🫂 Primary carer</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">✗ Not in pipeline</span></div>
+    </div>
+
+    <!-- Daily Engagement -->
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Daily Engagement</div>
+      <div class="problem-title">No reason to open the app between appointments</div>
+      <div class="problem-desc">"I only use the app when I have an appointment or receive a letter." Episodic by design.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">All patients</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ Voice check-in, medication reminders, CC Pulse in pipeline</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Daily Engagement</div>
+      <div class="problem-title">Need a diary for symptoms, side effects, and questions</div>
+      <div class="problem-desc">#1 most-requested daily feature. "I need a dagboek to record pain scores." But manual logging is burdensome.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🤰 Pregnancy</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ BIGB-62 (Voice health check-in) addresses this</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Daily Engagement</div>
+      <div class="problem-title">Medication management is chaotic</div>
+      <div class="problem-desc">Chemo patient: "half an hour to puzzle out what to take next" from paper. ADHD: "I would like extra tips on how to remember my medicines." Cardiac: "a few hours' delay every day significantly reduces effect." Basic medication feature shipped. Advanced features not.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">♾️ Chronic</span><span class="mini-tag">❤️ Cardio</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">👴 Elderly</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ Basic medication feature shipped. Advanced management (BIGB-44 scope) not built.</span></div>
+    </div>
+
+    <!-- Activation -->
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Activation</div>
+      <div class="problem-title">90% drop-off from install to first value</div>
+      <div class="problem-desc">Core aha requires a doctor visit. Users who install have no appointment → no value → forget the app.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">All new users</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ "Tell Ditto About Your Health" being validated</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--red);">
+      <div class="problem-category" style="color:var(--red);">Activation</div>
+      <div class="problem-title">Can't differentiate user awareness stages</div>
+      <div class="problem-desc">Don't know if users dropped off because they don't understand, don't need it yet, or forgot. Three problems treated identically.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">All</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-low">✗ Awareness mapping is hypothesis — no tracking yet</span></div>
+    </div>
+
+    <!-- Trust -->
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Trust & Quality</div>
+      <div class="problem-title">AI errors erode trust</div>
+      <div class="problem-desc">"Wrong medication names make me hesitant to share." Can't easily edit AI errors.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">All patients</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ AI quality is priority #4; terminology DB (BIGB-61) in parking lot</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--yellow);">
+      <div class="problem-category" style="color:var(--yellow);">Trust & Quality</div>
+      <div class="problem-title">Fear of recording — afraid to ask doctor</div>
+      <div class="problem-desc">Older users and language barrier patients especially afraid of authority. A doctor explainer sheet was ideated on the BIGB board. Feature idea spec created: in-app permission script + printable doctor info sheet.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">👴 Elderly</span><span class="mini-tag">🌍 Language</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-medium">◐ Idea exists (doctor explainer sheet on BIGB board + new spec). Not shipped. QR at desk (BIGB-104) also partially addresses.</span></div>
+    </div>
+
+    <!-- Access -->
+    <div class="problem-card" style="border-left:4px solid var(--red);">
+      <div class="problem-category" style="color:var(--red);">Accessibility</div>
+      <div class="problem-title">Can't record phone/video consultations</div>
+      <div class="problem-desc">"Many consultations are by phone." No technical solution for non-in-person visits.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">All patients</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">✗ Technical limitation — not solved</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid var(--red);">
+      <div class="problem-category" style="color:var(--red);">Accessibility</div>
+      <div class="problem-title">Progressive cognitive decline — can't manage app alone</div>
+      <div class="problem-desc">Neurodegenerative patients need gradual handover of app management to caregiver.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🧠 Neuro</span><span class="mini-tag">👴 Elderly</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">✗ No proxy management / access handover</span></div>
+    </div>
+
+    <!-- Undocumented but real -->
+    <div class="problem-card" style="border-left:4px solid #ccc;">
+      <div class="problem-category" style="color:var(--muted);">Undocumented</div>
+      <div class="problem-title">Cardiac patients: medication adherence is life-critical</div>
+      <div class="problem-desc">Blood thinners, statins, beta-blockers — missing doses has immediate health consequences. No research exists.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">❤️ Cardio</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">⚪ Hypothesized — needs research</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid #ccc;">
+      <div class="problem-category" style="color:var(--muted);">Undocumented</div>
+      <div class="problem-title">Navigating the Dutch healthcare system as an outsider</div>
+      <div class="problem-desc">Refugees and immigrants don't understand referral paths, insurance, specialist access. Cultural healthcare differences.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">🌍 Language</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">⚪ Hypothesized — needs research</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid #ccc;">
+      <div class="problem-category" style="color:var(--muted);">Undocumented</div>
+      <div class="problem-title">Chronic disease fatigue — don't want another health app</div>
+      <div class="problem-desc">"Want to stop being a patient." Chronic patients have app fatigue from condition-specific trackers.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">♾️ Chronic</span><span class="mini-tag">❤️ Cardio</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">⚪ Hypothesized — positioning problem</span></div>
+    </div>
+
+    <div class="problem-card" style="border-left:4px solid #ccc;">
+      <div class="problem-category" style="color:var(--muted);">Undocumented</div>
+      <div class="problem-title">Managing multiple conditions simultaneously</div>
+      <div class="problem-desc">Cancer + diabetes, Parkinson's + cardiac — multiple specialist tracks that need separation and overview.</div>
+      <div class="problem-personas">
+        <span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">👴 Elderly</span>
+      </div>
+      <div style="margin-top:8px;"><span class="coverage coverage-none">⚪ BIGB-65 (auto-group into journeys) in parking lot</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== COVERAGE MATRIX ==================== -->
+<div class="section" id="coverage">
+  <div class="section-title">Coverage Matrix</div>
+  <div class="section-subtitle">How well each capability serves each persona. Green = shipped, Yellow = in pipeline, Red = gap, Gray = not relevant.</div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Shipped</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div> In Pipeline</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Gap (needed but not planned)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blue);"></div> Partially Addresses</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ddd;"></div> Not Relevant</div>
+  </div>
+
+  <div class="matrix-container">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="rotate">🎗 Cancer</th>
+          <th class="rotate">🤰 Pregnancy</th>
+          <th class="rotate">🧠 Neuro</th>
+          <th class="rotate">❤️ Cardiology</th>
+          <th class="rotate">♾️ Chronic</th>
+          <th class="rotate">🌍 Language</th>
+          <th class="rotate">💪 Self-Mgr</th>
+          <th class="rotate">👴 Elderly</th>
+          <th class="rotate">🫂 Prim. Carer</th>
+          <th class="rotate">💜 Extended</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Appointment recording</td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>AI summary (plain language + translations)</td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Document scan + explainer</td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Care Circle sharing</td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+        </tr>
+        <tr>
+          <td>What-to-share controls (sections)</td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+        </tr>
+        <tr>
+          <td>Who-to-share-with controls</td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+        </tr>
+        <tr>
+          <td>Voice health check-in / diary</td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Medication management (basic)</td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Advanced medication (diary, reminders, caregiver visibility)</td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Multi-language (TR/AR/EN translation)</td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Disease-specific content</td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Health document vault / profile</td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Emergency info (no login)</td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Caregiver dashboard / proxy</td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Logistics coordination</td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+        </tr>
+        <tr>
+          <td>Appointment preparation</td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-green">✓</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Chat with health data</td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Health integrations (Apple/Google)</td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-yellow">▸</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+        <tr>
+          <td>Peer connection (lotgenoten)</td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-blue">◐</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-red">✗</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+          <td><span class="dot dot-gray">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== GAP ANALYSIS ==================== -->
+<div class="section" id="gaps">
+  <div class="section-title">Gap Analysis</div>
+  <div class="section-subtitle">Prioritized gaps ranked by estimated impact and alignment with Ditto's mission</div>
+
+  <div class="gap-list">
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--red);"></div>
+      <div class="gap-content">
+        <div class="gap-title">1. No disease-specific user profiles exist anywhere</div>
+        <div class="gap-desc">Three focus areas (pregnancy, neuro, oncology) are named in strategy but have zero dedicated research, zero tailored features, and zero differentiated content. Cardiology and chronic disease aren't even named. Ditto treats all patients identically — a cancer patient and a pregnant woman get the same experience.</div>
+        <div class="gap-actions">
+          <span>Impact: Critical</span>
+          <span>Effort: Medium (research-first)</span>
+          <span>Suggestion: Disease-specific interview rounds → persona cards → feature differentiation roadmap</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--orange);"></div>
+      <div class="gap-content">
+        <div class="gap-title">2. Language barrier patients: translations exist, but no dedicated experience</div>
+        <div class="gap-desc">Turkish, Arabic, and English translations are shipped — this is more than most competitors offer. But the experience isn't tailored: no dedicated onboarding for non-native speakers, no culturally adapted content, no healthcare system navigation, transcription limited to Dutch + English. The gap is in UX and positioning, not core capability.</div>
+        <div class="gap-actions">
+          <span>Impact: High (large underserved population in NL)</span>
+          <span>Effort: Low-Medium (UX + content, not technical)</span>
+          <span>Suggestion: Test targeted onboarding variant for non-native speakers → measure activation difference</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--red);"></div>
+      <div class="gap-content">
+        <div class="gap-title">3. Neurodegenerative is the most natural use case but least invested</div>
+        <div class="gap-desc">Memory loss patients are the quintessential "need to remember what the doctor said" users. Yet Ditto has no proxy management, no progressive access handover, no cognitive accessibility features, and no caregiver-as-primary-user flow. One anecdote total.</div>
+        <div class="gap-actions">
+          <span>Impact: High (natural product-market fit)</span>
+          <span>Effort: Medium</span>
+          <span>Suggestion: Interview 5 Parkinson's/Alzheimer's caregivers → validate proxy management need</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--orange);"></div>
+      <div class="gap-content">
+        <div class="gap-title">4. No formal persona documents — research is feature-centric, not user-centric</div>
+        <div class="gap-desc">Segments are defined across 11+ Confluence pages with different granularity and framing. No single persona card or reference exists. This makes it impossible to prioritize features by user impact or to onboard new team members on who we serve.</div>
+        <div class="gap-actions">
+          <span>Impact: High (foundational)</span>
+          <span>Effort: Low</span>
+          <span>Suggestion: Turn this canvas into the canonical persona reference → publish to Confluence</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--yellow);"></div>
+      <div class="gap-content">
+        <div class="gap-title">5. Cardiology: evidence exists, strategy doesn't</div>
+        <div class="gap-desc">NotebookLM reveals cardiac patients ARE using Ditto — heart clinics, blood pressure monitoring, medication timing concerns. AI has misidentified cardiac meds as psychiatric drugs. But cardiology isn't named in strategy, has no tailored features, and no positioning.</div>
+        <div class="gap-actions">
+          <span>Impact: Medium-High</span>
+          <span>Effort: Low (validate with targeted interviews)</span>
+          <span>Suggestion: Add to focus areas alongside oncology/pregnancy/neuro, or explicitly deprioritize</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--orange);"></div>
+      <div class="gap-content">
+        <div class="gap-title">5b. AI summary accuracy for chronic patients — "focused on background, not changes"</div>
+        <div class="gap-desc">COPD/ACOS patient reports AI focused on chronic background rather than the medication changes actually discussed. Cardiac meds misidentified as psychiatric drugs. For chronic patients who see specialists regularly, summaries that rehash known conditions instead of highlighting what changed are actively unhelpful.</div>
+        <div class="gap-actions">
+          <span>Impact: High (trust + utility)</span>
+          <span>Effort: Medium (AI prompt engineering)</span>
+          <span>Suggestion: "What changed this visit" prioritization in AI summary logic</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--orange);"></div>
+      <div class="gap-content">
+        <div class="gap-title">6. Caregiver logistics coordination — validated need, no solution</div>
+        <div class="gap-desc">"Who is going with mom? Who is cooking?" — explicit quotes from primary caregivers. CC v2 addresses emotional sharing but not practical coordination. This is what differentiates a "sharing tool" from a "care network."</div>
+        <div class="gap-actions">
+          <span>Impact: Medium</span>
+          <span>Effort: Medium</span>
+          <span>Suggestion: Could be Later roadmap — evaluate after CC v2 adoption data</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--yellow);"></div>
+      <div class="gap-content">
+        <div class="gap-title">7. Pregnancy: named #1 focus area, treated generically</div>
+        <div class="gap-desc">Strategy document lists pregnancy as the most well-defined focus area. 95% sharing intent is the highest of any segment. Yet zero pregnancy-specific features exist or are in pipeline. No milestone tracking, no partner experience, no trimester awareness.</div>
+        <div class="gap-actions">
+          <span>Impact: Medium (high adoption potential)</span>
+          <span>Effort: Low-Medium</span>
+          <span>Suggestion: Pregnancy journey template + partner sharing optimization as quick wins</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <div class="gap-severity" style="background:var(--yellow);"></div>
+      <div class="gap-content">
+        <div class="gap-title">8. Quantitative research is thin — most insights from 6 super user interviews</div>
+        <div class="gap-desc">Findings largely come from 6 super users + 34-person Lyssna panel. No large-scale survey, no behavioral data analysis supporting persona definitions. Awareness stage mapping is explicitly flagged as "hypothesis needing validation."</div>
+        <div class="gap-actions">
+          <span>Impact: Medium (confidence gap)</span>
+          <span>Effort: Low</span>
+          <span>Suggestion: Mixpanel behavioral segmentation + 200-person survey to validate personas</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== FEATURES ==================== -->
+<div class="section" id="features">
+  <div class="section-title">Feature Ideas → Persona Mapping</div>
+  <div class="section-subtitle">37 feature ideas from BIGB board + pm-workspace specs, mapped to the personas they'd serve. Sorted by user evidence strength.</div>
+
+  <div class="filters" id="feature-filters">
+    <button class="filter-btn active" data-filter="all">All (37)</button>
+    <button class="filter-btn" data-filter="strong">Strong Evidence (4)</button>
+    <button class="filter-btn" data-filter="moderate">Moderate Evidence (8)</button>
+    <button class="filter-btn" data-filter="weak">Weak Evidence (8)</button>
+    <button class="filter-btn" data-filter="none">No Evidence (17)</button>
+  </div>
+
+  <div class="feature-grid" id="feature-grid">
+
+    <!-- Strong evidence -->
+    <div class="feature-card" data-evidence="strong">
+      <h4>Voice Health Check-In (BIGB-62)</h4>
+      <div style="margin-bottom:6px;">30-second voice diary for symptoms, side effects, measurements. AI-structured daily notes.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🤰 Pregnancy</span><span class="mini-tag">💪 Self-mgr</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--green);">Strong</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:90%;background:var(--green);"></div></div>
+        <span style="font-size:11px;">8/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="strong">
+      <h4>Medication Reminders (BIGB-44)</h4>
+      <div style="margin-bottom:6px;">Medication overview, schedules, adherence reminders, caregiver visibility.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">♾️ Chronic</span><span class="mini-tag">❤️ Cardio</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">👴 Elderly</span><span class="mini-tag">🫂 Carer</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--green);">Strong</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:75%;background:var(--green);"></div></div>
+        <span style="font-size:11px;">5/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="strong">
+      <h4>Care Circle v2 (Full sharing redesign)</h4>
+      <div style="margin-bottom:6px;">Invitation cards, personal context, short summaries, reactions, support cards, help offers, profiles.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🫂 Primary carer</span><span class="mini-tag">💜 Extended</span><span class="mini-tag">All patients</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--green);">Strong</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:95%;background:var(--green);"></div></div>
+        <span style="font-size:11px;">10/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="strong">
+      <h4>Enhanced Sharing Personalization (DPMA-1964)</h4>
+      <div style="margin-bottom:6px;">Choose what to share with whom. Personal messaging. Edit & delete shares.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">All patients</span><span class="mini-tag">🫂 Primary carer</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--green);">Strong</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:80%;background:var(--green);"></div></div>
+        <span style="font-size:11px;">6/15</span>
+      </div>
+    </div>
+
+    <!-- Moderate evidence -->
+    <div class="feature-card" data-evidence="moderate">
+      <h4>Visual Timeline (BIGB-48)</h4>
+      <div style="margin-bottom:6px;">Redesigned journey timeline with visual cues, filtering, and grouping.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">🤰 Pregnancy</span><span class="mini-tag">♾️ Chronic</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:55%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">4/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>Chat with Health Data (BIGB-115)</h4>
+      <div style="margin-bottom:6px;">ChatGPT-like interface for querying your own medical history. Guided capabilities.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">💪 Self-mgr</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:40%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>Health Document Vault (BIGB-58)</h4>
+      <div style="margin-bottom:6px;">Store medical records, prescriptions, test results, insurance, emergency contacts.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🫂 Primary carer</span><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🎗 Cancer</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:50%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">3/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>Historical Records Import (BIGB-50)</h4>
+      <div style="margin-bottom:6px;">Import past medical records (PDF, photos, portal export) into Ditto.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">💪 Self-mgr</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:50%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">3/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>Peer Connection / Lotgenoten (BIGB-37)</h4>
+      <div style="margin-bottom:6px;">Find and connect with patients on similar health journeys.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🤰 Pregnancy</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:35%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>Emergency Info Without Login (BIGB-98)</h4>
+      <div style="margin-bottom:6px;">Blood type, allergies, medications accessible from lock screen.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">🧠 Neuro</span><span class="mini-tag">❤️ Cardio</span><span class="mini-tag">👴 Elderly</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:35%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>QR to Start Recording (BIGB-104)</h4>
+      <div style="margin-bottom:6px;">Sticker/leaflet at doctor's desk → scan → immediately start recording.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">👴 Elderly</span><span class="mini-tag">All patients</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:35%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate">
+      <h4>EHR Screenshot → Summary (BIGB-41)</h4>
+      <div style="margin-bottom:6px;">OCR from EHR screenshots to generate patient-friendly summaries.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">💪 Self-mgr</span><span class="mini-tag">🎗 Cancer</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--yellow);">Moderate</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:50%;background:var(--yellow);"></div></div>
+        <span style="font-size:11px;">3/15</span>
+      </div>
+    </div>
+
+    <!-- Activation ideas (from specs) -->
+    <div class="feature-card" data-evidence="strong" style="border-left:3px solid var(--accent);">
+      <h4>"Tell Ditto About Your Health" (Onboarding)</h4>
+      <div style="margin-bottom:6px;">Voice-first health overview during onboarding. Creates first personal artifact. Shareable.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">All new users</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--accent);">In Validation</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:70%;background:var(--accent);"></div></div>
+        <span style="font-size:11px;">High</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate" style="border-left:3px solid var(--accent);">
+      <h4>Ditto Chat — Contextual AI Interface</h4>
+      <div style="margin-bottom:6px;">Guided AI chat: upload docs, query health data, voice journaling, pinnable components.</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">💪 Self-mgr</span><span class="mini-tag">🎗 Cancer</span><span class="mini-tag">♾️ Chronic</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--accent);">Concept</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:40%;background:var(--accent);"></div></div>
+        <span style="font-size:11px;">Med</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="moderate" style="border-left:3px solid var(--accent);">
+      <h4>Health Integrations as Signal Layer</h4>
+      <div style="margin-bottom:6px;">Apple Health / Google Fit as interpretation layer. "Where do I see how I'm doing health-wise?"</div>
+      <div class="persona-tags" style="margin-bottom:6px;">
+        <span class="mini-tag">♾️ Chronic</span><span class="mini-tag">❤️ Cardio</span><span class="mini-tag">💪 Self-mgr</span>
+      </div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;font-weight:600;color:var(--accent);">Apple Health Built</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:50%;background:var(--accent);"></div></div>
+        <span style="font-size:11px;">Med</span>
+      </div>
+    </div>
+
+    <!-- Weak/None evidence - sample -->
+    <div class="feature-card" data-evidence="weak">
+      <h4>Auto-group into Care Journeys (BIGB-65)</h4>
+      <div style="margin-bottom:6px;">AI-based grouping of events into logical care streams.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">♾️ Chronic</span><span class="mini-tag">🎗 Cancer</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--orange);">Weak</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:25%;background:var(--orange);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="weak">
+      <h4>Terminology Database (BIGB-61)</h4>
+      <div style="margin-bottom:6px;">Central repo of medical abbreviations per discipline for AI accuracy.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">All patients</span><span class="mini-tag">🌍 Language</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--orange);">Weak</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:25%;background:var(--orange);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="weak">
+      <h4>AI Governance Report (BIGB-93)</h4>
+      <div style="margin-bottom:6px;">Show reliability metrics on AI output. Fit-for-patient + fit-for-physician.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">B2B/Partners</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--orange);">Weak</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:25%;background:var(--orange);"></div></div>
+        <span style="font-size:11px;">2/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>Geofencing (BIGB-55)</h4>
+      <div style="margin-bottom:6px;">Smart reminders near healthcare locations.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">All patients</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>Simplified Medicine Leaflets (BIGB-43)</h4>
+      <div style="margin-bottom:6px;">Patient-friendly bijsluiter using AI explainer.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">👴 Elderly</span><span class="mini-tag">🌍 Language</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>Samen Beslissen Integration (BIGB-72)</h4>
+      <div style="margin-bottom:6px;">Support shared decision-making with Ditto Send.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">All patients</span><span class="mini-tag">HCP</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>Explainer API for Partners (BIGB-92)</h4>
+      <div style="margin-bottom:6px;">B2B API: medical text → patient-friendly summary. Per-use pricing.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">B2B</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>Summary on Website (BIGB-59)</h4>
+      <div style="margin-bottom:6px;">View summary on private webpage instead of requiring app download.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">💜 Extended</span><span class="mini-tag">All</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>End-to-End Encryption (BIGB-40)</h4>
+      <div style="margin-bottom:6px;">Best-practice key exchange protocol for medical data.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">Platform</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+    <div class="feature-card" data-evidence="none">
+      <h4>HCP Cross-Check (BIGB-106)</h4>
+      <div style="margin-bottom:6px;">Premium service: HCP validates AI output X times/year.</div>
+      <div class="persona-tags" style="margin-bottom:6px;"><span class="mini-tag">Business Model</span></div>
+      <div class="feature-evidence">
+        <span style="font-size:11px;color:var(--muted);">None</span>
+        <div class="evidence-bar"><div class="evidence-fill" style="width:5%;background:#ccc;"></div></div>
+        <span style="font-size:11px;">0/15</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SOURCES ==================== -->
+<div class="section" id="sources">
+  <div class="section-title">Sources & Methodology</div>
+  <div class="section-subtitle">Everything that went into this canvas</div>
+
+  <div class="summary-panel">
+    <h3>Data Sources Consolidated</h3>
+    <table style="width:100%;font-size:13px;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border);">
+          <th style="text-align:left;padding:8px;">Source</th>
+          <th style="text-align:left;padding:8px;">Type</th>
+          <th style="text-align:left;padding:8px;">Content</th>
+          <th style="text-align:left;padding:8px;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;">Confluence (11 pages)</td>
+          <td>Strategy, research, brand</td>
+          <td>Product Canonical Description, Brand Positioning, Strategy - Focus Patients, Discovery methodology, CC v1 learnings, CC v2 PRD, User Awareness Mapping, B2C Playbook, Marketing audiences</td>
+          <td style="color:var(--green);">Read</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;">Local specs (pm-workspace)</td>
+          <td>Ideas, research</td>
+          <td>37 feature ideas (BIGB board), activation strategy (3 parts), CC v2 (6 user flows), voice health check-in (full spec), onboarding-to-aha, direction B, activation improvement synthesis</td>
+          <td style="color:var(--green);">Read</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;">User research synthesis</td>
+          <td>Qualitative</td>
+          <td>15 sources: 9 interviews (Gerda, Wil Jan, Peter, Aisha, Gert, John, Marieke, AYA, R1/R2), 4 surveys (Typeform, Lyssna, CC v2 feedback, anonymized), 1 meeting transcript</td>
+          <td style="color:var(--green);">Read</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;">Feature evidence mapping</td>
+          <td>Analysis</td>
+          <td>All 37 features mapped against 15 research sources with evidence strength ratings</td>
+          <td style="color:var(--green);">Read</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;">Completed features log</td>
+          <td>Reference</td>
+          <td>860 items shipped (Jan 2025 - Feb 2026), 101 epics — what's actually built</td>
+          <td style="color:var(--green);">Read</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;">NotebookLM (15 sources)</td>
+          <td>User insights</td>
+          <td>Ditto User Insights notebook — 9 interviews (Care Circle, Ditto Dierbaren, AYA), 4 surveys/feedback, 1 doc. Queried for disease-specific evidence, caregiver types, medication needs. Significantly richer than local research files.</td>
+          <td style="color:var(--green);">Connected & queried</td>
+        </tr>
+        <tr>
+          <td style="padding:8px;">Miro</td>
+          <td>Visual research</td>
+          <td>Referenced in Confluence (backend flows, customer journeys) but not accessible via API</td>
+          <td style="color:var(--red);">Not accessible</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-panel">
+    <h3>Persona Framework Used</h3>
+    <p>Each persona follows a standardized structure combining three established frameworks:</p>
+    <ul style="font-size:13px;padding-left:20px;margin-top:8px;">
+      <li><strong>Jobs-to-be-Done (Christensen)</strong> — What is this person trying to accomplish? What progress are they seeking?</li>
+      <li><strong>Five Stages of Awareness (Schwartz)</strong> — How aware are they of the problem and solution? This determines messaging and activation strategy.</li>
+      <li><strong>Disease/Context Layer</strong> — What medical context shapes their needs? This is the Ditto-specific dimension that makes generic personas actionable.</li>
+    </ul>
+  </div>
+
+  <div class="summary-panel">
+    <h3>What's NOT Included (Needs Follow-up)</h3>
+    <ul style="font-size:13px;padding-left:20px;">
+      <li><strong>NotebookLM insights</strong> — Now connected. 3 queries executed covering disease areas, caregiver types, and medication needs. Additional queries possible for deeper dives on specific segments.</li>
+      <li><strong>Miro boards</strong> — Customer journey maps and backend flows referenced in Confluence are not accessible (no Miro MCP available).</li>
+      <li><strong>HCP personas</strong> — A "Customer Journeys HCP" page exists (id: 815726593) but returned 404. HCP-side user profiling is entirely absent from this canvas.</li>
+      <li><strong>Quantitative validation</strong> — Persona sizes, conversion rates by segment, and behavioral patterns from Mixpanel are not included.</li>
+      <li><strong>Menzis-specific segments</strong> — How the 2M potential Menzis users segment across these personas is unknown.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// Navigation
+document.querySelectorAll('.nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.section).classList.add('active');
+  });
+});
+
+// Persona expand/collapse
+function togglePersona(card) {
+  card.classList.toggle('expanded');
+}
+
+// Persona filters
+document.querySelectorAll('#persona-filters .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#persona-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.persona-card').forEach(card => {
+      if (filter === 'all') { card.style.display = ''; return; }
+      card.style.display = card.dataset.type.includes(filter) ? '' : 'none';
+    });
+  });
+});
+
+// Feature filters
+document.querySelectorAll('#feature-filters .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#feature-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.feature-card').forEach(card => {
+      if (filter === 'all') { card.style.display = ''; return; }
+      card.style.display = card.dataset.evidence === filter ? '' : 'none';
+    });
+  });
+});
+
+// Navigate to persona
+function goTo(section, id) {
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-section="${section}"]`).classList.add('active');
+  document.getElementById(section).classList.add('active');
+  setTimeout(() => {
+    const card = document.querySelector(`[data-id="${id}"]`);
+    if (card) {
+      card.classList.add('expanded');
+      card.scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+  }, 100);
+}
+</script>
+
+</body>
+</html>

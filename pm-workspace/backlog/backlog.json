@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-17",
+  "description": "Mewtwo's own backlog. Items are added during workflows when gaps, opportunities, or maintenance needs are spotted. Reviewed during periodic reviews or on request.",
+  "items": [
+    {
+      "id": "bl-001",
+      "type": "setup",
+      "title": "Fill product-context.md TODOs",
+      "description": "North star metric, technical stack details, and team structure are undefined. These are needed for accurate impact assessments and multi-perspective reviews.",
+      "priority": "high",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    },
+    {
+      "id": "bl-002",
+      "type": "workflow",
+      "title": "Create user-research-synthesis workflow",
+      "description": "Merlijn identified this as a key recurring workflow. Needs: ingesting research notes, pattern identification, mapping to features, prioritization.",
+      "priority": "medium",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    },
+    {
+      "id": "bl-003",
+      "type": "workflow",
+      "title": "Create mixpanel-analysis workflow",
+      "description": "Correlating product analytics with user feedback to improve feature ideas. Requires Mixpanel MCP integration.",
+      "priority": "medium",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    },
+    {
+      "id": "bl-004",
+      "type": "workflow",
+      "title": "Create design-review workflow",
+      "description": "Structured process for reviewing designs against specs, user research, and product principles.",
+      "priority": "low",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    },
+    {
+      "id": "bl-005",
+      "type": "integration",
+      "title": "Set up Confluence templates",
+      "description": "Standardized templates for feature documentation in Confluence: research, insights, scoping, phasing, prioritization, learnings.",
+      "priority": "medium",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    },
+    {
+      "id": "bl-006",
+      "type": "integration",
+      "title": "Configure Atlassian MCP for Jira + Confluence",
+      "description": "Required for direct read/write to Jira tickets and Confluence pages from Mewtwo workflows.",
+      "priority": "high",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    },
+    {
+      "id": "bl-007",
+      "type": "integration",
+      "title": "Configure Mixpanel MCP",
+      "description": "Required for pulling analytics data during research and analysis workflows.",
+      "priority": "medium",
+      "added": "2026-02-17",
+      "source": "initial-setup"
+    }
+  ]
+}

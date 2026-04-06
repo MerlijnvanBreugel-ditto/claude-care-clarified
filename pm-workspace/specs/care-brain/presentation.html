@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto Care Brain — Interactive Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFBF5;
+  --card: #FFF8F0;
+  --surface: #FEFCF9;
+  --coral: #FF6B4A;
+  --coral-hover: #FF8A70;
+  --coral-active: #E55A3A;
+  --navy: #0D164F;
+  --teal: #58B6D2;
+  --teal-light: #7DD4E8;
+  --gold: #D4A832;
+  --success: #4ADE80;
+  --warning: #FBBF24;
+  --error: #F87171;
+  --info: #60A5FA;
+  --text: #0D164F;
+  --text-secondary: #7C8297;
+  --text-light: #A0A8BE;
+  --border: rgba(255, 150, 100, 0.15);
+  --shadow-sm: 0 2px 8px rgba(255, 150, 100, 0.08);
+  --shadow-md: 0 4px 16px rgba(255, 150, 100, 0.10);
+  --shadow-lg: 0 8px 24px rgba(255, 150, 100, 0.12);
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #F0EDE8; color: var(--text); height: 100vh; overflow: hidden; font-weight: 500; }
+h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; }
+
+/* === TOP NAV === */
+.top-nav {
+  display: flex; align-items: center; height: 56px; padding: 0 24px;
+  background: var(--navy); color: white; gap: 8px; flex-shrink: 0;
+}
+.top-nav .logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; margin-right: 24px; letter-spacing: 0.02em; }
+.top-nav .logo span { color: var(--coral); }
+.flow-tabs { display: flex; gap: 4px; }
+.flow-tab {
+  padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7); background: transparent; white-space: nowrap;
+}
+.flow-tab:hover { background: rgba(255,255,255,0.1); color: white; }
+.flow-tab.active { background: var(--coral); color: white; border-color: var(--coral); }
+
+/* === SPLIT LAYOUT === */
+.split { display: flex; height: calc(100vh - 56px); }
+
+/* Left panel */
+.explain {
+  width: 420px; min-width: 420px; padding: 32px; overflow-y: auto;
+  background: white; border-right: 1px solid #E8E4DF;
+}
+.explain-section { display: none; }
+.explain-section.active { display: block; }
+.explain .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+.badge-problem { background: #FDEAEA; color: #B91C1C; }
+.badge-brain { background: #E0F2FE; color: #0369A1; }
+.badge-arch { background: #F3E8FF; color: #7C3AED; }
+.badge-flow { background: #ECFDF5; color: #065F46; }
+.explain h2 { font-size: 22px; color: var(--navy); margin-bottom: 8px; line-height: 1.3; }
+.explain h3 { font-size: 16px; color: var(--navy); margin: 16px 0 6px; }
+.explain p { font-size: 14px; line-height: 1.65; color: #4A5068; margin-bottom: 10px; }
+.explain .event-flow {
+  background: #F8F7F5; border-radius: var(--radius-sm); padding: 12px; margin: 12px 0;
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; line-height: 1.8; color: #6B7280;
+}
+.explain .event-flow .event { color: var(--coral); font-weight: 600; }
+.explain .event-flow .worker { color: var(--teal); font-weight: 600; }
+.explain .event-flow .arrow { color: #9CA3AF; }
+.step-dots { display: flex; gap: 8px; margin: 20px 0; }
+.step-dot { width: 10px; height: 10px; border-radius: 50%; background: #DDD; transition: all 0.3s; }
+.step-dot.active { background: var(--coral); transform: scale(1.2); }
+.step-dot.done { background: var(--success); }
+.nav-btns { display: flex; gap: 8px; margin-top: 16px; }
+.nav-btn {
+  padding: 8px 16px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.2s;
+}
+.nav-btn.prev { background: #F0EDE8; color: var(--text-secondary); }
+.nav-btn.prev:hover { background: #E4E0DB; }
+.nav-btn.next { background: var(--coral); color: white; }
+.nav-btn.next:hover { background: var(--coral-hover); }
+
+/* Right panel (phone) */
+.phone-area {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  background: #F0EDE8; padding: 24px;
+}
+.phone-frame {
+  width: 375px; height: 780px; background: #1A1A1A; border-radius: 48px;
+  padding: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.2), inset 0 0 0 2px #333;
+  position: relative;
+}
+.phone-notch {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 28px; background: #1A1A1A; border-radius: 0 0 16px 16px; z-index: 10;
+}
+.phone-screen {
+  width: 100%; height: 100%; background: var(--bg); border-radius: 38px;
+  overflow: hidden; position: relative;
+}
+/* Status bar */
+.status-bar {
+  height: 50px; display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 24px 8px; font-size: 12px; font-weight: 600; color: var(--navy);
+  background: var(--bg); position: relative; z-index: 5;
+}
+/* App header */
+.app-header {
+  padding: 4px 20px 12px; background: var(--bg);
+}
+.app-header h1 { font-size: 20px; color: var(--navy); }
+.app-header .subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+/* Bottom nav */
+.bottom-nav {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 72px;
+  background: white; border-top: 1px solid #EEE; display: flex;
+  align-items: center; justify-content: space-around; padding: 0 8px 12px;
+  border-radius: 0 0 38px 38px; z-index: 5;
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 6px 12px; }
+.nav-item .icon { font-size: 20px; }
+.nav-item .label { font-size: 10px; font-weight: 600; color: var(--text-secondary); }
+.nav-item.active .label { color: var(--coral); }
+/* Scrollable content area */
+.screen-content {
+  position: absolute; top: 50px; bottom: 72px; left: 0; right: 0;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+/* Screen visibility */
+.screen { display: none; padding: 0 20px 20px; min-height: 100%; }
+.screen.active { display: block; }
+
+/* === MOCKUP UI COMPONENTS === */
+.m-card {
+  background: white; border-radius: var(--radius-lg); padding: 16px;
+  box-shadow: var(--shadow-sm); margin-bottom: 12px;
+}
+.m-card-accent {
+  background: linear-gradient(135deg, #FFF5F2, #FFF8F0);
+  border: 1px solid rgba(255, 107, 74, 0.15);
+}
+.m-section-title {
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;
+  margin: 16px 0 8px; padding: 0 4px;
+}
+.m-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700;
+}
+.m-tag-active { background: #ECFDF5; color: #065F46; }
+.m-tag-discontinued { background: #F3F4F6; color: #6B7280; }
+.m-tag-upcoming { background: #EFF6FF; color: #1E40AF; }
+
+/* Suggestion chips */
+.suggestion-chip {
+  background: white; border: 1.5px solid var(--border); border-radius: var(--radius-md);
+  padding: 12px 16px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+  font-size: 14px; line-height: 1.5; color: var(--navy);
+}
+.suggestion-chip:hover { border-color: var(--coral); background: #FFF8F5; }
+.suggestion-chip.expanded { border-color: var(--coral); background: #FFF8F5; }
+.suggestion-chip .chip-q { font-weight: 600; }
+.suggestion-chip .chip-answer {
+  display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+  font-weight: 500; color: #4A5068; font-size: 13px; line-height: 1.7;
+}
+.suggestion-chip.expanded .chip-answer { display: block; }
+.chip-answer .quote { color: var(--navy); font-style: italic; background: #FFF5F0; padding: 8px 12px; border-radius: 8px; margin: 8px 0; border-left: 3px solid var(--coral); font-size: 12px; }
+.chip-answer .source { font-size: 11px; color: var(--text-light); margin-top: 8px; font-style: italic; }
+
+/* Mic button */
+.mic-btn {
+  width: 72px; height: 72px; border-radius: 50%; background: var(--coral);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 107, 74, 0.35); transition: all 0.2s;
+  margin: 0 auto; border: none; color: white; font-size: 28px;
+}
+.mic-btn:hover { transform: scale(1.05); box-shadow: 0 6px 28px rgba(255, 107, 74, 0.45); }
+.mic-btn.recording { animation: pulse 1.5s infinite; background: #E55A3A; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,107,74,0.4); } 50% { box-shadow: 0 0 0 20px rgba(255,107,74,0); } }
+
+/* Confirm buttons */
+.confirm-btn {
+  width: 100%; padding: 14px; border-radius: var(--radius-md); font-size: 14px;
+  font-weight: 600; cursor: pointer; border: none; margin-bottom: 8px; transition: all 0.15s;
+}
+.confirm-btn.primary { background: var(--coral); color: white; }
+.confirm-btn.primary:hover { background: var(--coral-hover); }
+.confirm-btn.secondary { background: #F0EDE8; color: var(--text-secondary); }
+
+/* Profile items */
+.profile-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid #F5F3F0;
+}
+.profile-item:last-child { border-bottom: none; }
+.profile-item .pi-name { font-weight: 600; font-size: 14px; }
+.profile-item .pi-detail { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+/* Notification card */
+.notif-card {
+  background: white; border-radius: var(--radius-lg); padding: 14px 16px;
+  box-shadow: var(--shadow-md); margin-bottom: 10px; display: flex; gap: 12px; align-items: flex-start;
+}
+.notif-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.notif-body .notif-title { font-weight: 600; font-size: 13px; }
+.notif-body .notif-text { font-size: 12px; color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+
+/* Prep item */
+.prep-item { padding: 10px 0; border-bottom: 1px solid #F5F3F0; }
+.prep-item:last-child { border-bottom: none; }
+.prep-item .prep-label { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.prep-item .prep-value { font-size: 14px; margin-top: 4px; line-height: 1.5; }
+
+/* Circle split view */
+.circle-cards { display: flex; flex-direction: column; gap: 10px; }
+.circle-view {
+  background: white; border-radius: var(--radius-lg); padding: 12px 14px;
+  box-shadow: var(--shadow-sm); border-left: 4px solid var(--teal);
+}
+.circle-view .cv-role { font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.06em; }
+.circle-view .cv-name { font-weight: 600; font-size: 14px; margin: 2px 0 6px; }
+.circle-view .cv-text { font-size: 12px; color: #4A5068; line-height: 1.6; }
+
+/* Ask input */
+.ask-input-wrap {
+  display: flex; gap: 8px; margin-top: 8px; padding: 12px;
+  background: white; border-radius: var(--radius-md); border: 1.5px solid var(--border);
+}
+.ask-input-wrap input {
+  flex: 1; border: none; outline: none; font-size: 14px; font-family: 'Inter', sans-serif;
+  font-weight: 500; color: var(--navy); background: transparent;
+}
+.ask-input-wrap button {
+  background: var(--coral); color: white; border: none; border-radius: 12px;
+  width: 36px; height: 36px; cursor: pointer; font-size: 16px; flex-shrink: 0;
+}
+
+/* Loading shimmer */
+.shimmer { background: linear-gradient(90deg, #F0EDE8 25%, #E8E4DF 50%, #F0EDE8 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; height: 14px; margin: 6px 0; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Clickable hint */
+.click-hint {
+  position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+  background: rgba(13,22,79,0.85); color: white; padding: 6px 14px;
+  border-radius: 20px; font-size: 11px; font-weight: 600; z-index: 10;
+  pointer-events: none; opacity: 0; transition: opacity 0.3s;
+}
+.screen.active .click-hint { opacity: 1; animation: fadeHint 3s forwards; }
+@keyframes fadeHint { 0%,60% { opacity: 0.9; } 100% { opacity: 0; } }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-nav">
+  <div class="logo">ditto<span>.</span></div>
+  <div class="flow-tabs">
+    <div class="flow-tab active" onclick="switchFlow('f1')">Summary + Q&A</div>
+    <div class="flow-tab" onclick="switchFlow('f2')">Circle View</div>
+    <div class="flow-tab" onclick="switchFlow('f3')">Voice Input</div>
+    <div class="flow-tab" onclick="switchFlow('f4')">Health Profile</div>
+    <div class="flow-tab" onclick="switchFlow('f5')">Appointment Prep</div>
+    <div class="flow-tab" onclick="switchFlow('f6')">Everyone Understands</div>
+  </div>
+</div>
+
+<div class="split">
+
+<!-- LEFT: EXPLANATION PANEL -->
+<aside class="explain" id="explainPanel">
+
+  <!-- FLOW 1 explanations -->
+  <div class="explain-section active" id="ex-f1-1">
+    <span class="badge badge-problem">Problem</span>
+    <h2>Questions at 11pm</h2>
+    <p>After reading a summary, patients have follow-up questions they can't get answered. "What did the doctor mean by watchful waiting?" "Is this medication change related to my last scan?"</p>
+    <p>Currently they Google (generic, alarming), call family, or wait weeks for the next appointment.</p>
+    <h3>What the brain does</h3>
+    <div class="event-flow">
+      <span class="event">recording.completed</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">summarize_worker</span> (Sonnet, ~3s)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">extract_worker</span> (Haiku, ~1.5s) <em>parallel</em><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">suggest_worker</span> (Sonnet, ~2s)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Profile updated, suggestions cached
+    </div>
+    <div class="step-dots" id="dots-f1"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn next" onclick="nextStep('f1')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f1-2">
+    <span class="badge badge-brain">Brain in action</span>
+    <h2>Smart Suggestions</h2>
+    <p>The brain analyzed Mara's oncology conversation and generated 3 contextual questions she'd likely want answered. Not generic. Specific to THIS appointment.</p>
+    <p>Suggestions are pre-computed during the recording pipeline, so they appear instantly when Mara views the summary.</p>
+    <h3>Why this matters</h3>
+    <p>The patient doesn't need to know how to "use AI." They don't type a prompt. The brain suggests, they tap. Guided intelligence.</p>
+    <div class="step-dots" id="dots-f1-2"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:12px;">Tap a suggestion chip in the phone &rarr;</p>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f1')">&#8592; Back</button><button class="nav-btn next" onclick="nextStep('f1')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f1-3">
+    <span class="badge badge-arch">Architecture</span>
+    <h2>Grounded Answer</h2>
+    <p>The answer is generated by <strong>answer_worker</strong> (Claude Sonnet, streaming, first token ~1.5s). It uses ONLY data from Mara's conversation transcript + her health profile. Never general medical knowledge.</p>
+    <div class="event-flow">
+      <span class="event">suggestion.tapped</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Load context: transcript + summary + profile<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">answer_worker</span> (Sonnet, streaming)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Answer cached for instant replay
+    </div>
+    <h3>Grounding rules</h3>
+    <p>Every answer cites the doctor: <em>"Dr. van der Berg legde uit dat..."</em> If the question can't be answered from the conversation, the brain says so explicitly.</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f1')">&#8592; Back</button><button class="nav-btn next" onclick="nextStep('f1')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f1-4">
+    <span class="badge badge-flow">User flow</span>
+    <h2>Ask Something Else</h2>
+    <p>For the minority of users who want more than the suggested questions, there's a text input. Same grounding rules apply. Rate-limited to 5 custom questions per summary.</p>
+    <p>This is Phase 2 (ships after suggestion chips are validated). Most users will never need it. The suggestions cover 80% of questions.</p>
+    <h3>Tracking</h3>
+    <p>Custom questions are stored for analytics: what are people asking that we didn't suggest? This feeds back into better suggestion generation.</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f1')">&#8592; Back</button></div>
+  </div>
+
+  <!-- FLOW 2 explanations -->
+  <div class="explain-section" id="ex-f2-1">
+    <span class="badge badge-problem">Problem</span>
+    <h2>Partner needs different answers</h2>
+    <p>Hans is Mara's partner. He needs practical, logistics-focused information: what medication changed, when's the next appointment, what can he do to help.</p>
+    <p>Mara's summary focuses on understanding her diagnosis. Hans needs a version that helps him <em>act</em>.</p>
+    <h3>What the brain does</h3>
+    <div class="event-flow">
+      <span class="event">summary.viewed</span> (viewer_role: "partner")<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">adapt_worker</span> (Sonnet, ~2s)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">suggest_worker</span> with role context<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Partner-specific summary + suggestions
+    </div>
+    <div class="step-dots" id="dots-f2"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn next" onclick="nextStep('f2')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f2-2">
+    <span class="badge badge-brain">Brain in action</span>
+    <h2>Role-Specific Suggestions</h2>
+    <p>Hans sees different suggestion chips than Mara. His are framed from the caregiver perspective:</p>
+    <p><strong>Mara sees:</strong> "Waarom wordt er overgestapt van tabletten naar infusen?"<br>
+    <strong>Hans sees:</strong> "Wat houdt de overstap praktisch in voor ons?"</p>
+    <p>Same appointment data. Different framing. The brain adapts based on relationship and access level.</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f2')">&#8592; Back</button><button class="nav-btn next" onclick="nextStep('f2')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f2-3">
+    <span class="badge badge-arch">Architecture</span>
+    <h2>Context-Scoped Answers</h2>
+    <p>Hans's answer includes action items specific to his role: drive to the infusion, watch for side effects, when to call the hospital.</p>
+    <div class="event-flow">
+      <span class="event">suggestion.tapped</span> (viewer_role: "partner")<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Context scoped to Hans's sharing permissions<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">answer_worker</span> with role="partner"<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Partner-framed answer with action items
+    </div>
+    <p style="margin-top:12px;"><strong>This is the unicorn feature.</strong> No other product generates audience-adapted health answers for care circles.</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f2')">&#8592; Back</button></div>
+  </div>
+
+  <!-- FLOW 3 explanations -->
+  <div class="explain-section" id="ex-f3-1">
+    <span class="badge badge-problem">Problem</span>
+    <h2>Health updates get lost</h2>
+    <p>Between appointments, patients learn new information: medication changes, side effects, appointment reschedules. This information lives in their head or scattered across WhatsApp messages.</p>
+    <p>Manual data entry (forms, dropdowns) has near-zero adoption with 50+ audiences.</p>
+    <h3>Voice solves this</h3>
+    <p>10 seconds. Tap, talk, done. The brain extracts structured data from natural speech and validates it against the existing profile.</p>
+    <div class="step-dots" id="dots-f3"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:12px;">Tap the mic button &rarr;</p>
+    <div class="nav-btns"><button class="nav-btn next" onclick="nextStep('f3')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f3-2">
+    <span class="badge badge-brain">Brain in action</span>
+    <h2>Listening...</h2>
+    <p>Voice captured by STT (Whisper/Deepgram), then the brain processes the transcript.</p>
+    <div class="event-flow">
+      <span class="event">voice_input.received</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> STT: "Ze hebben mijn medicijn veranderd naar metformine 500mg, twee keer per dag"<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">extract_worker</span> (Haiku, ~1s)
+    </div>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f3')">&#8592; Back</button><button class="nav-btn next" onclick="nextStep('f3')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f3-3">
+    <span class="badge badge-arch">Architecture</span>
+    <h2>Smart Validation</h2>
+    <p>The brain extracted "Metformine 500mg, 2x daags" and compared it with Jan's existing profile. It found Gliclazide 80mg (another diabetes medication) and inferred this is likely a replacement, not an addition.</p>
+    <p>Instead of silently updating, it asks for confirmation. <strong>Confirm, don't assume.</strong></p>
+    <div class="event-flow">
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Profile comparison: found existing diabetes med (Gliclazide)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Conflict detected: likely replacement<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Present to user for confirmation
+    </div>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:12px;">Tap a confirmation button &rarr;</p>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f3')">&#8592; Back</button><button class="nav-btn next" onclick="nextStep('f3')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f3-4">
+    <span class="badge badge-flow">Complete</span>
+    <h2>Profile Updated</h2>
+    <p>10 seconds. No forms. No typing. The brain heard, extracted, validated, and updated.</p>
+    <div class="event-flow">
+      <span class="event">voice_input.confirmed</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Profile v8 &rarr; v9<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">detect_changes_worker</span>: high significance<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Circle members notified of medication change
+    </div>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f3')">&#8592; Back</button></div>
+  </div>
+
+  <!-- FLOW 4 explanations -->
+  <div class="explain-section" id="ex-f4-1">
+    <span class="badge badge-problem">Problem</span>
+    <h2>No single source of truth</h2>
+    <p>Patients can't remember their full medication list, conditions, or care team. This information is scattered across hospital portals, paper letters, and memory.</p>
+    <p>Health apps that require manual profile entry have near-zero completion rates for 50+ audiences.</p>
+    <h3>The brain's approach</h3>
+    <p>The Health Profile Store is auto-populated from every interaction. Every conversation, every document, every voice input enriches it. The patient only corrects, never creates.</p>
+    <div class="step-dots" id="dots-f4"><div class="step-dot active"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn next" onclick="nextStep('f4')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f4-2">
+    <span class="badge badge-arch">Architecture</span>
+    <h2>Living Document</h2>
+    <p>Every field has source attribution: which worker extracted it, from which input, with what confidence. Conflicts are detected (two sources disagree about a medication) and flagged.</p>
+    <p>This creates massive switching costs. 18 months of auto-extracted health context can't be recreated elsewhere.</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot active"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f4')">&#8592; Back</button></div>
+  </div>
+
+  <!-- FLOW 5 explanations -->
+  <div class="explain-section" id="ex-f5-1">
+    <span class="badge badge-problem">Problem</span>
+    <h2>Unprepared patients</h2>
+    <p>The night before an appointment, patients stare at the ceiling trying to remember what they wanted to ask. They arrive and the doctor repeats last conversation. Questions get forgotten. Concerns go unaddressed.</p>
+    <div class="event-flow">
+      <span class="event">appointment.approaching</span> (48h before)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">prep_worker</span> (Sonnet, ~3s)<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Context: profile diff since last visit + open items<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Push notification with prep nudge
+    </div>
+    <div class="step-dots" id="dots-f5"><div class="step-dot active"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn next" onclick="nextStep('f5')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f5-2">
+    <span class="badge badge-brain">Brain in action</span>
+    <h2>Contextual Preparation</h2>
+    <p>The brain knows what changed since the last visit, what was left unresolved, and what questions are worth asking based on Mara's full journey context.</p>
+    <p>Persistent memory makes this magical. A generic app says "What do you want to ask?" The brain says "Last time you mentioned wanting to ask about side effects. Here's that question, plus two more based on your treatment change."</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot active"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f5')">&#8592; Back</button></div>
+  </div>
+
+  <!-- FLOW 6 explanations -->
+  <div class="explain-section" id="ex-f6-1">
+    <span class="badge badge-problem">Problem</span>
+    <h2>The phone tree problem</h2>
+    <p>After every appointment, patients call 3-5 people to explain what happened. Each call is slightly different. It's exhausting, especially when the news is hard.</p>
+    <p>Currently: WhatsApp groups, phone calls, retelling the same thing with different detail levels.</p>
+    <div class="step-dots" id="dots-f6"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn next" onclick="nextStep('f6')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f6-2">
+    <span class="badge badge-brain">Brain in action</span>
+    <h2>One button. Seven things.</h2>
+    <p>Mara presses record. The full pipeline runs. Within 60 seconds, the brain has generated everything: summary, suggestions, profile updates, AND adapted versions for every circle member.</p>
+    <div class="event-flow">
+      <span class="event">recording.completed</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">summarize_worker</span> + <span class="worker">extract_worker</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">suggest_worker</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">adapt_worker</span> &times; 3 circle members<br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> <span class="worker">detect_changes_worker</span><br>
+      <span class="arrow">&nbsp;&nbsp;&#x2192;</span> Notifications sent to Hans, Lisa, Tom
+    </div>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f6')">&#8592; Back</button><button class="nav-btn next" onclick="nextStep('f6')">Next &rarr;</button></div>
+  </div>
+
+  <div class="explain-section" id="ex-f6-3">
+    <span class="badge badge-flow">The unicorn feature</span>
+    <h2>Everyone understands</h2>
+    <p>Three people. Three different needs. Three adapted views. From one recording.</p>
+    <p><strong>Hans (partner):</strong> Practical. What changed, what to do, when.<br>
+    <strong>Lisa (daughter):</strong> Wellbeing. How is mama doing, is she okay.<br>
+    <strong>Tom (friend):</strong> High-level. Things are stable, she appreciates support.</p>
+    <p style="margin-top:12px;color:var(--coral);font-weight:600;">No other product does this. Big Tech builds for one person. Ditto builds for the circle.</p>
+    <div class="step-dots"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+    <div class="nav-btns"><button class="nav-btn prev" onclick="prevStep('f6')">&#8592; Back</button></div>
+  </div>
+</aside>
+
+<!-- RIGHT: PHONE MOCKUP -->
+<div class="phone-area">
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      <div class="status-bar"><span>9:41</span><span>&#x1F4F6; 100%</span></div>
+      <div class="screen-content">
+
+      <!-- ===== FLOW 1: SUMMARY + SUGGESTIONS ===== -->
+      <div class="screen active" id="s-f1-1">
+        <div class="app-header"><h1>Samenvatting</h1><div class="subtitle">4 april 2026 &middot; Oncologie</div></div>
+        <div class="m-card">
+          <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Oncologie controle</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Dr. van der Berg &middot; Erasmus MC</div>
+          <div style="font-size:13px;line-height:1.7;color:#4A5068;">
+            <p style="margin-bottom:8px;">De scan laat zien dat de tumor <strong style="color:var(--success);">kleiner is geworden</strong>. De chemotherapie heeft effect.</p>
+            <p style="margin-bottom:8px;">De behandeling wordt aangepast: <strong>capecitabine tabletten</strong> worden gestopt. In plaats daarvan start <strong style="color:var(--coral);">oxaliplatin via infuus</strong>, elke 3 weken.</p>
+            <p>Mogelijke bijwerking: tintelingen in handen en voeten. Meld dit bij het behandelteam als het erger wordt.</p>
+          </div>
+        </div>
+        <div class="m-section-title">Volgende stappen</div>
+        <div class="m-card">
+          <div style="font-size:13px;line-height:1.7;color:#4A5068;">
+            <div style="margin-bottom:6px;">&#x2022; Eerste infuus: <strong>18 april</strong>, Erasmus MC</div>
+            <div style="margin-bottom:6px;">&#x2022; Bloedonderzoek: 3 dagen voor elk infuus</div>
+            <div>&#x2022; Volgende controle: <strong>9 mei</strong></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text-light);text-align:center;margin:12px 0;font-style:italic;">Op basis van Mara's gesprek met Dr. van der Berg op 4 april 2026</div>
+        <div class="click-hint">Scroll down for suggestions</div>
+      </div>
+
+      <div class="screen" id="s-f1-2">
+        <div class="app-header"><h1>Samenvatting</h1><div class="subtitle">4 april 2026 &middot; Oncologie</div></div>
+        <div class="m-card" style="max-height:140px;overflow:hidden;opacity:0.7;">
+          <div style="font-weight:600;font-size:14px;margin-bottom:6px;">Oncologie controle</div>
+          <div style="font-size:12px;color:#4A5068;line-height:1.6;">De scan laat zien dat de tumor kleiner is geworden. Behandeling aangepast naar oxaliplatin infuus...</div>
+        </div>
+        <div class="m-section-title" style="display:flex;align-items:center;gap:6px;">&#x1F4A1; Suggesties voor jou</div>
+        <div class="suggestion-chip" onclick="goToScreen('f1','s-f1-3')">
+          <div class="chip-q">Waarom wordt er overgestapt van tabletten naar infusen?</div>
+        </div>
+        <div class="suggestion-chip" onclick="goToScreen('f1','s-f1-3b')">
+          <div class="chip-q">Wat kan ik verwachten bij de tintelingen?</div>
+        </div>
+        <div class="suggestion-chip">
+          <div class="chip-q">Hoe verhouden deze scanresultaten zich tot januari?</div>
+        </div>
+        <div class="click-hint">Tap a suggestion</div>
+      </div>
+
+      <div class="screen" id="s-f1-3">
+        <div class="app-header"><h1>Samenvatting</h1><div class="subtitle">4 april 2026 &middot; Oncologie</div></div>
+        <div class="m-section-title" style="display:flex;align-items:center;gap:6px;">&#x1F4A1; Suggesties voor jou</div>
+        <div class="suggestion-chip expanded">
+          <div class="chip-q">Waarom wordt er overgestapt van tabletten naar infusen?</div>
+          <div class="chip-answer">
+            <div class="quote">"De capecitabine heeft goed gewerkt, maar voor de volgende fase van de behandeling is oxaliplatin effectiever. Dit medicijn kan alleen via een infuus worden toegediend."</div>
+            <p>Dr. van der Berg legde uit dat de overstap een positief teken is. De tumor is kleiner geworden door de capecitabine, en oxaliplatin is de logische volgende stap om het resultaat te consolideren.</p>
+            <p style="margin-top:8px;">Elk infuus duurt ongeveer <strong>twee tot drie uur</strong>. Je kunt een boek of tablet meenemen. Na het infuus kun je je een paar dagen moe voelen.</p>
+            <div class="source">Op basis van Mara's gesprek met Dr. van der Berg op 4 april 2026. Neem voor medisch advies contact op met het behandelteam.</div>
+          </div>
+        </div>
+        <div class="suggestion-chip" onclick="goToScreen('f1','s-f1-3b')">
+          <div class="chip-q">Wat kan ik verwachten bij de tintelingen?</div>
+        </div>
+        <div class="suggestion-chip">
+          <div class="chip-q">Hoe verhouden deze scanresultaten zich tot januari?</div>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f1-3b">
+        <div class="app-header"><h1>Samenvatting</h1><div class="subtitle">4 april 2026 &middot; Oncologie</div></div>
+        <div class="m-section-title" style="display:flex;align-items:center;gap:6px;">&#x1F4A1; Suggesties voor jou</div>
+        <div class="suggestion-chip" onclick="goToScreen('f1','s-f1-3')">
+          <div class="chip-q">Waarom wordt er overgestapt van tabletten naar infusen?</div>
+        </div>
+        <div class="suggestion-chip expanded">
+          <div class="chip-q">Wat kan ik verwachten bij de tintelingen?</div>
+          <div class="chip-answer">
+            <div class="quote">"Een veelvoorkomende bijwerking van oxaliplatin is perifere neuropathie, dat zijn tintelingen in de handen en voeten. Dit begint meestal na de eerste paar infusen."</div>
+            <p>De tintelingen zijn meestal tijdelijk en verminderen na het stoppen van de behandeling. Dr. van der Berg vroeg om het te melden als de tintelingen <strong>erger worden of niet weggaan</strong>, omdat de dosering dan aangepast kan worden.</p>
+            <p style="margin-top:8px;">Praktische tip: vermijd koud water en koude voorwerpen direct na het infuus, dit kan de tintelingen verergeren.</p>
+            <div class="source">Op basis van Mara's gesprek met Dr. van der Berg op 4 april 2026.</div>
+          </div>
+        </div>
+        <div class="suggestion-chip">
+          <div class="chip-q">Hoe verhouden deze scanresultaten zich tot januari?</div>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f1-4">
+        <div class="app-header"><h1>Samenvatting</h1><div class="subtitle">4 april 2026 &middot; Oncologie</div></div>
+        <div class="m-section-title">&#x1F4A1; Suggesties voor jou</div>
+        <div class="suggestion-chip" style="opacity:0.5;"><div class="chip-q">Waarom wordt er overgestapt van tabletten naar infusen?</div></div>
+        <div class="suggestion-chip" style="opacity:0.5;"><div class="chip-q">Wat kan ik verwachten bij de tintelingen?</div></div>
+        <div class="suggestion-chip" style="opacity:0.5;"><div class="chip-q">Hoe verhouden deze scanresultaten zich tot januari?</div></div>
+        <div class="ask-input-wrap">
+          <input type="text" placeholder="Stel een andere vraag..." value="Mag ik nog autorijden na het infuus?">
+          <button>&#x2192;</button>
+        </div>
+      </div>
+
+      <!-- ===== FLOW 2: CIRCLE MEMBER VIEW ===== -->
+      <div class="screen" id="s-f2-1">
+        <div class="app-header"><h1>Update van Mara</h1><div class="subtitle">4 april 2026 &middot; Oncologie controle</div></div>
+        <div class="m-card m-card-accent">
+          <div style="font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Aangepast voor jou als partner</div>
+          <div style="font-size:13px;line-height:1.7;color:#4A5068;">
+            <p style="margin-bottom:8px;"><strong style="color:var(--success);">Goed nieuws:</strong> de scan laat zien dat de tumor kleiner is geworden. De chemotherapie werkt.</p>
+            <p style="margin-bottom:8px;">De behandeling verandert: Mara stopt met capecitabine tabletten en gaat over op <strong>oxaliplatin infusen</strong>, elke 3 weken in Erasmus MC.</p>
+          </div>
+        </div>
+        <div class="m-section-title">Wat jij kunt doen</div>
+        <div class="m-card">
+          <div style="font-size:13px;line-height:1.8;color:#4A5068;">
+            <div>&#x2022; <strong>18 april:</strong> Rijd mee naar het eerste infuus (duurt 2-3 uur)</div>
+            <div>&#x2022; Let op tintelingen in handen/voeten bij Mara</div>
+            <div>&#x2022; Bloedprikken 3 dagen voor elk infuus plannen</div>
+          </div>
+        </div>
+        <div class="click-hint">Scroll for suggestions</div>
+      </div>
+
+      <div class="screen" id="s-f2-2">
+        <div class="app-header"><h1>Update van Mara</h1><div class="subtitle">4 april 2026</div></div>
+        <div class="m-section-title">&#x1F4A1; Suggesties voor jou</div>
+        <div class="suggestion-chip" onclick="goToScreen('f2','s-f2-3')">
+          <div class="chip-q">Wat houdt de overstap naar infusen praktisch in voor ons?</div>
+        </div>
+        <div class="suggestion-chip">
+          <div class="chip-q">Hoe kan ik helpen met de bijwerkingen?</div>
+        </div>
+        <div class="suggestion-chip">
+          <div class="chip-q">Wanneer moet ik me zorgen maken?</div>
+        </div>
+        <div class="click-hint">Tap a suggestion</div>
+      </div>
+
+      <div class="screen" id="s-f2-3">
+        <div class="app-header"><h1>Update van Mara</h1><div class="subtitle">4 april 2026</div></div>
+        <div class="m-section-title">&#x1F4A1; Suggesties voor jou</div>
+        <div class="suggestion-chip expanded">
+          <div class="chip-q">Wat houdt de overstap naar infusen praktisch in voor ons?</div>
+          <div class="chip-answer">
+            <p>Mara krijgt elke 3 weken een oxaliplatin infuus in Erasmus MC. Elk infuus duurt <strong>2-3 uur</strong>.</p>
+            <p style="margin-top:8px;"><strong>Concreet voor jullie:</strong></p>
+            <p>&#x2022; 18 april: eerste infuus. Plan om mee te rijden, Mara kan zich moe voelen na afloop.</p>
+            <p>&#x2022; 3 dagen voor elk infuus moet bloed geprikt worden.</p>
+            <p>&#x2022; Na het infuus: 2-3 dagen rustiger aan doen. Vermijd koude dranken/voorwerpen (verergert tintelingen).</p>
+            <p>&#x2022; Let op: als tintelingen erger worden of niet weggaan, bel het behandelteam.</p>
+            <div class="source">Op basis van Mara's gesprek met Dr. van der Berg. Neem voor medisch advies contact op met het behandelteam.</div>
+          </div>
+        </div>
+        <div class="suggestion-chip"><div class="chip-q">Hoe kan ik helpen met de bijwerkingen?</div></div>
+      </div>
+
+      <!-- ===== FLOW 3: VOICE INPUT ===== -->
+      <div class="screen" id="s-f3-1">
+        <div class="app-header"><h1>Hallo Jan</h1><div class="subtitle">Wat wil je Ditto vertellen?</div></div>
+        <div style="text-align:center;padding:40px 20px;">
+          <div style="font-size:48px;margin-bottom:20px;">&#x1F3A4;</div>
+          <p style="font-size:14px;color:var(--text-secondary);margin-bottom:32px;line-height:1.6;">Vertel Ditto over een medicijnwijziging, bijwerking, of update van je arts.</p>
+          <div class="mic-btn" onclick="goToScreen('f3','s-f3-2');advanceExplain('f3',2);">&#x1F3A4;</div>
+          <p style="font-size:12px;color:var(--text-light);margin-top:16px;">Tik om te spreken</p>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f3-2">
+        <div class="app-header"><h1>Luisteren...</h1></div>
+        <div style="text-align:center;padding:60px 20px;">
+          <div class="mic-btn recording" onclick="goToScreen('f3','s-f3-3');advanceExplain('f3',3);" style="width:96px;height:96px;font-size:36px;">&#x1F3A4;</div>
+          <p style="font-size:14px;color:var(--navy);margin-top:24px;font-weight:600;">"Ze hebben mijn medicijn veranderd naar metformine 500 milligram, twee keer per dag."</p>
+          <p style="font-size:12px;color:var(--text-light);margin-top:8px;">Tik om te stoppen</p>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f3-3">
+        <div class="app-header"><h1>Klopt dit?</h1><div class="subtitle">Controleer wat Ditto heeft begrepen</div></div>
+        <div class="m-card" style="border-left:4px solid var(--success);">
+          <div style="font-size:11px;color:var(--success);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">&#x1F48A; Nieuw medicijn</div>
+          <div style="font-weight:600;font-size:16px;margin:6px 0;">Metformine 500mg</div>
+          <div style="font-size:13px;color:var(--text-secondary);">2x daags (ochtend en avond)</div>
+        </div>
+        <div class="m-card" style="border-left:4px solid var(--warning);">
+          <div style="font-size:11px;color:var(--warning);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">&#x2753; Vraag</div>
+          <div style="font-size:14px;margin-top:6px;line-height:1.6;">Je gebruikt nu <strong>Gliclazide 80mg</strong>. Is metformine een vervanging?</div>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="confirm-btn primary" onclick="goToScreen('f3','s-f3-4');advanceExplain('f3',4);">Ja, ik ben gestopt met gliclazide</button>
+          <button class="confirm-btn secondary">Nee, ik gebruik beide</button>
+          <button class="confirm-btn secondary">Details aanpassen</button>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f3-4">
+        <div class="app-header"><h1>Bijgewerkt!</h1></div>
+        <div style="text-align:center;padding:40px 20px;">
+          <div style="font-size:56px;margin-bottom:16px;">&#x2705;</div>
+          <h2 style="font-size:20px;margin-bottom:8px;">Profiel bijgewerkt</h2>
+          <p style="font-size:14px;color:var(--text-secondary);line-height:1.6;">Gliclazide gestopt. Metformine 500mg 2x daags toegevoegd.</p>
+          <div class="m-card" style="margin-top:24px;text-align:left;">
+            <div style="font-size:11px;color:var(--text-light);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Medicijnen</div>
+            <div class="profile-item">
+              <div><div class="pi-name">Metformine 500mg</div><div class="pi-detail">2x daags &middot; Sinds vandaag</div></div>
+              <span class="m-tag m-tag-active">Actief</span>
+            </div>
+            <div class="profile-item">
+              <div><div class="pi-name" style="color:var(--text-secondary);">Gliclazide 80mg</div><div class="pi-detail">Gestopt op 5 april 2026</div></div>
+              <span class="m-tag m-tag-discontinued">Gestopt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FLOW 4: HEALTH PROFILE ===== -->
+      <div class="screen" id="s-f4-1">
+        <div class="app-header"><h1>Gezondheidsprofiel</h1><div class="subtitle">Automatisch bijgehouden door Ditto</div></div>
+        <div class="m-section-title">Aandoeningen</div>
+        <div class="m-card">
+          <div class="profile-item">
+            <div><div class="pi-name">Darmkanker stadium 3b</div><div class="pi-detail">Diagnose: sept 2025 &middot; Dr. van der Berg</div></div>
+            <span class="m-tag m-tag-active">Actief</span>
+          </div>
+          <div class="profile-item">
+            <div><div class="pi-name">Hoge bloeddruk</div><div class="pi-detail">Diagnose: 2019 &middot; Huisarts</div></div>
+            <span class="m-tag m-tag-active">Actief</span>
+          </div>
+        </div>
+        <div class="m-section-title">Medicijnen</div>
+        <div class="m-card" onclick="goToScreen('f4','s-f4-2');advanceExplain('f4',2);" style="cursor:pointer;">
+          <div class="profile-item">
+            <div><div class="pi-name">Oxaliplatin</div><div class="pi-detail">Infuus elke 3 weken &middot; Erasmus MC</div></div>
+            <span class="m-tag m-tag-active">Actief</span>
+          </div>
+          <div class="profile-item">
+            <div><div class="pi-name" style="color:var(--text-secondary);">Capecitabine</div><div class="pi-detail">Gestopt op 4 april 2026</div></div>
+            <span class="m-tag m-tag-discontinued">Gestopt</span>
+          </div>
+          <div class="profile-item">
+            <div><div class="pi-name">Lisinopril 10mg</div><div class="pi-detail">1x daags &middot; Huisarts</div></div>
+            <span class="m-tag m-tag-active">Actief</span>
+          </div>
+        </div>
+        <div class="m-section-title">Behandelteam</div>
+        <div class="m-card">
+          <div class="profile-item">
+            <div><div class="pi-name">Dr. van der Berg</div><div class="pi-detail">Oncoloog &middot; Erasmus MC</div></div>
+          </div>
+          <div class="profile-item">
+            <div><div class="pi-name">Dr. Jansen</div><div class="pi-detail">Huisarts &middot; Huisartsenpraktijk Zuid</div></div>
+          </div>
+        </div>
+        <div class="m-section-title">Actiepunten</div>
+        <div class="m-card">
+          <div class="profile-item"><div><div class="pi-name">Bloedonderzoek laten doen</div><div class="pi-detail">Voor 15 april &middot; 3 dagen voor eerste infuus</div></div><span class="m-tag m-tag-upcoming">Te doen</span></div>
+        </div>
+        <div class="click-hint">Tap medications for detail</div>
+      </div>
+
+      <div class="screen" id="s-f4-2">
+        <div class="app-header"><h1>Medicijnen</h1><div class="subtitle">Geschiedenis en wijzigingen</div></div>
+        <div class="m-card" style="border-left:4px solid var(--success);">
+          <div style="font-weight:600;font-size:16px;">Oxaliplatin</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin:4px 0;">Infuus elke 3 weken &middot; Erasmus MC</div>
+          <span class="m-tag m-tag-active">Actief</span>
+          <div style="font-size:12px;color:var(--text-light);margin-top:8px;">Gestart: 4 april 2026 &middot; Voorgeschreven door Dr. van der Berg</div>
+          <div style="font-size:12px;color:var(--text-light);">Bron: samenvatting van 4 april 2026</div>
+        </div>
+        <div class="m-card" style="border-left:4px solid #D1D5DB;">
+          <div style="font-weight:600;font-size:16px;color:var(--text-secondary);">Capecitabine</div>
+          <div style="font-size:13px;color:var(--text-light);margin:4px 0;">Tabletten &middot; Was 2x daags</div>
+          <span class="m-tag m-tag-discontinued">Gestopt</span>
+          <div style="font-size:12px;color:var(--text-light);margin-top:8px;">Periode: okt 2025 - apr 2026 &middot; Vervangen door oxaliplatin</div>
+          <div style="font-size:12px;color:var(--text-light);">Bron: samenvatting van 4 april 2026</div>
+        </div>
+        <div class="m-card" style="border-left:4px solid var(--success);">
+          <div style="font-weight:600;font-size:16px;">Lisinopril 10mg</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin:4px 0;">1x daags &middot; Ochtend</div>
+          <span class="m-tag m-tag-active">Actief</span>
+          <div style="font-size:12px;color:var(--text-light);margin-top:8px;">Sinds 2019 &middot; Voorgeschreven door Dr. Jansen (huisarts)</div>
+        </div>
+      </div>
+
+      <!-- ===== FLOW 5: APPOINTMENT PREP ===== -->
+      <div class="screen" id="s-f5-1">
+        <div class="app-header"><h1>Afspraak</h1><div class="subtitle">Over 2 dagen</div></div>
+        <div class="m-card m-card-accent" style="text-align:center;padding:24px;">
+          <div style="font-size:36px;margin-bottom:8px;">&#x1F4CB;</div>
+          <div style="font-weight:600;font-size:16px;">Oncologie controle</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin:4px 0;">Dr. van der Berg &middot; Erasmus MC</div>
+          <div style="font-size:14px;font-weight:600;color:var(--coral);margin-top:8px;">Donderdag 9 mei, 14:00</div>
+        </div>
+        <div style="text-align:center;margin:16px 0;">
+          <button class="confirm-btn primary" style="width:auto;display:inline-block;padding:12px 32px;" onclick="goToScreen('f5','s-f5-2');advanceExplain('f5',2);">Bekijk voorbereiding</button>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f5-2">
+        <div class="app-header"><h1>Voorbereiding</h1><div class="subtitle">Oncologie &middot; 9 mei 2026</div></div>
+        <div class="m-section-title">Wat er veranderd is</div>
+        <div class="m-card">
+          <div class="prep-item"><div class="prep-label">Medicatie</div><div class="prep-value">Overgestapt van capecitabine tabletten naar <strong>oxaliplatin infuus</strong> (gestart 18 april)</div></div>
+          <div class="prep-item"><div class="prep-label">Behandeling</div><div class="prep-value">Eerste infuusronde afgerond. Tweede infuus gepland voor 9 mei.</div></div>
+          <div class="prep-item"><div class="prep-label">Bijwerkingen</div><div class="prep-value">Je meldde tintelingen in handen na het eerste infuus.</div></div>
+        </div>
+        <div class="m-section-title">Vragen om te stellen</div>
+        <div class="m-card">
+          <div class="prep-item"><div class="prep-value">&#x2022; Hoe verdraag ik de oxaliplatin infusen tot nu toe?</div></div>
+          <div class="prep-item"><div class="prep-value">&#x2022; Worden de tintelingen minder of erger?</div></div>
+          <div class="prep-item"><div class="prep-value">&#x2022; Wanneer is de volgende scan gepland?</div></div>
+        </div>
+        <div class="m-section-title">Meenemen</div>
+        <div class="m-card">
+          <div class="prep-item"><div class="prep-value">&#x2022; Bloeduitslag van 6 mei</div></div>
+          <div class="prep-item"><div class="prep-value">&#x2022; Lijst van bijwerkingen sinds het eerste infuus</div></div>
+        </div>
+      </div>
+
+      <!-- ===== FLOW 6: EVERYONE UNDERSTANDS ===== -->
+      <div class="screen" id="s-f6-1">
+        <div class="app-header"><h1>Opname</h1><div class="subtitle">Tik om te starten</div></div>
+        <div style="text-align:center;padding:60px 20px;">
+          <div style="width:120px;height:120px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;margin:0 auto;cursor:pointer;box-shadow:0 8px 32px rgba(255,107,74,0.35);" onclick="goToScreen('f6','s-f6-2');advanceExplain('f6',2);">
+            <span style="color:white;font-size:48px;">&#x23FA;</span>
+          </div>
+          <p style="font-size:14px;color:var(--text-secondary);margin-top:24px;">Neem je gesprek op met de arts</p>
+          <p style="font-size:12px;color:var(--text-light);margin-top:8px;">Ditto maakt een samenvatting en informeert je kring</p>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f6-2">
+        <div class="app-header"><h1>Verwerken...</h1><div class="subtitle">Even geduld</div></div>
+        <div style="padding:20px;">
+          <div class="m-card" style="text-align:center;padding:20px;">
+            <div style="font-size:32px;margin-bottom:8px;">&#x1F9E0;</div>
+            <div style="font-weight:600;margin-bottom:12px;">De Care Brain werkt</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+              <div class="shimmer" style="width:90%;margin:8px auto;"></div>
+              <div class="shimmer" style="width:70%;margin:8px auto;"></div>
+              <div class="shimmer" style="width:80%;margin:8px auto;"></div>
+            </div>
+          </div>
+          <div style="margin-top:16px;">
+            <div class="notif-card" style="opacity:0.6;">
+              <div class="notif-avatar">H</div>
+              <div class="notif-body"><div class="notif-title">Hans (partner)</div><div class="notif-text">Update wordt voorbereid...</div></div>
+            </div>
+            <div class="notif-card" style="opacity:0.4;">
+              <div class="notif-avatar" style="background:var(--coral);">L</div>
+              <div class="notif-body"><div class="notif-title">Lisa (dochter)</div><div class="notif-text">Update wordt voorbereid...</div></div>
+            </div>
+            <div class="notif-card" style="opacity:0.3;">
+              <div class="notif-avatar" style="background:var(--gold);">T</div>
+              <div class="notif-body"><div class="notif-title">Tom (vriend)</div><div class="notif-text">Update wordt voorbereid...</div></div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:16px;">
+            <button class="confirm-btn primary" style="width:auto;display:inline-block;padding:10px 24px;" onclick="goToScreen('f6','s-f6-3');advanceExplain('f6',3);">Bekijk resultaat</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen" id="s-f6-3">
+        <div class="app-header"><h1>Kring updates</h1><div class="subtitle">3 aangepaste berichten klaar</div></div>
+        <div class="circle-cards" style="padding:0 0 20px;">
+          <div class="circle-view">
+            <div class="cv-role">Partner</div>
+            <div class="cv-name">Hans</div>
+            <div class="cv-text">Mara stopt met capecitabine en gaat over op oxaliplatin infusen. Eerste infuus 18 april, Erasmus MC (2-3 uur). Rijd mee, ze kan moe zijn. Let op tintelingen.</div>
+          </div>
+          <div class="circle-view" style="border-left-color:var(--coral);">
+            <div class="cv-role" style="color:var(--coral);">Dochter</div>
+            <div class="cv-name">Lisa</div>
+            <div class="cv-text">Goed nieuws: mama's scan ziet er goed uit, de tumor is kleiner geworden. De behandeling wordt aangepast maar dat is positief. Ze kan zich af en toe moe voelen.</div>
+          </div>
+          <div class="circle-view" style="border-left-color:var(--gold);">
+            <div class="cv-role" style="color:var(--gold);">Vriend</div>
+            <div class="cv-name">Tom</div>
+            <div class="cv-text">Update van Mara: de behandeling gaat goed, positieve scanresultaten. Ze begint een nieuwe fase. Berichtjes worden gewaardeerd.</div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <button class="confirm-btn primary" style="width:auto;display:inline-block;padding:12px 32px;">Verstuur alle updates</button>
+        </div>
+      </div>
+
+      </div><!-- /screen-content -->
+
+      <!-- BOTTOM NAV -->
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="icon">&#x1F3E0;</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">&#x1F4DD;</div><div class="label">Samenvattingen</div></div>
+        <div class="nav-item"><div class="icon">&#x2764;&#xFE0F;</div><div class="label">Profiel</div></div>
+        <div class="nav-item"><div class="icon">&#x1F465;</div><div class="label">Kring</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /split -->
+
+<script>
+const flows = {
+  f1: { screens: ['s-f1-1','s-f1-2','s-f1-3','s-f1-4'], step: 0 },
+  f2: { screens: ['s-f2-1','s-f2-2','s-f2-3'], step: 0 },
+  f3: { screens: ['s-f3-1','s-f3-2','s-f3-3','s-f3-4'], step: 0 },
+  f4: { screens: ['s-f4-1','s-f4-2'], step: 0 },
+  f5: { screens: ['s-f5-1','s-f5-2'], step: 0 },
+  f6: { screens: ['s-f6-1','s-f6-2','s-f6-3'], step: 0 }
+};
+let currentFlow = 'f1';
+
+function hideAll() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.explain-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.flow-tab').forEach(t => t.classList.remove('active'));
+}
+
+function showScreen(flowId, screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(screenId);
+  if (el) el.classList.add('active');
+}
+
+function showExplain(flowId, step) {
+  document.querySelectorAll('.explain-section').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('ex-' + flowId + '-' + step);
+  if (el) el.classList.add('active');
+}
+
+function switchFlow(flowId) {
+  hideAll();
+  currentFlow = flowId;
+  flows[flowId].step = 0;
+  const idx = ['f1','f2','f3','f4','f5','f6'].indexOf(flowId);
+  document.querySelectorAll('.flow-tab')[idx].classList.add('active');
+  showScreen(flowId, flows[flowId].screens[0]);
+  showExplain(flowId, 1);
+}
+
+function goToScreen(flowId, screenId) {
+  const idx = flows[flowId].screens.indexOf(screenId);
+  if (idx >= 0) {
+    flows[flowId].step = idx;
+    showScreen(flowId, screenId);
+  }
+}
+
+function advanceExplain(flowId, step) {
+  showExplain(flowId, step);
+}
+
+function nextStep(flowId) {
+  const f = flows[flowId];
+  if (f.step < f.screens.length - 1) {
+    f.step++;
+    showScreen(flowId, f.screens[f.step]);
+    showExplain(flowId, f.step + 1);
+  }
+}
+
+function prevStep(flowId) {
+  const f = flows[flowId];
+  if (f.step > 0) {
+    f.step--;
+    showScreen(flowId, f.screens[f.step]);
+    showExplain(flowId, f.step + 1);
+  }
+}
+
+// Init
+switchFlow('f1');
+</script>
+</body>
+</html>
