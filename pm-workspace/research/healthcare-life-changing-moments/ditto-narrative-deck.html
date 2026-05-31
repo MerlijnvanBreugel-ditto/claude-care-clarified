@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ditto — The Living Health Companion · Narrative Deck</title>
+<style>
+  :root{
+    --ink:#16252b; --ink-soft:#3c5560; --muted:#6c8893;
+    --paper:#f6f4ef; --card:#fffdfa; --line:#dfe6e6;
+    --teal:#0f8a8d; --teal-deep:#0a5d63; --coral:#e2674d; --amber:#d99a2b;
+    --indigo:#3b4d8f;
+    --maxw:980px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.55;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  #deck{height:100vh;width:100vw;position:relative}
+  .slide{
+    position:absolute;inset:0;display:none;
+    padding:6vh 7vw 9vh; overflow-y:auto;
+    animation:fade .35s ease;
+  }
+  .slide.active{display:flex;flex-direction:column;justify-content:center}
+  .slide .inner{max-width:var(--maxw);margin:0 auto;width:100%}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .kicker{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:1rem}
+  h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;letter-spacing:-.02em;font-weight:800}
+  h2{font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.12;letter-spacing:-.015em;font-weight:780;margin-bottom:1.1rem}
+  h3{font-size:1.05rem;font-weight:720;color:var(--teal-deep);margin:.2rem 0 .4rem}
+  p{font-size:clamp(1rem,1.5vw,1.18rem);color:var(--ink-soft);margin-bottom:.8rem}
+  .lead{font-size:clamp(1.15rem,2vw,1.5rem);color:var(--ink);font-weight:500}
+  strong{color:var(--ink);font-weight:680}
+  em{color:var(--teal-deep);font-style:normal;font-weight:640}
+  ul{list-style:none;margin:.4rem 0}
+  li{position:relative;padding-left:1.4rem;margin-bottom:.6rem;font-size:clamp(.98rem,1.4vw,1.12rem);color:var(--ink-soft)}
+  li::before{content:"";position:absolute;left:0;top:.62em;width:.5rem;height:.5rem;border-radius:50%;background:var(--teal)}
+  .src{font-size:.8rem;color:var(--muted);margin-top:1.2rem;border-top:1px solid var(--line);padding-top:.7rem}
+  .src b{color:var(--ink-soft)}
+
+  .grid{display:grid;gap:1rem;margin-top:1rem}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem}
+  .card h3{margin-top:0}
+  .card p{font-size:.96rem;margin-bottom:0}
+  .stat{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:850;color:var(--teal-deep);letter-spacing:-.02em;line-height:1}
+  .stat-l{font-size:.92rem;color:var(--muted);margin-top:.35rem}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.2rem .6rem;border-radius:999px;background:#e7f1f0;color:var(--teal-deep);margin-bottom:.6rem}
+  .pill.warn{background:#fbeee6;color:var(--coral)}
+  .pill.ok{background:#eaf3e9;color:#3f7a3a}
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .ba .before{background:#f3eeea;border:1px solid #e7ddd4;border-radius:14px;padding:1.1rem 1.2rem}
+  .ba .after{background:#e9f3f2;border:1px solid #cfe6e3;border-radius:14px;padding:1.1rem 1.2rem}
+  .big-quote{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:740;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+  .big-quote .hl{color:var(--coral)}
+  table{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.92rem}
+  th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);color:var(--ink-soft)}
+  th{color:var(--teal-deep);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+  td b{color:var(--ink)}
+  .tag{font-size:.72rem;padding:.12rem .5rem;border-radius:6px;background:#eef2f1;color:var(--ink-soft)}
+
+  #bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-deep));z-index:30;transition:width .35s ease}
+  #nav{position:fixed;bottom:18px;right:24px;z-index:30;display:flex;gap:8px;align-items:center;font-size:.8rem;color:var(--muted)}
+  #nav button{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1rem}
+  #nav button:hover{border-color:var(--teal);color:var(--teal-deep)}
+  #count{min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .foot{position:fixed;bottom:18px;left:24px;z-index:30;font-size:.74rem;color:var(--muted);letter-spacing:.02em}
+  .logo{font-weight:850;letter-spacing:-.04em;color:var(--teal-deep)}
+  .two-col{columns:2;column-gap:2.4rem}
+  @media(max-width:760px){.g2,.g3,.g4,.ba{grid-template-columns:1fr}.two-col{columns:1}#nav{bottom:12px;right:12px}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="deck">
+
+  <!-- 1 -->
+  <section class="slide active"><div class="inner">
+    <div class="kicker">ditto · strategy narrative · 2026</div>
+    <h1>The Living Health Companion</h1>
+    <p class="lead" style="margin-top:1.2rem;max-width:760px">Which category can ditto shape? A research-grounded case that the biggest opportunity in serious illness is not documenting the appointment — it's showing up <em>every day</em>, for the patient <em>and the people who love them</em>.</p>
+    <p class="src" style="max-width:760px"><b>What this is:</b> a synthesis of 9 research pipelines across cancer, neurodegenerative, MS/autoimmune & sudden-severe journeys — pan-EU, anchored NL + DACH, every claim cited. Use ← → or Space to navigate.</p>
+  </div></section>
+
+  <!-- 2 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The premise</div>
+    <h2>ditto already proved a contrarian point</h2>
+    <p class="lead">A patient-level summary of a healthcare appointment looks trivial. It isn't.</p>
+    <div class="grid g3" style="margin-top:1.4rem">
+      <div class="card"><div class="stat">40–80%</div><div class="stat-l">of medical information is forgotten immediately after a consultation</div></div>
+      <div class="card"><div class="stat">~½</div><div class="stat-l">of what patients <i>do</i> remember is recalled incorrectly</div></div>
+      <div class="card"><div class="stat">47.6%</div><div class="stat-l">of EU adults have limited health literacy — the silent multiplier</div></div>
+    </div>
+    <p style="margin-top:1.3rem">If a "trivial" summary quietly battles a status-quo failure this big, <strong>there is a whole cluster of problems with the same shape</strong> — normalised, dismissed, yet felt by millions. This deck maps that cluster and the category it opens.</p>
+    <div class="src"><b>Sources (verified):</b> Kessels, <i>J R Soc Med</i> 2003 · HLS19 / M-POHL 2021. Both independently re-verified.</div>
+  </div></section>
+
+  <!-- 3 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The strategic crux</div>
+    <h2>But the summary has a frequency problem</h2>
+    <div class="ba" style="margin-top:.6rem">
+      <div class="before">
+        <span class="pill warn">today's constraint</span>
+        <p style="color:var(--ink)"><strong>Low-frequency. Single-player. Externally triggered.</strong></p>
+        <ul>
+          <li>Fires only around appointments — often 1–2× / month</li>
+          <li>Depends on the patient <i>remembering</i> to use it</li>
+          <li>No accumulating data, no network → can't compound</li>
+        </ul>
+        <p style="margin-top:.6rem">A strong action and reward, but a rare trigger. The classic "vitamin utility that stalls" — hard to make habit-forming, hard to grow, hard to monetise.</p>
+      </div>
+      <div class="after">
+        <span class="pill ok">the question</span>
+        <p style="color:var(--ink)"><strong>What do people on these journeys do <i>every day?</i></strong></p>
+        <p>You're ill all day — not just at the appointment. The opportunity is the high-frequency daily life of serious illness: symptoms, meds, fear, asking for help, "what can I still do?".</p>
+        <p style="margin-top:.6rem"><em>Like Uber or Airbnb, low individual frequency can still compound — if it's multi-player with a data moat.</em></p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 4 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The human reality</div>
+    <h2>A life-changing diagnosis drops you into a system you don't understand, at the moment you're least able to</h2>
+    <p class="lead" style="max-width:820px">Cancer. Dementia. MS. A stroke that arrives overnight. ~<strong>4–5 million Europeans</strong> enter one of these journeys every year; <strong>34–38M</strong> are living one now — and behind nearly every patient is a loved one carrying it with them.</p>
+    <div class="grid g4" style="margin-top:1.2rem">
+      <div class="card"><div class="stat">2.8M</div><div class="stat-l">new cancer diagnoses / yr (EU)</div></div>
+      <div class="card"><div class="stat">9.1M</div><div class="stat-l">people with dementia (EU-27)</div></div>
+      <div class="card"><div class="stat">9.5M</div><div class="stat-l">stroke survivors (EU)</div></div>
+      <div class="card"><div class="stat">~80%</div><div class="stat-l">of EU long-term care is delivered informally — by loved ones</div></div>
+    </div>
+    <div class="src"><b>Sources:</b> ECIS/ENCR 2022 · Alzheimer Europe 2025 · GBD/AHA Stroke 2020 · Eurocarers. See <i>findings/01</i>.</div>
+  </div></section>
+
+  <!-- 5 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Four journeys · one shape</div>
+    <h2>Cancer</h2>
+    <p class="lead">High volume, high information burden, high caregiver involvement.</p>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card"><h3>The overlooked gaps</h3>
+        <ul>
+          <li><strong>The patient is the unpaid care coordinator</strong> across oncologist, GP, radiology, pharmacy — no one holds the overview</li>
+          <li><strong>Unverified understanding:</strong> 69%/81% of metastatic patients didn't grasp chemo wasn't curative</li>
+          <li><strong>Diagnostic limbo</strong> — anxiety peaks <i>while waiting</i>, and the system goes silent</li>
+        </ul>
+      </div>
+      <div class="card"><h3>The loved one</h3>
+        <p>Caregivers show measurably higher depression, anxiety and insomnia; their <strong>#1 unmet need is information</strong> — yet they have no formal access to records or the plan. The "update everyone" burden falls on the sickest person.</p>
+      </div>
+    </div>
+    <div class="src"><b>Sources:</b> Weeks <i>NEJM</i> 2012 (US) · All.Can/ECO · Goren 2014. See <i>findings/02</i>.</div>
+  </div></section>
+
+  <!-- 6 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Four journeys · one shape</div>
+    <h2>Neurodegenerative — dementia, Parkinson's, ALS</h2>
+    <p class="lead">Progressive. The caregiver becomes the primary user and decision-maker.</p>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card"><h3>The overlooked gaps</h3>
+        <ul>
+          <li><strong>The family is the integration layer</strong> — the only complete record lives in the caregiver's head for 8–12 years</li>
+          <li><strong>Proxy/legal/digital access is silently broken</strong> as patient capacity declines</li>
+          <li><strong>Flooded at diagnosis, then abandoned</strong> — &gt;half get no support referral</li>
+        </ul>
+      </div>
+      <div class="card"><h3>The "hidden patient"</h3>
+        <div class="stat">~49%</div><div class="stat-l">of dementia caregivers carry clinically significant burden; ~33% depression. No one is accountable for the caregiver's own health.</div>
+      </div>
+    </div>
+    <div class="src"><b>Sources:</b> "Mind the gap" review · JMIR Aging 2024 · Alzheimer's Society. See <i>findings/03</i>.</div>
+  </div></section>
+
+  <!-- 7 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Four journeys · one shape</div>
+    <h2>MS & autoimmune</h2>
+    <p class="lead">Young, sudden, lifelong, dominated by uncertainty — the sharpest <em>daily</em> wedge in healthcare.</p>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card"><h3>The overlooked gaps</h3>
+        <ul>
+          <li><strong>"Is this a flare — should I call my team <i>today?</i>"</strong> — a high-anxiety judgement made daily, with no tool that knows the patient's baseline</li>
+          <li><strong>Invisible symptoms</strong> (fatigue &gt;80%, cognitive fog) — most disabling, least believed</li>
+          <li><strong>Diagnostic gaslighting</strong> of young women; mental-health comorbidity under-detected (~2× suicide risk)</li>
+        </ul>
+      </div>
+      <div class="card"><h3>Why it's a strong beachhead</h3>
+        <p>Onset at 20–40 (digital-native, highest lifetime value), tight online communities, near-zero direct competition, and a screaming need to "explain my invisible illness to the people around me."</p>
+      </div>
+    </div>
+    <div class="src"><b>Sources:</b> MS Trust · MS fatigue meta-analysis · EMSP Barometer. See <i>findings/04</i>.</div>
+  </div></section>
+
+  <!-- 8 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Four journeys · one shape</div>
+    <h2>Sudden severe — stroke, cardiac, acute onset</h2>
+    <p class="lead">Shock, zero preparation, and a sudden lifelong self-management regime.</p>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card"><h3>The overlooked gaps</h3>
+        <ul>
+          <li><strong>The discharge-comprehension illusion</strong> — ~90% say they understood; ~40% can't recall their diagnosis/plan; everyone signs off "patient educated"</li>
+          <li><strong>The broken hand-off</strong> — the discharge summary reaches the GP in time only 12–34% of the time</li>
+          <li><strong>The conscripted, untrained caregiver</strong> — only ~40% feel confident at discharge; the home transition is "sometimes traumatic"</li>
+        </ul>
+      </div>
+      <div class="card"><h3>The unnarrated event</h3>
+        <p>~half of cardiac-arrest survivors have memory loss at 1 year — "what just happened to me?" is literal. Post-event PTSD and depression go largely unscreened.</p>
+      </div>
+    </div>
+    <div class="src"><b>Sources:</b> Front Communication 2021 · BJGP 2018 · stroke-caregiver studies. See <i>findings/05</i>.</div>
+  </div></section>
+
+  <!-- 9 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The synthesis</div>
+    <h2>Five universal problems — the same in every journey</h2>
+    <p>Not disease-specific. Not "the patient's job." This is the <em>operating system of being seriously ill</em> — and most of it is <strong>continuous, not appointment-bound.</strong></p>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card"><h3>A · Comprehension & memory</h3><p>Understand & remember what's happening. <span class="tag">ditto today, episodically</span></p></div>
+      <div class="card"><h3>B · Continuity & overview</h3><p>One picture across providers & over time. <span class="tag">continuous</span></p></div>
+      <div class="card"><h3>C · The loved-one layer</h3><p>Let the people who care actually help. <span class="tag">multi-player</span></p></div>
+      <div class="card"><h3>D · Daily self-management</h3><p>"Is this normal? What do I do today?" <span class="tag">daily</span></p></div>
+      <div class="card" style="grid-column:span 2"><h3>E · Emotional & existential load</h3><p>The fear, exhaustion and isolation carried all day, under-screened across every journey. <span class="tag">daily</span></p></div>
+    </div>
+    <div class="src"><b>See:</b> <i>synthesis/09 — cross-journey pain map.</i></div>
+  </div></section>
+
+  <!-- 10 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The daily reality</div>
+    <h2>What people actually do every day</h2>
+    <p>High-frequency jobs ditto doesn't yet touch — each hacked together from a different broken tool.</p>
+    <table>
+      <tr><th>Daily job</th><th>Frequency</th><th>Hacked together with</th></tr>
+      <tr><td><b>"Is this normal — should I call?"</b></td><td>daily, multi×</td><td>notebook, nothing, Dr. Google</td></tr>
+      <tr><td><b>"Did I take it?"</b> (meds, timing, side-effects)</td><td>every dose</td><td>pill alarms, a partner who reminds</td></tr>
+      <tr><td><b>"Let my people know / ask for help"</b></td><td>daily–weekly</td><td>WhatsApp broadcast, CaringBridge</td></tr>
+      <tr><td><b>"What does this mean for <i>me?</i>"</b></td><td>daily (post-Dx)</td><td>Google, YouTube, forums, 2am scrolling</td></tr>
+      <tr><td><b>"How am I feeling today"</b></td><td>continuous</td><td>bottling it up</td></tr>
+    </table>
+    <p style="margin-top:1rem"><strong>~50%</strong> medication non-adherence (~200k deaths, €125bn/yr EU) · clinicians miss between-visit symptoms <strong>up to half the time</strong> · <strong>55%</strong> of EU citizens (77% NL) search health info online.</p>
+    <div class="src"><b>Sources:</b> Basch <i>JAMA</i> 2017 (US) · OECD/WHO adherence · Eurostat. See <i>findings/08b</i>.</div>
+  </div></section>
+
+  <!-- 11 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The tailwind — why now</div>
+    <h2>Three unlocks that weren't here three years ago</h2>
+    <div class="grid g3" style="margin-top:1rem">
+      <div class="card"><h3>LLMs</h3><p>Plain-language comprehension and grounded Q&A are finally cheap and good — exactly what 48% limited health literacy always needed.</p></div>
+      <div class="card"><h3>EHDS</h3><p>In force since <b>26 Mar 2025</b>; patient summaries EU-wide by <b>2029</b>. It forces your data <i>to</i> you — but explicitly <strong>won't explain or organise it.</strong> The pipes are laid; nobody owns the tap.</p></div>
+      <div class="card"><h3>Caregiving at breaking point</h3><p>~80% of EU long-term care is informal, rising +50% by 2050 — and the "circle" already lives, ungoverned, on WhatsApp.</p></div>
+    </div>
+    <p style="margin-top:1.2rem">Plus the regulatory line that defines the safe lane: stay an <em>information / comprehension / coordination</em> tool (output stays with the patient) → not a medical device. Cross into <em>clinical decision support</em> → MDR Class IIa+. <span class="tag">DiGA = the one clean reimbursement path, but it requires device status</span></p>
+    <div class="src"><b>Sources:</b> EHDS Reg. (EU) 2025/327 (verified) · MDCG 2019-11 · AI Act Art. 50 · BfArM DiGA. See <i>findings/06</i>.</div>
+  </div></section>
+
+  <!-- 12 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The whitespace</div>
+    <h2>Everyone captures the visit. Nobody owns the life.</h2>
+    <div class="grid g2" style="margin-top:.6rem">
+      <div class="card"><h3>What exists</h3>
+        <ul>
+          <li><b>AI scribes</b> (Abridge, Nabla, Corti) capture the richest signal — the consultation — but sell to <i>clinicians</i>; the patient is a data source</li>
+          <li><b>EU patient companions</b> are oncology-only and consolidating (Outcomes4Me + Germany's Mika)</li>
+          <li><b>Patient portals</b> (Epic MyChart) are the status quo — and being <i>sued in 2025</i> for fragmenting records</li>
+          <li><b>Caregiver apps</b> are US-centric and disconnected from care</li>
+        </ul>
+      </div>
+      <div class="card" style="background:#e9f3f2;border-color:#cfe6e3"><h3>The unowned space</h3>
+        <p style="color:var(--ink);font-weight:600">No scaled, named EU player owns <em>the patient's and family's understanding of their own care — over time, across every provider, every day.</em></p>
+        <p style="margin-top:.6rem">That is the gap. And the summary alone won't hold it: a scribe could bolt one on. <strong>The defensible thing is the daily, multi-player relationship.</strong></p>
+      </div>
+    </div>
+    <div class="src"><b>See:</b> <i>findings/07 — competitive landscape & whitespace map.</i></div>
+  </div></section>
+
+  <!-- 13 -->
+  <section class="slide" style="background:#0f8a8d"><div class="inner" style="color:#eafafa">
+    <div class="kicker" style="color:#bfeae9">The contrarian insight</div>
+    <p class="big-quote" style="color:#ffffff;max-width:880px">Everyone is building for the <span class="hl" style="color:#ffd9cf">doctor's 15&nbsp;minutes.</span><br>Nobody is building for the <span style="color:#ffd9cf">patient's 15&nbsp;hours.</span></p>
+    <p style="color:#dff3f2;margin-top:1.4rem;max-width:820px;font-size:1.15rem">The whole industry — EHRs, scribes, even EHDS — optimises the clinical encounter and treats the patient as an episodic visitor and a data source. But serious illness is a <strong style="color:#fff">life, lived every day, by a frightened person and a small circle who love them</strong> — and 99.9% of it happens outside the room, where there is no product.</p>
+    <p style="color:#bfeae9;margin-top:1rem">Same reframe as Spotify (all music, always — not the album) and Airbnb (belonging anywhere — not the booking): change the unit from the <i>transaction</i> to the <i>person's ongoing life.</i></p>
+  </div></section>
+
+  <!-- 14 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The category to name & own</div>
+    <h2>The Living Health Companion</h2>
+    <p class="lead">A care OS for patients and the people who love them.</p>
+    <div class="ba" style="margin-top:1rem">
+      <div class="before"><span class="pill warn">before</span>
+        <p style="color:var(--ink)">Healthcare happens <i>to you</i> in episodes you don't understand, can't remember, can't oversee, and carry alone — stitched across WhatsApp, a notes-app symptom list, pill alarms, Dr. Google, a binder of letters, and a portal you can't read.</p>
+      </div>
+      <div class="after"><span class="pill ok">after</span>
+        <p style="color:var(--ink)">You and your circle have <strong>one calm daily companion</strong> that helps you understand and manage your illness day to day, lets the people who love you actually help, and turns each clinical encounter into one you walk into prepared and walk out understanding.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem"><strong>The appointment summary isn't the category — it's the proof-of-trust artifact</strong> and the periodic crystallisation of the daily relationship. It's the "Wrapped," not the Spotify.</p>
+  </div></section>
+
+  <!-- 15 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The move — unbundle → rebundle</div>
+    <h2>Rebundle the daily hack into one companion</h2>
+    <table>
+      <tr><th>Today's fragmented hack</th><th>Rebundled into the companion</th></tr>
+      <tr><td>WhatsApp family broadcast</td><td><b>The circle</b> — permissioned updates + "here's how to help"</td></tr>
+      <tr><td>Notes app / notebook symptom list</td><td><b>Daily check-in</b> — symptom/mood/med log that compounds</td></tr>
+      <tr><td>Pill alarms</td><td>Meds in context, with side-effect guidance</td></tr>
+      <tr><td>Dr. Google at 2am</td><td><b>Grounded Q&A</b> — answers tied to <i>your</i> situation</td></tr>
+      <tr><td>Binder of letters / unreadable portal</td><td><b>Your living overview</b> — understandable, longitudinal, EHDS-fed</td></tr>
+      <tr><td>The appointment summary <span class="tag">ditto today</span></td><td>The crystallisation — shareable to the circle in one tap</td></tr>
+    </table>
+    <p style="margin-top:1rem">Each piece alone is a commodity. Governed by <em>one daily relationship and one accumulating record</em>, together they become something no single-point competitor can copy.</p>
+  </div></section>
+
+  <!-- 16 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The growth physics</div>
+    <h2>Why this compounds when the summary alone didn't</h2>
+    <div class="grid g2" style="margin-top:.6rem">
+      <div class="card"><h3>① Daily trigger → habit</h3><p>Symptoms, mood and meds fire <i>internally, every day</i> — replacing the rare external trigger of an appointment.</p></div>
+      <div class="card"><h3>② Personal data moat → retention</h3><p>Each daily entry makes tomorrow's "is this normal for <i>you?</i>" better; the longitudinal record is switching cost. And it carries a <i>clinical</i> reward, not just convenience.</p></div>
+      <div class="card"><h3>③ Network effect → CAC collapses</h3><p>Each patient brings 5–20 loved ones who experience the value and become future seeds. Social rewards (replies, offers of help) are the most habit-forming class.</p></div>
+      <div class="card" style="background:#e9f3f2;border-color:#cfe6e3"><h3>The Uber/Airbnb answer</h3><p>They compound at low <i>individual</i> frequency because they're <strong>multi-player marketplaces with a data moat.</strong> ditto's "circle" is the same structure at human scale.</p></div>
+    </div>
+  </div></section>
+
+  <!-- 17 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Where to start</div>
+    <h2>The beachhead</h2>
+    <p>A daily, compounding, multi-player product needs density: high frequency, an active circle, word-of-mouth, long duration, digital-native users.</p>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card"><span class="pill">recommended start</span><h3>Newly-diagnosed cancer + primary caregiver</h3><p>Largest, highest-intent inflow; the daily symptom job carries a survival signal; "update everyone" behaviour is most developed here; engaged caregiver; high word-of-mouth density. Exercises all three loops at once.</p><p style="margin-top:.5rem;color:var(--coral)"><b>Risk:</b> the one journey with EU competition; emotionally heavy.</p></div>
+      <div class="card"><span class="pill">strongest alternative</span><h3>MS / young-onset autoimmune</h3><p>Younger, digital, lifelong (highest LTV), the sharpest daily wedge, tight communities, near-zero competition. Smaller inflow, denser engagement, cleaner runway.</p><p style="margin-top:.5rem;color:var(--teal-deep)"><b>Pick this if</b> you weight daily frequency + data moat + low competition over raw reach.</p></div>
+    </div>
+    <p style="margin-top:1rem"><strong>This is the #1 decision to settle with evidence</strong> — two concurrent 30-person concierge cohorts — not taste.</p>
+  </div></section>
+
+  <!-- 18 -->
+  <section class="slide" style="background:#16252b"><div class="inner" style="color:#e8eef0">
+    <div class="kicker" style="color:#6fc7c9">The 11-star experience</div>
+    <h2 style="color:#fff">The day after a diagnosis</h2>
+    <p style="color:#cdd9dd;max-width:840px;font-size:1.12rem">You open ditto. It already has yesterday's shattering appointment, rewritten so you actually understand it, with the three questions you forgot queued for next time. It asks one gentle question: <em style="color:#9fe0e1">"How are you feeling today?"</em> You tap.</p>
+    <p style="color:#cdd9dd;max-width:840px;font-size:1.12rem;margin-top:.6rem">It notices your fatigue building across the week and tells you, in plain language, what <i>your own care team</i> said to watch for — and that this isn't yet the thing to call about. One tap, and your sister, partner and two closest friends get a calm update — not the gory details, just <em style="color:#9fe0e1">"tired today, treatment Thursday, could use a lift."</em> Within an hour your sister has claimed the lift and a friend dropped off dinner. You made no calls and retold the story zero times.</p>
+    <p style="color:#cdd9dd;max-width:840px;font-size:1.12rem;margin-top:.6rem">Before Thursday, ditto hands you a one-page brief your oncologist actually thanks you for.</p>
+    <p style="color:#9fe0e1;max-width:840px;margin-top:1rem;font-weight:600">You never "used an app." A companion showed up — for you and the people carrying this with you. That is the category.</p>
+  </div></section>
+
+  <!-- 19 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">The build — ruthlessly sequenced</div>
+    <h2>Vision = the OS. Build = one loop.</h2>
+    <p>Layer onto the existing summary, in this order:</p>
+    <div class="grid g3" style="margin-top:1rem">
+      <div class="card"><h3>① Daily check-in</h3><p>The habit engine. Low-effort, adaptive-cadence symptom/mood/med log anchored on "what did my team say to watch for?" — <b>no triage verdict</b> (stays non-device). Goes quiet on bad days; the caregiver can carry it.</p></div>
+      <div class="card"><h3>② The circle</h3><p>The growth engine. Permissioned, no-repeat updates + "here's how to help," built on existing proxy rails (DE ePA, NL DigiD Machtigen). Privacy-by-design — a <b>P0</b>.</p></div>
+      <div class="card"><h3>③ The summary, reframed</h3><p>Now grounded in a month of real daily data, shareable to the circle in one tap. The crystallisation, not the core.</p></div>
+    </div>
+    <p style="margin-top:1.1rem;color:var(--muted)"><b>Explicitly deferred:</b> true clinical triage (until a deliberate CE-marked/DiGA module is justified), full record aggregation, lifestyle/peer-community layers, multi-journey expansion.</p>
+  </div></section>
+
+  <!-- 20 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Intellectual honesty — the red-team</div>
+    <h2>What could kill this</h2>
+    <p>The vision is bold; these are <em>hypotheses, not wins.</em> Treated as first-order risks, not footnotes.</p>
+    <table>
+      <tr><th>Risk</th><th>Verdict</th></tr>
+      <tr><td><b>Monetisation / who pays</b> — EU patient-pay is hard; DiGA needs the device status we're avoiding early</td><td><span class="tag" style="background:#fbeee6;color:var(--coral)">biggest, unresolved</span></td></tr>
+      <tr><td><b>Network effects compound</b> — CaringBridge/WhatsApp exist & didn't become a category</td><td><span class="tag">aspirational</span></td></tr>
+      <tr><td><b>Daily engagement from the sick</b> — fatigue & "I want to forget I'm ill" fight a daily habit</td><td><span class="tag">unproven</span></td></tr>
+      <tr><td><b>The valuable feature is the regulated one</b> — the de-risked version may be a vitamin</td><td><span class="tag">real tension</span></td></tr>
+      <tr><td><b>Privacy/trust</b> — health data + a circle is a GDPR minefield; one breach ends trust</td><td><span class="tag">P0 by design</span></td></tr>
+    </table>
+    <div class="src"><b>See:</b> <i>synthesis/12 — full red-team critique.</i></div>
+  </div></section>
+
+  <!-- 21 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">What must be true — next steps</div>
+    <h2>Evidence-gated, cheapest first</h2>
+    <ul style="margin-top:.6rem">
+      <li><strong>Step 0 (this week, near-free):</strong> measure the actual problem — pull ditto's own usage/retention data to quantify the frequency problem before re-architecting around it.</li>
+      <li><strong>Step 1 (concierge):</strong> two parallel 30-person cohorts (cancer+caregiver vs MS/autoimmune). Metrics: D30 daily-check-in retention (≥40% on ≥4 days/wk), circle size seeded, and <b>whether any loved one starts their own circle</b> — the network seed.</li>
+      <li><strong>Step 2 (parallel spikes):</strong> price-probe who pays (patient / loved-one-as-payer / B2B2C-insurer-DiGA); get a regulatory read that the non-device design stays outside MDR.</li>
+      <li><strong>The gate:</strong> don't scale until engagement, a credible payer, and the non-device design are all validated.</li>
+    </ul>
+  </div></section>
+
+  <!-- 22 -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Open questions to hold</div>
+    <h2>The question above all others</h2>
+    <p class="big-quote" style="max-width:860px">Are we building a daily companion that happens to make summaries — <span class="hl">or a summary tool pretending to be daily?</span></p>
+    <p style="margin-top:1.2rem;max-width:820px">Every roadmap decision gets tested against one thing: does it increase <strong>daily, multi-player</strong> engagement? Other open questions: which beachhead compounds fastest · can the non-device "watch-for" feature retain without a verdict · who is the payer · how much value can we deliver from patient-entered data <i>before</i> EHDS flows in 2029.</p>
+    <p style="margin-top:1rem;color:var(--ink-soft)">The vision is the operating system for living with serious illness. The discipline is to earn it <em>one validated loop at a time.</em></p>
+  </div></section>
+
+  <!-- 23 -->
+  <section class="slide" style="background:#0a5d63"><div class="inner" style="color:#eafafa">
+    <div class="kicker" style="color:#9fe0e1">The bet</div>
+    <p class="big-quote" style="color:#fff;max-width:900px">Change the unit from the <span style="color:#ffd9cf">appointment to the day</span>, and from the <span style="color:#ffd9cf">patient to the patient-and-circle.</span></p>
+    <p style="color:#dff3f2;margin-top:1.4rem;max-width:820px;font-size:1.15rem">Stop being "AI summaries of appointments." Become <strong style="color:#fff">the Living Health Companion</strong> — the daily operating system for patients and the people who love them. That is the category-defining flip, and the answer to the frequency problem.</p>
+    <p style="margin-top:2rem;color:#9fe0e1"><span class="logo" style="color:#fff;font-size:1.4rem">ditto</span> &nbsp;·&nbsp; full research: <i>README.md</i> &nbsp;·&nbsp; master doc: <i>synthesis/13</i></p>
+  </div></section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="Previous">‹</button>
+  <span id="count">1 / 23</span>
+  <button id="next" aria-label="Next">›</button>
+</div>
+<div class="foot"><span class="logo">ditto</span> · Living Health Companion · 2026-05-31 · grounded & cited</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0; const bar=document.getElementById('bar'), count=document.getElementById('count');
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    bar.style.width=((i)/(slides.length-1)*100)+'%';
+    count.textContent=(i+1)+' / '+slides.length;
+    slides[i].scrollTop=0;
+  }
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();show(i+1);}
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(i-1);}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(slides.length-1);}
+  });
+  show(0);
+</script>
+</body>
+</html>
