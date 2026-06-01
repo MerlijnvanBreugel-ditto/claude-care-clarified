@@ -96,6 +96,26 @@
 - Epic sued over MyChart record fragmentation, 2025. https://www.beckershospitalreview.com/healthcare-information-technology/ehrs/epic-sued-over-claims-mychart-fragments-patient-medical-records/ (T2/news)
 - Hedy AI — patient/caregiver appointment capture. https://www.hedy.ai/post/best-ai-patient-tools/ (T3/company)
 
+## Moat & platform strategy (synthesis/14)
+*VC / Lenny's-Newsletter frameworks and healthcare platform examples. Several primary pages (lennysnewsletter.com, nfx.com, reforge.com, a16z, BVP) block automated fetch; quotes are close paraphrases verified across secondary sources — confirm verbatim before external use.*
+- Hamilton Helmer — 7 Powers, Lenny's Podcast (moats are sequenced; Power = Benefit + Barrier). https://www.lennysnewsletter.com/p/business-strategy-with-hamilton-helmer · https://7powers.com/ (Blog/VC)
+- Casey Winters — "Magic Tricks, Moats, and the Three-Body Problem of AI." https://www.caseyaccidental.com/p/magic-tricks-moats-and-the-three (Blog/VC)
+- Sarah Tavel — Hierarchy of Engagement (accruing benefits + mounting losses). https://sarahtavel.medium.com/the-hierarchy-of-engagement-5803bf4e6cfa · https://www.lennysnewsletter.com/p/the-hierarchy-of-engagement-sarah (Blog/VC)
+- Brian Balfour — Growth Loops / Four Fits (Reforge). https://www.reforge.com/blog/growth-loops · https://brianbalfour.com/four-fits-growth-framework (Blog/VC)
+- Kevin Kwok — "Why Figma Wins" (loop sequencing). https://kwokchain.com/2020/06/19/why-figma-wins/ (Blog/VC)
+- NFX — Truth about data network effects · The 4 Types of Defensibility. https://www.nfx.com/post/truth-about-data-network-effects · https://www.nfx.com/post/the-four-types-of-defensibility (Blog/VC)
+- Parker Conrad — Compound Startup (moat = shared data layer, not the bundle). https://www.rippling.com/glossary/compound-startup · https://www.saastr.com/rippling-ceo-parker-conrads-theory-of-the-compound-startup/ (Blog/News)
+- Tomasz Tunguz — negative net churn / product expansion; "distribution is the only long-term moat." https://tomtunguz.com/engendering-negative-churn/ (Blog/VC)
+- a16z — Fintech scales vertical SaaS · It's time to build healthtech infrastructure · Software eating care delivery / payvidor. https://a16z.com/fintech-scales-vertical-saas/ · https://a16z.com/its-time-to-build-healthtech-infrastructure/ · https://a16z.com/2019/07/31/how-software-is-eating-care-delivery-in-healthcare/ (Blog/VC)
+- Bessemer — State of Health AI 2026 / Roadmap: 10 Laws of Healthcare (wedge-then-expand; validation as moat). https://www.bvp.com/atlas/state-of-health-ai-2026 (Blog/VC)
+- Babylon Health collapse (anti-pattern). https://sifted.eu/articles/the-rise-and-fall-of-babylon · https://theweek.com/health/babylon-health-the-failed-ai-wonder-app-that-dazzled-politicians (News)
+- D2C→B2B2C pivots: Infermedica · Ada Health. https://www.mobihealthnews.com/news/emea/symptom-checker-infermedica-scores-365m-continues-move-us-market · https://en.wikipedia.org/wiki/Ada_Health (News)
+- B2B2C channel scale: Hinge Health / Sword Health. https://sacra.com/c/hinge-health/ (News)
+- Data-asset exemplars: Flatiron (Roche $1.9B) · Komodo Health · PatientsLikeMe · Outcomes4Me · Belong.Life. https://www.biopharmadive.com/news/roche-buys-cancer-data-company-flatiron-health-for-19b/517285/ · https://www.komodohealth.com/ · https://belong.life/ (Official/News)
+- Platform/infrastructure: Huma (SaMD platform) · Epic MyChart / SMART-on-FHIR. https://www.huma.com/ · https://www.fiercehealthcare.com/health-tech/epic-rolls-out-new-feature-give-patients-easier-share-medical-records-health-apps (Official/News)
+- Regulatory moat: BfArM DiGA · DiGA 2026 RWD rules · DiGA 3-yr evolution. https://www.bfarm.de/EN/Medical-devices/Tasks/DiGA-and-DiPA/Digital-Health-Applications/Interesting-facts/_artikel.html · https://www.insideeulifesciences.com/2026/02/03/germany-changes-rules-for-digital-health-applications/ · https://www.nature.com/articles/s41746-024-01137-1 (Official/Peer)
+- EU data hub: EHDS · MedMij/PGO (NL). https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en · https://medmij.nl/en/home/ (Official)
+
 ---
 
 ### Verification & caveats

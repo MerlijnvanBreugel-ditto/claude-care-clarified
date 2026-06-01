@@ -30,6 +30,7 @@ Deep research into the overlooked, high-reach problems people face at life-chang
 | [`synthesis/11-contrarian-founder-lens.md`](synthesis/11-contrarian-founder-lens.md) | The Ek/Chesky lens: category, wedge, 11-star, questions |
 | [`synthesis/12-red-team-critique.md`](synthesis/12-red-team-critique.md) | Adversarial self-critique |
 | [`synthesis/13-synthesis-final.md`](synthesis/13-synthesis-final.md) | **Master document (read this first)** |
+| [`synthesis/14-moat-and-platform-strategy.md`](synthesis/14-moat-and-platform-strategy.md) | App→platform: five diverse moat directions beyond network effects (VC/Lenny lens) |
 | [`sources.md`](sources.md) | Consolidated citation bibliography |
 
 ## The one-paragraph takeaway
