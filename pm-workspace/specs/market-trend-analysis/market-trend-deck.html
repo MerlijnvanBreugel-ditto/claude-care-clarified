@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market &amp; Trend Map — Outside-In Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D164F; --mint: #E0FBD5; --teal: #58B6D2; --yellow: #F3DE70;
+    --orange: #E8916E; --lavender: #BEAEF8; --cream: #EFE9DE; --light-blue: #B2DCF5;
+    --light-gray: #F1F1F1; --text-light: #7C8297; --red: #D94F4F; --green: #2D8A50;
+    --divider: #EAEAEA; --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-body); background: #FFFFFF; color: var(--navy); overflow: hidden; height: 100vh; width: 100vw; }
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: center; justify-content: safe center;
+    padding: 5.5vh 7vw 6vh; opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    overflow-y: auto; overflow-x: hidden;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide--default { background: #FFFFFF; color: var(--navy); }
+  .slide--navy { background: var(--navy); color: #F8F7F4; }
+  .slide::-webkit-scrollbar { width: 8px; }
+  .slide::-webkit-scrollbar-thumb { background: rgba(88,182,210,0.3); border-radius: 4px; }
+  .wrap { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+  h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.4rem, 5vw, 4.3rem); line-height: 1.08; margin-bottom: 0.35em; letter-spacing: -0.02em; }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 3.1vw, 2.6rem); line-height: 1.13; margin-bottom: 0.45em; letter-spacing: -0.01em; }
+  h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.05rem, 1.9vw, 1.42rem); line-height: 1.25; margin-bottom: 0.35em; }
+  h4 { font-family: var(--font-display); font-weight: 700; font-size: clamp(0.95rem,1.3vw,1.1rem); margin-bottom: 0.2em; }
+  p, li { font-family: var(--font-body); font-weight: 500; font-size: clamp(0.92rem, 1.25vw, 1.12rem); line-height: 1.5; }
+  .subtitle { font-family: var(--font-body); font-weight: 400; font-size: clamp(0.98rem, 1.25vw, 1.12rem); line-height: 1.55; color: var(--text-light); max-width: 48em; }
+  .slide--navy .subtitle { color: #B9C0D8; }
+  .label { font-family: var(--font-body); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; color: var(--teal); }
+
+  blockquote { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.22; padding-left: 0.7em; margin: 0.5em 0; max-width: 20em; border-left: 5px solid var(--yellow); letter-spacing: -0.01em; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4vw; margin-top: 1em; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5vw; margin-top: 1em; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 0.7em; font-size: clamp(0.76rem, 1vw, 0.96rem); }
+  th, td { text-align: left; padding: 0.42em 0.75em; font-weight: 500; vertical-align: top; }
+  th { font-family: var(--font-display); font-weight: 700; font-size: clamp(0.68rem, 0.9vw, 0.84rem); text-transform: uppercase; letter-spacing: 0.04em; color: var(--teal); border-bottom: 2px solid rgba(88,182,210,0.25); }
+  td { border-bottom: 1px solid rgba(13,22,79,0.06); }
+  .slide--navy th { color: var(--teal); border-bottom-color: rgba(88,182,210,0.3); }
+  .slide--navy td { border-bottom-color: rgba(255,255,255,0.08); }
+  table.tight th, table.tight td { padding: 0.34em 0.7em; font-size: clamp(0.72rem,0.95vw,0.9rem); }
+
+  .card { border-radius: 12px; padding: 1em 1.2em; margin-bottom: 0.55em; background: rgba(13,22,79,0.03); border: 1px solid rgba(13,22,79,0.06); }
+  .slide--navy .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.08); }
+
+  ul, ol { padding-left: 1.15em; margin-top: 0.3em; }
+  li { margin-bottom: 0.28em; }
+  li::marker { color: var(--teal); }
+  .highlight { color: var(--teal); } .slide--navy .highlight { color: var(--yellow); }
+  strong { font-weight: 700; }
+
+  .flow { display: flex; align-items: center; gap: 0.5em; margin: 1em 0; flex-wrap: wrap; }
+  .flow-item { background: rgba(88,182,210,0.1); border: 1px solid rgba(88,182,210,0.2); border-radius: 10px; padding: 0.5em 0.9em; font-family: var(--font-display); font-weight: 600; font-size: clamp(0.82rem, 1.05vw, 1rem); white-space: nowrap; }
+  .flow-arrow { color: var(--teal); font-size: 1.1rem; opacity: 0.5; }
+  .slide--navy .flow-item { background: rgba(88,182,210,0.15); border-color: rgba(88,182,210,0.3); }
+
+  .pill { display: inline-block; font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; padding: 0.16em 0.6em; border-radius: 100px; margin-right: 0.2em; white-space: nowrap; }
+  .pill--teal { background: rgba(88,182,210,0.15); color: var(--teal); }
+  .pill--gold { background: rgba(243,222,112,0.4); color: #8a7012; }
+  .pill--red { background: rgba(217,79,79,0.12); color: var(--red); }
+  .pill--green { background: rgba(45,138,80,0.12); color: var(--green); }
+
+  a.ref { font-family: var(--font-body); font-weight: 600; font-size: 0.72em; color: var(--teal); text-decoration: none; white-space: nowrap; opacity: 0.9; }
+  a.ref:hover { text-decoration: underline; opacity: 1; }
+  .slide--navy a.ref { color: var(--yellow); }
+
+  details.drop { border: 1px solid rgba(88,182,210,0.28); border-radius: 10px; padding: 0 0.95em; margin-top: 0.55em; background: rgba(88,182,210,0.045); }
+  details.drop summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: clamp(0.82rem,1vw,0.95rem); color: var(--teal); padding: 0.55em 0; list-style: none; }
+  details.drop summary::-webkit-details-marker { display: none; }
+  details.drop summary::before { content: '▸  '; font-size: 0.8em; }
+  details.drop[open] summary::before { content: '▾  '; }
+  details.drop .drop-body { padding: 0.05em 0 0.8em; font-size: clamp(0.82rem,1vw,0.93rem); }
+  .slide--navy details.drop { border-color: rgba(88,182,210,0.32); background: rgba(255,255,255,0.04); }
+
+  .progress { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--teal); transition: width 0.35s ease; z-index: 100; }
+  .counter { position: fixed; bottom: 1.2em; right: 1.5em; font-family: var(--font-body); font-weight: 500; font-size: 0.78rem; opacity: 0.4; z-index: 100; }
+
+  .mt-1 { margin-top: 0.5em; } .mt-2 { margin-top: 1em; } .mt-3 { margin-top: 1.5em; }
+  .small { font-size: clamp(0.74rem, 0.95vw, 0.86rem); opacity: 0.55; }
+  .estimate { font-size: 0.7rem; font-weight: 600; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85em 1.25em; margin-top: 1em; }
+  .stat .num { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.45rem, 2.9vw, 2.3rem); color: var(--teal); line-height: 1; letter-spacing: -0.02em; }
+  .stat .lbl { font-size: clamp(0.76rem, 0.96vw, 0.9rem); opacity: 0.72; margin-top: 0.38em; line-height: 1.32; }
+
+  .ladder { display: flex; flex-direction: column; gap: 0.32em; margin-top: 0.9em; max-width: 42em; }
+  .rung { display: grid; grid-template-columns: 9em 1fr; gap: 1em; align-items: baseline; padding: 0.5em 1em; border-radius: 10px; }
+  .rung .rn { font-family: var(--font-display); font-weight: 700; font-size: clamp(0.9rem,1.2vw,1.06rem); }
+  .rung:nth-child(1){ background: rgba(88,182,210,0.05);} .rung:nth-child(2){ background: rgba(88,182,210,0.09);}
+  .rung:nth-child(3){ background: rgba(88,182,210,0.14);} .rung:nth-child(4){ background: rgba(88,182,210,0.2);}
+
+  .axes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1vw; margin-top: 1em; }
+  .axis { border-radius: 14px; padding: 1.1em 1.2em; border: 1px solid rgba(13,22,79,0.08); }
+  .axis.clarity { background: rgba(88,182,210,0.1); border-color: rgba(88,182,210,0.3); }
+  .axis.connection { background: rgba(243,222,112,0.22); border-color: rgba(243,222,112,0.5); }
+  .axis.convenience { background: rgba(13,22,79,0.04); }
+  .axis h3 { margin-bottom: 0.1em; } .axis .ax-sub { font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.5em; }
+  .axis p { font-size: clamp(0.8rem,1vw,0.94rem); }
+
+  .matrix { display: grid; grid-template-columns: 6em 1fr 1fr; grid-auto-rows: minmax(0,1fr); gap: 0.5em; margin-top: 0.9em; max-width: 52em; }
+  .matrix .col-h, .matrix .row-h { font-family: var(--font-display); font-weight: 700; font-size: clamp(0.74rem,1vw,0.9rem); color: var(--teal); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.15; }
+  .matrix .cell { border-radius: 12px; padding: 0.75em 0.9em; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+  .matrix .cell p { font-size: clamp(0.76rem,1vw,0.9rem); opacity: 0.85; }
+  .matrix .cell.target { background: rgba(88,182,210,0.18); border-color: rgba(88,182,210,0.4); }
+  .matrix .cell.target h4 { color: var(--yellow); }
+  .matrix .cell.danger { background: rgba(217,79,79,0.14); border-color: rgba(217,79,79,0.4); }
+
+  .big { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.9rem, 4vw, 3.3rem); line-height: 1.1; letter-spacing: -0.02em; max-width: 17em; }
+  .divnum { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 9vw, 8rem); color: var(--teal); opacity: 0.3; line-height: 0.9; }
+
+  @media (max-width: 768px) {
+    .slide { padding: 4vh 6vw 6vh; }
+    .two-col, .three-col, .stat-grid, .axes { grid-template-columns: 1fr; gap: 0.8em; }
+    .matrix { grid-template-columns: 1fr; } .matrix .col-h { display: none; }
+    .rung { grid-template-columns: 1fr; gap: 0.1em; }
+    table { font-size: 0.74rem; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 0 TITLE -->
+<div class="slide slide--default" data-slide="0"><div class="wrap">
+  <div class="label">Ditto Care · Strategy Input · May 2026</div>
+  <h1>Market &amp; Trend Map</h1>
+  <p class="subtitle mt-2">An outside-in scan of competitors, the market, and where the puck is going. EU-primary, US as a leading signal. Layered horizon: 12–18 months and 3–5 years.</p>
+  <p class="subtitle mt-2">Built from 14 sourced research briefs. Every claim links to its source. Built to walk for ~30 minutes without reading the documents.</p>
+  <p class="small mt-3">Navigate: arrow keys, click left/right half, or swipe. Click <span class="highlight">▸ drop-downs</span> for the deep version. Click <span class="highlight">[source ↗]</span> links to open articles.</p>
+</div></div>
+
+<!-- 1 HOW TO READ -->
+<div class="slide slide--default" data-slide="1"><div class="wrap">
+  <div class="label">How to read this</div>
+  <h2>Three layers of depth, organised on three axes</h2>
+  <div class="three-col mt-1">
+    <div class="card"><h3>1. The slide</h3><p>The headline and the "so what." Enough on its own.</p></div>
+    <div class="card"><h3>2. ▸ Drop-downs</h3><p>Click to expand the detail, numbers, and nuance.</p></div>
+    <div class="card"><h3>3. [source ↗]</h3><p>Every factual claim links to its article. Click to verify.</p></div>
+  </div>
+  <p class="mt-2">The strategic spine is three axes: <span class="highlight">Clarity</span> (understand your care), <span class="highlight">Connection</span> (family / care circle), <span class="highlight">Convenience</span> (access / scheduling). We map the market on each.</p>
+  <p class="small mt-1"><span class="estimate">Estimate</span> tags mark reasoned analyst estimates, not published figures.</p>
+</div></div>
+
+<!-- 2 THE ONE THING -->
+<div class="slide slide--navy" data-slide="2"><div class="wrap">
+  <div class="label">The one thing</div>
+  <p class="big">The summary is commoditizing. The moat is the <span class="highlight">patient &amp; family care layer</span>, and it has a clock.</p>
+  <p class="subtitle mt-3">Institutions will ship the patient-friendly summary for free in NL/BE around <strong style="color:#fff;">2027–28</strong> <span class="estimate">estimate</span>. The durable advantage is patient-owned, family-shared, cross-provider, consent-first, and clinician-grounded. A network moat, not a feature moat. The recorded visit is the wedge, not the product.</p>
+</div></div>
+
+<!-- 3 METHOD -->
+<div class="slide slide--default" data-slide="3"><div class="wrap">
+  <div class="label">How this was built</div>
+  <h2>14 sourced briefs</h2>
+  <p class="subtitle">Every claim cited, recency-flagged, contrarian evidence included, fact / inference / recommendation kept separate.</p>
+  <div class="three-col mt-1">
+    <div><h3>Phase 1</h3><ul><li>Regulation &amp; AI incidents</li><li>EU reimbursement</li><li>Competitive landscape</li><li>US demand-side macro</li><li>Incumbent platforms</li></ul></div>
+    <div><h3>Phase 2</h3><ul><li>Classification × reimbursement</li><li>Encroachment (native-language)</li><li>Relationship / family moat</li></ul></div>
+    <div><h3>Extension</h3><ul><li>Consumer wearables</li><li>AI developments</li><li>Where the relationship lives</li><li>Telling headlines</li><li>EU shipped + scribe apps</li><li>EU AI / WhatsApp / Hello 24/7</li><li>The three axes</li></ul></div>
+  </div>
+  <p class="small mt-1">Deferred by choice: capital/M&amp;A; defensibility is left as your own conclusion to draw from this.</p>
+</div></div>
+
+<!-- 4 DIVIDER 01 -->
+<div class="slide slide--navy" data-slide="4"><div class="wrap">
+  <div class="divnum">01</div>
+  <h1 style="margin-top:0.1em;">Where the market is moving</h1>
+  <p class="subtitle">Headlines, wearables, and the AI shift. The forces that set direction.</p>
+</div></div>
+
+<!-- 5 HEADLINES (ALL ON ONE) -->
+<div class="slide slide--default" data-slide="5"><div class="wrap">
+  <div class="label">10 headlines that tell the story · last 6 months</div>
+  <h2>What just happened in the market</h2>
+  <table class="tight">
+    <tr><th>Headline</th><th>Why it matters</th></tr>
+    <tr><td><strong>Kin Health raises $9M</strong> for an AI notetaker for patients: records visits, summarizes, shares with family. <a class="ref" href="https://techcrunch.com/2026/05/18/kin-health-raises-9m-to-build-an-ai-notetaker-for-patients/" target="_blank" rel="noopener">[TechCrunch ↗]</a></td><td>A direct competitor on our exact wedge, now funded.</td></tr>
+    <tr><td><strong>40M ask ChatGPT health questions daily</strong>; in NL ~32% used AI for health in a year. <a class="ref" href="https://www.healthcaredive.com/news/40-million-use-chatgpt-health-questions-openai/808861/" target="_blank" rel="noopener">[Healthcare Dive ↗]</a> <a class="ref" href="https://www.unive.nl/zorgverzekering/onderzoek-raadplegen-ai-bij-gezondheidsvragen" target="_blank" rel="noopener">[Univé ↗]</a></td><td>The "explain my care" demand is massive and now European.</td></tr>
+    <tr><td><strong>OpenEvidence ($12B) withdrew from the EU/UK</strong> over AI Act risk. <a class="ref" href="https://www.thelancet.com/journals/lanepe/article/PIIS2666-7762(26)00130-4/fulltext" target="_blank" rel="noopener">[Lancet ↗]</a></td><td>The best-funded clarity player just vacated our home market.</td></tr>
+    <tr><td><strong>All three AI labs entered consumer health in one Jan-2026 week</strong> (ChatGPT Health, Claude for Healthcare, Gemini coach). <a class="ref" href="https://fortune.com/2026/01/07/openai-launches-chatgpt-health-in-a-push-to-become-a-hub-for-personal-health-data/" target="_blank" rel="noopener">[Fortune ↗]</a></td><td>Foundation models are now platform and competitor.</td></tr>
+    <tr><td><strong>Oura + Fullscript</strong> push wearable data into clinical workflows; <strong>Whoop $10.1B</strong> with Abbott + Mayo. <a class="ref" href="https://medcitynews.com/2026/01/fullscript-oura-partnership/" target="_blank" rel="noopener">[MedCity ↗]</a></td><td>Wearables are crossing into the clinical record.</td></tr>
+    <tr><td><strong>Google's $9.99/mo Gemini health coach launches May 19.</strong> <a class="ref" href="https://techcrunch.com/2026/05/07/googles-9-99-per-month-ai-health-coach-launches-may-19/" target="_blank" rel="noopener">[TechCrunch ↗]</a></td><td>Big tech going consumer-direct on health.</td></tr>
+    <tr><td><strong>Abridge raises $300M, $5.3B valuation</strong>; ships a consumer "Abridge for Patients" app. <a class="ref" href="https://www.fiercehealthcare.com/ai-and-machine-learning/ambient-ai-startup-abridge-scores-300m-series-e-backed-a16z-and-khosla" target="_blank" rel="noopener">[Fierce ↗]</a></td><td>A scribe with a patient app and family sharing. The closest analog.</td></tr>
+    <tr><td><strong>ZAS Antwerp goes live with B1-level patient summaries</strong> (~40k/yr) inside the portal. <a class="ref" href="https://nieuws.zas.be/primeur-zas-maakt-medische-verslagen-begrijpelijk-met-ai" target="_blank" rel="noopener">[ZAS ↗]</a></td><td>The institution is starting to give patients the summary for free.</td></tr>
+    <tr><td><strong>Ontario AG: all 20 approved AI-scribe vendors hallucinating</strong>, ~5,000 doctors. <a class="ref" href="https://oecd.ai/en/incidents/2026-05-12-76df" target="_blank" rel="noopener">[OECD.AI ↗]</a></td><td>The category's trust crisis is breaking now. Our exact failure mode.</td></tr>
+    <tr><td><strong>Poll: 88% want AI disclosure; only 11% trust AI for diagnosis alone.</strong> <a class="ref" href="https://www.wfsb.com/2026/01/20/poll-shows-ai-changing-healthcare-patients-seek-transparency/" target="_blank" rel="noopener">[WFSB ↗]</a></td><td>The trust gap is large and explicit. Transparency differentiates.</td></tr>
+  </table>
+</div></div>
+
+<!-- 6 WEARABLES LADDER -->
+<div class="slide slide--default" data-slide="6"><div class="wrap">
+  <div class="label">Consumer health · wearables</div>
+  <h2>Wearables are climbing from data to clinical integration</h2>
+  <p class="subtitle">2025–26 is when the leaders crossed from rungs 1–2 into 3–4: selling "healthspan," not steps. <a class="ref" href="https://athletechnews.com/how-wearables-are-evolving-from-fitness-trackers-to-health-systems/" target="_blank" rel="noopener">[Athletech ↗]</a></p>
+  <div class="ladder">
+    <div class="rung"><span class="rn">1 · Data</span><span>Raw signals: steps, HR, sleep, SpO2.</span></div>
+    <div class="rung"><span class="rn">2 · Insight</span><span>AI interpretation: readiness, trends, "what this means."</span></div>
+    <div class="rung"><span class="rn">3 · Prescriptive</span><span>Coaching and action: AI health agents telling you what to do.</span></div>
+    <div class="rung"><span class="rn">4 · Clinical</span><span>Data into clinician workflows; FDA-cleared features; care delivery.</span></div>
+  </div>
+  <p class="mt-2"><strong>The signal:</strong> the prescriptive layer is becoming an AI health agent aimed at "understand my health." <span class="highlight">But none of them capture what the clinician actually said.</span></p>
+</div></div>
+
+<!-- 7 WHOOP + OURA -->
+<div class="slide slide--default" data-slide="7"><div class="wrap">
+  <div class="label">Wearables · the two leaders</div>
+  <h2>Whoop and Oura are health platforms now, not trackers</h2>
+  <div class="two-col mt-1">
+    <div class="card"><h3>Whoop</h3>
+      <ul><li><strong>$10.1B</strong> valuation; Abbott + Mayo Clinic on the cap table <a class="ref" href="https://thenextweb.com/news/whoop-series-g-575m-valuation-ipo-health-platform" target="_blank" rel="noopener">[TNW ↗]</a></li>
+      <li>Whoop MG: FDA-cleared ECG <a class="ref" href="https://www.whoop.com/us/en/press-center/whoop-unveils-5.0-MG/" target="_blank" rel="noopener">[Whoop ↗]</a></li>
+      <li>Advanced Labs: blood panels via Quest <a class="ref" href="https://www.businesswire.com/news/home/20260416833481/en/WHOOP-Launches-Specialized-Panels-to-Deliver-Deeper-More-Personalized-Health-Insights" target="_blank" rel="noopener">[BusinessWire ↗]</a></li></ul>
+    </div>
+    <div class="card"><h3>Oura</h3>
+      <ul><li><strong>~$11B</strong> valuation; 5.5M rings; &gt;$1B revenue <a class="ref" href="https://www.cnbc.com/2025/10/14/oura-ringmaker-valuation-fundraise.html" target="_blank" rel="noopener">[CNBC ↗]</a></li>
+      <li>AI Advisor + glucose via Dexcom <a class="ref" href="https://www.fiercehealthcare.com/digital-health/smart-ring-maker-oura-picks-75m-series-d-inks-strategic-partnership-dexcom" target="_blank" rel="noopener">[Fierce ↗]</a></li>
+      <li>Into clinical: Fullscript, Lumeris, DoD <a class="ref" href="https://medcitynews.com/2026/01/fullscript-oura-partnership/" target="_blank" rel="noopener">[MedCity ↗]</a></li></ul>
+    </div>
+  </div>
+  <details class="drop"><summary>The contrarian case (accuracy &amp; overreach)</summary><div class="drop-body">Accuracy still wobbles (energy-expenditure error up to ~28%, sleep overestimation, weaker HR on darker skin) <a class="ref" href="https://wellnesspulse.com/research/accuracy-of-fitness-trackers/" target="_blank" rel="noopener">[WellnessPulse ↗]</a>. Whoop drew an FDA warning letter over its BP feature, now anchoring a class action <a class="ref" href="https://www.afslaw.com/perspectives/longevity-lens/whoop-there-it-fda-warning-letter-now-anchors-class-action-against" target="_blank" rel="noopener">[ArentFox ↗]</a>. Overclaiming medical function is costly, which is why a verified, clinician-grounded layer is defensible.</div></details>
+</div></div>
+
+<!-- 8 BIG TECH WEARABLES -->
+<div class="slide slide--default" data-slide="8"><div class="wrap">
+  <div class="label">Wearables · big tech</div>
+  <h2>Closest to the "doctor visit," but pulling back</h2>
+  <table>
+    <tr><th>Player</th><th>Move</th><th>Read</th></tr>
+    <tr><td><strong>Google / Fitbit</strong></td><td>Gemini "Personal Health Coach," 500k+ testers, helps users <em>"get more from doctor's visits"</em> <a class="ref" href="https://blog.google/products/fitbit/fitbit-ai-personal-health-coach-preview/" target="_blank" rel="noopener">[blog.google ↗]</a></td><td><span class="pill pill--gold">Most adjacent</span> Our exact job, from the wearable side.</td></tr>
+    <tr><td><strong>Apple</strong></td><td>Series 11 FDA-cleared hypertension <a class="ref" href="https://www.engadget.com/wearables/apple-watch-series-11-receives-fda-clearance-for-hypertension-alerts-120046138.html" target="_blank" rel="noopener">[Engadget ↗]</a>; <strong>scaled back the AI doctor "Mulberry"</strong> (Feb 2026) <a class="ref" href="https://www.bloomberg.com/news/articles/2026-02-05/apple-is-scaling-back-plans-for-new-ai-based-health-coach-service" target="_blank" rel="noopener">[Bloomberg ↗]</a></td><td><span class="pill pill--teal">Hardware-led</span></td></tr>
+    <tr><td><strong>Samsung</strong></td><td>BP, ECG, FDA-first sleep apnea <a class="ref" href="https://news.samsung.com/us/samsung-blood-pressure-monitoring-feature-available" target="_blank" rel="noopener">[Samsung ↗]</a></td><td><span class="pill pill--teal">Fast follower</span></td></tr>
+  </table>
+  <p class="mt-2"><strong>So what:</strong> even the most adjacent move works off self-tracked data, not the conversation in the consult room.</p>
+</div></div>
+
+<!-- 9 WEARABLES TAKE -->
+<div class="slide slide--navy" data-slide="9"><div class="wrap">
+  <div class="label">Wearables · the take</div>
+  <blockquote>Wearables own the sensor data. Nobody owns what the doctor said.</blockquote>
+  <p class="subtitle mt-2">The emerging "Personal Health OS" is missing one input: the clinician-grounded record of the visit. That is Ditto's raw material, plus the care circle and oncology/EU focus. <strong style="color:#fff;">Own "what the doctor said," feed the agents rather than fight them.</strong></p>
+</div></div>
+
+<!-- 10 AI VOICE -->
+<div class="slide slide--default" data-slide="10"><div class="wrap">
+  <div class="label">AI developments · interface</div>
+  <h2>Voice is becoming the interface. A tailwind.</h2>
+  <ul class="mt-1">
+    <li>Voice mode is moving from feature to primary interface <a class="ref" href="https://techcrunch.com/2025/11/25/chatgpts-voice-mode-is-no-longer-a-separate-interface/" target="_blank" rel="noopener">[TechCrunch ↗]</a></li>
+    <li>Ambient / voice-first is "rewriting the rules of healthcare" <a class="ref" href="https://www.speechmatics.com/company/articles-and-news/what-is-ambient-ai-how-voice-first-tech-is-rewriting-the-rules-of-healthcare" target="_blank" rel="noopener">[Speechmatics ↗]</a></li>
+    <li>Patient comfort with AI listening in a consult: <strong>21% (2024) → 60% (2026)</strong> <a class="ref" href="https://www.healthcareforesights.com/reports/ai-voice-agents-in-healthcare-market" target="_blank" rel="noopener">[Healthcare Foresights ↗]</a></li>
+  </ul>
+  <div class="card mt-2" style="background:rgba(45,138,80,0.07);border-color:rgba(45,138,80,0.2);"><p><strong>For Ditto:</strong> a product whose raw input is a <em>spoken visit</em> rides this directly. Voice-first is a tailwind, not a threat.</p></div>
+</div></div>
+
+<!-- 11 AI FOUNDATION MODELS -->
+<div class="slide slide--default" data-slide="11"><div class="wrap">
+  <div class="label">AI developments · the big one</div>
+  <h2>In one week (Jan 2026) all three labs entered consumer health</h2>
+  <table>
+    <tr><th>Lab</th><th>What shipped</th></tr>
+    <tr><td><strong>OpenAI — ChatGPT Health</strong></td><td>Connect your patient portal + Apple Health; grounded Q&amp;A on your own labs. <a class="ref" href="https://fortune.com/2026/01/07/openai-launches-chatgpt-health-in-a-push-to-become-a-hub-for-personal-health-data/" target="_blank" rel="noopener">[Fortune ↗]</a></td></tr>
+    <tr><td><strong>Anthropic — Claude for Healthcare</strong></td><td>Via HealthEx; connect medical records; consumer beta. <a class="ref" href="https://fortune.com/2026/01/11/anthropic-unveils-claude-for-healthcare-and-expands-life-science-features-partners-with-healthex-to-let-users-connect-medical-records/" target="_blank" rel="noopener">[Fortune ↗]</a></td></tr>
+    <tr><td><strong>Google — Gemini Health Coach</strong></td><td>$9.99/mo; summarizes medical records. <a class="ref" href="https://blog.google/products-and-platforms/products/google-health/google-health-coach/" target="_blank" rel="noopener">[blog.google ↗]</a></td></tr>
+  </table>
+  <p class="mt-2"><strong>They are Sherlocking the "explain my visit" job</strong> — but three structural gaps protect us:</p>
+  <div class="three-col mt-1">
+    <div class="card"><h4>US / FHIR-first</h4><p>Record connectivity built for the US, not the EU.</p></div>
+    <div class="card"><h4>Single-user</h4><p>No care circle, no family loop.</p></div>
+    <div class="card"><h4>Horizontal</h4><p>Not oncology-deep, not journey-aware.</p></div>
+  </div>
+</div></div>
+
+<!-- 12 AGENTIC + WRAPPER -->
+<div class="slide slide--default" data-slide="12"><div class="wrap">
+  <div class="label">AI developments · agentic &amp; the wrapper question</div>
+  <h2>Agentic is the frame; the wrapper risk is real</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3>Agentic, hype-ahead-of-reality</h3>
+      <ul>
+        <li>Agents that act, not just chat <a class="ref" href="https://www.cnbc.com/2026/03/24/anthropic-claude-ai-agent-use-computer-finish-tasks.html" target="_blank" rel="noopener">[CNBC ↗]</a></li>
+        <li>Only ~3% of health orgs have agents live <a class="ref" href="https://www.microsoft.com/en-us/industry/blog/healthcare/2026/02/12/assessing-healthcares-agentic-ai-readiness-new-research-from-microsoft-and-the-health-management-academy/" target="_blank" rel="noopener">[Microsoft ↗]</a>; Gartner: 40%+ cancelled by 2027 <a class="ref" href="https://www.coherehealth.com/blog/agentic-ai-health-plans-gartner-2026-insights" target="_blank" rel="noopener">[Cohere ↗]</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Generative UI &amp; thin wrappers</h3>
+      <p>Interfaces generated per user; the fixed app is no longer the only unit <a class="ref" href="https://research.google/blog/generative-ui-a-rich-custom-visual-interactive-user-experience-for-any-prompt/" target="_blank" rel="noopener">[Google ↗]</a>. VCs call generic wrappers a death sentence <a class="ref" href="https://www.baytechconsulting.com/blog/why-generic-ai-startups-are-dead-executive-playbook-moats" target="_blank" rel="noopener">[Baytech ↗]</a>.</p>
+    </div>
+  </div>
+  <div class="card mt-2" style="background:rgba(45,138,80,0.07);border-color:rgba(45,138,80,0.2);"><p><strong>The escape from wrapper-death is Ditto's profile:</strong> vertical + regulated + proprietary <strong>patient &amp; family care layer</strong> + embedded care-circle workflow. Treat foundation models as interchangeable engines. The realistic agentic surface is low-risk action (prep, reminders, family updates) where liability blocks the labs.</p></div>
+</div></div>
+
+<!-- 13 DIVIDER 02 -->
+<div class="slide slide--navy" data-slide="13"><div class="wrap">
+  <div class="divnum">02</div>
+  <h1 style="margin-top:0.1em;">The three axes</h1>
+  <p class="subtitle">Clarity, Connection, Convenience. The strategic lens for reading the whole market.</p>
+</div></div>
+
+<!-- 14 AXES MAPPED -->
+<div class="slide slide--default" data-slide="14"><div class="wrap">
+  <div class="label">The strategic frame</div>
+  <h2>Three axes, three different games</h2>
+  <div class="axes">
+    <div class="axis clarity"><h3>Clarity</h3><div class="ax-sub">Understand your care</div><p><strong>Contested, fast-moving.</strong> ChatGPT, scribes, Onno, OpenEvidence. Where the bet must be made.</p></div>
+    <div class="axis connection"><h3>Connection</h3><div class="ax-sub">Family / care circle</div><p><strong>Fragmented, low-tech, no winner.</strong> CaringBridge, Caren, Hello 24/7, Kin's loop, WhatsApp. Our core moat.</p></div>
+    <div class="axis convenience"><h3>Convenience</h3><div class="ax-sub">Access / scheduling</div><p><strong>Won and consolidated.</strong> Doctolib, ZorgDomein, portals. Integrate, don't compete.</p></div>
+  </div>
+  <p class="mt-2"><strong>The thesis:</strong> concede Convenience. Win <span class="highlight">Connection</span> (the family layer) and a <span class="highlight">trust-and-UX version of Clarity</span> ("understand <em>your</em> care"), not raw intelligence.</p>
+</div></div>
+
+<!-- 15 CONVENIENCE -->
+<div class="slide slide--default" data-slide="15"><div class="wrap">
+  <div class="label">Axis · Convenience</div>
+  <h2>Convenience is already won. Integrate, don't fight.</h2>
+  <ul class="mt-1">
+    <li><strong>Doctolib</strong> ("Dr. Leep"): ~80M patient accounts, ~€348M ARR, active in NL; already sends after-visit summaries and is launching a patient AI <a class="ref" href="https://sifted.eu/articles/doctolib-results-2024" target="_blank" rel="noopener">[Sifted ↗]</a> <a class="ref" href="https://about.doctolib.fr/news/intelligence-artificielle-doctolib-lance-lassistant-de-consultation/" target="_blank" rel="noopener">[Doctolib ↗]</a></li>
+    <li><strong>ZorgDomein</strong> owns the NL referral rail; hospital portals run Epic MyChart <a class="ref" href="https://www.llcp.com/portfolio/zorgdomein/" target="_blank" rel="noopener">[LLCP ↗]</a></li>
+  </ul>
+  <div class="card mt-2"><p><strong>Implication:</strong> a scaled incumbent owns scheduling and is bundling the summary. Compete here and you lose. Treat Doctolib/portals as a <em>distribution surface</em>, not a battleground.</p></div>
+</div></div>
+
+<!-- 16 DIVIDER CONNECTION -->
+<div class="slide slide--navy" data-slide="16"><div class="wrap">
+  <div class="label">Axis · Connection</div>
+  <h1 style="font-size:clamp(2rem,4.5vw,3.6rem);">The relationship is the moat</h1>
+  <p class="subtitle">It already runs daily, scattered across non-purpose-built venues. None owns the whole job. That fragmentation is the opportunity.</p>
+</div></div>
+
+<!-- 17 WHERE RELATIONSHIP LIVES -->
+<div class="slide slide--default" data-slide="17"><div class="wrap">
+  <div class="label">Connection · where it lives today</div>
+  <h2>Four venues, none owning the whole job</h2>
+  <div class="two-col mt-1">
+    <div class="card"><h3>AI chat</h3><p>The clarification venue. Fastest-growing, closest to our job, but ungrounded and solo.</p></div>
+    <div class="card"><h3>WhatsApp</h3><p>The invisible dominant channel for family updates. A distribution rail, not a rival.</p></div>
+    <div class="card"><h3>Communities &amp; care apps</h3><p>CaringBridge, Kanker.nl, Caren, Hello 24/7. Peer support / logistics, not visit comprehension.</p></div>
+    <div class="card"><h3>Facebook / Reddit</h3><p>Open groups. A decaying rail (FB) and a growing one (Reddit).</p></div>
+  </div>
+</div></div>
+
+<!-- 18 AI CHAT VENUE -->
+<div class="slide slide--default" data-slide="18"><div class="wrap">
+  <div class="label">Connection · AI chat as clarification venue</div>
+  <h2>AI chat is the closest behavioral match to our job</h2>
+  <div class="stat-grid">
+    <div class="stat"><div class="num">40M/day</div><div class="lbl">ask ChatGPT health questions <a class="ref" href="https://www.fiercehealthcare.com/ai-and-machine-learning/40m-people-use-chatgpt-answer-healthcare-questions-openai-says" target="_blank" rel="noopener">[Fierce ↗]</a></div></div>
+    <div class="stat"><div class="num">~32%</div><div class="lbl">of NL adults used AI for a health question in a year (Univé) <a class="ref" href="https://www.unive.nl/zorgverzekering/onderzoek-raadplegen-ai-bij-gezondheidsvragen" target="_blank" rel="noopener">[Univé ↗]</a></div></div>
+    <div class="stat"><div class="num">24%</div><div class="lbl">of UK patients use AI/social for health guidance (Semble) <a class="ref" href="https://www.semble.io/en/blog/dr-chatgpt-patients-turning-to-ai-for-health-information" target="_blank" rel="noopener">[Semble ↗]</a></div></div>
+  </div>
+  <p class="mt-2">48% of those questions are to "clarify terminology or instructions" (our after-visit job). Patients already screenshot portal labs into ChatGPT <a class="ref" href="https://kffhealthnews.org/health-industry/electronic-medical-records-patients-ai-chatbots-diagnosis-privacy-accuracy/" target="_blank" rel="noopener">[KFF ↗]</a>. The biggest threat <em>and</em> the strongest proof of demand. But ungrounded, single-user, not GDPR-safe.</p>
+</div></div>
+
+<!-- 19 WHATSAPP + COMMUNITIES -->
+<div class="slide slide--default" data-slide="19"><div class="wrap">
+  <div class="label">Connection · informal channels &amp; communities</div>
+  <h2>The family thread is on WhatsApp; communities own peer support</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3>WhatsApp / social</h3>
+      <p><strong>~89% NL penetration</strong> <a class="ref" href="https://www.statista.com/statistics/1224092/leading-social-networks-netherlands/" target="_blank" rel="noopener">[Statista ↗]</a>. The "how is mum?" thread is already here, with no structure, record, or roles. <strong>Treat it as a distribution rail.</strong></p>
+      <p class="small mt-1">Honest gap: no representative survey quantifies family health-discussion on WhatsApp. Worth one panel question of our own.</p>
+    </div>
+    <div>
+      <h3>Communities</h3>
+      <ul>
+        <li>CaringBridge ~300k visitors/day <a class="ref" href="https://www.prnewswire.com/news-releases/new-caringbridge-impact-report-finds-online-health-communities-reduce-caregiver-loneliness-and-overwhelm-302621615.html" target="_blank" rel="noopener">[PRNewswire ↗]</a></li>
+        <li>Kanker.nl / IKNL — NL oncology, a partner candidate <a class="ref" href="https://www.kanker.nl/overig/over-de-community" target="_blank" rel="noopener">[Kanker.nl ↗]</a></li>
+        <li>Belong.Life launched an AI mentor "Dave" <a class="ref" href="https://www.fiercehealthcare.com/digital-health/belonglife-maker-social-network-cancer-patients-launches-ai-mentor" target="_blank" rel="noopener">[Fierce ↗]</a></li>
+      </ul>
+    </div>
+  </div>
+</div></div>
+
+<!-- 20 HELLO 24/7 -->
+<div class="slide slide--default" data-slide="20"><div class="wrap">
+  <div class="label">Connection · the NL competitor to watch</div>
+  <h2>Hello 24/7: an insurer-reimbursed care-circle app, in your home market</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3>What it is</h3>
+      <p>A Dutch caregiver-coordination ("mantelzorg") app, organising the people around a patient. A direct Connection-axis comparable, and the closest NL analog to the care circle. <a class="ref" href="https://www.hello247.nl/en/hello-premium/" target="_blank" rel="noopener">[Hello 24/7 ↗]</a></p>
+    </div>
+    <div>
+      <h3>Why it matters</h3>
+      <ul>
+        <li>Premium from <strong>€5.83/mo</strong>, <strong>reimbursed 100% by Zilveren Kruis + Menzis</strong></li>
+        <li>~21k users / ~10k families (vendor-reported); B2B2C deal with Thebe (Jul 2025)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card mt-2" style="background:rgba(243,222,112,0.25);border-color:rgba(243,222,112,0.5);"><p><strong>The signal:</strong> NL insurers already reimburse a family-care-circle app. That is a reimbursement path for <em>Connection</em>, distinct from the clinical DiGA route. It is also a competitor that lacks the recorded-visit comprehension layer.</p></div>
+</div></div>
+
+<!-- 21 WIN PATIENT -->
+<div class="slide slide--default" data-slide="21"><div class="wrap">
+  <div class="label">Connection · winning the patient</div>
+  <h2>How the patient is actually won (directly)</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3 class="highlight">What works</h3>
+      <ul>
+        <li><strong>Condition-specific entry</strong> (oncology fits)</li>
+        <li><strong>Trusted-referrer hand-off</strong>: clinician, pharmacy, charity</li>
+        <li><strong>Local-language long-tail SEO</strong></li>
+      </ul>
+      <div class="card mt-1" style="background:rgba(217,79,79,0.06);border-color:rgba(217,79,79,0.2);"><p><span class="pill pill--red">Failure mode</span> Paid installs. Documented to fail for this category.</p></div>
+    </div>
+    <div>
+      <h3 class="highlight">What makes them stay</h3>
+      <p>Retention comes from a <strong>self-monitoring habit</strong> (~80% vs ~60% at 40 weeks) and human/peer support.</p>
+      <p class="mt-1">The one-shot summary has <strong>zero recurrence</strong>. The retention problem, stated in market terms: the artifact does not build a habit.</p>
+    </div>
+  </div>
+</div></div>
+
+<!-- 22 WIN FAMILY -->
+<div class="slide slide--default" data-slide="22"><div class="wrap">
+  <div class="label">Connection · winning the family</div>
+  <h2>Five compounding family mechanics</h2>
+  <p class="subtitle">The family loop and the growth engine are the same thing. Each mechanic has a proof product.</p>
+  <table>
+    <tr><th>Mechanic</th><th>Proof product</th></tr>
+    <tr><td>Free for invitees</td><td>Jointly, CircleCare</td></tr>
+    <tr><td>Differentiated roles (Manager / Viewer / Informed)</td><td>Kin already ships this</td></tr>
+    <tr><td>Value-per-member rises with each join</td><td>Lotsa task feed, CaringBridge</td></tr>
+    <tr><td>The diagnosis trigger as the activation moment</td><td>Cancer-companion playbooks</td></tr>
+    <tr><td>The update / summary as the viral unit</td><td>CaringBridge</td></tr>
+  </table>
+  <p class="small mt-1"><strong>Failure lessons:</strong> stranger-communities get acquired (PatientsLikeMe → UnitedHealth <a class="ref" href="https://www.statnews.com/2019/06/24/patientslikeme-forced-by-u-s-to-ditch-chinese-investor-sold-to-unitedhealth-group/" target="_blank" rel="noopener">[STAT ↗]</a>); trackers without a family loop get absorbed (Vinehealth → Sciensus).</p>
+</div></div>
+
+<!-- 23 COMPETITORS RELATIONSHIP -->
+<div class="slide slide--default" data-slide="23"><div class="wrap">
+  <div class="label">Connection · who contests it</div>
+  <h2>The relationship layer: fragmented, but contested</h2>
+  <table>
+    <tr><th>Player</th><th>Wedge</th><th>Read</th></tr>
+    <tr><td><strong>Kin Health</strong> (US)</td><td>Same wedge + care circle</td><td><span class="pill pill--red">Most direct</span> US-only today. Speed in EU.</td></tr>
+    <tr><td><strong>Hello 24/7</strong> (NL)</td><td>Caregiver coordination, insurer-reimbursed</td><td><span class="pill pill--red">Home-turf</span> Lacks the visit-comprehension layer.</td></tr>
+    <tr><td><strong>Mika / Outcomes4Me</strong></td><td>EU cancer-relationship via Germany</td><td><span class="pill pill--gold">Watch</span> Also the reimbursement story.</td></tr>
+    <tr><td><strong>Caren / Carenzorgt</strong> (NL)</td><td>Family record-sharing, EHR-tethered</td><td><span class="pill pill--teal">Adjacent</span> Large for caregivers; partner or rival.</td></tr>
+    <tr><td>Tandem Health (EU)</td><td>Clinician scribe, fast growth</td><td><span class="pill pill--gold">Watch</span> Bought your vendor Juvoly.</td></tr>
+  </table>
+</div></div>
+
+<!-- 24 DIVIDER CLARITY -->
+<div class="slide slide--navy" data-slide="24"><div class="wrap">
+  <div class="divnum">03</div>
+  <h1 style="margin-top:0.1em;">Clarity: the contested bet</h1>
+  <p class="subtitle">The summary is commoditizing here. You cannot out-intelligence ChatGPT. You can win on trust and healthcare-specific UX.</p>
+</div></div>
+
+<!-- 25 CONVERGENCE -->
+<div class="slide slide--default" data-slide="25"><div class="wrap">
+  <div class="label">Clarity · the artifact is commoditizing</div>
+  <h2>The summary is being closed in on from every side</h2>
+  <table class="tight">
+    <tr><th>Vector</th><th>Who</th><th>Status</th></tr>
+    <tr><td>Portal / EHR</td><td>ChipSoft HiX; ZAS Antwerp</td><td>Live in NL/BE (~40k letters/yr) <a class="ref" href="https://nieuws.zas.be/primeur-zas-maakt-medische-verslagen-begrijpelijk-met-ai" target="_blank" rel="noopener">[ZAS ↗]</a></td></tr>
+    <tr><td>NL personal-health env (PGO)</td><td>Quli, Ivido (MedMij)</td><td>Own the cross-provider record; no AI summary yet <a class="ref" href="https://www.quli.nl/pgo-persoonlijke-gezondheidsomgeving/" target="_blank" rel="noopener">[Quli ↗]</a></td></tr>
+    <tr><td>Incumbent</td><td>Epic "Ask Emmie"</td><td>Patient-direct 2026–27; no EU deploy yet <a class="ref" href="https://www.techtarget.com/patientengagement/feature/Epics-Ask-Emmie-offers-EHR-backed-AI-chatbot-option-for-patients" target="_blank" rel="noopener">[TechTarget ↗]</a></td></tr>
+    <tr><td>Scribe</td><td>DAX; Abridge for Patients</td><td>DAX clinician-only; Abridge has a US consumer app <a class="ref" href="https://www.fiercehealthcare.com/ai-and-machine-learning/ambient-ai-startup-abridge-scores-300m-series-e-backed-a16z-and-khosla" target="_blank" rel="noopener">[Fierce ↗]</a></td></tr>
+    <tr><td>B2C consumer</td><td>Simply Onno (DE), Kin (US)</td><td>Real traction on the comprehension job <a class="ref" href="https://www.simply-onno.com/en/press-releases/german-startup-uses-ai-to-explain-medical-findings" target="_blank" rel="noopener">[Onno ↗]</a></td></tr>
+  </table>
+  <p class="small mt-1">Comprehension alone is not defensible. Differentiate on relationship + cross-provider + oncology depth.</p>
+</div></div>
+
+<!-- 26 NL PORTAL + PGO + 2027-28 -->
+<div class="slide slide--default" data-slide="26"><div class="wrap">
+  <div class="label">Clarity · the NL clock and the real threat</div>
+  <h2>The portal is shipping the summary; the PGO owns the record</h2>
+  <ul class="mt-1">
+    <li><strong>ZAS Antwerp live 16 Apr 2026</strong>, B1-level patient summaries (~40k/yr) <a class="ref" href="https://nieuws.zas.be/primeur-zas-maakt-medische-verslagen-begrijpelijk-met-ai" target="_blank" rel="noopener">[ZAS ↗]</a>; <strong>ChipSoft</strong> building it as a platform-level HiX feature <a class="ref" href="https://www.chipsoft.com/nl-be/nieuws-blogs/gestandaardiseerde-uitwisseling-van-zorggegevens-via-fhir-voor-betere-patientzorg/" target="_blank" rel="noopener">[ChipSoft ↗]</a></li>
+    <li><strong>The real structural threat is the PGO</strong> (Quli, Ivido): it already owns the patient-owned, cross-provider record and government distribution. It just lacks the AI summary layer <a class="ref" href="https://ivido.nl/nieuws/minister-bruins-reikt-medmij-label-uit/" target="_blank" rel="noopener">[Ivido ↗]</a></li>
+  </ul>
+  <div class="card mt-2" style="background:rgba(232,145,110,0.08);border-color:rgba(232,145,110,0.25);"><p><span class="estimate">Estimate</span> In-portal patient-friendly summaries likely become a <strong>normal expectation in NL/BE around 2027–28</strong>. Reasoned analyst estimate, not a published figure.</p></div>
+  <details class="drop"><summary>How that estimate is built (and its limits)</summary><div class="drop-body">Anchored on ZAS live (Apr 2026), ChipSoft building it as a platform feature, and Epic's patient layer ~18–24 months out <a class="ref" href="https://www.techtarget.com/patientengagement/feature/Epics-Ask-Emmie-offers-EHR-backed-AI-chatbot-option-for-patients" target="_blank" rel="noopener">[TechTarget ↗]</a>. Limits: deployments are narrow (ZAS = 2 specialties), hospital-gated, single-provider; GP-side portals aren't in this yet; EU health-IT slips. A directional band, not a hard date.</div></details>
+</div></div>
+
+<!-- 27 EU SHIPPED EXAMPLES -->
+<div class="slide slide--default" data-slide="27"><div class="wrap">
+  <div class="label">Clarity · already shipped in EU/NL</div>
+  <h2>The "explain my record" job is being built across Europe</h2>
+  <table class="tight">
+    <tr><th>Who</th><th>Country</th><th>What</th></tr>
+    <tr><td><strong>HealthTalk.ai</strong></td><td>NL</td><td>AI consult summary; endorsed by insurer Zilveren Kruis <a class="ref" href="https://healthtalk.ai/nl/solutions/" target="_blank" rel="noopener">[HealthTalk ↗]</a></td></tr>
+    <tr><td><strong>Tilburg Univ. + Antoni van Leeuwenhoek</strong></td><td>NL</td><td>Oncology comprehension tool (pre-product) <a class="ref" href="https://www.tilburguniversity.edu/magazine/overview/new-ai-tool-makes-medical-information-understandable-and-personalized" target="_blank" rel="noopener">[Tilburg ↗]</a></td></tr>
+    <tr><td><strong>Befunddolmetscher</strong> / Was hab' ich?</td><td>DE</td><td>Free public medical-finding translators <a class="ref" href="https://befunddolmetscher.de/" target="_blank" rel="noopener">[Befunddolmetscher ↗]</a></td></tr>
+    <tr><td><strong>Pharos "Begrijpelijke PGO's"</strong></td><td>NL</td><td>Accessibility program shaping what PGOs must ship <a class="ref" href="https://www.pharos.nl/kennisbank/begrijpelijke-persoonlijke-gezondheidsomgevingen-pgos/" target="_blank" rel="noopener">[Pharos ↗]</a></td></tr>
+    <tr><td><strong>NHS discharge-letter LLM</strong></td><td>UK</td><td>Chelsea &amp; Westminster pilot, clinician-mediated <a class="ref" href="https://www.digitalhealth.net/2025/08/ai-assisted-tool-on-fdp-will-help-write-hospital-discharge-letters/" target="_blank" rel="noopener">[Digital Health ↗]</a></td></tr>
+  </table>
+  <p class="small mt-1">Most are translators or clinician-mediated. None combine recording + family circle + oncology depth.</p>
+</div></div>
+
+<!-- 28 OPENEVIDENCE -->
+<div class="slide slide--default" data-slide="28"><div class="wrap">
+  <div class="label">Clarity · the curated-source play</div>
+  <h2>OpenEvidence is the model, and it just left Europe</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3>What it proves</h3>
+      <p>A trusted, citation-grounded clinical answer engine reached <strong>$12B, 760k US doctors, 40%+ daily use</strong> <a class="ref" href="https://www.cnbc.com/2026/01/21/openevidence-chatgpt-for-doctors-doubles-valuation-to-12-billion.html" target="_blank" rel="noopener">[CNBC ↗]</a>. Grounded-in-sources is a real, fundable wedge.</p>
+    </div>
+    <div>
+      <h3>The opening</h3>
+      <p>It is <strong>physician-only with no consumer plan</strong>, and it <strong>withdrew from the EU/UK in May 2026</strong> over AI Act risk <a class="ref" href="https://www.thelancet.com/journals/lanepe/article/PIIS2666-7762(26)00130-4/fulltext" target="_blank" rel="noopener">[Lancet ↗]</a>. The best-funded clarity player just vacated your home market.</p>
+    </div>
+  </div>
+  <div class="card mt-2"><p><strong>The consumer "curated-source chat" slot is open in the EU.</strong> Imagine a chat grounded only in vetted sources <em>and</em> the patient's own care: that is a credible Clarity mode, and nobody scaled is doing it for EU consumers.</p></div>
+</div></div>
+
+<!-- 29 SYMPTOM TRACKING -->
+<div class="slide slide--default" data-slide="29"><div class="wrap">
+  <div class="label">Clarity · the executable edge</div>
+  <h2>Healthcare-specific UX: symptom tracking done well</h2>
+  <p class="subtitle">Where a focused player can out-execute a general chatbot: structured tracking, journaling, and visualization.</p>
+  <table class="tight">
+    <tr><th>Player</th><th>Note</th></tr>
+    <tr><td><strong>Bearable</strong></td><td>~900k users; best-in-class symptom-factor correlations <a class="ref" href="https://bearable.app/" target="_blank" rel="noopener">[Bearable ↗]</a></td></tr>
+    <tr><td><strong>Guava Health</strong></td><td>Body heat-map visualization of symptoms <a class="ref" href="https://guavahealth.com/" target="_blank" rel="noopener">[Guava ↗]</a></td></tr>
+    <tr><td><strong>Vinehealth</strong> (oncology)</td><td>Acqui-hired by Sciensus 2024 — signal that tracking <em>alone</em> doesn't scale <a class="ref" href="https://www.medicaldevice-network.com/news/sciensus-acquires-oncology-symptom-tracker-app-vinehealth/" target="_blank" rel="noopener">[MDN ↗]</a></td></tr>
+  </table>
+  <p class="mt-1"><strong>Lesson:</strong> tracking is necessary, not sufficient. It compounds only when tied to the visit, the family, and proprietary real-world data.</p>
+</div></div>
+
+<!-- 30 CLARITY MOAT -->
+<div class="slide slide--navy" data-slide="30"><div class="wrap">
+  <div class="label">Clarity · the moat verdict</div>
+  <blockquote>Don't compete on "understanding health." Win on understanding <span class="highlight">your</span> care.</blockquote>
+  <p class="subtitle mt-2">You cannot out-intelligence ChatGPT (40M/day, citation-grounding now table stakes after OpenAI's clinician release <a class="ref" href="https://openai.com/index/making-chatgpt-better-for-clinicians/" target="_blank" rel="noopener">[OpenAI ↗]</a>), and consumers under-value privacy. The defensible Clarity mode is the <strong style="color:#fff;">compound</strong>: healthcare-specific UX (tracking, journaling, visualization) × clinician-grounded trust × EU-native compliance × your own longitudinal record × the family circle. Generic medical Q&amp;A loses; "your care" wins.</p>
+</div></div>
+
+<!-- 31 DEMAND -->
+<div class="slide slide--default" data-slide="31"><div class="wrap">
+  <div class="label">Demand is validated, not hypothetical</div>
+  <h2>Every vector points at the same user and moment</h2>
+  <div class="stat-grid">
+    <div class="stat"><div class="num">40–80%</div><div class="lbl">of a visit forgotten immediately <a class="ref" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC539473/" target="_blank" rel="noopener">[PMC ↗]</a></div></div>
+    <div class="stat"><div class="num">63M</div><div class="lbl">US caregivers, +45%/decade; NL 1.9M <a class="ref" href="https://www.aarp.org/pri/topics/ltss/family-caregiving/caregiving-in-the-us-2025/" target="_blank" rel="noopener">[AARP ↗]</a></div></div>
+    <div class="stat"><div class="num">76%</div><div class="lbl">of US adults have ≥1 chronic condition <a class="ref" href="https://www.cdc.gov/pcd/issues/2025/24_0539.htm" target="_blank" rel="noopener">[CDC ↗]</a></div></div>
+    <div class="stat"><div class="num">16→32%</div><div class="lbl">US consumer health-AI use, one year <a class="ref" href="https://rockhealth.com/insights/the-tortoise-and-the-hare-of-care-health-ai-insights-from-rock-healths-2025-consumer-adoption-survey/" target="_blank" rel="noopener">[Rock Health ↗]</a></div></div>
+    <div class="stat"><div class="num">31–38%</div><div class="lbl">of summary-engagers share it, unprompted <a class="ref" href="https://www.jabfm.org/content/27/2/209" target="_blank" rel="noopener">[JABFM ↗]</a></div></div>
+    <div class="stat"><div class="num">18%</div><div class="lbl">rate chatbots "highly accurate" — the opening for verified output (Pew) <a class="ref" href="https://www.pewresearch.org/science/2026/04/07/users-of-social-media-and-ai-chatbots-for-health-information-are-more-likely-to-say-they-are-convenient-than-accurate/" target="_blank" rel="noopener">[Pew ↗]</a></div></div>
+  </div>
+  <p class="small mt-1"><strong>Read:</strong> NL/EU is an ideal beachhead, behind the US on AI adoption but at parity on caregiver and chronic burden.</p>
+</div></div>
+
+<!-- 32 DIVIDER 05 -->
+<div class="slide slide--navy" data-slide="32"><div class="wrap">
+  <div class="divnum">04</div>
+  <h1 style="margin-top:0.1em;">The money &amp; the rules</h1>
+  <p class="subtitle">Reimbursement (two routes now), the device-class logic, and the regulatory clock.</p>
+</div></div>
+
+<!-- 33 REIMBURSEMENT -->
+<div class="slide slide--default" data-slide="33"><div class="wrap">
+  <div class="label">The money · reimbursement</div>
+  <h2>Two routes: clinical DiGA, and the NL Connection route</h2>
+  <div class="two-col mt-1">
+    <div class="card"><h3>Clinical (DiGA)</h3><p>~56–59 apps, &gt;1M prescriptions <a class="ref" href="https://www.bfarm.de/EN/Medical-devices/Tasks/DiGA-and-DiPA/Digital-Health-Applications/Interesting-facts/_artikel.html" target="_blank" rel="noopener">[BfArM ↗]</a>. <strong>95% are Class I</strong>; the wall is a clinical RCT, not the device class <a class="ref" href="https://www.zorgakkoorden.nl/documenten/publicaties/2025/251210-vws-financing-and-making-available-of-digital-health-applications-in-europe.pdf" target="_blank" rel="noopener">[VWS ↗]</a>.</p></div>
+    <div class="card"><h3>Connection (NL, now)</h3><p><strong>Hello 24/7 is reimbursed 100% by Zilveren Kruis + Menzis from €5.83/mo</strong> as a caregiver app <a class="ref" href="https://www.hello247.nl/en/hello-premium/" target="_blank" rel="noopener">[Hello 24/7 ↗]</a>. NL insurers already pay for a family-care-circle product. A nearer route than DiGA.</p></div>
+  </div>
+  <details class="drop"><summary>The DiGA class logic, precisely (your question answered)</summary><div class="drop-body">DiGA requires a CE-marked medical device of <strong>risk class I or IIa</strong>. IIa is not required, but the app must be <strong>at least a registered Class I medical device</strong> — non-devices are excluded <a class="ref" href="https://www.bfarm.de/EN/Medical-devices/Tasks/DiGA-and-DiPA/Digital-Health-Applications/Interesting-facts/_artikel.html" target="_blank" rel="noopener">[BfArM ↗]</a>. Floor = Class I, ceiling = IIa. <strong>The real one-way door is device vs. non-device.</strong> A pure summary tool with no claimed medical purpose is a non-device and is not DiGA-eligible as-is.</div></details>
+</div></div>
+
+<!-- 34 TWO PATHS -->
+<div class="slide slide--default" data-slide="34"><div class="wrap">
+  <div class="label">The money · the fork</div>
+  <h2>Stay light, or go clinical — sequential, not exclusive</h2>
+  <div class="two-col mt-1">
+    <div class="card"><h3>Path 1 — stay light</h3><p>Class I or non-device, patient-owned. Monetize at home via B2B inside hospital/insurer routes, the <strong>Hello-24/7-style insurer reimbursement</strong> for a care app, and the emerging Dutch <strong>diga.nl</strong> scheme <a class="ref" href="https://www.zorgakkoorden.nl/documenten/publicaties/2025/251210-vws-financing-and-making-available-of-digital-health-applications-in-europe.pdf" target="_blank" rel="noopener">[VWS ↗]</a>.</p></div>
+    <div class="card"><h3>Path 2 — go clinical</h3><p>CE Class I + a clinical <strong>RCT</strong> opens DiGA. Est. <strong>€1.2–3M, 2–3 years</strong> <a class="ref" href="https://dux-healthcare.com/en/knowledge/international-markets/market-access-germany/" target="_blank" rel="noopener">[DUX ↗]</a>. Poor oncology base rate.</p></div>
+  </div>
+  <p class="small mt-1">Note: precise B2B pricing isn't knowable from public data; validate willingness-to-pay with real deals (Hello 24/7's €5.83/mo reimbursed is the only firm NL anchor).</p>
+  <details class="drop"><summary>Why Mika is a cautionary tale, not a green light</summary><div class="drop-body">Mika (Class I, structural/procedural track) had an RCT that hit distress but missed quality-of-life <a class="ref" href="https://www.jmir.org/2024/1/e51949" target="_blank" rel="noopener">[JMIR ↗]</a>; it withdrew from DiGA twice and Fosanis sold it to US Outcomes4Me (Jun 2025) <a class="ref" href="https://outcomes4me.com/press-release/outcomes4me-acquires-germanys-mika-health-app-to-accelerate-ai-driven-patient-empowerment-globally/" target="_blank" rel="noopener">[Outcomes4Me ↗]</a>. No live permanent oncology-companion DiGA exists today.</div></details>
+</div></div>
+
+<!-- 35 DECISIONS -->
+<div class="slide slide--navy" data-slide="35"><div class="wrap">
+  <div class="label">The money · what you owe yourselves</div>
+  <h2>Three decisions</h2>
+  <div class="card"><h3>1. Ratify the intended-purpose statement</h3><p>It controls device classification and whether the "care intelligence layer" drifts into high-risk by accident.</p></div>
+  <div class="card"><h3>2. Decide the home-market route</h3><p>B2B inside hospital/insurer funding, the Hello-24/7-style insurer-reimbursed care app, and/or diga.nl. Validate willingness-to-pay with real deals.</p></div>
+  <div class="card"><h3>3. Set the clinical RCT go / no-go gate</h3><p>Define when the 2–3 year DiGA bet is worth it, given the poor oncology-companion base rate.</p></div>
+</div></div>
+
+<!-- 36 RULES -->
+<div class="slide slide--default" data-slide="36"><div class="wrap">
+  <div class="label">The rules · regulation</div>
+  <h2>One near deadline, one controllable line</h2>
+  <table>
+    <tr><th>Item</th><th>What it means</th><th>When</th></tr>
+    <tr><td><strong>AI Act Article 50</strong></td><td>Patient-facing AI must perceivably disclose it is AI. Cheap, mandatory. <a class="ref" href="https://artificialintelligenceact.eu/transparency-rules-article-50/" target="_blank" rel="noopener">[AI Act ↗]</a></td><td><span class="pill pill--red">2 Aug 2026</span></td></tr>
+    <tr><td><strong>Classification line</strong></td><td>Explain/organise = Class I. Interpret/triage/recommend = IIa + high-risk. <a class="ref" href="https://petrieflom.law.harvard.edu/2026/03/05/simplification-or-back-to-square-one-the-future-of-eu-medical-ai-regulation/" target="_blank" rel="noopener">[Petrie-Flom ↗]</a></td><td>Design choice</td></tr>
+    <tr><td><strong>High-risk obligations</strong></td><td>Pushed back by the "Digital Omnibus" (provisional). <a class="ref" href="https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/" target="_blank" rel="noopener">[Gibson Dunn ↗]</a></td><td>Dec 2027 / Aug 2028</td></tr>
+    <tr><td><strong>EHDS</strong></td><td>Portability + training-data tailwind. <a class="ref" href="https://www.arnoldporter.com/en/perspectives/advisories/2025/03/european-health-data-space-regulation-published" target="_blank" rel="noopener">[Arnold &amp; Porter ↗]</a></td><td>2029+</td></tr>
+  </table>
+  <p class="small mt-1">The EU's strictness is a wedge: it is exactly why OpenEvidence left. EU-native compliance is a moat ingredient.</p>
+</div></div>
+
+<!-- 37 TRUST -->
+<div class="slide slide--default" data-slide="37"><div class="wrap">
+  <div class="label">The rules · trust battleground</div>
+  <h2>The scribe-error scandal is our exposure and our wedge</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3 style="color:var(--red);">The cluster (last ~month)</h3>
+      <ul>
+        <li>Ontario AG: <strong>all 20</strong> approved scribe vendors hallucinating <a class="ref" href="https://oecd.ai/en/incidents/2026-05-12-76df" target="_blank" rel="noopener">[OECD.AI ↗]</a></li>
+        <li>Whisper/Nabla: up to <strong>8/10</strong> transcripts hallucinated <a class="ref" href="https://www.healthcare-brew.com/stories/2024/11/18/openai-transcription-tool-whisper-hallucinations" target="_blank" rel="noopener">[Healthcare Brew ↗]</a></li>
+        <li>BMJ: <strong>49.6%</strong> of chatbot health answers problematic <a class="ref" href="https://bmjgroup.com/substantial-amount-of-medical-information-provided-by-popular-chatbots-inaccurate-and-incomplete/" target="_blank" rel="noopener">[BMJ ↗]</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="highlight">The wedge</h3>
+      <p>This is Ditto's exact failure mode (cf. the internal medication-inversion incident). One bad output is existential.</p>
+      <p class="mt-1">It is also the position to own: <strong>verified, provider-sourced, consent-first, EU/GDPR-native.</strong></p>
+    </div>
+  </div>
+  <p class="small mt-1">Caveat: a few incident figures came from secondary aggregators; primary-verify before external use.</p>
+</div></div>
+
+<!-- 38 DIVIDER 06 -->
+<div class="slide slide--navy" data-slide="38"><div class="wrap">
+  <div class="divnum">05</div>
+  <h1 style="margin-top:0.1em;">Foresight &amp; close</h1>
+  <p class="subtitle">Timing, the scenario that matters, the compound moat, and what to verify.</p>
+</div></div>
+
+<!-- 39 TIMING -->
+<div class="slide slide--default" data-slide="39"><div class="wrap">
+  <div class="label">Foresight · timing</div>
+  <h2>Where each trend sits on the curve</h2>
+  <table class="tight">
+    <tr><th>Trend</th><th>Stage</th><th>Window</th></tr>
+    <tr><td>Portal/EHR patient summaries (NL/BE)</td><td>Piloting → live</td><td>Standard <strong>~2027–28</strong> <span class="estimate">est.</span></td></tr>
+    <tr><td>NL PGO adds an AI summary layer</td><td>Not yet built</td><td>The sleeper threat</td></tr>
+    <tr><td>Foundation-model health (ChatGPT/Claude/Gemini)</td><td>Just launched</td><td>Now, US/FHIR-first</td></tr>
+    <tr><td>Wearables → clinical integration</td><td>Crossing rungs 3–4</td><td>Now, accelerating</td></tr>
+    <tr><td>Agentic patient assistants</td><td>Hype ahead of reality</td><td>Low-risk actions first</td></tr>
+    <tr><td>EU consumer health-AI adoption</td><td>~32% NL already</td><td>Steep climb underway</td></tr>
+    <tr><td>EU reimbursement (DiGA + insurer care apps)</td><td>Maturing / live</td><td>Enter while climbable</td></tr>
+  </table>
+</div></div>
+
+<!-- 40 2x2 -->
+<div class="slide slide--navy" data-slide="40"><div class="wrap">
+  <div class="label">Foresight · the scenario that matters</div>
+  <h2>Commoditization speed × moat strength</h2>
+  <div class="matrix">
+    <div></div><div class="col-h">Moat WEAK</div><div class="col-h">Moat STRONG</div>
+    <div class="row-h">Commod. SLOW</div>
+    <div class="cell"><h4>Borrowed time</h4><p>Works a while; race to build the loop.</p></div>
+    <div class="cell"><h4>Comfortable lead</h4><p>Best case. Less likely.</p></div>
+    <div class="row-h">Commod. FAST</div>
+    <div class="cell danger"><h4>Commoditized &amp; exposed</h4><p>Summary free everywhere, no lock-in. The existential risk.</p></div>
+    <div class="cell target"><h4>Win the relationship</h4><p>Summary going free is fine: you own the patient + family habit. The target.</p></div>
+  </div>
+  <p class="subtitle mt-2">Evidence says commoditization is fast. The game is moving to the right-hand column <strong style="color:#fff;">before ~2027–28</strong>.</p>
+</div></div>
+
+<!-- 41 COMPOUND MOAT -->
+<div class="slide slide--default" data-slide="41"><div class="wrap">
+  <div class="label">Foresight · the strategic mode</div>
+  <h2>The moat is the compound, not any single axis</h2>
+  <p class="subtitle">If Ditto is the trusted place to understand <em>your</em> care, with symptom tracking, journaling, and curated-source answers, the defensibility comes from stacking edges no single competitor holds together.</p>
+  <table class="tight mt-1">
+    <tr><th>Edge</th><th>Who lacks it</th></tr>
+    <tr><td>Grounded in the patient's <strong>actual care</strong>, not generic literature</td><td>ChatGPT, OpenEvidence</td></tr>
+    <tr><td><strong>EU-native compliance</strong> (the OpenEvidence-vacancy wedge)</td><td>OpenEvidence (left), US scribes</td></tr>
+    <tr><td><strong>Oncology UX + visualization</strong> that compounds into proprietary real-world data</td><td>Generalist chatbots</td></tr>
+    <tr><td>The <strong>family care circle</strong> as retention + virality</td><td>Wearables, scribes, foundation models</td></tr>
+  </table>
+  <p class="mt-1"><strong>The honest caveat:</strong> you can't win on raw intelligence or on privacy alone (consumers under-value it). You win on healthcare-specific UX + trust + the family layer, together.</p>
+</div></div>
+
+<!-- 42 LEDGER -->
+<div class="slide slide--default" data-slide="42"><div class="wrap">
+  <div class="label">Foresight · trend → implication ledger</div>
+  <h2>The signals that should drive decisions</h2>
+  <table class="tight">
+    <tr><th></th><th>Signal</th><th>So what</th></tr>
+    <tr><td><span class="pill pill--red">T</span></td><td>Portal summaries live; NL/BE standard ~2027–28; PGO owns the record</td><td>Build the relationship moat before the artifact is free</td></tr>
+    <tr><td><span class="pill pill--green">O</span></td><td>OpenEvidence left the EU over the AI Act</td><td>EU-native trusted clarity is an open, defensible slot</td></tr>
+    <tr><td><span class="pill pill--green">O</span></td><td>NL insurers reimburse a care-circle app (Hello 24/7)</td><td>A Connection reimbursement route exists now, nearer than DiGA</td></tr>
+    <tr><td><span class="pill pill--red">T</span></td><td>Foundation models entered consumer health; 40M/day, NL 32%</td><td>Be the EU, family, oncology-deep "your care" layer they aren't</td></tr>
+    <tr><td><span class="pill pill--green">O</span></td><td>Wearables miss "what the doctor said"</td><td>Own that input; feed the agents</td></tr>
+    <tr><td><span class="pill pill--red">T</span></td><td>Paid installs fail; retention = habit + peer</td><td>Kill paid acquisition; build a recurring habit</td></tr>
+    <tr><td><span class="pill pill--gold">T/O</span></td><td>Scribe hallucination scandal</td><td>Own "verified, consent-first"; one error is existential</td></tr>
+    <tr><td><span class="pill pill--red">T</span></td><td>AI Act Article 50 transparency, 2 Aug 2026</td><td>Ship AI-disclosure UX now</td></tr>
+  </table>
+</div></div>
+
+<!-- 43 CORRECTIONS -->
+<div class="slide slide--default" data-slide="43"><div class="wrap">
+  <div class="label">Intellectual honesty</div>
+  <h2>What the deep dives corrected</h2>
+  <ul class="mt-1">
+    <li><strong>DiGA does not require Class IIa.</strong> 95% are Class I; the real door is device vs. non-device, the wall is an RCT.</li>
+    <li><strong>Epic patient-direct is 2026–27, not today.</strong> NL Epic is still clinician-mediated.</li>
+    <li><strong>Mika is cautionary.</strong> It withdrew twice and was sold; no live oncology-companion DiGA exists.</li>
+    <li><strong>Hello 24/7 is a care-circle app, not a telehealth/pricing benchmark</strong> — and it's insurer-reimbursed.</li>
+    <li><strong>Suki's "patient summary" is clinician-facing</strong> (earlier brief was wrong); <strong>Abridge ships a real consumer app</strong>.</li>
+  </ul>
+</div></div>
+
+<!-- 44 OPEN ITEMS -->
+<div class="slide slide--default" data-slide="44"><div class="wrap">
+  <div class="label">What to verify · what's parked</div>
+  <h2>Open items &amp; deferred</h2>
+  <div class="two-col mt-1">
+    <div>
+      <h3 class="highlight">Verify before external use</h3>
+      <ul>
+        <li>Dutch B2B pricing — no public numbers; validate with real deals</li>
+        <li>The secondary-aggregator incident stats</li>
+        <li>The ~2027–28 estimate (reasoned, not published)</li>
+        <li>WhatsApp family-health prevalence (commission a panel question)</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="highlight">Deferred by choice</h3>
+      <ul>
+        <li>Capital / M&amp;A (just raised)</li>
+        <li>Defensibility as your own conclusion from this map</li>
+        <li>Deeper native-language sweeps if a market becomes the target</li>
+      </ul>
+    </div>
+  </div>
+</div></div>
+
+<!-- 45 SOURCES / CLOSE -->
+<div class="slide slide--navy" data-slide="45"><div class="wrap">
+  <div class="label">The deliverable</div>
+  <h2>14 briefs + the map, all sourced</h2>
+  <p class="subtitle">In <code>pm-workspace/specs/market-trend-analysis/</code>. Spine: <strong style="color:var(--yellow);">02-market-trend-map-v2.md</strong>. Citation index: <strong>citation-index.md</strong>. Briefs A–E, phase2-A/B/C, F, G, H, J, K1–K3.</p>
+  <blockquote class="mt-2">Concede convenience. Own the relationship, and a trusted version of clarity, before the summary goes free.</blockquote>
+</div></div>
+
+</div><!-- /deck -->
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+let current = 0;
+function showSlide(n) {
+  if (n < 0 || n >= slides.length) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  slides[current].scrollTop = 0;
+  progress.style.width = ((current + 1) / slides.length * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+  counter.style.color = slides[current].classList.contains('slide--navy') ? '#fff' : 'var(--navy)';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); showSlide(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); showSlide(current - 1); }
+});
+document.addEventListener('click', e => {
+  if (e.target.closest('a, details, summary')) return;
+  const x = e.clientX / window.innerWidth;
+  if (x > 0.5) showSlide(current + 1); else showSlide(current - 1);
+});
+let tsX = 0, tsY = 0;
+document.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; tsY = e.touches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = tsX - e.changedTouches[0].clientX, dy = tsY - e.changedTouches[0].clientY;
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) { if (dx > 0) showSlide(current + 1); else showSlide(current - 1); }
+});
+showSlide(0);
+</script>
+</body>
+</html>

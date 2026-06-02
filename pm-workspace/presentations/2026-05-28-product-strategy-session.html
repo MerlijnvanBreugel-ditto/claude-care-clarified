@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Strategy — Code Red follow-up · May 2026</title>
+<style>
+  :root {
+    --bg: #f7f9fb;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --line: #e2e8f0;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #0d9488;
+    --accent-soft: rgba(13, 148, 136, 0.09);
+    --warn: #d97706;
+    --warn-soft: rgba(217, 119, 6, 0.10);
+    --wrong: #dc2626;
+    --wrong-soft: rgba(220, 38, 38, 0.07);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  .app {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 32px 120px;
+    position: relative;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .brand .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .meta { font-size: 13px; color: var(--muted); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 40px 44px 36px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+    margin-bottom: 28px;
+  }
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 26px;
+    line-height: 1.25;
+    margin: 0 0 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 15px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  p { margin: 0 0 12px; color: var(--text); }
+  .lede { color: var(--muted); font-size: 17px; line-height: 1.5; }
+
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  ul li { margin-bottom: 6px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 8px;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--line);
+  }
+  td.num { font-variant-numeric: tabular-nums; }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 20px 0 6px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0 6px;
+  }
+  .tile {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .tile .label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .tile h3 { font-size: 16px; margin: 0 0 6px; }
+  .tile p { font-size: 14px; color: var(--text); margin: 0; }
+  .tile .stat {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 2px 0 4px;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .tile .sub { font-size: 12px; color: var(--muted); }
+
+  .callout {
+    padding: 18px 22px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    margin: 18px 0;
+    font-size: 15px;
+  }
+  .callout .label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .callout.warn { background: var(--warn-soft); border-left-color: var(--warn); }
+  .callout.warn .label { color: var(--warn); }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .pill.wrong { background: var(--wrong-soft); color: var(--wrong); }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+  }
+  .checklist li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 15px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .box {
+    flex: 0 0 18px;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--muted);
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+
+  .lifemoment {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0 12px;
+  }
+  .lm-card {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .lm-card h3 { font-size: 17px; margin: 0 0 4px; color: var(--accent); }
+  .lm-card .tam { font-size: 12px; color: var(--muted); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+  .lm-card p { font-size: 13px; margin: 0; color: var(--text); }
+
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 18px 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .ba-col { padding: 20px 22px; }
+  .ba-col.before { background: var(--surface-2); }
+  .ba-col.after { background: var(--accent-soft); }
+  .ba-col .label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .ba-col.after .label { color: var(--accent); }
+  .ba-col ul { padding-left: 18px; margin: 0; }
+  .ba-col li { font-size: 14px; margin-bottom: 6px; }
+
+  .out-list {
+    columns: 2;
+    column-gap: 28px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .out-list p {
+    margin: 0 0 6px;
+    break-inside: avoid;
+  }
+
+  .footnote {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .card { position: relative; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><span class="dot"></span>Ditto · Product Strategy</div>
+    <div class="meta">28 May 2026 · Ilayda · Niek · Iman</div>
+  </header>
+
+  <!-- Slide 1 -->
+  <section class="card">
+    <div class="slide-num">01 / 08</div>
+    <div class="kicker">Where we are</div>
+    <h1>The 50k MAU gap is real, and status quo plateaus.</h1>
+    <p class="lede">May 21 leadership session confirmed: linear inflow, compounding churn, no growth engine identified. The gap doesn't close itself. This session translates the strategic shape into product bets.</p>
+
+    <div class="grid-3" style="margin-top:26px;">
+      <div class="tile">
+        <div class="label">North star</div>
+        <div class="stat">50k</div>
+        <div class="sub">MAU by EOY 2026 — confirmed</div>
+      </div>
+      <div class="tile">
+        <div class="label">Today (rolling)</div>
+        <div class="stat">~1.5k</div>
+        <div class="sub">Patient MAU · 0.3% of NL specialist-care population</div>
+      </div>
+      <div class="tile">
+        <div class="label">Care circle MoM</div>
+        <div class="stat">~30%</div>
+        <div class="sub">Strongest signal — but 100% appointment-dependent</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="label">From the room (May 21)</div>
+      Two real decisions were deferred: marketing widen-vs-narrow, product widen-vs-narrow. Both have since been answered offline. This session locks the product translation.
+    </div>
+  </section>
+
+  <!-- Slide 2 -->
+  <section class="card">
+    <div class="slide-num">02 / 08</div>
+    <div class="kicker">What's locked since May 21</div>
+    <h2>Four anchors. Don't re-debate them — translate them.</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:32%;">Anchor</th>
+          <th>What it means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Life Moments is the lens</strong></td>
+          <td>All product + marketing filter through Life-Moment fit. We don't try to serve "everyone with a doctor's appointment."</td>
+        </tr>
+        <tr>
+          <td><strong>Three Life Moments in primary focus</strong></td>
+          <td>Cancer · Neurodegenerative · Sudden severe diagnosis (cardiac, mass, acute findings — broader than cardiac-only).</td>
+        </tr>
+        <tr>
+          <td><strong>Greatly improve the follower experience</strong></td>
+          <td>Followers today: view + ❤. Tomorrow: progressive onboarding, real reason to open the app.</td>
+        </tr>
+        <tr>
+          <td><strong>Drive frequency for patients <em>and</em> followers</strong></td>
+          <td>Break appointment-only dependence — thoughtful messaging, pre-appointment notifications, journey surfaces, between-visit utility.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="label">Plus two cross-cuts</div>
+      <strong>Link AI output → authoritative resources</strong> (cancer.nl, Thuisarts, neuro-partner content) for the three focused Life Moments. <strong>Deep user research</strong>: 10×30min interviews next week on unmet use cases (journaling, symptom tracking, anything that drives frequency).
+    </div>
+  </section>
+
+  <!-- Slide 3 -->
+  <section class="card">
+    <div class="slide-num">03 / 08</div>
+    <div class="kicker">The 3 Life Moments</div>
+    <h2>Cancer, Neurodegenerative, Sudden severe diagnosis.</h2>
+    <p class="lede">Together: ~510k NL adults in active specialist follow-up. 50k MAU = 10% penetration of this segment — ambitious but structurally feasible.</p>
+
+    <div class="lifemoment">
+      <div class="lm-card">
+        <h3>Cancer</h3>
+        <div class="tam">~250k NL active · ~128k new/year</div>
+        <p>Highest appointment frequency, highest emotional stakes, strongest care-circle activation pattern. The unambiguous beachhead.</p>
+      </div>
+      <div class="lm-card">
+        <h3>Neurodegenerative</h3>
+        <div class="tam">~160k NL active · Alzheimer's, Parkinson's, MS, ALS</div>
+        <p>Caregiver-led recording matches the Care Circle thesis natively. Strong partner content opportunity (cancer.nl-style resource linking).</p>
+      </div>
+      <div class="lm-card">
+        <h3>Sudden severe diagnosis</h3>
+        <div class="tam">~100k+ NL · cardiac, masses, acute findings</div>
+        <p>Broader than cardiac-only. Post-AMI, new heart failure, AFib, newly-found masses — high specialist contact, family-involving, untargeted today.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="label">Out of primary focus (this period)</div>
+      Pregnancy / young parents · Sudden chronic disease without severity escalation. Keep on the radar; don't build for them.
+    </div>
+
+    <p class="footnote">Source: <code>pm-workspace/personal/strategy/code-red-mau-improvement/research-life-moments-tam.md</code> (May 2026 TAM research).</p>
+  </section>
+
+  <!-- Slide 4 -->
+  <section class="card">
+    <div class="slide-num">04 / 08</div>
+    <div class="kicker">Bet 1</div>
+    <h2>A real follower experience.</h2>
+    <p class="lede">Today, followers exist only to receive. Tomorrow, they have their own onboarding, their own reason to return, and a way to engage back with the patient.</p>
+
+    <div class="before-after">
+      <div class="ba-col before">
+        <div class="label">Followers today</div>
+        <ul>
+          <li>Click invite link · accept</li>
+          <li>View summary when patient shares</li>
+          <li>Send ❤</li>
+          <li>Wait</li>
+        </ul>
+      </div>
+      <div class="ba-col after">
+        <div class="label">Followers tomorrow</div>
+        <ul>
+          <li>Progressive onboarding (relationship · role · what you'll receive)</li>
+          <li>Thoughtful-message sharing (more than ❤)</li>
+          <li>Pre-appointment notification (your person sees the oncologist Thursday)</li>
+          <li>Inbound reactions back to patient (schedule a call · confirm help offer)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;"><span class="pill accent">Decision today</span> Which lands first — progressive onboarding, thoughtful messaging, or pre-appointment notification? Name an owner.</p>
+  </section>
+
+  <!-- Slide 5 -->
+  <section class="card">
+    <div class="slide-num">05 / 08</div>
+    <div class="kicker">Bet 2</div>
+    <h2>Drive frequency without inventing a new product.</h2>
+    <p class="lede">Most candidates are already on the table — either in flight in Linear or specced in the repo. Pick two, commit, ship.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Source</th>
+          <th>Why it drives frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pre-appointment Care Circle notification</td>
+          <td>Linear (new) · Niek raised in May 21</td>
+          <td>Returns followers to the app on a calendar event, not just on patient action.</td>
+        </tr>
+        <tr>
+          <td>Thoughtful-message sharing</td>
+          <td>Linear (new)</td>
+          <td>Adds patient ↔ circle moments outside the summary loop. Doesn't depend on a recording.</td>
+        </tr>
+        <tr>
+          <td>AI output → authoritative resources</td>
+          <td>NEW (Merlijn offline)</td>
+          <td>Every summary becomes a doorway to cancer.nl / Thuisarts / neuro-partner content. Returning patients re-read. B2B hook.</td>
+        </tr>
+        <tr>
+          <td>Care journeys (mobile visualization)</td>
+          <td>O2-KR4 · backlog</td>
+          <td>Living timeline patients and followers return to — anchors frequency even without a new appointment.</td>
+        </tr>
+        <tr>
+          <td>Beyond Appointments: Expanding Activation Paths</td>
+          <td>O2-KR2 · backlog</td>
+          <td>Named umbrella project. Needs concrete scope locked this session.</td>
+        </tr>
+        <tr>
+          <td>Medical Data Vault</td>
+          <td>O2-KR4 · backlog</td>
+          <td>Between-visit utility (medication, vaccination), self-updating from past recordings.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:18px;"><span class="pill accent">Decision today</span> Pick 2 of 6 to commit. Each gets an owner and a target shipping window.</p>
+  </section>
+
+  <!-- Slide 6 -->
+  <section class="card">
+    <div class="slide-num">06 / 08</div>
+    <div class="kicker">Bet 3</div>
+    <h2>Talk to 10 people next week.</h2>
+    <p class="lede">We are about to commit product capacity to "drive frequency" without knowing what unmet needs would actually pull people in. Cheap fix: 10×30min interviews, mid-June output.</p>
+
+    <div class="grid-2">
+      <div class="tile">
+        <h3>Hypotheses to test</h3>
+        <ul style="margin:0; padding-left:18px; font-size:14px;">
+          <li>Journaling moments (post-appointment, post-news)</li>
+          <li>Symptom tracking (severity, side-effects, medication)</li>
+          <li>"How am I doing today" check-ins for followers</li>
+          <li>Question-prep between visits</li>
+          <li>Family coordination beyond information sharing</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h3>Recruit profile</h3>
+        <ul style="margin:0; padding-left:18px; font-size:14px;">
+          <li>Skewed to the 3 Life Moments (Cancer · Neuro · Sudden severe)</li>
+          <li>Mix of patients (6) and care-circle members (4)</li>
+          <li>Mix of new Ditto users (last 90d) and longer-tenured</li>
+          <li>At least 2 caregiver-led neuro cases (Alzheimer's, Parkinson's)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="label">Open questions for this slide</div>
+      Who owns recruit? Who runs interviews? Who synthesizes? What's the gate that lets us promote findings into committed product bets vs. parked-for-later?
+    </div>
+  </section>
+
+  <!-- Slide 7 -->
+  <section class="card">
+    <div class="slide-num">07 / 08</div>
+    <div class="kicker">Linear cascade</div>
+    <h2>Accelerate · continue · pause · retire.</h2>
+
+    <div class="grid-2">
+      <div class="tile" style="background:var(--accent-soft); border-color:rgba(13,148,136,0.25);">
+        <h3 style="color:var(--accent);">Accelerate (HIGH)</h3>
+        <ul style="margin:0; padding-left:18px; font-size:13.5px;">
+          <li>Beyond Appointments: Expanding Activation Paths</li>
+          <li>Care Circle 3.0 · Remove confirmation from CC invite</li>
+          <li>Multi-profile / Managed accounts (neuro caregiver fit)</li>
+          <li>Care journeys (mobile)</li>
+          <li>Medical Data Vault</li>
+          <li>Partner projects in the 3 Life Moments: Antoni v Leeuwenhoek (AYA), Pantein + UMCU Hematology, Radboud (Bas Bloem), ZGT/MST (Parkinson's), Cordiaal</li>
+          <li>HCP Persona Experience</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h3>Continue (MEDIUM)</h3>
+        <ul style="margin:0; padding-left:18px; font-size:13.5px;">
+          <li>Customer.io flows (Welcome · Post-Summary · Appt Prep · Profile Completion)</li>
+          <li>AI Answer Suggestions</li>
+          <li>Personalized Discovery page</li>
+          <li>Geofencing · Wearable Integration (research-grade, support bets)</li>
+          <li>Analytics Foundations · Triage RISCE / Cleanup (O1-KR4)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:14px;">
+      <div class="tile" style="background:var(--warn-soft); border-color:rgba(217,119,6,0.25);">
+        <h3 style="color:var(--warn);">Pause for review</h3>
+        <ul style="margin:0; padding-left:18px; font-size:13.5px;">
+          <li>Hospital partners outside the 3 Life Moments: HagaZiekenhuis, Maasstad, Albert Schweitzer, NoordWest, ZorgSaam, Ikazia, MUMC, UMCG (review per-partner — keep where there's Life-Moment-aligned dept)</li>
+          <li>Insurance plays (Zilveren Kruis, ASR, CZ) — keep warm, don't activate as 2026 inflow lever</li>
+          <li>Oog in Oog Vereniging (eye prosthesis — out of the 3)</li>
+          <li>Stroomz Huisartsen · Kinderkliniek (broad GP)</li>
+        </ul>
+      </div>
+      <div class="tile" style="background:var(--wrong-soft); border-color:rgba(220,38,38,0.18);">
+        <h3 style="color:var(--wrong);">Out of scope (this session)</h3>
+        <ul style="margin:0; padding-left:18px; font-size:13.5px;">
+          <li>UK launch + O1-KR3 (separate KR, separate session)</li>
+          <li>15 FTE AI agents / Person Research (O1-KR2)</li>
+          <li>Hiring · Onboarding · Office (O1-KR1)</li>
+          <li>Mantelzorg as standalone audience (killed May 21)</li>
+          <li>Updated slide decks, broad website work, HLTH ice-cream</li>
+          <li>Detailed acquisition budget (deferred per May 21)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:18px;">
+      <div class="label">New projects to create</div>
+      Progressive follower onboarding · Thoughtful-message sharing · Pre-appointment Care Circle notification · AI-output → authoritative-resource linking · 10-interview research sprint. Owners + initiative tags assigned in this meeting.
+    </div>
+  </section>
+
+  <!-- Slide 8 -->
+  <section class="card">
+    <div class="slide-num">08 / 08</div>
+    <div class="kicker">Decisions today + follow-ups</div>
+    <h2>What we leave the room with.</h2>
+
+    <h3 style="margin-top:14px;">In-room decisions</h3>
+    <ul class="checklist">
+      <li><div class="box"></div><span>Confirm the 3 Life Moments — Cancer, Neurodegenerative, Sudden severe diagnosis (validate the broader framing of #3, not cardiac-only)</span></li>
+      <li><div class="box"></div><span>Name the first follower-experience feature to ship + owner (progressive onboarding · thoughtful messaging · pre-appointment notification)</span></li>
+      <li><div class="box"></div><span>Pick 2 of 6 frequency-bet features to commit + owners + target window</span></li>
+      <li><div class="box"></div><span>Lock the 10-interview research plan: recruit owner, interview guide owner, synthesis deadline, promotion-to-bet gate</span></li>
+      <li><div class="box"></div><span>Approve the Linear cascade — what accelerates, what pauses for review</span></li>
+    </ul>
+
+    <h3 style="margin-top:24px;">Owed back to the leadership session</h3>
+    <ul class="checklist">
+      <li><div class="box"></div><span>B2B narrow-vs-broad call — partner-funnel implications of the 3 Life Moments</span></li>
+      <li><div class="box"></div><span>Marketing budget allocation across the 3 Life Moments + retention spend</span></li>
+      <li><div class="box"></div><span>Life-Moment cohort retention dashboard ETA (Porygon 2.4 — blocks measurement of the entire narrowing)</span></li>
+    </ul>
+
+    <div class="footnote">
+      Sources · <code>pm-workspace/personal/strategy/code-red-mau-improvement/research-life-moments-tam.md</code> · <code>pm-workspace/specs/funnel-leverage-model/</code> · <code>pm-workspace/specs/care-brain/care-brain-magic-paths.md</code> · <code>pm-workspace/specs/care-brain/care-brain-master-synthesis.md</code> · Linear Q2 2026 OKRs (O2-KR1 → KR4) · May 21 Code Red transcript.
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

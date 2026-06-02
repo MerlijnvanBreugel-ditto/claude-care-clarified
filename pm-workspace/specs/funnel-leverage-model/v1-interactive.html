@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funnel Leverage Model — Ditto Care v1</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --surface: #ffffff;
+    --border: #e4e8eb;
+    --border-strong: #cdd3d8;
+    --text: #1a1d1f;
+    --text-muted: #5a6268;
+    --text-dim: #8a929a;
+    --primary: #2e7a8c;
+    --primary-dark: #1f5966;
+    --primary-tint: #e8f2f4;
+    --positive: #18a47c;
+    --positive-tint: #e3f5ee;
+    --negative: #d94141;
+    --negative-tint: #fbe8e8;
+    --warning: #b7791f;
+    --warning-tint: #fdf5e4;
+    --slider-track: #e4e8eb;
+    --slider-fill: #2e7a8c;
+    --mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  button.reset-btn {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--sans);
+  }
+  button.reset-btn:hover { background: var(--bg); color: var(--text); }
+
+  .mau-readout {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    background: linear-gradient(90deg, var(--bg), var(--surface));
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+
+  .mau-card {
+    text-align: left;
+  }
+
+  .mau-card.center { text-align: center; }
+
+  .mau-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .mau-card .value {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .mau-card .sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: var(--mono);
+  }
+
+  .mau-arrow {
+    font-size: 24px;
+    color: var(--text-dim);
+  }
+
+  .mau-delta {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .mau-delta.positive { color: var(--positive); }
+  .mau-delta.negative { color: var(--negative); }
+  .mau-delta.zero { color: var(--text-dim); }
+
+  main {
+    padding: 20px 32px 40px 32px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+  }
+
+  section.pane {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  section.pane.full { grid-column: 1 / -1; }
+
+  h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  h3.group-title {
+    margin: 20px 0 10px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed var(--border);
+  }
+  h3.group-title:first-of-type { margin-top: 0; }
+
+  .slider-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .slider-row .name {
+    font-size: 13px;
+    color: var(--text);
+  }
+  .slider-row .name .hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    display: block;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--slider-track);
+    border-radius: 4px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--slider-fill);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--surface);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--slider-fill);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--surface);
+  }
+
+  .slider-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-align: right;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 6px;
+  }
+  .slider-value.changed { color: var(--primary); border-color: var(--primary); background: var(--primary-tint); font-weight: 600; }
+
+  .derived {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .derived-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .derived-card .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .derived-card .value {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 3px;
+  }
+
+  .initiative {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.12s;
+    background: var(--surface);
+  }
+  .initiative:hover { border-color: var(--primary); }
+  .initiative.active {
+    background: var(--primary-tint);
+    border-color: var(--primary);
+  }
+
+  .initiative-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .initiative .title {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .initiative .badge {
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+  }
+  .initiative.active .badge { background: var(--surface); }
+
+  .initiative .desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .initiative .deltas {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+  .initiative .delta-chip {
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 3px;
+    padding: 2px 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+  }
+  .initiative.active .delta-chip { background: var(--surface); border-color: var(--primary); }
+
+  .initiative .mau-impact {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--positive);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+  }
+
+  .leverage-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lev-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 100px;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lev-row .lev-name {
+    font-size: 13px;
+  }
+  .lev-row .lev-name .lev-delta-amount {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    display: block;
+  }
+
+  .lev-bar-container {
+    background: var(--bg);
+    height: 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .lev-bar {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s;
+  }
+  .lev-bar.weak { background: var(--text-dim); }
+
+  .lev-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+    color: var(--text);
+  }
+
+  .notes {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .notes h4 {
+    font-size: 12px;
+    margin: 16px 0 6px 0;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .notes h4:first-child { margin-top: 0; }
+
+  .notes ul { margin: 4px 0; padding-left: 20px; }
+  .notes li { margin: 2px 0; }
+  .notes code {
+    background: var(--bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 11px;
+    border: 1px solid var(--border);
+  }
+
+  .formula {
+    background: var(--bg);
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    margin: 10px 0 16px 0;
+    line-height: 1.8;
+  }
+
+  .calibration-note {
+    background: var(--warning-tint);
+    border-left: 3px solid var(--warning);
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    margin: 12px 0;
+  }
+
+  .add-custom {
+    border: 1px dashed var(--border-strong);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .add-custom:hover { color: var(--primary); border-color: var(--primary); }
+
+  @media (max-width: 1024px) {
+    main { grid-template-columns: 1fr; }
+    .mau-readout { grid-template-columns: 1fr; text-align: center; }
+    .mau-readout .mau-card { text-align: center; }
+    .mau-arrow { display: none; }
+    .slider-row { grid-template-columns: 1fr 1fr; }
+    .slider-row .slider-value { grid-column: 2; }
+    .slider-row input[type="range"] { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>Funnel Leverage Model</h1>
+      <div class="subtitle">Ditto Care · v1 · Calibrated to Porygon data 2026-04-21</div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">↺ Reset to baseline</button>
+  </div>
+
+  <div class="mau-readout">
+    <div class="mau-card">
+      <div class="label">Baseline (current state)</div>
+      <div class="value" id="mau-baseline">—</div>
+      <div class="sub">Observed activated MAU: ~1,230</div>
+    </div>
+    <div class="mau-arrow">→</div>
+    <div class="mau-card center">
+      <div class="label">Scenario</div>
+      <div class="value" id="mau-scenario">—</div>
+      <div class="sub">activated MAU (steady state)</div>
+    </div>
+    <div class="mau-arrow">=</div>
+    <div class="mau-card">
+      <div class="label">Impact</div>
+      <div class="value mau-delta" id="mau-delta">—</div>
+      <div class="sub" id="mau-delta-pct">—</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="pane">
+    <h2>Parameters</h2>
+
+    <h3 class="group-title">Inflow</h3>
+    <div id="group-inflow"></div>
+
+    <h3 class="group-title">Funnel conversion</h3>
+    <div id="group-funnel"></div>
+
+    <h3 class="group-title">Retention (two-tier)</h3>
+    <div id="group-retention"></div>
+
+    <h3 class="group-title">Care Circle loop</h3>
+    <div id="group-loop"></div>
+
+    <div class="derived">
+      <div class="derived-card">
+        <div class="label">Monthly activated</div>
+        <div class="value" id="d-activated">—</div>
+      </div>
+      <div class="derived-card">
+        <div class="label">Lifetime (months)</div>
+        <div class="value" id="d-lifetime">—</div>
+      </div>
+      <div class="derived-card">
+        <div class="label">K-factor (loop)</div>
+        <div class="value" id="d-kfactor">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2>Initiatives</h2>
+    <div id="initiative-list"></div>
+    <div class="add-custom" onclick="alert('Tip: to test a custom initiative, move the sliders and note the MAU impact. Named presets can be added to the code — ask Merlijn.')">
+      + Add custom initiative (prototype — edit in code)
+    </div>
+  </section>
+
+  <section class="pane full">
+    <h2>Leverage — marginal MAU per standardized lift, ranked</h2>
+    <div class="leverage-bars" id="leverage-bars"></div>
+    <div class="notes" style="margin-top: 14px;">
+      <em>Standardized lifts: rates = +5 percentage points · inflow = +1,000 installs/mo · invites-per-inviter = +0.5. All held independently (one parameter at a time, from baseline). Inflow ranks highly because +1,000 installs is ~20% of baseline while +5pp on a 35% rate is ~14% relative. Volume is <strong>not</strong> a weak lever in pure math — it's only "weak" per unit effort, which requires effort estimates (v2).</em>
+    </div>
+  </section>
+
+  <section class="pane full">
+    <h2>Formula & assumptions</h2>
+    <div class="formula">
+      MAU<sub>activated</sub> = Inflow × P(reg) × P(act|reg) × Lifetime × 1/(1 − K)<br>
+      Lifetime = 1 + r₁ / (1 − r₂)<br>
+      K = invite_rate × invites_per_inviter × P(invite→install) × P(invited→activate)
+    </div>
+
+    <div class="calibration-note">
+      <strong>Calibration note:</strong> Formula predicts ~1,283 activated MAU at baseline; observed is ~1,230 (~4% overestimate). The model uses the <em>tight</em> Care Circle loop (K ≈ 0.012), not Porygon's K ≈ 0.09 which includes untracked broader sharing (WhatsApp forwards, organic word-of-mouth). That extra ~8pp of virality isn't represented in v1 — to model it, either nudge the loop sliders up or wait for v4 (multi-loop).
+    </div>
+
+    <div class="notes">
+      <h4>What this model is for</h4>
+      <ul>
+        <li><strong>Primary:</strong> sensitivity narrative — show where MAU leverage lives so the team invests in the right stage.</li>
+        <li><strong>Secondary:</strong> initiative prioritization — compare initiatives by MAU lift (costs/effort to be added in v2).</li>
+        <li><strong>Not for:</strong> forecasting a specific future MAU number.</li>
+      </ul>
+
+      <h4>Key insights from running the model</h4>
+      <ul>
+        <li>Retention is <strong>two-tier, not geometric</strong>: r₁ = 54% (M0→M1 cliff), r₂ = 66% (stable core). Mathematically, <strong>r₂ has higher leverage than r₁</strong> because 1/(1−r₂) compounds unboundedly. In practice r₁ has more headroom — fixing the cliff is easier than pushing stable-core to 80%+.</li>
+        <li>Under standardized +5pp / +1,000-install lifts, ranking is roughly: <strong>Inflow ≈ Activation &gt; Registration &gt; r₂ &gt;&gt; r₁ &gt;&gt; loop params.</strong> This honest answer contradicts the common "volume is waste" intuition — volume is a <em>linear</em> lever in the math, not a wasted one. The "is it wasted?" question only makes sense with effort/cost estimates (v2).</li>
+        <li>The Care Circle loop sliders barely move MAU individually (K ≈ 0.012). To matter, Care Circle v2 must lift <em>multiple</em> loop parameters together — toggle the Care Circle v2 initiative to see the combined effect.</li>
+        <li>Porygon's broader K-factor ≈ 0.09 includes untracked WhatsApp / word-of-mouth sharing. The v1 model deliberately excludes this — the sliders represent the <em>measurable</em> Care Circle loop only.</li>
+      </ul>
+
+      <h4>Baseline inputs (confirmed by Porygon)</h4>
+      <ul>
+        <li><code>Monthly installs</code>: 5,000 (steady-state, blended iOS + Android + iPadOS)</li>
+        <li><code>Install → Registration</code> (7d): 35%</li>
+        <li><code>Registration → Activation</code> (14d, any of manual appt / recording / doc scan): 28%</li>
+        <li><code>r₁</code>: 54% (M0→M1 survival, summary_created cohort)</li>
+        <li><code>r₂</code>: 66% (stable-core monthly survival, computed from 33% M2 absolute / 54% M1)</li>
+        <li><code>Invite rate</code>: 24% of newly activated users invite within 30d</li>
+        <li><code>Invites per inviter</code>: 1.48 avg</li>
+        <li><code>Invite → Install</code>: 15% <em>(untracked — slider estimate, 10–20% plausible range)</em></li>
+        <li><code>Invited → Activation</code>: 22% <em>(~2× native; directional, measured on follower-accept data)</em></li>
+      </ul>
+
+      <h4>Known limitations (v1)</h4>
+      <ul>
+        <li>Non-activated viewers (447 / 27% of MAU) not modeled — these are registered+viewing but not activated, mostly Care Circle family members. Adds ~36% passive MAU in reality.</li>
+        <li>No per-channel split (Adjust attribution is 94% broken). "Quality of inflow" lives implicitly in the conversion rates.</li>
+        <li>No Life Moment segmentation. Single blended funnel.</li>
+        <li>Steady-state only — does not model transient dynamics, seasonality, or migration artifacts.</li>
+        <li>Only one loop (Care Circle). Retention loops (e.g. notifications, habit), partner loops (Menzis onboarding), and content loops not modeled.</li>
+      </ul>
+
+      <h4>Next versions (planned)</h4>
+      <ul>
+        <li>v2: add effort estimates per initiative → ROI ranking (MAU lift ÷ weeks of engineering)</li>
+        <li>v3: life moment segmentation (cancer / neuro / parents / chronic)</li>
+        <li>v4: multi-loop (retention, partnership, content)</li>
+        <li>v5: non-activated viewer model (Care Circle passive MAU)</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ========== BASELINE (calibrated from Porygon 2026-04-21) ==========
+  const BASELINE = {
+    inflow: 5000,            // installs/month
+    regRate: 0.35,           // install → registration (7d)
+    actRate: 0.28,           // registration → activation (14d)
+    r1: 0.54,                // M0 → M1 retention (of activated users)
+    r2: 0.66,                // M1 → M2+ stable core retention
+    inviteRate: 0.24,        // % of newly activated who invite within 30d
+    invitesPerInviter: 1.48,
+    inviteToInstall: 0.15,   // untracked; slider 10–20% range
+    invitedActRate: 0.22,    // install → activation for invited users (~2× native)
+  };
+
+  // ========== SLIDER DEFINITIONS ==========
+  const SLIDERS = [
+    // Inflow
+    { id: 'inflow', group: 'inflow', label: 'Monthly installs',
+      hint: 'Top of funnel volume',
+      min: 1000, max: 20000, step: 100, unit: '', format: 'int' },
+
+    // Funnel
+    { id: 'regRate', group: 'funnel', label: 'Install → Registration',
+      hint: '7-day conversion',
+      min: 0.05, max: 0.80, step: 0.01, format: 'pct' },
+    { id: 'actRate', group: 'funnel', label: 'Registration → Activation',
+      hint: '14-day, first key action',
+      min: 0.05, max: 0.70, step: 0.01, format: 'pct' },
+
+    // Retention
+    { id: 'r1', group: 'retention', label: 'M0 → M1 retention (r₁)',
+      hint: 'First-month cliff — biggest lever',
+      min: 0.20, max: 0.95, step: 0.01, format: 'pct' },
+    { id: 'r2', group: 'retention', label: 'M1 → M2+ stable (r₂)',
+      hint: 'Ongoing stable-core survival',
+      min: 0.20, max: 0.95, step: 0.01, format: 'pct' },
+
+    // Loop
+    { id: 'inviteRate', group: 'loop', label: 'Invite rate',
+      hint: '% activated who invite in 30d',
+      min: 0.00, max: 0.80, step: 0.01, format: 'pct' },
+    { id: 'invitesPerInviter', group: 'loop', label: 'Invites per inviter',
+      hint: 'Avg invites sent',
+      min: 1.0, max: 5.0, step: 0.1, format: 'dec1' },
+    { id: 'inviteToInstall', group: 'loop', label: 'Invite → Install',
+      hint: 'Untracked — slider estimate',
+      min: 0.00, max: 0.60, step: 0.01, format: 'pct' },
+    { id: 'invitedActRate', group: 'loop', label: 'Invited → Activation',
+      hint: 'Install → activation for invitees',
+      min: 0.00, max: 0.80, step: 0.01, format: 'pct' },
+  ];
+
+  // ========== INITIATIVE PRESETS ==========
+  // Each initiative = named bundle of deltas applied to baseline.
+  // Deltas are ADDITIVE on top of baseline parameter values.
+  const INITIATIVES = [
+    {
+      id: 'care-circle-v2',
+      title: 'Care Circle v2',
+      badge: 'Exploit',
+      desc: 'Polish the invite flow, improve invitee onboarding, add reactions.',
+      deltas: {
+        inviteRate: +0.10,      // +10pp
+        inviteToInstall: +0.05, // +5pp
+        invitedActRate: +0.08,  // +8pp (warmer invitee onboarding)
+        actRate: +0.02,         // +2pp (reaction prompts bring inviters back)
+      }
+    },
+    {
+      id: 'onboarding-redesign',
+      title: 'Onboarding → Aha (voice + intent)',
+      badge: 'Explore',
+      desc: '"Speak to Ditto" intent question, personalized empty state, first-moment matching.',
+      deltas: {
+        regRate: +0.05,
+        actRate: +0.07,
+      }
+    },
+    {
+      id: 'retain-the-activated',
+      title: 'Retain the Activated',
+      badge: 'Exploit',
+      desc: 'First-month push cadence, next-appointment nudges, summary re-read prompts to fix the M0→M1 cliff.',
+      deltas: {
+        r1: +0.10,
+      }
+    },
+    {
+      id: 'menzis-partnership',
+      title: 'Menzis partnership push',
+      badge: 'Exploit',
+      desc: 'Scale B2B2C distribution via health insurer. Higher-intent inflow + volume.',
+      deltas: {
+        inflow: +2000,
+        regRate: +0.08,  // higher-intent referred traffic
+        actRate: +0.04,
+      }
+    },
+    {
+      id: 'quality-over-volume',
+      title: 'Quality-of-inflow shift',
+      badge: 'Explore',
+      desc: 'Cut low-intent Meta paid, re-invest in content / organic / partner referrals.',
+      deltas: {
+        inflow: -500,
+        regRate: +0.07,
+        actRate: +0.05,
+      }
+    },
+    {
+      id: 'journey-page',
+      title: 'Journey Page (Care Brain anchor)',
+      badge: 'Explore',
+      desc: 'Living health record for serious-condition patients; step-change in long-term value → retention.',
+      deltas: {
+        r2: +0.10,
+        actRate: +0.03,
+        inviteRate: +0.05,
+      }
+    },
+  ];
+
+  // ========== STATE ==========
+  let scenario = { ...BASELINE };
+  let activeInitiatives = new Set();
+
+  // ========== MATH ENGINE ==========
+  function computeMAU(p) {
+    const A0 = p.inflow * p.regRate * p.actRate;                 // new activated / month (direct)
+    const K = p.inviteRate * p.invitesPerInviter * p.inviteToInstall * p.invitedActRate;
+    const ATotal = A0 / (1 - K);                                  // new activated / month (with loop)
+    const L = 1 + p.r1 / (1 - p.r2);                              // avg activated lifetime (months)
+    const MAU = ATotal * L;
+    return { A0, K, ATotal, L, MAU };
+  }
+
+  // ========== FORMATTING ==========
+  function fmt(value, kind) {
+    if (kind === 'pct') return (value * 100).toFixed(0) + '%';
+    if (kind === 'dec1') return value.toFixed(1);
+    if (kind === 'int') return Math.round(value).toLocaleString();
+    return String(value);
+  }
+
+  function fmtMAU(n) { return Math.round(n).toLocaleString(); }
+
+  // ========== RENDER ==========
+  function renderSliders() {
+    ['inflow', 'funnel', 'retention', 'loop'].forEach(group => {
+      const container = document.getElementById(`group-${group}`);
+      container.innerHTML = '';
+      SLIDERS.filter(s => s.group === group).forEach(s => {
+        const row = document.createElement('div');
+        row.className = 'slider-row';
+        row.innerHTML = `
+          <div class="name">${s.label}<span class="hint">${s.hint}</span></div>
+          <input type="range" id="slider-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${scenario[s.id]}">
+          <div class="slider-value" id="value-${s.id}">${fmt(scenario[s.id], s.format)}</div>
+        `;
+        container.appendChild(row);
+
+        const input = row.querySelector('input');
+        input.addEventListener('input', e => {
+          scenario[s.id] = parseFloat(e.target.value);
+          // Manual slider change breaks initiative sync — clear all active initiatives
+          // to avoid ambiguous state. Keep it simple.
+          if (activeInitiatives.size > 0) {
+            activeInitiatives.clear();
+          }
+          renderAll();
+        });
+      });
+    });
+  }
+
+  function renderInitiatives() {
+    const container = document.getElementById('initiative-list');
+    container.innerHTML = '';
+    INITIATIVES.forEach(init => {
+      const isActive = activeInitiatives.has(init.id);
+      // Compute what MAU would be if ONLY this initiative were applied to baseline
+      const soloScenario = { ...BASELINE };
+      for (const [key, delta] of Object.entries(init.deltas)) {
+        soloScenario[key] = BASELINE[key] + delta;
+      }
+      const mauSolo = computeMAU(soloScenario).MAU;
+      const mauBase = computeMAU(BASELINE).MAU;
+      const soloLift = mauSolo - mauBase;
+      const soloPct = (soloLift / mauBase) * 100;
+
+      const deltasStr = Object.entries(init.deltas).map(([k, v]) => {
+        const slider = SLIDERS.find(s => s.id === k);
+        const sign = v >= 0 ? '+' : '';
+        let formatted;
+        if (slider.format === 'pct') formatted = sign + (v * 100).toFixed(0) + 'pp';
+        else if (slider.format === 'int') formatted = sign + Math.round(v).toLocaleString();
+        else formatted = sign + v.toFixed(1);
+        return `<span class="delta-chip">${slider.label.split(' ')[0]} ${formatted}</span>`;
+      }).join('');
+
+      const card = document.createElement('div');
+      card.className = 'initiative' + (isActive ? ' active' : '');
+      card.innerHTML = `
+        <div class="initiative-header">
+          <div class="title">${init.title}</div>
+          <div class="badge">${init.badge}</div>
+        </div>
+        <div class="desc">${init.desc}</div>
+        <div class="deltas">${deltasStr}</div>
+        <div class="mau-impact">Solo impact: ${soloLift >= 0 ? '+' : ''}${fmtMAU(soloLift)} MAU (${soloPct >= 0 ? '+' : ''}${soloPct.toFixed(1)}%)</div>
+      `;
+      card.addEventListener('click', () => toggleInitiative(init.id));
+      container.appendChild(card);
+    });
+  }
+
+  function toggleInitiative(id) {
+    const init = INITIATIVES.find(i => i.id === id);
+    if (!init) return;
+    if (activeInitiatives.has(id)) {
+      // Subtract deltas
+      activeInitiatives.delete(id);
+      for (const [key, delta] of Object.entries(init.deltas)) {
+        scenario[key] = scenario[key] - delta;
+      }
+    } else {
+      // Add deltas
+      activeInitiatives.add(id);
+      for (const [key, delta] of Object.entries(init.deltas)) {
+        scenario[key] = scenario[key] + delta;
+      }
+    }
+    // Clamp to slider ranges
+    SLIDERS.forEach(s => {
+      scenario[s.id] = Math.max(s.min, Math.min(s.max, scenario[s.id]));
+    });
+    renderAll();
+  }
+
+  function renderLeverage() {
+    // Standardized deltas
+    const deltas = {
+      inflow: 1000,
+      regRate: 0.05,
+      actRate: 0.05,
+      r1: 0.05,
+      r2: 0.05,
+      inviteRate: 0.05,
+      invitesPerInviter: 0.5,
+      inviteToInstall: 0.05,
+      invitedActRate: 0.05,
+    };
+
+    const results = SLIDERS.map(s => {
+      const perturbed = { ...BASELINE, [s.id]: BASELINE[s.id] + deltas[s.id] };
+      // Clamp
+      perturbed[s.id] = Math.max(s.min, Math.min(s.max, perturbed[s.id]));
+      const mauNew = computeMAU(perturbed).MAU;
+      const mauBase = computeMAU(BASELINE).MAU;
+      const lift = mauNew - mauBase;
+      const deltaLabel = s.format === 'pct'
+        ? `+${(deltas[s.id] * 100).toFixed(0)}pp`
+        : s.format === 'int'
+          ? `+${deltas[s.id].toLocaleString()}`
+          : `+${deltas[s.id].toFixed(1)}`;
+      return { id: s.id, label: s.label, lift, deltaLabel };
+    });
+
+    results.sort((a, b) => b.lift - a.lift);
+    const maxLift = Math.max(...results.map(r => Math.abs(r.lift)));
+
+    const container = document.getElementById('leverage-bars');
+    container.innerHTML = '';
+    results.forEach(r => {
+      const pct = (Math.abs(r.lift) / maxLift) * 100;
+      const row = document.createElement('div');
+      row.className = 'lev-row';
+      row.innerHTML = `
+        <div class="lev-name">${r.label}<span class="lev-delta-amount">standardized ${r.deltaLabel}</span></div>
+        <div class="lev-bar-container">
+          <div class="lev-bar ${pct < 15 ? 'weak' : ''}" style="width: ${pct}%"></div>
+        </div>
+        <div class="lev-value">+${fmtMAU(r.lift)}</div>
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  function renderSliderValues() {
+    SLIDERS.forEach(s => {
+      const el = document.getElementById(`value-${s.id}`);
+      const slider = document.getElementById(`slider-${s.id}`);
+      if (el) {
+        el.textContent = fmt(scenario[s.id], s.format);
+        const changed = Math.abs(scenario[s.id] - BASELINE[s.id]) > 1e-6;
+        el.classList.toggle('changed', changed);
+      }
+      if (slider) slider.value = scenario[s.id];
+    });
+  }
+
+  function renderReadout() {
+    const baseResult = computeMAU(BASELINE);
+    const scenResult = computeMAU(scenario);
+    document.getElementById('mau-baseline').textContent = fmtMAU(baseResult.MAU);
+    document.getElementById('mau-scenario').textContent = fmtMAU(scenResult.MAU);
+
+    const delta = scenResult.MAU - baseResult.MAU;
+    const pct = (delta / baseResult.MAU) * 100;
+    const deltaEl = document.getElementById('mau-delta');
+    const pctEl = document.getElementById('mau-delta-pct');
+    const sign = delta >= 0 ? '+' : '';
+    deltaEl.textContent = `${sign}${fmtMAU(delta)}`;
+    pctEl.textContent = `${sign}${pct.toFixed(1)}% vs baseline`;
+    deltaEl.classList.remove('positive', 'negative', 'zero');
+    if (Math.abs(delta) < 1) deltaEl.classList.add('zero');
+    else if (delta > 0) deltaEl.classList.add('positive');
+    else deltaEl.classList.add('negative');
+
+    // Derived
+    document.getElementById('d-activated').textContent = fmtMAU(scenResult.ATotal) + '/mo';
+    document.getElementById('d-lifetime').textContent = scenResult.L.toFixed(2);
+    document.getElementById('d-kfactor').textContent = scenResult.K.toFixed(3);
+  }
+
+  function renderAll() {
+    renderSliderValues();
+    renderInitiatives();
+    renderReadout();
+  }
+
+  function resetAll() {
+    scenario = { ...BASELINE };
+    activeInitiatives.clear();
+    renderAll();
+  }
+
+  // ========== INIT ==========
+  renderSliders();
+  renderLeverage();
+  renderAll();
+</script>
+
+</body>
+</html>

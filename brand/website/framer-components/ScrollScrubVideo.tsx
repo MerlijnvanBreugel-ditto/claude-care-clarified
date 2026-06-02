@@ -116,12 +116,14 @@ interface Props {
     chapterTextColor: string
     chapterFontFamily: string
     chapterBaseFontSize: number
-    s1Start: number; s1End: number
-    s2Start: number; s2End: number
-    s3Start: number; s3End: number
-    s4Start: number; s4End: number
-    s5Start: number; s5End: number
-    s6Start: number; s6End: number
+    scrollTarget: string
+    fps: number
+    s1Start: number; s1StartFrames: number; s1End: number; s1EndFrames: number
+    s2Start: number; s2StartFrames: number; s2End: number; s2EndFrames: number
+    s3Start: number; s3StartFrames: number; s3End: number; s3EndFrames: number
+    s4Start: number; s4StartFrames: number; s4End: number; s4EndFrames: number
+    s5Start: number; s5StartFrames: number; s5End: number; s5EndFrames: number
+    s6Start: number; s6StartFrames: number; s6End: number; s6EndFrames: number
     style?: React.CSSProperties
 }
 
@@ -150,12 +152,14 @@ export default function ScrollScrubVideo(props: Props) {
         chapterTextColor = "#0D164F",
         chapterFontFamily = "'Bricolage Grotesque', sans-serif",
         chapterBaseFontSize = 20,
-        s1Start = 0, s1End = 8,
-        s2Start = 10, s2End = 17,
-        s3Start = 19, s3End = 50,
-        s4Start = 55, s4End = 72,
-        s5Start = 75, s5End = 85,
-        s6Start = 88, s6End = 94,
+        scrollTarget = "",
+        fps = 30,
+        s1Start = 0, s1StartFrames = 0, s1End = 9, s1EndFrames = 10,
+        s2Start = 10, s2StartFrames = 10, s2End = 18, s2EndFrames = 4,
+        s3Start = 19, s3StartFrames = 4, s3End = 38, s3EndFrames = 13,
+        s4Start = 39, s4StartFrames = 13, s4End = 54, s4EndFrames = 4,
+        s5Start = 55, s5StartFrames = 4, s5End = 72, s5EndFrames = 26,
+        s6Start = 73, s6StartFrames = 26, s6End = 94, s6EndFrames = 0,
         style,
     } = props
 
@@ -174,15 +178,24 @@ export default function ScrollScrubVideo(props: Props) {
 
     const isMobile = mobileLayout
 
-    const sceneBounds = useMemo(() => [
-        { start: s1Start, end: s1End },
-        { start: s2Start, end: s2End },
-        { start: s3Start, end: s3End },
-        { start: s4Start, end: s4End },
-        { start: s5Start, end: s5End },
-        { start: s6Start, end: s6End },
-    ], [s1Start, s1End, s2Start, s2End, s3Start, s3End,
-        s4Start, s4End, s5Start, s5End, s6Start, s6End])
+    const sceneBounds = useMemo(() => {
+        const safeFps = fps > 0 ? fps : 30
+        const t = (sec: number, frames: number) => sec + frames / safeFps
+        return [
+            { start: t(s1Start, s1StartFrames), end: t(s1End, s1EndFrames) },
+            { start: t(s2Start, s2StartFrames), end: t(s2End, s2EndFrames) },
+            { start: t(s3Start, s3StartFrames), end: t(s3End, s3EndFrames) },
+            { start: t(s4Start, s4StartFrames), end: t(s4End, s4EndFrames) },
+            { start: t(s5Start, s5StartFrames), end: t(s5End, s5EndFrames) },
+            { start: t(s6Start, s6StartFrames), end: t(s6End, s6EndFrames) },
+        ]
+    }, [fps,
+        s1Start, s1StartFrames, s1End, s1EndFrames,
+        s2Start, s2StartFrames, s2End, s2EndFrames,
+        s3Start, s3StartFrames, s3End, s3EndFrames,
+        s4Start, s4StartFrames, s4End, s4EndFrames,
+        s5Start, s5StartFrames, s5End, s5EndFrames,
+        s6Start, s6StartFrames, s6End, s6EndFrames])
 
     const videoDuration = useMemo(
         () => Math.max(...sceneBounds.map(b => b.end)),
@@ -436,8 +449,7 @@ export default function ScrollScrubVideo(props: Props) {
 
     const exitSection = useCallback(() => {
         const video = videoRef.current
-        const section = sectionRef.current
-        if (!video || !section) return
+        if (!video) return
         video.currentTime = videoDuration
         video.pause()
         lockedRef.current = false
@@ -446,14 +458,18 @@ export default function ScrollScrubVideo(props: Props) {
         wheelAccumRef.current = 0
         document.documentElement.style.overflow = ""
         document.body.style.overflow = ""
-        // Find the next sibling section in the DOM and scroll to it
-        const next = section.nextElementSibling
-        if (next) {
+        // Smooth scroll to the target section
+        if (scrollTarget) {
             requestAnimationFrame(() => {
-                next.scrollIntoView({ behavior: "smooth" })
+                // scrollTarget from Framer Link control is a URL or #hash
+                const hash = scrollTarget.startsWith("#") ? scrollTarget : new URL(scrollTarget, window.location.href).hash
+                const target = hash ? document.querySelector(hash) : null
+                if (target) {
+                    target.scrollIntoView({ behavior: "smooth" })
+                }
             })
         }
-    }, [videoDuration])
+    }, [videoDuration, scrollTarget])
 
     // ── Render ───────────────────────────────────────────────────────────────
 
@@ -663,16 +679,16 @@ export default function ScrollScrubVideo(props: Props) {
                         background: "none",
                         border: "none",
                         cursor: "pointer",
-                        padding: 12,
-                        opacity: 0.3,
+                        padding: 16,
+                        opacity: 0.4,
                         transition: "opacity 200ms ease",
                         zIndex: 3,
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.6" }}
-                    onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.3" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.7" }}
+                    onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.4" }}
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="#0D164F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#0D164F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </button>
@@ -785,8 +801,10 @@ addPropertyControls(ScrollScrubVideo, {
         type: ControlType.Number,
         title: "Chapter Font Size (px)",
         defaultValue: 20,
-        min: 10, max: 40, step: 1,
-        description: "Base size. Active chapter gets 20% larger.",
+    },
+    scrollTarget: {
+        type: ControlType.Link,
+        title: "Skip Button Target",
     },
     bottomFadeEnabled: {
         type: ControlType.Boolean,
@@ -822,16 +840,35 @@ addPropertyControls(ScrollScrubVideo, {
         defaultValue: 0,
         min: -100, max: 100, step: 2,
     },
-    s1Start: { type: ControlType.Number, title: "Scene 1 Start (s)", defaultValue: 0, min: 0, max: 300, step: 0.1 },
-    s1End: { type: ControlType.Number, title: "Scene 1 End (s)", defaultValue: 8, min: 0, max: 300, step: 0.1 },
-    s2Start: { type: ControlType.Number, title: "Scene 2 Start (s)", defaultValue: 10, min: 0, max: 300, step: 0.1 },
-    s2End: { type: ControlType.Number, title: "Scene 2 End (s)", defaultValue: 17, min: 0, max: 300, step: 0.1 },
-    s3Start: { type: ControlType.Number, title: "Scene 3 Start (s)", defaultValue: 19, min: 0, max: 300, step: 0.1 },
-    s3End: { type: ControlType.Number, title: "Scene 3 End (s)", defaultValue: 50, min: 0, max: 300, step: 0.1 },
-    s4Start: { type: ControlType.Number, title: "Scene 4 Start (s)", defaultValue: 55, min: 0, max: 300, step: 0.1 },
-    s4End: { type: ControlType.Number, title: "Scene 4 End (s)", defaultValue: 72, min: 0, max: 300, step: 0.1 },
-    s5Start: { type: ControlType.Number, title: "Scene 5 Start (s)", defaultValue: 75, min: 0, max: 300, step: 0.1 },
-    s5End: { type: ControlType.Number, title: "Scene 5 End (s)", defaultValue: 85, min: 0, max: 300, step: 0.1 },
-    s6Start: { type: ControlType.Number, title: "Scene 6 Start (s)", defaultValue: 88, min: 0, max: 300, step: 0.1 },
-    s6End: { type: ControlType.Number, title: "Scene 6 End (s)", defaultValue: 94, min: 0, max: 300, step: 0.1 },
+    fps: {
+        type: ControlType.Number,
+        title: "Video FPS",
+        defaultValue: 30,
+        min: 1, max: 120, step: 1,
+        description: "Frame rate used to convert frame offsets to seconds.",
+    },
+    s1Start: { type: ControlType.Number, title: "Scene 1 Start (s)", defaultValue: 0, min: 0, max: 3600, step: 0.1 },
+    s1StartFrames: { type: ControlType.Number, title: "Scene 1 Start (f)", defaultValue: 0, min: 0, max: 120, step: 1 },
+    s1End: { type: ControlType.Number, title: "Scene 1 End (s)", defaultValue: 9, min: 0, max: 3600, step: 0.1 },
+    s1EndFrames: { type: ControlType.Number, title: "Scene 1 End (f)", defaultValue: 10, min: 0, max: 120, step: 1 },
+    s2Start: { type: ControlType.Number, title: "Scene 2 Start (s)", defaultValue: 10, min: 0, max: 3600, step: 0.1 },
+    s2StartFrames: { type: ControlType.Number, title: "Scene 2 Start (f)", defaultValue: 10, min: 0, max: 120, step: 1 },
+    s2End: { type: ControlType.Number, title: "Scene 2 End (s)", defaultValue: 18, min: 0, max: 3600, step: 0.1 },
+    s2EndFrames: { type: ControlType.Number, title: "Scene 2 End (f)", defaultValue: 4, min: 0, max: 120, step: 1 },
+    s3Start: { type: ControlType.Number, title: "Scene 3 Start (s)", defaultValue: 19, min: 0, max: 3600, step: 0.1 },
+    s3StartFrames: { type: ControlType.Number, title: "Scene 3 Start (f)", defaultValue: 4, min: 0, max: 120, step: 1 },
+    s3End: { type: ControlType.Number, title: "Scene 3 End (s)", defaultValue: 38, min: 0, max: 3600, step: 0.1 },
+    s3EndFrames: { type: ControlType.Number, title: "Scene 3 End (f)", defaultValue: 13, min: 0, max: 120, step: 1 },
+    s4Start: { type: ControlType.Number, title: "Scene 4 Start (s)", defaultValue: 39, min: 0, max: 3600, step: 0.1 },
+    s4StartFrames: { type: ControlType.Number, title: "Scene 4 Start (f)", defaultValue: 13, min: 0, max: 120, step: 1 },
+    s4End: { type: ControlType.Number, title: "Scene 4 End (s)", defaultValue: 54, min: 0, max: 3600, step: 0.1 },
+    s4EndFrames: { type: ControlType.Number, title: "Scene 4 End (f)", defaultValue: 4, min: 0, max: 120, step: 1 },
+    s5Start: { type: ControlType.Number, title: "Scene 5 Start (s)", defaultValue: 55, min: 0, max: 3600, step: 0.1 },
+    s5StartFrames: { type: ControlType.Number, title: "Scene 5 Start (f)", defaultValue: 4, min: 0, max: 120, step: 1 },
+    s5End: { type: ControlType.Number, title: "Scene 5 End (s)", defaultValue: 72, min: 0, max: 3600, step: 0.1 },
+    s5EndFrames: { type: ControlType.Number, title: "Scene 5 End (f)", defaultValue: 26, min: 0, max: 120, step: 1 },
+    s6Start: { type: ControlType.Number, title: "Scene 6 Start (s)", defaultValue: 73, min: 0, max: 3600, step: 0.1 },
+    s6StartFrames: { type: ControlType.Number, title: "Scene 6 Start (f)", defaultValue: 26, min: 0, max: 120, step: 1 },
+    s6End: { type: ControlType.Number, title: "Scene 6 End (s)", defaultValue: 94, min: 0, max: 3600, step: 0.1 },
+    s6EndFrames: { type: ControlType.Number, title: "Scene 6 End (f)", defaultValue: 0, min: 0, max: 120, step: 1 },
 })

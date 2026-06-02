@@ -1,0 +1,13 @@
+population,tenure_bucket,n_users,definition_of_active,caveats
+activated,0-1m,,summary_created in last 30d,
+activated,1-3m,,summary_created in last 30d,
+activated,3-6m,,summary_created in last 30d,
+activated,6-12m,,summary_created in last 30d,
+activated,12-24m,,summary_created in last 30d,
+activated,24m+,,summary_created in last 30d,
+passive,0-1m,,summary_viewed in last 30d (no activation ever),
+passive,1-3m,,summary_viewed in last 30d (no activation ever),
+passive,3-6m,,summary_viewed in last 30d (no activation ever),
+passive,6-12m,,summary_viewed in last 30d (no activation ever),
+passive,12-24m,,summary_viewed in last 30d (no activation ever),
+passive,24m+,,summary_viewed in last 30d (no activation ever),

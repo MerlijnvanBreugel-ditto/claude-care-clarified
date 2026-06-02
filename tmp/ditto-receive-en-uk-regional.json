@@ -1,0 +1,66 @@
+{
+    "home": {
+        "recordingInfo": {
+            "description": "In the UK you can record a conversation with your doctor for your own personal use. You are not allowed to share the recording publicly without permission.",
+            "explanation": "In the UK you can record a conversation with your doctor for your own personal use. You are not allowed to share the recording publicly without permission."
+        },
+        "resources": {
+            "card": {
+                "nomination": {
+                    "heading": "Help Ditto win the Dutch Healthcare Innovation Award 🎉",
+                    "body1": "Great news: Ditto is a finalist for the biggest healthcare innovation award in the Netherlands — run by Zorginnovatie.nl.",
+                    "howToVote": {
+                        "deadline": "Voting closes 14 April at 5pm (CET). Don't forget to confirm your vote via email."
+                    }
+                }
+            }
+        }
+    },
+    "recordingInfo": { 
+        "description": "In the UK you can record a conversation with your doctor for your own personal use. You are not allowed to share the recording publicly without permission.",
+        "explanation": "In the UK you can record a conversation with your doctor for your own personal use. You are not allowed to share the recording publicly without permission."
+    },
+    "userInfo": {
+        "phone": {
+            "help": "Include country code, e.g. +31"
+        }
+    },
+    "activation": {
+        "step": {
+            "4": {
+                "sheet": {
+                    "title": "Use of Ditto during a doctor's visit"
+                }
+            }
+        },
+        "infographic": {
+            "recording": {
+                "card": {
+                    "description": "This is a recording of a conversation with a doctor — try it out."
+                }
+            },
+            "summary": {
+                "specialist": {
+                    "description": "If the complaints persist, a consultation with a physiotherapist may be useful."
+                }
+            }
+        }
+    },
+    "question": {
+        "library": {
+            "24": "Should I see a doctor about this?"
+        }
+    },
+    "nomination": {
+        "inbox": {
+            "body": "Ditto has been nominated for the Dutch Healthcare Innovation Award. Help us with your vote. 🎉"
+        }
+    },
+    "discover": {
+        "articles": {
+            "article2": {
+                "title": "Menzis, a major Dutch health insurer, partners with Ditto on understandable health information"
+            }
+        }
+    }
+}

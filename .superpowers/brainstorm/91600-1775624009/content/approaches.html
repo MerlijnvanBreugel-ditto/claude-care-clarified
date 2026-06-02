@@ -1,0 +1,82 @@
+<h2>Care Brain MVP: Three Delivery Approaches</h2>
+<p class="subtitle">3 months, full nervous system, AI-first development. Click to select.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Infrastructure-First</h3>
+      <p><strong>Month 1:</strong> Build the full nervous system skeleton (event bus, profile store, worker framework, API layer) + run UX research in parallel</p>
+      <p><strong>Month 2:</strong> Build all 6 pipelines on the infrastructure + implement designs</p>
+      <p><strong>Month 3:</strong> Integration, polish, testing, sharing adaptation</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Clean architecture from day 1</li>
+          <li>No rework when adding pipelines</li>
+          <li>Infrastructure decisions made upfront</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>No visible product for 5+ weeks</li>
+          <li>Risk of over-engineering infra</li>
+          <li>UX feedback comes late</li>
+          <li>Big integration risk in month 2</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)" style="border: 2px solid #4CAF50;">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Vertical Slices + AI Agents &nbsp;<span style="background:#4CAF50;color:white;padding:2px 8px;border-radius:4px;font-size:0.75em;">RECOMMENDED</span></h3>
+      <p><strong>Slice 1 (Wk 1-4):</strong> Recording → Summary → Suggestions → Q&amp;A (the core brain, end-to-end)</p>
+      <p><strong>Slice 2 (Wk 5-8):</strong> Health Profile Store + Voice Input + Document Processing</p>
+      <p><strong>Slice 3 (Wk 9-11):</strong> Appointment Prep + Sharing Adaptation preview</p>
+      <p><strong>Polish (Wk 12):</strong> Integration testing, UX polish, quality gates</p>
+      <p style="margin-top:12px;"><strong>Team model:</strong> AI coding agents build each slice. Human architect sets patterns in Slice 1. Human reviewers gate each slice. UX research runs 1 sprint ahead. Design runs 1 sprint ahead of engineering.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Working brain from week 4</li>
+          <li>Each slice is testable and demoable</li>
+          <li>Natural priority order (most valuable first)</li>
+          <li>Infrastructure grows with real needs</li>
+          <li>Fast feedback, early course corrections</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>Some infrastructure rework between slices</li>
+          <li>Requires strong architectural vision upfront</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full Parallel Blast</h3>
+      <p><strong>Week 0:</strong> Architecture sprint, define all interfaces</p>
+      <p><strong>Weeks 1-8:</strong> All pipelines built simultaneously by different AI agents in isolated worktrees</p>
+      <p><strong>Weeks 9-12:</strong> Integration, UX, polish</p>
+      <p style="margin-top:12px;"><strong>Team model:</strong> Multiple AI agents work in parallel on independent pipelines. Human orchestrator manages integration.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Theoretically fastest delivery</li>
+          <li>Maximizes AI parallelism</li>
+          <li>Each pipeline is independent</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>Massive integration risk in weeks 9-12</li>
+          <li>No user-testable product until late</li>
+          <li>Interface mismatches between parallel work</li>
+          <li>UX is bolted on rather than designed in</li>
+          <li>Hardest to course-correct</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:24px; padding:16px; background:#f8f9fa; border-radius:8px; border-left:4px solid #4CAF50;">
+  <h3 style="margin-top:0;">Why B?</h3>
+  <p style="margin:8px 0 0;">The nervous system architecture is inherently slice-friendly: each pipeline is independent, the event bus and profile store grow incrementally. Slice 1 forces the hardest architectural decisions (event bus, worker pattern, profile schema) with the highest-value feature (Smart Suggestions). By week 4 you have a product you can touch. AI agents handle implementation throughput; humans handle judgment calls at gates. The infrastructure "rework" in Approach B is minimal because the event-driven pattern is naturally additive.</p>
+</div>
