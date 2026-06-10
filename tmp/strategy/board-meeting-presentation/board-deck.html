@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto Care · Board Meeting, June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D164F; --mint: #E0FBD5; --teal: #58B6D2; --yellow: #F3DE70;
+    --orange: #E8916E; --lavender: #BEAEF8; --cream: #EFE9DE; --light-blue: #B2DCF5;
+    --light-gray: #F1F1F1; --text-light: #7C8297; --red: #D94F4F; --divider: #EAEAEA;
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: var(--font-body); background: #FFFFFF; color: var(--navy); overflow: hidden; height: 100vh; width: 100vw; }
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6vh 8vw; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  .slide--default { background: #FFFFFF; color: var(--navy); }
+  .slide--navy { background: var(--navy); color: #F8F7F4; }
+
+  .brand-o { position: absolute; pointer-events: none; z-index: 0; }
+  .brand-o img { width: 100%; height: 100%; object-fit: contain; }
+  .slide > *:not(.brand-o) { position: relative; z-index: 1; }
+
+  h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 0.4em; letter-spacing: -0.02em; }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; margin-bottom: 0.5em; letter-spacing: -0.01em; }
+  h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.3; margin-bottom: 0.4em; }
+  p, li { font-family: var(--font-body); font-weight: 500; font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.6; }
+
+  .subtitle { font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.6; color: #7C8297; max-width: 42em; }
+  .slide--navy .subtitle { opacity: 0.8; color: #DCE6F0; }
+
+  .label { font-family: var(--font-body); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; color: var(--teal); }
+  .sub-label { font-family: var(--font-body); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); margin-bottom: 0.6em; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; margin-top: 1.5em; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3vw; margin-top: 1.5em; }
+
+  .card { border-radius: 12px; padding: 1.4em; margin-bottom: 0.8em; background: #fff; border: 1px solid rgba(30,36,50,0.08); }
+  .slide--navy .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+
+  ul, ol { padding-left: 1.2em; margin-top: 0.5em; }
+  li { margin-bottom: 0.4em; }
+  li::marker { color: var(--teal); }
+
+  .highlight { color: var(--teal); } .slide--navy .highlight { color: var(--yellow); }
+  strong { font-weight: 700; }
+
+  .pill { display: inline-block; font-family: var(--font-display); font-weight: 600; font-size: 0.72rem; padding: 0.2em 0.7em; border-radius: 100px; margin-right: 0.4em; margin-bottom: 0.3em; }
+  .pill--teal { background: rgba(88,182,210,0.18); color: var(--teal); }
+  .pill--navy { background: var(--navy); color: #fff; }
+  .pill--gray { background: rgba(124,130,151,0.16); color: var(--text-light); }
+
+  .progress { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--teal); transition: width 0.4s ease; z-index: 100; }
+  .counter { position: fixed; bottom: 1.5em; right: 2em; font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; opacity: 0.4; z-index: 100; color: var(--navy); }
+
+  .mt-1 { margin-top: 0.5em; } .mt-2 { margin-top: 1em; } .mt-3 { margin-top: 1.5em; } .mt-4 { margin-top: 2em; }
+  .mb-1 { margin-bottom: 0.5em; }
+  .small { font-size: clamp(0.8rem, 1vw, 0.9rem); opacity: 0.55; } .slide--navy .small { opacity: 0.7; }
+
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding: 0.4em 0; padding-left: 1.6em; position: relative; line-height: 1.4; font-size: 0.92rem; }
+  .checklist li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.9em; height: 0.9em; border: 2px solid var(--teal); border-radius: 4px; }
+
+  /* ===================== Board-deck additions ===================== */
+  .fill { background: var(--yellow); color: var(--navy); font-weight: 700; font-family: var(--font-body); padding: 0 .3em; border-radius: 4px; outline: 1px dashed var(--orange); white-space: nowrap; }
+  text.ph-t { fill: #B8761D; font-weight: 700; }
+
+  .divider { align-items: flex-start; }
+  .divider .chapter-no { font-family: var(--font-display); font-weight: 800; font-size: clamp(4rem, 13vw, 11rem); line-height: 0.85; color: var(--teal); letter-spacing: -0.03em; }
+  .divider h2 { font-size: clamp(2.4rem, 5vw, 4rem); margin-top: 0.1em; margin-bottom: 0.2em; }
+
+  .agenda { display: flex; flex-direction: column; gap: 0.6em; margin-top: 1.4em; max-width: 48em; }
+  .agenda-row { display: grid; grid-template-columns: 2.4em 1fr; gap: 1.2em; align-items: center; padding: 0.85em 1.2em; border-radius: 12px; background: rgba(13,22,79,0.03); border: 1px solid rgba(13,22,79,0.06); }
+  .agenda-no { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--teal); }
+  .agenda-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.05rem,1.6vw,1.35rem); }
+  .agenda-desc { font-size: 0.88rem; color: var(--text-light); margin-top: 0.1em; }
+
+  .slot { margin-top: 1.4em; padding: 2em; border-radius: 14px; border: 2px dashed rgba(88,182,210,0.4); background: rgba(88,182,210,0.04); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 36vh; color: var(--text-light); }
+  .slot .slot-label { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--teal); margin-bottom: 0.3em; }
+
+  .okr-target { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1; font-size: clamp(1.9rem, 4.2vw, 3.4rem); }
+  .okr-target .to { color: var(--teal); margin: 0 0.15em; }
+  .okr-target .sub { font-family: var(--font-body); font-weight: 600; font-size: 0.3em; color: var(--text-light); display: block; margin-top: 0.5em; letter-spacing: 0; }
+  .okr-obj-desc { font-size: 0.85rem; color: var(--text-light); margin: 0.2em 0 0.7em; }
+  .kr { display: flex; gap: 0.6em; align-items: flex-start; padding: 0.32em 0; }
+  .kr .gyr { margin-top: 0.28em; }
+  .kr-t { font-weight: 600; font-size: 0.88rem; }
+  .kr-now { color: var(--text-light); font-size: 0.8rem; }
+  .gyr { width: 0.8em; height: 0.8em; border-radius: 50%; flex: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.04); }
+  .gyr--g { background: #2D8A50; } .gyr--y { background: #E0A82E; } .gyr--r { background: var(--red); }
+
+  .diagnosis { font-size: 0.88rem; color: var(--navy); margin-top: 0.7em; }
+  .exit { border-left: 5px solid var(--red); background: rgba(217,79,79,0.07); border-radius: 0 12px 12px 0; padding: 0.7em 1em; margin-top: 0.9em; }
+  .exit .exit-h { font-weight: 700; color: var(--red); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.1em; }
+  .strip { border-left: 5px solid var(--orange); background: rgba(232,145,110,0.08); border-radius: 0 12px 12px 0; padding: 0.8em 1.1em; margin-top: 0.9em; }
+  .strip.teal { border-left-color: var(--teal); background: rgba(88,182,210,0.08); }
+  .statline { display: flex; gap: 1.6em; flex-wrap: wrap; margin: 0.6em 0; }
+  .stat .stat-num { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem,2.6vw,2rem); line-height: 1; }
+  .stat .stat-lbl { font-size: 0.76rem; color: var(--text-light); margin-top: 0.25em; max-width: 12em; }
+  .ctry { display: grid; grid-template-columns: 5.5em 1fr auto; gap: 0.6em; align-items: center; font-size: 0.82rem; margin-top: 0.45em; }
+  .ctry-track { height: 10px; border-radius: 5px; background: rgba(13,22,79,0.06); position: relative; overflow: hidden; }
+  .ctry-fill { height: 100%; border-radius: 5px; }
+
+  .img-ph { border-radius: 14px; border: 2px dashed rgba(88,182,210,0.45); background: rgba(88,182,210,0.05); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-light); font-size: 0.78rem; font-weight: 600; padding: 1em; min-height: 22vh; }
+
+  .chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart .grid { stroke: rgba(13,22,79,0.1); stroke-width: 1; }
+  .chart .axis { fill: var(--text-light); font-size: 12px; }
+  .chart .lgd { fill: var(--navy); font-size: 12px; }
+  .cap { font-size: 0.8rem; color: var(--text-light); margin-top: 0.4em; }
+
+  .nav-hint { position: fixed; bottom: 1.4em; left: 2em; font-size: 0.76rem; color: var(--text-light); opacity: 0.6; z-index: 100; }
+  .print-note { position: fixed; top: 1.1em; right: 1.6em; font-size: 0.68rem; color: var(--text-light); opacity: 0.5; z-index: 100; max-width: 17em; text-align: right; line-height: 1.4; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.printing) .slide.active > *:not(.brand-o) { animation: fadeUp 0.5s cubic-bezier(.2,.7,.2,1) both; }
+    body:not(.printing) .slide.active > *:nth-child(2) { animation-delay: .05s; }
+    body:not(.printing) .slide.active > *:nth-child(3) { animation-delay: .10s; }
+    body:not(.printing) .slide.active > *:nth-child(4) { animation-delay: .15s; }
+    body:not(.printing) .slide.active > *:nth-child(5) { animation-delay: .20s; }
+    body:not(.printing) .slide.active > *:nth-child(6) { animation-delay: .25s; }
+  }
+
+  @media screen and (max-width: 768px) {
+    .slide { padding: 4vh 6vw; }
+    .two-col, .three-col { grid-template-columns: 1fr; gap: 1.5em; }
+  }
+
+  /* ===================== Print / PDF ===================== */
+  @page { size: 297mm 210mm; margin: 0; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    html, body { height: auto !important; width: auto !important; overflow: visible !important; background: #fff !important; }
+    .deck { height: auto !important; width: auto !important; position: static !important; }
+    .slide {
+      position: relative !important; top: auto !important; left: auto !important;
+      opacity: 1 !important; transform: none !important; pointer-events: auto !important;
+      display: flex !important; width: 297mm !important; height: 209mm !important;
+      padding: 13mm 17mm !important; margin: 0 !important;
+      page-break-after: always; break-after: page; break-inside: avoid; overflow: hidden !important;
+    }
+    .slide:last-child { break-after: auto; page-break-after: auto; }
+    .progress, .counter, .nav-hint, .print-note { display: none !important; }
+    .brand-o { width: 68mm !important; height: 68mm !important; }
+    .two-col { grid-template-columns: 1fr 1fr !important; gap: 12mm !important; }
+    .three-col { grid-template-columns: 1fr 1fr 1fr !important; gap: 10mm !important; }
+    h1 { font-size: 40pt !important; } h2 { font-size: 24pt !important; } h3 { font-size: 13pt !important; }
+    p, li, td, th { font-size: 10pt !important; line-height: 1.4 !important; }
+    .subtitle { font-size: 10.5pt !important; }
+    .label, .sub-label { font-size: 8pt !important; }
+    .small, .cap, .agenda-desc, .okr-obj-desc, .kr-t, .kr-now, .diagnosis, .checklist li { font-size: 8.5pt !important; }
+    .fill { background: none !important; outline: none !important; padding: 0 !important; color: inherit !important; font-weight: 700 !important; }
+    .divider .chapter-no { font-size: 96pt !important; }
+    .slot { min-height: 64mm !important; }
+    .img-ph { min-height: 46mm !important; }
+    .chart { max-height: 120mm !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ============ SLIDE 0 · TITLE (navy) ============ -->
+<div class="slide slide--navy active" data-slide="0">
+  <div class="brand-o" style="right: -6%; bottom: -12%; width: 60vh; height: 60vh; opacity: 0.06;">
+    <img src="logo/Ditto_white.svg" alt="">
+  </div>
+  <div style="position:absolute; top:6vh; left:8vw; width:118px; opacity:0.95;"><img src="logo/Ditto_white.svg" alt="Ditto" style="width:100%;"></div>
+  <div class="label" style="color: var(--teal);">Board Meeting · June 2026</div>
+  <h1>Growing Ditto</h1>
+  <p class="subtitle mt-2" style="max-width: 30em;">Audience, activation and retention: the path back on course toward <strong style="color:#fff;">5,000 by June 30</strong>, and on to a much larger year-end ambition.</p>
+  <p class="small mt-4">Navigate with arrow keys, click, or swipe.</p>
+</div>
+
+<!-- ============ SLIDE 1 · AGENDA ============ -->
+<div class="slide slide--default" data-slide="1">
+  <div class="brand-o" style="right: -8%; top: 6%; width: 50vh; height: 50vh; opacity: 0.04;">
+    <img src="logo/Ditto_darkblue_bigo.svg" alt="">
+  </div>
+  <div class="label">Agenda</div>
+  <h2>What we'll cover</h2>
+  <div class="agenda">
+    <div class="agenda-row">
+      <div class="agenda-no">01</div>
+      <div><div class="agenda-title">Actuals &amp; Projections</div><div class="agenda-desc">This year, and looking ahead.</div></div>
+    </div>
+    <div class="agenda-row">
+      <div class="agenda-no">02</div>
+      <div><div class="agenda-title">Growing Ditto</div><div class="agenda-desc">Where we stand, where we're heading, and the levers that get us there.</div></div>
+    </div>
+    <div class="agenda-row">
+      <div class="agenda-no">A</div>
+      <div><div class="agenda-title">Appendix</div><div class="agenda-desc">Deep dives.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 2 · CH1 DIVIDER (navy) ============ -->
+<div class="slide slide--navy divider" data-slide="2">
+  <div class="chapter-no">01</div>
+  <h2>Actuals &amp; Projections</h2>
+  <p class="subtitle">This year, and looking ahead.</p>
+</div>
+
+<!-- ============ SLIDE 3 · CH1 CONTENT (placeholder) ============ -->
+<div class="slide slide--default" data-slide="3">
+  <div class="label">Actuals &amp; Projections</div>
+  <h2>This year, and looking ahead</h2>
+  <div class="two-col" style="margin-top:1.2em; gap:3vw;">
+    <div class="slot" style="margin-top:0;">
+      <div class="slot-label">This year</div>
+      <p style="max-width: 24em;">Actuals to date: spend, runway and the metrics that matter. Content supplied separately.</p>
+    </div>
+    <div class="slot" style="margin-top:0;">
+      <div class="slot-label">Looking ahead</div>
+      <p style="max-width: 24em;">Projections for the remainder of the year and the runway implication.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 4 · CH2 DIVIDER (navy) ============ -->
+<div class="slide slide--navy divider" data-slide="4">
+  <div class="chapter-no">02</div>
+  <h2>Growing Ditto</h2>
+  <p class="subtitle">Where we stand, where we're heading, and the levers that get us there.</p>
+</div>
+
+<!-- ============ SLIDE 5 · OKR OVERVIEW (2 objectives x 4 KRs) ============ -->
+<div class="slide slide--default" data-slide="5">
+  <div class="label">Q2 2026 · OKRs</div>
+  <h2 style="margin-bottom:0.25em;">Where we stand</h2>
+  <div class="okr-target">
+    2,169 <span class="to">&rarr;</span> 5,000
+    <span class="sub">Core MAU · 5,000 by June 30 &nbsp;·&nbsp; year-end ambition 50,000</span>
+  </div>
+  <div class="two-col" style="margin-top:1em; gap:3vw; align-items:start;">
+    <div class="card">
+      <h3 style="font-size:1.1rem;">O1 · Foundation</h3>
+      <p class="okr-obj-desc">Build the team, habits and foundation to scale Ditto internationally.</p>
+      <div class="kr"><span class="gyr gyr--r"></span><div><span class="kr-t">New hires onboarded &amp; fully operational</span> <span class="kr-now">&middot; Past Jun 1 target; brand lead open</span></div></div>
+      <div class="kr"><span class="gyr gyr--y"></span><div><span class="kr-t">15 FTE AI agents deployed across departments</span> <span class="kr-now">&middot; &asymp;1.5 of 15 FTE</span></div></div>
+      <div class="kr"><span class="gyr gyr--r"></span><div><span class="kr-t">100 MAU + 2 partners referring outside NL</span> <span class="kr-now">&middot; &asymp;14 MAU &middot; 0 partners</span></div></div>
+      <div class="kr"><span class="gyr gyr--g"></span><div><span class="kr-t">100% of major initiatives follow Proposal &amp; Evaluation</span> <span class="kr-now">&middot; pipeline live</span></div></div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1.1rem;">O2 · Growth loop</h3>
+      <p class="okr-obj-desc">Build the growth loop that compounds into 5,000 MAU by June 30.</p>
+      <div class="kr"><span class="gyr gyr--r"></span><div><span class="kr-t">2,000 partner registrations</span> <span class="kr-now">&middot; &asymp;270 / 2,000</span></div></div>
+      <div class="kr"><span class="gyr gyr--y"></span><div><span class="kr-t">D14 activation 11% &rarr; 25%</span> <span class="kr-now">&middot; 11% (from 5.3%)</span></div></div>
+      <div class="kr"><span class="gyr gyr--y"></span><div><span class="kr-t">Care-circle size 1.34 &rarr; 3.4</span> <span class="kr-now">&middot; avg &asymp;1.7</span></div></div>
+      <div class="kr"><span class="gyr gyr--r"></span><div><span class="kr-t">MAU retention 40% &rarr; 60%</span> <span class="kr-now">&middot; &asymp;40%</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 6 · MAU SINCE JANUARY (strict, looks red) ============ -->
+<div class="slide slide--default" data-slide="6">
+  <div class="label">The headline</div>
+  <h2>MAU since January</h2>
+  <div class="two-col" style="margin-top:0.8em; gap:3vw; align-items:center;">
+    <div>
+      <!-- CHART A1 · strict MAU Jan..Jun. y = 290 - value*0.05 (0..5,000). -->
+      <svg class="chart" viewBox="0 0 660 340" role="img" aria-label="Core MAU per month Jan to Jun against the pace to 5,000">
+        <g class="grid"><line x1="80" y1="40" x2="620" y2="40"/><line x1="80" y1="165" x2="620" y2="165"/><line x1="80" y1="290" x2="620" y2="290"/></g>
+        <g class="axis" text-anchor="end"><text x="70" y="44">5,000</text><text x="70" y="169">2,500</text><text x="70" y="294">0</text></g>
+        <line x1="80" y1="233" x2="620" y2="40" stroke="var(--orange)" stroke-width="2" stroke-dasharray="6 5"/>
+        <text x="620" y="34" text-anchor="end" fill="var(--orange)" font-size="12" font-weight="700">June target 5,000</text>
+        <polyline fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="80,233 188,230 296,217 404,202.45 512,181.9"/>
+        <polyline fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-dasharray="4 5" stroke-linecap="round" points="512,181.9 620,160.3"/>
+        <g fill="var(--teal)"><circle cx="80" cy="233" r="4.5"/><circle cx="188" cy="230" r="4.5"/><circle cx="296" cy="217" r="4.5"/><circle cx="404" cy="202.45" r="4.5"/><circle cx="512" cy="181.9" r="4.5"/><circle cx="620" cy="160.3" r="4.5" fill="#fff" stroke="var(--teal)" stroke-width="2.5"/></g>
+        <text x="512" y="170" text-anchor="middle" font-size="12" fill="var(--navy)" font-weight="700">2,162</text>
+        <text x="335" y="226" font-size="12" fill="var(--text-light)" font-style="italic">~20% MoM</text>
+        <g class="axis" text-anchor="middle"><text x="80" y="312">Jan</text><text x="188" y="312">Feb</text><text x="296" y="312">Mar</text><text x="404" y="312">Apr</text><text x="512" y="312">May</text><text x="620" y="312">Jun</text></g>
+        <g class="lgd"><line x1="80" y1="332" x2="100" y2="332" stroke="var(--teal)" stroke-width="3.5"/><text x="106" y="336">Actual MAU (summary viewed)</text><line x1="330" y1="332" x2="350" y2="332" stroke="var(--orange)" stroke-width="2" stroke-dasharray="6 5"/><text x="356" y="336">June target</text></g>
+      </svg>
+    </div>
+    <div>
+      <div class="card"><h3 style="font-size:1.05rem;">How we count it</h3><p style="font-size:0.9rem;">Core MAU = unique users who view at least one summary in a calendar month (<em>summary_viewed</em>). May: 2,162.</p></div>
+      <p class="mt-2">We grow about <strong>20%</strong> month over month and have for three months running. Steady, but linear, while the goal is far steeper.</p>
+      <div class="strip"><p style="font-size:0.95rem;"><strong>So the headline reads red.</strong> The next two slides show why it's closer to orange, and how we get back on course.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 7 · IT'S MORE ORANGE THAN RED (expanded, stacked) ============ -->
+<div class="slide slide--default" data-slide="7">
+  <div class="label">The headline, reframed</div>
+  <h2>It's more orange than red</h2>
+  <div class="two-col" style="margin-top:0.8em; gap:3vw; align-items:center;">
+    <div>
+      <!-- CHART A2 · stacked MAU Jan..Jun. y = 290 - value*0.0625 (0..4,000). Teal = strict, orange = appointments added (estimate). -->
+      <svg class="chart" viewBox="0 0 660 340" role="img" aria-label="Stacked MAU per month: summary viewed plus appointments added">
+        <g class="grid"><line x1="80" y1="40" x2="620" y2="40"/><line x1="80" y1="165" x2="620" y2="165"/><line x1="80" y1="290" x2="620" y2="290"/></g>
+        <g class="axis" text-anchor="end"><text x="70" y="44">4,000</text><text x="70" y="169">2,000</text><text x="70" y="294">0</text></g>
+        <g>
+          <rect x="57" y="218.75" width="46" height="71.25" fill="var(--teal)"/><rect x="57" y="188.75" width="46" height="30" fill="var(--orange)"/>
+          <rect x="165" y="215" width="46" height="75" fill="var(--teal)"/><rect x="165" y="180.6" width="46" height="34.4" fill="var(--orange)"/>
+          <rect x="273" y="198.75" width="46" height="91.25" fill="var(--teal)"/><rect x="273" y="152.5" width="46" height="46.25" fill="var(--orange)"/>
+          <rect x="381" y="180.6" width="46" height="109.4" fill="var(--teal)"/><rect x="381" y="126.2" width="46" height="54.4" fill="var(--orange)"/>
+          <rect x="489" y="154.9" width="46" height="135.1" fill="var(--teal)"/><rect x="489" y="98.65" width="46" height="56.25" fill="var(--orange)"/>
+          <rect x="597" y="127.9" width="46" height="162.1" fill="var(--teal)" opacity="0.55"/><rect x="597" y="68.5" width="46" height="59.4" fill="var(--orange)" opacity="0.55"/>
+        </g>
+        <text x="512" y="90" text-anchor="middle" font-size="12" fill="var(--navy)" font-weight="700">~3,066</text>
+        <g class="axis" text-anchor="middle"><text x="80" y="312">Jan</text><text x="188" y="312">Feb</text><text x="296" y="312">Mar</text><text x="404" y="312">Apr</text><text x="512" y="312">May</text><text x="620" y="312">Jun</text></g>
+        <g class="lgd"><rect x="80" y="328" width="14" height="10" fill="var(--teal)"/><text x="100" y="337">Summary viewed</text><rect x="250" y="328" width="14" height="10" fill="var(--orange)"/><text x="270" y="337">+ Appointments added</text></g>
+      </svg>
+    </div>
+    <div>
+      <p>Summary views are only part of how people use Ditto. Once we count <strong>appointment preparation</strong> the appointments people add and act on, engaged monthly users reach about <strong>3,066</strong> in May, roughly <strong>42% above</strong> the strict count.</p>
+      <div class="statline mt-2">
+        <div class="stat"><div class="stat-num">+42%</div><div class="stat-lbl">higher MAU once appointments count</div></div>
+        <div class="stat"><div class="stat-num">~3,066</div><div class="stat-lbl">expanded MAU in May</div></div>
+      </div>
+      <p class="small mt-2">Strict <em>summary viewed</em> stays our reported North Star. Expanded figures are an estimate pending the exact event union. This is the engagement we're already creating, and the definition we grow into as activation broadens beyond the summary.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 8 · THE PATH BACK ON COURSE (full-year ambition) ============ -->
+<div class="slide slide--default" data-slide="8">
+  <div class="label">Where we're heading</div>
+  <h2>The path back on course</h2>
+  <p class="subtitle">The ambition compounds at ~8.65% week on week to ~50,000 by year-end. At today's pace we drift far below it.</p>
+  <!-- CHART A3 · full-year Jan..Dec. y = 290 - value*0.005 (0..50,000). 12 months step 52.7 from x=70.
+       Teal solid = actual; teal dashed = ambition (8.65% WoW: Jan 1,300 -> Dec 50,032); gray dotted = drift (~20% MoM). -->
+  <svg class="chart" viewBox="0 0 720 360" role="img" aria-label="MAU full year: actual, ambition, and drift" style="margin-top:0.6em;">
+    <g class="grid"><line x1="60" y1="40" x2="680" y2="40"/><line x1="60" y1="165" x2="680" y2="165"/><line x1="60" y1="290" x2="680" y2="290"/></g>
+    <g class="axis" text-anchor="end"><text x="52" y="44">50,000</text><text x="52" y="169">25,000</text><text x="52" y="294">0</text></g>
+    <line x1="491.6" y1="40" x2="491.6" y2="290" stroke="rgba(13,22,79,0.12)" stroke-width="1" stroke-dasharray="3 4"/>
+    <text x="491.6" y="34" text-anchor="middle" font-size="11" fill="var(--text-light)">End Q3 · ~18,500</text>
+    <circle cx="649.7" cy="39.84" r="5" fill="var(--orange)"/>
+    <text x="644" y="46" text-anchor="end" font-size="12" font-weight="700" fill="var(--orange)">Ambition 50,000</text>
+    <!-- drift (~20% MoM), gray dotted -->
+    <polyline fill="none" stroke="var(--text-light)" stroke-width="2" stroke-dasharray="2 5" stroke-linecap="round" opacity="0.75"
+      points="280.8,279.19 333.5,277.03 386.2,274.44 438.9,271.32 491.6,267.59 544.3,263.1 597,257.72 649.7,251.27"/>
+    <text x="660" y="248" font-size="11" fill="var(--text-light)" text-anchor="end">Drift ~7,700</text>
+    <!-- ambition (8.65% WoW), teal dashed. Jan 1,300 · May 4,903 · Sep 18,488 · Dec 50,032. -->
+    <polyline fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-dasharray="6 5" stroke-linecap="round" stroke-linejoin="round"
+      points="70,283.5 122.7,280.94 175.4,277.38 228.1,272.41 280.8,265.49 333.5,255.84 386.2,242.4 438.9,223.66 491.6,197.56 544.3,161.18 597,110.48 649.7,39.84"/>
+    <!-- actual solid Jan..May -->
+    <polyline fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
+      points="70,284.3 122.7,284 175.4,282.7 228.1,281.25 280.8,279.19"/>
+    <g fill="var(--teal)"><circle cx="70" cy="284.3" r="4"/><circle cx="122.7" cy="284" r="4"/><circle cx="175.4" cy="282.7" r="4"/><circle cx="228.1" cy="281.25" r="4"/><circle cx="280.8" cy="279.19" r="4"/></g>
+    <g class="axis" text-anchor="middle" font-size="11">
+      <text x="60" y="308">Jan</text><text x="122.7" y="308">Feb</text><text x="175.4" y="308">Mar</text><text x="228.1" y="308">Apr</text><text x="280.8" y="308">May</text><text x="333.5" y="308">Jun</text><text x="386.2" y="308">Jul</text><text x="438.9" y="308">Aug</text><text x="491.6" y="308">Sep</text><text x="544.3" y="308">Oct</text><text x="597" y="308">Nov</text><text x="649.7" y="308">Dec</text>
+    </g>
+    <g class="lgd" font-size="11">
+      <line x1="60" y1="332" x2="80" y2="332" stroke="var(--teal)" stroke-width="3.5"/><text x="86" y="336">Actual</text>
+      <line x1="150" y1="332" x2="170" y2="332" stroke="var(--teal)" stroke-width="3.5" stroke-dasharray="6 5"/><text x="176" y="336">Ambition (8.65% WoW)</text>
+      <line x1="340" y1="332" x2="360" y2="332" stroke="var(--text-light)" stroke-width="2" stroke-dasharray="2 5"/><text x="366" y="336">If nothing changes (~20% MoM)</text>
+    </g>
+  </svg>
+  <p class="cap">At today's ~20% MoM we land near 7,700, about 85% below the 50,000 ambition. The gap between the lines is what the three levers must close.</p>
+</div>
+
+<!-- ============ SLIDE 9 · THREE LEVERS (navy intro) ============ -->
+<div class="slide slide--navy" data-slide="9">
+  <div class="label">What we're doing</div>
+  <h2>Three levers to close the gap</h2>
+  <p class="subtitle">Each slide follows the same shape: the signal on the left, the initiatives and exit decisions on the right.</p>
+  <div class="three-col mt-3">
+    <div class="card"><h3><span class="highlight">1 ·</span> Audience</h3><p style="font-size:0.92rem;">Get the right people in. Severe, high-intensity care paths where Ditto compounds.</p></div>
+    <div class="card"><h3><span class="highlight">2 ·</span> Activation</h3><p style="font-size:0.92rem;">Get them to first value fast, and widen what counts as value beyond the summary.</p></div>
+    <div class="card"><h3><span class="highlight">3 ·</span> Care Circle</h3><p style="font-size:0.92rem;">Turn every patient into a circle that pulls in more users, and keeps them.</p></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 10 · LEVER 1 · AUDIENCE ============ -->
+<div class="slide slide--default" data-slide="10">
+  <div class="label">Lever 1 · Audience</div>
+  <h2>The right audience: Life Moments</h2>
+  <p class="subtitle">High-intensity care paths, where the need is acute and people share.</p>
+  <div class="two-col" style="margin-top:0.7em; gap:3vw; align-items:start;">
+    <div>
+      <div class="sub-label">The signal</div>
+      <!-- CHART B · specialty split. bar width = pct * 5.6 px from x=120; rows 46px apart from y=24. -->
+      <svg class="chart" viewBox="0 0 440 240" role="img" aria-label="Share of categorised summaries by specialty" style="max-width:430px;">
+        <rect x="120" y="24" width="165" height="22" rx="4" fill="var(--teal)"/><text x="112" y="39" text-anchor="end" font-size="12.5" fill="var(--navy)" font-weight="700">Oncology</text><text x="293" y="39" font-size="11.5" class="ph-t">29.5%</text>
+        <rect x="120" y="70" width="81" height="22" rx="4" fill="var(--light-blue)"/><text x="112" y="85" text-anchor="end" font-size="12.5" fill="var(--navy)">Cardiology</text><text x="209" y="85" font-size="11.5" class="ph-t">14.4%</text>
+        <rect x="120" y="116" width="63" height="22" rx="4" fill="var(--light-blue)"/><text x="112" y="131" text-anchor="end" font-size="12.5" fill="var(--navy)">Neurology</text><text x="191" y="131" font-size="11.5" class="ph-t">11.2%</text>
+        <rect x="120" y="162" width="62" height="22" rx="4" fill="var(--light-blue)"/><text x="112" y="177" text-anchor="end" font-size="12.5" fill="var(--navy)">Orthopedics</text><text x="190" y="177" font-size="11.5" class="ph-t">11.1%</text>
+        <rect x="120" y="208" width="189" height="22" rx="4" fill="rgba(124,130,151,0.35)"/><text x="112" y="223" text-anchor="end" font-size="12.5" fill="var(--navy)">Other</text><text x="317" y="223" font-size="11.5" class="ph-t">33.8%</text>
+      </svg>
+      <p class="cap">Share of categorised summaries by specialty (~29% coverage; users may appear in more than one).</p>
+      <div style="margin-top:0.7em;">
+        <div class="sub-label" style="margin-bottom:0.3em;">By market</div>
+        <div class="ctry"><span>Netherlands</span><div class="ctry-track"><div class="ctry-fill" style="width:97.1%; background:var(--teal);"></div></div><span style="font-weight:700;">97.1%</span></div>
+        <div class="ctry"><span>United Kingdom</span><div class="ctry-track"><div class="ctry-fill" style="width:2%; background:var(--lavender);"></div></div><span style="font-weight:700;">0.6%</span></div>
+      </div>
+      <p class="diagnosis">Cardiology comes largely from our <strong>Hartklinieken</strong> partnership, a named B2B channel. Oncology patients return and view about <strong>2&times;</strong> more summaries over time (2.2&times; week-1 retention), and their invites are accepted <strong>1.8&times;</strong> more often (78% vs 53%).</p>
+    </div>
+    <div>
+      <div class="sub-label">What we're doing</div>
+      <ul class="checklist">
+        <li>Specialty-specific tutorials and onboarding.</li>
+        <li>Double down on partnerships, especially <strong>AYA</strong> (Jong &amp; Kanker) and Hartklinieken.</li>
+        <li>Hire a brand lead who is also a designer, with a broad marketing remit.</li>
+        <li>Build social presence and creative output.</li>
+      </ul>
+      <div class="exit"><span class="exit-h">Exit decision</span><p style="font-size:0.9rem;">Stop broad paid performance marketing. Reallocate to targeted, specialty-led acquisition.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 11 · LEVER 2 · ACTIVATION ============ -->
+<div class="slide slide--default" data-slide="11">
+  <div class="label">Lever 2 · Activation</div>
+  <h2>Activation: faster, and broader</h2>
+  <p class="subtitle">Activation today = a user's first summary. Two moves: lift the rate, and widen what counts.</p>
+  <div class="two-col" style="margin-top:0.7em; gap:3vw; align-items:start;">
+    <div>
+      <div class="sub-label">The signal</div>
+      <div class="statline">
+        <div class="stat"><div class="stat-num">45&rarr;52%</div><div class="stat-lbl">registration rate after removing the skip option</div></div>
+        <div class="stat"><div class="stat-num">11%</div><div class="stat-lbl">D14 activation, doubled from 5.3% in April</div></div>
+      </div>
+      <p class="diagnosis">The first summary is the bar. We are lifting the rate at onboarding, and widening what counts as value so activation no longer depends on a same-day appointment.</p>
+      <div class="strip teal"><p style="font-size:0.9rem;"><strong>Now experimenting · Calendar pull.</strong> On-device, bilingual keyword matching (local models) reads the appointments already in your phone, pre-fills them in Ditto, and reminds you to record. It pulls activation forward to <em>before</em> the visit. Launched June 1; first pulls landing.</p></div>
+    </div>
+    <div>
+      <div class="sub-label">What we're doing</div>
+      <ul class="checklist">
+        <li><strong>Better onboarding.</strong> Removed the option to skip creating an account; registration up.</li>
+        <li><strong>Lifecycle table stakes.</strong> Customer.io and Survicate live, with personalised onboarding series, smarter push, and audience-differentiated research.</li>
+        <li><strong>Calendar sync.</strong> Add an appointment in Ditto, it syncs to your phone calendar. One agenda, not two.</li>
+        <li><strong>Calendar pull.</strong> Pre-fill appointments from the phone and remind users to record (live this week).</li>
+      </ul>
+      <div class="img-ph">Calendar feature mockup &middot; images/activation-calendar.png</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 12 · LEVER 3 · CARE CIRCLE ============ -->
+<div class="slide slide--default" data-slide="12">
+  <div class="label">Lever 3 · Care Circle</div>
+  <h2>Care Circle: the compounding engine</h2>
+  <p class="subtitle">v2 shipped in March and grows fast off a near-zero base. It doesn't compound yet.</p>
+  <div class="two-col" style="margin-top:0.7em; gap:3vw; align-items:start;">
+    <div>
+      <div class="sub-label">The signal</div>
+      <p style="font-size:0.9rem;">Followers are starting to view summaries (<strong>+46%</strong> MoM), exactly the behaviour we want. But the loop is sub-critical: K-factor &asymp; <strong>0.10</strong>, well below 1. And <strong>75%</strong> of Core MAU still has no circle, while moving someone to even one member doubles their monthly summary views, our largest untapped lever.</p>
+      <!-- CHART C · oncology vs non-oncology. bar height = pct * 1.5 px from baseline y=190 (0..100%). -->
+      <svg class="chart" viewBox="0 0 380 230" role="img" aria-label="Oncology versus non-oncology: week-1 retention and care-circle acceptance" style="max-width:360px; margin-top:0.4em;">
+        <line x1="40" y1="190" x2="360" y2="190" class="grid"/>
+        <rect x="70" y="131.5" width="34" height="58.5" rx="3" fill="var(--orange)"/><rect x="110" y="163" width="34" height="27" rx="3" fill="rgba(124,130,151,0.45)"/>
+        <text x="87" y="124" text-anchor="middle" font-size="12" class="ph-t">39%</text><text x="127" y="156" text-anchor="middle" font-size="12" class="ph-t">18%</text>
+        <text x="107" y="210" text-anchor="middle" font-size="12" fill="var(--navy)" font-weight="600">Week-1 retention</text>
+        <rect x="236" y="73" width="34" height="117" rx="3" fill="var(--orange)"/><rect x="276" y="110.5" width="34" height="79.5" rx="3" fill="rgba(124,130,151,0.45)"/>
+        <text x="253" y="66" text-anchor="middle" font-size="12" class="ph-t">78%</text><text x="293" y="103" text-anchor="middle" font-size="12" class="ph-t">53%</text>
+        <text x="273" y="210" text-anchor="middle" font-size="12" fill="var(--navy)" font-weight="600">Circle acceptance</text>
+        <rect x="40" y="222" width="12" height="8" fill="var(--orange)"/><text x="56" y="230" font-size="11" fill="var(--navy)">Oncology</text>
+        <rect x="150" y="222" width="12" height="8" fill="rgba(124,130,151,0.45)"/><text x="166" y="230" font-size="11" fill="var(--navy)">Non-oncology</text>
+      </svg>
+    </div>
+    <div>
+      <div class="sub-label">What we're doing</div>
+      <ul class="checklist">
+        <li><strong>Follower-specific onboarding.</strong> Don't assume the follower is the patient.</li>
+        <li><strong>Personalised messaging</strong> after they accept an invite.</li>
+        <li><strong>Differentiated sharing.</strong> Choose what to share, and with whom.</li>
+        <li><strong>A more social care-update experience</strong>, with room for a thoughtful message.</li>
+      </ul>
+      <div class="strip"><p style="font-size:0.9rem;"><strong>Synergy with Lever 1.</strong> This compounds fastest with the right people in: in oncology, patients create more summaries, add more people, and share more often.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 13 · APPENDIX DIVIDER (navy) ============ -->
+<div class="slide slide--navy divider" data-slide="13">
+  <div class="chapter-no">A</div>
+  <h2>Appendix</h2>
+  <p class="subtitle">Deep dives.</p>
+</div>
+
+<!-- ============ SLIDE 14 · APPENDIX CONTENT (placeholder) ============ -->
+<div class="slide slide--default" data-slide="14">
+  <div class="label">Appendix</div>
+  <h2>Deep dives</h2>
+  <div class="slot">
+    <div class="slot-label">To populate</div>
+    <p style="max-width: 32em;">Market, product and any supporting detail land here. Add one slide per deep dive as needed.</p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+<div class="nav-hint">Arrow keys / click / swipe</div>
+<div class="print-note">To print: Cmd/Ctrl+P · enable <strong>Background graphics</strong> · Landscape · margins None</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+let current = 0;
+
+function showSlide(n) {
+  if (n < 0 || n >= slides.length) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  progress.style.width = ((current + 1) / slides.length * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); showSlide(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); showSlide(current - 1); }
+});
+
+document.addEventListener('click', e => {
+  const x = e.clientX / window.innerWidth;
+  if (x > 0.5) showSlide(current + 1); else showSlide(current - 1);
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) { if (diff > 0) showSlide(current + 1); else showSlide(current - 1); }
+});
+
+window.addEventListener('beforeprint', () => document.body.classList.add('printing'));
+window.addEventListener('afterprint',  () => document.body.classList.remove('printing'));
+
+showSlide(0);
+</script>
+
+</body>
+</html>

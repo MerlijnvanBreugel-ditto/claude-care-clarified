@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-05-31T00:00",
+  "last_updated": "2026-06-09",
   "description": "Live registry of all Mewtwo artifacts. Updated on every create/modify/archive. Summaries enable efficient context loading without reading full files.",
   "artifacts": [
     {
@@ -725,13 +725,13 @@
     },
     {
       "id": "eval-004",
-      "path": "pm-workspace/specs/funnel-leverage-model/",
+      "path": "pm-workspace/product-strategy/funnel-leverage-model/",
       "type": "evaluation",
-      "title": "Funnel Leverage Model — Python Cohort Stock-and-Flow Simulator (v3) + Porygon Data Requests + Research Memo",
-      "summary": "Calibrated mathematical model of Ditto's user funnel. v3 is a Python discrete-time Markov cohort simulator (model/) with state vector [s_0..s_11, s_loyal], three-tier retention (r₁=0.54 cliff, r₂=0.66 stable core, r_loyal=0.91 loyal self-loop hypothesis), Care Circle viral loop K≈0.012, passive as multiplier (0.36×activated), committed floor slider. Produces 24-month MAU trajectory + analytical asymptote; 8 pytest sanity tests (baseline flat, simulated→closed-form asymptote match, inflow-drop is gradual not cliff, retention lift compounds, loyal self-loop conserved, sensitivity ordering, K<1 guard). Fixes v2's 'scenario number is the asymptote' artifact: dropping Inflow 5k→1k now shows ~30% M1 drop (was 80% cliff), approaching new asymptote of 355 by M12. Synthetic calibration today; calibration.py auto-detects filled Porygon CSV templates. porygon-data-requests.md documents 10 requests across 3 tiers with 9 concrete CSV templates: 1.1 stock by tenure (Tier 1 blocking), 1.2 cohort retention matrix, 1.3 loyal tail retention, 2.1 growth accounting (New/Resurrected/Retained/Churned), 2.2 passive retention, 2.3 installs weekly, 2.4 Life Moment retention, 3.1 invite latency, 3.2 invite rate by tenure, 3.3 passive source split. Six initiative presets (Care Circle v2, Onboarding→Aha, Retain the Activated, Menzis partnership, Quality-of-inflow shift, Journey Page) port from v2. v1+v2 HTML retained for A-B reference. growth-frameworks-research.md (revised 2026-04-22) positions v3 as L3 Markov cohort (pulled forward from original v4 slot), re-sequences v4 to focus on data upgrades (per-tenure retention fit from 1.2, passive as own cohort from 2.2, Life Moment from 2.4, growth accounting from 2.1), v5 experiment linkage + MMM, v6 causal. Key honest insights: (1) activated base is inflow-heavy short run — s_0 is ~38% of activated MAU; (2) retention has biggest compounding leverage (r₂ 12m elasticity +1.47 vs funnel-conversion +0.98 vs viral params +0.01); (3) Care Circle loop is tiny at current K≈0.012 — invite→install leakage (untracked) is where the real leverage hides; (4) loyal tail is small (~2%) but cushions transients.",
+      "title": "Funnel Leverage Model — Python Cohort Stock-and-Flow Simulator (v3, sensitivity) + MAU Target Model (path-to-50k, forecasting) + Porygon Data Requests + Research Memo",
+      "summary": "Two complementary models of Ditto's funnel (folder moved from specs/ to product-strategy/ in the Jun sync). (A) v3 sensitivity tool (model/): Python discrete-time Markov cohort simulator, state vector [s_0..s_11, s_loyal], three-tier retention (r₁=0.54, r₂=0.66, r_loyal=0.91), K≈0.012, passive multiplier 0.36, 24-month trajectory + asymptote, 8 pytest tests. Answers 'where does leverage live' — retention has biggest compounding leverage, Care Circle loop tiny, invite→install leakage untracked. Explicitly NOT a forecaster. (B) NEW mau-target-model.html (2026-06-03, rate-based forecasting tool): single self-contained HTML, hand-rolled SVG chart, zero deps. Answers 'can we hit 50k by Dec and how'. Jan–Dec trajectory: real actuals Jan–Jun (Mar1381/Apr1714/May2080/Jun2200; Jan–Feb back-estimated), then slider-driven projection vs Ambition(→50k) and Drift(20%) reference lines. Engine MAU_next=MAU_now×m where m=ρ(retention)+ν(installs×reg×act/MAU)×a(1/(1−K)); 6 sliders in PM-native units (acquisition split into organic 3450/mo=115/day [earned floor] + paid&partner 3550/mo [bought, ~parked], reg 53%, act 15%, M1 retention 40%, K 0.10). ρ₀≈0.92 reverse-solved as an explicit PLUG so baseline=20%/mo exactly. Headline truth: from June 2,200 over 6 months, 50k needs ~68%/mo (not the stale Jan-anchored 39%); retention alone caps ~+26%/mo; virality dead until K rebuilt; acquisition tagged 'bought' (purple, evaporates) vs retention/virality/reg/act 'earned'. Live per-driver MoM contribution bars. All four stats caveats (ρ is a plug, 20% is a decelerating trailing avg, rate-based treats acquisition as sustained, point-estimate no bands) baked into in-tool assumptions panel. v1+v2 HTML retained for reference. growth-frameworks-research.md positions roadmap v4 data upgrades, v5 MMM, v6 causal.",
       "status": "draft",
       "created": "2026-04-21",
-      "updated": "2026-04-22"
+      "updated": "2026-06-03"
     },
     {
       "id": "proj-001",
@@ -777,7 +777,7 @@
       "id": "pres-003",
       "path": "pm-workspace/specs/market-trend-analysis/market-trend-deck.html",
       "type": "presentation",
-      "title": "Market & Trend Map — Slide Deck (46 slides, axes-reorg)",
+      "title": "Market & Trend Map — Slide Deck (47 slides, axes-reorg + field map)",
       "summary": "Self-contained HTML deck digesting the outside-in market/trend research (research-003), styled with brand-fundamentals.html (Bricolage/Inter, navy/teal/yellow). v3, 46 slides, reorganised around Merlijn's three axes (Clarity / Connection / Convenience). Clickable [publisher] source links on every claim (89), expandable drop-downs, vertical-centered slides (safe center). Asset renamed 'patient & family care layer' (was data/care graph). Sections: 0 Frame; 1 Where the market is moving (10 headlines on ONE slide, wearables ladder/Whoop/Oura/big-tech, voice-first, Jan-2026 foundation-model triple-entry, agentic+wrapper); 2 The three axes (mapped) + Convenience (Doctolib, concede); 3/Connection (where the relationship lives, AI-chat venue w/ NL 32% Univé + UK 24% Semble, WhatsApp+communities, Hello 24/7 insurer-reimbursed care-circle competitor, win patient, win family, competitors); Clarity (artifact commoditizing, NL portal+PGO threat Quli/Ivido, EU shipped examples HealthTalk.ai/Befunddolmetscher/Tilburg+AvL, scribes incl Abridge-for-Patients consumer app, OpenEvidence + its May-2026 EU exit, symptom-tracking/viz, the compound-moat 'understand YOUR care' verdict); demand; 4 Money & rules (two reimbursement routes incl Hello 24/7 + DiGA-Class-I drop-down, two paths, decisions, regulation, trust); 5 Foresight (timing, 2x2, compound moat, ledger, corrections, open items, sources). Kin/Google disclaimer removed per Merlijn. Draws on briefs F/G/H/J/K1/K2/K3 + citation-index.md. Built for Merlijn's own digestion.",
       "status": "active",
       "created": "2026-05-30",
@@ -822,6 +822,218 @@
       "status": "complete",
       "created": "2026-05-30",
       "updated": "2026-05-30"
+    },
+    {
+      "id": "vision-001",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/",
+      "type": "strategy",
+      "title": "Long-Term Product Vision — Five Product × Strategy × Monetization Routes",
+      "summary": "Forward-looking synthesis (2026-06-03) reframing Ditto's strategy around two binding constraints: frequency (escape the episodic appointment trap) and reimbursement-independent monetization. Five distinct routes, each a frequency engine x a non-reimbursement monetization engine: A Caregiver Command Center (caregiver pays + Hello-24/7-style reimbursement topper), B Proactive Care Agent (agentic/voice premium + outcomes), C Treatment Companion + RWD engine (active-treatment tracking + consent-first oncology RWD), D Verified Care Record (consent/grounding layer, b.well-style API + EHDS), E Family Health Network (freemium care-graph at scale). Recommends an A+C hybrid (serve the caregiver in the active-treatment window; they pay directly; RWD second engine; insurer reimbursement as channel topper); treats E as a bet-to-validate, B as a capability layer, D as an earn-later platform play. Names the retention prerequisite and the caregiver-vs-patient fork as gating. long-term-product-vision.md is the synthesis; sources/ holds 7 distilled (non-copy) artifacts of the evidence bases used (01 market/competitive, 02 growth/retention, 03 care-brain corpus+critique, 04 activation/unicorn theses, 05 TAM, 06 investor DD, 07 product-context+brand).",
+      "status": "draft",
+      "created": "2026-06-03",
+      "updated": "2026-06-03"
+    },
+    {
+      "id": "mds-001",
+      "path": "pm-workspace/product-strategy/market-deep-dive/",
+      "type": "market-research",
+      "title": "Market Deep Dive — 'Who Already Won, and How'",
+      "summary": "Focused deep-research program (plan agreed 2026-06-09, not yet run) that is the mirror image of market-trend-analysis/: that folder is the THREAT map (who's coming for the summary wedge, by threat vector); this is the OPPORTUNITY-AND-MECHANICS map (in each layer Ditto could build, who already won, what feature made them sticky, how they monetize, is the direction real). Built to serve own-perspective-v2.md (two layers — Intelligence core: understanding→advising→agency, PHR as multiplier; Operational front door: scheduling/Rx/messaging/data, ~DrLeap/Doctolib; coordination+social as leans) and its questions 0–4, run along both reasoning axes (vision-backwards + JTBD-forwards over the 5 named jobs), with monetization as a HARD filter. Structure: Part I = 8 capability-field teardown briefs (F1 ePRO/symptom-tracking, F2 journaling, F3 PHR/data-integration, F4 EHDS, F5 care-coordination, F6 proactive assistants/coaches, F7 social/family networks, F8 operational front door), each running 5–10 global best-in-class players through a consistent 7-lens template (job/moment, sticky mechanic, frequency engine, monetization+filter, moat, graveyard lesson, EU-applicability). Part II = 6 direction chapters to v2's architecture (C1 intelligence ladder, C2 PHR multiplier, C3 operational front door, C4 coordination lean, C5 social lean, C6 JTBD-forward map). Part III = cross-cutting patterns + monetization-filter exclusions + layer-stack scorecard vs the 4 criteria + reconciliation with the threat map. Even depth (weighting is a synthesis conclusion, not a research filter); global teardowns, EU filter. Adds players the existing analysis misses entirely (Kaiku Health, Noona, Navify, b.well, Particle, Wellthy, Thyme Care, Strava/Flo as habit precedents). ALL PHASES COMPLETE 2026-06-09: 8 briefs + 6 direction chapters (C1-C6) + 4 synthesis docs + citation index, web-sourced and graded. PAYLOAD = synthesis/17-layer-stack-scorecard.md. Convergent conclusion: nothing in this space monetizes on patient-pay (money is B2B everywhere); none of these fields is a standalone business for Ditto; the recurring UNDERSTOOD medical conversation is the unowned asset and the spine; everything else is a frequency engine, multiplier, lean, or rail-to-integrate. Validates v2's two-layer architecture and supersedes the v1 five-routes frame (A+C survive as customer/window choices; B=capability, D=integration, E=lean). Central tension surfaced: patient-first vs every-payer-is-B2B. Pending: real care-circle metrics to firm up the social bet (C5).",
+      "status": "active",
+      "created": "2026-06-09",
+      "updated": "2026-06-09"
+    },
+    {
+      "id": "vision-002",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/board-meeting-input-2026-06-03.md",
+      "type": "strategy",
+      "title": "Board Meeting — Strategy Inputs (2026-06-03)",
+      "summary": "Faithful, unsynthesized capture of board-meeting inputs (Merlijn to add the overarching perspective). Themes: wearables × medical context (the real unlock + MDR flag + 'Open Wearables' party + discuss-with-Lucas); the reframed long-term vision ('most trusted digital solution for your health', go-to-Ditto-instead-of-Google); route reframes + one new route (trusted context-aware answer engine = 'ChatGPT with your record'; Route E → social/peer care platform; convenience: scheduling/payment/reminders; patient+caregiver Care OS; proactive agent + nudges/guidance; EHDS verified-record vault); a beyond-MRR North Star idea (~50% of newly-diagnosed NL oncology patients use Ditto within a week of diagnosis); B2B lock-in monetization (replace portal / be the channel / cut no-shows / prove adherence) + pharmacy/pharma RWD; and Merlijn's reflection on daily-to-weekly frequency and the functional-vs-emotional-needs tension. Feeds vision-001 and vision-003. Includes a transcript-ambiguities list (Lucas→Łukasz?, 'Open Wearables', 'on-call for health').",
+      "status": "active",
+      "created": "2026-06-04",
+      "updated": "2026-06-04"
+    },
+    {
+      "id": "vision-003",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/09-aspirational-playbooks-and-human-needs.md",
+      "type": "strategy",
+      "title": "Aspirational Playbooks & the Human Needs of the Seriously Ill",
+      "summary": "Mewtwo's analysis + research approach answering two board questions: the underlying human needs of seriously ill people (oncology/neuro) and how category-defining companies approached vision-vs-wedge and functional-vs-emotional. Core thesis: a functional wedge gets you used, an emotional/identity need gets you loved, a recurring behavior is the bridge. Contents: a four-layers needs table (informational/psychological/relational/existential × lab-copyability); a 9-need hypothesis map (control in chaos, tell-the-story-once, calibrate fear, reciprocity, being seen, realistic hope, legacy, caregiver competence, neuro dignity) ranked by depth×frequency×can-the-labs-copy-it; a playbook grid (board's Airbnb/Uber/Spotify/Headspace + my picks Strava/Duolingo/Oura + healthcare precedents Flo/PatientsLikeMe/Revolut); the cross-pattern (vision is usually post-hoc articulation, winners beat the *real* alternative = Google + calling-your-daughter, frequency is engineered not assumed); implications for the five routes (a 6th 'trusted answer engine' route is emerging; E→social/peer; A→patient+caregiver Care OS); and a two-workstream research plan (WS1 NotebookLM/JTBD human needs; WS2 deep-research harness on early company histories with adversarial verification). NOT yet researched — analysis + approach, with offer to kick off either workstream.",
+      "status": "active",
+      "created": "2026-06-04",
+      "updated": "2026-06-04"
+    },
+    {
+      "id": "vision-004",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/08-lenny-guest-perspectives.md",
+      "type": "strategy",
+      "title": "Source 08 — Lenny's Guest Panel: Ten Verified Perspectives on the Long-Term Vision",
+      "summary": "Ten Lenny's Podcast/Newsletter guests selected for decision leverage on the seven open forks (spine route, caregiver-vs-patient, monetization motion, narrow-vs-wide, frequency engineering, functional-vs-emotional, North Star), grounded by a deep-research pass (103 agents, 21 sources, 25 claims adversarially verified, 1 refuted+excluded). The ten: Tavel (core action before network; engaged users over MAU), Chen (atomic networks; Route E test), Moesta (struggling-moment JTBD), Shah (Delta-4 vs Google+daughter), Ramanujam (WTP before building), Verna (PLS layers on consumer; growth can't fix decline), Duke (pre-committed kill criteria), Mehrotra (forks 1+2 are the eigenquestions), Conrad (the business equation must close, reimbursement=0), Peiris (WOM solves trust; 10x product over referral mechanics). Includes staged debate (6 convergences, 5 live tensions), 9 actionable nuggets, blind-spots section (forks 2 and 5 under-served; no healthcare/EU voice verified), and a closing opposing-view synthesis (episodic-utility counter-read, receiver-audience-not-network, Series A MAU milestone risk, emotional-category WTP inflation, execution-not-decisions bottleneck). All fork applications labeled as Mewtwo's bridges, not guest statements about Ditto.",
+      "status": "active",
+      "created": "2026-06-04",
+      "updated": "2026-06-04"
+    },
+    {
+      "id": "vision-005",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/10-rethinking-the-core-action.md",
+      "type": "strategy",
+      "title": "Source 10 — Rethinking the Core Action: From Appointment Summary to a Weekly-or-Better Companion",
+      "summary": "Synthesizes Merlijn's candidate list of frequent-use jobs (sharing/updates, symptom tracking, daily logging, journaling, med adherence/reminders/purchasing, context-aware Q&A, literature research, podcast/infographic explainers, care-task management) against research/healthcare-life-changing-moments (7 evidenced daily JTBD, 5 universal clusters, red team) + ZeroClaw/care-brain JTBD corpus + sources 08/09. Bottom line: the summary is the wedge and trust artifact, not the product; flip the unit from appointment→day/week and patient→patient-and-circle. Five-part bar for any core action (internal trigger daily-weekly, struggling moment, Delta-4 vs the hack, compounds, non-device). Converges on three candidates: 20-second check-in (data moat + Basch clinical signal), tell-once circle update (network), grounded ask-anything (trust engine) — recommends A+B as one fused loop with C as surface; oncology=patient-led, neuro=caregiver-led modes. Holds the red-team honestly (daily-engagement wounded, circle-as-feature, monetization unresolved, vitamin risk, episodic counter-read). Validation plan: Step 0 own-data pull; Step 1 HARD REQUIREMENT = 20×1h interviews with NL oncology patients (+8-10 caregivers incl. neuro) using Moesta forces + day reconstruction + Delta-4 + WTP + concept-card ranking, 10 by mid-June, 20 by end June; Step 2 = 30-person wizard-of-oz cohort (D30 check-in ≥40% @4d/wk; circle-seeding signal) + monetization & MDR spikes. Two flagged research gaps: medication purchasing, explainer modality.",
+      "status": "active",
+      "created": "2026-06-04",
+      "updated": "2026-06-04"
+    },
+    {
+      "id": "vision-006",
+      "type": "source-synthesis",
+      "title": "JTBD catalog across disease trajectories (source 11)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/11-jtbd-disease-trajectories.md",
+      "status": "active",
+      "created": "2026-06-04",
+      "modified": "2026-06-04",
+      "summary": "Full jobs-to-be-done catalog for oncology, neurodegenerative, MS/autoimmune and sudden-severe trajectories: jobs per phase, 10 recurring cross-trajectory jobs, circle-side follower jobs, top-of-mind vs job-fire-rate analysis. Feeds the three eigenquestions (core actions / problems / primary user) for the source-10 v2 rewrite.",
+      "related": [
+        "vision-005",
+        "research-004"
+      ]
+    },
+    {
+      "id": "vision-007",
+      "type": "source-synthesis",
+      "title": "External evidence: the core action (source 12)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/12-external-evidence-core-action.md",
+      "status": "active",
+      "created": "2026-06-04",
+      "modified": "2026-06-04",
+      "summary": "Synthesis of a 73-agent external deep-research campaign: recording behavior validated (German survey, OWise, KNMG), episodic-beats-daily engagement evidence, 10 product autopsies with four failure patterns, retention base rates, AI opportunity map (proactive/voice/vision), 5-competitor swarm analysis, NL recording law. All load-bearing claims 3-vote verified.",
+      "related": [
+        "vision-005",
+        "vision-006",
+        "research-005"
+      ]
+    },
+    {
+      "id": "vision-008",
+      "type": "source-synthesis",
+      "title": "Contrarian category-creators and the AI-anticipation lens (source 14)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/14-contrarian-category-creators.md",
+      "status": "active",
+      "created": "2026-06-05",
+      "modified": "2026-06-05",
+      "summary": "13-agent sweep: Osika thesis corrected at source, impossible-category founders (Chesky/Perkins/Luckey/Huang/Field/Srinivas), healthcare speed contrarians (Nadler/Rao/Shah/Ek), capability-curve debate both sides, concrete 6-18mo pre-build list, Babylon/Forward/Theranos discriminator, full red team + opposing-view synthesis. Also documents full Lenny transcript repos.",
+      "related": [
+        "vision-007",
+        "vision-005"
+      ]
+    },
+    {
+      "id": "vision-010",
+      "type": "source-synthesis",
+      "title": "The week of living with cancer + AI-native daily evidence (source 13)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/sources/13-the-week-of-living-with-cancer.md",
+      "status": "active",
+      "created": "2026-06-05",
+      "modified": "2026-06-05",
+      "summary": "10-finder sweep: the forecastable architecture of the chemo week and day, the non-medical loads (7h/wk admin 'logistic toxicity', pity tax, dex cycle, zwarte gat), NL voices, phase contrast incl. metastatic scan-to-scan life. Plus scored verdicts on the three AI-native mechanics (check-in+synthesis strongest, grounded Q&A = on-demand utility, voice = input-only with Dutch ASR fine-tuning needed) and retention design rules with numbers. 8 critic-identified holes feed the interview guide.",
+      "related": [
+        "vision-007",
+        "vision-009"
+      ]
+    },
+    {
+      "id": "vision-009",
+      "type": "strategy-canvas",
+      "title": "Decision canvas (June 2026)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/decision-canvas.md",
+      "status": "active",
+      "created": "2026-06-05",
+      "modified": "2026-06-05",
+      "summary": "Working front door for founder alignment (Jun 6-7 weekend) + strategy session: 2031 vision, four-route table with focus column, five challenges, decisions (D1-D2 board-decided, D3-D4 proposed, D5 open), six eigenquestions with draft answers (Q1 = feeling in control), and a max-two-week answering plan (founder alignment -> own data -> standardized agentic market research -> interviews -> concierge pilot go/no-go). Roadmap deliberately excluded; strategy session decides from full backlog.",
+      "related": [
+        "vision-001",
+        "vision-007",
+        "vision-008"
+      ]
+    },
+    {
+      "id": "vision-011",
+      "type": "presentation",
+      "title": "Long-term Product Vision — deck (HTML)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/long-term-product-vision-deck.html",
+      "status": "active",
+      "created": "2026-06-07",
+      "modified": "2026-06-07",
+      "summary": "Self-contained 10-slide HTML presentation merging Merlijn's own-perspective.md (origin/contrarian belief, why summaries can't be the goal + the good part, five visions, how they relate, why it matters / might not, four core questions) with the interactive radial decision map embedded live. Apple/shadcn style, keyboard + scroll nav, dot indicator. For team sharing / strategy session. Typos cleaned; the 'explore the social vision' sentence rendered with Merlijn's likely intent (flag to confirm).",
+      "related": [
+        "vision-009"
+      ]
+    },
+    {
+      "id": "vision-012",
+      "type": "narrative",
+      "title": "Long-term vision — consolidated narrative (5pp)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/long-term-vision-narrative.md",
+      "status": "active",
+      "created": "2026-06-09",
+      "modified": "2026-06-09",
+      "summary": "One strong ~5-page narrative consolidating own-perspective-v2 + Nick's input + the market-deep-dive frame: why (mission), summaries-can't-be-the-goal, two reasoning modes + B2B/B2B2C monetization filter, all 6 product end-states outlined, the two-layer synthesis (intelligence spine + operational front door, PHR multiplier, coordination/social leans, MDR rung), delivery (direction-over-route), and the patient-first-vs-every-payer-is-B2B decision. Source for the HTML build.",
+      "related": [
+        "vision-011"
+      ]
+    },
+    {
+      "id": "vision-013",
+      "type": "narrative",
+      "title": "Long-term vision — appendices (standalone, superseded by v3)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/own-perspective-v2-appendices.md",
+      "status": "superseded",
+      "created": "2026-06-09",
+      "modified": "2026-06-09",
+      "summary": "Standalone evidence appendices that fed own-perspective-v3.md. SUPERSEDED by vision-014 (v3 folds the updated appendices into one document). Earlier 4-appendix cut (market forces / six end-states in-depth+scored / commoditization clock / monetization filter). Kept only as a stepping stone; v3 is canonical. Candidate for deletion.",
+      "related": [
+        "vision-014",
+        "vision-012",
+        "mds-001"
+      ]
+    },
+    {
+      "id": "vision-014",
+      "type": "narrative",
+      "title": "Long-term Product Vision v3 (consolidated: narrative + appendices)",
+      "path": "pm-workspace/product-strategy/long-term-product-vision/own-perspective-v3.md",
+      "status": "active",
+      "created": "2026-06-09",
+      "modified": "2026-06-09",
+      "summary": "Single canonical long-term-vision document in Merlijn's voice, consolidating own-perspective-v2 + the appendices. Main body: why/mission, summaries-can't-be-the-goal, the six end-states IN DEPTH at top (relation-to-vision/what-it-does/strengths/risks), Core/Additional synthesis (replaces spine/lean jargon; intelligence=Core, record=multiplier, front door/coordination/social=Additional), two reasoning modes + monetization filter, the how, market-dynamics distillation, Q0-4 + patient-first-vs-payer tension. Appendices folded in: A market forces (heating-market tailwind; Whoop/Oura B2B partnerships, Kin, 3 labs in one week); B six end-states scored 1-5 (Frequency/Defensibility/Monetization/User value/Company excitement/Regulatory); C commoditization clock; D monetization routes+realism (sharpened: SkinVision needs frequency ~$3.8M; reimbursement bounded — DiGA ~€171M/2025, Pear bankruptcy; the big ones (Hinge ~$3B/$588M, Sword ~$4B, Doctolib) scaled on B2B not reimbursement; NL engine = hospital/insurer+pharma). Supersedes own-perspective-v2.md (vision frame) and vision-013 (standalone appendices).",
+      "related": [
+        "vision-013",
+        "vision-012",
+        "vision-011",
+        "mds-001"
+      ]
+    },
+    {
+      "id": "research-005",
+      "type": "research-data",
+      "title": "Core-action evidence sweep (raw campaign data)",
+      "path": "pm-workspace/research/core-action-evidence-sweep/",
+      "status": "active",
+      "created": "2026-06-04",
+      "modified": "2026-06-04",
+      "summary": "Raw JSON output of the 2026-06-04 deep-research campaign: 227 sourced findings (phase 1), 10 autopsies + 45 verification votes + 4 gap-fillers (phases 2-3). Feeds vision-007.",
+      "related": [
+        "vision-007"
+      ]
+    },
+    {
+      "id": "research-004",
+      "path": "pm-workspace/research/healthcare-life-changing-moments/",
+      "type": "research",
+      "title": "Healthcare Life-Changing Moments — external research package (merged from main, PR #1)",
+      "summary": "Deep external research (compiled 2026-05-31, public sources only, pan-EU anchored NL+DACH) into overlooked high-reach problems at life-changing healthcare moments. Findings: epidemiology/TAM (EU ~34-38M living with these conditions, ~4-5M newly diagnosed/yr), four journey files (cancer, neurodegenerative, MS/autoimmune, sudden-severe), EU policy (EHDS/AI Act/MDR/DiGA/proxy), competitive landscape, overlooked problems, and 08b daily high-frequency JTBD (7 jobs ranked by frequency×reach×hook: #1 update loved ones + coordinate help [network], #2 symptom tracking & interpretation [data moat + Basch survival signal], #3 meds, #4 grounded info-seeking). Synthesis: 5 universal pain clusters; Living Health Companion category flip (appointment→day, patient→patient-and-circle, summary = crystallization not product); contrarian founder lens; red-team critique (monetization unresolved = biggest risk; network effects + daily engagement wounded hypotheses); final master doc with evidence-gated next steps (own-data pull, 2×30-person concierge cohorts, monetization + regulatory spikes); moat/platform memo. Feeds vision-005 (source 10). Not produced by Mewtwo; treat per-claim confidence flags (US-derived flagged) when citing.",
+      "status": "active",
+      "created": "2026-05-31",
+      "updated": "2026-06-04"
     }
   ],
   "workflows": [
@@ -988,9 +1200,22 @@
       "epic_title": "CC V2 | Social Engagement (Emoji Reactions)",
       "classification": "Explore",
       "tickets": [
-        { "key": "DPMA-2230", "title": "Define Business Metrics", "status": "updated" },
-        { "key": "DPMA-2231", "title": "Define Tracking Plan", "status": "updated" },
-        { "key": "DPMA-2232", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+        {
+          "key": "DPMA-2230",
+          "title": "Define Business Metrics",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2231",
+          "title": "Define Tracking Plan",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2232",
+          "title": "Implement Tracking",
+          "status": "created",
+          "blocks_release": true
+        }
       ],
       "created": "2026-03-06"
     },
@@ -999,9 +1224,22 @@
       "epic_title": "CC V2 | Enhanced Sharing Options",
       "classification": "Exploit",
       "tickets": [
-        { "key": "DPMA-2221", "title": "Define Business Metrics", "status": "updated" },
-        { "key": "DPMA-2222", "title": "Define Tracking Plan", "status": "updated" },
-        { "key": "DPMA-2223", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+        {
+          "key": "DPMA-2221",
+          "title": "Define Business Metrics",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2222",
+          "title": "Define Tracking Plan",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2223",
+          "title": "Implement Tracking",
+          "status": "created",
+          "blocks_release": true
+        }
       ],
       "created": "2026-03-06"
     },
@@ -1010,9 +1248,22 @@
       "epic_title": "CC V2 | Enhanced follower user profiles",
       "classification": "Explore",
       "tickets": [
-        { "key": "DPMA-2267", "title": "Define Business Metrics", "status": "updated" },
-        { "key": "DPMA-2268", "title": "Define Tracking Plan", "status": "updated" },
-        { "key": "DPMA-2269", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+        {
+          "key": "DPMA-2267",
+          "title": "Define Business Metrics",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2268",
+          "title": "Define Tracking Plan",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2269",
+          "title": "Implement Tracking",
+          "status": "created",
+          "blocks_release": true
+        }
       ],
       "created": "2026-03-06"
     },
@@ -1021,9 +1272,22 @@
       "epic_title": "CC V2 | Improved Invitation Flow",
       "classification": "Exploit",
       "tickets": [
-        { "key": "DPMA-2236", "title": "Define Business Metrics", "status": "updated" },
-        { "key": "DPMA-2237", "title": "Define Tracking Plan", "status": "updated" },
-        { "key": "DPMA-2238", "title": "Implement Tracking", "status": "created", "blocks_release": true }
+        {
+          "key": "DPMA-2236",
+          "title": "Define Business Metrics",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2237",
+          "title": "Define Tracking Plan",
+          "status": "updated"
+        },
+        {
+          "key": "DPMA-2238",
+          "title": "Implement Tracking",
+          "status": "created",
+          "blocks_release": true
+        }
       ],
       "created": "2026-03-06"
     }

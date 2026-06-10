@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ditto · Long-term Product Vision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f5f7; --card:#fff; --border:#e6e6ea; --border-soft:#eeeef1;
+    --ink:#1d1d1f; --body:#43434a; --muted:#86868b; --faint:#aeaeb4;
+    --primary:#1d1d1f;
+    --blue:#0a84ff; --blue-deep:#0060df; --blue-tint:#eef5ff;
+    --red:#e5484d; --red-deep:#c4302b; --red-tint:#fdf0f0; --pos:#1e9e57;
+    --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 20px rgba(16,24,40,.05);
+    --shadow-pop:0 10px 38px rgba(16,24,40,.16);
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; scroll-behavior:smooth; }
+  body{ margin:0; background:linear-gradient(180deg,#fbfbfd,#f4f4f7); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",system-ui,sans-serif;
+    scroll-snap-type:y proximity; }
+  .slide{ min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    padding:96px 32px 80px; scroll-snap-align:start; position:relative; }
+  .inner{ width:100%; max-width:980px; }
+  .wide{ max-width:1120px; }
+
+  /* chrome */
+  .topbar{ position:fixed; top:0; left:0; right:0; height:54px; z-index:40; display:flex; align-items:center; justify-content:space-between;
+    padding:0 26px; background:rgba(251,251,253,.72); backdrop-filter:saturate(180%) blur(18px); -webkit-backdrop-filter:saturate(180%) blur(18px); border-bottom:1px solid var(--border-soft); }
+  .topbar .brand{ font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--ink); display:flex; align-items:center; gap:8px; }
+  .topbar .brand .pip{ width:7px; height:7px; border-radius:50%; background:var(--blue); }
+  .topbar .count{ font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .progress{ position:fixed; top:54px; left:0; height:2px; background:var(--blue); z-index:40; transition:width .25s; width:0; }
+  .dots{ position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; gap:11px; }
+  .dot{ width:9px; height:9px; border-radius:50%; background:#d2d2d8; border:none; cursor:pointer; padding:0; transition:all .2s; }
+  .dot:hover{ transform:scale(1.25); }
+  .dot.on{ background:var(--ink); transform:scale(1.15); }
+  .nav-arrows{ position:fixed; right:24px; bottom:22px; z-index:40; display:flex; gap:8px; }
+  .arrow{ width:42px; height:42px; border-radius:50%; background:var(--card); border:1px solid var(--border); box-shadow:var(--shadow);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink); transition:all .16s; }
+  .arrow:hover{ border-color:#cfcfd6; transform:translateY(-1px); } .arrow svg{ width:18px; height:18px; }
+
+  /* type */
+  .kicker{ display:flex; align-items:center; gap:9px; font-size:12px; font-weight:600; letter-spacing:.07em; color:var(--muted); text-transform:uppercase; margin-bottom:20px; }
+  .kicker .pip{ width:7px; height:7px; border-radius:50%; }
+  h1{ font-size:64px; line-height:1.04; margin:0 0 20px; font-weight:600; letter-spacing:-.03em; }
+  h2{ font-size:42px; line-height:1.1; margin:0 0 22px; font-weight:600; letter-spacing:-.022em; }
+  .lead{ font-size:21px; line-height:1.5; color:var(--body); margin:0 0 14px; font-weight:400; }
+  .body{ font-size:18.5px; line-height:1.62; color:var(--body); }
+  .body strong{ color:var(--ink); font-weight:600; }
+  .byline{ font-size:15px; color:var(--muted); margin-top:30px; }
+  .hint{ font-size:13px; color:var(--faint); margin-top:14px; display:flex; align-items:center; gap:7px; }
+
+  .quote{ font-size:30px; line-height:1.32; font-weight:500; letter-spacing:-.015em; color:var(--ink); margin:8px 0; }
+  .quote .hl{ background:linear-gradient(180deg,transparent 62%, #cfe4ff 62%); padding:0 2px; }
+  .tag{ display:inline-flex; align-items:center; gap:8px; margin-top:26px; font-size:14.5px; font-weight:500; color:var(--blue-deep);
+    background:var(--blue-tint); border:1px solid #d8e8ff; border-radius:999px; padding:8px 16px; }
+
+  .two{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .panel{ border-radius:18px; padding:24px 26px; border:1px solid var(--border); background:var(--card); box-shadow:var(--shadow); }
+  .panel.bad{ background:linear-gradient(180deg,#fff,#fefafa); border-color:#f3dede; }
+  .panel.good{ background:linear-gradient(180deg,#fff,#f8fbff); border-color:#dde9f6; }
+  .panel h3{ margin:0 0 14px; font-size:13px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+  .panel.bad h3{ color:var(--red-deep); } .panel.good h3{ color:var(--blue-deep); }
+  .panel ul{ margin:0; padding:0; list-style:none; }
+  .panel li{ font-size:15.5px; line-height:1.5; color:var(--body); padding:9px 0; border-top:1px solid var(--border-soft); }
+  .panel li:first-child{ border-top:none; padding-top:0; }
+  .panel li strong{ color:var(--ink); font-weight:600; }
+
+  .cards{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .vcard{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px 16px; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+  .vcard .vnum{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .vcard .vdot{ width:11px; height:11px; border-radius:4px; }
+  .vcard .vn{ font-size:11.5px; font-weight:600; color:var(--faint); font-variant-numeric:tabular-nums; }
+  .vcard h4{ margin:0 0 8px; font-size:16.5px; font-weight:600; letter-spacing:-.01em; line-height:1.18; }
+  .vcard .vvis{ font-size:13px; line-height:1.45; color:var(--body); font-style:italic; margin-bottom:10px; }
+  .vcard .vfocus{ font-size:12.5px; line-height:1.4; color:var(--muted); margin-bottom:11px; }
+  .vcard .vfocus b{ color:var(--ink); font-weight:600; font-style:normal; }
+  .vcard .edge{ margin-top:auto; font-size:11.5px; line-height:1.5; }
+  .vcard .edge .e1{ color:#1a7a44; } .vcard .edge .e2{ color:#b5403b; }
+
+  .relate{ display:grid; grid-template-columns:1.1fr 1fr; gap:30px; align-items:start; }
+  .relate ul{ margin:0; padding:0; list-style:none; }
+  .relate li{ font-size:16.5px; line-height:1.55; color:var(--body); padding:12px 0; border-top:1px solid var(--border-soft); }
+  .relate li:first-child{ border-top:none; }
+  .relate li b{ color:var(--ink); font-weight:600; }
+  .layerbox{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:8px 22px 18px; box-shadow:var(--shadow); }
+  .layer{ display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid var(--border-soft); }
+  .layer:last-child{ border-bottom:none; }
+  .layer .ln{ width:26px; height:26px; border-radius:8px; color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex:none; }
+  .layer .lt{ font-size:14.5px; } .layer .lt b{ font-weight:600; } .layer .lt span{ color:var(--muted); }
+
+  .qgrid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+  .qitem{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px 26px; box-shadow:var(--shadow); display:flex; gap:16px; align-items:flex-start; }
+  .qitem .qn{ font-size:30px; font-weight:600; color:var(--blue); letter-spacing:-.02em; line-height:1; font-variant-numeric:tabular-nums; }
+  .qitem .qt{ font-size:19px; font-weight:500; line-height:1.35; letter-spacing:-.01em; }
+
+  /* radial */
+  .map-wrap{ display:grid; grid-template-columns:1.55fr 1fr; gap:18px; align-items:center; width:100%; }
+  .map-card{ background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow); padding:14px 16px 8px; }
+  svg#plot{ display:block; width:100%; height:auto; max-height:60vh; overflow:visible; }
+  .leg{ padding:4px; }
+  .leg-item{ cursor:pointer; border-radius:12px; padding:10px 11px; transition:all .16s; border:1px solid transparent; }
+  .leg-item:hover{ background:#fafafb; } .leg-on{ background:#fafafb; border-color:var(--border-soft); } .leg-off{ opacity:.4; }
+  .leg-head{ display:flex; align-items:center; gap:9px; }
+  .leg-dot{ width:10px; height:10px; border-radius:4px; flex:none; }
+  .leg-num{ font-size:11px; color:var(--faint); font-weight:600; }
+  .leg-name{ font-size:14px; font-weight:600; letter-spacing:-.01em; }
+  .leg-net{ margin-left:auto; font-size:12px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .vbar{ height:5px; border-radius:999px; margin:8px 0 0 19px; background:#eef0f2; display:flex; overflow:hidden; }
+  .vbar .v{ background:var(--blue); } .vbar .c{ background:var(--red); margin-left:auto; }
+  .scalebar{ display:flex; align-items:center; gap:9px; font-size:11.5px; color:var(--muted); margin-top:8px; font-weight:500; padding-left:4px; }
+  .scalebar .bar{ height:6px; width:90px; border-radius:999px; background:linear-gradient(90deg,#34a853,#f5a623,#e5484d); }
+
+  #tip{ position:fixed; pointer-events:none; opacity:0; transform:translateY(4px); transition:opacity .14s, transform .14s; z-index:60;
+    background:rgba(255,255,255,.88); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border:1px solid var(--border); border-radius:14px; padding:13px 15px; max-width:300px; box-shadow:var(--shadow-pop); }
+  #tip .tt-name{ font-weight:600; font-size:14px; margin-bottom:8px; }
+  #tip .grp{ font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin:7px 0 2px; }
+  #tip .grp.bl{ color:var(--blue-deep); } #tip .grp.rd{ color:var(--red-deep); }
+  #tip .tt-row{ font-size:12px; color:var(--body); display:flex; justify-content:space-between; gap:18px; padding:1px 0; font-variant-numeric:tabular-nums; }
+  #tip .tt-row b{ font-weight:600; color:var(--ink); }
+
+  .note-line{ font-size:14px; color:var(--muted); margin-top:14px; max-width:980px; line-height:1.55; }
+  .close-pip{ font-size:15px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+
+  @media(max-width:980px){
+    h1{ font-size:44px; } h2{ font-size:32px; } .two{ grid-template-columns:1fr; } .cards{ grid-template-columns:1fr 1fr; }
+    .relate,.qgrid,.map-wrap{ grid-template-columns:1fr; } .dots{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="pip"></span> Ditto · Long-term Product Vision</div>
+  <div class="count"><span id="cur">1</span> / <span id="tot">10</span></div>
+</div>
+<div class="progress" id="prog"></div>
+<div class="dots" id="dots"></div>
+<div class="nav-arrows">
+  <div class="arrow" onclick="go(-1)" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+  <div class="arrow" onclick="go(1)" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+</div>
+
+<!-- 1 · COVER -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker"><span class="pip" style="background:var(--blue)"></span> Ditto · Product Strategy · Internal</div>
+    <h1>Long-term<br>product vision.</h1>
+    <p class="lead" style="max-width:680px;">Where Ditto goes after the summary — and the questions we have to answer together to get there.</p>
+    <div class="byline">Merlijn van Breugel · June 2026 · for discussion, not a decision</div>
+    <div class="hint">→ &nbsp;Use arrow keys or scroll to move through</div>
+  </div>
+</section>
+
+<!-- 2 · HOW WE STARTED -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker"><span class="pip" style="background:var(--muted)"></span> 01 · How we started</div>
+    <p class="body" style="font-size:21px; max-width:820px;">
+      Medical scribes gained traction because the technology finally caught up. But the real problem was never the
+      doctor's note — it was <strong>the patient</strong>, still working from a notepad at best, a failing memory at
+      worst. EHRs have let patients down: clunky software, enormous fragmentation, and Latin-laced letters that disclose
+      you have cancer.
+    </p>
+    <div class="quote" style="margin-top:34px;">From the start we've held a contrarian belief: the patient is
+      <span class="hl">massively underserved</span> — and the patient is the unlock for a stuck healthcare system.</div>
+    <div class="tag">Focus today · severe disease — oncology primary, neurodegenerative secondary</div>
+  </div>
+</section>
+
+<!-- 3 · SUMMARIES CANNOT BE THE GOAL -->
+<section class="slide">
+  <div class="inner wide">
+    <div class="kicker"><span class="pip" style="background:var(--muted)"></span> 02 · Summaries cannot be the goal</div>
+    <h2>Summary tools are a commodity now.</h2>
+    <div class="two">
+      <div class="panel bad">
+        <h3>Why the wedge won't carry us</h3>
+        <ul>
+          <li>Better summaries are only defensible with <strong>something no one else has</strong> — proprietary models, unique validation data, a sharp niche. We don't truly have that yet.</li>
+          <li>EHRs and scribes are catching up; within <strong>~1 year, patient summaries are native</strong>. When ChatGPT or Gemini ship conversation summaries, that directly attacks us. "Doctors will never allow it" is stretching reality.</li>
+          <li>A summary matters at the appointment and maybe the day after — <strong>weekly at most</strong>, even when severely ill. Without delivering incredible value in that moment, we're a convenience, not something people grow attached to.</li>
+          <li>Low frequency is hard to monetise: consumers rarely pay for health apps; insurers need activity to justify reimbursement.</li>
+          <li>Pushing frequency or growth features <strong>for their own sake is a dead end</strong>. Unless we solve real problems, we can only nudge so far in the direction <em>we</em> want.</li>
+        </ul>
+      </div>
+      <div class="panel good">
+        <h3>The good part</h3>
+        <ul>
+          <li>Our summaries are <strong>genuinely better</strong>, and people trust them. This is key <span style="color:var(--muted)">(and we must measure it).</span></li>
+          <li>We are roughly <strong>10× better than the alternative</strong>: forgetting.</li>
+          <li>Summaries and recordings hold far more potential than we unlock today.</li>
+          <li>The summary is the <strong>way in</strong>. We have to maximise the value we bring in that episodic moment.</li>
+          <li>From there: auto-update your health profile · nudge and help with follow-up tasks · inform family dynamically · link to peers · explain treatment in podcast/visual form · find a second opinion · find a fitting trial… <em>and the list goes on.</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · THE FIVE VISIONS -->
+<section class="slide">
+  <div class="inner wide">
+    <div class="kicker"><span class="pip" style="background:var(--muted)"></span> 03 · The undecided vision</div>
+    <h2 style="margin-bottom:8px;">Five versions of a future Ditto.</h2>
+    <p class="lead" style="margin-bottom:24px;">Not exclusive end-states. They can be combined — possibly layers, stacked together.</p>
+    <div class="cards">
+      <div class="vcard"><div class="vnum"><span class="vdot" style="background:#e08a3c"></span><span class="vn">01</span></div>
+        <h4>Care Companion</h4>
+        <div class="vvis">Supports you along every step of your care journey.</div>
+        <div class="vfocus"><b>Understanding</b> — making sense of what's happening, knowing what to expect.</div>
+        <div class="edge"><span class="e1">+ disease-specific, beats general AI, holistic</span><br><span class="e2">− EHRs improving, needs user commitment</span></div></div>
+      <div class="vcard"><div class="vnum"><span class="vdot" style="background:#34a853"></span><span class="vn">02</span></div>
+        <h4>Social Care Platform</h4>
+        <div class="vvis">The place for shared understanding among loved ones and peers.</div>
+        <div class="vfocus"><b>Connection</b> — emotional support, not being alone.</div>
+        <div class="edge"><span class="e1">+ network effects, the go-to health-sharing place</span><br><span class="e2">− competes with social media / WhatsApp</span></div></div>
+      <div class="vcard"><div class="vnum"><span class="vdot" style="background:#6366f1"></span><span class="vn">03</span></div>
+        <h4>Care Coordination</h4>
+        <div class="vvis">Families manage the disease and arrange practical support.</div>
+        <div class="vfocus"><b>Coordination</b> — tasks, keeping the core care group aligned.</div>
+        <div class="edge"><span class="e1">+ rising need, care too complex for WhatsApp</span><br><span class="e2">− pros need onboarding (Caren), needs whole group</span></div></div>
+      <div class="vcard"><div class="vnum"><span class="vdot" style="background:#8a8a90"></span><span class="vn">04</span></div>
+        <h4>Patient-Owned Record</h4>
+        <div class="vvis">You own and understand all your healthcare data.</div>
+        <div class="vfocus"><b>Data</b> — ingest everything, make it understandable and shareable.</div>
+        <div class="edge"><span class="e1">+ EU go-to with huge lock-in if superior</span><br><span class="e2">− data alone is low value, gov competition, integration-dependent</span></div></div>
+      <div class="vcard"><div class="vnum"><span class="vdot" style="background:#e5484d"></span><span class="vn">05</span></div>
+        <h4>Trusted Health Assistant</h4>
+        <div class="vvis">Prevents illness or gets you recovered as well as possible.</div>
+        <div class="vfocus"><b>Agency</b> — advice and nudges on the medical behaviour you control.</div>
+        <div class="edge"><span class="e1">+ highest tech IP, strong lock-in once trusted</span><br><span class="e2">− competes with big tech, instant MDR / high-risk</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · THE MAP -->
+<section class="slide">
+  <div class="inner wide">
+    <div class="kicker"><span class="pip" style="background:var(--blue)"></span> 04 · The decision map</div>
+    <h2 style="margin-bottom:6px;">Value above, challenges below.</h2>
+    <p class="lead" style="margin-bottom:18px; max-width:860px;">A vision's shape is read by balance, not size. Blue is what's good; red is what's hard. Top-heavy wins; sinking into the red is fighting gravity. Hover any shape — or the ghost outline (today's product).</p>
+    <div class="map-wrap">
+      <div class="map-card">
+        <svg id="plot" viewBox="0 0 880 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Radial vision map"></svg>
+        <div class="scalebar"><span>Risk</span><span class="bar"></span><span style="color:#34a853">low</span><span style="color:var(--faint)">→</span><span style="color:var(--red)">high</span></div>
+      </div>
+      <div class="leg" id="legend"></div>
+    </div>
+    <div class="note-line">Scores are research-informed gut (sources 11–14), 1–5 per axis, for recalibration — not measured fact. <b>net</b> = blue value − red challenge; the shape matters more than the scalar.</div>
+  </div>
+</section>
+
+<!-- 6 · HOW THEY RELATE -->
+<section class="slide">
+  <div class="inner wide">
+    <div class="kicker"><span class="pip" style="background:var(--muted)"></span> 05 · How they relate</div>
+    <h2>One product, or layers?</h2>
+    <div class="relate">
+      <ul>
+        <li>These are <b>not excluding end-states</b>. They can be combined and merged — potentially layers stacked together.</li>
+        <li>But doing so risks a <b>confused, split focus</b> and a muddy market position.</li>
+        <li><b>1, 3 and 5</b> link directly to our contrarian take: the patient is the key to better healthcare. <b>4</b> needs real intelligence to change anything. <b>2</b> improves experience and perception — maybe not the outcome.</li>
+        <li>I propose we <b>explore the social vision further</b> — I believe its upside and impact are biggest, and it opens monetisation routes, expected and unexpected.</li>
+        <li>Short-to-mid term: oncology favours <b>1, 2, 5</b>; neurodegenerative favours <b>3</b>.</li>
+        <li><b>4 is not a goal in itself</b> — more likely a requirement to truly nail 1 and 5.</li>
+      </ul>
+      <div class="layerbox">
+        <div class="layer"><span class="ln" style="background:#e5484d">5</span><span class="lt"><b>Trusted Health Assistant</b><br><span>agency — the deepest, hardest layer</span></span></div>
+        <div class="layer"><span class="ln" style="background:#e08a3c">1</span><span class="lt"><b>Care Companion</b><br><span>understanding — the daily surface</span></span></div>
+        <div class="layer"><span class="ln" style="background:#34a853">2</span><span class="lt"><b>Social Care Platform</b><br><span>connection — the layer to explore</span></span></div>
+        <div class="layer"><span class="ln" style="background:#6366f1">3</span><span class="lt"><b>Care Coordination</b><br><span>coordination — leans neurodegenerative</span></span></div>
+        <div class="layer"><span class="ln" style="background:#8a8a90">4</span><span class="lt"><b>Patient-Owned Record</b><br><span>data — the substrate beneath it all</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · WHY THIS MATTERS -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker"><span class="pip" style="background:var(--muted)"></span> 06 · Why this matters</div>
+    <p class="body" style="font-size:21px; max-width:840px;">
+      Every day we decide what to build and how to grow Ditto. <strong>Directionality matters</strong> — without it we
+      ship a fragmented, unclear product and proposition. Features we ship may be discontinued; that is fine, but until
+      then each one costs maintenance and a less-clear experience.
+    </p>
+    <p class="body" style="font-size:21px; max-width:840px; margin-top:22px;">
+      Bug fixes and polish will always take a share of our capacity. But in the end we should focus on what
+      differentiates us and delivers the most value for users. <strong>If we cannot sharply articulate who our users
+      are, which problems we solve, and why we do it better than anyone — we lose focus and efficiency.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- 8 · WHY THIS MIGHT NOT MATTER -->
+<section class="slide">
+  <div class="inner">
+    <div class="kicker"><span class="pip" style="background:var(--muted)"></span> 07 · Why this might not matter</div>
+    <h2>The honest counter-argument.</h2>
+    <div class="panel" style="max-width:860px;">
+      <ul>
+        <li>Many successful companies never articulated the mission they'd hold ten years later — <strong>but at their core there was a north star</strong> that underpinned the category.</li>
+        <li>The field moves so fast that we have to <strong>stay adaptable</strong>.</li>
+        <li>The real question: to what extent do commitments now <strong>exclude other options</strong> or make success there less likely? Going all-in on data integrations and anticipating EHDS, for example, means slowing down on adding real health intelligence to whatever data users already put into Ditto.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · THE QUESTIONS -->
+<section class="slide">
+  <div class="inner wide">
+    <div class="kicker"><span class="pip" style="background:var(--blue)"></span> 08 · Defining the vision</div>
+    <h2 style="margin-bottom:6px;">Four questions to answer.</h2>
+    <p class="lead" style="margin-bottom:22px;">This deck is the input. The strategy session is where we choose.</p>
+    <div class="qgrid">
+      <div class="qitem"><span class="qn">1</span><span class="qt">What does Ditto try to solve or improve?</span></div>
+      <div class="qitem"><span class="qn">2</span><span class="qt">Who are we building for?</span></div>
+      <div class="qitem"><span class="qn">3</span><span class="qt">What will be our moat?</span></div>
+      <div class="qitem"><span class="qn">4</span><span class="qt">How do we monetise it?</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · CLOSE -->
+<section class="slide">
+  <div class="inner" style="text-align:center;">
+    <div class="quote" style="font-size:34px; max-width:780px; margin:0 auto 28px;">The patient is massively underserved — and the patient is the unlock for a stuck healthcare system.</div>
+    <div class="close-pip">Care. Clarified.</div>
+  </div>
+</section>
+
+<div id="tip"></div>
+
+<script>
+/* ============ RADIAL MAP ============ */
+const AXES = [
+  { key:'convenience',  label:'Convenience',  angle:0,   side:'pos', cluster:'User value' },
+  { key:'monetisation', label:'Monetisation', angle:40,  side:'pos', cluster:'Company value' },
+  { key:'excitement',   label:'Excitement',   angle:80,  side:'pos', cluster:'Company value' },
+  { key:'commoditisation', label:'Commoditisation', angle:100, side:'neg', cluster:'Competition' },
+  { key:'incumbent',       label:'Incumbent reach', angle:153, side:'neg', cluster:'Competition' },
+  { key:'regulation',      label:'Regulation',      angle:207, side:'neg', cluster:'Context' },
+  { key:'dependency',      label:'Healthcare dependency', angle:260, side:'neg', cluster:'Context' },
+  { key:'connection',   label:'Connection',   angle:280, side:'pos', cluster:'User value' },
+  { key:'agency',       label:'Agency',       angle:320, side:'pos', cluster:'User value' },
+];
+const CLUSTERS = [
+  { name:'USER VALUE', at:338, side:'pos' }, { name:'COMPANY VALUE', at:60, side:'pos' },
+  { name:'COMPETITION', at:126, side:'neg' }, { name:'CONTEXT', at:233, side:'neg' },
+];
+const VISIONS = [
+  { id:1, name:'Care Companion', tag:'Understand the journey', color:'#e08a3c', s:{ convenience:4, monetisation:3, excitement:4, connection:2, agency:4, commoditisation:4, incumbent:4, regulation:2, dependency:2 } },
+  { id:2, name:'Social Care Platform', tag:'Shared understanding', color:'#34a853', s:{ convenience:3, monetisation:2, excitement:5, connection:5, agency:2, commoditisation:4, incumbent:3, regulation:1, dependency:1 } },
+  { id:3, name:'Care Coordination', tag:'Families manage care', color:'#6366f1', s:{ convenience:5, monetisation:3, excitement:2, connection:4, agency:3, commoditisation:3, incumbent:2, regulation:1, dependency:3 } },
+  { id:4, name:'Patient-Owned Record', tag:'You own your data', color:'#8a8a90', s:{ convenience:2, monetisation:3, excitement:3, connection:1, agency:2, commoditisation:3, incumbent:3, regulation:3, dependency:5 } },
+  { id:5, name:'Trusted Health Assistant', tag:'Prevent & recover', color:'#e5484d', s:{ convenience:4, monetisation:4, excitement:5, connection:1, agency:5, commoditisation:3, incumbent:4, regulation:5, dependency:2 } },
+];
+const CURRENT = { name:"Today's product — the summary", s:{ convenience:4, monetisation:2, excitement:2, connection:2, agency:3, commoditisation:5, incumbent:4, regulation:2, dependency:2 } };
+
+const NS='http://www.w3.org/2000/svg';
+const W=880,H=720,CX=440,CY=348,R=202,MAX=5;
+const svg=document.getElementById('plot'), tip=document.getElementById('tip');
+const el=(t,a,x)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;return e;};
+const pt=(angle,r)=>{const a=angle*Math.PI/180;return [CX+r*Math.sin(a),CY-r*Math.cos(a)];};
+const posAxes=AXES.filter(a=>a.side==='pos'), negAxes=AXES.filter(a=>a.side==='neg');
+const valScore=v=>posAxes.reduce((s,a)=>s+v.s[a.key],0)/posAxes.length;
+const chalScore=v=>negAxes.reduce((s,a)=>s+v.s[a.key],0)/negAxes.length;
+const net=v=>valScore(v)-chalScore(v);
+let showCurrent=true, fill=true, muted=new Set(), hovered=null;
+
+function draw(){
+  svg.innerHTML='';
+  const big=(sw,col,op)=>{const [ax,ay]=pt(sw[0],R),[bx,by]=pt(sw[1],R);return el('path',{d:`M ${ax} ${ay} A ${R} ${R} 0 0 1 ${bx} ${by} Z`,fill:col,opacity:op});};
+  svg.appendChild(big([270,90],'#0a84ff',0.05)); svg.appendChild(big([90,270],'#e5484d',0.05));
+  svg.appendChild(el('line',{x1:CX-R,y1:CY,x2:CX+R,y2:CY,stroke:'#dcdce1','stroke-width':1.2}));
+  for(let k=1;k<=MAX;k++) svg.appendChild(el('circle',{cx:CX,cy:CY,r:R*k/MAX,fill:'none',stroke:k===MAX?'#d7d7dc':'#ececf0','stroke-width':k===MAX?1.3:1}));
+  AXES.forEach(ax=>{
+    const [ex,ey]=pt(ax.angle,R); svg.appendChild(el('line',{x1:CX,y1:CY,x2:ex,y2:ey,stroke:'#ededf1','stroke-width':1}));
+    const [lx,ly]=pt(ax.angle,R+15); const s=Math.sin(ax.angle*Math.PI/180);
+    const anchor=s>0.25?'start':s<-0.25?'end':'middle';
+    svg.appendChild(el('text',{x:lx,y:ly+4,'text-anchor':anchor,'font-size':12.5,'font-weight':500,fill:ax.side==='pos'?'#0060df':'#c4302b'},ax.label));
+  });
+  CLUSTERS.forEach(c=>{const [lx,ly]=pt(c.at,R+50);const s=Math.sin(c.at*Math.PI/180);const anchor=s>0.25?'start':s<-0.25?'end':'middle';
+    svg.appendChild(el('text',{x:lx,y:ly,'text-anchor':anchor,'font-size':10.5,'font-weight':700,'letter-spacing':'.06em',fill:c.side==='pos'?'#0a84ff':'#e5484d',opacity:.85},c.name));});
+  svg.appendChild(el('text',{x:CX,y:CY-R-34,'text-anchor':'middle','font-size':11.5,'font-weight':700,'letter-spacing':'.08em',fill:'#0a84ff'},'VALUE'));
+  svg.appendChild(el('text',{x:CX,y:CY+R+44,'text-anchor':'middle','font-size':11.5,'font-weight':700,'letter-spacing':'.08em',fill:'#e5484d'},'CHALLENGES'));
+  if(showCurrent){
+    const d=AXES.map(ax=>pt(ax.angle,R*CURRENT.s[ax.key]/MAX));
+    svg.appendChild(el('polygon',{points:d.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#9a9aa0','stroke-width':1.6,'stroke-dasharray':'4 4','stroke-linejoin':'round'}));
+    const g=el('g',{}); g.appendChild(el('polygon',{points:d.map(p=>p.join(',')).join(' '),fill:'transparent'})); attachTip(g,CURRENT,true); svg.appendChild(g);
+  }
+  VISIONS.forEach(v=>{
+    if(muted.has(v.id)) return;
+    const isH=hovered===v.id, anyH=hovered!=null;
+    const d=AXES.map(ax=>pt(ax.angle,R*v.s[ax.key]/MAX));
+    const g=el('g',{opacity:anyH?(isH?1:0.12):1,style:'transition:opacity .2s'});
+    g.appendChild(el('polygon',{points:d.map(p=>p.join(',')).join(' '),fill:v.color,'fill-opacity':fill?(isH?0.26:0.14):0,stroke:v.color,'stroke-width':isH?3:2,'stroke-linejoin':'round'}));
+    if(isH||!anyH) d.forEach(p=>g.appendChild(el('circle',{cx:p[0],cy:p[1],r:isH?3.4:2.4,fill:v.color})));
+    attachTip(g,v,false); svg.appendChild(g);
+  });
+}
+function attachTip(g,v,isCur){
+  g.style.cursor='default';
+  g.addEventListener('mousemove',e=>{
+    if(!isCur){ hovered=v.id; draw(); legend(); }
+    tip.style.opacity=1; tip.style.transform='translateY(0)';
+    tip.style.left=Math.min(e.clientX+16,innerWidth-320)+'px'; tip.style.top=Math.min(e.clientY+14,innerHeight-260)+'px';
+    let h=`<div class="tt-name">${isCur?'':v.id+'. '}${v.name}</div>`;
+    if(!isCur) h+=`<div class="tt-row"><span>net</span><b style="color:${net(v)>=0?'#1e9e57':'#c4302b'}">${net(v)>=0?'+':''}${net(v).toFixed(2)}</b></div>`;
+    const grp=(n,c,ks)=>{let s=`<div class="grp ${c}">${n}</div>`;ks.forEach(k=>{const ax=AXES.find(a=>a.key===k);s+=`<div class="tt-row"><span>${ax.label}</span><b>${v.s[k]}</b></div>`;});return s;};
+    h+=grp('Company value','bl',['monetisation','excitement'])+grp('User value','bl',['agency','connection','convenience'])+grp('Competition','rd',['commoditisation','incumbent'])+grp('Context','rd',['regulation','dependency']);
+    tip.innerHTML=h;
+  });
+  g.addEventListener('mouseleave',()=>{ tip.style.opacity=0; tip.style.transform='translateY(4px)'; if(!isCur){ hovered=null; draw(); legend(); }});
+}
+function legend(){
+  const box=document.getElementById('legend'); box.innerHTML='';
+  VISIONS.forEach(v=>{
+    const on=!muted.has(v.id), val=valScore(v), chal=chalScore(v), n=net(v);
+    const d=document.createElement('div'); d.className='leg-item '+(on?'leg-on':'leg-off');
+    d.onclick=()=>{ on?muted.add(v.id):muted.delete(v.id); legend(); draw(); };
+    d.onmouseenter=()=>{ if(on){ hovered=v.id; draw(); } }; d.onmouseleave=()=>{ hovered=null; draw(); };
+    d.innerHTML=`<div class="leg-head"><span class="leg-dot" style="background:${v.color}"></span><span class="leg-num">0${v.id}</span><span class="leg-name">${v.name}</span><span class="leg-net" style="color:${n>=0?'#1e9e57':'#c4302b'}">${n>=0?'+':''}${n.toFixed(2)}</span></div>
+      <div class="vbar"><span class="v" style="width:${val/MAX*48}%"></span><span class="c" style="width:${chal/MAX*48}%"></span></div>`;
+    box.appendChild(d);
+  });
+}
+legend(); draw();
+
+/* ============ DECK NAV ============ */
+const slides=[...document.querySelectorAll('.slide')];
+document.getElementById('tot').textContent=slides.length;
+const dotsBox=document.getElementById('dots');
+slides.forEach((s,i)=>{ const b=document.createElement('button'); b.className='dot'; b.onclick=()=>slides[i].scrollIntoView({behavior:'smooth'}); dotsBox.appendChild(b); });
+const dots=[...dotsBox.children];
+let idx=0;
+const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ idx=slides.indexOf(e.target);
+  dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+  document.getElementById('cur').textContent=idx+1;
+  document.getElementById('prog').style.width=((idx+1)/slides.length*100)+'%';
+}});},{threshold:0.55});
+slides.forEach(s=>io.observe(s));
+function go(dir){ const n=Math.max(0,Math.min(slides.length-1,idx+dir)); slides[n].scrollIntoView({behavior:'smooth'}); }
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); go(1); }
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(-1); }
+});
+</script>
+</body>
+</html>

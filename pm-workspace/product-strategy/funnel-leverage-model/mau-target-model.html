@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAU Target Model — Path to 50k · Ditto Care</title>
+<style>
+  :root {
+    --bg: #f7f9fb;
+    --surface: #ffffff;
+    --border: #e4e8eb;
+    --border-strong: #cdd3d8;
+    --navy: #0e2a47;
+    --text: #1a1d1f;
+    --text-muted: #5a6268;
+    --text-dim: #8a929a;
+    --teal: #2e7a8c;
+    --teal-dark: #1f5966;
+    --teal-tint: #e8f2f4;
+    --orange: #e8833a;
+    --orange-tint: #fdf0e4;
+    --positive: #18a47c;
+    --positive-tint: #e3f5ee;
+    --negative: #d94141;
+    --negative-tint: #fbe8e8;
+    --bought: #b07cca;
+    --bought-tint: #f2ebf8;
+    --warning: #b7791f;
+    --warning-tint: #fdf5e4;
+    --gray-line: #9aa5b1;
+    --mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: var(--sans); background: var(--bg);
+    color: var(--text); font-size: 14px; line-height: 1.5;
+  }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 28px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  h1 { margin: 0 0 4px 0; font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+  .subtitle { color: var(--text-muted); font-size: 13px; }
+  .chip {
+    display: inline-block; margin-left: 8px; font-family: var(--mono); font-size: 11px;
+    background: var(--teal-tint); color: var(--teal-dark); padding: 2px 8px; border-radius: 10px; vertical-align: middle;
+  }
+  button.reset-btn {
+    background: var(--surface); border: 1px solid var(--border-strong); color: var(--text-muted);
+    padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-family: var(--sans);
+  }
+  button.reset-btn:hover { background: var(--bg); color: var(--text); }
+
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px;
+  }
+  .kpi {
+    background: linear-gradient(180deg, var(--surface), var(--bg));
+    border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px;
+  }
+  .kpi .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); font-weight: 700; }
+  .kpi .value { font-family: var(--mono); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-top: 4px; color: var(--navy); }
+  .kpi .sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-family: var(--mono); }
+  .kpi.hero { border-color: var(--teal); background: linear-gradient(180deg, var(--teal-tint), var(--surface)); }
+  .kpi .value.good { color: var(--positive); }
+  .kpi .value.bad { color: var(--negative); }
+
+  .verdict {
+    margin-top: 14px; padding: 10px 14px; border-radius: 8px; font-size: 13px;
+    background: var(--warning-tint); border: 1px solid #ecd9a8; color: #6b5410;
+  }
+  .verdict.win { background: var(--positive-tint); border-color: #b9e6d3; color: #0c6b4e; }
+  .verdict strong { font-weight: 700; }
+
+  main { padding: 18px 28px 40px 28px; display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
+  section.pane { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  section.pane.full { grid-column: 1 / -1; }
+  h2 { margin: 0 0 14px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+
+  .chart-wrap { width: 100%; }
+  svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+  .legend .item { display: flex; align-items: center; gap: 6px; }
+  .legend .swatch { width: 22px; height: 0; border-top-width: 3px; border-top-style: solid; }
+
+  h3.group-title {
+    margin: 18px 0 8px 0; font-size: 11px; font-weight: 700; color: var(--teal-dark);
+    text-transform: uppercase; letter-spacing: 0.04em; padding-bottom: 4px; border-bottom: 1px dashed var(--border);
+  }
+  h3.group-title:first-of-type { margin-top: 0; }
+
+  .slider-row { display: grid; grid-template-columns: 175px 1fr 78px; align-items: center; gap: 10px; padding: 7px 0; }
+  .slider-row .name { font-size: 13px; color: var(--text); }
+  .slider-row .name .tag {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 700;
+    padding: 1px 5px; border-radius: 4px; margin-left: 4px; vertical-align: middle;
+  }
+  .tag.earned { background: var(--positive-tint); color: #0c6b4e; }
+  .tag.bought { background: var(--bought-tint); color: #7a3da0; }
+  .slider-row .name .hint { font-size: 11px; color: var(--text-dim); display: block; }
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+    background: var(--border); border-radius: 4px; outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 16px; height: 16px; background: var(--teal);
+    border-radius: 50%; cursor: pointer; border: 2px solid var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+  input[type="range"].bought::-webkit-slider-thumb { background: var(--bought); }
+  input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: var(--teal); border-radius: 50%; cursor: pointer; border: 2px solid var(--surface); }
+  .slider-value {
+    font-family: var(--mono); font-size: 13px; text-align: right; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 3px 6px;
+  }
+  .slider-value.changed { color: var(--teal-dark); border-color: var(--teal); background: var(--teal-tint); font-weight: 700; }
+
+  .derived { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .derived-card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+  .derived-card .label { font-size: 9px; text-transform: uppercase; color: var(--text-dim); font-weight: 700; letter-spacing: 0.03em; }
+  .derived-card .value { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
+
+  .contrib-row { display: grid; grid-template-columns: 130px 1fr 64px; align-items: center; gap: 10px; margin: 6px 0; }
+  .contrib-name { font-size: 12px; }
+  .contrib-bar-track {
+    position: relative; height: 16px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden; display: flex; justify-content: center;
+  }
+  .contrib-bar-track .mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border-strong); }
+  .contrib-bar { position: absolute; top: 0; bottom: 0; }
+  .contrib-bar.pos { background: var(--positive); left: 50%; }
+  .contrib-bar.neg { background: var(--negative); right: 50%; }
+  .contrib-bar.bought-pos { background: var(--bought); left: 50%; }
+  .contrib-val { font-family: var(--mono); font-size: 12px; font-weight: 700; text-align: right; }
+
+  .notes { font-size: 12px; color: var(--text-muted); line-height: 1.65; }
+  .notes h4 { font-size: 12px; margin: 16px 0 6px 0; color: var(--text); text-transform: uppercase; letter-spacing: 0.04em; }
+  .notes h4:first-child { margin-top: 0; }
+  .notes ul { margin: 4px 0; padding-left: 18px; }
+  .notes li { margin: 3px 0; }
+  .notes code { background: var(--bg); padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 11px; border: 1px solid var(--border); }
+  .formula {
+    background: var(--bg); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border);
+    font-family: var(--mono); font-size: 13px; color: var(--text); margin: 6px 0 14px 0; line-height: 1.9;
+  }
+  .formula .c { color: var(--text-dim); font-style: italic; }
+  .flag { background: var(--warning-tint); border-left: 3px solid var(--warning); padding: 4px 12px; border-radius: 4px; margin: 6px 0; }
+
+  @media (max-width: 1080px) {
+    main { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>The path back to 50k<span class="chip">rate model · v1</span></h1>
+      <div class="subtitle">Ditto Care · Which growth lever, moved how far, bends MAU onto the 50,000 year-end target. Calibrated to Porygon, May 2026.</div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">↺ Reset to baseline</button>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi hero">
+      <div class="label">December MAU (your scenario)</div>
+      <div class="value" id="kpi-dec">—</div>
+      <div class="sub" id="kpi-dec-pct">—</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Gap to 50,000 goal</div>
+      <div class="value" id="kpi-gap">—</div>
+      <div class="sub">target: 50,000 by Dec</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Your go-forward growth</div>
+      <div class="value" id="kpi-mom">—</div>
+      <div class="sub">per month, Jul→Dec</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Rate needed from here</div>
+      <div class="value" id="kpi-req">—</div>
+      <div class="sub">to reach 50k by Dec (6 mo)</div>
+    </div>
+  </div>
+
+  <div class="verdict" id="verdict">—</div>
+</header>
+
+<main>
+
+  <section class="pane">
+    <h2>MAU trajectory — January to December 2026</h2>
+    <div class="chart-wrap" id="chart"></div>
+    <div class="legend">
+      <div class="item"><span class="swatch" style="border-color: var(--navy);"></span>Actual (Jan–Jun)</div>
+      <div class="item"><span class="swatch" style="border-color: var(--teal);"></span>Your scenario (Jul–Dec)</div>
+      <div class="item"><span class="swatch" style="border-color: var(--orange); border-top-style: dashed;"></span>Ambition → 50k</div>
+      <div class="item"><span class="swatch" style="border-color: var(--gray-line); border-top-style: dotted;"></span>Drift (20%/mo)</div>
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2>The five drivers</h2>
+
+    <h3 class="group-title">Acquisition</h3>
+    <div id="group-acq"></div>
+
+    <h3 class="group-title">Funnel conversion</h3>
+    <div id="group-funnel"></div>
+
+    <h3 class="group-title">Growth loops</h3>
+    <div id="group-loops"></div>
+
+    <div class="derived">
+      <div class="derived-card"><div class="label">Monthly multiplier</div><div class="value" id="d-mult">—</div></div>
+      <div class="derived-card"><div class="label">New actives / mo</div><div class="value" id="d-new">—</div></div>
+      <div class="derived-card"><div class="label">Viral amp 1/(1−K)</div><div class="value" id="d-amp">—</div></div>
+      <div class="derived-card"><div class="label">Effective stickiness ρ</div><div class="value" id="d-rho">—</div></div>
+      <div class="derived-card"><div class="label">Inflow share of MAU</div><div class="value" id="d-nu">—</div></div>
+      <div class="derived-card"><div class="label">Bought vs earned MoM</div><div class="value" id="d-split">—</div></div>
+    </div>
+
+    <h2 style="margin-top:20px;">Contribution to your monthly growth</h2>
+    <div style="font-size:11px;color:var(--text-dim);margin:-8px 0 10px 0;">Points of MoM growth each lever adds vs baseline, holding the others where you've set them. Not strictly additive (levers interact).</div>
+    <div id="contrib"></div>
+  </section>
+
+  <section class="pane full">
+    <h2>How it works &amp; what to distrust</h2>
+    <div class="formula">
+      <span class="c">// Each projected month: MAU_next = MAU_now × m</span><br>
+      m = ρ(retention) + ν(acquisition × registration × activation) × a(virality)<br><br>
+      ν = (organic + paid installs) × P(reg) × P(act) ÷ MAU_now &nbsp;&nbsp;<span class="c">// new actives as a share of MAU</span><br>
+      a = 1 / (1 − K) &nbsp;&nbsp;<span class="c">// viral amplification; explodes as K → 1</span><br>
+      ρ = ρ₀ + 0.30 × (M1_retention − 40%) &nbsp;&nbsp;<span class="c">// effective monthly MAU stickiness</span><br>
+      <span class="c">// ρ₀ ≈ 0.92 is reverse-solved so the baseline gives exactly 20%/mo — it is a PLUG, not a measurement.</span>
+    </div>
+
+    <div class="notes">
+      <h4>What this is</h4>
+      <ul>
+        <li>A decision tool for one question: <strong>which lever, moved how far, puts December MAU on 50,000?</strong> The answer it surfaces: <strong>no single slider does it</strong> — you need retention near its ceiling <em>plus</em> roughly double the activated inflow and/or a transformed loop.</li>
+        <li><strong>Acquisition splits into organic and paid.</strong> Organic (~115/day = 3,450/mo) is an <strong>earned</strong> floor that costs nothing and keeps coming. <strong>Paid &amp; partner</strong> (purple) is <strong>bought</strong>: a rate you fund every month, gone when spend stops — consumer paid (Meta/Google) is parked today, so this is the lever you'd turn back on. <strong>Retention and virality are also "earned"</strong> and compound on the whole base; registration and activation scale the inflow. Watch the contribution bars — retention does the most per point but is capped (you cannot retain more than everyone), and virality is near-dead at today's K≈0.10 until you fundamentally rebuild the loop.</li>
+      </ul>
+      <h4>What to distrust (read before quoting)</h4>
+      <ul>
+        <li class="flag"><strong>ρ is a plug, not a parameter.</strong> It is reverse-solved from the observed 20% and silently absorbs reactivation, the loyal tail, and the gap between cohort retention (M1 ≈ 40%) and rolling 30-day MAU persistence (≈ 92%). The retention slider speaks in M1 % — do not read it as ρ.</li>
+        <li class="flag"><strong>The 20% baseline is a trailing average and decelerating</strong> (May was +1.7% week-on-week). The true instantaneous rate is below 20%, so the drift line is optimistic and the gap is, if anything, understated.</li>
+        <li class="flag"><strong>Rate-based simplification.</strong> New-user inflow is held as a constant share of today's MAU, so acquisition reads as a <em>sustained</em> rate lever. In reality bought growth is a one-time level shift you must keep funding. Treat acquisition gains as the least durable on this chart.</li>
+        <li class="flag"><strong>Point estimates, no uncertainty bands.</strong> The retention→ρ slope (0.30) is an assumption, not a fit. Required-rate is highly sensitive to base and horizon: ~39%/mo was the Jan→Dec plan; from June's 2,200 over six months it is <strong>~68%/mo</strong>. Five months of drift raised the bar — that is the headline, not the 39%.</li>
+      </ul>
+      <h4>Baseline values (Porygon, May 2026)</h4>
+      <ul>
+        <li>Installs ≈ 7,000/mo = organic ~3,450 (115/day) + paid &amp; partner ~3,550 · Install→reg ≈ 53% · Reg→activated ≈ 15% · M1 next-month retention ≈ 40% · Viral coefficient K ≈ 0.10. Current MAU = 2,200 (June). Jan–Feb actuals are back-estimated at ~20%/mo and flagged.</li>
+        <li>Companion to the steady-state sensitivity model in <code>model/</code> (v3). That tool answers "where does leverage live"; this one answers "can we hit the number, and how."</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ================= CONSTANTS (Porygon, May 2026) =================
+  const MAU_NOW   = 2200;     // June 2026, current Core MAU
+  const GOAL      = 50000;    // year-end target (December)
+  const MONTHS_LEFT = 6;      // Jul, Aug, Sep, Oct, Nov, Dec
+  const BASE_MOM  = 0.20;     // observed/drift baseline monthly growth
+  const RET_BASE  = 0.40;     // baseline M1 next-month retention
+  const RET_SENS  = 0.30;     // pp of effective stickiness per pp of M1 retention (assumption)
+  const RHO_MIN = 0.80, RHO_MAX = 0.985;
+
+  // Actuals Jan..Jun (Mar–May real from Porygon; Jan/Feb back-estimated, flagged)
+  const ACTUALS = [960, 1150, 1381, 1714, 2080, 2200];
+  const MONTHS  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Acquisition split: organic ~115/day (3,450/mo) + paid & partner (~3,550/mo) ≈ 7,000 total.
+  const BASELINE = { organic: 3450, paid: 3550, reg: 0.53, act: 0.15, ret: 0.40, K: 0.10 };
+
+  // Reverse-solve ρ₀ so the baseline multiplier is exactly 1 + BASE_MOM.
+  const NEW_BASE = (BASELINE.organic + BASELINE.paid) * BASELINE.reg * BASELINE.act;  // 556.5
+  const NU_BASE  = NEW_BASE / MAU_NOW;                                   // 0.253
+  const A_BASE   = 1 / (1 - BASELINE.K);                                 // 1.111
+  const RHO_0    = (1 + BASE_MOM) - NU_BASE * A_BASE;                    // ≈ 0.919
+
+  // ================= SLIDER DEFINITIONS =================
+  const SLIDERS = [
+    { id:'organic', group:'acq', label:'Acquisition — organic', tag:'earned', hint:'Marketing-free floor (~115/day = 3,450/mo)',
+      min:0, max:12000, step:100, format:'int' },
+    { id:'paid', group:'acq', label:'Acquisition — paid & partner', tag:'bought', hint:'Meta/Google/ASA/partners (consumer paid ~parked today)',
+      min:0, max:25000, step:250, format:'int', accent:true },
+    { id:'reg', group:'funnel', label:'Registration', tag:'earned', hint:'Install → registration',
+      min:0.20, max:0.85, step:0.01, format:'pct' },
+    { id:'act', group:'funnel', label:'Activation', tag:'earned', hint:'Registration → first summary',
+      min:0.03, max:0.45, step:0.01, format:'pct' },
+    { id:'ret', group:'loops', label:'Retention', tag:'earned', hint:'M1 next-month (OKR target 60%)',
+      min:0.20, max:0.80, step:0.01, format:'pct' },
+    { id:'K', group:'loops', label:'Virality', tag:'earned', hint:'Viral coefficient K (escape velocity = 1.0)',
+      min:0.00, max:0.85, step:0.01, format:'dec2' },
+  ];
+
+  let scenario = { ...BASELINE };
+
+  // ================= MODEL =================
+  function compute(d) {
+    const newA = (d.organic + d.paid) * d.reg * d.act;
+    const nu = newA / MAU_NOW;
+    const a = 1 / (1 - Math.min(d.K, 0.95));
+    let rho = RHO_0 + RET_SENS * (d.ret - RET_BASE);
+    rho = Math.max(RHO_MIN, Math.min(RHO_MAX, rho));
+    const m = rho + nu * a;
+    return { newA, nu, a, rho, m, mom: m - 1 };
+  }
+
+  function projectScenario(d) {
+    const m = compute(d).m;
+    const arr = ACTUALS.slice();              // idx 0..5 = Jan..Jun (fixed)
+    for (let i = ACTUALS.length; i < 12; i++) arr.push(arr[i-1] * m);
+    return arr;                                // length 12, Jan..Dec
+  }
+
+  function driftLine() {
+    const arr = [ACTUALS[0]];
+    for (let i = 1; i < 12; i++) arr.push(arr[i-1] * (1 + BASE_MOM));
+    return arr;
+  }
+  function ambitionLine() {
+    // Smooth curve from the actual Jan base to exactly GOAL at December.
+    const r = Math.pow(GOAL / ACTUALS[0], 1 / 11);
+    const arr = [ACTUALS[0]];
+    for (let i = 1; i < 12; i++) arr.push(arr[i-1] * r);
+    return arr;
+  }
+  const REQ_RATE = Math.pow(GOAL / MAU_NOW, 1 / MONTHS_LEFT) - 1;
+
+  // ================= FORMAT =================
+  function fmtInt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function fmtPct(v){ return (v*100).toFixed(0) + '%'; }
+  function fmtMoM(v){ return (v>=0?'+':'') + (v*100).toFixed(1) + '%'; }
+  function fmtVal(v, f){
+    if (f==='pct') return (v*100).toFixed(0)+'%';
+    if (f==='dec2') return v.toFixed(2);
+    if (f==='int') return Math.round(v).toLocaleString('en-US');
+    return String(v);
+  }
+
+  // ================= CHART (hand-rolled SVG) =================
+  function renderChart() {
+    const scen = projectScenario(scenario);
+    const drift = driftLine();
+    const amb = ambitionLine();
+    const scenDec = scen[11];
+
+    const W=720, H=380, ML=58, MR=92, MT=22, MB=34;
+    const plotW = W-ML-MR, plotH = H-MT-MB;
+    let yMax = (scenDec > GOAL) ? Math.min(scenDec*1.06, 80000) : 52000;
+    const tickStep = yMax <= 55000 ? 10000 : 20000;
+
+    const x = i => ML + (i/11)*plotW;
+    const y = v => MT + plotH*(1 - Math.min(v, yMax)/yMax);
+    const poly = (arr,a,b) => { let s=[]; for(let i=a;i<=b;i++) s.push(x(i)+','+y(arr[i])); return s.join(' '); };
+
+    let grid='', yl='';
+    for (let v=0; v<=yMax+1; v+=tickStep){
+      grid += `<line x1="${ML}" y1="${y(v)}" x2="${ML+plotW}" y2="${y(v)}" stroke="#eef1f4" stroke-width="1"/>`;
+      yl   += `<text x="${ML-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#8a929a" font-family="monospace">${v>=1000?(v/1000)+'k':v}</text>`;
+    }
+    let xl='';
+    for (let i=0;i<12;i++) xl += `<text x="${x(i)}" y="${H-12}" text-anchor="middle" font-size="11" fill="#8a929a">${MONTHS[i]}</text>`;
+
+    const nowX = x(5);
+    const goalY = y(GOAL);
+
+    const scenColor = (scenDec >= GOAL) ? '#18a47c' : '#2e7a8c';
+
+    const svg = `
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="MAU trajectory chart">
+      ${grid}${yl}${xl}
+      <!-- goal line + marker -->
+      <line x1="${ML}" y1="${goalY}" x2="${ML+plotW}" y2="${goalY}" stroke="#e8833a" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
+      <text x="${ML+4}" y="${goalY-6}" font-size="11" fill="#e8833a" font-weight="700">50,000 goal</text>
+      <!-- now divider -->
+      <line x1="${nowX}" y1="${MT}" x2="${nowX}" y2="${MT+plotH}" stroke="#cdd3d8" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="${nowX+4}" y="${MT+12}" font-size="10" fill="#8a929a">today</text>
+      <!-- drift -->
+      <polyline points="${poly(drift,0,11)}" fill="none" stroke="#9aa5b1" stroke-width="2" stroke-dasharray="2 4"/>
+      <!-- ambition -->
+      <polyline points="${poly(amb,0,11)}" fill="none" stroke="#e8833a" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <!-- scenario projection -->
+      <polyline points="${poly(scen,5,11)}" fill="none" stroke="${scenColor}" stroke-width="3.5" stroke-linejoin="round"/>
+      <!-- actuals -->
+      <polyline points="${poly(ACTUALS.concat([]),0,5)}" fill="none" stroke="#0e2a47" stroke-width="3.5" stroke-linejoin="round"/>
+      ${[0,1,2,3,4,5].map(i=>`<circle cx="${x(i)}" cy="${y(ACTUALS[i])}" r="3" fill="#0e2a47"/>`).join('')}
+      <!-- scenario end marker -->
+      <circle cx="${x(11)}" cy="${y(scenDec)}" r="5" fill="${scenColor}"/>
+      <text x="${x(11)}" y="${y(scenDec) + (scenDec>GOAL? -12 : 18)}" text-anchor="end" font-size="12" font-weight="700" fill="${scenColor}" font-family="monospace">${fmtInt(scenDec)}</text>
+      <!-- ambition end -->
+      <circle cx="${x(11)}" cy="${y(GOAL)}" r="4" fill="#e8833a"/>
+    </svg>`;
+    document.getElementById('chart').innerHTML = svg;
+  }
+
+  // ================= READOUTS =================
+  function renderReadouts() {
+    const c = compute(scenario);
+    const scen = projectScenario(scenario);
+    const scenDec = scen[11];
+
+    document.getElementById('kpi-dec').textContent = fmtInt(scenDec);
+    const pctOfGoal = scenDec/GOAL*100;
+    document.getElementById('kpi-dec-pct').textContent = pctOfGoal.toFixed(0) + '% of 50k goal';
+    const decEl = document.getElementById('kpi-dec');
+    decEl.classList.toggle('good', scenDec>=GOAL);
+    decEl.classList.toggle('bad', scenDec < GOAL*0.5);
+
+    const gap = GOAL - scenDec;
+    const gapEl = document.getElementById('kpi-gap');
+    gapEl.textContent = (gap<=0? '+'+fmtInt(-gap) : '−'+fmtInt(gap));
+    gapEl.className = 'value ' + (gap<=0?'good':'bad');
+
+    document.getElementById('kpi-mom').textContent = fmtMoM(c.mom);
+    document.getElementById('kpi-req').textContent = '~' + (REQ_RATE*100).toFixed(0) + '%';
+
+    // derived
+    document.getElementById('d-mult').textContent = c.m.toFixed(3) + '×';
+    document.getElementById('d-new').textContent = fmtInt(c.newA);
+    document.getElementById('d-amp').textContent = c.a.toFixed(2) + '×';
+    document.getElementById('d-rho').textContent = c.rho.toFixed(3);
+    document.getElementById('d-nu').textContent = (c.nu*100).toFixed(0) + '%';
+
+    // bought vs earned split of the MoM uplift over baseline
+    const upliftTotal = c.mom - BASE_MOM;
+    const boughtScen = { ...BASELINE, paid: scenario.paid };  // only paid (bought) moved
+    const boughtMoM = compute(boughtScen).mom - BASE_MOM;
+    const earnedMoM = upliftTotal - boughtMoM;
+    document.getElementById('d-split').textContent =
+      (boughtMoM*100).toFixed(0) + ' / ' + (earnedMoM*100).toFixed(0) + ' pp';
+
+    // verdict
+    const v = document.getElementById('verdict');
+    if (scenDec >= GOAL) {
+      v.className = 'verdict win';
+      v.innerHTML = `<strong>On the number.</strong> December lands at ${fmtInt(scenDec)} — at or above 50k. Sanity-check feasibility: holding ${fmtMoM(c.mom)}/mo for six months is the bet. Acquisition-bought points are the first to evaporate if spend stops.`;
+    } else {
+      const need = REQ_RATE*100;
+      v.className = 'verdict';
+      v.innerHTML = `<strong>${fmtInt(gap)} short of 50k.</strong> You're growing ${fmtMoM(c.mom)}/mo; reaching 50k from here needs <strong>~${need.toFixed(0)}%/mo</strong>. Retention alone caps near +26%/mo — close the rest with inflow (organic or paid × activation) and/or a transformed loop (K).`;
+    }
+  }
+
+  // ================= CONTRIBUTION BARS =================
+  function renderContrib() {
+    const curMoM = compute(scenario).mom;
+    const rows = SLIDERS.map(s => {
+      const reset = { ...scenario, [s.id]: BASELINE[s.id] };
+      const contrib = curMoM - compute(reset).mom;   // pp this lever adds vs its baseline
+      return { id:s.id, label:s.label, tag:s.tag, contrib };
+    });
+    rows.sort((a,b)=> Math.abs(b.contrib)-Math.abs(a.contrib));
+    const maxAbs = Math.max(0.02, ...rows.map(r=>Math.abs(r.contrib)));
+
+    const el = document.getElementById('contrib');
+    el.innerHTML = rows.map(r => {
+      const pct = Math.min(50, Math.abs(r.contrib)/maxAbs*50);
+      const pos = r.contrib >= 0;
+      const cls = pos ? (r.tag==='bought' ? 'bought-pos' : 'pos') : 'neg';
+      const valColor = pos ? (r.tag==='bought' ? 'var(--bought)' : 'var(--positive)') : 'var(--negative)';
+      return `<div class="contrib-row">
+        <div class="contrib-name">${r.label}</div>
+        <div class="contrib-bar-track"><span class="mid"></span><span class="contrib-bar ${cls}" style="width:${pct}%"></span></div>
+        <div class="contrib-val" style="color:${valColor}">${(r.contrib*100>=0?'+':'')}${(r.contrib*100).toFixed(1)}pp</div>
+      </div>`;
+    }).join('');
+  }
+
+  // ================= SLIDERS =================
+  function renderSliders() {
+    ['acq','funnel','loops'].forEach(group => {
+      const c = document.getElementById('group-'+group);
+      c.innerHTML = '';
+      SLIDERS.filter(s=>s.group===group).forEach(s => {
+        const row = document.createElement('div');
+        row.className = 'slider-row';
+        row.innerHTML = `
+          <div class="name">${s.label}<span class="tag ${s.tag}">${s.tag}</span><span class="hint">${s.hint}</span></div>
+          <input type="range" class="${s.accent?'bought':''}" id="sl-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${scenario[s.id]}">
+          <div class="slider-value" id="v-${s.id}">${fmtVal(scenario[s.id], s.format)}</div>`;
+        c.appendChild(row);
+        row.querySelector('input').addEventListener('input', e => {
+          scenario[s.id] = parseFloat(e.target.value);
+          renderAll();
+        });
+      });
+    });
+  }
+  function renderSliderValues() {
+    SLIDERS.forEach(s => {
+      const v = document.getElementById('v-'+s.id);
+      const sl = document.getElementById('sl-'+s.id);
+      if (v){ v.textContent = fmtVal(scenario[s.id], s.format); v.classList.toggle('changed', Math.abs(scenario[s.id]-BASELINE[s.id])>1e-9); }
+      if (sl) sl.value = scenario[s.id];
+    });
+  }
+
+  function renderAll(){ renderSliderValues(); renderChart(); renderReadouts(); renderContrib(); }
+  function resetAll(){ scenario = { ...BASELINE }; renderAll(); }
+
+  renderSliders();
+  renderAll();
+</script>
+</body>
+</html>

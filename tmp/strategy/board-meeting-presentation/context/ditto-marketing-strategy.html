@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ditto Marketing Strategy: Q3/Q4 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f8f5ef;
+  --fg: #15171a;
+  --secondary: #4b5260;
+  --tertiary: #7a8294;
+  --border: #e6e1d6;
+  --card-bg: #ffffff;
+  --muted: #f1ede3;
+  --info: #2563eb; --info-bg: #e0ecff;
+  --success: #16a34a; --success-bg: #dcfce7;
+  --warning: #d97706; --warning-bg: #fef3c7;
+  --danger: #dc2626; --danger-bg: #fee2e2;
+  --neutral: #4b5260; --neutral-bg: #ece8de;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+.container { max-width: 980px; margin: 0 auto; padding: 56px 24px 96px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; line-height: 1.15; margin: 0; }
+h1 { font-size: 56px; }
+h2 { font-size: 36px; margin-top: 8px; }
+h3 { font-size: 24px; margin-top: 4px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+.hero { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.grid { display: grid; gap: 16px; margin: 16px 0; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+@media (max-width: 720px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  h1 { font-size: 40px; } h2 { font-size: 28px; }
+  .container { padding: 32px 16px; }
+}
+.txt { margin: 4px 0; font-size: 16px; }
+.txt-secondary { color: var(--secondary); }
+.txt-tertiary { color: var(--tertiary); font-size: 13px; }
+.txt-small { font-size: 13px; }
+.txt-semibold { font-weight: 600; }
+.stat { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.stat-value { font-family: var(--font-display); font-size: 32px; line-height: 1; }
+.stat-label { font-size: 12px; color: var(--secondary); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-warning { border-left: 3px solid var(--warning); }
+.stat-danger  { border-left: 3px solid var(--danger); }
+.stat-success { border-left: 3px solid var(--success); }
+.stat-info    { border-left: 3px solid var(--info); }
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--muted); }
+.card-title { font-family: var(--font-display); font-size: 20px; }
+.card-body { padding: 16px 18px; }
+.callout { border-radius: 12px; padding: 16px 18px; margin: 16px 0; border: 1px solid var(--border); background: var(--card-bg); border-left-width: 4px; }
+.callout-title { font-weight: 600; margin-bottom: 6px; }
+.callout-body { color: var(--secondary); font-size: 15px; }
+.callout-info { border-left-color: var(--info); background: var(--info-bg); }
+.callout-success { border-left-color: var(--success); background: var(--success-bg); }
+.callout-warning { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout-danger { border-left-color: var(--danger); background: var(--danger-bg); }
+.callout-neutral { border-left-color: var(--neutral); }
+.pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); background: var(--card-bg); color: var(--fg); }
+.pill-sm { font-size: 11px; padding: 2px 8px; }
+.pill-active.pill-info    { background: var(--info-bg); color: var(--info); border-color: transparent; }
+.pill-active.pill-success { background: var(--success-bg); color: var(--success); border-color: transparent; }
+.pill-active.pill-warning { background: var(--warning-bg); color: var(--warning); border-color: transparent; }
+.pill-active.pill-danger  { background: var(--danger-bg); color: var(--danger); border-color: transparent; }
+.tbl { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.tbl th, .tbl td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+.tbl th { background: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--secondary); }
+.tbl.striped tbody tr:nth-child(even) { background: rgba(0,0,0,0.015); }
+.chart { margin: 12px 0; }
+.chart canvas { width: 100% !important; }
+</style>
+</head>
+<body>
+<main class="container">
+
+<header class="hero">
+  <h1>Ditto Marketing Strategy: Q3/Q4 2026</h1>
+  <p class="txt txt-secondary txt-regular txt-md">From linear growth to a compounding engine. Narrow to severe care paths. Reach caretakers through patient magazines and authentic social content. Let the care circle viral loop do the math. 50K MAU is the Series A milestone — 12-18 month horizon (mid-2027), not a year-end cliff.</p>
+  <div class="row"><span class="pill pill-info pill-active pill-sm">Prepared May 29, 2026</span><span class="pill pill-neutral pill-sm">Post Code Red meeting</span><span class="pill pill-neutral pill-sm">Niek Schreurs</span></div>
+</header>
+<hr/>
+
+<aside class="callout callout-neutral">
+  <div class="callout-title">TL;DR</div>
+  <div class="callout-body">Go narrow and deep. Target caretakers and patients in severe care paths (oncology, cardiology, neurology, chronic conditions). Two new content pillars: (1) advertorials in patient association magazines, (2) social / UGC content featuring real patients and caretakers. Scale the care circle viral loop as the primary growth engine. Stop broad campaigns. Quality over volume. Cost per activated MAU, not CPI. 50K is the Series A milestone on a 12-18 month horizon — Q3/Q4 2026 builds the engine that compounds through H1 2027.</div>
+</aside>
+<h2>Where we are: the Code Red reality</h2>
+<p class="txt txt-secondary txt-regular txt-md">Core MAU is behind the Q2 pace, but the trajectory is improving. The Code Red meeting confirmed: growth is linear, not compounding. Churn offsets acquisition. No scalable engine has been found yet. But care circle is accelerating, activation is trending up, and retention on summary_viewed is above target at 74%. The 50K target is the Series A milestone — 12 to 18 months away, not a year-end deadline. That gives us Q3/Q4 to build the engine and H1 2027 to scale it.</p>
+<div class="grid grid-4"><div class="stat stat-warning">
+  <div class="stat-value">2,083</div>
+  <div class="stat-label">Core MAU (May 29)</div>
+</div><div class="stat stat-danger">
+  <div class="stat-value">4,568</div>
+  <div class="stat-label">Q2 Exit Target</div>
+</div><div class="stat stat-neutral">
+  <div class="stat-value">50,000</div>
+  <div class="stat-label">Series A target</div>
+</div><div class="stat stat-neutral">
+  <div class="stat-value">12-18 mo</div>
+  <div class="stat-label">Timeline (mid-2027)</div>
+</div></div>
+<div class="grid grid-4"><div class="stat stat-danger">
+  <div class="stat-value">3.8%</div>
+  <div class="stat-label">Install → Summary (90d)</div>
+</div><div class="stat stat-neutral">
+  <div class="stat-value">37.5%</div>
+  <div class="stat-label">Install → Register</div>
+</div><div class="stat stat-success">
+  <div class="stat-value">~12%</div>
+  <div class="stat-label">May M0 Retention</div>
+</div><div class="stat stat-warning">
+  <div class="stat-value">24.8%</div>
+  <div class="stat-label">CC Invite Acceptance</div>
+</div></div>
+<h3>MAU growth trend</h3>
+<div class="chart" style="height:240px"><canvas id="chart1"></canvas></div>
+<p class="txt txt-tertiary txt-regular txt-small">Source: Mixpanel (live pull May 29). MAU grew 108% since December. Summaries created grew 86%. Avg MoM growth: ~15.8%. At this rate we reach ~5,800 by Dec — the engine needs to compound to hit higher scenarios.</p>
+<hr/>
+<h2>The strategic decision: narrow and deep</h2>
+<aside class="callout callout-info">
+  <div class="callout-title">Code Red outcome</div>
+  <div class="callout-body">The founders chose Option A with care circle amplification: narrow product and marketing to high-intensity care paths (oncology, cardiology, neurology) and their care circles. Focus on caretakers as the primary marketing persona. Build toward a compounding growth engine through social/UGC content + care circle virality.</div>
+</aside>
+<div class="grid grid-2"><div class="card">
+  <div class="card-header"><div class="card-title">Narrow + Deep</div><span class="pill pill-success pill-active pill-sm">Chosen</span></div>
+  <div class="card-body"><p class="txt txt-primary txt-semibold txt-md">Product:</p><p class="txt txt-secondary txt-regular txt-md">Fix the core recording-to-summary path. Optimize for appointment-heavy users in severe care paths. Improve care circle invite acceptance (28% to 60%+).</p><p class="txt txt-primary txt-semibold txt-md">Marketing:</p><p class="txt txt-secondary txt-regular txt-md">Target caretakers and patients in severe care trajectories. Advertorials in patient association magazines. Social content from real patients/caretakers. Quality-gated paid channels.</p><p class="txt txt-primary txt-semibold txt-md">Expected outcome:</p><p class="txt txt-secondary txt-regular txt-md">Higher activation (15-25% on targeted), better retention, care circle viral loop begins compounding. 5-12K MAU realistic by EOY.</p></div>
+</div><div class="card">
+  <div class="card-header"><div class="card-title">Broad + Mass market</div><span class="pill pill-neutral pill-sm">Rejected</span></div>
+  <div class="card-body"><p class="txt txt-secondary txt-regular txt-md">Mass newspaper ads, broad Meta/Google campaigns, generic healthcare positioning. This approach was tested and produced high volume but 3-8% activation. Brings low-intent users who churn. NRC/DPG campaigns showed: broad intake dilutes activation.</p><p class="txt txt-secondary txt-semibold txt-md">The April paradox: record installs (10,594) but register-to-summary dropped to 23% due to broad campaigns.</p></div>
+</div></div>
+<hr/>
+<h2>The growth engine: care circle virality + content</h2>
+<p class="txt txt-secondary txt-regular txt-md">Three engine candidates were evaluated. Care circle virality shows the strongest organic signal (k=0.35, growing). The Q3/Q4 strategy is to nurture this into a self-sustaining loop while building a content engine (social/UGC) that feeds the top of funnel with high-intent users.</p>
+<h3>Care circle flywheel — the numbers</h3>
+<div class="chart" style="height:240px"><canvas id="chart2"></canvas></div>
+<p class="txt txt-tertiary txt-regular txt-small">Source: Mixpanel (live pull May 29). Invites sent 3.8x since Dec. Follow requests accepted 4.2x. CC engagement (following_event_opened) is the strongest consistent growth trend: 3.6x with no down months.</p>
+<div class="grid grid-3"><div class="stat stat-neutral">
+  <div class="stat-value">k=0.35</div>
+  <div class="stat-label">Current viral coefficient</div>
+</div><div class="stat stat-info">
+  <div class="stat-value">k=0.5+</div>
+  <div class="stat-label">Q3 target</div>
+</div><div class="stat stat-success">
+  <div class="stat-value">k=1.0+</div>
+  <div class="stat-label">Q4 target (compounding)</div>
+</div></div>
+<aside class="callout callout-warning">
+  <div class="callout-title">The invite bottleneck</div>
+  <div class="callout-body">75% of invite links never convert (24.8% acceptance rate, confirmed via Mixpanel — avg time to accept: 12.1 hours). Once someone installs, acceptance is ~100%. This is a friction problem, not a trust problem. Deep links, skip-onboarding for CC members, and landing directly on the shared summary are prerequisites for the engine.</div>
+</aside>
+<aside class="callout callout-danger">
+  <div class="callout-title">Data quality flag: caretaker tracking broken</div>
+  <div class="callout-body">user_type_others_care is not being set on new user profiles. 0 of 12,486 recent registrations show as caretakers. Caretaker share of summary_viewed dropped from 7.3% (Dec) to 0.4% (May) — this is a property-setting regression, not a real decline. Fix needed before we can measure the caretaker activation path. Engineering ticket required.</div>
+</aside>
+<hr/>
+<h2>Activation funnel — where users leak</h2>
+<p class="txt txt-secondary txt-regular txt-md">Live data from Mixpanel (last 90 days, 25,753 installs). The funnel shows why narrow targeting matters: we lose 62.5% at install → register, and another 82% of registered users never reach a key action.</p>
+<div class="chart" style="height:240px"><canvas id="chart3"></canvas></div>
+<div class="grid grid-2"><div class="card">
+  <div class="card-header"><div class="card-title">Install → Register: 37.5%</div><span class="pill pill-danger pill-active pill-sm">Biggest leak</span></div>
+  <div class="card-body"><p class="txt txt-secondary txt-regular txt-md">62.5% of installs never register. Trending up (was 42.7% in Dec, now 55.3% in May) but still the widest part of the funnel. Broad campaigns make this worse — April&#x27;s record installs (10,592) only converted 52.9% vs. May&#x27;s 55.3% on targeted channels.</p><p class="txt txt-primary txt-semibold txt-small">Implication for marketing: high-intent channels (magazines, ASA) will have higher register rates. Stop paying for installs that never register.</p></div>
+</div><div class="card">
+  <div class="card-header"><div class="card-title">Appointment → Summary: 33.2%</div><span class="pill pill-warning pill-active pill-sm">Key gap</span></div>
+  <div class="card-body"><p class="txt txt-secondary txt-regular txt-md">Only 1 in 3 users who create an appointment generate a summary within 30 days. Average time to convert: 3.5 days. This is the 55% gap — the product&#x27;s core value is one step away but 67% never reach it.</p><p class="txt txt-primary txt-semibold txt-small">Implication: Customer.io summary reminder flow is the highest single-deliverable impact for activation. Must ship in Q3.</p></div>
+</div></div>
+<h3>Key action mix — recording dominates</h3>
+<div class="chart" style="height:220px"><canvas id="chart4"></canvas></div>
+<p class="txt txt-tertiary txt-regular txt-small">Recording saved is the dominant path (1,570 unique users in May). Manual appointments saw 3.9x growth since Dec. Document scanning is flat — not a growth lever at current product state.</p>
+<hr/>
+<h2>Q3/Q4 channel strategy</h2>
+<p class="txt txt-secondary txt-regular txt-md">Five marketing levers, sequenced by impact and readiness. The core thesis: fix the bucket first (Jun-Jul), then scale intake through high-intent channels (Aug-Sep), then compound via the viral loop (Oct-Dec).</p>
+<h3>Channel mix — the Racecar framework</h3>
+<table class="tbl striped"><thead><tr><th>Component</th><th>Channel</th><th>Role</th><th>Q3 action</th><th>Q4 action</th><th>Health</th></tr></thead><tbody><tr><td>Engine</td><td>Care circle virality</td><td>Compounding loop — each patient brings 0.35+ CC viewers</td><td>Fix invite funnel (28% → 50%+), deep links, directive onboarding</td><td>Scale to k=1.0+, social amplification of sharing behavior</td><td><span class="pill pill-warning pill-active pill-sm">Building</span></td></tr><tr><td>Engine</td><td>Social / UGC content</td><td>Compounding awareness — caretaker stories drive installs</td><td>Launch Instagram/Facebook. Test 3-5 patient/caretaker stories. Build content pipeline</td><td>Scale working formats. UGC from community. Influencer partnerships</td><td><span class="pill pill-warning pill-active pill-sm">New</span></td></tr><tr><td>Turbo boost</td><td>Magazine advertorials</td><td>High-intent bursts into care path audiences</td><td>Test Tier 1: ReumaMagazine, MantelKRACHT, Hartbrug. Test 2 magazine placements</td><td>Scale proven magazines. Add oncology/neurology publications</td><td><span class="pill pill-info pill-active pill-sm">Testing</span></td></tr><tr><td>Turbo boost</td><td>Newspaper advertorials</td><td>Proven but broad — tailor stories to care paths</td><td>Continue DPG with caretaker-focused stories. NRC selectively</td><td>Only care-path-specific stories. Stop generic health content</td><td><span class="pill pill-success pill-active pill-sm">Active</span></td></tr><tr><td>Fuel</td><td>Apple Search Ads</td><td>Stable baseline — highest intent, capped volume</td><td>Maintain. Optimize keywords for care path terms</td><td>Maintain. Natural ceiling ~€45/install</td><td><span class="pill pill-success pill-active pill-sm">Active</span></td></tr><tr><td>Fuel</td><td>Partnerships (B2B)</td><td>Moment-of-need acquisition — diagnosis triggers</td><td>Scale Menzis + Geboortezorg + Rotterdam. Prove it by Aug</td><td>Template and replicate proven models. Add 2-3 new partners</td><td><span class="pill pill-warning pill-active pill-sm">Proving</span></td></tr><tr><td>Lubricant</td><td>Customer.io lifecycle</td><td>Retention backbone — reactivate 100K install base</td><td>Implement. Summary reminder flow. Care circle nudges</td><td>Re-engagement campaigns. Appointment-triggered sequences</td><td><span class="pill pill-danger pill-active pill-sm">Behind</span></td></tr></tbody></table>
+<hr/>
+<h2>Content strategy: stories that convert</h2>
+<p class="txt txt-secondary txt-regular txt-md">The shift from broad to narrow means our content must speak directly to people navigating severe care paths. Two content pillars, both designed to reach caretakers (the person most likely to set up Ditto).</p>
+<div class="grid grid-2"><div class="card">
+  <div class="card-header"><div class="card-title">Pillar 1: Advertorials in patient magazines</div><span class="pill pill-info pill-active pill-sm">Print</span></div>
+  <div class="card-body"><p class="txt txt-primary txt-semibold txt-md">The thesis</p><p class="txt txt-secondary txt-regular txt-md">Patient association magazines are read by people in the middle of their care journey — exactly when Ditto&#x27;s value is highest. These are the highest-intent placements available in NL. Caretakers read these to understand what their loved one is going through.</p><hr/><p class="txt txt-primary txt-semibold txt-md">Q3: Test phase (Jul-Sep)</p><p class="txt txt-secondary txt-regular txt-md">4 Tier 1 placements: ReumaMagazine (2M+ audience), MantelKRACHT (national caretaker magazine), Hartbrug (cardiology 6x/yr), Mantelzorgelijk.nl (mediakit ready). Measure install-to-activation quality vs. newspaper baseline.</p><hr/><p class="txt txt-primary txt-semibold txt-md">Q4: Scale phase (Oct-Dec)</p><p class="txt txt-secondary txt-regular txt-md">Add oncology (NFK network = 22 organizations, 900K+ people), neurology (Parkinson, MS, Hersenletsel). Pursue Patiëntenfederatie NL partnership for cross-condition reach (200+ patient orgs).</p></div>
+</div><div class="card">
+  <div class="card-header"><div class="card-title">Pillar 2: Social / UGC content</div><span class="pill pill-info pill-active pill-sm">Social</span></div>
+  <div class="card-body"><p class="txt txt-primary txt-semibold txt-md">The thesis</p><p class="txt txt-secondary txt-regular txt-md">External feedback was clear: &quot;you are not a consumer brand&quot; — Ditto only has LinkedIn. Social worked in the past for volume but activation was worse. Now with a better product and care circle features, social can become a compounding engine if the content is authentic and targeted.</p><hr/><p class="txt txt-primary txt-semibold txt-md">Q3: Experiment phase</p><p class="txt txt-secondary txt-regular txt-md">Launch Instagram + Facebook. Content types: (1) Caretaker stories — &quot;How I manage my mother&#x27;s cancer care&quot; (2) Patient interviews — &quot;Living with Parkinson&#x27;s: what I wish I knew&quot; (3) Short-form video: recording an appointment, showing the summary, sharing with care circle. Test 3-5 stories, measure engagement + install quality.</p><hr/><p class="txt txt-primary txt-semibold txt-md">Q4: Scale what works</p><p class="txt txt-secondary txt-regular txt-md">Build UGC pipeline from community. Partner with patient influencers in cardiology/oncology. Cross-promote magazine stories on social. If activation rate holds above 15%, gradually increase paid social spend.</p></div>
+</div></div>
+<h3>Story angles — tailored to care paths</h3>
+<table class="tbl striped"><thead><tr><th>Care path</th><th>Story angle</th><th>Magazine channel</th><th>Social format</th></tr></thead><tbody><tr><td>Oncology</td><td>&quot;My partner was diagnosed with cancer — how we stay on top of 12 specialist visits&quot;</td><td>NFK network, Voor elkaar, Blad B, kanker.nl</td><td>Video: caretaker shows how they share summaries with family</td></tr><tr><td>Cardiology</td><td>&quot;After my heart attack, I needed to remember what 4 different doctors told me&quot;</td><td>Hartbrug Magazine, Hartstichting</td><td>Before/after: appointment notes vs. Ditto summary</td></tr><tr><td>Neurology</td><td>&quot;Caring for my father with Parkinson&#x27;s — the appointments I can&#x27;t attend&quot;</td><td>Parkinson Magazine, Hersenletsel Magazine, MenSen</td><td>Care circle feature demo: caretaker receives summary remotely</td></tr><tr><td>Rheumatology</td><td>&quot;Managing chronic pain means managing information — here&#x27;s how I do it&quot;</td><td>ReumaMagazine (2M+ audience)</td><td>Carousel: 5 tips for organizing your care, featuring Ditto</td></tr><tr><td>Mantelzorg (cross-cutting)</td><td>&quot;5.6 million Dutch caretakers. Here&#x27;s what helps me cope.&quot;</td><td>MantelKRACHT, Mantelzorgelijk.nl</td><td>UGC series: real caretakers, real stories, real tools</td></tr></tbody></table>
+<hr/>
+<h2>Budget and phasing</h2>
+<p class="txt txt-secondary txt-regular txt-md">The marketing budget follows the &quot;fix the bucket, then pour&quot; principle. Product fixes first (Jun-Jul), then scale intake through high-intent channels (Aug-Sep), then compound via the viral loop (Oct-Dec).</p>
+<h3>Phased spend plan</h3>
+<table class="tbl striped"><thead><tr><th>Phase</th><th>Months</th><th>Monthly spend</th><th>Channels</th><th>Gate</th></tr></thead><tbody><tr><td>Fix the bucket</td><td>Jun-Jul</td><td>€50-60K (baseline)</td><td>ASA + newsletter advertorials. Customer.io setup. Care circle product fixes</td><td>Ship deep links, Customer.io live, CC invite rate improving</td></tr><tr><td>Test new channels</td><td>Aug-Sep</td><td>€70-90K (+€20-40K incr.)</td><td>+ Magazine advertorials (Tier 1). + Social content launch. + Partnerships scaling</td><td>D14 activation &gt;15% on paid. Magazine install quality measured</td></tr><tr><td>Scale with loop</td><td>Oct-Dec</td><td>€100-150K (+€50-100K incr.)</td><td>Full channel mix. Scale proven magazines + social. Viral loop amplifying</td><td>CC multiplier &gt;0.5x. Social activation &gt;12%. Paid ROI positive</td></tr></tbody></table>
+<h3>Channel budget allocation (Q3 → Q4 shift)</h3>
+<div class="grid grid-2"><div><p class="txt txt-primary txt-semibold txt-md">Q3 (Jul-Sep)</p><div class="chart" style="height:260px;max-width:340px"><canvas id="chart5"></canvas></div></div><div><p class="txt txt-primary txt-semibold txt-md">Q4 (Oct-Dec)</p><div class="chart" style="height:260px;max-width:340px"><canvas id="chart6"></canvas></div></div></div>
+<p class="txt txt-tertiary txt-regular txt-small">Budget shifts from ASA/newspaper toward magazines and social as those channels prove activation quality. Newspaper share drops as we move from broad to care-path-specific stories.</p>
+<hr/>
+<h2>Measurement framework</h2>
+<p class="txt txt-secondary txt-regular txt-md">Every channel is measured on activation quality, not install volume. The core metric is cost per activated MAU — not CPI.</p>
+<table class="tbl striped"><thead><tr><th>Metric</th><th>Current</th><th>Q3 target</th><th>Q4 target</th><th>Why it matters</th></tr></thead><tbody><tr><td>Core MAU</td><td>2,083</td><td>5,000-6,000</td><td>10,000-19,000</td><td>Series A milestone (50K, 12-18mo). Q4 exit should show accelerating MoM growth</td></tr><tr><td>D14 activation (targeted)</td><td>15-25%</td><td>&gt;20% sustained</td><td>&gt;25%</td><td>Conversion rate on all intake. Magazine/social must hit this bar</td></tr><tr><td>CC invite → install</td><td>28%</td><td>50%+</td><td>60%+</td><td>The viral engine bottleneck. Deep links + skip-onboarding are prerequisites</td></tr><tr><td>CC multiplier</td><td>0.27x</td><td>0.5x+</td><td>1.0x+</td><td>Each patient brings X active CC viewers. Compounds with patient volume</td></tr><tr><td>Cost per activated MAU</td><td>~€20-25</td><td><€15</td><td><€12</td><td>The efficiency metric. CC multiplier is what bends this curve down</td></tr><tr><td>Social activation rate</td><td>N/A (not active)</td><td>&gt;12%</td><td>&gt;15%</td><td>Quality gate for social spend. Below 12% = pause and iterate</td></tr><tr><td>Magazine activation rate</td><td>N/A (not tested)</td><td>Baseline established</td><td>&gt;15%</td><td>Hypothesis: care-path magazines &gt; broad newspapers for activation</td></tr><tr><td>Patient M1 creation retention</td><td>28%</td><td>35%+</td><td>40%+</td><td>Patients must keep creating summaries for CC members to view them</td></tr></tbody></table>
+<aside class="callout callout-info">
+  <div class="callout-title">Quality gates</div>
+  <div class="callout-body">Every channel has a kill switch. If D14 activation drops below 12% on any paid channel for 2 consecutive weeks, pause spend and investigate. If magazine placements don't outperform newspaper baseline on activation, don't scale. If social activation stays below 10% after 8 weeks of testing, deprioritize and redirect budget.</div>
+</aside>
+<hr/>
+<h2>Execution timeline</h2>
+<h3>Q3: Build the engine (Jul-Sep 2026)</h3>
+<table class="tbl striped"><thead><tr><th>Month</th><th>Marketing</th><th>Product (prerequisites)</th><th>Partnerships</th></tr></thead><tbody><tr><td>July</td><td>Contact Tier 1 magazines (Reuma, MantelKRACHT, Hartbrug, Mantelzorgelijk). Draft first 2 advertorial stories. Set up Instagram + Facebook accounts. Plan first 4 social posts</td><td>Ship deep links for CC invites. Customer.io live with summary reminder flow. CC invite acceptance improvements shipping</td><td>Menzis + Geboortezorg scaling. Rotterdam hospital activation. &#x27;Prove it&#x27; deadline for partner volume</td></tr><tr><td>August</td><td>First magazine placement live. Social content launch (3-5 posts/week). First caretaker story video. Measure activation quality on all new channels</td><td>Progressive onboarding live (patient vs. caretaker path). Post-summary share prompt. Calendar auto-sync testing</td><td>Evaluate partner ROI. If below threshold, reallocate FTEs. If above, template for replication</td></tr><tr><td>September</td><td>Second round of magazine placements. Social content iteration based on engagement data. First UGC from community. Begin outreach to patient influencers</td><td>Caretaker-specific first-open experience. CC nudge flows in Customer.io. Re-engagement campaigns for 100K install base</td><td>If proven: add 1-2 new partner templates. If not: redirect resources to marketing/product</td></tr></tbody></table>
+<h3>Q4: Scale what works (Oct-Dec 2026)</h3>
+<table class="tbl striped"><thead><tr><th>Month</th><th>Marketing</th><th>Product support</th><th>Partnerships</th></tr></thead><tbody><tr><td>October</td><td>Scale proven magazine channels. Add Tier 2 (NFK, BVN, Parkinson). Increase social budget if activation holds. First influencer collaboration</td><td>Viral loop producing measurable k-factor. Product and marketing aligned on care-path messaging</td><td>3+ replicable partner templates. Ditto for Doctors evaluation</td></tr><tr><td>November</td><td>Full magazine rotation across 6-8 publications. UGC pipeline producing 2-3 stories/week. Social paid scaling if quality holds. Cross-promote magazine + social content</td><td>CC multiplier &gt;0.5x. Customer.io flows fully operational. Re-engagement producing measurable reactivation</td><td>Partner-sourced installs contributing meaningfully. Evaluate B2B for Q1 2027 planning</td></tr><tr><td>December</td><td>Full channel mix operating. Evaluate EOY metrics. Plan Q1 2027 based on proven channels. Document what worked and what didn&#x27;t</td><td>Growth engine assessment: is the loop compounding? Retention sustainable? Activation ceiling reached?</td><td>EOY partner portfolio review. International expansion readiness check</td></tr></tbody></table>
+<hr/>
+<h2>Scenario planning: the path to Series A</h2>
+<p class="txt txt-secondary txt-regular txt-md">50K MAU is the Series A milestone on a 12-18 month horizon (target: mid-2027). That means ~30% MoM sustained — aggressive but within the range of top-performing startups (vs. 57% MoM if it were 7 months). Q3/Q4 2026 builds the engine. H1 2027 is when it compounds.</p>
+<aside class="callout callout-info">
+  <div class="callout-title">The math changes with a longer runway</div>
+  <div class="callout-body">At 30% MoM from 2,083 today: ~5,600 by Dec 2026, ~25,000 by Apr 2027, ~50,000 by Jun 2027. At 20% MoM: ~50K by Oct 2027. The engine doesn't need to be at full speed by December — it needs to be demonstrably compounding so the Series A story is credible.</div>
+</aside>
+<div class="chart" style="height:280px"><canvas id="chart7"></canvas></div>
+<p class="txt txt-tertiary txt-regular txt-small">12-month projections through Jun 2027. Status quo plateaus ~9K. Narrow strategy reaches ~42K by mid-2027. Engine on hits 50K by spring 2027. Q3/Q4 2026 is the inflection period where the engine either starts compounding or doesn&#x27;t.</p>
+<table class="tbl striped"><thead><tr><th>Scenario</th><th>Key assumptions</th><th>Dec 2026</th><th>Series A (mid-2027)</th><th>Required MoM</th></tr></thead><tbody><tr><td>A. Status quo</td><td>No structural change. 70% retention, 10% activation, 0.27x CC multiplier</td><td>~4,700</td><td>~9,000</td><td><span class="pill pill-danger pill-active pill-sm">Misses target</span></td></tr><tr><td>B. Narrow strategy (our plan)</td><td>Fix CC funnel (50%+), activation 18%, retention 78%, magazines + social proving. 0.55x CC</td><td>~11,200</td><td>~42,500</td><td><span class="pill pill-info pill-active pill-sm">~25% MoM</span></td></tr><tr><td>C. Engine on</td><td>CC multiplier 1.0x, activation 22%, retention 82%, paid scaling, viral loop contributing</td><td>~19,200</td><td>50,000+</td><td><span class="pill pill-success pill-active pill-sm">~30% MoM</span></td></tr><tr><td>D. Full compound</td><td>1.4x CC, 25% activation, 85% retention. All levers firing. Viral installs dominating</td><td>~35,000</td><td>50,000+ (by Q1 &#x27;27)</td><td><span class="pill pill-success pill-active pill-sm">~35% MoM</span></td></tr></tbody></table>
+<p class="txt txt-secondary txt-regular txt-md">The Series A story requires demonstrating a compounding engine by Dec 2026, not hitting 50K by Dec 2026. Scenario B (11K by EOY, clear upward trajectory) is a credible fundraise if the growth rate is accelerating and the engine mechanics are proven. Scenario C (19K by EOY, 50K within reach) is the strong case.</p>
+<hr/>
+<h2>Key risks and mitigations</h2>
+<table class="tbl striped"><thead><tr><th>Risk</th><th>Impact</th><th>Mitigation</th><th>Owner</th></tr></thead><tbody><tr><td>Magazine channels don&#x27;t outperform newspapers on activation</td><td>Wasted Q3 budget on unproven channel</td><td>Test 1 placement before committing. Measure install-to-activation within 4 weeks. If below newspaper baseline, stop</td><td>Niek</td></tr><tr><td>Social content brings low-intent users (repeat of past)</td><td>Activation drops, CAC rises</td><td>Quality gate: pause social spend if D14 &lt; 12% for 2 weeks. Only scale when activation is proven. Different from past: product is much better now</td><td>Niek</td></tr><tr><td>Care circle viral loop doesn&#x27;t compound (k stays &lt; 0.5)</td><td>Growth remains linear. 50K becomes impossible</td><td>Deep links are the prerequisite. If CC invite → install stays below 40% by Sep, reassess engine choice. Consider web viewer (no install needed)</td><td>Olivier / Niek</td></tr><tr><td>Narrow targeting limits total addressable volume</td><td>We run out of high-intent audience</td><td>Patient association magazines reach millions (ReumaMagazine: 2M+, NFK: 900K+, Hartstichting: 1.7M). NL has 5.6M mantelzorgers. Volume is not the constraint at our scale</td><td>Niek</td></tr><tr><td>Customer.io still not live by Q3</td><td>No retention backbone. Re-engagement of 100K base impossible</td><td>Contract out CRM implementation (2-4 weeks, €8-15K). This is the single most behind prerequisite</td><td>Niek</td></tr><tr><td>Brand hire doesn&#x27;t materialize</td><td>No capacity for social content creation</td><td>Start with freelance content creator. 2-3 caretaker stories as proof of concept. Hire when content proves effective</td><td>Merlijn</td></tr></tbody></table>
+<hr/>
+<h2>What we stop doing</h2>
+<p class="txt txt-secondary txt-regular txt-md">Narrowing means saying no. These are the things we consciously stop or deprioritize to focus resources on the chosen strategy.</p>
+<table class="tbl striped"><thead><tr><th>Stop / Deprioritize</th><th>Why</th><th>Redirect to</th></tr></thead><tbody><tr><td>Generic newspaper ads (broad health angle)</td><td>3-8% activation. Brings low-intent users who churn. Volume without value</td><td>Care-path-specific advertorials in newspapers. Same channel, different story</td></tr><tr><td>Broad Meta/Google paid campaigns</td><td>Quality degraded as we pushed beyond high-intent core. Expensive at scale without CC multiplier</td><td>Only resume paid social if organic social content proves activation quality. Quality-gated</td></tr><tr><td>International expansion execution (Q2 KR)</td><td>Code Red: fix domestic engine first. Every hour on UK = hour not on CC/activation</td><td>Olivier focuses 100% on care circle size (O2-KR3). Resume UK in Q1 2027 if engine validated</td></tr><tr><td>Volume-based AI agent KR (15 FTE agents)</td><td>Reframe from quantity to impact. 15 agents means nothing if the growth model isn&#x27;t working</td><td>Agents that directly serve top KRs: activation experiments, retention flows, care circle measurement</td></tr><tr><td>New feature development outside activation/retention</td><td>Death zone complexity. Every new surface splits attention from fixing the core path</td><td>All product capacity goes to: CC invite flow, deep links, summary reminder, progressive onboarding</td></tr></tbody></table>
+<hr/>
+<h2>Next steps — this week</h2>
+<table class="tbl striped"><thead><tr><th>Action</th><th>Owner</th><th>Deadline</th></tr></thead><tbody><tr><td>Contact Tier 1 magazine publications for mediakit/pricing (ReumaMagazine, MantelKRACHT, Hartbrug, Mantelzorgelijk)</td><td>Niek</td><td>Week of Jun 2</td></tr><tr><td>Draft first caretaker advertorial story (oncology or cardiology angle)</td><td>Niek + Brand</td><td>Week of Jun 9</td></tr><tr><td>Set up Instagram + Facebook business accounts for Ditto</td><td>Brand hire / Niek</td><td>Week of Jun 9</td></tr><tr><td>Contract out Customer.io implementation (unblock the retention backbone)</td><td>Niek</td><td>Week of Jun 2</td></tr><tr><td>Ship deep link rework for CC invites (prerequisite for viral engine)</td><td>Wouter / Patryk</td><td>End of June</td></tr><tr><td>Run Mixpanel analysis: activation rate by care path / disease area</td><td>Niek (Porygon)</td><td>Week of Jun 2</td></tr><tr><td>Explore NFK koepel partnership for cross-organization reach (22 cancer orgs)</td><td>Niek / Bart</td><td>Week of Jun 16</td></tr></tbody></table>
+</main>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+  Chart.defaults.color = '#4b5260';
+  Chart.defaults.borderColor = 'rgba(0,0,0,0.06)';
+  new Chart(document.getElementById('chart1'), {"type": "line", "data": {"labels": ["Dec", "Jan", "Feb", "Mar", "Apr", "May"], "datasets": [{"label": "Total Core MAU", "data": [1002, 1140, 1200, 1460, 1752, 2083], "borderWidth": 2, "tension": 0.3, "fill": false}, {"label": "Summaries Created", "data": [1429, 1807, 1691, 2084, 2153, 2660], "borderWidth": 2, "tension": 0.3, "fill": false}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+new Chart(document.getElementById('chart2'), {"type": "bar", "data": {"labels": ["Dec", "Jan", "Feb", "Mar", "Apr", "May"], "datasets": [{"label": "Invites sent", "data": [487, 454, 343, 754, 1776, 1862]}, {"label": "Follow requests accepted", "data": [170, 151, 170, 263, 501, 717]}, {"label": "CC events opened (engagement)", "data": [95, 138, 169, 205, 245, 344]}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+new Chart(document.getElementById('chart3'), {"type": "bar", "data": {"labels": ["Install", "Register (37.5%)", "Appointment (6.9%)", "Recording (4.6%)", "Summary (3.8%)"], "datasets": [{"label": "Users", "data": [25753, 9665, 1780, 1173, 968]}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+new Chart(document.getElementById('chart4'), {"type": "bar", "data": {"labels": ["Dec", "Jan", "Feb", "Mar", "Apr", "May"], "datasets": [{"label": "Recording saved", "data": [836, 987, 952, 1100, 1436, 1570]}, {"label": "Manual appointment", "data": [317, 272, 653, 893, 1250, 1234]}, {"label": "Document scanned", "data": [394, 480, 382, 467, 452, 496]}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+new Chart(document.getElementById('chart5'), {"type": "doughnut", "data": {"labels": ["Apple Search Ads", "Newspaper advertorials", "Magazine advertorials (new)", "Social content (new)", "Customer.io / CRM", "Partnerships"], "datasets": [{"data": [35, 20, 15, 10, 10, 10]}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+new Chart(document.getElementById('chart6'), {"type": "doughnut", "data": {"labels": ["Apple Search Ads", "Newspaper advertorials", "Magazine advertorials", "Social / UGC content", "Customer.io / CRM", "Partnerships"], "datasets": [{"data": [20, 10, 25, 20, 10, 15]}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+new Chart(document.getElementById('chart7'), {"type": "line", "data": {"labels": ["Jun", "Sep", "Dec", "Mar '27", "Jun '27"], "datasets": [{"label": "Status quo (~16% MoM)", "data": [2443, 3400, 4700, 6500, 9000], "borderWidth": 2, "tension": 0.3, "fill": false}, {"label": "Narrow strategy (~25% MoM)", "data": [2934, 5700, 11200, 21800, 42500], "borderWidth": 2, "tension": 0.3, "fill": false}, {"label": "Engine on (~30% MoM)", "data": [3972, 8700, 19200, 42100, 50000], "borderWidth": 2, "tension": 0.3, "fill": false}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "bottom"}}}});
+});
+</script>
+</body>
+</html>

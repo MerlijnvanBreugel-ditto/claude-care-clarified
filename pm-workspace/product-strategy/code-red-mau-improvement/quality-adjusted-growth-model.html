@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quality-Adjusted Growth Model — Ditto Care</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --surface: #ffffff;
+    --border: #e4e8eb;
+    --border-strong: #cdd3d8;
+    --text: #1a1d1f;
+    --text-muted: #5a6268;
+    --text-dim: #8a929a;
+    --primary: #2e7a8c;
+    --primary-dark: #1f5966;
+    --primary-tint: #e8f2f4;
+    --positive: #18a47c;
+    --positive-tint: #e3f5ee;
+    --negative: #d94141;
+    --negative-tint: #fbe8e8;
+    --warning: #b7791f;
+    --warning-tint: #fdf5e4;
+    --hi: #5a2ca0;
+    --hi-tint: #f0ebfa;
+    --lo: #b7791f;
+    --lo-tint: #fdf5e4;
+    --mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 0; font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 32px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  h1 { margin: 0 0 4px 0; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+  .subtitle { color: var(--text-muted); font-size: 13px; }
+  .chip { display: inline-block; font-family: var(--mono); font-size: 11px; background: var(--primary-tint); color: var(--primary-dark); padding: 2px 8px; border-radius: 10px; }
+
+  button.reset-btn { background: var(--surface); border: 1px solid var(--border-strong); color: var(--text-muted); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  button.reset-btn:hover { background: var(--bg); color: var(--text); }
+
+  .insight-banner { background: #f0ebfa; border: 1px solid var(--hi); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--text); margin-top: 12px; line-height: 1.5; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 32px; display: grid; gap: 20px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .card h2 { margin: 0 0 4px 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+  .card .card-desc { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+
+  /* Segment tabs */
+  .seg-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .seg-tab { padding: 6px 16px; border-radius: 6px; border: 1.5px solid var(--border-strong); cursor: pointer; font-size: 12px; font-weight: 600; background: var(--bg); color: var(--text-muted); transition: all 0.15s; }
+  .seg-tab.active-hi { background: var(--hi-tint); border-color: var(--hi); color: var(--hi); }
+  .seg-tab.active-lo { background: var(--lo-tint); border-color: var(--lo); color: var(--lo); }
+
+  /* Sliders */
+  .slider-group { margin-bottom: 14px; }
+  .slider-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .slider-name { font-size: 13px; font-weight: 500; }
+  .slider-val { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--primary-dark); }
+  .slider-hint { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  input[type=range] { width: 100%; accent-color: var(--primary); height: 4px; }
+  input[type=range].hi { accent-color: var(--hi); }
+  input[type=range].lo { accent-color: var(--lo); }
+
+  /* Mix bar */
+  .mix-bar-wrap { margin: 16px 0; }
+  .mix-bar { height: 20px; border-radius: 4px; overflow: hidden; display: flex; }
+  .mix-hi { background: var(--hi); transition: width 0.2s; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; }
+  .mix-lo { background: var(--lo); flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; }
+  .mix-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* KPI grid */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
+  .kpi-val { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .kpi-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .kpi.hi .kpi-val { color: var(--hi); }
+  .kpi.lo .kpi-val { color: var(--lo); }
+  .kpi.total .kpi-val { color: var(--primary-dark); }
+  .kpi.blended .kpi-val { color: var(--positive); }
+
+  /* Scenario comparison */
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .scenario-card { border: 1.5px solid var(--border); border-radius: 8px; padding: 14px; background: var(--bg); }
+  .scenario-card.current { border-color: var(--primary); background: var(--primary-tint); }
+  .scenario-card.vol { border-color: var(--lo); background: var(--lo-tint); }
+  .scenario-card.qual { border-color: var(--hi); background: var(--hi-tint); }
+  .scenario-title { font-size: 12px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .scenario-mau { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin: 8px 0 4px; }
+  .scenario-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .scenario-delta { font-size: 13px; font-weight: 700; margin-top: 6px; }
+  .pos { color: var(--positive); }
+  .neg { color: var(--negative); }
+
+  /* Waterfall chart */
+  .waterfall { margin: 12px 0; }
+  .wf-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+  .wf-label { width: 180px; flex-shrink: 0; color: var(--text-muted); }
+  .wf-bar-wrap { flex: 1; background: var(--bg); border-radius: 3px; height: 18px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+  .wf-bar { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .wf-val { width: 60px; text-align: right; font-family: var(--mono); font-size: 12px; font-weight: 600; }
+
+  /* Two-col layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* Formula */
+  .formula-box { background: #f5f5f5; border-radius: 6px; padding: 14px 16px; font-family: var(--mono); font-size: 12px; line-height: 2; color: var(--text); }
+  .formula-box .comment { color: var(--text-dim); }
+
+  /* Sensitivity table */
+  table.sens { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.sens th { text-align: left; padding: 6px 8px; border-bottom: 2px solid var(--border-strong); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  table.sens td { padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  table.sens tr:last-child td { border-bottom: none; }
+  .sens-bar { display: inline-block; height: 8px; border-radius: 2px; vertical-align: middle; margin-left: 4px; }
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .tag-hi { background: var(--hi-tint); color: var(--hi); }
+  .tag-lo { background: var(--lo-tint); color: var(--lo); }
+  .tag-both { background: var(--primary-tint); color: var(--primary-dark); }
+
+  @media (max-width: 700px) {
+    .scenario-grid, .two-col { grid-template-columns: 1fr; }
+    main { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>Quality-Adjusted Growth Model <span class="chip">v3-quality</span></h1>
+      <div class="subtitle">Two-segment inflow: high-intent vs. low-intent users · Extends funnel-leverage-model v2</div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">Reset to baseline</button>
+  </div>
+  <div class="insight-banner">
+    <strong>The core question:</strong> Is it better to acquire <em>more</em> users at current quality, or <em>fewer</em> users at higher quality? This model lets you explore the tradeoff by splitting inflow into high-intent (cancer, pregnancy, chronic illness — appointment-ready) and low-intent (broad population — newsletter, NRC, general ads) segments, each with their own activation and retention rates. Compare three strategies: status quo, volume-up, and quality-shift.
+  </div>
+</header>
+
+<main>
+
+  <!-- KPI SUMMARY -->
+  <div class="card">
+    <h2>Current model output</h2>
+    <p class="card-desc">Steady-state MAU under current slider settings. Adjust sliders below to explore scenarios.</p>
+    <div class="kpi-grid">
+      <div class="kpi hi">
+        <div class="kpi-label">High-intent MAU</div>
+        <div class="kpi-val" id="kpi-hi-mau">—</div>
+        <div class="kpi-sub" id="kpi-hi-sub">—</div>
+      </div>
+      <div class="kpi lo">
+        <div class="kpi-label">Low-intent MAU</div>
+        <div class="kpi-val" id="kpi-lo-mau">—</div>
+        <div class="kpi-sub" id="kpi-lo-sub">—</div>
+      </div>
+      <div class="kpi total">
+        <div class="kpi-label">Total MAU</div>
+        <div class="kpi-val" id="kpi-total-mau">—</div>
+        <div class="kpi-sub" id="kpi-total-sub">—</div>
+      </div>
+      <div class="kpi blended">
+        <div class="kpi-label">Blended activation</div>
+        <div class="kpi-val" id="kpi-blend-act">—</div>
+        <div class="kpi-sub">reg-based D14</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Viral coefficient K</div>
+        <div class="kpi-val" id="kpi-k">—</div>
+        <div class="kpi-sub">needs &gt;1.0 to self-sustain</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">CC MAU (passive)</div>
+        <div class="kpi-val" id="kpi-cc-mau">—</div>
+        <div class="kpi-sub">non-activated viewers</div>
+      </div>
+    </div>
+
+    <!-- Inflow mix bar -->
+    <div class="mix-bar-wrap">
+      <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">INFLOW MIX</div>
+      <div class="mix-bar">
+        <div class="mix-hi" id="mix-hi-bar" style="width:20%">HI</div>
+        <div class="mix-lo" id="mix-lo-bar">LO</div>
+      </div>
+      <div class="mix-label">
+        <span id="mix-hi-label">High-intent: 20% (1,000/mo)</span>
+        <span id="mix-lo-label">Low-intent: 80% (4,000/mo)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO COMPARISON -->
+  <div class="card">
+    <h2>Strategy comparison</h2>
+    <p class="card-desc">Three strategies given current parameters. "Volume up" = +50% inflow, same mix. "Quality shift" = same total inflow, shift 20pp toward high-intent.</p>
+    <div class="scenario-grid">
+      <div class="scenario-card current">
+        <div class="scenario-title" style="color:var(--primary-dark)">Current</div>
+        <div class="scenario-mau" id="sc-current" style="color:var(--primary-dark)">—</div>
+        <div class="scenario-desc">Baseline settings as set by sliders</div>
+      </div>
+      <div class="scenario-card vol">
+        <div class="scenario-title" style="color:var(--lo)">+ Volume (+50% inflow)</div>
+        <div class="scenario-mau" id="sc-vol" style="color:var(--lo)">—</div>
+        <div class="scenario-delta" id="sc-vol-delta">—</div>
+        <div class="scenario-desc">More of the same mix. More low-intent users unless acquisition targeting changes.</div>
+      </div>
+      <div class="scenario-card qual">
+        <div class="scenario-title" style="color:var(--hi)">Quality shift (+20pp hi-intent)</div>
+        <div class="scenario-mau" id="sc-qual" style="color:var(--hi)">—</div>
+        <div class="scenario-delta" id="sc-qual-delta">—</div>
+        <div class="scenario-desc">Same total inflow, shift mix 20pp toward high-intent. Lower volume, better conversion.</div>
+      </div>
+    </div>
+
+    <!-- MAU waterfall -->
+    <div class="waterfall" style="margin-top:20px;">
+      <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;">MAU BREAKDOWN</div>
+      <div class="wf-row">
+        <div class="wf-label">High-intent activated</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" id="wf-hi" style="background:var(--hi);width:0%"></div></div>
+        <div class="wf-val" id="wf-hi-val">—</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-label">Low-intent activated</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" id="wf-lo" style="background:var(--lo);width:0%"></div></div>
+        <div class="wf-val" id="wf-lo-val">—</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-label">Care Circle passive</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" id="wf-cc" style="background:var(--primary);opacity:0.5;width:0%"></div></div>
+        <div class="wf-val" id="wf-cc-val">—</div>
+      </div>
+      <div class="wf-row" style="font-weight:700;">
+        <div class="wf-label">Total MAU</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" id="wf-total" style="background:var(--primary-dark);width:0%"></div></div>
+        <div class="wf-val" id="wf-total-val">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDERS -->
+  <div class="two-col">
+
+    <!-- INFLOW & MIX -->
+    <div class="card">
+      <h2>Inflow</h2>
+      <p class="card-desc">Total monthly installs and how they split between segments.</p>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Total monthly installs</span>
+          <span class="slider-val" id="val-inflow">5,000</span>
+        </div>
+        <input type="range" id="sl-inflow" min="1000" max="30000" step="500" value="5000" oninput="update()">
+        <div class="slider-hint">Current: ~7-10K raw installs. Model uses registered users as inflow base (×reg rate).</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name" style="color:var(--hi)">% High-intent</span>
+          <span class="slider-val" id="val-hi-pct" style="color:var(--hi)">20%</span>
+        </div>
+        <input type="range" class="hi" id="sl-hi-pct" min="0" max="100" step="5" value="20" oninput="update()">
+        <div class="slider-hint">High-intent = cancer, pregnancy, chronic illness — appointment-ready, referred via targeted channels or partners.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Install → Registration</span>
+          <span class="slider-val" id="val-reg-rate">35%</span>
+        </div>
+        <input type="range" id="sl-reg-rate" min="0.05" max="0.80" step="0.01" value="0.35" oninput="update()">
+        <div class="slider-hint">Shared across segments. Currently ~45-55%, improving.</div>
+      </div>
+    </div>
+
+    <!-- HIGH-INTENT SEGMENT -->
+    <div class="card" style="border-color: var(--hi);">
+      <h2 style="color:var(--hi)">High-intent segment</h2>
+      <p class="card-desc">Cancer, pregnancy, chronic illness — users with upcoming appointments and real motivation to record.</p>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Activation rate (D14)</span>
+          <span class="slider-val" id="val-hi-act" style="color:var(--hi)">35%</span>
+        </div>
+        <input type="range" class="hi" id="sl-hi-act" min="0.05" max="0.80" step="0.01" value="0.35" oninput="update()">
+        <div class="slider-hint">Hypothesis: appointment-ready users activate at 2-3× the blended rate. Validate with Mixpanel cohort split.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">M1 retention (r₁)</span>
+          <span class="slider-val" id="val-hi-r1" style="color:var(--hi)">50%</span>
+        </div>
+        <input type="range" class="hi" id="sl-hi-r1" min="0.10" max="0.90" step="0.01" value="0.50" oninput="update()">
+        <div class="slider-hint">% who create a second summary next month. Blended rate is 28%; high-intent likely higher.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">M2+ stable retention (r₂)</span>
+          <span class="slider-val" id="val-hi-r2" style="color:var(--hi)">70%</span>
+        </div>
+        <input type="range" class="hi" id="sl-hi-r2" min="0.10" max="0.95" step="0.01" value="0.70" oninput="update()">
+        <div class="slider-hint">Monthly retention after month 1 stabilizes. Blended observed ~66%.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Invite rate</span>
+          <span class="slider-val" id="val-hi-inv" style="color:var(--hi)">35%</span>
+        </div>
+        <input type="range" class="hi" id="sl-hi-inv" min="0.00" max="0.80" step="0.01" value="0.35" oninput="update()">
+        <div class="slider-hint">% who send ≥1 care circle invite. High-intent patients likely more motivated to share.</div>
+      </div>
+    </div>
+
+    <!-- LOW-INTENT SEGMENT -->
+    <div class="card" style="border-color: var(--lo);">
+      <h2 style="color:var(--lo)">Low-intent segment</h2>
+      <p class="card-desc">Broad population from NRC newsletter, DPG newspaper ads, general keyword search — no imminent appointment.</p>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Activation rate (D14)</span>
+          <span class="slider-val" id="val-lo-act" style="color:var(--lo)">10%</span>
+        </div>
+        <input type="range" class="lo" id="sl-lo-act" min="0.02" max="0.50" step="0.01" value="0.10" oninput="update()">
+        <div class="slider-hint">Broad newsletter/NRC cohorts activate much worse. The April paradox: 10,594 installs → only 23% reg→created.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">M1 retention (r₁)</span>
+          <span class="slider-val" id="val-lo-r1" style="color:var(--lo)">20%</span>
+        </div>
+        <input type="range" class="lo" id="sl-lo-r1" min="0.05" max="0.70" step="0.01" value="0.20" oninput="update()">
+        <div class="slider-hint">Low-intent users who do activate are likely to churn faster — no anchor appointment to return for.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">M2+ stable retention (r₂)</span>
+          <span class="slider-val" id="val-lo-r2" style="color:var(--lo)">55%</span>
+        </div>
+        <input type="range" class="lo" id="sl-lo-r2" min="0.05" max="0.90" step="0.01" value="0.55" oninput="update()">
+        <div class="slider-hint">The few low-intent users who stick past month 1 may retain similarly to others.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Invite rate</span>
+          <span class="slider-val" id="val-lo-inv" style="color:var(--lo)">15%</span>
+        </div>
+        <input type="range" class="lo" id="sl-lo-inv" min="0.00" max="0.60" step="0.01" value="0.15" oninput="update()">
+        <div class="slider-hint">Lower motivation to share — haven't had the core product moment yet.</div>
+      </div>
+    </div>
+
+    <!-- SHARED VIRAL PARAMS -->
+    <div class="card">
+      <h2>Viral loop (shared)</h2>
+      <p class="card-desc">Parameters that apply to all CC invites regardless of segment.</p>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Invites per inviter</span>
+          <span class="slider-val" id="val-inv-per">1.5</span>
+        </div>
+        <input type="range" id="sl-inv-per" min="1.0" max="5.0" step="0.1" value="1.5" oninput="update()">
+        <div class="slider-hint">Observed ~1.4-1.48 added per patient. Grow this by prompting for 2nd invite after first summary.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Invite → Install conversion</span>
+          <span class="slider-val" id="val-inv-install">28%</span>
+        </div>
+        <input type="range" id="sl-inv-install" min="0.05" max="0.80" step="0.01" value="0.28" oninput="update()">
+        <div class="slider-hint">Currently 28% (down from 38-49% at lower volumes). Deep links could push to 50-70%.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Invited user activation rate</span>
+          <span class="slider-val" id="val-inv-act">40%</span>
+        </div>
+        <input type="range" id="sl-inv-act" min="0.05" max="0.80" step="0.01" value="0.40" oninput="update()">
+        <div class="slider-hint">CC invitees activate as passive viewers (summary_viewed). Currently ~100% once installed.</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name">Passive MAU multiplier</span>
+          <span class="slider-val" id="val-passive">0.36</span>
+        </div>
+        <input type="range" id="sl-passive" min="0.0" max="1.5" step="0.01" value="0.36" oninput="update()">
+        <div class="slider-hint">CC viewers per activated user. Observed 447 passive / 1,230 activated = 0.36.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SENSITIVITY TABLE -->
+  <div class="card">
+    <h2>Lever sensitivity (MAU impact of +10% on each parameter)</h2>
+    <p class="card-desc">Which slider moves the needle most from current position? Recomputed live.</p>
+    <table class="sens">
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Segment</th>
+          <th>Current value</th>
+          <th>+10% scenario MAU</th>
+          <th>Δ MAU</th>
+          <th>Impact bar</th>
+        </tr>
+      </thead>
+      <tbody id="sens-tbody">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FORMULA -->
+  <div class="card">
+    <h2>Model formula</h2>
+    <div class="formula-box">
+      <span class="comment">// Two-segment decomposition (v3-quality)</span><br>
+      MAU<sub>total</sub> = MAU<sub>hi</sub> + MAU<sub>lo</sub> + MAU<sub>CC-passive</sub><br><br>
+
+      <span class="comment">// Per-segment steady-state (simplified two-tier retention)</span><br>
+      MAU<sub>seg</sub> = C<sub>seg</sub> × (1 + r₁<sub>seg</sub> / (1 − r₂<sub>seg</sub>))<br>
+      C<sub>seg</sub> = Inflow × pct<sub>seg</sub> × P(reg) × act<sub>seg</sub> × 1/(1 − K)<br><br>
+
+      <span class="comment">// Viral coefficient K (blended across segments)</span><br>
+      K = (invite<sub>hi</sub> × C<sub>hi</sub> + invite<sub>lo</sub> × C<sub>lo</sub>) / (C<sub>hi</sub> + C<sub>lo</sub>)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;× invites_per_inviter × invite_to_install × invited_act_rate<br><br>
+
+      <span class="comment">// Care Circle passive viewers</span><br>
+      MAU<sub>CC-passive</sub> = (MAU<sub>hi</sub> + MAU<sub>lo</sub>) × passive_multiplier<br><br>
+
+      <span class="comment">// Lifecycle multiplier L (two-tier retention)</span><br>
+      L<sub>seg</sub> = 1 + r₁<sub>seg</sub> / (1 − r₂<sub>seg</sub>)
+    </div>
+
+    <div style="margin-top:12px; font-size:12px; color:var(--text-muted); line-height:1.6;">
+      <strong>Known limitations:</strong> Steady-state only (no transient dynamics). Segments share the same viral loop parameters (K is blended). Reactivation not modeled — reactivated users are not distinguished by segment. Life Moment mix (cancer vs. neuro vs. cardiac) is collapsed into a single "high-intent" bucket. For per-moment splits, extend C_seg to N sub-segments and use per-moment appointment frequency data.
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ========== DEFAULTS ==========
+const DEFAULTS = {
+  inflow: 5000,
+  hiPct: 20,
+  regRate: 0.35,
+  hiAct: 0.35,
+  hiR1: 0.50,
+  hiR2: 0.70,
+  hiInv: 0.35,
+  loAct: 0.10,
+  loR1: 0.20,
+  loR2: 0.55,
+  loInv: 0.15,
+  invPer: 1.5,
+  invInstall: 0.28,
+  invAct: 0.40,
+  passive: 0.36,
+};
+
+function getVal(id) { return parseFloat(document.getElementById(id).value); }
+
+function fmt(n) {
+  if (n >= 1000) return Math.round(n).toLocaleString('en');
+  return Math.round(n).toString();
+}
+function fmtPct(v) { return Math.round(v * 100) + '%'; }
+function fmtDec1(v) { return v.toFixed(1); }
+function fmtDec2(v) { return v.toFixed(2); }
+
+// MAU for one segment given C_hi, C_lo, r1, r2 and the computed K
+function segMAU(C, r1, r2) {
+  if (r2 >= 1) r2 = 0.999;
+  const L = 1 + r1 / (1 - r2);
+  return C * L;
+}
+
+// Compute K (blended)
+function computeK(C_hi, C_lo, invRateHi, invRateLo, invPer, invInstall, invAct) {
+  const C_total = C_hi + C_lo;
+  if (C_total <= 0) return 0;
+  const blendedInvRate = (invRateHi * C_hi + invRateLo * C_lo) / C_total;
+  return blendedInvRate * invPer * invInstall * invAct;
+}
+
+function computeAll(params) {
+  const {inflow, hiPct, regRate, hiAct, hiR1, hiR2, hiInv, loAct, loR1, loR2, loInv, invPer, invInstall, invAct, passive} = params;
+  const loPct = (100 - hiPct) / 100;
+  const hiPctF = hiPct / 100;
+
+  const inflow_hi = inflow * hiPctF;
+  const inflow_lo = inflow * loPct;
+
+  // Need to iterate K because C depends on K (viral loop adds back-pressure)
+  let K = 0;
+  for (let i = 0; i < 20; i++) {
+    const C_hi = inflow_hi * regRate * hiAct / Math.max(1 - K, 0.01);
+    const C_lo = inflow_lo * regRate * loAct / Math.max(1 - K, 0.01);
+    K = computeK(C_hi, C_lo, hiInv, loInv, invPer, invInstall, invAct);
+    if (K >= 1) { K = 0.99; break; }
+  }
+
+  const denom = Math.max(1 - K, 0.01);
+  const C_hi = inflow_hi * regRate * hiAct / denom;
+  const C_lo = inflow_lo * regRate * loAct / denom;
+
+  const mau_hi = segMAU(C_hi, hiR1, hiR2);
+  const mau_lo = segMAU(C_lo, loR1, loR2);
+  const mau_activated = mau_hi + mau_lo;
+  const mau_cc = mau_activated * passive;
+  const mau_total = mau_activated + mau_cc;
+
+  const blendedAct = (C_hi + C_lo) / (inflow * regRate);
+
+  return { mau_hi, mau_lo, mau_activated, mau_cc, mau_total, K, blendedAct, C_hi, C_lo };
+}
+
+function getCurrentParams() {
+  return {
+    inflow: getVal('sl-inflow'),
+    hiPct: getVal('sl-hi-pct'),
+    regRate: getVal('sl-reg-rate'),
+    hiAct: getVal('sl-hi-act'),
+    hiR1: getVal('sl-hi-r1'),
+    hiR2: getVal('sl-hi-r2'),
+    hiInv: getVal('sl-hi-inv'),
+    loAct: getVal('sl-lo-act'),
+    loR1: getVal('sl-lo-r1'),
+    loR2: getVal('sl-lo-r2'),
+    loInv: getVal('sl-lo-inv'),
+    invPer: getVal('sl-inv-per'),
+    invInstall: getVal('sl-inv-install'),
+    invAct: getVal('sl-inv-act'),
+    passive: getVal('sl-passive'),
+  };
+}
+
+function updateSliderLabel(id, rawVal) {
+  const pct = ['sl-reg-rate','sl-hi-act','sl-hi-r1','sl-hi-r2','sl-hi-inv','sl-lo-act','sl-lo-r1','sl-lo-r2','sl-lo-inv','sl-inv-install','sl-inv-act'];
+  const dec1 = ['sl-inv-per'];
+  const dec2 = ['sl-passive'];
+  const pctInt = ['sl-hi-pct'];
+  if (pct.includes(id)) return fmtPct(rawVal);
+  if (dec1.includes(id)) return fmtDec1(rawVal);
+  if (dec2.includes(id)) return fmtDec2(rawVal);
+  if (pctInt.includes(id)) return Math.round(rawVal) + '%';
+  return fmt(rawVal);
+}
+
+function update() {
+  const p = getCurrentParams();
+  const r = computeAll(p);
+
+  // Labels
+  const sliderMap = {
+    'sl-inflow': 'val-inflow',
+    'sl-hi-pct': 'val-hi-pct',
+    'sl-reg-rate': 'val-reg-rate',
+    'sl-hi-act': 'val-hi-act',
+    'sl-hi-r1': 'val-hi-r1',
+    'sl-hi-r2': 'val-hi-r2',
+    'sl-hi-inv': 'val-hi-inv',
+    'sl-lo-act': 'val-lo-act',
+    'sl-lo-r1': 'val-lo-r1',
+    'sl-lo-r2': 'val-lo-r2',
+    'sl-lo-inv': 'val-lo-inv',
+    'sl-inv-per': 'val-inv-per',
+    'sl-inv-install': 'val-inv-install',
+    'sl-inv-act': 'val-inv-act',
+    'sl-passive': 'val-passive',
+  };
+  for (const [slId, valId] of Object.entries(sliderMap)) {
+    const el = document.getElementById(valId);
+    if (el) el.textContent = updateSliderLabel(slId, getVal(slId));
+  }
+
+  // KPIs
+  document.getElementById('kpi-hi-mau').textContent = fmt(r.mau_hi);
+  document.getElementById('kpi-hi-sub').textContent = fmt(p.inflow * p.hiPct/100) + ' installs/mo → ' + fmtPct(p.hiAct) + ' act';
+  document.getElementById('kpi-lo-mau').textContent = fmt(r.mau_lo);
+  document.getElementById('kpi-lo-sub').textContent = fmt(p.inflow * (100-p.hiPct)/100) + ' installs/mo → ' + fmtPct(p.loAct) + ' act';
+  document.getElementById('kpi-total-mau').textContent = fmt(r.mau_total);
+  document.getElementById('kpi-total-sub').textContent = 'activated + CC passive';
+  document.getElementById('kpi-blend-act').textContent = fmtPct(r.blendedAct);
+  document.getElementById('kpi-k').textContent = r.K.toFixed(3);
+  document.getElementById('kpi-cc-mau').textContent = fmt(r.mau_cc);
+
+  // Mix bar
+  const hiWidth = Math.round(p.hiPct);
+  document.getElementById('mix-hi-bar').style.width = hiWidth + '%';
+  document.getElementById('mix-hi-bar').textContent = hiWidth > 10 ? 'HI' : '';
+  document.getElementById('mix-hi-label').textContent = `High-intent: ${hiWidth}% (${fmt(p.inflow * p.hiPct/100)}/mo)`;
+  document.getElementById('mix-lo-label').textContent = `Low-intent: ${100-hiWidth}% (${fmt(p.inflow * (100-p.hiPct)/100)}/mo)`;
+
+  // Scenarios
+  const sc_current = r.mau_total;
+
+  const p_vol = {...p, inflow: p.inflow * 1.5};
+  const r_vol = computeAll(p_vol);
+
+  const newHiPct = Math.min(100, p.hiPct + 20);
+  const p_qual = {...p, hiPct: newHiPct};
+  const r_qual = computeAll(p_qual);
+
+  document.getElementById('sc-current').textContent = fmt(sc_current);
+  document.getElementById('sc-vol').textContent = fmt(r_vol.mau_total);
+  document.getElementById('sc-qual').textContent = fmt(r_qual.mau_total);
+
+  const volDelta = r_vol.mau_total - sc_current;
+  const qualDelta = r_qual.mau_total - sc_current;
+  const scVolDelta = document.getElementById('sc-vol-delta');
+  scVolDelta.textContent = (volDelta >= 0 ? '+' : '') + fmt(volDelta) + ' MAU';
+  scVolDelta.className = 'scenario-delta ' + (volDelta >= 0 ? 'pos' : 'neg');
+  const scQualDelta = document.getElementById('sc-qual-delta');
+  scQualDelta.textContent = (qualDelta >= 0 ? '+' : '') + fmt(qualDelta) + ' MAU';
+  scQualDelta.className = 'scenario-delta ' + (qualDelta >= 0 ? 'pos' : 'neg');
+
+  // Waterfall bars (normalize to total)
+  const maxBar = r.mau_total;
+  const bars = [
+    { id: 'wf-hi', val: r.mau_hi },
+    { id: 'wf-lo', val: r.mau_lo },
+    { id: 'wf-cc', val: r.mau_cc },
+    { id: 'wf-total', val: r.mau_total },
+  ];
+  const wfVals = ['wf-hi-val', 'wf-lo-val', 'wf-cc-val', 'wf-total-val'];
+  bars.forEach((b, i) => {
+    document.getElementById(b.id).style.width = (maxBar > 0 ? (b.val / maxBar * 100) : 0) + '%';
+    document.getElementById(wfVals[i]).textContent = fmt(b.val);
+  });
+
+  // Sensitivity table
+  const SENS_PARAMS = [
+    { key: 'hiAct', label: 'High-intent activation', seg: 'hi', slId: 'sl-hi-act' },
+    { key: 'loAct', label: 'Low-intent activation', seg: 'lo', slId: 'sl-lo-act' },
+    { key: 'hiR1', label: 'High-intent M1 retention', seg: 'hi', slId: 'sl-hi-r1' },
+    { key: 'loR1', label: 'Low-intent M1 retention', seg: 'lo', slId: 'sl-lo-r1' },
+    { key: 'invInstall', label: 'Invite → Install', seg: 'both', slId: 'sl-inv-install' },
+    { key: 'hiInv', label: 'High-intent invite rate', seg: 'hi', slId: 'sl-hi-inv' },
+    { key: 'hiPct', label: 'High-intent mix %', seg: 'hi', slId: 'sl-hi-pct' },
+    { key: 'inflow', label: 'Total inflow', seg: 'both', slId: 'sl-inflow' },
+    { key: 'hiR2', label: 'High-intent M2+ retention', seg: 'hi', slId: 'sl-hi-r2' },
+    { key: 'loR2', label: 'Low-intent M2+ retention', seg: 'lo', slId: 'sl-lo-r2' },
+  ];
+
+  const rows = SENS_PARAMS.map(sp => {
+    const curVal = p[sp.key];
+    const lifted = {...p, [sp.key]: curVal * 1.10};
+    const liftedMAU = computeAll(lifted).mau_total;
+    return { ...sp, curVal, delta: liftedMAU - r.mau_total };
+  });
+  rows.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
+
+  const maxDelta = Math.max(...rows.map(r => Math.abs(r.delta)), 1);
+  const tbody = document.getElementById('sens-tbody');
+  tbody.innerHTML = rows.map(row => {
+    const barW = Math.round(Math.abs(row.delta) / maxDelta * 100);
+    const barColor = row.delta >= 0 ? 'var(--positive)' : 'var(--negative)';
+    const tagCls = row.seg === 'hi' ? 'tag-hi' : row.seg === 'lo' ? 'tag-lo' : 'tag-both';
+    const tagLabel = row.seg === 'hi' ? 'High' : row.seg === 'lo' ? 'Low' : 'Both';
+    let curDisplay = row.key === 'inflow' ? fmt(row.curVal) : row.key === 'hiPct' ? Math.round(row.curVal)+'%' : row.key === 'invPer' ? row.curVal.toFixed(1) : fmtPct(row.curVal);
+    return `<tr>
+      <td>${row.label}</td>
+      <td><span class="tag ${tagCls}">${tagLabel}</span></td>
+      <td style="font-family:var(--mono)">${curDisplay}</td>
+      <td style="font-family:var(--mono)">${fmt(r.mau_total + row.delta)}</td>
+      <td style="font-family:var(--mono);font-weight:700;color:${row.delta>=0?'var(--positive)':'var(--negative)'}">${row.delta>=0?'+':''}${fmt(row.delta)}</td>
+      <td><span class="sens-bar" style="width:${barW}px;background:${barColor}"></span></td>
+    </tr>`;
+  }).join('');
+}
+
+function resetAll() {
+  for (const [key, val] of Object.entries(DEFAULTS)) {
+    const slId = 'sl-' + key.replace(/([A-Z])/g, '-$1').toLowerCase();
+    const el = document.getElementById(slId);
+    if (el) el.value = val;
+  }
+  update();
+}
+
+// Init
+update();
+</script>
+</body>
+</html>

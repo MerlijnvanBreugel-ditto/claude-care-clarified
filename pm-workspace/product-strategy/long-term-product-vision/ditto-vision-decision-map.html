@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ditto · Vision Decision Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f5f7; --card:#fff; --border:#e6e6ea; --border-soft:#eeeef1;
+    --ink:#1d1d1f; --body:#4b4b52; --muted:#86868b; --faint:#aeaeb4;
+    --primary:#1d1d1f;
+    --blue:#0a84ff; --blue-deep:#0060df; --red:#e5484d; --red-deep:#c4302b; --pos:#1e9e57;
+    --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 20px rgba(16,24,40,.05);
+    --shadow-pop:0 10px 38px rgba(16,24,40,.16);
+    --r:18px;
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  body{ margin:0; min-height:100vh; padding-bottom:72px;
+    background:linear-gradient(180deg,#fbfbfd 0%, #f5f5f7 100%); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",system-ui,sans-serif; }
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 28px; }
+  header{ padding:56px 0 4px; }
+  .kicker{ display:flex; align-items:center; gap:9px; font-size:12px; font-weight:600; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:18px; }
+  .kicker .pip{ width:7px; height:7px; border-radius:50%; background:var(--blue); }
+  h1{ font-size:42px; line-height:1.08; margin:0 0 14px; font-weight:600; letter-spacing:-.022em; }
+  .lede{ max-width:830px; font-size:18px; line-height:1.58; color:var(--body); margin:0; }
+  .lede strong{ color:var(--ink); font-weight:600; }
+  .lede .b{ color:var(--blue-deep); font-weight:600; } .lede .rd{ color:var(--red-deep); font-weight:600; }
+
+  .controls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:30px 0 22px; }
+  .switch{ display:inline-flex; align-items:center; gap:10px; cursor:pointer; user-select:none; background:var(--card);
+    border:1px solid var(--border); border-radius:12px; padding:9px 14px; font-size:14px; font-weight:500; color:var(--ink); box-shadow:var(--shadow); transition:all .18s; }
+  .switch:hover{ border-color:#d9d9df; }
+  .track{ width:38px; height:22px; border-radius:999px; background:#e3e3e8; position:relative; transition:background .2s; flex:none; }
+  .track .thumb{ position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.18); transition:transform .2s; }
+  .switch.on .track{ background:var(--primary); } .switch.on .track .thumb{ transform:translateX(16px); }
+  .hint{ font-size:13.5px; color:var(--muted); }
+
+  .grid{ display:grid; grid-template-columns:1.5fr 1fr; gap:20px; align-items:start; }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); }
+  .card-pad{ padding:18px 20px 14px; }
+  .card-label{ font-size:12px; font-weight:600; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; margin-bottom:6px; }
+  svg{ display:block; width:100%; height:auto; overflow:visible; }
+
+  .leg{ padding:8px; }
+  .leg-item{ cursor:pointer; border-radius:13px; padding:12px 13px; transition:all .16s; border:1px solid transparent; }
+  .leg-item:hover{ background:#fafafb; }
+  .leg-on{ background:#fafafb; border-color:var(--border-soft); } .leg-off{ opacity:.4; }
+  .leg-head{ display:flex; align-items:center; gap:10px; }
+  .leg-dot{ width:11px; height:11px; border-radius:4px; flex:none; }
+  .leg-num{ font-size:12px; color:var(--faint); font-weight:600; font-variant-numeric:tabular-nums; }
+  .leg-name{ font-size:15px; font-weight:600; letter-spacing:-.01em; }
+  .leg-net{ margin-left:auto; font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .leg-tag{ font-size:13px; color:var(--muted); margin:3px 0 0 21px; }
+  .vbar{ height:6px; border-radius:999px; margin:9px 0 0 21px; background:#eef0f2; display:flex; overflow:hidden; }
+  .vbar .v{ background:var(--blue); } .vbar .c{ background:var(--red); margin-left:auto; }
+  .leg-stats{ margin:7px 0 0 21px; font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+
+  .note{ margin-top:22px; padding:22px 24px; }
+  .note .card-label{ margin-bottom:8px; }
+  .note p{ margin:0; font-size:15.5px; line-height:1.62; color:var(--body); }
+  .note strong{ color:var(--ink); font-weight:600; }
+  footer{ max-width:1140px; margin:24px auto 0; padding:0 28px; font-size:13px; color:var(--faint); line-height:1.55; }
+  footer code{ font-family:"SF Mono",ui-monospace,Menlo,monospace; font-size:12px; background:#ececef; padding:1px 5px; border-radius:5px; color:var(--body); }
+
+  #tip{ position:fixed; pointer-events:none; opacity:0; transform:translateY(4px); transition:opacity .14s, transform .14s; z-index:60;
+    background:rgba(255,255,255,.86); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border:1px solid var(--border); border-radius:14px; padding:13px 15px; max-width:300px; box-shadow:var(--shadow-pop); }
+  #tip .tt-name{ font-weight:600; font-size:14.5px; letter-spacing:-.01em; margin-bottom:9px; }
+  #tip .grp{ font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin:8px 0 3px; }
+  #tip .grp.bl{ color:var(--blue-deep); } #tip .grp.rd{ color:var(--red-deep); }
+  #tip .tt-row{ font-size:12.5px; color:var(--body); display:flex; justify-content:space-between; gap:18px; padding:1.5px 0; font-variant-numeric:tabular-nums; }
+  #tip .tt-row b{ font-weight:600; color:var(--ink); }
+  @media(max-width:920px){ .grid{ grid-template-columns:1fr; } h1{ font-size:34px; } }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="kicker"><span class="pip"></span> Ditto · Product Vision · Decision Map</div>
+  <h1>Where each vision sits — value above, challenges below.</h1>
+  <p class="lede">
+    A vision's shape is read by balance, not size. The <span class="b">blue upper half</span> is what is good —
+    <span class="b">company value</span> (monetisation, excitement) and <span class="b">user value</span> (agency,
+    connection, convenience). The <span class="rd">red lower half</span> is what is hard — <span class="rd">competition</span>
+    (commoditisation, incumbent reach) and <span class="rd">context</span> (regulation, healthcare dependency). A
+    top-heavy blue shape is a winner; one that sinks into the red is fighting gravity. Hover the ghost outline for
+    today's product.
+  </p>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="switch on" id="t-current" onclick="toggleCurrent()"><span class="track"><span class="thumb"></span></span> Today's product</div>
+    <div class="switch on" id="t-fill" onclick="toggleFill()"><span class="track"><span class="thumb"></span></span> Fill shapes</div>
+    <span class="hint">Tap a vision to mute · hover a row to isolate</span>
+  </div>
+
+  <div class="grid">
+    <div class="card card-pad">
+      <div class="card-label">The radial — value vs. challenge</div>
+      <svg id="plot" viewBox="0 0 880 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Radial vision map"></svg>
+    </div>
+    <div class="card leg" id="legend"></div>
+  </div>
+
+  <div class="card note">
+    <div class="card-label">How to read it</div>
+    <p>
+      The <strong>net</strong> (blue value minus red challenge) is a crude scalar — the shape matters more. On these
+      draft scores, <strong>Social (2)</strong> and <strong>Coordination (3)</strong> sit cleanest: real value, light
+      red. <strong>Trusted Health Assistant (5)</strong> has the largest blue reach and the deepest red dip — regulation
+      pulls it down hard; the prize and the trap in one shape. <strong>Care Companion (1)</strong> is dragged by
+      commoditisation. <strong>Patient-Owned Record (4)</strong> is the only net-negative — thin value, heavy dependency —
+      which is why it reads as substrate, not a destination. And today's product (ghost) is shallow on top and spiked
+      into commoditisation: useful, but exposed.
+    </p>
+  </div>
+</div>
+
+<footer>
+  Scores are research-informed gut (sources 11–14), 1–5 per axis, for recalibration at founder alignment — not measured
+  fact. Edit the <code>VISIONS</code> / <code>AXES</code> blocks at the top of the script and the map redraws. Positive
+  axes are scored so higher = better; challenge axes so higher = more of that problem.
+</footer>
+
+<div id="tip"></div>
+
+<script>
+/* ===== EDITABLE — axes (angle in degrees, 0=top, clockwise) + scores 1–5 ===== */
+const AXES = [
+  // TOP · BLUE · positive (higher = better)
+  { key:'convenience',  label:'Convenience',  angle:0,   side:'pos', cluster:'User value' },
+  { key:'monetisation', label:'Monetisation', angle:40,  side:'pos', cluster:'Company value' },
+  { key:'excitement',   label:'Excitement',   angle:80,  side:'pos', cluster:'Company value' },
+  // BOTTOM · RED · challenges (higher = more of the problem)
+  { key:'commoditisation', label:'Commoditisation', angle:100, side:'neg', cluster:'Competition' },
+  { key:'incumbent',       label:'Incumbent reach', angle:153, side:'neg', cluster:'Competition' },
+  { key:'regulation',      label:'Regulation',      angle:207, side:'neg', cluster:'Context' },
+  { key:'dependency',      label:'Healthcare dependency', angle:260, side:'neg', cluster:'Context' },
+  // back to top · BLUE · positive
+  { key:'connection',   label:'Connection',   angle:280, side:'pos', cluster:'User value' },
+  { key:'agency',       label:'Agency',       angle:320, side:'pos', cluster:'User value' },
+];
+const CLUSTERS = [
+  { name:'USER VALUE',    at:338, side:'pos' },
+  { name:'COMPANY VALUE', at:60,  side:'pos' },
+  { name:'COMPETITION',   at:126, side:'neg' },
+  { name:'CONTEXT',       at:233, side:'neg' },
+];
+const VISIONS = [
+  { id:1, name:'Care Companion', tag:'Understand the journey', color:'#e08a3c', s:{
+      convenience:4, monetisation:3, excitement:4, connection:2, agency:4,
+      commoditisation:4, incumbent:4, regulation:2, dependency:2 } },
+  { id:2, name:'Social Care Platform', tag:'Shared understanding, loved ones', color:'#34a853', s:{
+      convenience:3, monetisation:2, excitement:5, connection:5, agency:2,
+      commoditisation:4, incumbent:3, regulation:1, dependency:1 } },
+  { id:3, name:'Care Coordination', tag:'Families manage the disease', color:'#6366f1', s:{
+      convenience:5, monetisation:3, excitement:2, connection:4, agency:3,
+      commoditisation:3, incumbent:2, regulation:1, dependency:3 } },
+  { id:4, name:'Patient-Owned Record', tag:'You own your data', color:'#8a8a90', s:{
+      convenience:2, monetisation:3, excitement:3, connection:1, agency:2,
+      commoditisation:3, incumbent:3, regulation:3, dependency:5 } },
+  { id:5, name:'Trusted Health Assistant', tag:'Prevent illness, recover best', color:'#e5484d', s:{
+      convenience:4, monetisation:4, excitement:5, connection:1, agency:5,
+      commoditisation:3, incumbent:4, regulation:5, dependency:2 } },
+];
+const CURRENT = { name:"Today's product — the summary", s:{
+      convenience:4, monetisation:2, excitement:2, connection:2, agency:3,
+      commoditisation:5, incumbent:4, regulation:2, dependency:2 } };
+/* ============================================================================ */
+
+const NS='http://www.w3.org/2000/svg';
+const W=880, H=720, CX=440, CY=348, R=202, MAX=5;
+const svg=document.getElementById('plot'), tip=document.getElementById('tip');
+const el=(t,a,x)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;return e;};
+const pt=(angle,r)=>{const a=angle*Math.PI/180; return [CX+r*Math.sin(a), CY-r*Math.cos(a)];};
+
+const posAxes=AXES.filter(a=>a.side==='pos'), negAxes=AXES.filter(a=>a.side==='neg');
+const valScore=v=>posAxes.reduce((s,a)=>s+v.s[a.key],0)/posAxes.length;
+const chalScore=v=>negAxes.reduce((s,a)=>s+v.s[a.key],0)/negAxes.length;
+const net=v=>valScore(v)-chalScore(v);
+
+let showCurrent=true, fill=true, muted=new Set(), hovered=null;
+
+function draw(){
+  svg.innerHTML='';
+  // half-disc tints
+  const big=(sweep,col,op)=>{ const [ax,ay]=pt(sweep[0],R),[bx,by]=pt(sweep[1],R);
+    return el('path',{d:`M ${ax} ${ay} A ${R} ${R} 0 0 1 ${bx} ${by} Z`,fill:col,opacity:op}); };
+  svg.appendChild(big([270,90],'#0a84ff',0.05));  // top blue
+  svg.appendChild(big([90,270],'#e5484d',0.05));  // bottom red
+  // equator
+  svg.appendChild(el('line',{x1:CX-R,y1:CY,x2:CX+R,y2:CY,stroke:'#dcdce1','stroke-width':1.2}));
+  // rings
+  for(let k=1;k<=MAX;k++) svg.appendChild(el('circle',{cx:CX,cy:CY,r:R*k/MAX,fill:'none',stroke:k===MAX?'#d7d7dc':'#ececf0','stroke-width':k===MAX?1.3:1}));
+  // spokes + axis labels
+  AXES.forEach(ax=>{
+    const [ex,ey]=pt(ax.angle,R); svg.appendChild(el('line',{x1:CX,y1:CY,x2:ex,y2:ey,stroke:'#ededf1','stroke-width':1}));
+    const [lx,ly]=pt(ax.angle,R+15); const s=Math.sin(ax.angle*Math.PI/180);
+    const anchor=s>0.25?'start':s<-0.25?'end':'middle';
+    svg.appendChild(el('text',{x:lx,y:ly+4,'text-anchor':anchor,'font-size':12.5,'font-weight':500,
+      fill:ax.side==='pos'?'#0060df':'#c4302b'},ax.label));
+  });
+  // cluster labels (outer)
+  CLUSTERS.forEach(c=>{ const [lx,ly]=pt(c.at,R+50); const s=Math.sin(c.at*Math.PI/180);
+    const anchor=s>0.25?'start':s<-0.25?'end':'middle';
+    svg.appendChild(el('text',{x:lx,y:ly,'text-anchor':anchor,'font-size':10.5,'font-weight':700,'letter-spacing':'.06em',
+      fill:c.side==='pos'?'#0a84ff':'#e5484d',opacity:.85},c.name)); });
+  // poles
+  svg.appendChild(el('text',{x:CX,y:CY-R-34,'text-anchor':'middle','font-size':11.5,'font-weight':700,'letter-spacing':'.08em',fill:'#0a84ff'},'VALUE'));
+  svg.appendChild(el('text',{x:CX,y:CY+R+44,'text-anchor':'middle','font-size':11.5,'font-weight':700,'letter-spacing':'.08em',fill:'#e5484d'},'CHALLENGES'));
+
+  // today's product ghost
+  if(showCurrent){
+    const d=AXES.map(ax=>pt(ax.angle,R*CURRENT.s[ax.key]/MAX));
+    svg.appendChild(el('polygon',{points:d.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#9a9aa0','stroke-width':1.6,'stroke-dasharray':'4 4','stroke-linejoin':'round'}));
+    const g=el('g',{}); g.appendChild(el('polygon',{points:d.map(p=>p.join(',')).join(' '),fill:'transparent'})); attachTip(g,CURRENT,true); svg.appendChild(g);
+  }
+
+  // visions
+  VISIONS.forEach(v=>{
+    if(muted.has(v.id)) return;
+    const isH=hovered===v.id, anyH=hovered!=null;
+    const d=AXES.map(ax=>pt(ax.angle,R*v.s[ax.key]/MAX));
+    const o=anyH?(isH?1:0.12):1;
+    const g=el('g',{opacity:o,style:'transition:opacity .2s'});
+    g.appendChild(el('polygon',{points:d.map(p=>p.join(',')).join(' '),
+      fill:v.color, 'fill-opacity':fill?(isH?0.26:0.14):0, stroke:v.color, 'stroke-width':isH?3:2,'stroke-linejoin':'round'}));
+    if(isH||!anyH) d.forEach(p=>g.appendChild(el('circle',{cx:p[0],cy:p[1],r:isH?3.4:2.4,fill:v.color})));
+    attachTip(g,v,false);
+    svg.appendChild(g);
+  });
+}
+
+function attachTip(g,v,isCur){
+  g.style.cursor='default';
+  g.addEventListener('mousemove',e=>{
+    if(!isCur){ hovered=v.id; draw(); legend(); }
+    tip.style.opacity=1; tip.style.transform='translateY(0)';
+    tip.style.left=Math.min(e.clientX+16, innerWidth-320)+'px'; tip.style.top=(e.clientY+14)+'px';
+    let html=`<div class="tt-name">${isCur?'':v.id+'. '}${v.name}</div>`;
+    if(!isCur) html+=`<div class="tt-row"><span>net (value − challenge)</span><b style="color:${net(v)>=0?'#1e9e57':'#c4302b'}">${net(v)>=0?'+':''}${net(v).toFixed(2)}</b></div>`;
+    const grp=(name,cls,keys)=>{ let h=`<div class="grp ${cls}">${name}</div>`; keys.forEach(k=>{const ax=AXES.find(a=>a.key===k); h+=`<div class="tt-row"><span>${ax.label}</span><b>${v.s[k]}</b></div>`;}); return h; };
+    html+=grp('Company value','bl',['monetisation','excitement']);
+    html+=grp('User value','bl',['agency','connection','convenience']);
+    html+=grp('Competition','rd',['commoditisation','incumbent']);
+    html+=grp('Context','rd',['regulation','dependency']);
+    tip.innerHTML=html;
+  });
+  g.addEventListener('mouseleave',()=>{ tip.style.opacity=0; tip.style.transform='translateY(4px)'; if(!isCur){ hovered=null; draw(); legend(); } });
+}
+
+function legend(){
+  const box=document.getElementById('legend'); box.innerHTML='';
+  VISIONS.forEach(v=>{
+    const on=!muted.has(v.id), val=valScore(v), chal=chalScore(v), n=net(v);
+    const d=document.createElement('div'); d.className='leg-item '+(on?'leg-on':'leg-off');
+    d.onclick=()=>{ on?muted.add(v.id):muted.delete(v.id); legend(); draw(); };
+    d.onmouseenter=()=>{ if(on){ hovered=v.id; draw(); } };
+    d.onmouseleave=()=>{ hovered=null; draw(); };
+    d.innerHTML=`<div class="leg-head"><span class="leg-dot" style="background:${v.color}"></span>
+      <span class="leg-num">0${v.id}</span><span class="leg-name">${v.name}</span>
+      <span class="leg-net" style="color:${n>=0?'#1e9e57':'#c4302b'}">${n>=0?'+':''}${n.toFixed(2)}</span></div>
+      <div class="leg-tag">${v.tag}</div>
+      <div class="vbar"><span class="v" style="width:${val/MAX*48}%"></span><span class="c" style="width:${chal/MAX*48}%"></span></div>
+      <div class="leg-stats">value ${val.toFixed(1)} &nbsp;·&nbsp; challenge ${chal.toFixed(1)}</div>`;
+    box.appendChild(d);
+  });
+}
+function toggleCurrent(){ showCurrent=!showCurrent; document.getElementById('t-current').classList.toggle('on',showCurrent); draw(); }
+function toggleFill(){ fill=!fill; document.getElementById('t-fill').classList.toggle('on',fill); draw(); }
+
+legend(); draw();
+</script>
+</body>
+</html>
