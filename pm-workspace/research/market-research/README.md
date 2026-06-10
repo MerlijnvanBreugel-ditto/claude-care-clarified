@@ -6,7 +6,7 @@ A holistic, cited, reusable view of *what is happening in the market* — across
 
 ## How to navigate
 
-**The deck:** [`market-research-deck.html`](market-research-deck.html) — open in any browser (self-contained, offline, 40 slides). Use ← / → or Space.
+**The deck:** [`market-research-deck.html`](market-research-deck.html) — open in any browser (self-contained, offline, **51 slides** in a consultant pyramid: 9 section dividers → supporting slides → a **ⓘ Deep dive** overlay on every detail slide with the reasoning, named players, and clickable sources). Use ← / → or Space; click any **ⓘ Deep dive** (or press **i**); Esc closes.
 **The argument:** [`synthesis/S1-market-framework-and-direction.md`](synthesis/S1-market-framework-and-direction.md) (what's happening + where it's going) → [`synthesis/S2-implications-for-ditto.md`](synthesis/S2-implications-for-ditto.md) (where to play / watch / avoid).
 **The evidence:** the `findings/` files below — every claim cited, tiered, confidence-tagged, with US→EU flags.
 
@@ -24,6 +24,14 @@ A holistic, cited, reusable view of *what is happening in the market* — across
 | [`findings/M6-feature-direction-traction.md`](findings/M6-feature-direction-traction.md) | Traction: AI assistants · grounded/cited (OpenEvidence) · coaches · symptom tracking · journaling/logging |
 | [`findings/M7-consumer-health-retention.md`](findings/M7-consumer-health-retention.md) | Why cycle/meditation win & symptom trackers churn; the 7-gate retention checklist |
 | [`findings/M8-strategic-moves-map.md`](findings/M8-strategic-moves-map.md) | How players migrate (scribe→billing→workflow; single→platform; D2C→B2B2C) |
+| **Findings (round 2 — depth & recency, for the deep-dive overlays)** | |
+| [`findings/M9-funding-recency-leaderboards.md`](findings/M9-funding-recency-leaderboards.md) | Q1 2026 funding · consumer-app leaderboards 2024/25/26 · Europe top-10 · NL white-space |
+| [`findings/M10-consumer-app-deepdives.md`](findings/M10-consumer-app-deepdives.md) | Profiles: cycle/pregnancy · meditation · journaling (Finch/Daylio/Bearable) · fitness super-apps & wearables |
+| [`findings/M11-ai-frontdoor-deepdive.md`](findings/M11-ai-frontdoor-deepdive.md) | Dr Google vs Dr ChatGPT scale · named payer/provider bots · diagnostic-accuracy research · consumer grounded engines |
+| [`findings/M12-consumerization-comprehension.md`](findings/M12-consumerization-comprehension.md) | Scheduling shift (Doctolib/NHS App) · plain-language reality check · comprehension↔adherence · data moat |
+| [`findings/M13-partnerships-eu-scribes-eu-block.md`](findings/M13-partnerships-eu-scribes-eu-block.md) | Marquee partnerships · EU scribes + the EHDS-summary threat · why ChatGPT Health is EU-blocked |
+| [`findings/M14-ai-mental-health-therapy.md`](findings/M14-ai-mental-health-therapy.md) | AI therapy chapter: LLM-as-therapist trend & risks · Ash/Slingshot, Wysa, Limbic, Therabot, Woebot · EU regs |
+| [`findings/M15-winners-losers-why.md`](findings/M15-winners-losers-why.md) | Winners vs losers & **why**: symptom checkers (Ada/Babylon) · coaches (Hinge/Omada vs Noom) · trackers |
 | **Synthesis** | |
 | [`synthesis/S1-market-framework-and-direction.md`](synthesis/S1-market-framework-and-direction.md) | The lens + "where the puck is going" |
 | [`synthesis/S2-implications-for-ditto.md`](synthesis/S2-implications-for-ditto.md) | Opportunities, watch-list, what-to-avoid, the strategic question |
@@ -36,4 +44,4 @@ Demand for understanding is overwhelming — ~40 million people ask ChatGPT heal
 
 ## Method & limitations
 
-External/public sources only (no internal ditto data; no Drive/Confluence this round — Confluence was referenced but not reachable from this session). Tiered sourcing (Tier 1 official/peer-reviewed/analyst · Tier 2 reputable press · Tier 3 blog/self-report, flagged) with confidence levels and US→EU flags. The "40M ChatGPT health questions" figure was re-verified as **per day** (not per week). Several primary pages (OpenAI, some app stores, journals) blocked automated fetch; those figures are triangulated across multiple independent reports and flagged in the findings. Competitor self-claims (funding, MAU, retention) are treated as Tier 3 unless independently corroborated. See [`sources.md`](sources.md) and each findings file's caveats.
+External/public sources only (no internal ditto data; no Drive/Confluence this round — Confluence was referenced but not reachable from this session). Built across two research rounds (M1–M8 landscape; M9–M15 depth & recency for the deck's deep-dive overlays). Tiered sourcing (Tier 1 official/peer-reviewed/analyst · Tier 2 reputable press · Tier 3 blog/self-report, flagged) with confidence levels and US→EU flags. The "40M ChatGPT health questions" figure was re-verified as **per day** (not per week). Several primary pages (OpenAI, some app stores, journals) blocked automated fetch; those figures are triangulated across multiple independent reports and flagged in the findings. Competitor self-claims (funding, MAU, retention) are treated as Tier 3 unless independently corroborated. See [`sources.md`](sources.md) and each findings file's caveats.
