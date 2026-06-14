@@ -1,0 +1,5209 @@
+{
+  "version": "0.2.0",
+  "purpose": "Test fixtures for the on-device calendar scanner (PRO-335). Each entry mirrors the cross-platform calendar event format the app receives after the user grants Calendar permission (EKEvent on iOS / CalendarContract.Events on Android). Ground truth (is_medical, expected_keywords, variation tags) lives in _test_metadata — strip this block before processing in production.",
+  "schema_note": "EventKit-aligned fields: eventIdentifier (iOS) / _id (Android), title, location, notes (= description on Android), startDate (= dtstart), endDate (= dtend), isAllDay (= allDay), calendar.{title, source} (= provenance), hasRecurrenceRules (= rrule presence; full RRULE strings not modelled here), url. Times are wall-clock with timezone offset (Europe/Amsterdam for nl-NL, Europe/London for en-GB). _test_metadata is fictional and prefixed with underscore to flag as non-system data.",
+  "distribution_per_locale": {
+    "nl-NL": {
+      "total": 108,
+      "true_positives": 82,
+      "true_negatives": 26,
+      "typo_subset": 8
+    },
+    "en-GB": {
+      "total": 108,
+      "true_positives": 82,
+      "true_negatives": 26,
+      "typo_subset": 8
+    }
+  },
+  "fixtures": {
+    "nl-NL": [
+      {
+        "eventIdentifier": "evt-nl-001",
+        "title": "Tandarts",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-25T08:00:00+02:00",
+        "endDate": "2026-05-25T08:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-002",
+        "title": "Tandarts controle 10:30",
+        "location": "Tandartspraktijk Centrum, Hoogstraat 14, Utrecht",
+        "notes": null,
+        "startDate": "2026-05-28T09:15:00+02:00",
+        "endDate": "2026-05-28T10:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "title_with_time",
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-003",
+        "title": "Tandarts dr. Janssen",
+        "location": null,
+        "notes": "Tel: 030-1234567",
+        "startDate": "2026-05-31T10:30:00+02:00",
+        "endDate": "2026-05-31T11:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "title_with_doctor_name",
+            "with_notes_phone"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-004",
+        "title": "Sophie tandarts 14:00",
+        "location": "Mauritskade 12",
+        "notes": null,
+        "startDate": "2026-06-03T11:45:00+02:00",
+        "endDate": "2026-06-03T12:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "family_member",
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-005",
+        "title": "TANDARTS!!",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-06T12:00:00+02:00",
+        "endDate": "2026-06-06T12:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "all_caps"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-006",
+        "title": "Tandartsje Mila 🦷",
+        "location": "Tandartspraktijk de Linde",
+        "notes": null,
+        "startDate": "2026-06-09T13:15:00+02:00",
+        "endDate": "2026-06-09T14:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "with_emoji",
+            "family_member",
+            "diminutive"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-007",
+        "title": "Huisarts",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-12T14:30:00+02:00",
+        "endDate": "2026-06-12T15:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "huisarts"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-008",
+        "title": "Huisarts dr. de Vries 09:30",
+        "location": "Huisartsenpraktijk Centrum, Linnaeusstraat 8, Amsterdam",
+        "notes": null,
+        "startDate": "2026-06-15T15:45:00+02:00",
+        "endDate": "2026-06-15T16:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "huisarts"
+          ],
+          "tags": [
+            "title_with_doctor_name",
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-009",
+        "title": "Spreekuur huisarts",
+        "location": null,
+        "notes": "Aanmelden balie - meenemen: medicijnlijst",
+        "startDate": "2026-06-18T16:00:00+02:00",
+        "endDate": "2026-06-18T17:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "spreekuur",
+            "huisarts"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-010",
+        "title": "Bij dokter",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-21T08:15:00+02:00",
+        "endDate": "2026-06-21T08:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dokter"
+          ],
+          "tags": [
+            "title_only",
+            "colloquial"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-011",
+        "title": "Huisartsenpost spoed",
+        "location": "HAP Amsterdam Zuid, VUmc terrein",
+        "notes": null,
+        "startDate": "2026-06-24T09:30:00+02:00",
+        "endDate": "2026-06-24T10:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "huisartsenpost",
+            "HAP",
+            "VUmc"
+          ],
+          "tags": [
+            "with_location_name"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-012",
+        "title": "HAP - Mila koorts",
+        "location": "Boelelaan",
+        "notes": "Tel 088-0030600 vooraf bellen",
+        "startDate": "2026-06-27T10:45:00+02:00",
+        "endDate": "2026-06-27T11:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "HAP"
+          ],
+          "tags": [
+            "family_member",
+            "abbreviated",
+            "with_notes_phone"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-013",
+        "title": "SEH",
+        "location": "OLVG Oost",
+        "notes": null,
+        "startDate": "2026-06-30T11:00:00+02:00",
+        "endDate": "2026-06-30T11:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "SEH",
+            "OLVG"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-014",
+        "title": "Apotheek recept ophalen",
+        "location": "Apotheek Linnaeus",
+        "notes": null,
+        "startDate": "2026-07-03T12:15:00+02:00",
+        "endDate": "2026-07-03T13:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "apotheek"
+          ],
+          "tags": [
+            "title_with_specialty"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-015",
+        "title": "Apotheek",
+        "location": "BENU Stadshart",
+        "notes": null,
+        "startDate": "2026-07-06T13:30:00+02:00",
+        "endDate": "2026-07-06T14:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "apotheek"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-016",
+        "title": "Polikliniek cardiologie 11:00",
+        "location": "Erasmus MC - poli 8",
+        "notes": "Verwijsbrief meenemen",
+        "startDate": "2026-07-09T14:45:00+02:00",
+        "endDate": "2026-07-09T15:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "polikliniek",
+            "poli",
+            "cardioloog",
+            "Erasmus"
+          ],
+          "tags": [
+            "title_with_specialty",
+            "with_location_name",
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-017",
+        "title": "Poli oncologie - uitslag",
+        "location": "Antoni van Leeuwenhoek",
+        "notes": "Anne meenemen?",
+        "startDate": "2026-07-12T15:00:00+02:00",
+        "endDate": "2026-07-12T15:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "poli",
+            "oncoloog",
+            "Antoni van Leeuwenhoek"
+          ],
+          "tags": [
+            "title_with_specialty",
+            "with_location_name"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-018",
+        "title": "Bloed prikken",
+        "location": "Atalmedial Bos en Lommer",
+        "notes": null,
+        "startDate": "2026-05-21T16:15:00+02:00",
+        "endDate": "2026-05-21T17:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "bloed"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-019",
+        "title": "Bloedprikken 8:00 NUCHTER",
+        "location": null,
+        "notes": "12u niet eten - water mag wel",
+        "startDate": "2026-05-24T08:30:00+02:00",
+        "endDate": "2026-05-24T09:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "bloed"
+          ],
+          "tags": [
+            "title_with_time",
+            "with_notes_prep",
+            "all_caps"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-020",
+        "title": "Bloedonderzoek halfjaarlijks",
+        "location": "Prikpost Sint Lucas",
+        "notes": null,
+        "startDate": "2026-05-27T09:45:00+02:00",
+        "endDate": "2026-05-27T10:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "bloed",
+            "prikpost"
+          ],
+          "tags": [
+            "recurring_mention"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-021",
+        "title": "Echo 20 weken 🤰",
+        "location": "Verloskundigen Maas, Rotterdam",
+        "notes": "Volle blaas meenemen",
+        "startDate": "2026-05-30T10:00:00+02:00",
+        "endDate": "2026-05-30T11:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "echo",
+            "verloskundige"
+          ],
+          "tags": [
+            "with_emoji",
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-022",
+        "title": "Echo Mila hartfunctie",
+        "location": "Maxima MC Veldhoven",
+        "notes": null,
+        "startDate": "2026-06-02T11:15:00+02:00",
+        "endDate": "2026-06-02T11:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "echo",
+            "Maxima MC"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-023",
+        "title": "MRI knie rechts",
+        "location": "Radboud UMC - Radiologie afd 5",
+        "notes": "Geen sieraden",
+        "startDate": "2026-06-05T12:30:00+02:00",
+        "endDate": "2026-06-05T13:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "MRI",
+            "Radboud"
+          ],
+          "tags": [
+            "with_notes_prep",
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-024",
+        "title": "CT-scan thorax",
+        "location": "Isala Zwolle",
+        "notes": null,
+        "startDate": "2026-06-08T13:45:00+02:00",
+        "endDate": "2026-06-08T14:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "CT",
+            "scan",
+            "Isala"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-025",
+        "title": "Röntgen pols",
+        "location": "Spaarne Gasthuis Haarlem",
+        "notes": null,
+        "startDate": "2026-06-11T14:00:00+02:00",
+        "endDate": "2026-06-11T14:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "röntgen",
+            "Spaarne"
+          ],
+          "tags": [
+            "diacritic"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-026",
+        "title": "Operatie heup - opname",
+        "location": "OLVG West",
+        "notes": "1 dag vooraf bellen - nuchter vanaf 22u",
+        "startDate": "2026-06-14T15:15:00+02:00",
+        "endDate": "2026-06-14T16:00:00+02:00",
+        "isAllDay": true,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "operatie",
+            "OLVG"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-027",
+        "title": "Vaccinatie Mila 4 mnd",
+        "location": "CB Bos en Lommer",
+        "notes": null,
+        "startDate": "2026-06-17T16:30:00+02:00",
+        "endDate": "2026-06-17T17:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "vaccinatie"
+          ],
+          "tags": [
+            "family_member",
+            "abbreviated"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-028",
+        "title": "Consultatiebureau",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-20T08:45:00+02:00",
+        "endDate": "2026-06-20T09:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "consultatiebureau"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-029",
+        "title": "Verloskundige check 36 wkn",
+        "location": "Verloskundigen Rotterdam Noord",
+        "notes": null,
+        "startDate": "2026-06-23T09:00:00+02:00",
+        "endDate": "2026-06-23T09:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "verloskundige"
+          ],
+          "tags": [
+            "abbreviated"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-030",
+        "title": "Verlosk.",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-26T10:15:00+02:00",
+        "endDate": "2026-06-26T11:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [],
+          "tags": [
+            "abbreviated",
+            "expected_miss"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-031",
+        "title": "Gynaecologie controle",
+        "location": "Catharina Eindhoven",
+        "notes": null,
+        "startDate": "2026-06-29T11:30:00+02:00",
+        "endDate": "2026-06-29T12:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "gynaecoloog",
+            "Catharina"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-032",
+        "title": "Bevalling planning gesprek",
+        "location": null,
+        "notes": "Naar Erasmus - bel verloskundige eerst",
+        "startDate": "2026-07-02T12:45:00+02:00",
+        "endDate": "2026-07-02T13:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "bevalling",
+            "Erasmus",
+            "verloskundige"
+          ],
+          "tags": [
+            "with_notes_doctor_info"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-033",
+        "title": "Kinderarts Mila",
+        "location": "Wilhelmina Kinderziekenhuis - UMCU",
+        "notes": null,
+        "startDate": "2026-07-05T13:00:00+02:00",
+        "endDate": "2026-07-05T14:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "kinderarts",
+            "UMCU"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-034",
+        "title": "Fysio rugklachten",
+        "location": "Fysiotherapie Centrum, Plein 1, Den Haag",
+        "notes": null,
+        "startDate": "2026-07-08T14:15:00+02:00",
+        "endDate": "2026-07-08T14:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "fysio",
+            "fysiotherapeut"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-035",
+        "title": "Fysio",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-11T15:30:00+02:00",
+        "endDate": "2026-07-11T16:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "fysio"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-036",
+        "title": "Stef fysio",
+        "location": "Fysio Stadshart",
+        "notes": null,
+        "startDate": "2026-05-20T16:45:00+02:00",
+        "endDate": "2026-05-20T17:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "fysio"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-037",
+        "title": "Orthodontist - beugel afspraak",
+        "location": "Annatommie",
+        "notes": null,
+        "startDate": "2026-05-23T08:00:00+02:00",
+        "endDate": "2026-05-23T08:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "orthodontist",
+            "Annatommie"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-038",
+        "title": "Mondhygiënist 9u",
+        "location": "Tandartspraktijk Lindemans",
+        "notes": null,
+        "startDate": "2026-05-26T09:15:00+02:00",
+        "endDate": "2026-05-26T10:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "mondhygiënist",
+            "tandarts"
+          ],
+          "tags": [
+            "diacritic"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-039",
+        "title": "Logopedie Mila",
+        "location": "Praatkracht Amsterdam",
+        "notes": null,
+        "startDate": "2026-05-29T10:30:00+02:00",
+        "endDate": "2026-05-29T11:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "logopedist"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-040",
+        "title": "Diëtist intake",
+        "location": null,
+        "notes": "Voedingsdagboek invullen vooraf",
+        "startDate": "2026-06-01T11:45:00+02:00",
+        "endDate": "2026-06-01T12:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "diëtist"
+          ],
+          "tags": [
+            "with_notes_prep",
+            "diacritic"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-041",
+        "title": "Psycholoog",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-04T12:00:00+02:00",
+        "endDate": "2026-06-04T12:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "psycholoog"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-042",
+        "title": "Psycholoog Anne 14:00",
+        "location": "GGZ Inholland Hoofddorp",
+        "notes": null,
+        "startDate": "2026-06-07T13:15:00+02:00",
+        "endDate": "2026-06-07T14:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "psycholoog",
+            "GGZ"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-043",
+        "title": "Psychiater controle",
+        "location": "GGZ Centraal",
+        "notes": null,
+        "startDate": "2026-06-10T14:30:00+02:00",
+        "endDate": "2026-06-10T15:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "psychiater",
+            "GGZ"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-044",
+        "title": "Oogarts uitslag scan",
+        "location": "Oogartsenpraktijk Vergeer, Coolsingel 42",
+        "notes": null,
+        "startDate": "2026-06-13T15:45:00+02:00",
+        "endDate": "2026-06-13T16:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "oogarts",
+            "scan"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-045",
+        "title": "KNO controle",
+        "location": "MST Enschede",
+        "notes": null,
+        "startDate": "2026-06-16T16:00:00+02:00",
+        "endDate": "2026-06-16T17:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "KNO",
+            "MST"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-046",
+        "title": "Dermatoloog moedervlek",
+        "location": "Mauritskliniek Den Haag",
+        "notes": null,
+        "startDate": "2026-06-19T08:15:00+02:00",
+        "endDate": "2026-06-19T08:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dermatoloog",
+            "Mauritskliniek"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-047",
+        "title": "Cardioloog controle",
+        "location": "St. Antonius Nieuwegein",
+        "notes": null,
+        "startDate": "2026-06-22T09:30:00+02:00",
+        "endDate": "2026-06-22T10:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "cardioloog",
+            "Antonius"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-048",
+        "title": "Neuroloog 11:30",
+        "location": "MUMC+",
+        "notes": null,
+        "startDate": "2026-06-25T10:45:00+02:00",
+        "endDate": "2026-06-25T11:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "neuroloog",
+            "MUMC"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-049",
+        "title": "Oncoloog uitslag",
+        "location": "NKI / Antoni van Leeuwenhoek, Plesmanlaan 121",
+        "notes": "Anne meenemen",
+        "startDate": "2026-06-28T11:00:00+02:00",
+        "endDate": "2026-06-28T11:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "oncoloog",
+            "Antoni van Leeuwenhoek"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-050",
+        "title": "Internist",
+        "location": "Diakonessenhuis",
+        "notes": null,
+        "startDate": "2026-07-01T12:15:00+02:00",
+        "endDate": "2026-07-01T13:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "internist",
+            "Diakonessenhuis"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-051",
+        "title": "Chirurg pre-op consult",
+        "location": "Albert Schweitzer Dordrecht",
+        "notes": null,
+        "startDate": "2026-07-04T13:30:00+02:00",
+        "endDate": "2026-07-04T14:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "chirurg",
+            "Albert Schweitzer"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-052",
+        "title": "MDL endoscopie 10u nuchter",
+        "location": "Franciscus Gasthuis Rotterdam",
+        "notes": null,
+        "startDate": "2026-07-07T14:45:00+02:00",
+        "endDate": "2026-07-07T15:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "MDL",
+            "Franciscus"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-053",
+        "title": "Reumatoloog 14:30",
+        "location": "Sint Maartenskliniek Nijmegen",
+        "notes": null,
+        "startDate": "2026-07-10T15:00:00+02:00",
+        "endDate": "2026-07-10T15:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "reumatoloog"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-054",
+        "title": "Trombosedienst",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-13T16:15:00+02:00",
+        "endDate": "2026-07-13T17:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "trombosedienst"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-055",
+        "title": "Trombose prikken thuiszorg",
+        "location": "Bezoekadres opa",
+        "notes": null,
+        "startDate": "2026-05-22T08:30:00+02:00",
+        "endDate": "2026-05-22T09:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "trombosedienst"
+          ],
+          "tags": [
+            "prefix_match"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-056",
+        "title": "Geheugenpoli opa",
+        "location": "VUmc",
+        "notes": "Begeleider mee",
+        "startDate": "2026-05-25T09:45:00+02:00",
+        "endDate": "2026-05-25T10:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "poli",
+            "VUmc"
+          ],
+          "tags": [
+            "family_member",
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-057",
+        "title": "Chemo ronde 3",
+        "location": "Erasmus - Daniel den Hoed",
+        "notes": null,
+        "startDate": "2026-05-28T10:00:00+02:00",
+        "endDate": "2026-05-28T11:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": true,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "chemo",
+            "Erasmus"
+          ],
+          "tags": [
+            "recurring_mention"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-058",
+        "title": "Chemo",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-31T11:15:00+02:00",
+        "endDate": "2026-05-31T11:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "chemo"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-059",
+        "title": "Bestraling 14:00",
+        "location": "UMCG",
+        "notes": "Markeren door verpleegkundige",
+        "startDate": "2026-06-03T12:30:00+02:00",
+        "endDate": "2026-06-03T13:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "bestraling",
+            "UMCG"
+          ],
+          "tags": [
+            "title_with_time",
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-060",
+        "title": "Biopsie afspraak",
+        "location": "Rijnstate Arnhem",
+        "notes": null,
+        "startDate": "2026-06-06T13:45:00+02:00",
+        "endDate": "2026-06-06T14:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "biopsie",
+            "Rijnstate"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-061",
+        "title": "AMC bezoek opa",
+        "location": "Amsterdam UMC, locatie AMC, Meibergdreef 9",
+        "notes": null,
+        "startDate": "2026-06-09T14:00:00+02:00",
+        "endDate": "2026-06-09T14:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "AMC",
+            "Amsterdam UMC"
+          ],
+          "tags": [
+            "family_member",
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-062",
+        "title": "OLVG",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-12T15:15:00+02:00",
+        "endDate": "2026-06-12T16:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "OLVG"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-063",
+        "title": "Bergman heup pre-screening",
+        "location": "Bergman Clinics Rijswijk",
+        "notes": null,
+        "startDate": "2026-06-15T16:30:00+02:00",
+        "endDate": "2026-06-15T17:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Bergman"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-064",
+        "title": "DC Klinieken intake",
+        "location": "DC Klinieken Almere",
+        "notes": null,
+        "startDate": "2026-06-18T08:45:00+02:00",
+        "endDate": "2026-06-18T09:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "DC Klinieken"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-065",
+        "title": "Equipe heup",
+        "location": "Equipe Zorgbedrijven, Boschdijk 525, Eindhoven",
+        "notes": null,
+        "startDate": "2026-06-21T09:00:00+02:00",
+        "endDate": "2026-06-21T09:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Equipe"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-066",
+        "title": "Recept online apotheek",
+        "location": "online",
+        "notes": "Link uit mail apotheek",
+        "startDate": "2026-06-24T10:15:00+02:00",
+        "endDate": "2026-06-24T11:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": "https://meet.google.com/abc-def-ghi",
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "apotheek"
+          ],
+          "tags": [
+            "online_appointment"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-067",
+        "title": "Prinses Maxima — kinderoncologie",
+        "location": "Heidelberglaan 25, Utrecht",
+        "notes": null,
+        "startDate": "2026-06-27T11:30:00+02:00",
+        "endDate": "2026-06-27T12:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Prinses Maxima"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-068",
+        "title": "Spoedpost kind koorts",
+        "location": null,
+        "notes": "Telefonisch eerst: 088-...",
+        "startDate": "2026-06-30T12:45:00+02:00",
+        "endDate": "2026-06-30T13:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "spoedpost"
+          ],
+          "tags": [
+            "family_member",
+            "with_notes_phone"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-069",
+        "title": "Uroloog controle",
+        "location": "Tergooi Hilversum",
+        "notes": null,
+        "startDate": "2026-07-03T13:00:00+02:00",
+        "endDate": "2026-07-03T14:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "uroloog",
+            "Tergooi"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-070",
+        "title": "Orthopeed knie",
+        "location": "Martini Groningen",
+        "notes": null,
+        "startDate": "2026-07-06T14:15:00+02:00",
+        "endDate": "2026-07-06T14:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "orthopeed",
+            "Martini"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-071",
+        "title": "Vergadering Q2 review",
+        "location": "Kantoor",
+        "notes": null,
+        "startDate": "2026-07-09T15:30:00+02:00",
+        "endDate": "2026-07-09T16:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-072",
+        "title": "Lunch met Anne",
+        "location": "Café Plein",
+        "notes": null,
+        "startDate": "2026-07-12T16:45:00+02:00",
+        "endDate": "2026-07-12T17:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-073",
+        "title": "Hardlopen rondje Maas",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-21T08:00:00+02:00",
+        "endDate": "2026-05-21T08:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-074",
+        "title": "Sportschool",
+        "location": "Basic Fit Centrum",
+        "notes": null,
+        "startDate": "2026-05-24T09:15:00+02:00",
+        "endDate": "2026-05-24T10:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-075",
+        "title": "Boodschappen Albert Heijn",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-27T10:30:00+02:00",
+        "endDate": "2026-05-27T11:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-076",
+        "title": "Kapper 10u",
+        "location": "Hairsalon Top, Rokin 14",
+        "notes": null,
+        "startDate": "2026-05-30T11:45:00+02:00",
+        "endDate": "2026-05-30T12:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-077",
+        "title": "Auto APK",
+        "location": "Garage Janssen",
+        "notes": null,
+        "startDate": "2026-06-02T12:00:00+02:00",
+        "endDate": "2026-06-02T12:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-078",
+        "title": "Verjaardag Sophie 🎂",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-05T13:15:00+02:00",
+        "endDate": "2026-06-05T14:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical",
+            "with_emoji"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-079",
+        "title": "Bioscoop Dr. Strange",
+        "location": "Pathé Tuschinski",
+        "notes": null,
+        "startDate": "2026-06-08T14:30:00+02:00",
+        "endDate": "2026-06-08T15:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-080",
+        "title": "Schoolreisje Mila",
+        "location": "NEMO Amsterdam",
+        "notes": null,
+        "startDate": "2026-06-11T15:45:00+02:00",
+        "endDate": "2026-06-11T16:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-081",
+        "title": "Ophalen pakketje",
+        "location": "PostNL punt Stadshart",
+        "notes": null,
+        "startDate": "2026-06-14T16:00:00+02:00",
+        "endDate": "2026-06-14T17:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-082",
+        "title": "Sales call met klant",
+        "location": "Zoom",
+        "notes": null,
+        "startDate": "2026-06-17T08:15:00+02:00",
+        "endDate": "2026-06-17T08:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": "https://meet.google.com/abc-def-ghi",
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical",
+            "online_appointment"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-083",
+        "title": "All-hands 16:00",
+        "location": "Kantoor 4e",
+        "notes": null,
+        "startDate": "2026-06-20T09:30:00+02:00",
+        "endDate": "2026-06-20T10:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-084",
+        "title": "Vakantie Frankrijk vertrek",
+        "location": "Schiphol T3",
+        "notes": null,
+        "startDate": "2026-06-23T10:45:00+02:00",
+        "endDate": "2026-06-23T11:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-085",
+        "title": "Tax aangifte deadline",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-26T11:00:00+02:00",
+        "endDate": "2026-06-26T11:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-086",
+        "title": "Workshop fotografie",
+        "location": "Foam Amsterdam",
+        "notes": null,
+        "startDate": "2026-06-29T12:15:00+02:00",
+        "endDate": "2026-06-29T13:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-087",
+        "title": "Verhuizing helpen Stef",
+        "location": "Westerpark",
+        "notes": null,
+        "startDate": "2026-07-02T13:30:00+02:00",
+        "endDate": "2026-07-02T14:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-088",
+        "title": "Pasta avond buren",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-05T14:45:00+02:00",
+        "endDate": "2026-07-05T15:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-089",
+        "title": "Stomerij ophalen",
+        "location": "Stomerij Centrum",
+        "notes": null,
+        "startDate": "2026-07-08T15:00:00+02:00",
+        "endDate": "2026-07-08T15:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-090",
+        "title": "Yoga Marleen 19:30",
+        "location": "Yoga Studio Oost",
+        "notes": null,
+        "startDate": "2026-07-11T16:15:00+02:00",
+        "endDate": "2026-07-11T17:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-091",
+        "title": "Bloedmaan kijken 🌕",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-20T08:30:00+02:00",
+        "endDate": "2026-05-20T09:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "bloed"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-092",
+        "title": "Tandartsverzekering opzeggen",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-23T09:45:00+02:00",
+        "endDate": "2026-05-23T10:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-093",
+        "title": "Echo team standup",
+        "location": "Slack huddle",
+        "notes": null,
+        "startDate": "2026-05-26T10:00:00+02:00",
+        "endDate": "2026-05-26T11:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "echo"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-094",
+        "title": "Scan documenten notaris",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-29T11:15:00+02:00",
+        "endDate": "2026-05-29T11:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "scan"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-095",
+        "title": "Bart's verjaardag 🎈",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-01T12:30:00+02:00",
+        "endDate": "2026-06-01T13:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike",
+            "with_emoji"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-096",
+        "title": "Bij arts Janssen",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-04T13:45:00+02:00",
+        "endDate": "2026-06-04T14:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case",
+            "expected_miss"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-097",
+        "title": "T-arts 10:30",
+        "location": "Lindeplein 2",
+        "notes": null,
+        "startDate": "2026-06-07T14:00:00+02:00",
+        "endDate": "2026-06-07T14:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case",
+            "expected_miss",
+            "abbreviated"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-098",
+        "title": "Tand 14u Sophie",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-10T15:15:00+02:00",
+        "endDate": "2026-06-10T16:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case",
+            "expected_miss",
+            "abbreviated",
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-099",
+        "title": "MRI scan onderzoek pols",
+        "location": "AMC radiologie",
+        "notes": null,
+        "startDate": "2026-06-13T16:30:00+02:00",
+        "endDate": "2026-06-13T17:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "MRI",
+            "scan",
+            "AMC",
+            "Amsterdam UMC"
+          ],
+          "tags": [
+            "hard_case",
+            "multi_keyword"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-100",
+        "title": "Pasta recept koken Anne",
+        "location": null,
+        "notes": "Boekenkast bovenste plank",
+        "startDate": "2026-06-16T08:45:00+02:00",
+        "endDate": "2026-06-16T09:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-101",
+        "title": "Tandartz controle",
+        "location": "Hoogstraat 14, Utrecht",
+        "notes": null,
+        "startDate": "2026-06-19T09:00:00+02:00",
+        "endDate": "2026-06-19T09:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "tandarts"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-102",
+        "title": "Huisaarts 9:30",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-22T10:15:00+02:00",
+        "endDate": "2026-06-22T11:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "huisarts"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-103",
+        "title": "fysoi 14u",
+        "location": "Fysiotherapie Centrum",
+        "notes": null,
+        "startDate": "2026-06-25T11:30:00+02:00",
+        "endDate": "2026-06-25T12:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "fysio"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-104",
+        "title": "Aphoteek recept",
+        "location": "Apotheek Stadshart",
+        "notes": null,
+        "startDate": "2026-06-28T12:45:00+02:00",
+        "endDate": "2026-06-28T13:30:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "apotheek"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-105",
+        "title": "Bloet prikken nuchter",
+        "location": null,
+        "notes": "8u, niet eten vanaf 22u",
+        "startDate": "2026-07-01T13:00:00+02:00",
+        "endDate": "2026-07-01T14:00:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "bloed"
+          ],
+          "tags": [
+            "typo",
+            "ed1",
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-106",
+        "title": "Erasmuz oncologie",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-04T14:15:00+02:00",
+        "endDate": "2026-07-04T14:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Erasmus"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-107",
+        "title": "rontgen pols",
+        "location": "Spaarne Gasthuis Haarlem",
+        "notes": null,
+        "startDate": "2026-07-07T15:30:00+02:00",
+        "endDate": "2026-07-07T16:15:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "röntgen",
+            "Spaarne"
+          ],
+          "tags": [
+            "typo",
+            "ed1",
+            "diacritic_missing"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-nl-108",
+        "title": "Cathrina controle",
+        "location": "Cathrina Eindhoven",
+        "notes": null,
+        "startDate": "2026-07-10T16:45:00+02:00",
+        "endDate": "2026-07-10T17:45:00+02:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Catharina"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      }
+    ],
+    "en-GB": [
+      {
+        "eventIdentifier": "evt-en-001",
+        "title": "GP appointment",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-25T08:00:00+01:00",
+        "endDate": "2026-05-25T08:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "GP"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-002",
+        "title": "GP — 9:30",
+        "location": "The Health Centre, 14 High St",
+        "notes": null,
+        "startDate": "2026-05-28T09:15:00+01:00",
+        "endDate": "2026-05-28T10:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "GP"
+          ],
+          "tags": [
+            "title_with_time",
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-003",
+        "title": "GP Dr Smith",
+        "location": null,
+        "notes": "Tel 020-7946-0000",
+        "startDate": "2026-05-31T10:30:00+01:00",
+        "endDate": "2026-05-31T11:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "GP",
+            "doctor"
+          ],
+          "tags": [
+            "title_with_doctor_name",
+            "with_notes_phone"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-004",
+        "title": "GP surgery Mon 10am",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-03T11:45:00+01:00",
+        "endDate": "2026-06-03T12:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "GP",
+            "surgery"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-005",
+        "title": "Dentist",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-06T12:00:00+01:00",
+        "endDate": "2026-06-06T12:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dentist"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-006",
+        "title": "Dentist 14:00",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-09T13:15:00+01:00",
+        "endDate": "2026-06-09T14:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dentist"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-007",
+        "title": "Dentist check-up",
+        "location": "Bupa Dental Belsize Park",
+        "notes": null,
+        "startDate": "2026-06-12T14:30:00+01:00",
+        "endDate": "2026-06-12T15:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dentist",
+            "Bupa"
+          ],
+          "tags": [
+            "with_location_name"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-008",
+        "title": "Sophie dentist 4pm",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-15T15:45:00+01:00",
+        "endDate": "2026-06-15T16:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dentist"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-009",
+        "title": "Doctor's appt",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-18T16:00:00+01:00",
+        "endDate": "2026-06-18T17:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "doctor"
+          ],
+          "tags": [
+            "title_only",
+            "colloquial"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-010",
+        "title": "NHS follow up call",
+        "location": null,
+        "notes": "Ref: NHS123456",
+        "startDate": "2026-06-21T08:15:00+01:00",
+        "endDate": "2026-06-21T08:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "NHS"
+          ],
+          "tags": [
+            "with_notes_doctor_info"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-011",
+        "title": "Pharmacy — collect script",
+        "location": "Boots Holborn",
+        "notes": null,
+        "startDate": "2026-06-24T09:30:00+01:00",
+        "endDate": "2026-06-24T10:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "pharmacy"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-012",
+        "title": "A&E if needed",
+        "location": "Royal Free",
+        "notes": "Only if temp >38.5",
+        "startDate": "2026-06-27T10:45:00+01:00",
+        "endDate": "2026-06-27T11:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "A&E",
+            "Royal Free",
+            "hospital"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-013",
+        "title": "A&E",
+        "location": "Whittington",
+        "notes": null,
+        "startDate": "2026-06-30T11:00:00+01:00",
+        "endDate": "2026-06-30T11:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "A&E"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-014",
+        "title": "OOH GP call back",
+        "location": null,
+        "notes": "Tel 111",
+        "startDate": "2026-07-03T12:15:00+01:00",
+        "endDate": "2026-07-03T13:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "OOH",
+            "GP"
+          ],
+          "tags": [
+            "with_notes_phone"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-015",
+        "title": "Walk-in centre — kids cough",
+        "location": "Soho Walk-in, 1 Frith St",
+        "notes": null,
+        "startDate": "2026-07-06T13:30:00+01:00",
+        "endDate": "2026-07-06T14:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "walk-in"
+          ],
+          "tags": [
+            "family_member",
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-016",
+        "title": "Urgent care eye",
+        "location": "Moorfields A&E",
+        "notes": null,
+        "startDate": "2026-07-09T14:45:00+01:00",
+        "endDate": "2026-07-09T15:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "urgent care",
+            "Moorfields",
+            "A&E"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-017",
+        "title": "Health visitor home visit",
+        "location": "home",
+        "notes": null,
+        "startDate": "2026-07-12T15:00:00+01:00",
+        "endDate": "2026-07-12T15:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "health visitor"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-018",
+        "title": "Mental health team",
+        "location": null,
+        "notes": "Online — Zoom link in email",
+        "startDate": "2026-05-21T16:15:00+01:00",
+        "endDate": "2026-05-21T17:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": "https://zoom.us/j/abc123",
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "mental health"
+          ],
+          "tags": [
+            "online_appointment"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-019",
+        "title": "Bloods 8am",
+        "location": "Royal Free phlebotomy",
+        "notes": "Fasting from 8pm",
+        "startDate": "2026-05-24T08:30:00+01:00",
+        "endDate": "2026-05-24T09:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "blood",
+            "Royal Free"
+          ],
+          "tags": [
+            "with_notes_prep",
+            "prefix_match"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-020",
+        "title": "Blood test",
+        "location": null,
+        "notes": "Don't eat after midnight",
+        "startDate": "2026-05-27T09:45:00+01:00",
+        "endDate": "2026-05-27T10:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "blood"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-021",
+        "title": "Ultrasound 20 week scan 🤰",
+        "location": "St Thomas — Antenatal Clinic",
+        "notes": null,
+        "startDate": "2026-05-30T10:00:00+01:00",
+        "endDate": "2026-05-30T11:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "ultrasound",
+            "scan",
+            "St Thomas",
+            "antenatal"
+          ],
+          "tags": [
+            "with_emoji"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-022",
+        "title": "MRI knee",
+        "location": "Imperial Hammersmith",
+        "notes": null,
+        "startDate": "2026-06-02T11:15:00+01:00",
+        "endDate": "2026-06-02T11:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "MRI",
+            "Hammersmith"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-023",
+        "title": "CT abdomen",
+        "location": "Royal Marsden Chelsea",
+        "notes": null,
+        "startDate": "2026-06-05T12:30:00+01:00",
+        "endDate": "2026-06-05T13:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "CT",
+            "Royal Marsden"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-024",
+        "title": "X-ray right wrist",
+        "location": "Chelsea Westminster A&E",
+        "notes": null,
+        "startDate": "2026-06-08T13:45:00+01:00",
+        "endDate": "2026-06-08T14:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "X-ray",
+            "Chelsea Westminster",
+            "A&E"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-025",
+        "title": "Operation pre-op",
+        "location": "UCLH",
+        "notes": "Nil by mouth from 10pm",
+        "startDate": "2026-06-11T14:00:00+01:00",
+        "endDate": "2026-06-11T14:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "operation",
+            "UCLH"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-026",
+        "title": "Vaccination — flu jab",
+        "location": "Boots Oxford Circus",
+        "notes": null,
+        "startDate": "2026-06-14T15:15:00+01:00",
+        "endDate": "2026-06-14T16:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "vaccination",
+            "jab"
+          ],
+          "tags": [
+            "multi_keyword"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-027",
+        "title": "Jab 12pm",
+        "location": "Local pharmacy",
+        "notes": null,
+        "startDate": "2026-06-17T16:30:00+01:00",
+        "endDate": "2026-06-17T17:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "jab",
+            "pharmacy"
+          ],
+          "tags": [
+            "title_with_time",
+            "colloquial"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-028",
+        "title": "Midwife",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-20T08:45:00+01:00",
+        "endDate": "2026-06-20T09:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "midwife"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-029",
+        "title": "Midwife 36 weeks",
+        "location": "Whittington Birth Centre",
+        "notes": null,
+        "startDate": "2026-06-23T09:00:00+01:00",
+        "endDate": "2026-06-23T09:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "midwife"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-030",
+        "title": "Antenatal class",
+        "location": "Royal London",
+        "notes": null,
+        "startDate": "2026-06-26T10:15:00+01:00",
+        "endDate": "2026-06-26T11:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "antenatal",
+            "Royal London"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-031",
+        "title": "Hospital tour Tues",
+        "location": "Kings College Hospital",
+        "notes": null,
+        "startDate": "2026-06-29T11:30:00+01:00",
+        "endDate": "2026-06-29T12:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "hospital",
+            "Kings College"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-032",
+        "title": "Gynae follow up",
+        "location": "Guys",
+        "notes": null,
+        "startDate": "2026-07-02T12:45:00+01:00",
+        "endDate": "2026-07-02T13:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Guys"
+          ],
+          "tags": [
+            "abbreviated"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-033",
+        "title": "Paediatrician — Leo",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-05T13:00:00+01:00",
+        "endDate": "2026-07-05T14:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "paediatrician"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-034",
+        "title": "Physio knee",
+        "location": "Spire Bushey",
+        "notes": null,
+        "startDate": "2026-07-08T14:15:00+01:00",
+        "endDate": "2026-07-08T14:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "physio",
+            "physiotherapist",
+            "Spire"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-035",
+        "title": "Physio",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-11T15:30:00+01:00",
+        "endDate": "2026-07-11T16:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "physio"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-036",
+        "title": "Stef physio",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-20T16:45:00+01:00",
+        "endDate": "2026-05-20T17:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "physio"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-037",
+        "title": "Orthodontist brace tightening",
+        "location": "12 Wimpole Street",
+        "notes": null,
+        "startDate": "2026-05-23T08:00:00+01:00",
+        "endDate": "2026-05-23T08:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "orthodontist"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-038",
+        "title": "Hygienist 9am",
+        "location": "Dental Practice",
+        "notes": null,
+        "startDate": "2026-05-26T09:15:00+01:00",
+        "endDate": "2026-05-26T10:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "hygienist"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-039",
+        "title": "Speech therapist for Leo",
+        "location": "NHS Speech and Language",
+        "notes": null,
+        "startDate": "2026-05-29T10:30:00+01:00",
+        "endDate": "2026-05-29T11:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "speech therapist",
+            "NHS"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-040",
+        "title": "Dietitian intake",
+        "location": null,
+        "notes": "Food diary for 1 week",
+        "startDate": "2026-06-01T11:45:00+01:00",
+        "endDate": "2026-06-01T12:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dietitian"
+          ],
+          "tags": [
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-041",
+        "title": "OT home visit",
+        "location": null,
+        "notes": "Occupational therapist Mary — accessibility check",
+        "startDate": "2026-06-04T12:00:00+01:00",
+        "endDate": "2026-06-04T12:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "occupational therapist"
+          ],
+          "tags": [
+            "with_notes_doctor_info"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-042",
+        "title": "Psychologist",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-07T13:15:00+01:00",
+        "endDate": "2026-06-07T14:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "psychologist"
+          ],
+          "tags": [
+            "title_only"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-043",
+        "title": "Psychiatrist 2pm",
+        "location": "South London and Maudsley",
+        "notes": null,
+        "startDate": "2026-06-10T14:30:00+01:00",
+        "endDate": "2026-06-10T15:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "psychiatrist"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-044",
+        "title": "Ophthalmologist",
+        "location": "Moorfields Eye Hospital",
+        "notes": null,
+        "startDate": "2026-06-13T15:45:00+01:00",
+        "endDate": "2026-06-13T16:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "ophthalmologist",
+            "Moorfields",
+            "hospital"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-045",
+        "title": "ENT 11:30",
+        "location": "Royal National ENT",
+        "notes": null,
+        "startDate": "2026-06-16T16:00:00+01:00",
+        "endDate": "2026-06-16T17:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "ENT"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-046",
+        "title": "Dermatologist mole check",
+        "location": "HCA Sloane Street",
+        "notes": null,
+        "startDate": "2026-06-19T08:15:00+01:00",
+        "endDate": "2026-06-19T08:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dermatologist",
+            "HCA"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-047",
+        "title": "Cardiologist follow up",
+        "location": "Royal Brompton",
+        "notes": null,
+        "startDate": "2026-06-22T09:30:00+01:00",
+        "endDate": "2026-06-22T10:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "cardiologist",
+            "Royal Brompton"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-048",
+        "title": "Neurologist",
+        "location": "Queen Square, Bloomsbury",
+        "notes": null,
+        "startDate": "2026-06-25T10:45:00+01:00",
+        "endDate": "2026-06-25T11:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "neurologist"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-049",
+        "title": "Oncologist results",
+        "location": "The Christie",
+        "notes": "Bring Sam?",
+        "startDate": "2026-06-28T11:00:00+01:00",
+        "endDate": "2026-06-28T11:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "oncologist",
+            "Christie"
+          ],
+          "tags": [
+            "with_notes_doctor_info"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-050",
+        "title": "Consultant pre-op",
+        "location": "Royal Free",
+        "notes": null,
+        "startDate": "2026-07-01T12:15:00+01:00",
+        "endDate": "2026-07-01T13:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "consultant",
+            "Royal Free"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-051",
+        "title": "Gastroenterology clinic",
+        "location": "John Radcliffe Oxford",
+        "notes": null,
+        "startDate": "2026-07-04T13:30:00+01:00",
+        "endDate": "2026-07-04T14:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "gastroenterology",
+            "clinic",
+            "John Radcliffe"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-052",
+        "title": "Urologist 10:00",
+        "location": "Addenbrooke's",
+        "notes": null,
+        "startDate": "2026-07-07T14:45:00+01:00",
+        "endDate": "2026-07-07T15:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "urologist",
+            "Addenbrooke"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-053",
+        "title": "Rheumatologist",
+        "location": "Royal National Rheumatic, Bath",
+        "notes": null,
+        "startDate": "2026-07-10T15:00:00+01:00",
+        "endDate": "2026-07-10T15:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "rheumatologist"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-054",
+        "title": "Orthopaedic surgeon consult",
+        "location": "Spire Norwich",
+        "notes": null,
+        "startDate": "2026-07-13T16:15:00+01:00",
+        "endDate": "2026-07-13T17:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "orthopaedic",
+            "surgeon",
+            "Spire"
+          ],
+          "tags": [
+            "multi_keyword"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-055",
+        "title": "Therapy session",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-22T08:30:00+01:00",
+        "endDate": "2026-05-22T09:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [],
+          "tags": [
+            "expected_miss"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-056",
+        "title": "Marsden review",
+        "location": "Royal Marsden Sutton",
+        "notes": null,
+        "startDate": "2026-05-25T09:45:00+01:00",
+        "endDate": "2026-05-25T10:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Royal Marsden"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-057",
+        "title": "Christie chemo round 4",
+        "location": "The Christie Manchester",
+        "notes": null,
+        "startDate": "2026-05-28T10:00:00+01:00",
+        "endDate": "2026-05-28T11:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": true,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "chemo",
+            "Christie"
+          ],
+          "tags": [
+            "recurring_mention"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-058",
+        "title": "Radiotherapy 14:00",
+        "location": "UCLH cancer centre",
+        "notes": null,
+        "startDate": "2026-05-31T11:15:00+01:00",
+        "endDate": "2026-05-31T11:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "radiotherapy",
+            "UCLH"
+          ],
+          "tags": [
+            "title_with_time"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-059",
+        "title": "Biopsy results",
+        "location": "QEHB",
+        "notes": null,
+        "startDate": "2026-06-03T12:30:00+01:00",
+        "endDate": "2026-06-03T13:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "biopsy",
+            "QEHB"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-060",
+        "title": "GOSH paediatric ward visit",
+        "location": "Great Ormond Street",
+        "notes": null,
+        "startDate": "2026-06-06T13:45:00+01:00",
+        "endDate": "2026-06-06T14:45:00+01:00",
+        "isAllDay": true,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "paediatrician",
+            "Great Ormond Street"
+          ],
+          "tags": [
+            "with_location_name"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-061",
+        "title": "Papworth — heart MRI",
+        "location": "Papworth Cambridge",
+        "notes": null,
+        "startDate": "2026-06-09T14:00:00+01:00",
+        "endDate": "2026-06-09T14:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "MRI",
+            "Papworth"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-062",
+        "title": "Bupa health check",
+        "location": "Bupa Russell Square",
+        "notes": null,
+        "startDate": "2026-06-12T15:15:00+01:00",
+        "endDate": "2026-06-12T16:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Bupa"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-063",
+        "title": "Spire consultant appt",
+        "location": "Spire Cardiff",
+        "notes": null,
+        "startDate": "2026-06-15T16:30:00+01:00",
+        "endDate": "2026-06-15T17:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Spire",
+            "consultant"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-064",
+        "title": "Nuffield — knee scan",
+        "location": "Nuffield Health Leeds",
+        "notes": null,
+        "startDate": "2026-06-18T08:45:00+01:00",
+        "endDate": "2026-06-18T09:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Nuffield",
+            "scan"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-065",
+        "title": "Circle Health knee",
+        "location": "Circle Reading",
+        "notes": null,
+        "startDate": "2026-06-21T09:00:00+01:00",
+        "endDate": "2026-06-21T09:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Circle Health"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-066",
+        "title": "HCA Wellington outpatient",
+        "location": "The Wellington Hospital, NW8",
+        "notes": null,
+        "startDate": "2026-06-24T10:15:00+01:00",
+        "endDate": "2026-06-24T11:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "HCA",
+            "hospital"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-067",
+        "title": "Surgeon follow up",
+        "location": "Bristol Royal Infirmary",
+        "notes": null,
+        "startDate": "2026-06-27T11:30:00+01:00",
+        "endDate": "2026-06-27T12:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "surgeon",
+            "Bristol Royal"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-068",
+        "title": "Manchester Royal eye clinic",
+        "location": "Oxford Rd, Manchester",
+        "notes": null,
+        "startDate": "2026-06-30T12:45:00+01:00",
+        "endDate": "2026-06-30T13:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Manchester Royal",
+            "clinic"
+          ],
+          "tags": [
+            "with_location_address"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-069",
+        "title": "Speech therapist follow up",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-03T13:00:00+01:00",
+        "endDate": "2026-07-03T14:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "speech therapist"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-070",
+        "title": "Health check — pharmacy",
+        "location": "Tesco Pharmacy",
+        "notes": null,
+        "startDate": "2026-07-06T14:15:00+01:00",
+        "endDate": "2026-07-06T14:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "pharmacy"
+          ],
+          "tags": []
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-071",
+        "title": "Q2 review meeting",
+        "location": "Office",
+        "notes": null,
+        "startDate": "2026-07-09T15:30:00+01:00",
+        "endDate": "2026-07-09T16:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-072",
+        "title": "Lunch with Anne",
+        "location": "Dishoom",
+        "notes": null,
+        "startDate": "2026-07-12T16:45:00+01:00",
+        "endDate": "2026-07-12T17:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-073",
+        "title": "Football practice",
+        "location": "Park",
+        "notes": null,
+        "startDate": "2026-05-21T08:00:00+01:00",
+        "endDate": "2026-05-21T08:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-074",
+        "title": "Gym session",
+        "location": "PureGym",
+        "notes": null,
+        "startDate": "2026-05-24T09:15:00+01:00",
+        "endDate": "2026-05-24T10:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-075",
+        "title": "Tesco shop",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-27T10:30:00+01:00",
+        "endDate": "2026-05-27T11:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-076",
+        "title": "Haircut 10am",
+        "location": "Toni & Guy",
+        "notes": null,
+        "startDate": "2026-05-30T11:45:00+01:00",
+        "endDate": "2026-05-30T12:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-077",
+        "title": "MOT car",
+        "location": "Halfords Autocentre",
+        "notes": null,
+        "startDate": "2026-06-02T12:00:00+01:00",
+        "endDate": "2026-06-02T12:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-078",
+        "title": "Sophie's birthday 🎂",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-05T13:15:00+01:00",
+        "endDate": "2026-06-05T14:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical",
+            "with_emoji"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-079",
+        "title": "Cinema — Dr. Strange",
+        "location": "Picturehouse Central",
+        "notes": null,
+        "startDate": "2026-06-08T14:30:00+01:00",
+        "endDate": "2026-06-08T15:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-080",
+        "title": "School trip Leo",
+        "location": "Science Museum",
+        "notes": null,
+        "startDate": "2026-06-11T15:45:00+01:00",
+        "endDate": "2026-06-11T16:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-081",
+        "title": "Pickup parcel",
+        "location": "Post Office",
+        "notes": null,
+        "startDate": "2026-06-14T16:00:00+01:00",
+        "endDate": "2026-06-14T17:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-082",
+        "title": "Sales call with client",
+        "location": "Zoom",
+        "notes": null,
+        "startDate": "2026-06-17T08:15:00+01:00",
+        "endDate": "2026-06-17T08:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": "https://zoom.us/j/abc123",
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical",
+            "online_appointment"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-083",
+        "title": "All-hands 4pm",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-20T09:30:00+01:00",
+        "endDate": "2026-06-20T10:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-084",
+        "title": "France holiday — depart",
+        "location": "Heathrow T5",
+        "notes": null,
+        "startDate": "2026-06-23T10:45:00+01:00",
+        "endDate": "2026-06-23T11:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-085",
+        "title": "Tax return deadline",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-26T11:00:00+01:00",
+        "endDate": "2026-06-26T11:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-086",
+        "title": "Photography workshop",
+        "location": "Tate Modern",
+        "notes": null,
+        "startDate": "2026-06-29T12:15:00+01:00",
+        "endDate": "2026-06-29T13:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-087",
+        "title": "Help Stef move",
+        "location": "Hackney",
+        "notes": null,
+        "startDate": "2026-07-02T13:30:00+01:00",
+        "endDate": "2026-07-02T14:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-088",
+        "title": "Pasta night with neighbours",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-07-05T14:45:00+01:00",
+        "endDate": "2026-07-05T15:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-089",
+        "title": "Dry cleaning collect",
+        "location": "Jeeves",
+        "notes": null,
+        "startDate": "2026-07-08T15:00:00+01:00",
+        "endDate": "2026-07-08T15:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Work",
+          "source": "Exchange"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-090",
+        "title": "Yoga 7:30pm",
+        "location": "Triyoga Soho",
+        "notes": null,
+        "startDate": "2026-07-11T16:15:00+01:00",
+        "endDate": "2026-07-11T17:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "Google"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "negative_clearly_non_medical"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-091",
+        "title": "Blood moon viewing 🌕",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-20T08:30:00+01:00",
+        "endDate": "2026-05-20T09:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "blood"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-092",
+        "title": "Dentistry conference panel",
+        "location": "ExCeL London",
+        "notes": null,
+        "startDate": "2026-05-23T09:45:00+01:00",
+        "endDate": "2026-05-23T10:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "dentist"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike",
+            "prefix_match"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-093",
+        "title": "Charts review with team",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-26T10:00:00+01:00",
+        "endDate": "2026-05-26T11:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-094",
+        "title": "Scan invoices for tax",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-05-29T11:15:00+01:00",
+        "endDate": "2026-05-29T11:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "scan"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-095",
+        "title": "Surgery presentation team",
+        "location": "Office",
+        "notes": null,
+        "startDate": "2026-06-01T12:30:00+01:00",
+        "endDate": "2026-06-01T13:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "surgery"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-096",
+        "title": "GP rotation engineering review",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-04T13:45:00+01:00",
+        "endDate": "2026-06-04T14:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": false,
+          "expected_keywords": [
+            "GP"
+          ],
+          "tags": [
+            "hard_case",
+            "false_positive_lookalike"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-097",
+        "title": "NHS hospital follow up",
+        "location": "Royal London",
+        "notes": null,
+        "startDate": "2026-06-07T14:00:00+01:00",
+        "endDate": "2026-06-07T14:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "NHS",
+            "hospital",
+            "Royal London"
+          ],
+          "tags": [
+            "hard_case",
+            "multi_keyword"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-098",
+        "title": "Doc — chat about results",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-10T15:15:00+01:00",
+        "endDate": "2026-06-10T16:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [],
+          "tags": [
+            "hard_case",
+            "expected_miss",
+            "abbreviated"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-099",
+        "title": "Hospital visit grandad",
+        "location": "John Radcliffe",
+        "notes": null,
+        "startDate": "2026-06-13T16:30:00+01:00",
+        "endDate": "2026-06-13T17:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Family",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "hospital",
+            "John Radcliffe"
+          ],
+          "tags": [
+            "family_member"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-100",
+        "title": "MRI scan results review",
+        "location": "Imperial Hammersmith",
+        "notes": null,
+        "startDate": "2026-06-16T08:45:00+01:00",
+        "endDate": "2026-06-16T09:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "MRI",
+            "scan",
+            "Hammersmith"
+          ],
+          "tags": [
+            "multi_keyword"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-101",
+        "title": "Dentst 10am",
+        "location": "Bupa Dental",
+        "notes": null,
+        "startDate": "2026-06-19T09:00:00+01:00",
+        "endDate": "2026-06-19T09:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "dentist",
+            "Bupa"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-102",
+        "title": "Doctorr Smith follow up",
+        "location": null,
+        "notes": null,
+        "startDate": "2026-06-22T10:15:00+01:00",
+        "endDate": "2026-06-22T11:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "doctor"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-103",
+        "title": "Bloodd test 8am",
+        "location": "Royal Free phlebotomy",
+        "notes": "fasting from 8pm",
+        "startDate": "2026-06-25T11:30:00+01:00",
+        "endDate": "2026-06-25T12:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "blood",
+            "Royal Free"
+          ],
+          "tags": [
+            "typo",
+            "ed1",
+            "with_notes_prep"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-104",
+        "title": "Phisio knee",
+        "location": "Spire Bushey",
+        "notes": null,
+        "startDate": "2026-06-28T12:45:00+01:00",
+        "endDate": "2026-06-28T13:30:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "physio",
+            "Spire"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-105",
+        "title": "Cardilogist follow up",
+        "location": "Royal Brompton",
+        "notes": null,
+        "startDate": "2026-07-01T13:00:00+01:00",
+        "endDate": "2026-07-01T14:00:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "cardiologist",
+            "Royal Brompton"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-106",
+        "title": "Marsdn review",
+        "location": "Royal Marsden Sutton",
+        "notes": null,
+        "startDate": "2026-07-04T14:15:00+01:00",
+        "endDate": "2026-07-04T14:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Royal Marsden"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-107",
+        "title": "Cristie chemo round 5",
+        "location": "The Christie Manchester",
+        "notes": null,
+        "startDate": "2026-07-07T15:30:00+01:00",
+        "endDate": "2026-07-07T16:15:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": true,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "chemo",
+            "Christie"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      },
+      {
+        "eventIdentifier": "evt-en-108",
+        "title": "Addnbrooke 10am",
+        "location": "Addenbrooke's",
+        "notes": null,
+        "startDate": "2026-07-10T16:45:00+01:00",
+        "endDate": "2026-07-10T17:45:00+01:00",
+        "isAllDay": false,
+        "calendar": {
+          "title": "Personal",
+          "source": "iCloud"
+        },
+        "hasRecurrenceRules": false,
+        "url": null,
+        "_test_metadata": {
+          "is_medical": true,
+          "expected_keywords": [
+            "Addenbrooke"
+          ],
+          "tags": [
+            "typo",
+            "ed1"
+          ]
+        }
+      }
+    ]
+  }
+}

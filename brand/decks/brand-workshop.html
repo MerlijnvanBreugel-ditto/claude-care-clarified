@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto — Brand Workshop</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');
+
+  :root {
+    --text: #0D164F;
+    --text-light: #7C8297;
+    --bg: #FFFFFF;
+    --brand: #1C1E26;
+    --blue: #58B6D2;
+    --gold: #D4A832;
+    --gold-light: #7DD4E8;
+    --red: #D94F4F;
+    --divider: #EAEAEA;
+    --soft-bg: #F7F6F3;
+    --heading: 'Bricolage Grotesque', sans-serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius: 20px;
+    --pad: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow: hidden; height: 100%; }
+  body { font-family: var(--body); color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; line-height: 1.5; overflow: hidden; height: 100%; }
+
+  .deck { height: 100vh; width: 100vw; position: relative; }
+  .slide { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 128px; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; background: var(--bg); }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide.active .a { animation: fadeUp 0.55s ease both; }
+  .slide.active .a1 { animation-delay: 0.1s; }
+  .slide.active .a2 { animation-delay: 0.2s; }
+  .slide.active .a3 { animation-delay: 0.3s; }
+  .slide.active .a4 { animation-delay: 0.4s; }
+  .slide.active .a5 { animation-delay: 0.5s; }
+  .slide.active .a6 { animation-delay: 0.6s; }
+  .slide.active .anim-scale { animation: scaleIn 1.2s ease both; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
+
+  .content { max-width: 880px; width: 100%; }
+  .hl-gold { color: var(--gold); }
+  .hl-blue { color: var(--blue); }
+  .hl-gold-light { color: var(--gold-light); }
+  .hl-red { color: var(--red); }
+
+  .deck-logo { position: fixed; top: 28px; right: 36px; height: 24px; z-index: 1000; }
+
+  /* Slide types */
+  .slide-dark { background: var(--brand); color: #F8F7F4; }
+  .slide-dark .label { color: rgba(248,247,244,0.3); }
+  .slide-soft { background: var(--soft-bg); }
+
+  .slide-hero { padding: 0; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide-hero .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+  .slide-hero .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(160deg, rgba(13,22,79,0.85) 0%, rgba(13,22,79,0.5) 100%); }
+  .slide-hero .content { position: relative; z-index: 2; color: #F8F7F4; padding: 0 128px; }
+  .slide-hero .label { color: rgba(248,247,244,0.45); }
+  .slide-hero .body-text { color: rgba(248,247,244,0.6); }
+
+  .slide-inset { padding: var(--pad); display: flex; flex-direction: column; justify-content: stretch; }
+  .slide-inset .inset-frame { flex: 1; border-radius: var(--radius); overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+  .slide-inset .inset-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .slide-inset .inset-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(13,22,79,0.72) 0%, rgba(13,22,79,0.08) 55%); }
+  .slide-inset .inset-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 52px 68px; color: #F8F7F4; z-index: 2; }
+  .slide-inset .inset-content .label { color: rgba(248,247,244,0.45); }
+  .slide-inset .inset-content .body-text { color: rgba(248,247,244,0.55); }
+
+  /* Typography */
+  .hero-text { font-family: var(--heading); font-size: 66px; font-weight: 600; letter-spacing: -1.5px; line-height: 1.06; }
+  .big-text { font-family: var(--heading); font-size: 46px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.14; }
+  .medium-text { font-family: var(--heading); font-size: 30px; font-weight: 500; line-height: 1.28; }
+  .body-text { font-family: var(--body); font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--text-light); }
+  .label { font-family: var(--body); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-light); margin-bottom: 12px; }
+  .spacer-sm { height: 14px; }
+  .spacer-md { height: 28px; }
+  .spacer-lg { height: 44px; }
+
+  /* Cards */
+  .card { padding: 24px; border-radius: 14px; background: #fff; box-shadow: 0 1px 4px rgba(13,22,79,0.06); margin-bottom: 14px; }
+  .card h3 { font-family: var(--heading); font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+  .card p { font-size: 13px; color: var(--text-light); line-height: 1.55; }
+  .card .proof { font-size: 12px; color: var(--blue); font-style: italic; margin-top: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 20px; }
+
+  /* Quote */
+  .quote-block { font-family: var(--heading); font-size: 24px; font-weight: 400; font-style: italic; line-height: 1.4; color: var(--text-light); border-left: 3px solid var(--blue); padding-left: 20px; margin-top: 20px; }
+  .quote-attr { font-size: 13px; color: var(--text-light); font-style: normal; margin-top: 8px; }
+
+  /* Framework layers */
+  .fw-layer { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--divider); }
+  .fw-layer:last-child { border-bottom: none; }
+  .fw-num { font-family: var(--heading); font-size: 32px; font-weight: 600; color: var(--blue); width: 40px; flex-shrink: 0; }
+  .fw-layer h3 { font-family: var(--heading); font-size: 18px; font-weight: 500; }
+  .fw-layer p { font-size: 13px; color: var(--text-light); }
+
+  /* Interactive vote cards */
+  .vote-group { margin-top: 24px; }
+  .vote-card { padding: 20px 24px; border-radius: 14px; border: 2px solid var(--divider); margin-bottom: 12px; cursor: pointer; transition: all 0.25s ease; position: relative; }
+  .vote-card:hover { border-color: var(--blue); background: rgba(88,182,210,0.04); }
+  .vote-card.selected { border-color: var(--blue); background: rgba(88,182,210,0.08); }
+  .vote-card.selected::after { content: '\2713'; position: absolute; top: 20px; right: 20px; color: var(--blue); font-weight: 700; font-size: 18px; }
+  .vote-card h3 { font-family: var(--heading); font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+  .vote-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+  .slide-dark .vote-card { border-color: rgba(248,247,244,0.1); background: rgba(248,247,244,0.03); }
+  .slide-dark .vote-card:hover { border-color: var(--gold-light); background: rgba(248,247,244,0.06); }
+  .slide-dark .vote-card.selected { border-color: var(--gold-light); background: rgba(248,247,244,0.08); }
+  .slide-dark .vote-card.selected::after { color: var(--gold-light); }
+  .slide-dark .vote-card h3 { color: #F8F7F4; }
+  .slide-dark .vote-card p { color: rgba(248,247,244,0.45); }
+
+  /* Spectrum */
+  .spectrum-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--divider); font-size: 13px; }
+  .spectrum-row:last-child { border-bottom: none; }
+  .spectrum-left { width: 80px; text-align: right; color: var(--text-light); flex-shrink: 0; }
+  .spectrum-right { width: 80px; color: var(--text-light); flex-shrink: 0; }
+  .spectrum-bar { flex: 1; height: 6px; background: var(--divider); border-radius: 3px; position: relative; }
+  .spectrum-dot { position: absolute; top: -5px; width: 16px; height: 16px; background: var(--blue); border-radius: 50%; }
+  .spectrum-label { font-weight: 600; color: var(--text); font-size: 14px; width: 100px; flex-shrink: 0; }
+
+  /* Progress + nav */
+  .progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--brand); z-index: 1000; transition: width 0.4s ease; }
+  .counter.on-dark { color: rgba(248,247,244,0.2); }
+  .counter.on-photo { color: rgba(255,255,255,0.3); }
+  .export-btn { position: fixed; bottom: 24px; right: 36px; font-family: var(--body); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--blue); background: none; border: 1px solid var(--blue); padding: 6px 14px; border-radius: 6px; cursor: pointer; z-index: 1001; }
+  .export-btn:hover { background: var(--blue); color: #fff; }
+  .counter { position: fixed; bottom: 48px; right: 36px; font-size: 11px; font-weight: 500; color: #C0C0C0; z-index: 1000; letter-spacing: 0.5px; }
+
+  /* Draggable spectrum */
+  .spectrum-bar { cursor: pointer; }
+  .spectrum-dot { cursor: grab; transition: none; }
+  .spectrum-dot.dragging { cursor: grabbing; transform: scale(1.3); }
+
+  /* Open text field */
+  .open-field { margin-top: 16px; }
+  .open-field textarea { width: 100%; min-height: 48px; padding: 12px 16px; border: 2px solid var(--divider); border-radius: 10px; font-family: var(--body); font-size: 14px; color: var(--text); background: var(--soft-bg); resize: vertical; outline: none; transition: border-color 0.2s; }
+  .open-field textarea:focus { border-color: var(--blue); }
+  .open-field label { font-size: 12px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px; }
+  .slide-dark .open-field textarea { background: rgba(248,247,244,0.06); border-color: rgba(248,247,244,0.1); color: #F8F7F4; }
+  .slide-dark .open-field textarea:focus { border-color: var(--gold-light); }
+  .slide-dark .open-field textarea::placeholder { color: rgba(248,247,244,0.25); }
+  .slide-dark .open-field label { color: rgba(248,247,244,0.3); }
+
+  /* Nav hint */
+  .nav-hint { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); font-family: var(--body); font-size: 11px; color: #C0C0C0; z-index: 1000; letter-spacing: 0.5px; }
+  .nav-hint.on-dark { color: rgba(248,247,244,0.2); }
+  .nav-hint.on-photo { color: rgba(255,255,255,0.3); }
+
+  /* Export + counter stack */
+  .bottom-right { position: fixed; bottom: 24px; right: 36px; z-index: 1001; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .export-btn { font-family: var(--body); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--blue); background: none; border: 1px solid var(--blue); padding: 6px 14px; border-radius: 6px; cursor: pointer; }
+  .export-btn:hover { background: var(--blue); color: #fff; }
+  .export-btn.hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="nav-hint" id="navHint">← → arrow keys to navigate</div>
+<img class="deck-logo" id="deckLogo" src="logo/Ditto_darkblue.svg" alt="Ditto">
+<div class="bottom-right">
+  <button class="export-btn" id="exportBtn" onclick="exportChoices()">Export choices</button>
+  <div class="counter" id="counter"></div>
+</div>
+
+<div class="deck">
+
+<!-- 1. TITLE -->
+<div class="slide slide-hero" data-theme="photo">
+  <img class="hero-bg anim-scale" src="images/89ed73da68380a26b963138a1714041b.jpg" alt="">
+  <div class="hero-overlay"></div>
+  <div class="content">
+    <div class="label a">Brand Workshop</div>
+    <h1 class="hero-text a a1">Ditto Brand<br><span class="hl-gold-light">Fundamentals</span></h1>
+    <div class="spacer-md"></div>
+    <p class="body-text a a2">Defining who we are, what we believe,<br>and how we show up. March 2026.</p>
+  </div>
+</div>
+
+<!-- 2. WHAT IS BRAND -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">Why Brand</div>
+    <h2 class="big-text a a1">A brand is not a logo.<br>It's a <span class="hl-blue">decision-making system.</span></h2>
+    <div class="spacer-md"></div>
+    <p class="body-text a a2">It determines who trusts you, who joins you, who pays you.</p>
+    <div class="quote-block a a3">"A brand is a person's gut feeling about a product, service, or company."<div class="quote-attr">— Marty Neumeier, The Brand Gap</div></div>
+  </div>
+</div>
+
+<!-- 3. WHY NOW -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/e476dd8b49d234e5258fae18aed4d33c.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay"></div>
+    <div class="inset-content">
+      <div class="label a">Why Now</div>
+      <h2 class="big-text a a1">75K users. Seed raise.<br>EU expansion ahead.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">You can't scale what you can't articulate.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 4. LESSONS -->
+<div class="slide slide-soft">
+  <div class="content">
+    <div class="label a">Inspiration</div>
+    <h2 class="big-text a a1">Lessons from brands<br>we <span class="hl-gold">admire.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="card a a2"><h3>Headspace</h3><p>Brand IS the product. One visual metaphor, applied everywhere. Unmistakable.</p><div class="proof">Lesson: be so distinctive no one confuses you for anyone else.</div></div>
+    <div class="card a a3"><h3>Apple</h3><p>Radical simplicity. Says less than you'd expect. Hits harder because of it.</p><div class="proof">Lesson: simplicity is a brand position, not just a design preference.</div></div>
+    <div class="card a a4"><h3>Patagonia</h3><p>The mission is the brand. They'd rather lose a sale than compromise a value.</p><div class="proof">Lesson: values without sacrifice are just decoration.</div></div>
+  </div>
+</div>
+
+<!-- 5. THE FRAMEWORK -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">The Framework</div>
+    <h2 class="big-text a a1">Five layers.<br>Purpose at the top.</h2>
+    <div class="spacer-md"></div>
+    <div class="fw-layer a a2"><div class="fw-num">1</div><div><h3>Purpose</h3><p>Why do we exist beyond making money?</p></div></div>
+    <div class="fw-layer a a2"><div class="fw-num">2</div><div><h3>Values</h3><p>What do we believe — even when it costs us?</p></div></div>
+    <div class="fw-layer a a3"><div class="fw-num">3</div><div><h3>Position</h3><p>What space do we own in people's minds?</p></div></div>
+    <div class="fw-layer a a4"><div class="fw-num">4</div><div><h3>Promise</h3><p>What can people always count on?</p></div></div>
+    <div class="fw-layer a a4"><div class="fw-num">5</div><div><h3>Personality</h3><p>How do we show up — voice, tone, character?</p></div></div>
+  </div>
+</div>
+
+<!-- 6. CORE BELIEF -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/6a397c56d57ed464b03002d42f620716.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay"></div>
+    <div class="inset-content">
+      <div class="label a">Core Belief</div>
+      <h2 class="big-text a a1">Patient confusion is a<br><span class="hl-gold-light">design failure</span>,<br>not a human limitation.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">This belief drives everything we build.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 7. PURPOSE — VOTE -->
+<div class="slide slide-dark" data-theme="dark">
+  <div class="content">
+    <div class="label a">1 — Purpose</div>
+    <h2 class="big-text a a1">Why does Ditto <span class="hl-gold-light">exist?</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2" style="color:rgba(248,247,244,0.4);">Select the one that feels most true.</p>
+    <div class="vote-group">
+      <div class="vote-card a a3" data-group="purpose" data-value="A" onclick="vote(this)"><h3>A — Everyone deserves to feel in control of their care.</h3><p>Empowerment. The patient as protagonist.</p></div>
+      <div class="vote-card a a3" data-group="purpose" data-value="B" onclick="vote(this)"><h3>B — Healthcare should bring people closer, not push them apart.</h3><p>Connection. Care as a shared experience.</p></div>
+      <div class="vote-card a a4" data-group="purpose" data-value="C" onclick="vote(this)"><h3>C — People who understand their care make better decisions — for themselves and each other.</h3><p>Understanding as the lever for everything.</p></div>
+      <div class="vote-card a a4" data-group="purpose" data-value="D" onclick="vote(this)"><h3>D — We make healthcare work for the people it's supposed to serve.</h3><p>Challenger stance. Built for people, not systems.</p></div>
+      <div class="vote-card a a5" data-group="purpose" data-value="E" onclick="vote(this)"><h3>E — No one should go through healthcare feeling alone or in the dark.</h3><p>Emotional core. Not understanding + isolation combined.</p></div>
+    </div>
+    <div class="open-field a a6">
+      <label>Or add your own</label>
+      <textarea id="purpose-custom" placeholder="Your take on Ditto's purpose..." oninput="saveText('purpose_custom',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 8. VALUES -->
+<div class="slide slide-soft">
+  <div class="content">
+    <div class="label a">2 — Values</div>
+    <h2 class="big-text a a1">Four convictions.<br>Proven by <span class="hl-gold">decisions.</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2">Values aren't aspirations. They're beliefs we've already paid for.</p>
+    <div class="grid-2">
+      <div class="card a a3"><h3>The patient unlocks everything</h3><p>We build for the person, not the system.</p><div class="proof">Proof: said no to white-labeling. Consumer-first, always.</div></div>
+      <div class="card a a3"><h3>Health is never solo</h3><p>A diagnosis lands on a family. We build for the circle.</p><div class="proof">Proof: built sharing before monetization. 39% shared.</div></div>
+      <div class="card a a4"><h3>Simplicity is the feature</h3><p>If it makes the product harder to understand, it doesn't ship.</p><div class="proof">Proof: said no to elderly-only mode. Accessible for all.</div></div>
+      <div class="card a a4"><h3>Earn trust, don't extract it</h3><p>We never sell data or use it in ways users wouldn't expect.</p><div class="proof">Proof: rejected pharma data monetization.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. VALUES — VOTE -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">2 — Values Check</div>
+    <h2 class="big-text a a1">Which are <span class="hl-blue">essential?</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2">Select the ones that, if removed, would make Ditto not-Ditto.</p>
+    <div class="vote-group">
+      <div class="vote-card a a3" data-group="values" data-value="patient-unlocks" onclick="voteMulti(this)"><h3>The patient unlocks everything</h3><p>Consumer-first. The patient is the protagonist.</p></div>
+      <div class="vote-card a a3" data-group="values" data-value="never-solo" onclick="voteMulti(this)"><h3>Health is never solo</h3><p>Care is multi-person. The circle matters.</p></div>
+      <div class="vote-card a a4" data-group="values" data-value="simplicity" onclick="voteMulti(this)"><h3>Simplicity is the feature</h3><p>Strip complexity. Clarity in stressful moments.</p></div>
+      <div class="vote-card a a4" data-group="values" data-value="earn-trust" onclick="voteMulti(this)"><h3>Earn trust, don't extract it</h3><p>Privacy as conviction, not compliance.</p></div>
+    </div>
+    <div class="open-field a a5">
+      <label>Missing a value? Add it here</label>
+      <textarea id="values-custom" placeholder="A conviction Ditto acts on..." oninput="saveText('values_custom',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 10. POSITION — VOTE -->
+<div class="slide slide-dark" data-theme="dark">
+  <div class="content">
+    <div class="label a">3 — Position</div>
+    <h2 class="big-text a a1">What space does Ditto <span class="hl-gold-light">own?</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2" style="color:rgba(248,247,244,0.4);">Not a portal. Not a chatbot. Not quantified self. Where no one else sits.</p>
+    <div class="vote-group">
+      <div class="vote-card a a3" data-group="position" data-value="companion" onclick="vote(this)"><h3>A — The care companion</h3><p>Warm, personal. Ongoing relationship. Support without dependence.</p></div>
+      <div class="vote-card a a4" data-group="position" data-value="consumer-layer" onclick="vote(this)"><h3>B — The consumer layer for healthcare</h3><p>Ambitious, category-creating. What Spotify did for music.</p></div>
+      <div class="vote-card a a4" data-group="position" data-value="social-care" onclick="vote(this)"><h3>C — The social care platform</h3><p>New category. "Social" is the differentiator.</p></div>
+      <div class="vote-card a a5" data-group="position" data-value="communication-layer" onclick="vote(this)"><h3>D — The communication layer for care</h3><p>Functional, precise. Making care info flow between people.</p></div>
+    </div>
+    <div class="open-field a a6">
+      <label>Or describe it differently</label>
+      <textarea id="position-custom" placeholder="How would you describe Ditto's position..." oninput="saveText('position_custom',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 11. ONE WORD — VOTE -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">3 — One Word</div>
+    <h2 class="big-text a a1">If Ditto could own <span class="hl-gold">one word.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="vote-group">
+      <div class="vote-card a a2" data-group="oneword" data-value="understanding" onclick="vote(this)"><h3>Understanding</h3><p>"I understand what's happening." Broad, foundational.</p></div>
+      <div class="vote-card a a3" data-group="oneword" data-value="clarity" onclick="vote(this)"><h3>Clarity</h3><p>The product mechanic. Ties to "Care. Clarified."</p></div>
+      <div class="vote-card a a3" data-group="oneword" data-value="confidence" onclick="vote(this)"><h3>Confidence</h3><p>"I know what to do." What understanding produces.</p></div>
+      <div class="vote-card a a4" data-group="oneword" data-value="connection" onclick="vote(this)"><h3>Connection</h3><p>"My people can help." No one else owns this in health.</p></div>
+      <div class="vote-card a a4" data-group="oneword" data-value="grip" onclick="vote(this)"><h3>Grip</h3><p>"I have a grip on my care." Tangible, active.</p></div>
+    </div>
+    <div class="open-field a a5">
+      <label>Or suggest your own word</label>
+      <textarea id="oneword-custom" placeholder="Type a word or phrase..." oninput="saveText('oneword_custom',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 12. PROMISE -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/38daf1e4a7004a6cc07eecc1d80b6b66.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay"></div>
+    <div class="inset-content">
+      <div class="label a">4 — Promise</div>
+      <h2 class="big-text a a1">After every healthcare moment,<br>you and your people will<br><span class="hl-gold-light">understand.</span></h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">What happened. What it means. What to do next.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 13. ALWAYS / NEVER -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">4 — The Contract</div>
+    <h2 class="big-text a a1">Always. <span class="hl-red">Never.</span></h2>
+    <div class="grid-2" style="margin-top:28px;">
+      <div>
+        <h3 style="font-family:var(--heading);font-size:18px;margin-bottom:14px;color:var(--blue);">Ditto always:</h3>
+        <div class="card a a2"><p>Makes you walk away understanding, not guessing</p></div>
+        <div class="card a a3"><p>Helps the people who care about you actually help</p></div>
+        <div class="card a a3"><p>Ensures nothing important gets lost or forgotten</p></div>
+      </div>
+      <div>
+        <h3 style="font-family:var(--heading);font-size:18px;margin-bottom:14px;color:var(--red);">Ditto never:</h3>
+        <div class="card a a2"><p>Sells or exploits your health data</p></div>
+        <div class="card a a3"><p>Makes a vulnerable moment more stressful</p></div>
+        <div class="card a a3"><p>Sounds like the system that confused you</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 14. PERSONALITY CHARACTER -->
+<div class="slide slide-dark" data-theme="dark">
+  <div class="content">
+    <div class="label a">5 — Personality</div>
+    <h2 class="big-text a a1">If Ditto walked<br>into a <span class="hl-gold-light">room.</span></h2>
+    <div class="spacer-md"></div>
+    <p class="body-text a a2" style="color:rgba(248,247,244,0.4);max-width:600px;">Relatively young but knowledgeable. Radiates comfort — not low-energy, but thoughtful and uplifting. Feels immediately familiar, but brings something new.</p>
+    <div class="spacer-md"></div>
+    <p class="medium-text a a3" style="color:#F8F7F4;">The person you'd want next to you<br>in a <span class="hl-gold-light">waiting room.</span></p>
+  </div>
+</div>
+
+<!-- 15. VOICE SPECTRUM -->
+<div class="slide slide-soft">
+  <div class="content">
+    <div class="label a">5 — Voice Spectrum</div>
+    <h2 class="big-text a a1">Where Ditto <span class="hl-gold">lands.</span></h2>
+    <div style="margin-top:20px;">
+      <div class="spectrum-row a a2"><div class="spectrum-label">Tone</div><div class="spectrum-left">Formal</div><div class="spectrum-bar"><div class="spectrum-dot" style="left:72%;"></div></div><div class="spectrum-right">Casual</div></div>
+      <div class="spectrum-row a a2"><div class="spectrum-label">Outlook</div><div class="spectrum-left">Realistic</div><div class="spectrum-bar"><div class="spectrum-dot" style="left:68%;"></div></div><div class="spectrum-right">Optimistic</div></div>
+      <div class="spectrum-row a a3"><div class="spectrum-label">Volume</div><div class="spectrum-left">Loud</div><div class="spectrum-bar"><div class="spectrum-dot" style="left:72%;"></div></div><div class="spectrum-right">Quiet</div></div>
+      <div class="spectrum-row a a3"><div class="spectrum-label">Energy</div><div class="spectrum-left">Serious</div><div class="spectrum-bar"><div class="spectrum-dot" style="left:62%;"></div></div><div class="spectrum-right">Playful</div></div>
+      <div class="spectrum-row a a4"><div class="spectrum-label">Role</div><div class="spectrum-left">Teacher</div><div class="spectrum-bar"><div class="spectrum-dot" style="left:70%;"></div></div><div class="spectrum-right">Friend</div></div>
+      <div class="spectrum-row a a4"><div class="spectrum-label">Feel</div><div class="spectrum-left">Premium</div><div class="spectrum-bar"><div class="spectrum-dot" style="left:65%;"></div></div><div class="spectrum-right">Accessible</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 16. VOICE RULES -->
+<div class="slide">
+  <div class="content">
+    <div class="label a">5 — Voice Rules</div>
+    <h2 class="big-text a a1">Four rules for how<br>Ditto <span class="hl-blue">speaks.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="card a a2"><h3>Clear before clever.</h3><p>If a sentence explains, it stays. If it only entertains, cut it.</p></div>
+    <div class="card a a3"><h3>Warm before clinical.</h3><p>A friend who understands, not a system that processes.</p></div>
+    <div class="card a a4"><h3>Light touch, not light subject.</h3><p>Moments of delight in heavy contexts — a smile, not a joke.</p></div>
+    <div class="card a a5"><h3>Never sound like the system.</h3><p>No jargon, no bureaucratic tone, no talking at people.</p></div>
+  </div>
+</div>
+
+<!-- 17. TAGLINE -->
+<div class="slide slide-dark" data-theme="dark">
+  <div class="content">
+    <div class="label a">Tagline</div>
+    <h2 class="hero-text a a1" style="font-size:58px;">Care. <span class="hl-gold-light">Clarified.</span></h2>
+    <div class="spacer-lg"></div>
+    <p class="body-text a a2" style="color:rgba(248,247,244,0.35);">Short. Strong. Rhythm. Focused.</p>
+    <p class="body-text a a3" style="color:rgba(248,247,244,0.35);">Captures clarity. Doesn't fully capture connection.<br>Good enough to build on.</p>
+  </div>
+</div>
+
+<!-- 18. OPEN REFLECTION -->
+<div class="slide slide-soft">
+  <div class="content">
+    <div class="label a">Your Turn</div>
+    <h2 class="big-text a a1">How would you describe<br>the Ditto brand <span class="hl-gold">today?</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text a a2">Use Wispr Flow or just type. No polish needed — but sharp thinking is. Consider:</p>
+    <div class="spacer-sm"></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;" class="a a3">
+      <span style="font-size:12px;font-weight:600;color:var(--blue);background:rgba(88,182,210,0.1);padding:4px 12px;border-radius:6px;">What feeling should Ditto evoke?</span>
+      <span style="font-size:12px;font-weight:600;color:var(--blue);background:rgba(88,182,210,0.1);padding:4px 12px;border-radius:6px;">What makes us different from every health app?</span>
+      <span style="font-size:12px;font-weight:600;color:var(--blue);background:rgba(88,182,210,0.1);padding:4px 12px;border-radius:6px;">Where does the brand fall short today?</span>
+      <span style="font-size:12px;font-weight:600;color:var(--blue);background:rgba(88,182,210,0.1);padding:4px 12px;border-radius:6px;">What should the brand look like in a year?</span>
+      <span style="font-size:12px;font-weight:600;color:var(--blue);background:rgba(88,182,210,0.1);padding:4px 12px;border-radius:6px;">If a friend asked "what's Ditto?" — what do you say?</span>
+      <span style="font-size:12px;font-weight:600;color:var(--blue);background:rgba(88,182,210,0.1);padding:4px 12px;border-radius:6px;">What brands feel like what Ditto should feel like?</span>
+    </div>
+    <div class="open-field a a4">
+      <textarea id="reflection" placeholder="Speak your mind..." style="min-height:180px;" oninput="saveText('reflection',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 19. SUMMARY -->
+<div class="slide slide-inset" data-theme="photo">
+  <div class="inset-frame">
+    <img src="images/1037fa00b9b0c392f29b4d3b45c10ab7.jpg" alt="" class="anim-scale">
+    <div class="inset-overlay" style="background:linear-gradient(to top,rgba(13,22,79,0.7) 0%,rgba(13,22,79,0.1) 50%);"></div>
+    <div class="inset-content">
+      <div class="label a">Next</div>
+      <h2 class="big-text a a1">Purpose → Values → Position →<br>Promise → <span class="hl-gold-light">Personality.</span></h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text a a2">Click "Export choices" to save your selections.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide'),progress=document.getElementById('progress'),counter=document.getElementById('counter'),logo=document.getElementById('deckLogo'),navHint=document.getElementById('navHint'),exportBtn=document.getElementById('exportBtn');let current=0;const total=slides.length;
+function goTo(i){if(i<0||i>=total)return;slides[current].querySelectorAll('.a,.anim-scale').forEach(e=>{e.style.animation='none';e.offsetHeight;e.style.animation='';});slides[current].classList.remove('active');current=i;slides[current].querySelectorAll('.a,.anim-scale').forEach(e=>{e.style.animation='none';e.offsetHeight;e.style.animation='';});slides[current].classList.add('active');progress.style.width=((current+1)/total*100)+'%';counter.textContent=(current+1)+' / '+total;const t=slides[current].getAttribute('data-theme');counter.className='counter';navHint.className='nav-hint';if(t==='dark'){counter.classList.add('on-dark');navHint.classList.add('on-dark');progress.style.background='rgba(248,247,244,0.15)';}else if(t==='photo'){counter.classList.add('on-photo');navHint.classList.add('on-photo');progress.style.background='rgba(255,255,255,0.25)';}else{progress.style.background='var(--brand)';}logo.src=(t==='dark'||t==='photo')?'logo/Ditto_white.svg':'logo/Ditto_darkblue.svg';if(current===total-1){exportBtn.classList.add('hidden');}else{exportBtn.classList.remove('hidden');}}
+goTo(0);
+document.addEventListener('keydown',e=>{if(e.target.closest('.vote-card')||e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();goTo(current+1);}if(e.key==='ArrowLeft'||e.key==='Backspace'){e.preventDefault();goTo(current-1);}});
+let tx=0;document.addEventListener('touchstart',e=>{if(!e.target.closest('.vote-card'))tx=e.touches[0].clientX;});document.addEventListener('touchend',e=>{if(!e.target.closest('.vote-card')){const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50)d>0?goTo(current+1):goTo(current-1);}});
+
+// Voting
+const choices=JSON.parse(localStorage.getItem('ditto-brand-choices')||'{}');
+function vote(card){const g=card.dataset.group,v=card.dataset.value;document.querySelectorAll(`.vote-card[data-group="${g}"]`).forEach(c=>c.classList.remove('selected'));card.classList.add('selected');choices[g]=v;localStorage.setItem('ditto-brand-choices',JSON.stringify(choices));}
+function voteMulti(card){const g=card.dataset.group,v=card.dataset.value;card.classList.toggle('selected');if(!choices[g])choices[g]=[];if(card.classList.contains('selected')){if(!choices[g].includes(v))choices[g].push(v);}else{choices[g]=choices[g].filter(x=>x!==v);}localStorage.setItem('ditto-brand-choices',JSON.stringify(choices));}
+
+// Text fields
+function saveText(key,val){choices[key]=val;localStorage.setItem('ditto-brand-choices',JSON.stringify(choices));}
+
+// Restore votes
+for(const[g,v]of Object.entries(choices)){if(Array.isArray(v)){v.forEach(val=>{const c=document.querySelector(`.vote-card[data-group="${g}"][data-value="${val}"]`);if(c)c.classList.add('selected');});}else if(typeof v==='string'&&document.querySelector(`.vote-card[data-group="${g}"]`)){const c=document.querySelector(`.vote-card[data-group="${g}"][data-value="${v}"]`);if(c)c.classList.add('selected');}}
+// Restore text fields
+const textFields={oneword_custom:'oneword-custom',purpose_custom:'purpose-custom',values_custom:'values-custom',position_custom:'position-custom',reflection:'reflection'};
+for(const[key,id]of Object.entries(textFields)){if(choices[key]){const el=document.getElementById(id);if(el)el.value=choices[key];}}
+
+// Draggable spectrum dots
+document.querySelectorAll('.spectrum-bar').forEach(bar=>{
+  const dot=bar.querySelector('.spectrum-dot');
+  if(!dot)return;
+  let dragging=false;
+  function setPos(e){
+    const rect=bar.getBoundingClientRect();
+    const clientX=e.touches?e.touches[0].clientX:e.clientX;
+    let pct=(clientX-rect.left)/rect.width;
+    pct=Math.max(0,Math.min(1,pct));
+    dot.style.left=(pct*100)+'%';
+    // Save spectrum positions
+    const row=bar.closest('.spectrum-row');
+    const label=row?row.querySelector('.spectrum-label'):null;
+    if(label){
+      if(!choices.spectrum)choices.spectrum={};
+      choices.spectrum[label.textContent.trim()]=Math.round(pct*100);
+      localStorage.setItem('ditto-brand-choices',JSON.stringify(choices));
+    }
+  }
+  dot.addEventListener('mousedown',e=>{e.preventDefault();dragging=true;dot.classList.add('dragging');});
+  bar.addEventListener('click',e=>{setPos(e);});
+  document.addEventListener('mousemove',e=>{if(dragging)setPos(e);});
+  document.addEventListener('mouseup',()=>{dragging=false;dot.classList.remove('dragging');});
+  dot.addEventListener('touchstart',e=>{e.preventDefault();dragging=true;dot.classList.add('dragging');});
+  document.addEventListener('touchmove',e=>{if(dragging)setPos(e);});
+  document.addEventListener('touchend',()=>{dragging=false;dot.classList.remove('dragging');});
+});
+// Restore spectrum positions
+if(choices.spectrum){document.querySelectorAll('.spectrum-row').forEach(row=>{const label=row.querySelector('.spectrum-label');const dot=row.querySelector('.spectrum-dot');if(label&&dot&&choices.spectrum[label.textContent.trim()]!=null){dot.style.left=choices.spectrum[label.textContent.trim()]+'%';}});}
+
+// Block keyboard nav when typing
+document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA')e.stopPropagation();},true);
+
+// Export
+function exportChoices(){
+  const d=JSON.parse(localStorage.getItem('ditto-brand-choices')||'{}');
+  const l=['# Ditto Brand Workshop — Selections','',`Exported: ${new Date().toISOString().split('T')[0]}`,''];
+  const labels={purpose:'Purpose',purpose_custom:'Purpose (custom)',values:'Values (essential)',values_custom:'Values (custom)',position:'Position',position_custom:'Position (custom)',oneword:'One Word',oneword_custom:'One Word (custom)',spectrum:'Voice Spectrum',reflection:'Open Reflection'};
+  for(const[k,v]of Object.entries(d)){
+    const label=labels[k]||k;
+    if(k==='spectrum'){
+      l.push(`**${label}:**`);
+      for(const[dim,pct]of Object.entries(v)){l.push(`  - ${dim}: ${pct}%`);}
+    }else{
+      l.push(`**${label}:** ${Array.isArray(v)?v.join(', '):v}`);
+    }
+  }
+  const b=new Blob([l.join('\n')],{type:'text/markdown'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download='brand-workshop-choices.md';a.click();
+}
+</script>
+</body>
+</html>

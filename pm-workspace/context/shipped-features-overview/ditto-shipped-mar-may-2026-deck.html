@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ditto — What we shipped · Mar–May 2026</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<style>
+@import url('https://api.fontshare.com/v2/css?f[]=uncut-sans@400,500,600,700&display=swap');
+
+:root{
+  --navy:#0D164F;        /* Primary/Default */
+  --yellow:#F3DE70;      /* Primary/Yellow  */
+  --purple:#BEAEF8;      /* Primary/Purple  */
+  --blue:#B2DCF5;        /* Brand/Accent    */
+  --offwhite:#EFE9DE;    /* Secondary       */
+  --green:#E0FBD5;
+  --orange:#E8916E;
+  --surface:#ffffff;
+  --line:#E7E3DA;
+  --line2:#eef0f2;
+  --text:#0D164F;
+  --muted:#6A6E86;
+  --muted2:#9A9DB0;
+  /* pillar colours mapped to brand palette */
+  --p-clarity:#7FC4EC;   --p-clarity-bg:#EAF6FD;
+  --p-connection:#9F86F0;--p-connection-bg:#F1ECFE;
+  --p-convenience:#E7C53C;--p-convenience-bg:#FBF4D6;
+  --p-fund:#0D164F;      --p-fund-bg:#E7E9F2;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:"Uncut Sans",-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;
+  color:var(--text);
+  background:var(--offwhite);
+  background-image:linear-gradient(179deg,
+     rgba(243,222,112,0.22) 0%,
+     rgba(224,251,209,0.20) 26%,
+     rgba(178,220,245,0.26) 64%,
+     rgba(190,174,248,0.18) 100%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+.deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+.slide{
+  min-height:100vh;scroll-snap-align:start;
+  display:flex;align-items:center;justify-content:center;
+  padding:46px 26px 64px;
+}
+.card{
+  width:100%;max-width:1000px;background:var(--surface);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 24px 60px rgba(13,22,79,0.10),0 2px 6px rgba(13,22,79,0.05);
+  padding:48px 56px;
+}
+.kicker{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--p-clarity);margin-bottom:14px;display:flex;gap:10px;align-items:center;}
+.kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(243,222,112,0.3);}
+h1{font-size:40px;line-height:1.12;letter-spacing:-0.02em;font-weight:600;margin:0 0 16px;}
+h2{font-size:30px;line-height:1.18;letter-spacing:-0.015em;font-weight:600;margin:0 0 14px;}
+.lede{font-size:18px;line-height:1.5;color:var(--muted);max-width:74ch;margin:0 0 8px;}
+p{margin:0 0 12px;}
+strong{font-weight:600;}
+small{color:var(--muted);font-size:12.5px;}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:30px 0 8px;}
+.tiles.t3{grid-template-columns:repeat(3,1fr);}
+.tile{background:var(--offwhite);border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;}
+.tile .stat{font-size:32px;font-weight:600;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;line-height:1;margin:0 0 6px;}
+.tile .label{font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);}
+.tile .sub{font-size:12.5px;color:var(--muted);margin-top:6px;}
+.tile.accent{background:linear-gradient(160deg,#0D164F,#1b2a73);border-color:#0D164F;}
+.tile.accent .stat{color:#fff;} .tile.accent .label{color:var(--blue);} .tile.accent .sub{color:#c7cde6;}
+
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:22px;}
+.cols.c4{grid-template-columns:repeat(4,1fr);gap:14px;}
+.feat{border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;background:#fff;}
+.feat .ph{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;margin-bottom:12px;}
+.dotc{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.feat ul{margin:0;padding-left:0;list-style:none;}
+.feat li{font-size:14px;padding:7px 0;border-bottom:1px dashed var(--line2);line-height:1.35;}
+.feat li:last-child{border-bottom:none;}
+.feat li .e{font-size:10px;font-weight:700;color:var(--muted2);float:right;margin-left:8px;border:1px solid var(--line);border-radius:6px;padding:0 5px;}
+
+.ph.clarity{background:var(--p-clarity-bg);color:#1d6a99;} .ph.clarity .dotc{background:var(--p-clarity);}
+.ph.connection{background:var(--p-connection-bg);color:#5a3fc0;} .ph.connection .dotc{background:var(--p-connection);}
+.ph.convenience{background:var(--p-convenience-bg);color:#9a7d05;} .ph.convenience .dotc{background:var(--p-convenience);}
+.ph.fund{background:var(--p-fund-bg);color:var(--navy);} .ph.fund .dotc{background:var(--p-fund);}
+
+.barrow{display:grid;grid-template-columns:130px 1fr 56px;align-items:center;gap:12px;margin:9px 0;font-size:13.5px;}
+.barrow .bn{font-weight:600;color:var(--text);}
+.bar{height:14px;border-radius:8px;background:var(--line2);overflow:hidden;}
+.bar>span{display:block;height:100%;border-radius:8px;}
+.barrow .bv{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;font-weight:600;}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px;}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);vertical-align:top;}
+th{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line);}
+td .k{font-size:10.5px;font-weight:700;color:#1d6a99;background:var(--p-clarity-bg);border-radius:6px;padding:1px 7px;white-space:nowrap;}
+.up{color:#2e7d32;font-weight:600;} .down{color:#c0392b;font-weight:600;}
+
+.callout{margin-top:20px;padding:16px 20px;border-radius:12px;background:var(--p-fund-bg);border-left:4px solid var(--navy);font-size:14.5px;}
+.callout.warn{background:#FCEFE8;border-left-color:var(--orange);}
+.callout .label{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+.callout.warn .label{color:#bf5b34;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:14px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted2);}
+.brand{font-weight:600;color:var(--muted);letter-spacing:.4px;}
+.brand b{color:var(--navy);}
+
+/* nav */
+.dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:20;}
+.dots button{width:11px;height:11px;border-radius:50%;border:none;background:rgba(13,22,79,.22);cursor:pointer;padding:0;transition:.2s;}
+.dots button.active{background:var(--navy);transform:scale(1.35);}
+.pager{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:20;background:rgba(255,255,255,.8);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:6px 8px;}
+.pager button{border:none;background:var(--navy);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1;}
+.pager button:disabled{opacity:.3;cursor:default;}
+.pager .pc{font-size:12px;font-weight:600;color:var(--muted);min-width:42px;text-align:center;font-variant-numeric:tabular-nums;}
+@media(max-width:720px){.card{padding:30px 22px;}.tiles,.tiles.t3,.cols,.cols.c4{grid-template-columns:1fr 1fr;}h1{font-size:30px;}h2{font-size:24px;}.dots{display:none;}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 -->
+  <section class="slide">
+    <div class="card">
+      <div class="kicker"><span class="dot"></span> Product Review · Q2 2026 · Linear + Porygon</div>
+      <h1>What we shipped — March to May 2026</h1>
+      <p class="lede">259 issues completed across Product and the new Agents team. The quarter was foundation-heavy by design (Objective 1), with the growth-loop bets (Objective 2) concentrated in Care Circle, Calendar, Customer.io and the AI summary engine. Below: what shipped, how it splits, and what actually moved.</p>
+      <div class="tiles">
+        <div class="tile accent"><div class="label">Issues shipped</div><div class="stat">259</div><div class="sub">Mar 2 · Apr 112 · May 145</div></div>
+        <div class="tile"><div class="label">Core MAU</div><div class="stat">1,381→2,086</div><div class="sub">ATH 22 May · +21% / 30d</div></div>
+        <div class="tile"><div class="label">Install → summary</div><div class="stat">2.0→7.0%</div><div class="sub">end-to-end, Mar→May</div></div>
+        <div class="tile"><div class="label">Registration rate</div><div class="stat">15→53%</div><div class="sub">~4× Mar→May</div></div>
+      </div>
+      <div class="callout"><div class="label">The thesis</div>56% of shipping was Fundamentals (infra, design system, analytics, process tooling) — building the machine to scale. The KR-serving product work was deliberately narrow: <strong>Care Circle</strong> (Connection), <strong>Calendar + Customer.io</strong> (Convenience), <strong>AI summary quality + agents</strong> (Clarity).</div>
+      <div class="foot"><span class="brand"><b>Ditto</b> · Care. Clarified.</span><span>Source: Linear (Product + Agents), live 2026-05-30 · Performance: Mixpanel / Porygon</span></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section class="slide">
+    <div class="card">
+      <div class="kicker"><span class="dot"></span> 01 · The work</div>
+      <h2>The main features we shipped</h2>
+      <p class="lede">Grouped by strategy pillar. Effort tags: <span style="font-weight:600">L</span> large · <span style="font-weight:600">M</span> medium · <span style="font-weight:600">S</span> small.</p>
+      <div class="cols">
+        <div class="feat">
+          <span class="ph connection"><span class="dotc"></span> Connection · 32 issues · O2-KR3</span>
+          <ul>
+            <li>Care Circle 3.0 — follower experience overhaul<span class="e">L</span></li>
+            <li>Remove confirmation from invite flow (auto-accept)<span class="e">M</span></li>
+            <li>Multi-profile / managed accounts (scoping → build)<span class="e">M</span></li>
+            <li>Invite dead-end fixes, reminders, sharing polish<span class="e">S</span></li>
+          </ul>
+        </div>
+        <div class="feat">
+          <span class="ph convenience"><span class="dotc"></span> Convenience · 61 issues · O2-KR2</span>
+          <ul>
+            <li>Calendar Integration — auto-sync GA (v1.9.9)<span class="e">L</span></li>
+            <li>Customer.io lifecycle — welcome, prep, post-summary<span class="e">L</span></li>
+            <li>Dedicated Discover tab (educational hub)<span class="e">M</span></li>
+            <li>Onboarding: intent questions + skip-removal test<span class="e">M</span></li>
+          </ul>
+        </div>
+        <div class="feat">
+          <span class="ph clarity"><span class="dotc"></span> Clarity (AI) · 46 issues · O2-KR4 / O1-KR2</span>
+          <ul>
+            <li>Conversation Explainer — failover + Gemini fallback<span class="e">L</span></li>
+            <li>Eval &amp; guardrail rework (false-positives ↓)<span class="e">L</span></li>
+            <li>Appointment Prep — smart question extraction<span class="e">M</span></li>
+            <li>Agents team — autonomous B2B-outreach cascade<span class="e">L</span></li>
+          </ul>
+        </div>
+        <div class="feat">
+          <span class="ph fund"><span class="dotc"></span> Fundamentals · 120 issues · O1</span>
+          <ul>
+            <li>LEGO design system + Liquid Glass UI (iOS 26)<span class="e">L</span></li>
+            <li>Auth0 → Supabase migration<span class="e">M</span></li>
+            <li>Analytics Foundations + experiment velocity engine<span class="e">M</span></li>
+            <li>Privacy/GDPR, Survicate, 87 BAU/quality items<span class="e">S</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot"><span class="brand"><b>Ditto</b> · Care. Clarified.</span><span>Full issue-level list: shipped-mar-may-2026.csv (259 rows, every row links to Linear)</span></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section class="slide">
+    <div class="card">
+      <div class="kicker"><span class="dot"></span> 02 · The split &amp; the comparison</div>
+      <h2>Where the effort went</h2>
+      <div class="cols" style="grid-template-columns:1fr 1fr;align-items:start;">
+        <div>
+          <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:6px 0 12px;">By strategy pillar (of 259)</h3>
+          <div class="barrow"><span class="bn">Fundamentals</span><div class="bar"><span style="width:46%;background:var(--p-fund)"></span></div><span class="bv">46%</span></div>
+          <div class="barrow"><span class="bn">Convenience</span><div class="bar"><span style="width:23%;background:var(--p-convenience)"></span></div><span class="bv">23%</span></div>
+          <div class="barrow"><span class="bn">Clarity (AI)</span><div class="bar"><span style="width:17%;background:var(--p-clarity)"></span></div><span class="bv">17%</span></div>
+          <div class="barrow"><span class="bn">Connection</span><div class="bar"><span style="width:12%;background:var(--p-connection)"></span></div><span class="bv">12%</span></div>
+
+          <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:24px 0 12px;">By OKR contribution</h3>
+          <div class="barrow"><span class="bn">— BAU / found.</span><div class="bar"><span style="width:100%;background:#c9ccdb"></span></div><span class="bv">87</span></div>
+          <div class="barrow"><span class="bn">O2-KR2 activation</span><div class="bar"><span style="width:64%;background:var(--p-convenience)"></span></div><span class="bv">56</span></div>
+          <div class="barrow"><span class="bn">O2-KR3 circle</span><div class="bar"><span style="width:39%;background:var(--p-connection)"></span></div><span class="bv">34</span></div>
+          <div class="barrow"><span class="bn">O2-KR4 retention</span><div class="bar"><span style="width:38%;background:var(--p-clarity)"></span></div><span class="bv">33</span></div>
+          <div class="barrow"><span class="bn">O1-KR2 AI agents</span><div class="bar"><span style="width:30%;background:var(--navy)"></span></div><span class="bv">26</span></div>
+          <div class="barrow"><span class="bn">O1-KR4 discipline</span><div class="bar"><span style="width:15%;background:var(--navy)"></span></div><span class="bv">13</span></div>
+        </div>
+        <div>
+          <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:6px 0 12px;">By investment type (top)</h3>
+          <div class="barrow"><span class="bn">Bug fix</span><div class="bar"><span style="width:100%;background:#c9ccdb"></span></div><span class="bv">39</span></div>
+          <div class="barrow"><span class="bn">AI agents</span><div class="bar"><span style="width:67%;background:var(--p-clarity)"></span></div><span class="bv">26</span></div>
+          <div class="barrow"><span class="bn">Internal ops</span><div class="bar"><span style="width:67%;background:#c9ccdb"></span></div><span class="bv">26</span></div>
+          <div class="barrow"><span class="bn">Research</span><div class="bar"><span style="width:54%;background:var(--p-clarity)"></span></div><span class="bv">21</span></div>
+          <div class="barrow"><span class="bn">Lifecycle/CRM</span><div class="bar"><span style="width:51%;background:var(--p-convenience)"></span></div><span class="bv">20</span></div>
+          <div class="barrow"><span class="bn">Design system</span><div class="bar"><span style="width:44%;background:var(--p-fund)"></span></div><span class="bv">17</span></div>
+          <div class="barrow"><span class="bn">New feature</span><div class="bar"><span style="width:41%;background:var(--p-connection)"></span></div><span class="bv">16</span></div>
+          <div class="barrow"><span class="bn">AI quality</span><div class="bar"><span style="width:26%;background:var(--p-clarity)"></span></div><span class="bv">10</span></div>
+
+          <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:24px 0 12px;">How grounded is the mapping?</h3>
+          <div class="tiles t3" style="margin:0;">
+            <div class="tile"><div class="label">Linear-linked</div><div class="stat">116</div><div class="sub">KR from Linear itself</div></div>
+            <div class="tile"><div class="label">Inferred</div><div class="stat">56</div><div class="sub">by theme</div></div>
+            <div class="tile"><div class="label">BAU / no KR</div><div class="stat">87</div><div class="sub">quality &amp; infra</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout"><div class="label">Read it straight</div>A third of shipping (87 issues) serves no single KR — it is the keep-the-lights-on tail. Forcing those into a KR would flatter the numbers. The largest KR bet was <strong>activation (O2-KR2, 56 issues)</strong>, exactly where the funnel is most broken.</div>
+      <div class="foot"><span class="brand"><b>Ditto</b> · Care. Clarified.</span><span>Monthly: Mar 2 · Apr 112 · May 145 (Linear adoption started late March)</span></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section class="slide">
+    <div class="card">
+      <div class="kicker"><span class="dot"></span> 03 · Results</div>
+      <h2>What actually moved — measured in #insights</h2>
+      <p class="lede">Where Porygon has read the effect. Treat single-shot causal claims as directional; many are not yet A/B-clean.</p>
+      <table>
+        <thead><tr><th>Shipped feature</th><th>Measured effect</th><th>Serves</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Customer.io lifecycle</strong></td><td>Time-to-first-summary <span class="up">−46%</span> (55→30h); invites <span class="up">+59%</span>, manual appts <span class="up">+76%</span> vol. <span class="down">Push delivery broken (1.9%)</span></td><td><span class="k">O2-KR2</span></td></tr>
+          <tr><td><strong>Onboarding skip-removal</strong></td><td>Install→registration <span class="up">+9pp</span> (46→55%); completion <span class="up">+9pp</span>; quality flat (no dilution)</td><td><span class="k">O2-KR2</span></td></tr>
+          <tr><td><strong>Calendar sync (GA)</strong></td><td>25% end-to-end adoption; 86% of calendar-adders then create a manual appt</td><td><span class="k">O2-KR2</span></td></tr>
+          <tr><td><strong>Care Circle V2 loop</strong></td><td>Viral K <span class="up">0.05→0.08–0.10</span>; 2nd-gen invites <span class="up">6×</span>; follower→inviter 22%</td><td><span class="k">O2-KR3</span></td></tr>
+          <tr><td><strong>Conversation Explainer (AI)</strong></td><td>Eval false-positive rate <span class="up">~15% → 1–2%</span>; provider failover live</td><td><span class="k">O2-KR4</span></td></tr>
+          <tr><td><strong>Discover tab</strong></td><td>22% of installs view; viewers create summaries 14% vs 5% <small>(self-selection)</small></td><td><span class="k">O2-KR2</span></td></tr>
+        </tbody>
+      </table>
+      <div class="tiles" style="margin-top:18px;">
+        <div class="tile accent"><div class="label">Oncology wedge</div><div class="stat">39% vs 18%</div><div class="sub">week-1 retention, the PMF signal</div></div>
+        <div class="tile"><div class="label">Care-circle accept</div><div class="stat">18% vs 10%</div><div class="sub">oncology vs rest (1.8×)</div></div>
+        <div class="tile"><div class="label">Summaries / 30d</div><div class="stat">2,714</div><div class="sub">rec 58% · doc-scan 41%</div></div>
+        <div class="tile"><div class="label">Oncology share</div><div class="stat">~50%</div><div class="sub">of active users</div></div>
+      </div>
+      <div class="callout warn"><div class="label">Honest scoreboard — still behind</div>D14 activation ~6–8% blended vs 25% target · M1 retention ~40% vs 60% · partner regs 270 vs 2,000 · MAU ~36% behind Q2 pace. This is the gap that triggered the May 21 Code Red. We shipped a lot; the funnel still leaks at first-summary.</div>
+      <div class="foot"><span class="brand"><b>Ditto</b> · Care. Clarified.</span><span>Source: Slack #insights / Porygon, Apr–May 2026 · data/product-analytics.md</span></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 -->
+  <section class="slide">
+    <div class="card">
+      <div class="kicker"><span class="dot"></span> 04 · Next</div>
+      <h2>In flight for June–July</h2>
+      <p class="lede">37 active/planned projects; the near-term set chases exactly the activation and circle gaps the data exposes.</p>
+      <div class="cols c4">
+        <div class="feat"><span class="ph convenience"><span class="dotc"></span> Activation</span><ul>
+          <li>Calendar Pull MVP<span class="e">L</span></li>
+          <li>Aha-moment onboarding<span class="e">M</span></li>
+          <li>Beyond Appointments<span class="e">M</span></li>
+          <li>Customer.io profile + post-summary<span class="e">M</span></li></ul></div>
+        <div class="feat"><span class="ph connection"><span class="dotc"></span> Circle</span><ul>
+          <li>Care Circle 3.0 → Jul 2<span class="e">L</span></li>
+          <li>Invite auto-accept<span class="e">M</span></li>
+          <li>Multi-profile<span class="e">M</span></li></ul></div>
+        <div class="feat"><span class="ph clarity"><span class="dotc"></span> Clarity (AI)</span><ul>
+          <li>Conv. Explainer M2–M5 → Jun 19<span class="e">L</span></li>
+          <li>Transcription A/B<span class="e">M</span></li>
+          <li>AI Answer Suggestions<span class="e">M</span></li>
+          <li>15 FTE agents → Jun 30<span class="e">L</span></li></ul></div>
+        <div class="feat"><span class="ph fund"><span class="dotc"></span> Foundation</span><ul>
+          <li>Auth0 → Supabase<span class="e">M</span></li>
+          <li>Experiment velocity engine<span class="e">M</span></li>
+          <li>Post-ship verdict ritual<span class="e">S</span></li>
+          <li>UK launch · Language exp.<span class="e">M</span></li></ul></div>
+      </div>
+      <div class="callout"><div class="label">Coming next</div>A deeper, strategic forward-looking deck — sequencing, bets and trade-offs against the 5K-MAU path — follows this review. This page is the bridge, not the plan.</div>
+      <div class="foot"><span class="brand"><b>Ditto</b> · Care. Clarified.</span><span>Forward detail: planned-projects-next-2mo.csv · planned-issues-next-2mo.csv</span></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="pager">
+  <button id="prev" aria-label="Previous">‹</button>
+  <span class="pc" id="pc">1 / 5</span>
+  <button id="next" aria-label="Next">›</button>
+</div>
+
+<script>
+const deck=document.getElementById('deck');
+const slides=[...document.querySelectorAll('.slide')];
+const dotsWrap=document.getElementById('dots');
+const pc=document.getElementById('pc');
+const prev=document.getElementById('prev');
+const next=document.getElementById('next');
+let cur=0;
+slides.forEach((s,i)=>{const b=document.createElement('button');b.onclick=()=>go(i);dotsWrap.appendChild(b);});
+const dots=[...dotsWrap.children];
+function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:'smooth'});}
+function render(i){cur=i;dots.forEach((d,j)=>d.classList.toggle('active',j===i));pc.textContent=(i+1)+' / '+slides.length;prev.disabled=i===0;next.disabled=i===slides.length-1;}
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)render(slides.indexOf(e.target));});},{root:deck,threshold:0.55});
+slides.forEach(s=>io.observe(s));
+prev.onclick=()=>go(cur-1);next.onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{
+  if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
+  if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+});
+render(0);
+</script>
+</body>
+</html>

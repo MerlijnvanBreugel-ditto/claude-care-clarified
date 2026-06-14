@@ -1,0 +1,106 @@
+{
+  "project": {
+    "id": "4268194311103954043",
+    "name": "Care Circle V2 - Mockups",
+    "url": "https://stitch.withgoogle.com/projects/4268194311103954043",
+    "created": "2026-02-03"
+  },
+  "screens": {
+    "direction-a": [
+      {
+        "name": "Role Selection",
+        "screenId": "27893cba546045e9b9c9ecf4ecea1dfe",
+        "localPath": "direction-a-on-brand/01-role-selection.png",
+        "stitchUrl": "https://stitch.withgoogle.com/projects/4268194311103954043/screens/27893cba546045e9b9c9ecf4ecea1dfe",
+        "status": "generated"
+      },
+      {
+        "name": "Intention Setting",
+        "localPath": "direction-a-on-brand/02-intention-setting.png",
+        "status": "generating"
+      },
+      {
+        "name": "Invitation Visual Picker",
+        "localPath": "direction-a-on-brand/03-invitation-visual-picker.png",
+        "status": "generating"
+      },
+      {
+        "name": "Invitation Card Preview",
+        "localPath": "direction-a-on-brand/04-invitation-preview.png",
+        "status": "generating"
+      },
+      {
+        "name": "Profile Page (Follower View)",
+        "localPath": "direction-a-on-brand/05-profile-page.png",
+        "status": "generating"
+      },
+      {
+        "name": "Patient Home (Active)",
+        "localPath": "direction-a-on-brand/06-patient-home.png",
+        "status": "generating"
+      },
+      {
+        "name": "Follower Home (Empty)",
+        "localPath": "direction-a-on-brand/07-follower-home-empty.png",
+        "status": "generating"
+      },
+      {
+        "name": "Update with Reactions",
+        "localPath": "direction-a-on-brand/08-update-reactions.png",
+        "status": "generating"
+      },
+      {
+        "name": "Profile Setup",
+        "localPath": "direction-a-on-brand/09-profile-setup.png",
+        "status": "generating"
+      }
+    ],
+    "direction-b": [
+      {
+        "name": "Social Proof",
+        "localPath": "direction-b-partly/01-social-proof.png",
+        "status": "generating"
+      },
+      {
+        "name": "Help Offer",
+        "localPath": "direction-b-partly/02-help-offer.png",
+        "status": "generating"
+      }
+    ],
+    "direction-c": [
+      {
+        "name": "Role Selection (Full Duolingo)",
+        "localPath": "direction-c-duolingo/01-role-selection.png",
+        "status": "generating"
+      },
+      {
+        "name": "Connection Celebration",
+        "localPath": "direction-c-duolingo/02-connection-celebration.png",
+        "status": "generating"
+      },
+      {
+        "name": "Support Card Creation",
+        "localPath": "direction-c-duolingo/03-support-card.png",
+        "status": "generating"
+      },
+      {
+        "name": "Follower Home (Active)",
+        "localPath": "direction-c-duolingo/04-follower-home.png",
+        "status": "generating"
+      }
+    ]
+  },
+  "references": {
+    "styleGuide": "pm-workspace/data/references/warm-human-style-guide.md",
+    "duolingo": [
+      "pm-workspace/data/references/competitors/duolingo/home-1.png",
+      "pm-workspace/data/references/competitors/duolingo/celebration.png"
+    ],
+    "airbnb": [
+      "pm-workspace/data/references/competitors/airbnb/home-1.png"
+    ]
+  },
+  "expertPanelReview": "expert-panel-review.md",
+  "comparison": "comparison.md",
+  "recommendation": "Direction A with celebration elements from Direction C"
+}

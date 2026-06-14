@@ -1,0 +1,938 @@
+id,date,title,type,epic_id,epic_title,month,pillar
+DPMA-293,1/2/25,Modify shared event description,Story,DPMA-210,"[Receive] Bugs, issues, improvements UAT",Jan-25,Connection
+DPMA-306,1/2/25,Small textual adjustments that are bothering Merlijn,Story,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-137,1/3/25,Deploy/Manage Auth0 using .tf,Story,DPMA-134,Infrastructure,Jan-25,Fundamentals
+DPMA-229,1/3/25,Create PRD release,Story,DPMA-134,Infrastructure,Jan-25,Fundamentals
+DPMA-322,1/3/25,Add summary api key as secret for send api,Story,DPMA-134,Infrastructure,Jan-25,Clarity
+DPMA-321,1/3/25,Deploy GPT 3.5 to 4 model change,Story,DPMA-134,Infrastructure,Jan-25,Clarity
+DPMA-185,1/6/25,Display validation info udner wrong/not completed fields,Bug,DPMA-45,[Send] Doctor's onboarding and unlocking,Jan-25,Connection
+DPMA-267,1/6/25,Create Ditto Send ADR for Org management,Story,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-72,1/7/25,[Send AI] - New AI Consultation,Epic,,,Jan-25,Clarity
+DPMA-204,1/7/25,Post-MVP additional testing,Epic,,,Jan-25,Convenience
+DPMA-138,1/7/25,[Send] User Service + Authentication,Epic,,,Jan-25,Convenience
+DPMA-80,1/7/25,[Send AI] - View AI Consultation,Epic,,,Jan-25,Clarity
+DPMA-63,1/7/25,[Send] - UX/UI,Epic,,,Jan-25,Convenience
+DPMA-162,1/7/25,"Recording approval is not given, but the tab is using microphone",Bug,DPMA-72,[Send AI] - New AI Consultation,Jan-25,Clarity
+DPMA-310,1/7/25,'Attached files' section is sticked to the 'Description' text field,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-313,1/7/25,The QR code does not appear after completing the consultation survey,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-311,1/7/25,The same attachments can be added to a consultation multiple times,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-224,1/7/25,Patient summary view FE looks off and too tiny,Task,DPMA-94,[Send] UI Styling,Jan-25,Clarity
+DPMA-172,1/7/25,[Send] Localize Strings in Dutch language,Story,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-170,1/7/25,PRD For Send App,Task,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-326,1/7/25,Make visual for conceptual API service proposition,Task,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-314,1/8/25,Drag & drop area doesn't cover the entire screen height when multiple attachments are already selected,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-315,1/8/25,Both consultation types has the same title,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-316,1/8/25,Invalid URLs can be added to standard consultations,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-312,1/8/25,Lack of information about too much data entered within standard consultation,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-317,1/8/25,QR codes are being generated for empty consultation,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-318,1/8/25,Standard consultation's attachments require some changes,Bug,DPMA-46,[Send] Creating and sharing summary,Jan-25,Clarity
+DPMA-305,1/8/25,Invalid email format notification is missing,Bug,DPMA-45,[Send] Doctor's onboarding and unlocking,Jan-25,Clarity
+DPMA-210,1/9/25,"[Receive] Bugs, issues, improvements UAT",Epic,,,Jan-25,Fundamentals
+DPMA-280,1/9/25,Switch simplification service to Ditto AI,Epic,,,Jan-25,Clarity
+DPMA-45,1/9/25,[Send] Doctor's onboarding and unlocking,Epic,,,Jan-25,Connection
+DPMA-323,1/9/25,No permissions to update Azure AD app ownership,Bug,DPMA-134,Infrastructure,Jan-25,Fundamentals
+DPMA-281,1/9/25,Swap Claude simplification service to Ditto AI endpoint,Story,DPMA-280,Switch simplification service to Ditto AI,Jan-25,Clarity
+DPMA-208,1/9/25,Implement new version of timeline view,Story,DPMA-206,[Receive] Rebranding,Jan-25,Convenience
+DPMA-131,1/9/25,Summary Screen,Story,DPMA-94,[Send] UI Styling,Jan-25,Clarity
+DPMA-320,1/10/25,Replace Auth0 tenants,Story,DPMA-134,Infrastructure,Jan-25,Fundamentals
+DPMA-319,1/10/25,Auth0 configuration for Patients,Story,DPMA-134,Infrastructure,Jan-25,Fundamentals
+DPMA-283,1/11/25,"[POC] estimate effort, timeline and operating cost of SMS verification service",Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-166,1/11/25,CI/CD Electron package,Story,DPMA-134,Infrastructure,Jan-25,Fundamentals
+DPMA-134,1/13/25,Infrastructure,Epic,,,Jan-25,Fundamentals
+DPMA-356,1/13/25,Make scanning faster by auto-scan and open,Story,DPMA-330,Bugs / improvements raised by Ditto,Jan-25,Clarity
+DPMA-355,1/13/25,Implement new version of home screen,Story,DPMA-206,[Receive] Rebranding,Jan-25,Convenience
+DPMA-207,1/13/25,Redesign - Styleguide,Story,DPMA-206,[Receive] Rebranding,Jan-25,Convenience
+DPMA-132,1/13/25,User Settings,Story,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-206,1/14/25,[Receive] Rebranding,Epic,,,Jan-25,Convenience
+DPMA-370,1/15/25,Change search to work live instead of on click,Story,DPMA-368,[Receive] Improve flow and navigation in the app based on feedback,Jan-25,Convenience
+DPMA-379,1/16/25,[Send] Apply Role & Permissions,Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-346,1/16/25,[iOS] Event details disappear after changing the image to text (OCR),Bug,DPMA-331,[Receive][iOS] Pre-production activities,Jan-25,Clarity
+DPMA-361,1/16/25,Old Ditto logo on the login screen,Bug,DPMA-94,[Send] UI Styling,Jan-25,Convenience
+DPMA-371,1/19/25,Allow date selection before other appointment details,Story,DPMA-368,[Receive] Improve flow and navigation in the app based on feedback,Jan-25,Clarity
+DPMA-284,1/20/25,Patient login/logout,Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-369,1/20/25,[investigate] Maintain consistent language throughout user session,Story,DPMA-368,[Receive] Improve flow and navigation in the app based on feedback,Jan-25,Clarity
+DPMA-285,1/21/25,Expose API for Partners to share data,Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-380,1/23/25,[Send] Auth0 update API/Application structure to reflect miro,Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-365,1/23/25,Auth0 - custom domains,Story,DPMA-94,[Send] UI Styling,Jan-25,Clarity
+DPMA-372,1/24/25,[POC] Investigate how file naming system could be more user-friendly,Story,DPMA-368,[Receive] Improve flow and navigation in the app based on feedback,Jan-25,Convenience
+DPMA-94,1/27/25,[Send] UI Styling,Epic,,,Jan-25,Convenience
+DPMA-382,1/27/25,[Send] Introduce UUID,Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-386,1/27/25,Small adjustments before next beta wave (part 1),Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",Jan-25,Fundamentals
+DPMA-383,1/27/25,[design] Prototype of smart OCR for Receive,Story,DPMA-94,[Send] UI Styling,Jan-25,Clarity
+DPMA-282,1/28/25,Patient registration,Story,DPMA-148,Data sharing via server,Jan-25,Connection
+DPMA-403,1/29/25,Allow m4a format to be accepted by Ditto AI,Story,DPMA-394,Switch transcription service to Ditto AI,Jan-25,Clarity
+DPMA-401,1/30/25,Adjust Receive do use Ditto AI for transcript and summarisation,Story,DPMA-394,Switch transcription service to Ditto AI,Jan-25,Clarity
+DPMA-398,1/30/25,Change default view of an event created by recording,Story,DPMA-397,[Receive] Reimagine event view,Jan-25,Clarity
+DPMA-399,1/30/25,Adjust and future-proof data model to accommodate different event types,Story,DPMA-397,[Receive] Reimagine event view,Jan-25,Clarity
+DPMA-400,2/3/25,Ensure patients can authenticate same as doctors so they can use transcription and summarisation feature in Ditto AI,Story,DPMA-394,Switch transcription service to Ditto AI,Feb-25,Clarity
+DPMA-397,2/4/25,[Receive] Reimagine event view,Epic,,,Feb-25,Clarity
+DPMA-402,2/4/25,QR Code invalid if Job Title for HCP is General Practitioner,Bug,DPMA-206,[Receive] Rebranding,Feb-25,Convenience
+DPMA-287,2/5/25,Push notification when new data available for patient as shared by partner,Story,DPMA-148,Data sharing via server,Feb-25,Clarity
+DPMA-374,2/6/25,[design] Add helpful explanatory text and guidance throughout the app,Story,DPMA-368,[Receive] Improve flow and navigation in the app based on feedback,Feb-25,Convenience
+DPMA-373,2/6/25,[design] Use larger typography and clear visual distinction between different types of content,Story,DPMA-368,[Receive] Improve flow and navigation in the app based on feedback,Feb-25,Convenience
+DPMA-381,2/6/25,[design] Prototype of Ditto smart capture,Story,DPMA-206,[Receive] Rebranding,Feb-25,Convenience
+DPMA-286,2/7/25,Receiving data by Ditto Receive,Story,DPMA-148,Data sharing via server,Feb-25,Connection
+DPMA-410,2/7/25,WhatsApp content is empty after recording summary,Bug,DPMA-206,[Receive] Rebranding,Feb-25,Clarity
+DPMA-148,2/11/25,Data sharing via server,Epic,,,Feb-25,Connection
+DPMA-368,2/11/25,[Receive] Improve flow and navigation in the app based on feedback,Epic,,,Feb-25,Convenience
+DPMA-404,2/12/25,Show push notification after transcription and summarisation complete,Story,DPMA-394,Switch transcription service to Ditto AI,Feb-25,Clarity
+DPMA-408,2/17/25,[Receive] Estimate UIUX improvements based on new designs,Story,DPMA-206,[Receive] Rebranding,Feb-25,Convenience
+DPMA-439,2/24/25,[Receive] Ditto team feedback before soft launch,Story,DPMA-206,[Receive] Rebranding,Feb-25,Convenience
+DPMA-332,3/3/25,[Receive] Direct document/screenshot to understandable summary (via OCR),Epic,,,Mar-25,Clarity
+DPMA-299,3/3/25,Smart OCR to scan documents in Receive,Story,DPMA-332,[Receive] Direct document/screenshot to understandable summary (via OCR),Mar-25,Clarity
+DPMA-440,3/3/25,Improve UI changes before Testflight push,Story,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Fundamentals
+DPMA-394,3/13/25,Switch transcription service to Ditto AI,Epic,,,Mar-25,Clarity
+DPMA-430,3/13/25,[Receive] Provide feedback on AI output,Epic,,,Mar-25,Clarity
+DPMA-443,3/13/25,[Receive] Onboarding,Epic,,,Mar-25,Convenience
+DPMA-428,3/13/25,Remove unauthenticated access to all Ditto AI endpoints,Task,DPMA-394,Switch transcription service to Ditto AI,Mar-25,Clarity
+DPMA-444,3/13/25,Onboarding in Receive app,Story,DPMA-443,[Receive] Onboarding,Mar-25,Convenience
+DPMA-431,3/13/25,Allow users send feedback to AI outputs quality,Story,DPMA-430,[Receive] Provide feedback on AI output,Mar-25,Clarity
+DPMA-441,3/13/25,[Receive] Sharing of recording event gives empty details,Bug,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Clarity
+DPMA-405,3/13/25,Minor adjustments in new recording functionality,Story,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Clarity
+DPMA-438,3/13/25,[Receive] Minor recording tweaks,Bug,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Clarity
+DPMA-409,3/14/25,[Receive] Enable extensive yet easy feedback collection test users,Story,DPMA-210,"[Receive] Bugs, issues, improvements UAT",Mar-25,Fundamentals
+DPMA-469,3/19/25,Azure Security Recommendations,Story,DPMA-479,[Infrastructure] Security Q1,Mar-25,Fundamentals
+DPMA-411,3/19/25,[UserService] Security Improvements,Story,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Fundamentals
+DPMA-467,3/19/25,Provide rough estimate for time investment for Android App,Story,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Fundamentals
+DPMA-502,3/27/25,Implement Authentication with RBAC,Task,DPMA-498,[AI/Receive] AI API productionalisation,Mar-25,Clarity
+DPMA-499,3/27/25,Code reorganization,Task,DPMA-498,[AI/Receive] AI API productionalisation,Mar-25,Clarity
+DPMA-500,3/27/25,New Domain models + Database,Task,DPMA-498,[AI/Receive] AI API productionalisation,Mar-25,Clarity
+DPMA-436,3/28/25,Implement DBMS backups (and decide what kind of backups we need),Task,DPMA-479,[Infrastructure] Security Q1,Mar-25,Fundamentals
+DPMA-437,3/28/25,Implement audit trails (logs) on sensitive (patient) data access,Task,DPMA-479,[Infrastructure] Security Q1,Mar-25,Clarity
+DPMA-421,3/29/25,[UserService] Pre-Production Improvements/Tech Debt Q1,Story,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Mar-25,Fundamentals
+DPMA-463,4/2/25,Avoid storing traces in Langfuse,Story,DPMA-461,"[AI, receive] Do not store any data",Apr-25,Clarity
+DPMA-501,4/2/25,Implement API logic,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-503,4/2/25,[Infra] provision new resources,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-506,4/2/25,add rate limiting,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-505,4/2/25,apply security requirements,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-483,4/2/25,Enable Azure cloud defender.,Task,DPMA-479,[Infrastructure] Security Q1,Apr-25,Fundamentals
+DPMA-485,4/2/25,Subscriptions should have a contact email address for security issues,Task,DPMA-479,[Infrastructure] Security Q1,Apr-25,Clarity
+DPMA-487,4/2/25,Enable alert notifications,Task,DPMA-479,[Infrastructure] Security Q1,Apr-25,Fundamentals
+DPMA-513,4/2/25,Rework Doc scanner,Story,DPMA-331,[Receive][iOS] Pre-production activities,Apr-25,Convenience
+DPMA-516,4/4/25,Redefine APi contract,Story,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-504,4/8/25,CI/CD pipeline,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-489,4/10/25,Azure AI Services resources should have key access disabled (disable local authentication),Task,DPMA-479,[Infrastructure] Security Q1,Apr-25,Clarity
+DPMA-514,4/10/25,Migrate everything to Nothern Europe,Story,DPMA-479,[Infrastructure] Security Q1,Apr-25,Fundamentals
+DPMA-454,4/10/25,Log in with AppleID,Story,DPMA-453,[Receive] Q1 release Functional debt,Apr-25,Fundamentals
+DPMA-521,4/11/25,Update content log in and account creation screens,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Apr-25,Fundamentals
+DPMA-461,4/15/25,"[AI, receive] Do not store any data",Epic,,,Apr-25,Clarity
+DPMA-510,4/15/25,Switch to database identity login for prototype and core,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-512,4/15/25,Switch to production google keys,Story,DPMA-479,[Infrastructure] Security Q1,Apr-25,Fundamentals
+DPMA-520,4/16/25,"Have 15 mins timeout on ""finalize"" request",Story,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-414,4/16/25,Create/use application DB connection with least privilage rule,Task,DPMA-479,[Infrastructure] Security Q1,Apr-25,Connection
+DPMA-528,4/16/25,Design Force Update Solution (ADR),Task,DPMA-446,[Receive] The App should force users to upgrade in case of incompatible changes on backend,Apr-25,Convenience
+DPMA-537,4/16/25,[User Service] Update Auth0 scopes to allow for user removal,Task,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Apr-25,Fundamentals
+DPMA-523,4/18/25,Limit size of requests to AI services,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-519,4/18/25,[User Service] Update logic to allow single patient to use both Apple Id & Google Auth,Story,DPMA-425,[UserService] Pre-Prod Backend Release Q1,Apr-25,Fundamentals
+DPMA-425,4/23/25,[UserService] Pre-Prod Backend Release Q1,Epic,,,Apr-25,Fundamentals
+DPMA-562,4/23/25,Fix Audio upload in new AI api,Task,DPMA-498,[AI/Receive] AI API productionalisation,Apr-25,Clarity
+DPMA-545,4/23/25,Fix title spacing,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Apr-25,Fundamentals
+DPMA-546,4/23/25,Make Ditto insights cards clickable,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Apr-25,Fundamentals
+DPMA-549,4/23/25,Fix onboarding tagline,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Apr-25,Convenience
+DPMA-551,4/23/25,Privacy statement - fix spacing,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Apr-25,Fundamentals
+DPMA-288,4/24/25,Patient account management - features required to go live,Story,DPMA-331,[Receive][iOS] Pre-production activities,Apr-25,Fundamentals
+DPMA-413,4/25/25,Update Auth0 Token configuration to use short lived tokens,Task,DPMA-479,[Infrastructure] Security Q1,Apr-25,Fundamentals
+DPMA-452,4/25/25,Use secure HTTPs protocol,Story,DPMA-448,"[Receive, iOS] Security Q1 Release",Apr-25,Fundamentals
+DPMA-466,4/25/25,Minor adjustments before Testflight release,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",Apr-25,Fundamentals
+DPMA-552,4/25/25,Implement latest localise changes,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",Apr-25,Fundamentals
+DPMA-449,4/28/25,Data should be stored in the “Application Support Directory.”,Story,DPMA-448,"[Receive, iOS] Security Q1 Release",Apr-25,Fundamentals
+DPMA-498,4/30/25,[AI/Receive] AI API productionalisation,Epic,,,Apr-25,Clarity
+DPMA-450,5/1/25,Biometrics check and completeFileProtection class,Story,DPMA-448,"[Receive, iOS] Security Q1 Release",May-25,Fundamentals
+DPMA-561,5/1/25,Update delete note icon,Story,DPMA-453,[Receive] Q1 release Functional debt,May-25,Fundamentals
+DPMA-455,5/1/25,"Update text that explains users why we need push notifications, access to mic etc.",Story,DPMA-453,[Receive] Q1 release Functional debt,May-25,Clarity
+DPMA-511,5/1/25,Recording stops and breaks when alarm goes off,Bug,DPMA-331,[Receive][iOS] Pre-production activities,May-25,Clarity
+DPMA-564,5/1/25,Remove option to share audio file,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Connection
+DPMA-550,5/1/25,Fix onboarding images,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Convenience
+DPMA-478,5/1/25,Screenshot in onboarding don't change with language,Bug,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Convenience
+DPMA-565,5/1/25,Update external links in profile page,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Fundamentals
+DPMA-470,5/2/25,Make sure the application silently refreshes JWT tokens,Task,DPMA-448,"[Receive, iOS] Security Q1 Release",May-25,Fundamentals
+DPMA-568,5/2/25,Update face-id lockscreen,Story,DPMA-453,[Receive] Q1 release Functional debt,May-25,Convenience
+DPMA-459,5/3/25,Crash reports,Story,DPMA-458,[Receive] Technical Observability (3d),May-25,Fundamentals
+DPMA-456,5/5/25,"Legal documents available offline within the app (Privacy Policy, T&C, EULA).",Story,DPMA-453,[Receive] Q1 release Functional debt,May-25,Clarity
+DPMA-479,5/6/25,[Infrastructure] Security Q1,Epic,,,May-25,Fundamentals
+DPMA-331,5/6/25,[Receive][iOS] Pre-production activities,Epic,,,May-25,Fundamentals
+DPMA-446,5/6/25,[Receive] The App should force users to upgrade in case of incompatible changes on backend,Epic,,,May-25,Convenience
+DPMA-448,5/6/25,"[Receive, iOS] Security Q1 Release",Epic,,,May-25,Fundamentals
+DPMA-453,5/6/25,[Receive] Q1 release Functional debt,Epic,,,May-25,Fundamentals
+DPMA-457,5/6/25,Contact support option,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Fundamentals
+DPMA-531,5/6/25,Update user telemetry with latest app adjustments,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Fundamentals
+DPMA-330,5/8/25,Bugs / improvements raised by Ditto,Epic,,,May-25,Clarity
+DPMA-391,5/8/25,"[Release, iOS] Finalise Ditto V1.0 for the App-store",Epic,,,May-25,Fundamentals
+DPMA-579,5/8/25,Don’t include input and output text when sending feedback,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-525,5/8/25,Add styling to summary of medical letter,Story,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Clarity
+DPMA-586,5/9/25,Enable pg_bouncer on dev and prod,Task,DPMA-481,[Infrastructure] Security Q2 2d,May-25,Fundamentals
+DPMA-535,5/9/25,Do not route ALL traffic via VPN. Route only the one which is directed to our servers.,Task,DPMA-481,[Infrastructure] Security Q2 2d,May-25,Fundamentals
+DPMA-587,5/9/25,"If my phone auto-locks, the recording is (sometimes) paused.",Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Clarity
+DPMA-578,5/9/25,"After conversation summary was over, the message about summary being in progress was still there.",Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Clarity
+DPMA-534,5/12/25,Navigation of home screen cards,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Convenience
+DPMA-544,5/12/25,"Update tab ""More""",Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-540,5/12/25,Implement list of Ditto Quotes on profile page,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-526,5/12/25,Fix format sharing snippet,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Connection
+DPMA-569,5/12/25,Integration between Auth0 and Mailchimp,Task,DPMA-580,[Receive] Inbox Q2,May-25,Clarity
+DPMA-445,5/12/25,Update email verification email,Story,DPMA-571,[Receive] Inbox Q3,May-25,Clarity
+DPMA-592,5/13/25,Cleanup DB connection management,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Connection
+DPMA-573,5/19/25,Tweak WAF security settings,Task,DPMA-481,[Infrastructure] Security Q2 2d,May-25,Fundamentals
+DPMA-585,5/19/25,Cannot translate,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-541,5/19/25,Implement new feedback form,Story,DPMA-580,[Receive] Inbox Q2,May-25,Fundamentals
+DPMA-492,5/19/25,Assess complexity and effort needed for app improvements,Story,DPMA-580,[Receive] Inbox Q2,May-25,Fundamentals
+DPMA-548,5/19/25,Adjust order of App Store images,Bug,DPMA-580,[Receive] Inbox Q2,May-25,Fundamentals
+DPMA-543,5/19/25,"Update link ""About Ditto""",Story,DPMA-580,[Receive] Inbox Q2,May-25,Fundamentals
+DPMA-536,5/19/25,Add App-store descriptions & keywords,Story,DPMA-580,[Receive] Inbox Q2,May-25,Fundamentals
+DPMA-527,5/19/25,Implement updated onboarding images,Story,DPMA-580,[Receive] Inbox Q2,May-25,Convenience
+DPMA-533,5/19/25,Adjust bottom text and website URL in sharing summary,Story,DPMA-580,[Receive] Inbox Q2,May-25,Clarity
+DPMA-611,5/20/25,make sure the right notifications are sent when explanation is comleted,Task,DPMA-601,"[Receive, BE] Post Lunch Fixes",May-25,Fundamentals
+DPMA-610,5/20/25,First name not synced with Mailchimp,Bug,DPMA-391,"[Release, iOS] Finalise Ditto V1.0 for the App-store",May-25,Clarity
+DPMA-595,5/23/25,Can't retry if creation of a conversation summary is failed.,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Clarity
+DPMA-600,5/23/25,Birthdate selector of account stores day-1,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-583,5/23/25,Can't create summary on a locked app,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Clarity
+DPMA-584,5/23/25,Do not force users to upgrade if we can't receive app version from appstore.,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Convenience
+DPMA-629,5/26/25,Push notifications not working on dev,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-524,5/26/25,Limit size of requests to AI services,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Clarity
+DPMA-618,5/27/25,Need to deliver notification in user language (translated),Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Convenience
+DPMA-634,5/28/25,Push notifications not working,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",May-25,Fundamentals
+DPMA-574,6/3/25,Prevent translation of a conversation while one is pending,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-622,6/3/25,"Add ""uploading"" status to the application.",Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-602,6/3/25,Error status of an event transcription is not persisted.,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-635,6/5/25,Extend audio chunk request to include finalChunk boolean flag,Story,DPMA-571,[Receive] Inbox Q3,Jun-25,Fundamentals
+DPMA-601,6/6/25,"[Receive, BE] Post Lunch Fixes",Epic,,,Jun-25,Fundamentals
+DPMA-603,6/6/25,Transcription on J side takes 10 times more time than it should,Bug,DPMA-601,"[Receive, BE] Post Lunch Fixes",Jun-25,Clarity
+DPMA-598,6/6/25,"When conversation explanation is ""in progress"", the client can request finalize again with the same id, and get a successful response",Bug,DPMA-601,"[Receive, BE] Post Lunch Fixes",Jun-25,Clarity
+DPMA-624,6/9/25,[AI] Validate & Sanitize medical_summary payload in context of SQL/XSS/Prompt Injections,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-580,6/10/25,[Receive] Inbox Q2,Epic,,,Jun-25,Fundamentals
+DPMA-695,6/10/25,Tickets,Task,DPMA-643,[AI] Improvements Q2 6w,Jun-25,Clarity
+DPMA-694,6/10/25,Inventory of AI improvements,Task,DPMA-643,[AI] Improvements Q2 6w,Jun-25,Clarity
+DPMA-678,6/10/25,Populate the Epic with Tasks,Task,DPMA-615,[AI] Tech debt Q2 1d,Jun-25,Clarity
+DPMA-642,6/10/25,Create AI service tech debt inventory,Task,DPMA-615,[AI] Tech debt Q2 1d,Jun-25,Clarity
+DPMA-522,6/10/25,Implement updated error messages,Story,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-628,6/10/25,Getting connection error when trying to explain convesations,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-532,6/10/25,Update Dockerfile to allow managed identity (same as it works from local env - Azure OpenAI),Story,DPMA-464,"[Receive, iOS] Tech Debt Q3 Release",Jun-25,Clarity
+DPMA-588,6/10/25,"We refer to the fact that you get a reminder from an appointment manually added, but this is not implemented",Task,DPMA-571,[Receive] Inbox Q3,Jun-25,Convenience
+DPMA-591,6/10/25,Save recording to device menu option is still linked to Share functinality,Bug,DPMA-571,[Receive] Inbox Q3,Jun-25,Clarity
+DPMA-593,6/10/25,Play with speech related codecs,Task,DPMA-571,[Receive] Inbox Q3,Jun-25,Fundamentals
+DPMA-630,6/10/25,Update dynamic quotes,Story,DPMA-571,[Receive] Inbox Q3,Jun-25,Fundamentals
+DPMA-680,6/11/25,"Plan ""AI Tech Debt"" Epic development (Three highest prio tasks)",Task,DPMA-647,Take things under control (3d),Jun-25,Clarity
+DPMA-693,6/11/25,"Plan ""[AI] improvements""",Task,DPMA-647,Take things under control (3d),Jun-25,Clarity
+DPMA-696,6/11/25,Estimation,Task,DPMA-643,[AI] Improvements Q2 6w,Jun-25,Clarity
+DPMA-679,6/11/25,Estimate Tasks in Epic,Task,DPMA-615,[AI] Tech debt Q2 1d,Jun-25,Clarity
+DPMA-670,6/12/25,Populate The Epic with Tasks,Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-671,6/12/25,Estimate Epic tasks,Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-639,6/12/25,Design general Observability,Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-737,6/12/25,Disable unnecessary rules on WAF for endpoints containing free text,Task,DPMA-481,[Infrastructure] Security Q2 2d,Jun-25,Clarity
+DPMA-447,6/12/25,[Receive] Force users to upgrade Receive app,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Convenience
+DPMA-684,6/12/25,Have tech debt inventory for User service,Task,DPMA-491,[User] Tech debt Q2 (1w),Jun-25,Fundamentals
+DPMA-685,6/12/25,Populate Epic with Tasks,Task,DPMA-491,[User] Tech debt Q2 (1w),Jun-25,Fundamentals
+DPMA-672,6/16/25,"Plan ""[BE] Technical Observability"" Epic development (three Highest prio tasks)",Task,DPMA-647,Take things under control (3d),Jun-25,Fundamentals
+DPMA-735,6/16/25,Finalize Observability ADR,Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-599,6/16/25,Add relevant events in the app are tracked in GA4,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-608,6/16/25,Propose & Refactor a design for Event View/View model (+ State Machine integration),Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-627,6/16/25,Users did not get the force update on latest version on app store (1.2),Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Convenience
+DPMA-690,6/16/25,iOS notification when summary failed is wrong,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-609,6/16/25,"In some cases after an error that can be retried we do not set error to ""retry"" mode.",Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-667,6/17/25,Reduce (required) login fields,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-747,6/17/25,Not necessary notification?,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-746,6/17/25,Summarisation without being logged it fails silently.,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-621,6/19/25,In Debug version of the app add a button to send logs (somewhere).,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-638,6/19/25,Log-in / account creation bug in iOS 18.3.2,Story,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-741,6/19/25,Verify metrics are working correctly,Task,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-646,6/20/25,Unclear failure and error message in document scanner,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Clarity
+DPMA-748,6/23/25,Internet connection error if transcribing with locked phone,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Connection
+DPMA-749,6/23/25,Double confirmation message,Bug,DPMA-570,"[Receive, iOS] Post lunch fixes, high prio (2w)",Jun-25,Fundamentals
+DPMA-647,6/24/25,Take things under control (3d),Epic,,,Jun-25,Convenience
+DPMA-570,6/24/25,"[Receive, iOS] Post lunch fixes, high prio (2w)",Epic,,,Jun-25,Fundamentals
+DPMA-715,6/24/25,User Service Handover 1d,Task,DPMA-647,Take things under control (3d),Jun-25,Convenience
+DPMA-687,6/24/25,"Plan ""[User] Tech debt Q2"" Epic development (Three highest prio tasks)",Task,DPMA-647,Take things under control (3d),Jun-25,Fundamentals
+DPMA-482,6/24/25,Have MS accounts that are only used for Azure,Task,DPMA-481,[Infrastructure] Security Q2 2d,Jun-25,Fundamentals
+DPMA-575,6/25/25,Replace text for document error handling,Task,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-753,6/25/25,Add download button of transcript as .txt,Story,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Clarity
+DPMA-750,6/25/25,We need meaningful error message in case of generic error coming from BE,Bug,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-633,6/25/25,Update content cards,Story,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-743,6/25/25,Enable setting default output language of AI services,Task,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Clarity
+DPMA-689,6/26/25,Doc. removal processing error,Bug,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-755,6/26/25,"Users do not receive ""force update"" popup.",Bug,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-613,6/27/25,[BE] Technical Observability 2w,Epic,,,Jun-25,Fundamentals
+DPMA-729,6/27/25,"Create ""framework"" to push custom metrics from User API 1d",Task,DPMA-759,[BE] Inbox Q3,Jun-25,Fundamentals
+DPMA-726,6/27/25,Provision Azure Grafana with access to Azure Monitor 1d,Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-727,6/27/25,Provision ApplicationInsights 1d,Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-731,6/27/25,"Add Instrumentation to AI Service including ( requests, postgresql, including requests to user service, and external services: Azure OpenAI, Yuvoly, Azure Blob Storage, EntraId, Auth0) 1d",Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Clarity
+DPMA-730,6/27/25,"Create ""framework"" to push custom metrics from AI Service API 1d",Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Clarity
+DPMA-728,6/27/25,"Add Instrumentation to User API including ( requets, postgresql, including requests to external services: auth0?, EntraId, Mailchimp, Azure Notification Hub) 2d",Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Clarity
+DPMA-732,6/27/25,"In Grafana, define and create dashboard with metrics 2d",Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-734,6/27/25,"Define very simple SLO’s for service(s), define and create alerts based on those SLO’s 1d",Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Fundamentals
+DPMA-739,6/27/25,"Create a metrics for ""user approval of AI summaries"" on a dashboard for Tobias",Task,DPMA-613,[BE] Technical Observability 2w,Jun-25,Clarity
+DPMA-640,6/27/25,Infrastructure handover 1d,Task,DPMA-481,[Infrastructure] Security Q2 2d,Jun-25,Fundamentals
+DPMA-757,6/27/25,Doc scanner halucination,Bug,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jun-25,Convenience
+DPMA-119,7/7/25,Onboarding,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Convenience
+DPMA-650,7/7/25,Login,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-736,7/7/25,[User] Send notifications to Android from user service,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-653,7/7/25,Record Audio Functionality,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-654,7/7/25,Transcription and Summary Functionality,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-123,7/7/25,Event Sharing,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Connection
+DPMA-651,7/7/25,Home Screen,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-652,7/7/25,Timeline Screen,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-668,7/7/25,Storage refactoring,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-656,7/7/25,Profile Screen,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-803,7/8/25,Application rotates in to landscape mode,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-797,7/8/25,"Carepath is opened by default, not ""home"" when I launch the app [QA]",Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-788,7/8/25,Adjust Ditto logo prepare appointment card [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Convenience
+DPMA-784,7/8/25,[🤖] Fix details on privacy statement page  [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-785,7/8/25,Insights card fixes  [QA] AI,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-786,7/8/25,Fix landing  [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-787,7/8/25,Various issues with audio recorder [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-790,7/8/25,Check App language settings [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Convenience
+DPMA-812,7/8/25,Date format is incorrect [AI],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-816,7/8/25,Nice to have: icons in event page header are very small,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-819,7/8/25,Buttons are highlighted in Red,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-783,7/9/25,"[AI] Implement new design ""add event""  [QA]",Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-796,7/9/25,AI 🤖 Can't save recording to Device [QA],Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-804,7/9/25,"AI 🤖 Can't scroll down while swiping ""Ditto insights"" cards",Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-815,7/9/25,AI 🤖 Can't view introduction video's in full screen,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-826,7/9/25,"""Login"" state is not picked up by the app",Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-649,7/9/25,Account creation,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-813,7/9/25,Incorrect icon privacy statement,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-824,7/10/25,AI 🤖 Can click through on recording screen,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-808,7/10/25,AI 🤖 Can't see transcription of the conversation,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-806,7/10/25,"[🤖] When recording is stopped after a tap on notification, HOME screen is opened automatically",Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-805,7/10/25,Can't delete user account,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-792,7/10/25,[🤖] Start input fields with upper case [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-800,7/11/25,Notification and error handling issues [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-823,7/13/25,Can't save recording,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-782,7/13/25,Adjust visibility document scanner [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-791,7/13/25,Edit profile details has various issues [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-830,7/14/25,Does not translate to English,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-833,7/14/25,Add Action Items (bullet points) formatting,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-821,7/14/25,"Nice to have: Remove ""delete"" option from note when there are no notes yet",Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-822,7/14/25,Various issues with audio recorder v2 [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-794,7/14/25,[🤖] Recording summary various minor issues [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-837,7/14/25,Neverending throbber on added audio file,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-657,7/15/25,Translate conversation summary,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Clarity
+DPMA-658,7/15/25,Add notes to events,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-659,7/15/25,Editing and Deleting Event,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-663,7/15/25,Home insights Cards,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-664,7/15/25,Manual event creation,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-669,7/15/25,Home “create account” cards,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-122,7/15/25,Add files to Events,Story,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-836,7/15/25,"There should be a ""lock screen"" when you leave the application.",Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-840,7/15/25,Super long login time if open app on a phone without internet connection,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Connection
+DPMA-831,7/15/25,"Can't see translate and transcribe options, when failed to translate",Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-798,7/15/25,Event detail screen has various small issues [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-832,7/16/25,Add Arabic language to summary,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-834,7/16/25,Files loader stuck for conversation,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-843,7/16/25,"Minimised recorder covers modals, tab bar and other components",Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-795,7/16/25,Event detail screen minor issues [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-810,7/16/25,Onboarding: adjust image + content biometric step,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Convenience
+DPMA-793,7/16/25,Contact us links are not working [QA],Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-854,7/16/25,Search icon should be removed/hidden,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Convenience
+DPMA-846,7/16/25,Deletion of file from event detail page not working,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-845,7/16/25,Audio continues playback while recording play state is paused,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-851,7/16/25,First time use camera: show permissions pop-up,Task,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-844,7/17/25,Summary removed when note opened,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-847,7/17/25,Summary text is not visible when sharing event,Bug,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Clarity
+DPMA-835,7/17/25,Analytics - user tracking,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-856,7/17/25,Analytics - user action tracking,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Fundamentals
+DPMA-811,7/17/25,Onboarding: adjust info biometric step,Story,DPMA-118,"[Receive, Android] App Pilot (2-4w)",Jul-25,Convenience
+DPMA-118,7/18/25,"[Receive, Android] App Pilot (2-4w)",Epic,,,Jul-25,Fundamentals
+DPMA-707,7/21/25,Less restrictive document classification 1d,Task,DPMA-643,[AI] Improvements Q2 6w,Jul-25,Clarity
+DPMA-712,7/21/25,Have LLMOps library be able to handle { },Task,DPMA-615,[AI] Tech debt Q2 1d,Jul-25,Clarity
+DPMA-722,7/21/25,Enable OpenTelemetry,Task,DPMA-491,[User] Tech debt Q2 (1w),Jul-25,Fundamentals
+DPMA-871,7/22/25,Make sure no user data is leaked in logs,Task,DPMA-615,[AI] Tech debt Q2 1d,Jul-25,Clarity
+DPMA-868,7/24/25,"Cleanup strings on ""setup security"" onboarding screen",Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Convenience
+DPMA-885,7/24/25,Add reminder about AI generated summary,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Clarity
+DPMA-848,7/24/25,"When a recording is summarised, event title is not updated",Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Clarity
+DPMA-615,7/25/25,[AI] Tech debt Q2 1d,Epic,,,Jul-25,Clarity
+DPMA-883,7/25/25,CRITICAL: Container Apps Publicly Exposed - Bypassing Application Gateway WAF,Bug,DPMA-572,[Infrastructure] Security Q3,Jul-25,Clarity
+DPMA-752,7/28/25,Specify language for AI service,Task,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Jul-25,Clarity
+DPMA-866,7/29/25,"[Android] wrong event name: ""event_attachment_share"" instead of ""attachment_shared""",Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Connection
+DPMA-862,7/29/25,[Android] audio_transcription_requested added twice,Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Clarity
+DPMA-863,7/29/25,[Android] audio_transcription_saved fired twice,Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Clarity
+DPMA-864,7/29/25,[Android] audio_translation_requested is fired twice,Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-860,7/29/25,[Android] event_created event is not fired,Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-861,7/29/25,"[Android] Analytics, events' has_logged_in property is ""false"" all the time, even if the user is logged in",Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-858,7/29/25,[Android] user_logged_out event received twice,Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Fundamentals
+DPMA-859,7/29/25,"[Android] Wrongly fired ""audio_transcription_failed"" analytics event",Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Jul-25,Clarity
+DPMA-481,8/4/25,[Infrastructure] Security Q2 2d,Epic,,,Aug-25,Fundamentals
+DPMA-567,8/4/25,"[Receive, BE] Q2 Improvements (2w)",Epic,,,Aug-25,Convenience
+DPMA-703,8/4/25,"Data curation: redefine needed datasets, start gathering 2w",Task,DPMA-643,[AI] Improvements Q2 6w,Aug-25,Clarity
+DPMA-704,8/4/25,Improve evaluation process 2w,Task,DPMA-643,[AI] Improvements Q2 6w,Aug-25,Clarity
+DPMA-888,8/4/25,Integrate with Crashlytics crash reports,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Aug-25,Fundamentals
+DPMA-195,8/4/25,[Backup][iOS] Backup status is not updaing,Bug,DPMA-567,"[Receive, BE] Q2 Improvements (2w)",Aug-25,Clarity
+DPMA-725,8/4/25,[IMPORTANT] Add implementation of notifications for Android devices,Task,DPMA-491,[User] Tech debt Q2 (1w),Aug-25,Fundamentals
+DPMA-686,8/4/25,Estimate tasks,Task,DPMA-491,[User] Tech debt Q2 (1w),Aug-25,Fundamentals
+DPMA-759,8/5/25,[BE] Inbox Q3,Epic,,,Aug-25,Fundamentals
+DPMA-571,8/5/25,[Receive] Inbox Q3,Epic,,,Aug-25,Fundamentals
+DPMA-740,8/5/25,[User] Tech debt Q3,Epic,,,Aug-25,Fundamentals
+DPMA-713,8/5/25,[AI] Tech Debt Q3,Epic,,,Aug-25,Clarity
+DPMA-901,8/7/25,Implement WAF Policy on some of the alerts,Task,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-897,8/19/25,Observability,Task,DPMA-643,[AI] Improvements Q2 6w,Aug-25,Clarity
+DPMA-925,8/19/25,WAF Blocks - disable warnings,Story,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-560,8/19/25,"[iOS, Android] Implement correct microphone icon",Story,DPMA-648,"[Receive, Android] Android on par with iOS",Aug-25,Fundamentals
+DPMA-852,8/19/25,Close button is really small for document viewing,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Aug-25,Fundamentals
+DPMA-637,8/21/25,Update language handling in de app,Task,DPMA-922,[FE] Inbox Q4,Aug-25,Convenience
+DPMA-632,8/21/25,App freeze when scrolling through the summary,Bug,DPMA-922,[FE] Inbox Q4,Aug-25,Clarity
+DPMA-631,8/21/25,App stuck on login screen,Bug,DPMA-922,[FE] Inbox Q4,Aug-25,Fundamentals
+DPMA-921,8/21/25,Audio playback on Android pauses after 1 minute,Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Aug-25,Fundamentals
+DPMA-705,8/25/25,"Quickscan LLM tools, time box, reconsider if we are reinventing the wheel",Task,DPMA-643,[AI] Improvements Q2 6w,Aug-25,Clarity
+DPMA-701,8/25/25,Create capability to run components in parallel - LLMOps library,Task,DPMA-643,[AI] Improvements Q2 6w,Aug-25,Clarity
+DPMA-698,8/25/25,Change LLM manifest defiinition from Python to YAML - LLMOps library,Task,DPMA-643,[AI] Improvements Q2 6w,Aug-25,Clarity
+DPMA-900,8/25/25,Document security WAF policy,Task,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-926,8/27/25,WAF Blocks - implement cleaning and block,Story,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-927,8/27/25,WAF Blocks - disable rules,Story,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-661,8/28/25,Document Scanner,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Aug-25,Clarity
+DPMA-662,8/28/25,Document Explainer,Task,DPMA-648,"[Receive, Android] Android on par with iOS",Aug-25,Clarity
+DPMA-924,8/29/25,WAF Blocks - HCP services,Story,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-910,8/29/25,PG cron job not working,Bug,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-928,8/29/25,Shut down unused services,Task,DPMA-898,[BE] Launch post-actions/fixes,Aug-25,Fundamentals
+DPMA-929,9/1/25,Create unit test for eval PR,Story,DPMA-898,[BE] Launch post-actions/fixes,Sep-25,Fundamentals
+DPMA-955,9/1/25,Content policy violation results in an internal server error,Bug,DPMA-898,[BE] Launch post-actions/fixes,Sep-25,Fundamentals
+DPMA-954,9/2/25,Edit Grafana alerts,Story,DPMA-898,[BE] Launch post-actions/fixes,Sep-25,Fundamentals
+DPMA-971,9/4/25,[App] Design permission screen for tracking,Task,DPMA-952,BURNING! Q4,Sep-25,Fundamentals
+DPMA-980,9/4/25,Peak effort on Farsi machine translations,Story,DPMA-643,[AI] Improvements Q2 6w,Sep-25,Clarity
+DPMA-976,9/4/25,Firewall alerts <2w decisions,Story,DPMA-898,[BE] Launch post-actions/fixes,Sep-25,Fundamentals
+DPMA-956,9/5/25,Transcript display seems off and missing large chunks,Bug,DPMA-952,BURNING! Q4,Sep-25,Clarity
+DPMA-758,9/8/25,Enable partner QR to patient summary,Story,DPMA-952,BURNING! Q4,Sep-25,Clarity
+DPMA-899,9/8/25,Include Mixpanel SDKs for analytics and tracking,Story,DPMA-952,BURNING! Q4,Sep-25,Fundamentals
+DPMA-974,9/8/25,TODO: split analytics ticket,Task,DPMA-952,BURNING! Q4,Sep-25,Fundamentals
+DPMA-957,9/8/25,[All] Better Title For events we create,Task,DPMA-643,[AI] Improvements Q2 6w,Sep-25,Clarity
+DPMA-891,9/8/25,"[iOS] ""Not Authenticated"" shows right after login when using AI features",Bug,DPMA-648,"[Receive, Android] Android on par with iOS",Sep-25,Clarity
+DPMA-486,9/10/25,Guest accounts with write permissions on Azure resources should be removed,Task,DPMA-572,[Infrastructure] Security Q3,Sep-25,Fundamentals
+DPMA-691,9/15/25,Add ability to upload files to scanner,Story,DPMA-952,BURNING! Q4,Sep-25,Convenience
+DPMA-946,9/15/25,[iOS] Language does not switch to Dutch for some users,Bug,DPMA-952,BURNING! Q4,Sep-25,Convenience
+DPMA-898,9/16/25,[BE] Launch post-actions/fixes,Epic,,,Sep-25,Fundamentals
+DPMA-990,9/24/25,Research how much time it will take to rewrite Matrix communication stack on iOS and Android,Task,DPMA-952,BURNING! Q4,Sep-25,Convenience
+DPMA-1015,9/24/25,Add Share Tab,Story,DPMA-952,BURNING! Q4,Sep-25,Connection
+DPMA-960,9/24/25,Setup email sender in Azure,Task,DPMA-911,Maintenance Q3,Sep-25,Clarity
+DPMA-1068,9/24/25,[Azure AD] Add redundancy for global admin role,Task,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Sep-25,Fundamentals
+DPMA-1012,9/25/25,Change order of the Onbaording,Story,DPMA-952,BURNING! Q4,Sep-25,Fundamentals
+DPMA-1108,9/25/25,"Medical Term ""Bypass"" Triggers False Positive in Prompt Injection Detection",Bug,DPMA-923,[BE] Inbox Q4,Sep-25,Fundamentals
+DPMA-995,9/26/25,"[Android] Add ""AI Feedback"" option",Task,DPMA-648,"[Receive, Android] Android on par with iOS",Sep-25,Clarity
+DPMA-1013,9/29/25,Copy and Image update Login Screen,Story,DPMA-952,BURNING! Q4,Sep-25,Convenience
+DPMA-1051,10/1/25,[Android] Disabled Buttons in Feedback Cards 1/2 and 2/2 Can Be Clicked Despite Being Grayed Out,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1042,10/1/25,[Android] Missing fade mask effect when scrolling privacy policy document,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1043,10/1/25,[Android] Swipe down gesture closes document instead of scrolling up in privacy policy,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1004,10/3/25,[Growth] Redo Invite Page,Epic,,,Oct-25,Connection
+DPMA-572,10/3/25,[Infrastructure] Security Q3,Epic,,,Oct-25,Fundamentals
+DPMA-1110,10/3/25,[iOS] Fix missing video in home screen card,Story,DPMA-952,BURNING! Q4,Oct-25,Fundamentals
+DPMA-1035,10/3/25,[Android] Skip button displays in English instead of Dutch on onboarding first step,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Convenience
+DPMA-1117,10/3/25,"[iOS, Android] Alert dialog shows incorrect text when deleting note",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1049,10/3/25,"[iOS] ""Can't Continue"" Dialog - Try Again Button Opens Camera Instead of Retrying Event Creation",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Clarity
+DPMA-1048,10/3/25,"[iOS] Error Dialog with Unexpected Error After Adding Non-medical Document, Retry Button Closes Dialog Without Action",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1023,10/3/25,"[Android] ""Summarize recording"" button is unresponsive",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Clarity
+DPMA-1033,10/3/25,[Android] Incorrect delete dialog appears when deleting note during creation/editing,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1062,10/6/25,[Product] Build Care Network v1,Epic,,,Oct-25,Connection
+DPMA-1136,10/6/25,[FE] Create tickets fro Care Circle management,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1137,10/6/25,[FE] Create tickets for message delivery,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-967,10/6/25,[Doc] Clean old and redundant communication style logic (e.g. C1 level),Story,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-940,10/6/25,Write Unit tests for recent observability,Task,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-966,10/6/25,[Doc] Improved refinement logic and compliance,Story,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-1118,10/6/25,Design data model for CN,Story,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1160,10/7/25,Get Lukasz started with cc-service dev,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1162,10/7/25,add datamodel migrations using Alembic,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1159,10/7/25,Handle JWT in cc-service,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1115,10/8/25,Improve refer a friend copy,Story,DPMA-952,BURNING! Q4,Oct-25,Convenience
+DPMA-1032,10/8/25,"[Android] Close button ""X"" stops working after typing any character in note",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1030,10/8/25,[Android] Incorrect Icon Displayed on Event Tile After Creating Event from Home Screen,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1029,10/8/25,[Android] View lifting up and missing keyboard hide button,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-886,10/9/25,Potentially wrong metrics on success rate of conversations,Bug,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-849,10/9/25,[Android] Delete icon in file preview menu is inconsistent with the delete note icon,Bug,DPMA-1016,[Android] Bring Android on Par with iOS low Prio,Oct-25,Convenience
+DPMA-944,10/10/25,Exclude document scanner for now from response time alert,Task,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-738,10/10/25,"Add SQLI validation to ""feedback"" endpoint",Task,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-1123,10/10/25,Analyze current frequency and fail modes of AI failure,Story,DPMA-1121,Reduce and mitigate impact AI failure,Oct-25,Clarity
+DPMA-1126,10/10/25,Implement failure/error communication as API output,Story,DPMA-1121,Reduce and mitigate impact AI failure,Oct-25,Clarity
+DPMA-932,10/13/25,Let recording directly play rather than the double press,Task,DPMA-952,BURNING! Q4,Oct-25,Clarity
+DPMA-1183,10/13/25,Remove download audio recording button,Story,DPMA-952,BURNING! Q4,Oct-25,Clarity
+DPMA-1120,10/13/25,Instantly start recording when pressing record on home screen,Story,DPMA-952,BURNING! Q4,Oct-25,Clarity
+DPMA-1158,10/13/25,Setup VPN and associated work env.,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1147,10/13/25,[FE] Technical architecture,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1157,10/13/25,Setup secure interaction with ditto-user-service,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1113,10/14/25,Make Android available in Belgium,Story,DPMA-952,BURNING! Q4,Oct-25,Clarity
+DPMA-1192,10/14/25,Create Azure AI custom filters in Terraform,Story,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-1193,10/14/25,"[Android] After deleting recording in empty event, alert dialog does not change state",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Clarity
+DPMA-1027,10/14/25,[Android] Duplicated email or name briefly appears above email in user profile,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Clarity
+DPMA-1122,10/14/25,[Android] Missing data completion screen (first name) after email login,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Clarity
+DPMA-1161,10/16/25,Create Docker image for care circle service,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1206,10/16/25,[BE] no warnings on codebase,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1205,10/16/25,[BE] Deploy new build of CC via github action,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1203,10/16/25,[BE] Add SQL tool for dev purposes,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1134,10/16/25,[BE] Deployment,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1197,10/16/25,[BE] LRU Cache user-service,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-983,10/16/25,Previous waf changes don't work,Bug,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-1129,10/16/25,"Using just the word ""string"" as a medical summary produces hallucinations and does not trigger the classification or any guardrails",Bug,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-1216,10/17/25,Implement new onboarding animations,Story,DPMA-952,BURNING! Q4,Oct-25,Convenience
+DPMA-1221,10/17/25,Implement onboarding v2.0,Task,DPMA-952,BURNING! Q4,Oct-25,Convenience
+DPMA-1213,10/17/25,[BE] handle error when creating invitation to my_care_circle,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1199,10/17/25,"[BE] Tests for failures at route, service and storage layer",Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Clarity
+DPMA-1178,10/17/25,Update synthetic input set,Story,DPMA-912,"[AI Quality, Measure] Create curated dataset",Oct-25,Clarity
+DPMA-702,10/17/25,"LLMComponent and LLMConditionalComponent are almost identical, fix this - LLMOps library",Task,DPMA-714,[AI] Inbox Q4,Oct-25,Clarity
+DPMA-1128,10/17/25,Analyze other GPT models in existing pipelines,Story,DPMA-714,[AI] Inbox Q4,Oct-25,Clarity
+DPMA-887,10/17/25,[iOS/Android] Update refer a friend link,Story,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1186,10/18/25,Implement new illustration style,Story,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-984,10/20/25,Implement waf decisions 03/09/25,Task,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-1227,10/21/25,Correct http error on expired signature,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1132,10/21/25,[BE] Care Circle management,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1151,10/21/25,[BE] Send notification to a patient when a caregiver leaves the circle,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1133,10/21/25,[BE] Message delivery,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1236,10/22/25,Create SSE notification endpoint,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1230,10/24/25,Write question about how to add a new service to landscape,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1202,10/24/25,[BE] Add notifications call,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1228,10/24/25,Handle Postgres token refresh!,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1188,10/24/25,Customized AI error messages,Story,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-1241,10/24/25,[Android] No bold font in the error title,Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1234,10/24/25,"[iOS, Android] Incorrect errors when creating summary from medical recording",Bug,DPMA-922,[FE] Inbox Q4,Oct-25,Clarity
+DPMA-1149,10/26/25,"[BE] Send notification to a patient, when somebody requests joining a care circle",Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1250,10/27/25,[BE] Add localized title strings,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1201,10/27/25,[BE] Define notifications format,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-930,10/27/25,"Certificate renewal is not working (for us, but not for Pawel)",Task,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-1181,10/27/25,[Spike] AI requests throttling,Task,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-934,10/27/25,Create set of LLM mainfest that generate diverse data,Task,DPMA-912,"[AI Quality, Measure] Create curated dataset",Oct-25,Clarity
+DPMA-951,10/27/25,[Conv] More extensive extensive part,Task,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-1180,10/27/25,Implement new error handling screens + logic,Story,DPMA-922,[FE] Inbox Q4,Oct-25,Fundamentals
+DPMA-1251,10/28/25,[BE] exclude sender device from notifications.,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1242,10/28/25,[BE] cleanup async issues.,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1198,10/28/25,[BE] Error handling with defined http responses,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1210,10/28/25,[BE] Correct logging of CC,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1266,10/28/25,[BE] Allow machine2machine call to User Service for fetching user profiles,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1249,10/28/25,"[BE] Add profile_service for names, emails and such",Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Clarity
+DPMA-1204,10/28/25,[BE] Add Prometheus endpoint,Task,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1252,10/28/25,[BE] Fetch communication language from User profile in user service,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-935,10/28/25,Create interface for judging the diverse summaries,Task,DPMA-912,"[AI Quality, Measure] Create curated dataset",Oct-25,Clarity
+DPMA-963,10/28/25,[Conv] Improve explanation of all medical terms (quick fix),Story,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-965,10/28/25,[Doc] Improve explanation of all medical terms (quick fix),Story,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-964,10/28/25,[Conv] Priorities of actions are not correctly used,Story,DPMA-643,[AI] Improvements Q2 6w,Oct-25,Clarity
+DPMA-1257,10/29/25,Creating an event from files,Bug,DPMA-1131,Care Network v1 Polishing,Oct-25,Connection
+DPMA-1258,10/29/25,Creating an event from a taken document photo,Bug,DPMA-1131,Care Network v1 Polishing,Oct-25,Connection
+DPMA-1255,10/29/25,Creating an empty event,Bug,DPMA-1131,Care Network v1 Polishing,Oct-25,Connection
+DPMA-1259,10/29/25,App crashes while creating a summary for an audio recording,Bug,DPMA-1131,Care Network v1 Polishing,Oct-25,Clarity
+DPMA-985,10/29/25,WAF decision: rule 300700,Task,DPMA-911,Maintenance Q3,Oct-25,Clarity
+DPMA-643,10/30/25,[AI] Improvements Q2 6w,Epic,,,Oct-25,Clarity
+DPMA-911,10/30/25,Maintenance Q3,Epic,,,Oct-25,Clarity
+DPMA-648,10/30/25,"[Receive, Android] Android on par with iOS",Epic,,,Oct-25,Fundamentals
+DPMA-1278,10/30/25,Remove DEV user-id header feature,Story,DPMA-1130,Care Network v1 Tech implementation,Oct-25,Connection
+DPMA-1065,10/30/25,[Auth0] Implement custom database connection scripts,Task,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Oct-25,Connection
+DPMA-1047,11/3/25,[Growth] Implement Adjust,Task,DPMA-952,BURNING! Q4,Nov-25,Fundamentals
+DPMA-1286,11/3/25,Give account creation/login push directly when clicking document scanner,Task,DPMA-952,BURNING! Q4,Nov-25,Clarity
+DPMA-1238,11/3/25,Intro videos in app not working on iOS and Android,Task,DPMA-952,BURNING! Q4,Nov-25,Convenience
+DPMA-1150,11/3/25,"[BE] Send notification to a care giver, when their request to join care circle is accepted or rejected",Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1152,11/3/25,[BE] Notify care giver if patient removed them from care circle,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1156,11/3/25,[BE] Notify user when a new message received,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-841,11/4/25,[3d] Cleanup the code after previous crunch (nav com),Task,DPMA-952,BURNING! Q4,Nov-25,Fundamentals
+DPMA-1237,11/4/25,Implement get profile info in user service,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1232,11/4/25,Make browser test client work with DEV,Task,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1304,11/4/25,fix notifications format,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1287,11/4/25,Fix npm package vulnerabilities in user service,Story,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1179,11/4/25,Final run for all system variations,Story,DPMA-912,"[AI Quality, Measure] Create curated dataset",Nov-25,Clarity
+DPMA-1269,11/5/25,Implement flower referral service in FE,Story,DPMA-952,BURNING! Q4,Nov-25,Connection
+DPMA-936,11/5/25,Generate a dataset ready to be judged,Task,DPMA-912,"[AI Quality, Measure] Create curated dataset",Nov-25,Clarity
+DPMA-1302,11/5/25,Intro videos in app not working on Android,Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Convenience
+DPMA-1306,11/6/25,Can send request to join Care Circle I'm already part of,Task,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1267,11/6/25,Document settings and usage of CC Server,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1288,11/6/25,Deploy CN backend to production,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1305,11/6/25,IDs in the request body are validated in case sensitive manner.,Bug,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1307,11/6/25,"When wrong url (dev in a prod env), the send_notification call in the notification_service throws an uncaught exception",Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1309,11/6/25,wrong dummy profile call in DEVELOPMENT mod,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1313,11/6/25,Prevent inviting yourself,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-994,11/6/25,Research side-by-side eval tooling,Story,DPMA-912,"[AI Quality, Measure] Create curated dataset",Nov-25,Clarity
+DPMA-1072,11/6/25,[Containers] Patch critical vulnerabilities in container images,Task,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Nov-25,Clarity
+DPMA-1289,11/7/25,Android notification does not work,Bug,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1140,11/7/25,[FE] Generate and share invitation link,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1319,11/7/25,github deploy to prod fails,Story,DPMA-922,[FE] Inbox Q4,Nov-25,Clarity
+DPMA-1142,11/9/25,[FE] Process request to join a care circle,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1141,11/9/25,[FE] Click on invitation link,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1143,11/9/25,[FE] Leave care circle,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1144,11/9/25,[FE] Remove user from a care circle,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1145,11/9/25,[FE] See my care circle,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1146,11/9/25,[FE] See care circles I'm in,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1290,11/10/25,Implement observability in CC service,Task,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1315,11/10/25,get_translation uses wrong language,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1194,11/10/25,Make export of all AI feedback in app,Story,DPMA-714,[AI] Inbox Q4,Nov-25,Clarity
+DPMA-1189,11/10/25,[Spike] Research why /patients endpoint is open,Story,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Nov-25,Convenience
+DPMA-920,11/11/25,[Data Security] Address Data security Q4,Epic,,,Nov-25,Fundamentals
+DPMA-1284,11/11/25,Analytics differences,Bug,DPMA-952,BURNING! Q4,Nov-25,Fundamentals
+DPMA-1219,11/11/25,Document the way to add a  new microservice to the user service.,Story,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1361,11/11/25,"P1 [iOS, Android] Navigation loops back incorrectly after share",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1363,11/11/25,"P1 [iOS, Android] ""New"" badge persists after opening event",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1359,11/11/25,P1 [Android] Deleted events still visible to followers,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1207,11/11/25,[BE] Document CC,Task,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1166,11/11/25,Create Interservice communication ADR,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1167,11/11/25,Create Auth handling with JWT ADR,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1200,11/11/25,[BE] Code walkthrough,Task,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1229,11/11/25,Document addition of cc credentials to the user-service db,Task,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1360,11/12/25,P1 [Android] Shared data accessible before follow approval (Probably only after there was an approved care circle connection before that was removed),Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1364,11/12/25,P1 [Android] Share button layout and styling issues,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1362,11/12/25,P1 [Android] Missing call-to-action in empty state Followers tab,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1312,11/12/25,Implement custom share sheet,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1327,11/12/25,Remove feedback when you tap on a follower,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1353,11/12/25,"P2 [iOS, Android] Following empty state needs improvement",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1329,11/12/25,"Change label in invitation card from ""start"" to ""invite""",Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1328,11/12/25,"Following list: arrow should open profile and not ""leave circle""",Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1343,11/12/25,"P2 [iOS, Android] Share status indicator missing from cards",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1345,11/12/25,"P2 [iOS, Android] Unshare background color doesn't update immediately",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1270,11/12/25,Validate JWT signature in User Service,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1366,11/12/25,Azure does not restart CCS container with failed health endpoint,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Clarity
+DPMA-1155,11/12/25,[FE] Unshare event,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1154,11/12/25,[FE] Share event,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1139,11/12/25,[FE] Hide care circle if not logged in with a correct account,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1116,11/12/25,Prompt uncertainty guardrail only uses uncertainty of final prompt,Bug,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1357,11/12/25,Adjust and CareNetwork: Deeplink for invitation (Investigation),Story,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1358,11/13/25,"P1 [iOS, Android] Refer a friend design needs update",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1334,11/13/25,"P2 [iOS, Android] Invalid invite links hang during approval",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1374,11/13/25,Referral empty state font colour wrong (black),Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1351,11/13/25,"P2 [iOS, Android] Homescreen following events not implemented",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1354,11/13/25,P1 [Android] Cannot share without followers,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1349,11/13/25,"P2 [iOS, Android] Departure notification message incorrect",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1344,11/13/25,"P2 [iOS, Android] Shared header pill color scheme",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1332,11/13/25,"P2 [iOS, Android] App stuck in ""Sharing"" state when backgrounded",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1253,11/13/25,[FE] Provide initial language during user registration,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1265,11/13/25,[FE] Update the user language in the user profile once we detect that device has different language.,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1322,11/13/25,Log Content policy error reason,Story,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1367,11/13/25,Terraform defines no functional health probes,Story,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1308,11/14/25,Change copy of disclaimer regarding AI accountability,Task,DPMA-952,BURNING! Q4,Nov-25,Clarity
+DPMA-1283,11/14/25,Postgres async.,Story,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1317,11/14/25,Implement loadtesting for CC service,Task,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1321,11/17/25,[Android] Remote config module,Story,DPMA-952,BURNING! Q4,Nov-25,Fundamentals
+DPMA-1208,11/17/25,Android users don't have option to lock phone,Story,DPMA-952,BURNING! Q4,Nov-25,Fundamentals
+DPMA-1005,11/17/25,Implement Force update on Android,Task,DPMA-952,BURNING! Q4,Nov-25,Convenience
+DPMA-1387,11/17/25,[iOS] Duplicate language selection shown on first recording attempt,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1371,11/17/25,[Android] Summary and files cleared from event after sharing,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1386,11/17/25,"[iOS, Android] Shared event appear for follower on Home screen latest events",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1389,11/17/25,[Android] Event details changes not updated immediately after saving,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1390,11/17/25,[Android] App crashes when opening YouTube videos screen from Home,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1388,11/17/25,[iOS] Issues with recording from an empty event (iPhone X),Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1336,11/17/25,"P2 [iOS, Android] Cryptic error for duplicate invitations",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1335,11/17/25,"P2 [iOS, Android] Account deletion not handled",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1346,11/17/25,"P2 [iOS, Android] Open events don't update after unshare",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1379,11/17/25,"[iOS, Android] Incorrect design for event sharing screen",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1254,11/17/25,[iOS] Face ID appears immediately on the first launch of the app,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1347,11/17/25,"P2 [iOS, Android] Offline share needs better error messaging",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1401,11/17/25,"[Android, P1] - If sharing fails, summary text is removed",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1403,11/17/25,"[Android] ""Other"" share button not working in event share card",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1394,11/17/25,Review Security implementation,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1138,11/17/25,[BE] ADR - Technical architecture,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1395,11/17/25,Test migration from Current production to CC version,Story,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1373,11/17/25,Implement proper error notifications for users,Task,DPMA-1130,Care Network v1 Tech implementation,Nov-25,Connection
+DPMA-1239,11/17/25,"Improve formatting of shared message (WA, Signal)",Task,DPMA-922,[FE] Inbox Q4,Nov-25,Connection
+DPMA-1130,11/18/25,Care Network v1 Tech implementation,Epic,,,Nov-25,Connection
+DPMA-1276,11/18/25,App doesn't navigate to event after creating summary from document scan,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1402,11/18/25,[Android] Create account and sign in buttons not responding,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1330,11/18/25,Fix disappearing cards on home and timeline,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-706,11/18/25,Evaluate our pipelines with different models 2d,Task,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1340,11/19/25,"P2 [iOS, Android] Events stay open after follower removal",Bug,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1339,11/19/25,"P2 [iOS, Android] Removal confirmation dialog lacks hierarchy",Bug,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1314,11/19/25,[FE] Implement Mixpanel event for analytics,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1393,11/19/25,Analytics CC,Task,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1414,11/19/25,Accept follow request not working,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1338,11/19/25,"P2 [iOS, Android] Profile animation inconsistent in connection flow",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1121,11/20/25,Reduce and mitigate impact AI failure,Epic,,,Nov-25,Clarity
+DPMA-1407,11/20/25,Create Epic for Making events Great again,Task,DPMA-952,BURNING! Q4,Nov-25,Clarity
+DPMA-1153,11/20/25,[FE] Design App level communication protocol,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-959,11/20/25,Translate Auth0 email templates to Dutch,Task,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1124,11/20/25,Analyze edge cases where we get AI failure,Story,DPMA-1121,Reduce and mitigate impact AI failure,Nov-25,Clarity
+DPMA-1125,11/20/25,Design sheet to better communicate AI failure with user,Story,DPMA-1121,Reduce and mitigate impact AI failure,Nov-25,Clarity
+DPMA-1127,11/20/25,Tune content policy thresholds of OpenAI Service,Story,DPMA-1121,Reduce and mitigate impact AI failure,Nov-25,Clarity
+DPMA-1316,11/20/25,[Spike] Context engineering,Story,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1310,11/20/25,[Spike] PoC with Corti,Story,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1430,11/22/25,[iOS] Logged-out user receives shared event notifications and can access the event.,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1428,11/22/25,"[iOS, Android] Missing notification when trying to share event while not logged in",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1432,11/22/25,"[iOS, Android] Removed follower does not disappear immediately from list; error appears after refresh",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1325,11/24/25,P1 Notification copy quality issues,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1348,11/24/25,"P2 [iOS, Android] Follow request notification copy confusing",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-968,11/24/25,[All] Add GPT-specific checklists at end of prompt,Story,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1320,11/24/25,Create/consolidate AI quality and safety thresholds: what is good and safe?,Story,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1416,11/24/25,[Spike] Geofencing,Story,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1370,11/25/25,Make replicas configurable per containerapp,Story,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1437,11/26/25,Allow users to edit metadata after Juvoly QR scan,Task,DPMA-952,BURNING! Q4,Nov-25,Connection
+DPMA-1163,11/26/25,Implement asymmetric key encryption for Juvoly QR,Story,DPMA-952,BURNING! Q4,Nov-25,Connection
+DPMA-1418,11/26/25,Create tickets for changing Error Handling in CCS,Story,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1376,11/26/25,Create landing page on dittocare.com (WIX) for deeplinks clicked on desktop,Task,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1431,11/26/25,"[iOS, Android] Shared event tiles remain visible on the home screen after logout",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Clarity
+DPMA-1433,11/26/25,"[Android] After accepting follow invitation, user does not refresh to become clickable",Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1415,11/26/25,Create Epic for: Store User GDPR Consent,Task,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1449,11/26/25,Make ADR from QR Code,Story,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1372,11/26/25,Fix Health probes usage for AI and User service,Story,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1369,11/26/25,Add probes to ai-core and user-service,Story,DPMA-1279,Maintenance Q4,Nov-25,Clarity
+DPMA-1446,11/26/25,Care Circle analytics are off in Mixpanel,Bug,DPMA-1280,[AI] Improvements Q4,Nov-25,Clarity
+DPMA-1459,11/26/25,Update encryption declaration iOS,Story,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1435,11/27/25,[Android] Unshare button disappears after clickin. When user is logged out cannot unshare after logging back in.,Bug,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1377,11/27/25,CCS should give 403 when signature has expired.,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1423,11/27/25,Have a workshop with Niek to understand how he is using analytics,Task,DPMA-1422,Redesign Analytics event Structure,Nov-25,Clarity
+DPMA-1470,11/27/25,"[iOS, Android] Complete profile - analytics",Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1461,11/27/25,Health probe routes cause application to fail,Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Clarity
+DPMA-1396,11/28/25,Change order of homescreen cards,Bug,DPMA-1291,Care Network V1.1,Nov-25,Connection
+DPMA-1378,11/28/25,Address Code Review,Story,DPMA-1131,Care Network v1 Polishing,Nov-25,Connection
+DPMA-1472,11/28/25,[iOS] The back button in ‘Invitations’ (Complete Profile) is not centered,Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1469,11/28/25,"[iOS, Android] Empty string for invitation content sent from complete profile",Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1468,11/28/25,"[iOS] Clicking ""Skip"" in complete profile does not mark step as completed",Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1467,11/28/25,[Android] Incorrect behavior of field selection in profile completion on Android,Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1462,11/28/25,Write post-mortem on health probe bug,Story,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1463,11/28/25,DELETE /api/patients/devices/{deviceToken} endpoint returns 400 - device token not extracted from URL,Bug,DPMA-922,[FE] Inbox Q4,Nov-25,Fundamentals
+DPMA-1268,11/29/25,Ask for review when people gave thumbs up on AI output,Story,DPMA-952,BURNING! Q4,Nov-25,Clarity
+DPMA-1434,11/29/25,Replace T&C and Privacy Policy in the app,Story,DPMA-952,BURNING! Q4,Nov-25,Fundamentals
+DPMA-1007,12/1/25,[Growth] Onboarding - Create Account Page - Improve comms & make more explanatory,Epic,,,Dec-25,Convenience
+DPMA-1008,12/1/25,[Growth] Move Registration higher up in the funnel to enable personalisation,Epic,,,Dec-25,Convenience
+DPMA-1409,12/1/25,Implement new profile setup flow,Story,DPMA-952,BURNING! Q4,Dec-25,Convenience
+DPMA-1464,12/1/25,Implement Analytics for the new profile flow,Story,DPMA-952,BURNING! Q4,Dec-25,Convenience
+DPMA-1466,12/1/25,Next button during profile name not shown,Bug,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1397,12/1/25,Fix spacing home card,Bug,DPMA-1291,Care Network V1.1,Dec-25,Connection
+DPMA-1442,12/1/25,[iOS] Improve size orbit,Task,DPMA-1131,Care Network v1 Polishing,Dec-25,Connection
+DPMA-1475,12/1/25,Validate token refresh logic on mobile app.,Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1424,12/1/25,Design analytics approach that will make hooking of the new functionality automatic,Task,DPMA-1422,Redesign Analytics event Structure,Dec-25,Fundamentals
+DPMA-1311,12/1/25,Ensure with 95% confidence that evaluation dataset is representative,Story,DPMA-912,"[AI Quality, Measure] Create curated dataset",Dec-25,Clarity
+DPMA-1191,12/1/25,Remove steps from onboarding,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Convenience
+DPMA-1190,12/1/25,"Implement question ""where did you hear about Ditto""",Story,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1474,12/1/25,[AI] Audio that is too long returns a 500 instead of a validation error,Bug,DPMA-922,[FE] Inbox Q4,Dec-25,Clarity
+DPMA-1420,12/2/25,Decide on Force update logic,Story,DPMA-952,BURNING! Q4,Dec-25,Convenience
+DPMA-1384,12/2/25,don't accept multiple messages with same id.,Story,DPMA-1291,Care Network V1.1,Dec-25,Connection
+DPMA-1476,12/2/25,Review Analytics ADR,Story,DPMA-1422,Redesign Analytics event Structure,Dec-25,Convenience
+DPMA-1483,12/2/25,Fix pre-commit hooks in care circle repo,Bug,DPMA-922,[FE] Inbox Q4,Dec-25,Connection
+DPMA-1477,12/2/25,Use new principal in User Service and CC Service Github Workflows,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Convenience
+DPMA-1324,12/3/25,Write ADR for Firebase Remote Config usage,Task,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1400,12/3/25,Update endpoints policies,Story,DPMA-1291,Care Network V1.1,Dec-25,Connection
+DPMA-1417,12/3/25,Create Endpoints versioning ADR,Story,DPMA-1291,Care Network V1.1,Dec-25,Connection
+DPMA-1497,12/3/25,Review ADR for force update,Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1480,12/3/25,"[iOS, Android] Incorrect button size for invitation in complete profile",Bug,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1481,12/3/25,[Android] Missing user icon image in complete profile; incorrect icon visible to other users,Bug,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1425,12/4/25,Implement new events in the app,Task,DPMA-1422,Redesign Analytics event Structure,Dec-25,Fundamentals
+DPMA-1495,12/4/25,Sticky button in onboarding feature explanation page,Task,DPMA-922,[FE] Inbox Q4,Dec-25,Convenience
+DPMA-1465,12/4/25,"Bring back ""Refer a friend"" on settings page",Task,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1498,12/4/25,"Remove old ""create account"" cell from home view, and put there new profile cell with progress 0%",Story,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1508,12/4/25,Success modal after profile set-up completion,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1510,12/5/25,Add Figma links to epic description,Task,DPMA-1489,Appointment Preparation - phase 1 - revised event details,Dec-25,Clarity
+DPMA-1436,12/5/25,Pincode unlock not working on older iPhone,Bug,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1444,12/5/25,"Change illustration ""no followers"" in share sheet",Task,DPMA-1131,Care Network v1 Polishing,Dec-25,Connection
+DPMA-1445,12/5/25,Fix styling log-in modal,Task,DPMA-1131,Care Network v1 Polishing,Dec-25,Connection
+DPMA-1516,12/5/25,User cannot log in on TCL phone,Bug,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1485,12/6/25,Refresh access token 30 seconds in advance before its expiration,Task,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1406,12/6/25,"Fix ""Force Update"" functionality",Task,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1522,12/8/25,Review modal not shown after confirming review intent (Android phone Anne),Bug,DPMA-1487,Ask For Review v2.0,Dec-25,Convenience
+DPMA-1496,12/8/25,Trigger share modal after summary/event creation,Task,DPMA-922,[FE] Inbox Q4,Dec-25,Clarity
+DPMA-1517,12/8/25,New profile: create account and login,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1518,12/8/25,Android review prompt doest show up on production,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Convenience
+DPMA-1280,12/9/25,[AI] Improvements Q4,Epic,,,Dec-25,Clarity
+DPMA-1492,12/9/25,Generate questions on BE for the next appointment,Task,DPMA-1586,Appointment Preparation - Phase 3 - Ai Backed,Dec-25,Clarity
+DPMA-1323,12/9/25,"Plan and refine ""Prepare Apointment""",Task,DPMA-1489,Appointment Preparation - phase 1 - revised event details,Dec-25,Clarity
+DPMA-1542,12/9/25,Doc explainer takes more than 2 minuts,Task,DPMA-952,BURNING! Q4,Dec-25,Clarity
+DPMA-1494,12/9/25,Improve evaluation process for consequent sessions,Task,DPMA-912,"[AI Quality, Measure] Create curated dataset",Dec-25,Clarity
+DPMA-1272,12/9/25,Make provider and location smarter and visible,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1502,12/10/25,CC service logs email adresses,Bug,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1515,12/10/25,Design pop-up invitation UI with illustration and WhatsApp button for superusers,Task,DPMA-1512,Show invite for user research to high-freq users,Dec-25,Connection
+DPMA-1558,12/10/25,User service logs PII,Bug,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1521,12/11/25,Define other triggers for review pop-up,Task,DPMA-1487,Ask For Review v2.0,Dec-25,Convenience
+DPMA-1560,12/11/25,Calculate PTU needed for our LLM usage,Story,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1187,12/11/25,Create ADR for Mobile architecture,Story,DPMA-1131,Care Network v1 Polishing,Dec-25,Connection
+DPMA-1540,12/11/25,Fix CVE-2025-65945 in user service,Task,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1559,12/11/25,Prepare postmortem for quota,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Fundamentals
+DPMA-1553,12/12/25,Disable Analytics on a hidden button,Story,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1563,12/12/25,Fix logic of refresh token from Auth0 SDK,Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1070,12/12/25,[Azure] Limit service principal scope to specific resource groups  [DevOps 2MD],Task,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Dec-25,Fundamentals
+DPMA-1486,12/15/25,Improved Activation with Videos,Epic,,,Dec-25,Convenience
+DPMA-1541,12/15/25,(Android) Can't approve follow request,Task,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1554,12/15/25,Bootstrap graceful degradation notification,Story,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1507,12/15/25,Save button not shown on Date Picker view,Bug,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1565,12/15/25,Summary Customization v 0.1,Story,DPMA-1131,Care Network v1 Polishing,Dec-25,Clarity
+DPMA-1448,12/15/25,"Implement Ditto Series ""activation""",Task,DPMA-1486,Improved Activation with Videos,Dec-25,Convenience
+DPMA-1556,12/15/25,Refine the security epic,Story,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Dec-25,Fundamentals
+DPMA-606,12/15/25,[iOS] Fix toaster text summary created,Story,DPMA-922,[FE] Inbox Q4,Dec-25,Clarity
+DPMA-1564,12/16/25,Implement new triggers (see epic desc),Task,DPMA-1487,Ask For Review v2.0,Dec-25,Convenience
+DPMA-1588,12/16/25,Update copy typos and inconsistencies  (already done in Localize),Story,DPMA-952,BURNING! Q4,Dec-25,Convenience
+DPMA-1529,12/16/25,Implement Ditto Christmas theme in mobile app,Task,DPMA-952,BURNING! Q4,Dec-25,Convenience
+DPMA-1523,12/16/25,Design the technical solution,Task,DPMA-1488,Change Profile Picture V1,Dec-25,Convenience
+DPMA-1487,12/18/25,Ask For Review v2.0,Epic,,,Dec-25,Convenience
+DPMA-1555,12/18/25,Run vulnerability scan weekly for all backend repo's,Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1579,12/19/25,Make sure that “how to release” section is in the readme of each project.,Task,DPMA-952,BURNING! Q4,Dec-25,Fundamentals
+DPMA-1552,12/22/25,Machine translation component for language extension,Story,DPMA-1493,Language Extension Unlocking,Dec-25,Convenience
+DPMA-1600,12/30/25,Review Tracking: cleaning payloads,Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1601,12/30/25,Change how events are reported on Mixpanel (each separated),Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1602,12/30/25,Include referrals and goals in event (profile completion),Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1598,12/30/25,Make profile completion goals set same as referral source: Mixpanel,Story,DPMA-1279,Maintenance Q4,Dec-25,Clarity
+DPMA-1513,12/30/25,Implement event count tracking for high-frequency users,Task,DPMA-1512,Show invite for user research to high-freq users,Dec-25,Connection
+DPMA-1069,1/5/26,[CI/CD] Reduce GitHub Actions privileged access to infrastructure [DevOps 1MD for analysis],Task,DPMA-1063,[Data Security] Deal with pentest critical findings Q4,Jan-26,Fundamentals
+DPMA-997,1/5/26,Integrate Adjust into MixPanel,Task,DPMA-922,[FE] Inbox Q4,Jan-26,Fundamentals
+DPMA-1546,1/6/26,Add bullet points to notes,Story,DPMA-1489,Appointment Preparation - phase 1 - revised event details,Jan-26,Clarity
+DPMA-1549,1/6/26,New Add Appointment View UI Components,Story,DPMA-1489,Appointment Preparation - phase 1 - revised event details,Jan-26,Clarity
+DPMA-1548,1/6/26,New Event Detail View UI,Story,DPMA-1489,Appointment Preparation - phase 1 - revised event details,Jan-26,Clarity
+DPMA-1547,1/6/26,Extend Event model with questions,Story,DPMA-1489,Appointment Preparation - phase 1 - revised event details,Jan-26,Clarity
+DPMA-1609,1/6/26,Change copy of error message when no summary possible,Story,DPMA-1605,Get help from Doctor Ditto - Phase 0,Jan-26,Clarity
+DPMA-1534,1/6/26,Refactor logic of Event Detail Screen,Task,DPMA-1530,Revise Event Detail screen,Jan-26,Clarity
+DPMA-1490,1/6/26,Refactor event detail view with new navigation,Task,DPMA-1530,Revise Event Detail screen,Jan-26,Clarity
+DPMA-1514,1/6/26,Implement trigger pop-up after 5th (or subsequent) event creation,Task,DPMA-1512,Show invite for user research to high-freq users,Jan-26,Connection
+DPMA-1617,1/6/26,Release - Prep,Task,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-1530,1/7/26,Revise Event Detail screen,Epic,,,Jan-26,Clarity
+DPMA-1489,1/7/26,Appointment Preparation - phase 1 - revised event details,Epic,,,Jan-26,Clarity
+DPMA-1512,1/7/26,Show invite for user research to high-freq users,Epic,,,Jan-26,Connection
+DPMA-1279,1/7/26,Maintenance Q4,Epic,,,Jan-26,Clarity
+DPMA-952,1/7/26,BURNING! Q4,Epic,,,Jan-26,Fundamentals
+DPMA-922,1/7/26,[FE] Inbox Q4,Epic,,,Jan-26,Fundamentals
+DPMA-923,1/7/26,[BE] Inbox Q4,Epic,,,Jan-26,Fundamentals
+DPMA-918,1/7/26,[Infra] Take infrastructure cost under control,Epic,,,Jan-26,Fundamentals
+DPMA-1016,1/7/26,[Android] Bring Android on Par with iOS low Prio,Epic,,,Jan-26,Fundamentals
+DPMA-1493,1/7/26,Language Extension Unlocking,Epic,,,Jan-26,Convenience
+DPMA-1627,1/7/26,UX flow: share transcript with doctor Ditto,Story,DPMA-1605,Get help from Doctor Ditto - Phase 0,Jan-26,Clarity
+DPMA-1619,1/7/26,Design transcript sharing UX,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Clarity
+DPMA-1539,1/7/26,Develop transcript summary and return UX,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Clarity
+DPMA-820,1/7/26,"Remove notes option from ""edit event""",Task,DPMA-1016,[Android] Bring Android on Par with iOS low Prio,Jan-26,Fundamentals
+DPMA-818,1/7/26,"Wrong ""back"" actions on ""detailed"" privacy policy or terms and conditions",Bug,DPMA-1016,[Android] Bring Android on Par with iOS low Prio,Jan-26,Clarity
+DPMA-850,1/7/26,"Edit details, filled in name of organisation is not shown.",Bug,DPMA-1016,[Android] Bring Android on Par with iOS low Prio,Jan-26,Clarity
+DPMA-124,1/7/26,"Backups (ensure, that OS backs it up properly)",Story,DPMA-1016,[Android] Bring Android on Par with iOS low Prio,Jan-26,Fundamentals
+DPMA-1040,1/7/26,Check Domain Score since mails end up in spam,Story,DPMA-923,[BE] Inbox Q4,Jan-26,Clarity
+DPMA-884,1/7/26,Make unified in-control opentelemetry setup for all backend services,Task,DPMA-875,[Infra] Inbox Q4,Jan-26,Fundamentals
+DPMA-931,1/7/26,Create solution for hosting logo asset for auth0 usage,Task,DPMA-875,[Infra] Inbox Q4,Jan-26,Fundamentals
+DPMA-939,1/7/26,Improve the Auth0 email,Task,DPMA-875,[Infra] Inbox Q4,Jan-26,Clarity
+DPMA-953,1/7/26,Fix the Auth0 verification email issues,Story,DPMA-875,[Infra] Inbox Q4,Jan-26,Clarity
+DPMA-645,1/7/26,"Add AI cost monitoring to ""helicopter"" dashboard. 1h",Task,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Clarity
+DPMA-1331,1/7/26,Implement Force update on iOS #2,Story,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Convenience
+DPMA-875,1/8/26,[Infra] Inbox Q4,Epic,,,Jan-26,Fundamentals
+DPMA-714,1/8/26,[AI] Inbox Q4,Epic,,,Jan-26,Clarity
+DPMA-1632,1/8/26,"Decide what to do UX wise, if transcript is available, but not the summary",Task,DPMA-1605,Get help from Doctor Ditto - Phase 0,Jan-26,Clarity
+DPMA-1630,1/8/26,[BE] Return transcript if summary is not possible,Task,DPMA-1605,Get help from Doctor Ditto - Phase 0,Jan-26,Clarity
+DPMA-636,1/8/26,Need to reauthenticate when trying to transcrive >= 3 events simultaneously,Bug,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1655,1/8/26,[FE] Juvoly QR decoding produces invalid characters,Task,DPMA-1634,Must go next release Q1,Jan-26,Connection
+DPMA-937,1/8/26,Gather judges and plan session,Task,DPMA-912,"[AI Quality, Measure] Create curated dataset",Jan-26,Clarity
+DPMA-710,1/8/26,RAG PoC and eval,Task,DPMA-714,[AI] Inbox Q4,Jan-26,Clarity
+DPMA-1318,1/8/26,[Spike] Extract next appointment info from previous appointment,Story,DPMA-714,[AI] Inbox Q4,Jan-26,Clarity
+DPMA-1011,1/8/26,Delete Orphan audio files,Story,DPMA-1638,[BE] Inbox Q1,Jan-26,Fundamentals
+DPMA-1246,1/8/26,Fix Auth0 Verification Email,Story,DPMA-1638,[BE] Inbox Q1,Jan-26,Clarity
+DPMA-688,1/8/26,Not getting notifications,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-754,1/8/26,Add styling options to notes,Story,DPMA-1639,[FE] Inbox Q1,Jan-26,Convenience
+DPMA-802,1/8/26,[iOS] Links to Legal documents missing on onboarding screen,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Convenience
+DPMA-970,1/8/26,[Android] User cannot set pincode for Ditto security,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-972,1/8/26,[iOS] Do not receive notifications about summary transcribed,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Clarity
+DPMA-554,1/8/26,[iOS] Fix closing scanner,Story,DPMA-1639,[FE] Inbox Q1,Jan-26,Convenience
+DPMA-557,1/8/26,Update appointment actions,Story,DPMA-1639,[FE] Inbox Q1,Jan-26,Convenience
+DPMA-566,1/8/26,"Profile page: link ""sign in"" and ""create account"" directly to Auth0",Story,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-626,1/8/26,A generic error is returned when too long audio file is uploaded for summarisation.,Task,DPMA-1639,[FE] Inbox Q1,Jan-26,Clarity
+DPMA-978,1/8/26,[Both] Change Auth0 account creation screen,Story,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-979,1/8/26,Update Auth0 layout and logic,Story,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-1024,1/8/26,[Android] Delete button in save recording dialog lacks confirmation protection,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Clarity
+DPMA-1631,1/9/26,"[FE] Implement ""share transcript"" if transcript is present, but not the summary",Task,DPMA-1605,Get help from Doctor Ditto - Phase 0,Jan-26,Clarity
+DPMA-1742,1/9/26,Fix copy error message in small card,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Connection
+DPMA-1743,1/9/26,Detach policy bullet points from the blue box,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Connection
+DPMA-1629,1/9/26,Remove Xmas card,Story,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1006,1/9/26,"Share file (image, pdf, audio) with Ditto",Task,DPMA-1639,[FE] Inbox Q1,Jan-26,Connection
+DPMA-1708,1/9/26,Agree with engineers on code changes quality control.,Task,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-1711,1/9/26,Write Release Procedure,Task,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-1654,1/9/26,[Infra] Firewall blocks requests wth non-utf8 characters in document explainer requests,Task,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Clarity
+DPMA-912,1/12/26,"[AI Quality, Measure] Create curated dataset",Epic,,,Jan-26,Clarity
+DPMA-1614,1/12/26,[BE] Provide a public view on a person profile by their user ID for every authenticated user,Task,DPMA-1488,Change Profile Picture V1,Jan-26,Convenience
+DPMA-1526,1/12/26,Make design of notification center,Task,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-1625,1/12/26,In-app inbox follow up actions per type,Story,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-1626,1/12/26,In-app inbox message types,Story,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-890,1/12/26,[iOS] Feedback AI copy and pop-up incorrect,Bug,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1050,1/12/26,[iOS] Old Strings Displayed for Thumbs Up/Down in Feedback Card 2/2 After Creating Summary,Bug,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1610,1/12/26,Design flow for putting in appointment directly after onboarding,Task,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1623,1/12/26,Improved activation: add an appointment,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1751,1/12/26,Ditto Doc. Fix title in Dutch,Task,DPMA-1634,Must go next release Q1,Jan-26,Fundamentals
+DPMA-1214,1/12/26,Delete unsubscribe users from db user-service,Story,DPMA-1634,Must go next release Q1,Jan-26,Fundamentals
+DPMA-1752,1/12/26,Add retry button for previously failed summaries,Task,DPMA-1634,Must go next release Q1,Jan-26,Clarity
+DPMA-1624,1/13/26,Set-up user research for Care Circle V2,Story,DPMA-1616,CC V2 | Discover & Define,Jan-26,Connection
+DPMA-1595,1/13/26,[FE] Implement CRUD for own profile pictures,Task,DPMA-1488,Change Profile Picture V1,Jan-26,Convenience
+DPMA-1615,1/13/26,[FE] Make sure Fe components can return from endpoints requiring auth,Task,DPMA-1488,Change Profile Picture V1,Jan-26,Convenience
+DPMA-1723,1/13/26,Update first time use screens,Story,DPMA-1722,Design polishing,Jan-26,Convenience
+DPMA-893,1/13/26,Make data ownership decorator for all endpoints,Story,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1761,1/13/26,Fix high/critical vulnerabilities in Care Circle Service,Task,DPMA-1634,Must go next release Q1,Jan-26,Connection
+DPMA-1077,1/13/26,[Network] Upgrade TLS to 1.3 and disable legacy protocols,Task,DPMA-1584,"Security, Important, Q1",Jan-26,Convenience
+DPMA-1692,1/14/26,Expoloration Care Circle V2,Story,DPMA-1616,CC V2 | Discover & Define,Jan-26,Connection
+DPMA-1439,1/14/26,"[BE] As a user, I want to be able to edit my profile picture",Story,DPMA-1488,Change Profile Picture V1,Jan-26,Convenience
+DPMA-1787,1/14/26,[iOS] All newly added strings are invalid.,Bug,DPMA-1488,Change Profile Picture V1,Jan-26,Fundamentals
+DPMA-1788,1/14/26,[iOS]  Unable to change profile photo after user registration via email on iOS,Bug,DPMA-1488,Change Profile Picture V1,Jan-26,Clarity
+DPMA-1789,1/14/26,"[iOS[ Unable to change photo in edit profile details, screen closes after selecting photo from gallery",Bug,DPMA-1488,Change Profile Picture V1,Jan-26,Clarity
+DPMA-1633,1/14/26,Give Iman the Ultimate access rights to Azure,Story,DPMA-1760,Operational Inbox Q1,Jan-26,Fundamentals
+DPMA-1131,1/15/26,Care Network v1 Polishing,Epic,,,Jan-26,Connection
+DPMA-1422,1/15/26,Redesign Analytics event Structure,Epic,,,Jan-26,Fundamentals
+DPMA-1859,1/16/26,[Android] Avatar image reloads on every screen navigation,Bug,DPMA-1488,Change Profile Picture V1,Jan-26,Convenience
+DPMA-1593,1/16/26,[FE] Fetch profiles and pictures of our care circle through care circle service,Task,DPMA-1488,Change Profile Picture V1,Jan-26,Connection
+DPMA-1777,1/16/26,"Change title ""Uw notitie"" on event detail",Task,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1778,1/16/26,Start a bullet list item in note taking with a capital letter,Task,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1747,1/16/26,Prepare video shoot with Dr. Ditto (Geert),Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1749,1/16/26,Shoot & edit Dr. Ditto video,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1764,1/16/26,"Ask users for appstore feedback after 2 successful summaries, not 3",Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1776,1/16/26,Add appointment: change order of input fields,Task,DPMA-1634,Must go next release Q1,Jan-26,Convenience
+DPMA-1693,1/16/26,Onboard myself on Ditto AI tools,Story,DPMA-1760,Operational Inbox Q1,Jan-26,Clarity
+DPMA-1605,1/19/26,Get help from Doctor Ditto - Phase 0,Epic,,,Jan-26,Connection
+DPMA-1488,1/19/26,Change Profile Picture V1,Epic,,,Jan-26,Convenience
+DPMA-1550,1/19/26,New appointment preparation flow,Story,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Jan-26,Convenience
+DPMA-1798,1/19/26,Design discovery features,Story,DPMA-1616,CC V2 | Discover & Define,Jan-26,Convenience
+DPMA-1525,1/19/26,Define the logic and touchpoints for notifications,Task,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-801,1/19/26,"[iOS, Android] Wrong name for ""terms and conditions""",Bug,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1774,1/19/26,Dynamic cards in home view,Story,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1748,1/19/26,Shoot Dr. Ditto video,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1750,1/19/26,Make designs dev. ready,Task,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1718,1/19/26,Remove user accounts from db,Story,DPMA-1760,Operational Inbox Q1,Jan-26,Fundamentals
+DPMA-1709,1/19/26,Give Lukasz and Patryk access to grafana (and everybody else),Task,DPMA-1760,Operational Inbox Q1,Jan-26,Fundamentals
+DPMA-1757,1/19/26,Validate that current production version is best according to judgements,Task,DPMA-1756,"[AI] Enhance evaluation framework with ""judgements""",Jan-26,Clarity
+DPMA-1883,1/19/26,[Android] App becomes unclickable after closing follow back sheet,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-1782,1/20/26,Synthesise on User Research Care Circle V2,Story,DPMA-1616,CC V2 | Discover & Define,Jan-26,Connection
+DPMA-1908,1/20/26,Create docs for Dynamic cards,Story,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-1783,1/21/26,Call test users for Care Circle V2,Story,DPMA-1616,CC V2 | Discover & Define,Jan-26,Connection
+DPMA-1939,1/21/26,Investigate if our Google drive settings are EU based,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Connection
+DPMA-1861,1/21/26,Complete Domain Verification LinkedIn,Story,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Clarity
+DPMA-1739,1/22/26,Logic & cleanup navigation bars in-app,Story,DPMA-1722,Design polishing,Jan-26,Convenience
+DPMA-1941,1/22/26,Write disclaimer for sharable manual summary,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Clarity
+DPMA-1740,1/23/26,Recruit test/ interview participants,Story,DPMA-1616,CC V2 | Discover & Define,Jan-26,Convenience
+DPMA-1940,1/23/26,Write standardised whatsapp message as a response,Task,DPMA-1537,Get help from Doctor Ditto - Phase 1,Jan-26,Connection
+DPMA-1613,1/26/26,[FE] Fetch appointment preparation questions from BE,Task,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Jan-26,Convenience
+DPMA-1907,1/26/26,Delete user,Task,DPMA-1634,Must go next release Q1,Jan-26,Fundamentals
+DPMA-1763,1/26/26,Make WoW decisions happen,Story,DPMA-1760,Operational Inbox Q1,Jan-26,Fundamentals
+DPMA-1758,1/26/26,Analyse LLM-as-a-judge: Safety guardrails evaluation,Task,DPMA-1756,"[AI] Enhance evaluation framework with ""judgements""",Jan-26,Clarity
+DPMA-1985,1/27/26,[Android] Share sheet is not fully visible,Bug,DPMA-1503,In-app inbox (v1),Jan-26,Connection
+DPMA-1986,1/27/26,[Android] Application crashes when clicking any event on the Home Screen timeline,Bug,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-1992,1/27/26,"[Android] App crashes after clicking the ""Recording"" button on the Home screen",Bug,DPMA-1503,In-app inbox (v1),Jan-26,Clarity
+DPMA-1987,1/27/26,"[iOS] ""Prepare for appointment"" notification does't appear after creating a new event",Bug,DPMA-1503,In-app inbox (v1),Jan-26,Convenience
+DPMA-1991,1/27/26,"[iOS] Inbox notification does not appear for events scheduled in 24 hours, despite system notification working.",Bug,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-1990,1/27/26,[Android]  Ready summary notification doesn't appear in the inbox.,Bug,DPMA-1503,In-app inbox (v1),Jan-26,Clarity
+DPMA-1836,1/28/26,EXP01: Scaling Ad Budgets 11% WoW,Epic,,,Jan-26,Convenience
+DPMA-1959,1/28/26,QA UI flow,Task,DPMA-1503,In-app inbox (v1),Jan-26,Convenience
+DPMA-1989,1/28/26,[iOS] There are some weird characters in the notification message for the completed summary.,Bug,DPMA-1503,In-app inbox (v1),Jan-26,Clarity
+DPMA-1997,1/28/26,"[iOS, Android] Issues to fix.",Bug,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-1922,1/28/26,Add two steps to onboarding,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1935,1/28/26,Create new sections in home view,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1909,1/28/26,Add video Dr. Ditto to activation flow,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1911,1/28/26,Seperate onboarding video's in a new card,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1972,1/28/26,Fix: account creation flow,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1937,1/28/26,[IOS] Improve video launching,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1951,1/28/26,Small improvements scanned doc,Task,DPMA-1634,Must go next release Q1,Jan-26,Convenience
+DPMA-1971,1/28/26,Offboard Bart,Task,DPMA-1760,Operational Inbox Q1,Jan-26,Fundamentals
+DPMA-1968,1/28/26,Order new posters,Story,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-1988,1/29/26,[Android] App review notification does not appear after review sheet closure and duplicates upon dismissal,Bug,DPMA-1503,In-app inbox (v1),Jan-26,Convenience
+DPMA-1528,1/29/26,Implement notification logic,Task,DPMA-1503,In-app inbox (v1),Jan-26,Fundamentals
+DPMA-1961,1/29/26,Add gradient to scrollable views,Story,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1938,1/29/26,Update navigations and presented screens,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-2011,1/29/26,[Android] Problem with creating empty events,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-2006,1/29/26,"[iOS] The user clicks a valid inbox notification, but the related event has been deleted, so the link leads to a non-existing resource.",Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-2010,1/29/26,[iOS] Editing and saving an event created via QR code scan causes the app to unnecessarily regenerate the summary.,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Clarity
+DPMA-2012,1/29/26,"[iOS, Android] Inbox notifications behave differently for shared events",Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Connection
+DPMA-2009,1/29/26,[Android] No background,Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-2008,1/29/26,"[Android] After scanning the QR code, the app does not perform any action and only opens the home screen.",Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Convenience
+DPMA-2007,1/29/26,"[Android] Saving changes after editing an event redirects the user to the ""Carepath"" screen instead of returning to the updated event view.",Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Clarity
+DPMA-2013,1/29/26,"[iOS, Android] After updating from version 1.7.4 to 1.7.5, the notification about the new feature does not appear in the inbox.",Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Fundamentals
+DPMA-2005,1/29/26,"[iOS] ""Prepare an appointment"" button does not open the creation sheet in the ""Add an Appointment"" flow",Bug,DPMA-1639,[FE] Inbox Q1,Jan-26,Convenience
+DPMA-1756,1/30/26,"[AI] Enhance evaluation framework with ""judgements""",Epic,,,Jan-26,Clarity
+DPMA-1865,1/30/26,Send Arthur legal docs to sign,Story,DPMA-1651,Customer Engagement Platform (Customer.io) - Phase 1 - Foundation & Strategy,Jan-26,Convenience
+DPMA-2021,1/30/26,Code cleanup - remove profile completion,Story,DPMA-1635,Maintenance Q1,Jan-26,Clarity
+DPMA-1973,1/30/26,Set-up tracking,Story,DPMA-1621,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Jan-26,Convenience
+DPMA-1897,1/30/26,Release - Prep,Task,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-1976,1/30/26,Release notes,Story,DPMA-918,[Infra] Take infrastructure cost under control,Jan-26,Fundamentals
+DPMA-2017,2/2/26,Bootstrap Auth0-> migration,Story,DPMA-2037,Migrate away from Auth0 to...,Feb-26,Fundamentals
+DPMA-1912,2/2/26,Script new onboarding video's,Story,DPMA-1975,Mission: Activation Fix (1.5),Feb-26,Convenience
+DPMA-1913,2/2/26,Film new onboarding video's,Story,DPMA-1975,Mission: Activation Fix (1.5),Feb-26,Convenience
+DPMA-2031,2/2/26,Fix: inbox notification about upcoming appointment,Task,DPMA-1634,Must go next release Q1,Feb-26,Convenience
+DPMA-1710,2/2/26,Bootstrap Staging Environment,Task,DPMA-1760,Operational Inbox Q1,Feb-26,Fundamentals
+DPMA-1621,2/3/26,Mission: Activation Fix - Phase 1 - Create Manual Appointment for New Users,Epic,,,Feb-26,Convenience
+DPMA-1843,2/3/26,ASO-005: Rating & Review Management System,Story,DPMA-1775,App Store Optimisation - App Ranking,Feb-26,Convenience
+DPMA-1841,2/3/26,ASO-004: App Store Description Optimization,Story,DPMA-1775,App Store Optimisation - App Ranking,Feb-26,Convenience
+DPMA-1839,2/3/26,ASO-002: App Title & Subtitle Optimization,Story,DPMA-1775,App Store Optimisation - App Ranking,Feb-26,Convenience
+DPMA-1837,2/3/26,ASO-001: Keyword Research & Optimization (NL),Story,DPMA-1775,App Store Optimisation - App Ranking,Feb-26,Convenience
+DPMA-1967,2/3/26,Investigate why reviews dropped after changing summary count from 5 - 2,Task,DPMA-1635,Maintenance Q1,Feb-26,Clarity
+DPMA-2052,2/4/26,"[Android] Questions are not displayed immediately, refresh action required to load data",Bug,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Feb-26,Convenience
+DPMA-2053,2/4/26,[Android] Selected questions during event creation are not displayed in the Event,Bug,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Feb-26,Convenience
+DPMA-2054,2/4/26,[Android] Keyboard is not dismissed and editing does not end after adding a custom question,Bug,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Feb-26,Convenience
+DPMA-2051,2/4/26,"[Android, iOS] Empty question categories appear after adding a custom question",Bug,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Feb-26,Convenience
+DPMA-2018,2/4/26,[FE] Implement question library flow,Task,DPMA-1599,Appointment Preparation - Phase 2 - Questions before appointment,Feb-26,Convenience
+DPMA-1998,2/4/26,Diagram relevant content per user type,Story,DPMA-1965,CC V2 | Redesign home and main navigation,Feb-26,Clarity
+DPMA-1921,2/4/26,Add record button to an upcoming appointment card,Story,DPMA-1898,Low hanging UX improvements - High+,Feb-26,Convenience
+DPMA-1746,2/4/26,Add clear error message if Ditto does not detect any sound during recording,Story,DPMA-1898,Low hanging UX improvements - High+,Feb-26,Clarity
+DPMA-2038,2/4/26,Decide on the system to go,Task,DPMA-2037,Migrate away from Auth0 to...,Feb-26,Fundamentals
+DPMA-1981,2/4/26,Screenrecordings onboarding video's,Task,DPMA-1975,Mission: Activation Fix (1.5),Feb-26,Clarity
+DPMA-2026,2/4/26,Set auto-hide for existing users,Task,DPMA-2046,Mission: Activation Fix - Phase 2 - Iterations,Feb-26,Convenience
+DPMA-2049,2/4/26,[Android] Recording button for event does not work,Bug,DPMA-1639,[FE] Inbox Q1,Feb-26,Clarity
+DPMA-2050,2/4/26,[iOS] Recording created in CarePath does not navigate back to Event,Bug,DPMA-1639,[FE] Inbox Q1,Feb-26,Clarity
+DPMA-1900,2/5/26,Improve messaging about telephone consult,Story,DPMA-1898,Low hanging UX improvements - High+,Feb-26,Convenience
+DPMA-1899,2/5/26,Make recorder minimise more intuitive to show questions during appointment,Task,DPMA-1898,Low hanging UX improvements - High+,Feb-26,Convenience
+DPMA-1775,2/6/26,App Store Optimisation - App Ranking,Epic,,,Feb-26,Convenience

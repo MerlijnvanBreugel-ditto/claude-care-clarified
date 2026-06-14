@@ -22,7 +22,7 @@
     "automation",
     "best-practices"
   ],
-  "skills": ["./skills/", "./commands/"],
+  "skills": ["./skills/", "./commands/", "./pm-workspace/commands/"],
   "agents": [
     "./agents/architect.md",
     "./agents/build-error-resolver.md",
@@ -36,6 +36,18 @@
     "./agents/planner.md",
     "./agents/refactor-cleaner.md",
     "./agents/security-reviewer.md",
-    "./agents/tdd-guide.md"
+    "./agents/tdd-guide.md",
+    "./pm-workspace/agents/market-researcher.md",
+    "./pm-workspace/agents/competitive-analyst.md",
+    "./pm-workspace/agents/feedback-synthesizer.md",
+    "./pm-workspace/agents/insights-synthesizer.md",
+    "./pm-workspace/agents/prd-generator.md",
+    "./pm-workspace/agents/wireframe-designer.md",
+    "./pm-workspace/agents/stitch-mockup-creator.md",
+    "./pm-workspace/agents/product-designer.md",
+    "./website-workspace/agents/creative-director.md",
+    "./website-workspace/agents/designer.md",
+    "./website-workspace/agents/copywriter.md",
+    "./website-workspace/agents/website-developer.md"
   ]
 }

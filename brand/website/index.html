@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditto Care | Care. Clarified.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');
+
+  :root {
+    --text: #0D164F;
+    --text-light: #7C8297;
+    --bg: #FFFFFF;
+    --brand: #0D164F;
+    --blue: #58B6D2;
+    --gold: #D4A832;
+    --gold-light: #7DD4E8;
+    --red: #D94F4F;
+    --divider: #EAEAEA;
+    --soft-bg: #F7F6F3;
+    --heading: 'Bricolage Grotesque', sans-serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius: 20px;
+    --pad: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--body);
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* ---- TYPOGRAPHY (from deck) ---- */
+  .hero-text {
+    font-family: var(--heading);
+    font-size: 64px; font-weight: 600;
+    letter-spacing: -1.5px; line-height: 1.06;
+  }
+  .big-text {
+    font-family: var(--heading);
+    font-size: 46px; font-weight: 600;
+    letter-spacing: -0.8px; line-height: 1.14;
+  }
+  .medium-text {
+    font-family: var(--heading);
+    font-size: 30px; font-weight: 500;
+    line-height: 1.28;
+  }
+  .body-text {
+    font-family: var(--body);
+    font-size: 18px; font-weight: 400;
+    line-height: 1.6; color: var(--text-light);
+  }
+  .label {
+    font-family: var(--body);
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2.5px;
+    color: var(--text-light); margin-bottom: 12px;
+  }
+
+  .hl-gold { color: var(--gold); }
+  .hl-blue { color: var(--blue); }
+  .hl-gold-light { color: var(--gold-light); }
+  .hl-red { color: var(--red); }
+
+  .spacer-sm { height: 14px; }
+  .spacer-md { height: 28px; }
+  .spacer-lg { height: 44px; }
+
+  /* ---- NAV ---- */
+  .pro-bar {
+    background: var(--brand);
+    color: rgba(248,247,244,0.6);
+    text-align: center; padding: 9px 20px;
+    font-size: 13px; font-weight: 500;
+  }
+  .pro-bar a { color: var(--gold-light); text-decoration: none; }
+  .pro-bar a:hover { color: #fff; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(13,22,79,0.05);
+    padding: 0 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo img { height: 20px; }
+  .nav-links { display: flex; align-items: center; gap: 36px; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-light);
+    text-decoration: none; transition: color 0.2s; letter-spacing: 0.2px;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); font-weight: 600; }
+  .nav-cta {
+    font-size: 13px; font-weight: 600; color: #fff !important;
+    background: var(--brand); padding: 8px 20px; border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #1a2570; }
+
+  /* ---- SECTION: Full-bleed photo ---- */
+  .s-hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .s-hero img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .s-hero .overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(160deg, rgba(13,22,79,0.78) 0%, rgba(13,22,79,0.3) 100%);
+  }
+  .s-hero .content {
+    position: relative; z-index: 2; color: #F8F7F4;
+    padding: 0 128px; max-width: 1100px;
+  }
+  .s-hero .label { color: rgba(248,247,244,0.4); }
+  .s-hero .body-text { color: rgba(248,247,244,0.55); }
+  .s-hero .trust-row {
+    display: flex; gap: 24px; align-items: center; margin-top: 32px;
+    font-size: 13px; font-weight: 500; color: rgba(248,247,244,0.4);
+  }
+  .s-hero .trust-row .star { color: var(--gold); }
+  .s-hero .cta-row { display: flex; gap: 14px; margin-top: 28px; align-items: center; }
+  .s-hero .btn-dl {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    background: #fff; color: var(--brand); transition: transform 0.2s;
+  }
+  .s-hero .btn-dl:hover { transform: translateY(-1px); }
+  .s-hero .btn-ghost {
+    padding: 12px 24px; border-radius: 10px;
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    color: rgba(248,247,244,0.6); border: 1px solid rgba(248,247,244,0.15);
+    transition: border-color 0.2s;
+  }
+  .s-hero .btn-ghost:hover { border-color: rgba(248,247,244,0.4); color: #F8F7F4; }
+  .press-row {
+    display: flex; gap: 28px; align-items: center; margin-top: 36px;
+  }
+  .press-row span {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: rgba(248,247,244,0.2);
+  }
+
+  /* ---- SECTION: Text-only (white) ---- */
+  .s-text {
+    padding: 140px 128px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .s-text .content { max-width: 880px; }
+
+  /* ---- SECTION: Inset photo (rounded) ---- */
+  .s-inset {
+    padding: var(--pad);
+  }
+  .s-inset .frame {
+    border-radius: var(--radius); overflow: hidden;
+    position: relative; min-height: 88vh;
+    display: flex; align-items: flex-end;
+  }
+  .s-inset .frame img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .s-inset .frame .overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(13,22,79,0.72) 0%, rgba(13,22,79,0.08) 55%);
+  }
+  .s-inset .frame .overlay-top {
+    background: linear-gradient(to bottom, rgba(13,22,79,0.65) 0%, rgba(13,22,79,0.05) 55%);
+  }
+  .s-inset .content {
+    position: relative; z-index: 2; color: #F8F7F4;
+    padding: 56px 72px;
+  }
+  .s-inset .content-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    padding: 56px 72px; z-index: 2; color: #F8F7F4;
+  }
+  .s-inset .label { color: rgba(248,247,244,0.4); }
+  .s-inset .body-text { color: rgba(248,247,244,0.5); }
+
+  /* ---- SECTION: Split (photo + text) ---- */
+  .s-split {
+    padding: var(--pad);
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--pad);
+  }
+  .s-split .photo {
+    border-radius: var(--radius); overflow: hidden; position: relative;
+    min-height: 520px;
+  }
+  .s-split .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .s-split .text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 56px 60px;
+  }
+  .s-split .text.bg-soft { background: var(--soft-bg); border-radius: var(--radius); }
+
+  /* ---- SECTION: Soft background ---- */
+  .s-soft {
+    background: var(--soft-bg);
+    padding: 120px 128px;
+  }
+  .s-soft .content { max-width: 880px; }
+
+  /* ---- Pillar cards ---- */
+  .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .pillar-card {
+    padding: 28px; border-radius: 14px; background: #fff;
+    box-shadow: 0 1px 4px rgba(13,22,79,0.06);
+  }
+  .pillar-tag {
+    font-family: var(--body); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 8px; display: inline-block;
+  }
+  .pillar-card h3 { font-family: var(--heading); font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+  .pillar-card p { font-size: 13px; color: var(--text-light); line-height: 1.55; }
+
+  /* ---- Compare rows ---- */
+  .compare-row {
+    display: flex; align-items: baseline;
+    padding: 16px 0; border-bottom: 1px solid var(--divider);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-label { font-size: 15px; font-weight: 600; width: 180px; flex-shrink: 0; }
+  .compare-value { font-size: 14px; color: var(--text-light); flex: 1; line-height: 1.5; }
+
+  /* ---- Stats ---- */
+  .stat-row { display: flex; gap: 52px; margin-top: 44px; }
+  .stat-number {
+    font-family: var(--heading);
+    font-size: 50px; font-weight: 600;
+    letter-spacing: -1px; line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--text-light); margin-top: 6px; line-height: 1.45; }
+
+  /* ---- Testimonials ---- */
+  .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .testimonial-card {
+    padding: 28px; border-radius: 14px; background: var(--soft-bg);
+  }
+  .testimonial-card .tag {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 12px; display: inline-block;
+  }
+  .testimonial-card blockquote {
+    font-size: 14px; font-style: italic; line-height: 1.6;
+    color: var(--text); margin-bottom: 16px;
+  }
+  .testimonial-card .attr { font-size: 12px; font-weight: 600; color: var(--text); }
+  .testimonial-card .role { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+  /* ---- Quote ---- */
+  .quote {
+    font-family: var(--heading);
+    font-size: 28px; font-weight: 400; font-style: italic;
+    line-height: 1.35; max-width: 520px;
+  }
+  .quote-attr {
+    font-family: var(--body); font-size: 13px; color: var(--text-light);
+    font-style: normal; margin-top: 14px;
+  }
+
+  /* ---- FAQ ---- */
+  .faq-list { max-width: 640px; margin-top: 32px; }
+  .faq-item { border-bottom: 1px solid var(--divider); }
+  .faq-q {
+    padding: 18px 0; cursor: pointer; display: flex;
+    justify-content: space-between; align-items: center;
+    font-size: 15px; font-weight: 600; color: var(--text);
+    background: none; border: none; width: 100%; text-align: left;
+    font-family: var(--body);
+  }
+  .faq-q:hover { color: var(--blue); }
+  .faq-q .arrow { color: var(--text-light); font-size: 16px; transition: transform 0.3s; }
+  .faq-item.open .arrow { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-a-inner { padding: 0 0 18px; font-size: 14px; color: var(--text-light); line-height: 1.65; }
+  .faq-item.open .faq-a { max-height: 300px; }
+
+  /* ---- Footer ---- */
+  footer {
+    background: var(--brand); color: rgba(248,247,244,0.45);
+    padding: 64px 128px 36px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  }
+  .footer-brand img { height: 20px; margin-bottom: 16px; }
+  .footer-brand p { font-size: 13px; line-height: 1.6; max-width: 260px; }
+  .footer-col h4 {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: rgba(248,247,244,0.2); margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block; font-size: 13px; color: rgba(248,247,244,0.45);
+    text-decoration: none; margin-bottom: 10px;
+  }
+  .footer-col a:hover { color: rgba(248,247,244,0.75); }
+  .footer-bottom {
+    margin-top: 48px; padding-top: 20px;
+    border-top: 1px solid rgba(248,247,244,0.06);
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: rgba(248,247,244,0.2);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 900px) {
+    .s-hero .content, .s-text, .s-soft, footer { padding-left: 28px; padding-right: 28px; }
+    .s-inset .content, .s-inset .content-top { padding: 32px 28px; }
+    .s-split { grid-template-columns: 1fr; }
+    .s-split .photo { min-height: 300px; }
+    .s-split .text { padding: 36px 28px; }
+    .hero-text { font-size: 38px; }
+    .big-text { font-size: 30px; }
+    .medium-text { font-size: 22px; }
+    .pillar-grid, .testimonial-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; gap: 28px; }
+    .compare-row { flex-direction: column; gap: 4px; }
+    .compare-label { width: auto; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .s-inset .frame { min-height: 70vh; }
+    .press-row { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Pro bar -->
+<div class="pro-bar">Are you a healthcare professional? <a href="professionals.html">Learn how Ditto supports your practice →</a></div>
+
+<!-- Nav -->
+<nav>
+  <a class="nav-logo" href="index.html"><img src="../decks/logo/Ditto_darkblue.svg" alt="Ditto"></a>
+  <div class="nav-links">
+    <a href="professionals.html">For Professionals</a>
+    <a href="our-story.html">Our Story</a>
+    <a href="trust-privacy.html">Trust & Privacy</a>
+    <a href="help.html">Help</a>
+    <a href="#download" class="nav-cta">Download Ditto</a>
+  </div>
+</nav>
+
+<!-- 1. HERO — full bleed golden field -->
+<section class="s-hero">
+  <img src="../decks/images/89ed73da68380a26b963138a1714041b.jpg" alt="">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="label">Ditto Care</div>
+    <h1 class="hero-text">Understand your healthcare.<br>Share it with the people<br>who <span class="hl-gold-light">matter.</span></h1>
+    <div class="spacer-md"></div>
+    <p class="body-text">Record your doctor's visit. Get a clear summary in plain language.<br>Share it with your family — each getting exactly what they need to know.</p>
+    <div class="cta-row">
+      <a href="#download" class="btn-dl">Download Ditto</a>
+      <a href="professionals.html" class="btn-ghost">For Professionals →</a>
+    </div>
+    <div class="trust-row">
+      <span>75,000+ users</span>
+      <span><span class="star">★</span> 4.7 rating</span>
+      <span>Trusted by hundreds of doctors</span>
+    </div>
+    <div class="press-row">
+      <span>NOS</span><span>AD</span><span>Hart van NL</span><span>Quote</span><span>3FM</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2. THE GAP — text only -->
+<section class="s-text">
+  <div class="content">
+    <div class="label">The reality</div>
+    <p class="big-text">You leave the doctor's office.<br>Your partner asks: "What did they say?"</p>
+    <div class="spacer-md"></div>
+    <p class="big-text" style="color: var(--text-light);">You try to explain.<br>The details are already <span class="hl-red">slipping.</span></p>
+  </div>
+</section>
+
+<!-- 3. PROBLEM — inset grandmother -->
+<section class="s-inset">
+  <div class="frame">
+    <img src="../decks/images/e476dd8b49d234e5258fae18aed4d33c.jpg" alt="">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="label">The problem</div>
+      <h2 class="big-text">When healthcare gets serious,<br>people are <span class="hl-gold-light">lost, overwhelmed,<br>and feel alone.</span></h2>
+    </div>
+  </div>
+</section>
+
+<!-- 4. HOW FAMILIES COPE — inset kitchen -->
+<section class="s-inset">
+  <div class="frame">
+    <img src="../decks/images/Untitled_Candid_Interior_Scene_2026-03-23_14-40.jpg" alt="">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="label">How families cope today</div>
+      <h2 class="medium-text" style="max-width: 580px;">WhatsApp groups. Phone calls. Shared Google Docs. One family member who becomes the unofficial project manager.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text">The need is massive. The <span class="hl-gold-light">category doesn't exist.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. THREE PILLARS — soft bg -->
+<section class="s-soft">
+  <div class="content">
+    <div class="label">How Ditto helps</div>
+    <h2 class="big-text">Understand. <span class="hl-blue">Prepare.</span> <span class="hl-gold">Share.</span></h2>
+    <div class="spacer-sm"></div>
+    <p class="body-text">Three pillars. One app. No medical degree required.</p>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="pillar-tag" style="color: var(--brand);">Clarity</div>
+        <h3>You understand<br>what's happening</h3>
+        <p>Record your consultation and get a plain-language summary. What was said, what it means, what's next.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-tag" style="color: var(--blue);">Convenience</div>
+        <h3>You're prepared<br>for what's next</h3>
+        <p>Scan medical letters. Organize your journey. Everything in one place, always accessible.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-tag" style="color: var(--gold);">Connection</div>
+        <h3>Your people<br>can actually help</h3>
+        <p>Share without retelling. Your Care Circle stays informed. Everyone gets what they need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CARE CIRCLE — inset family -->
+<section class="s-inset">
+  <div class="frame">
+    <img src="../decks/images/31e50e608883796284d8e7f929951582.jpg" alt="">
+    <div class="overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.75) 0%, rgba(13,22,79,0.15) 60%);"></div>
+    <div class="content">
+      <div class="label">The insight</div>
+      <h2 class="hero-text" style="font-size: 56px;">It's a <span class="hl-gold-light">care circle</span>,<br>not a chatbot.</h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text">The defensible asset is not the AI. It's the Care Circle —<br>who cares about whom, what they need to know.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CARE CIRCLE EXPLAINED — text -->
+<section class="s-text">
+  <div class="content">
+    <div class="label">The Care Circle</div>
+    <h2 class="medium-text">Different people need <span class="hl-gold">different things.</span></h2>
+    <div class="spacer-md"></div>
+    <div class="compare-row">
+      <div class="compare-label">The partner</div>
+      <div class="compare-value">Full summary, action items, medication changes, emotional context</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">The adult child</div>
+      <div class="compare-value">Key decisions, next appointments, how parent is feeling</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">The elderly parent</div>
+      <div class="compare-value">Simplified update, reassurance, what matters most</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">The friend abroad</div>
+      <div class="compare-value">High-level status, what would actually help</div>
+    </div>
+    <div class="spacer-md"></div>
+    <p class="body-text">Not "share one post to everyone." The <span class="hl-blue">right information</span>,<br>to the right person, in the right format.</p>
+  </div>
+</section>
+
+<!-- 8. QUOTE — split -->
+<section class="s-split">
+  <div class="text bg-soft">
+    <div class="quote">"My daughter calls every day asking how I am. I <span class="hl-gold">love it</span> and I <span class="hl-red">hate it.</span> I'm exhausted from retelling."</div>
+    <div class="spacer-sm"></div>
+    <div class="quote-attr">The core tension of serious illness:<br>needing connection while carrying the burden.</div>
+  </div>
+  <div class="photo">
+    <img src="../decks/images/eb83e52565a37c025334d194de29e477.jpg" alt="">
+  </div>
+</section>
+
+<!-- 9. SOCIAL PROOF — text -->
+<section class="s-text">
+  <div class="content">
+    <div class="label">Trusted by thousands</div>
+    <h2 class="big-text">Ditto already <span class="hl-gold">works.</span></h2>
+    <div class="stat-row">
+      <div>
+        <div class="stat-number">75,000+</div>
+        <div class="stat-label">users across<br>the Netherlands</div>
+      </div>
+      <div>
+        <div class="stat-number">4.7 <span style="font-size: 32px; color: var(--gold);">★</span></div>
+        <div class="stat-label">App Store<br>rating</div>
+      </div>
+      <div>
+        <div class="stat-number">100s</div>
+        <div class="stat-label">of professionals<br>recommending Ditto</div>
+      </div>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="tag" style="color: var(--blue);">Patient</div>
+        <blockquote>"After my diagnosis, I couldn't remember anything the oncologist said. Now I open Ditto and everything is there — clear, calm, organized."</blockquote>
+        <div class="attr">[Name]</div>
+        <div class="role">Living with breast cancer</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="tag" style="color: var(--gold);">Caregiver</div>
+        <blockquote>"My father has three specialists. I used to call after each appointment. Now I get a summary in Ditto. He doesn't have to repeat it."</blockquote>
+        <div class="attr">[Name]</div>
+        <div class="role">Caregiver for her father</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="tag" style="color: var(--brand);">Professional</div>
+        <blockquote>"Patients come back better prepared. They ask better questions. That makes my job easier and their care better."</blockquote>
+        <div class="attr">[Name]</div>
+        <div class="role">General Practitioner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. IMAGE: elderly man, sun -->
+<section class="s-inset">
+  <div class="frame">
+    <img src="../decks/images/061b9b0b289cb231dc6009fac66d1fa3.jpg" alt="">
+    <div class="overlay" style="background: linear-gradient(to top, rgba(13,22,79,0.65) 0%, rgba(13,22,79,0.04) 45%);"></div>
+    <div class="content-top">
+      <div class="label" style="color: rgba(248,247,244,0.35);">Privacy</div>
+      <h2 class="big-text" style="color: #F8F7F4;">Your data stays <span class="hl-gold-light">yours.</span></h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text" style="color: rgba(248,247,244,0.45);">On your device. EU servers for processing, then deleted.<br>We can't read your summaries. By design.</p>
+      <div class="spacer-md"></div>
+      <a href="trust-privacy.html" style="color: var(--gold-light); font-size: 14px; font-weight: 600; text-decoration: none;">Learn how we protect your data →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 11. FAQ — text -->
+<section class="s-text">
+  <div class="content">
+    <div class="label">Questions</div>
+    <h2 class="medium-text">Wondering how Ditto works?</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">What is Ditto? <span class="arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Ditto is a free app that helps you understand and manage your healthcare. Record your doctor's visit, get a clear summary, understand medical letters, and share it all with your family — on your terms.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is my data safe? <span class="arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Your data stays on your device. When we process a recording, we use secure servers in the EU and delete the data immediately afterward. We can't access your summaries.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need my doctor's permission? <span class="arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">In the Netherlands, patients have the right to record their own consultations. We recommend mentioning it to your doctor — most are supportive. Many already recommend Ditto.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is it really free? <span class="arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Ditto is free to download and use. No hidden costs, no trial periods.</div></div>
+      </div>
+    </div>
+    <div class="spacer-lg"></div>
+    <a href="help.html" style="font-size: 14px; font-weight: 600; color: var(--blue); text-decoration: none;">See all questions →</a>
+  </div>
+</section>
+
+<!-- 12. CLOSING — inset runner -->
+<section class="s-inset" id="download">
+  <div class="frame" style="min-height: 75vh; display: flex; align-items: center; justify-content: center;">
+    <img src="../decks/images/34699eca0b59961a9490f5279181afe4.jpg" alt="">
+    <div class="overlay" style="background: linear-gradient(160deg, rgba(13,22,79,0.6) 0%, rgba(13,22,79,0.25) 100%);"></div>
+    <div style="position: relative; z-index: 2; text-align: center; color: #F8F7F4; padding: 48px;">
+      <h2 class="big-text">Start using Ditto — it's <span class="hl-gold-light">free.</span></h2>
+      <div class="spacer-sm"></div>
+      <p class="body-text" style="color: rgba(248,247,244,0.45);">Available on iOS and Android.</p>
+      <div class="spacer-md"></div>
+      <a href="#" class="btn-dl" style="background: #fff; color: var(--brand);">Download Ditto</a>
+      <div class="spacer-lg"></div>
+      <p class="medium-text" style="color: #F8F7F4; font-style: italic;">Care. <span class="hl-gold-light">Clarified.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="../decks/logo/Ditto_white.svg" alt="Ditto">
+      <p>We turn medical conversations into clarity. So you can understand your care and share it with the people who matter.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="index.html">How it works</a>
+      <a href="#download">Download</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="our-story.html">Our Story</a>
+      <a href="professionals.html">For Professionals</a>
+      <a href="help.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Trust</h4>
+      <a href="trust-privacy.html">Trust & Privacy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Ditto Care B.V. &middot; Rotterdam, Netherlands</span>
+    <span>press@ditto.care</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>

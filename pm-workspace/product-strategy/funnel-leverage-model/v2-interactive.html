@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funnel Leverage Model v2 — Ditto Care</title>
+<style>
+  :root {
+    --bg: #fafbfc;
+    --surface: #ffffff;
+    --border: #e4e8eb;
+    --border-strong: #cdd3d8;
+    --text: #1a1d1f;
+    --text-muted: #5a6268;
+    --text-dim: #8a929a;
+    --primary: #2e7a8c;
+    --primary-dark: #1f5966;
+    --primary-tint: #e8f2f4;
+    --positive: #18a47c;
+    --positive-tint: #e3f5ee;
+    --negative: #d94141;
+    --negative-tint: #fbe8e8;
+    --warning: #b7791f;
+    --warning-tint: #fdf5e4;
+    --accent: #7a4dca;
+    --accent-tint: #f0ebfa;
+    --mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .version-chip {
+    display: inline-block;
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--primary-tint);
+    color: var(--primary-dark);
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+  }
+
+  button.reset-btn {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--sans);
+  }
+  button.reset-btn:hover { background: var(--bg); color: var(--text); }
+
+  .framing-banner {
+    background: var(--accent-tint);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .framing-banner strong { color: var(--accent); }
+
+  .mau-readout {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    background: linear-gradient(90deg, var(--bg), var(--surface));
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+
+  .mau-card { text-align: left; }
+  .mau-card.center { text-align: center; }
+
+  .mau-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .mau-card .value {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .mau-card .sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: var(--mono);
+  }
+
+  .mau-card .breakdown {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .mau-card .breakdown .piece { margin-right: 8px; }
+
+  .mau-arrow {
+    font-size: 24px;
+    color: var(--text-dim);
+  }
+
+  .mau-delta {
+    font-family: var(--mono);
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .mau-delta.positive { color: var(--positive); }
+  .mau-delta.negative { color: var(--negative); }
+  .mau-delta.zero { color: var(--text-dim); }
+
+  main {
+    padding: 20px 32px 40px 32px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+  }
+
+  section.pane {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  section.pane.full { grid-column: 1 / -1; }
+
+  h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  h3.group-title {
+    margin: 20px 0 10px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed var(--border);
+  }
+  h3.group-title.accent-group {
+    color: var(--accent);
+    border-bottom-color: var(--accent-tint);
+  }
+  h3.group-title:first-of-type { margin-top: 0; }
+
+  .group-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: -6px;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .slider-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .slider-row .name {
+    font-size: 13px;
+    color: var(--text);
+  }
+  .slider-row .name .hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    display: block;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--surface);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  input[type="range"].accent::-webkit-slider-thumb { background: var(--accent); }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--surface);
+  }
+
+  .slider-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-align: right;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 6px;
+  }
+  .slider-value.changed { color: var(--primary); border-color: var(--primary); background: var(--primary-tint); font-weight: 600; }
+
+  .derived {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .derived-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .derived-card .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .derived-card .value {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 3px;
+  }
+
+  .initiative {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.12s;
+    background: var(--surface);
+  }
+  .initiative:hover { border-color: var(--primary); }
+  .initiative.active {
+    background: var(--primary-tint);
+    border-color: var(--primary);
+  }
+
+  .initiative-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .initiative .title {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .initiative .badge {
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+  }
+  .initiative.active .badge { background: var(--surface); }
+
+  .initiative .desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .initiative .deltas {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+  .initiative .delta-chip {
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 3px;
+    padding: 2px 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+  }
+  .initiative.active .delta-chip { background: var(--surface); border-color: var(--primary); }
+
+  .initiative .mau-impact {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--positive);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+  }
+
+  .leverage-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lev-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 100px;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lev-row .lev-name {
+    font-size: 13px;
+  }
+  .lev-row .lev-name .lev-delta-amount {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    display: block;
+  }
+
+  .lev-bar-container {
+    background: var(--bg);
+    height: 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .lev-bar {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s;
+  }
+  .lev-bar.weak { background: var(--text-dim); }
+
+  .lev-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+    color: var(--text);
+  }
+
+  .notes {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .notes h4 {
+    font-size: 12px;
+    margin: 16px 0 6px 0;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .notes h4:first-child { margin-top: 0; }
+
+  .notes ul { margin: 4px 0; padding-left: 20px; }
+  .notes li { margin: 2px 0; }
+  .notes code {
+    background: var(--bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 11px;
+    border: 1px solid var(--border);
+  }
+
+  .formula {
+    background: var(--bg);
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    margin: 10px 0 16px 0;
+    line-height: 1.8;
+  }
+
+  .formula .comment { color: var(--text-dim); font-style: italic; }
+
+  .calibration-note {
+    background: var(--warning-tint);
+    border-left: 3px solid var(--warning);
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    margin: 12px 0;
+  }
+
+  .changelog-v2 {
+    background: var(--accent-tint);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    margin: 12px 0;
+  }
+
+  .add-custom {
+    border: 1px dashed var(--border-strong);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .add-custom:hover { color: var(--primary); border-color: var(--primary); }
+
+  @media (max-width: 1024px) {
+    main { grid-template-columns: 1fr; }
+    .mau-readout { grid-template-columns: 1fr; text-align: center; }
+    .mau-readout .mau-card { text-align: center; }
+    .mau-arrow { display: none; }
+    .slider-row { grid-template-columns: 1fr 1fr; }
+    .slider-row .slider-value { grid-column: 2; }
+    .slider-row input[type="range"] { grid-column: 1 / -1; }
+    .derived { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>Funnel Leverage Model<span class="version-chip">v2 — Direction B</span></h1>
+      <div class="subtitle">Ditto Care · Decomposed two-cohort model · Calibrated to Porygon 2026-04-21</div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">↺ Reset to baseline</button>
+  </div>
+
+  <div class="framing-banner">
+    <strong>What you're looking at:</strong> <em>Baseline</em> = current steady state (≈ today's observed total MAU).
+    <em>Scenario</em> = where total MAU asymptotes <strong>if the slider rates held constant forever</strong> — not today's MAU after a rate change.
+    Real-world transitions take many months. Under a bad scenario, today's loyal users decay slowly; use the "Committed floor" slider to model that protection.
+  </div>
+
+  <div class="mau-readout">
+    <div class="mau-card">
+      <div class="label">Baseline (current)</div>
+      <div class="value" id="mau-baseline">—</div>
+      <div class="sub">Observed ≈ 1,677 total MAU</div>
+      <div class="breakdown" id="mau-baseline-breakdown"></div>
+    </div>
+    <div class="mau-arrow">→</div>
+    <div class="mau-card center">
+      <div class="label">Scenario (steady state)</div>
+      <div class="value" id="mau-scenario">—</div>
+      <div class="sub">total MAU asymptote</div>
+      <div class="breakdown" id="mau-scenario-breakdown"></div>
+    </div>
+    <div class="mau-arrow">=</div>
+    <div class="mau-card">
+      <div class="label">Impact</div>
+      <div class="value mau-delta" id="mau-delta">—</div>
+      <div class="sub" id="mau-delta-pct">—</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="pane">
+    <h2>Parameters</h2>
+
+    <h3 class="group-title">Inflow</h3>
+    <div id="group-inflow"></div>
+
+    <h3 class="group-title">Funnel conversion</h3>
+    <div id="group-funnel"></div>
+
+    <h3 class="group-title">Retention (two-tier, new-cohort only)</h3>
+    <div class="group-hint">Governs users activated in the last ~6 months. Long-tenure loyal users are captured separately via the Committed floor below.</div>
+    <div id="group-retention"></div>
+
+    <h3 class="group-title">Care Circle loop</h3>
+    <div id="group-loop"></div>
+
+    <h3 class="group-title accent-group">Output composition (v2)</h3>
+    <div class="group-hint">These shape how activated MAU translates into total MAU. Tune to match your intuition about the product.</div>
+    <div id="group-output"></div>
+
+    <div class="derived">
+      <div class="derived-card">
+        <div class="label">Monthly activated</div>
+        <div class="value" id="d-activated">—</div>
+      </div>
+      <div class="derived-card">
+        <div class="label">New-cohort lifetime</div>
+        <div class="value" id="d-lifetime">—</div>
+      </div>
+      <div class="derived-card">
+        <div class="label">K-factor (loop)</div>
+        <div class="value" id="d-kfactor">—</div>
+      </div>
+      <div class="derived-card">
+        <div class="label">Passive MAU</div>
+        <div class="value" id="d-passive">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2>Initiatives</h2>
+    <div id="initiative-list"></div>
+    <div class="add-custom" onclick="alert('Tip: move sliders to build a custom scenario; the Impact number at the top shows its MAU effect. Named presets can be added to the INITIATIVES array in the HTML source.')">
+      + Add custom initiative (prototype — edit in code)
+    </div>
+  </section>
+
+  <section class="pane full">
+    <h2>Leverage — marginal MAU per standardized lift, ranked</h2>
+    <div class="leverage-bars" id="leverage-bars"></div>
+    <div class="notes" style="margin-top: 14px;">
+      <em>Standardized lifts: rates = +5 percentage points · inflow = +1,000 installs/mo · invites-per-inviter = +0.5. Output-composition sliders (passive multiplier, committed floor) excluded — these aren't "strategies," they're assumptions about model structure.</em>
+    </div>
+  </section>
+
+  <section class="pane full">
+    <h2>Formula & assumptions</h2>
+
+    <div class="formula">
+      <span class="comment">// Three-component decomposition (v2, Direction B)</span><br>
+      MAU<sub>total</sub> = MAU<sub>new-cohort</sub> + MAU<sub>passive</sub> + MAU<sub>committed</sub><br><br>
+
+      <span class="comment">// New-cohort flow (steady state of current rates)</span><br>
+      MAU<sub>new-cohort</sub> = Inflow × P(reg) × P(act|reg) × L<sub>new</sub> × 1/(1 − K)<br>
+      L<sub>new</sub> = 1 + r₁ / (1 − r₂)<br>
+      K = invite_rate × invites_per_inviter × P(invite→install) × P(invited→activate)<br><br>
+
+      <span class="comment">// Passive MAU — Care Circle viewers, non-activated (scales with activated base)</span><br>
+      MAU<sub>passive</sub> = MAU<sub>new-cohort</sub> × passive_multiplier<br><br>
+
+      <span class="comment">// Committed floor — long-tenure loyal users (not affected by scenario rates)</span><br>
+      MAU<sub>committed</sub> = slider (user-supplied belief)
+    </div>
+
+    <div class="changelog-v2">
+      <strong>v2 changes vs v1:</strong> (1) baseline now matches observed total MAU (~1,700, not ~1,283); (2) passive viewers (447, 27% of MAU) explicitly modeled as activated × multiplier; (3) committed floor slider added to protect long-tenure loyal users from scenario collapse; (4) labels clarified — scenario is a long-run projection, not a today-MAU estimate; (5) retention labeled as new-cohort only.
+    </div>
+
+    <div class="calibration-note">
+      <strong>Calibration at baseline:</strong>
+      new-cohort 1,283 + passive 462 (1,283 × 0.36) + committed 0 = <strong>1,745</strong>.
+      Observed total MAU ≈ 1,677 (~4% overestimate). The committed floor defaults to 0 because current Porygon data (retention through M3 only, Easter-distorted) doesn't yet support a principled estimate for long-tenure loyalty. Set it if you have a belief.
+    </div>
+
+    <div class="notes">
+      <h4>What this model does and doesn't do</h4>
+      <ul>
+        <li><strong>Does:</strong> sensitivity analysis for MAU under hypothetical rate changes; initiative comparison via stacked parameter deltas; forces explicit assumptions about passive viewers and loyal-user protection.</li>
+        <li><strong>Doesn't:</strong> forecast a specific MAU number at a specific date; simulate transient dynamics (it's steady-state); model heterogeneity across Life Moments; handle marketing channels (attribution is broken); produce causal ROI per initiative (that needs experiment binding — see research memo).</li>
+      </ul>
+
+      <h4>Why the three components?</h4>
+      <ul>
+        <li><strong>New-cohort flow</strong> captures users activated recently whose retention follows the observed r₁/r₂ curve. Moves with the sliders.</li>
+        <li><strong>Passive MAU</strong> captures non-activated viewers (mostly Care Circle family). Observed at 27% of activated. Scales with activated base via multiplier.</li>
+        <li><strong>Committed floor</strong> captures users active 6+ months whose retention is likely much higher (~85–95% monthly) than the r₂ average suggests. The current retention data doesn't isolate them, so this is a belief slider. Raise it if you believe there's a protected base of loyal users who wouldn't churn from a scenario regression.</li>
+      </ul>
+
+      <h4>Known limitations in v2</h4>
+      <ul>
+        <li><strong>Retention heterogeneity is approximated.</strong> The two-tier r₁/r₂ is blended across cohorts. The committed floor is a workaround, not a proper cohort-conditional retention curve. Fix in v4 (Markov chain or survival model).</li>
+        <li><strong>Activation window is 14 days.</strong> Late activators (install → ever-activate at 90+ days) are not counted. Porygon doesn't yet provide this number.</li>
+        <li><strong>Invite rate is one-off</strong> (measured within 30d of activation). If loyal users keep inviting in later months, the loop is stronger than K ≈ 0.012 implies.</li>
+        <li><strong>No channel split.</strong> Adjust attribution is 94% broken. Quality-of-inflow lives implicitly in conversion rates.</li>
+        <li><strong>Single blended segment.</strong> No Life Moment / cancer / neuro split.</li>
+        <li><strong>Steady state.</strong> Doesn't show the arc from today's MAU to scenario MAU (which can take 12–24 months).</li>
+      </ul>
+
+      <h4>Scenario interpretation — reading the numbers correctly</h4>
+      <ul>
+        <li>If scenario = 900, it means: <em>if these rates held forever with no loyal base, MAU would eventually settle at 900</em>. Today's MAU would decay toward 900 over many months.</li>
+        <li>Set the Committed floor (e.g. 400) to protect loyal MAU from decay. Then scenario = 900 + loyal_floor = ~1,300 long-run.</li>
+        <li>For forecasting trajectory over time, you'd need a cohort-time-dynamic model (v4+). This is sensitivity analysis, not forecasting.</li>
+      </ul>
+
+      <h4>Next version plan</h4>
+      <ul>
+        <li>v3: Monthly growth accounting integration (new + retained + resurrected − churned) driven by real Mixpanel pulls.</li>
+        <li>v4: Markov chain cohort model — replace two-tier retention with state-transition matrix (new → engaged → loyal → dormant → churned).</li>
+        <li>v5: Effort estimates per initiative → ROI ranking.</li>
+        <li>v6: Experiment binding — link initiative deltas to measured A/B test effect sizes.</li>
+      </ul>
+
+      <h4>Further reading</h4>
+      <ul>
+        <li>See <code>growth-frameworks-research.md</code> in the same folder for a survey of growth-model frameworks (Racecar, AARRR, Growth Loops, Growth Accounting, Markov models, MMM) and how Ditto's model maps onto them.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ========== BASELINE (calibrated from Porygon 2026-04-21) ==========
+  const BASELINE = {
+    // Funnel & retention
+    inflow: 5000,
+    regRate: 0.35,
+    actRate: 0.28,
+    r1: 0.54,
+    r2: 0.66,
+    // Loop
+    inviteRate: 0.24,
+    invitesPerInviter: 1.48,
+    inviteToInstall: 0.15,
+    invitedActRate: 0.22,
+    // Output composition (v2)
+    passiveMultiplier: 0.36,    // observed 447 passive / 1,230 activated = 0.36
+    committedMAU: 0,            // belief slider, default off
+  };
+
+  // ========== SLIDER DEFINITIONS ==========
+  const SLIDERS = [
+    // Inflow
+    { id: 'inflow', group: 'inflow', label: 'Monthly installs',
+      hint: 'Top of funnel volume',
+      min: 1000, max: 20000, step: 100, format: 'int' },
+
+    // Funnel
+    { id: 'regRate', group: 'funnel', label: 'Install → Registration',
+      hint: '7-day conversion',
+      min: 0.05, max: 0.80, step: 0.01, format: 'pct' },
+    { id: 'actRate', group: 'funnel', label: 'Registration → Activation',
+      hint: '14-day, first key action',
+      min: 0.05, max: 0.70, step: 0.01, format: 'pct' },
+
+    // Retention (new-cohort)
+    { id: 'r1', group: 'retention', label: 'M0 → M1 retention (r₁)',
+      hint: 'First-month cliff',
+      min: 0.20, max: 0.95, step: 0.01, format: 'pct' },
+    { id: 'r2', group: 'retention', label: 'M1 → M2+ stable (r₂)',
+      hint: 'Early-stable monthly (not loyal)',
+      min: 0.20, max: 0.95, step: 0.01, format: 'pct' },
+
+    // Loop
+    { id: 'inviteRate', group: 'loop', label: 'Invite rate',
+      hint: '% activated who invite in 30d',
+      min: 0.00, max: 0.80, step: 0.01, format: 'pct' },
+    { id: 'invitesPerInviter', group: 'loop', label: 'Invites per inviter',
+      hint: 'Avg invites sent (one-off per cohort)',
+      min: 1.0, max: 5.0, step: 0.1, format: 'dec1' },
+    { id: 'inviteToInstall', group: 'loop', label: 'Invite → Install',
+      hint: 'Untracked — slider estimate',
+      min: 0.00, max: 0.60, step: 0.01, format: 'pct' },
+    { id: 'invitedActRate', group: 'loop', label: 'Invited → Activation',
+      hint: 'Install → activation for invitees',
+      min: 0.00, max: 0.80, step: 0.01, format: 'pct' },
+
+    // Output composition (v2)
+    { id: 'passiveMultiplier', group: 'output', label: 'Passive MAU multiplier',
+      hint: 'Passive viewers per activated user',
+      min: 0.0, max: 1.0, step: 0.01, format: 'dec2', accent: true },
+    { id: 'committedMAU', group: 'output', label: 'Committed floor (loyal base)',
+      hint: 'Long-tenure users protected from rate changes',
+      min: 0, max: 2000, step: 50, format: 'int', accent: true },
+  ];
+
+  // ========== INITIATIVE PRESETS ==========
+  const INITIATIVES = [
+    {
+      id: 'care-circle-v2',
+      title: 'Care Circle v2',
+      badge: 'Exploit',
+      desc: 'Polish the invite flow, improve invitee onboarding, add reactions.',
+      deltas: {
+        inviteRate: +0.10,
+        inviteToInstall: +0.05,
+        invitedActRate: +0.08,
+        actRate: +0.02,
+        passiveMultiplier: +0.05,  // more Care Circle viewers per active patient
+      }
+    },
+    {
+      id: 'onboarding-redesign',
+      title: 'Onboarding → Aha (voice + intent)',
+      badge: 'Explore',
+      desc: '"Speak to Ditto" intent question, personalized empty state, first-moment matching.',
+      deltas: {
+        regRate: +0.05,
+        actRate: +0.07,
+      }
+    },
+    {
+      id: 'retain-the-activated',
+      title: 'Retain the Activated',
+      badge: 'Exploit',
+      desc: 'First-month push cadence, next-appointment nudges, summary re-read prompts to fix the M0→M1 cliff.',
+      deltas: {
+        r1: +0.10,
+      }
+    },
+    {
+      id: 'menzis-partnership',
+      title: 'Menzis partnership push',
+      badge: 'Exploit',
+      desc: 'Scale B2B2C distribution via health insurer. Higher-intent inflow + volume.',
+      deltas: {
+        inflow: +2000,
+        regRate: +0.08,
+        actRate: +0.04,
+      }
+    },
+    {
+      id: 'quality-over-volume',
+      title: 'Quality-of-inflow shift',
+      badge: 'Explore',
+      desc: 'Cut low-intent Meta paid, re-invest in content / organic / partner referrals.',
+      deltas: {
+        inflow: -500,
+        regRate: +0.07,
+        actRate: +0.05,
+      }
+    },
+    {
+      id: 'journey-page',
+      title: 'Journey Page (Care Brain anchor)',
+      badge: 'Explore',
+      desc: 'Living health record for serious-condition patients; step-change in long-term value → retention.',
+      deltas: {
+        r2: +0.10,
+        actRate: +0.03,
+        inviteRate: +0.05,
+        passiveMultiplier: +0.03,
+      }
+    },
+  ];
+
+  // ========== STATE ==========
+  let scenario = { ...BASELINE };
+  let activeInitiatives = new Set();
+
+  // ========== MATH ENGINE ==========
+  function computeMAU(p) {
+    const A0 = p.inflow * p.regRate * p.actRate;
+    const K = p.inviteRate * p.invitesPerInviter * p.inviteToInstall * p.invitedActRate;
+    const ATotal = A0 / (1 - K);
+    const L_new = 1 + p.r1 / (1 - p.r2);
+    const MAU_new = ATotal * L_new;
+    const MAU_passive = MAU_new * p.passiveMultiplier;
+    const MAU_committed = p.committedMAU;
+    const MAU_total = MAU_new + MAU_passive + MAU_committed;
+    return { A0, K, ATotal, L_new, MAU_new, MAU_passive, MAU_committed, MAU_total };
+  }
+
+  // ========== FORMATTING ==========
+  function fmt(value, kind) {
+    if (kind === 'pct') return (value * 100).toFixed(0) + '%';
+    if (kind === 'dec1') return value.toFixed(1);
+    if (kind === 'dec2') return value.toFixed(2);
+    if (kind === 'int') return Math.round(value).toLocaleString();
+    return String(value);
+  }
+
+  function fmtMAU(n) { return Math.round(n).toLocaleString(); }
+
+  // ========== RENDER ==========
+  function renderSliders() {
+    ['inflow', 'funnel', 'retention', 'loop', 'output'].forEach(group => {
+      const container = document.getElementById(`group-${group}`);
+      container.innerHTML = '';
+      SLIDERS.filter(s => s.group === group).forEach(s => {
+        const row = document.createElement('div');
+        row.className = 'slider-row';
+        const accentClass = s.accent ? 'accent' : '';
+        row.innerHTML = `
+          <div class="name">${s.label}<span class="hint">${s.hint}</span></div>
+          <input type="range" class="${accentClass}" id="slider-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${scenario[s.id]}">
+          <div class="slider-value" id="value-${s.id}">${fmt(scenario[s.id], s.format)}</div>
+        `;
+        container.appendChild(row);
+
+        const input = row.querySelector('input');
+        input.addEventListener('input', e => {
+          scenario[s.id] = parseFloat(e.target.value);
+          if (activeInitiatives.size > 0) activeInitiatives.clear();
+          renderAll();
+        });
+      });
+    });
+  }
+
+  function renderInitiatives() {
+    const container = document.getElementById('initiative-list');
+    container.innerHTML = '';
+    INITIATIVES.forEach(init => {
+      const isActive = activeInitiatives.has(init.id);
+      const soloScenario = { ...BASELINE };
+      for (const [key, delta] of Object.entries(init.deltas)) {
+        soloScenario[key] = BASELINE[key] + delta;
+      }
+      const mauSolo = computeMAU(soloScenario).MAU_total;
+      const mauBase = computeMAU(BASELINE).MAU_total;
+      const soloLift = mauSolo - mauBase;
+      const soloPct = (soloLift / mauBase) * 100;
+
+      const deltasStr = Object.entries(init.deltas).map(([k, v]) => {
+        const slider = SLIDERS.find(s => s.id === k);
+        const sign = v >= 0 ? '+' : '';
+        let formatted;
+        if (slider.format === 'pct') formatted = sign + (v * 100).toFixed(0) + 'pp';
+        else if (slider.format === 'int') formatted = sign + Math.round(v).toLocaleString();
+        else if (slider.format === 'dec2') formatted = sign + v.toFixed(2);
+        else formatted = sign + v.toFixed(1);
+        return `<span class="delta-chip">${slider.label.split(' ')[0]} ${formatted}</span>`;
+      }).join('');
+
+      const card = document.createElement('div');
+      card.className = 'initiative' + (isActive ? ' active' : '');
+      card.innerHTML = `
+        <div class="initiative-header">
+          <div class="title">${init.title}</div>
+          <div class="badge">${init.badge}</div>
+        </div>
+        <div class="desc">${init.desc}</div>
+        <div class="deltas">${deltasStr}</div>
+        <div class="mau-impact">Solo impact: ${soloLift >= 0 ? '+' : ''}${fmtMAU(soloLift)} total MAU (${soloPct >= 0 ? '+' : ''}${soloPct.toFixed(1)}%)</div>
+      `;
+      card.addEventListener('click', () => toggleInitiative(init.id));
+      container.appendChild(card);
+    });
+  }
+
+  function toggleInitiative(id) {
+    const init = INITIATIVES.find(i => i.id === id);
+    if (!init) return;
+    if (activeInitiatives.has(id)) {
+      activeInitiatives.delete(id);
+      for (const [key, delta] of Object.entries(init.deltas)) {
+        scenario[key] = scenario[key] - delta;
+      }
+    } else {
+      activeInitiatives.add(id);
+      for (const [key, delta] of Object.entries(init.deltas)) {
+        scenario[key] = scenario[key] + delta;
+      }
+    }
+    SLIDERS.forEach(s => {
+      scenario[s.id] = Math.max(s.min, Math.min(s.max, scenario[s.id]));
+    });
+    renderAll();
+  }
+
+  function renderLeverage() {
+    // Only sliders that represent "strategy" — exclude output-composition assumptions
+    const strategySliders = SLIDERS.filter(s => s.group !== 'output');
+    const deltas = {
+      inflow: 1000,
+      regRate: 0.05, actRate: 0.05,
+      r1: 0.05, r2: 0.05,
+      inviteRate: 0.05, invitesPerInviter: 0.5,
+      inviteToInstall: 0.05, invitedActRate: 0.05,
+    };
+
+    const results = strategySliders.map(s => {
+      const perturbed = { ...BASELINE, [s.id]: BASELINE[s.id] + deltas[s.id] };
+      perturbed[s.id] = Math.max(s.min, Math.min(s.max, perturbed[s.id]));
+      const mauNew = computeMAU(perturbed).MAU_total;
+      const mauBase = computeMAU(BASELINE).MAU_total;
+      const lift = mauNew - mauBase;
+      const deltaLabel = s.format === 'pct'
+        ? `+${(deltas[s.id] * 100).toFixed(0)}pp`
+        : s.format === 'int'
+          ? `+${deltas[s.id].toLocaleString()}`
+          : `+${deltas[s.id].toFixed(1)}`;
+      return { id: s.id, label: s.label, lift, deltaLabel };
+    });
+
+    results.sort((a, b) => b.lift - a.lift);
+    const maxLift = Math.max(...results.map(r => Math.abs(r.lift)));
+
+    const container = document.getElementById('leverage-bars');
+    container.innerHTML = '';
+    results.forEach(r => {
+      const pct = (Math.abs(r.lift) / maxLift) * 100;
+      const row = document.createElement('div');
+      row.className = 'lev-row';
+      row.innerHTML = `
+        <div class="lev-name">${r.label}<span class="lev-delta-amount">standardized ${r.deltaLabel}</span></div>
+        <div class="lev-bar-container">
+          <div class="lev-bar ${pct < 15 ? 'weak' : ''}" style="width: ${pct}%"></div>
+        </div>
+        <div class="lev-value">+${fmtMAU(r.lift)}</div>
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  function renderSliderValues() {
+    SLIDERS.forEach(s => {
+      const el = document.getElementById(`value-${s.id}`);
+      const slider = document.getElementById(`slider-${s.id}`);
+      if (el) {
+        el.textContent = fmt(scenario[s.id], s.format);
+        const changed = Math.abs(scenario[s.id] - BASELINE[s.id]) > 1e-6;
+        el.classList.toggle('changed', changed);
+      }
+      if (slider) slider.value = scenario[s.id];
+    });
+  }
+
+  function renderReadout() {
+    const baseResult = computeMAU(BASELINE);
+    const scenResult = computeMAU(scenario);
+    document.getElementById('mau-baseline').textContent = fmtMAU(baseResult.MAU_total);
+    document.getElementById('mau-scenario').textContent = fmtMAU(scenResult.MAU_total);
+
+    // Breakdowns
+    const baseBreakdown = `
+      <span class="piece">activated ${fmtMAU(baseResult.MAU_new)}</span>
+      <span class="piece">passive ${fmtMAU(baseResult.MAU_passive)}</span>
+      <span class="piece">committed ${fmtMAU(baseResult.MAU_committed)}</span>
+    `;
+    const scenBreakdown = `
+      <span class="piece">activated ${fmtMAU(scenResult.MAU_new)}</span>
+      <span class="piece">passive ${fmtMAU(scenResult.MAU_passive)}</span>
+      <span class="piece">committed ${fmtMAU(scenResult.MAU_committed)}</span>
+    `;
+    document.getElementById('mau-baseline-breakdown').innerHTML = baseBreakdown;
+    document.getElementById('mau-scenario-breakdown').innerHTML = scenBreakdown;
+
+    const delta = scenResult.MAU_total - baseResult.MAU_total;
+    const pct = (delta / baseResult.MAU_total) * 100;
+    const deltaEl = document.getElementById('mau-delta');
+    const pctEl = document.getElementById('mau-delta-pct');
+    const sign = delta >= 0 ? '+' : '';
+    deltaEl.textContent = `${sign}${fmtMAU(delta)}`;
+    pctEl.textContent = `${sign}${pct.toFixed(1)}% vs baseline`;
+    deltaEl.classList.remove('positive', 'negative', 'zero');
+    if (Math.abs(delta) < 1) deltaEl.classList.add('zero');
+    else if (delta > 0) deltaEl.classList.add('positive');
+    else deltaEl.classList.add('negative');
+
+    // Derived
+    document.getElementById('d-activated').textContent = fmtMAU(scenResult.ATotal) + '/mo';
+    document.getElementById('d-lifetime').textContent = scenResult.L_new.toFixed(2);
+    document.getElementById('d-kfactor').textContent = scenResult.K.toFixed(3);
+    document.getElementById('d-passive').textContent = fmtMAU(scenResult.MAU_passive);
+  }
+
+  function renderAll() {
+    renderSliderValues();
+    renderInitiatives();
+    renderReadout();
+  }
+
+  function resetAll() {
+    scenario = { ...BASELINE };
+    activeInitiatives.clear();
+    renderAll();
+  }
+
+  // ========== INIT ==========
+  renderSliders();
+  renderLeverage();
+  renderAll();
+</script>
+
+</body>
+</html>

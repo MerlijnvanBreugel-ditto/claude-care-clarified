@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ditto Q1 Release Review — What Did We Actually Learn?</title>
+<style>
+  :root {
+    --bg: #f7f9fb;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --line: #e2e8f0;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #0d9488;
+    --accent-soft: rgba(13, 148, 136, 0.09);
+    --correct: #0d9488;
+    --wrong: #dc2626;
+    --warn: #d97706;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  .app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+    position: relative;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  .brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .brand .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .progress-wrap {
+    flex: 1;
+    max-width: 340px;
+    margin: 0 24px;
+  }
+  .progress-track {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 40px 40px 32px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    margin: 0 0 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 0 0 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  p { margin: 0 0 14px; color: var(--text); }
+  .lede { color: var(--muted); font-size: 17px; }
+
+  .options {
+    display: grid;
+    gap: 12px;
+    margin: 28px 0 24px;
+  }
+  .option {
+    text-align: left;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 16px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    line-height: 1.4;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .option:disabled { cursor: default; }
+  .option .marker {
+    flex: 0 0 28px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .option.correct {
+    border-color: var(--correct);
+    background: rgba(13, 148, 136, 0.08);
+  }
+  .option.correct .marker {
+    background: var(--correct);
+    color: #ffffff;
+    border-color: var(--correct);
+  }
+  .option.wrong {
+    border-color: var(--wrong);
+    background: rgba(220, 38, 38, 0.06);
+  }
+  .option.wrong .marker {
+    background: var(--wrong);
+    color: #fff;
+    border-color: var(--wrong);
+  }
+  .option.dim { opacity: 0.45; }
+
+  .reveal {
+    margin-top: 24px;
+    padding: 20px 22px;
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease;
+  }
+  .reveal .label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .reveal h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .reveal .data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .stat {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .stat .num {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .stat .num.accent { color: var(--accent); }
+  .stat .num.warn { color: var(--warn); }
+  .stat .num.wrong { color: var(--wrong); }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+  }
+  .btn {
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s ease, opacity 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .btn.ghost:hover { color: var(--text); border-color: var(--accent); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-slide { animation: fadeIn 0.4s ease; }
+
+  /* Intro & Outro */
+  .intro-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 28px 0;
+  }
+  .feature-pill {
+    padding: 14px 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 13px;
+  }
+  .feature-pill .tag {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .feature-pill strong { font-weight: 600; }
+
+  .summary-grid {
+    display: grid;
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .summary-item {
+    padding: 18px 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .summary-item .idx {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 18px;
+  }
+  .summary-item h4 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .summary-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .score-banner {
+    padding: 24px;
+    background: linear-gradient(135deg, var(--accent-soft), transparent);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .score-banner .big {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .score-banner .label {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  footer {
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .app { padding: 32px 16px 64px; }
+    .card { padding: 28px 24px; }
+    h1 { font-size: 26px; }
+    .progress-wrap { max-width: 140px; margin: 0 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><span class="dot"></span>🩺 Ditto Care · Q1 Review</div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+      <div class="progress-label" id="progressLabel">0 / 5</div>
+    </div>
+    <button class="btn ghost" id="restartBtn" style="display:none" onclick="restart()">Restart</button>
+  </header>
+
+  <main id="main" class="card fade-slide"></main>
+
+  <footer>
+    <span>📊 Data: Mixpanel, last 30–90 days · Analysis by Porygon · 2026-04-17</span>
+  </footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    kicker: "🚀 Question 1 of 5 · Release Impact",
+    q: "Over the last 3 months we shipped 4 major things. Which moved the 14-day summary-viewing rate the most? 📈",
+    options: [
+      "Manual appointment fix (DPMA-1621, Feb 3)",
+      "Care Circle v2 (Mar 17)",
+      "Appointment questions feature (Mar 28)",
+      "Activation panel on home (Mar 18)"
+    ],
+    correct: 1,
+    insightTitle: "🎉 The social loop beat the activation fix on our core metric.",
+    insight: "Care Circle v2 lifted the register → summary-viewed rate by <strong>+8pp</strong> (from ~13% → ~21%). Weekly unique summary viewers from recordings climbed from <strong>215 → 275/wk</strong> (+28%). Post-v2, <strong>181 users</strong> reach a summary specifically by opening a followed person's event — a path that didn't exist at scale before. That's twice the lift of the manual-appointment fix, which was supposed to be our big activation win.",
+    stats: [
+      { num: "+8pp", label: "CC v2 lift on summary rate", color: "accent" },
+      { num: "+4pp", label: "Manual appt fix lift", color: "" },
+      { num: "215 → 275", label: "Weekly summary viewers (recording)", color: "accent" },
+      { num: "181", label: "Users reaching summary via followed event", color: "accent" }
+    ],
+    takeaway: "Social graph > activation nudges, when both were shipped. Worth doubling down on the loop."
+  },
+  {
+    kicker: "🔗 Question 2 of 5 · Viral Loop",
+    q: "Of users invited into someone else's Care Circle, what % went on to invite their own loved ones within 30 days? 💌",
+    options: [
+      "~5% — essentially no spin-off",
+      "~10% — some, but niche",
+      "~21% — 1 in 5 becomes a sender",
+      "~40% — dominant behavior"
+    ],
+    correct: 2,
+    insightTitle: "✨ 1 in 5 invited followers becomes an inviter. The loop is real.",
+    insight: "Of <strong>665 new followers</strong>, <strong>141 sent their own invite</strong> within 30 days (21%) and <strong>72 shared their own care events</strong> (11%). Even more interesting: <strong>95 of them (14%) saved their own recording</strong> — often of the appointment they're attending with the person they follow. Median time to first invite: <strong>1.8 days</strong>. This is a genuine viral loop, not just a theoretical one.",
+    stats: [
+      { num: "141 / 665", label: "Followers → inviters (21%)", color: "accent" },
+      { num: "95", label: "Followers who saved a recording (14%)", color: "accent" },
+      { num: "72", label: "Followers who shared own events (11%)", color: "" },
+      { num: "1.8d", label: "Median time to first invite", color: "" }
+    ],
+    takeaway: "K-factor is probably up from ~0.05 to ~0.08–0.10. The loop works — fixing the leaks (Q5) compounds it."
+  },
+  {
+    kicker: "💬 Question 3 of 5 · Appointment Preparation",
+    q: "Appointment questions shipped Mar 28. 📝 What % of appointment creators add one — and how many questions are user-written (vs. tapped from the library)?",
+    options: [
+      "10% add · 90% just tap the library",
+      "15% add · split 50/50",
+      "32% add · 44% are user-written",
+      "50% add · almost all library"
+    ],
+    correct: 2,
+    insightTitle: "🌟 Questions is one of our strongest features — and people actually write their own.",
+    insight: "In 3 weeks, <strong>213 of 658 appointment creators added a question</strong> (32%). They fired <strong>719 question events</strong> total — averaging <strong>3.4 questions per user</strong>. Of those events, <strong>315 were manually written</strong> by the user (44%) vs 404 tapped from the library (56%). <strong>91 users added 3+ questions</strong> — real preparation depth, not a one-tap novelty. Question-adders are ~6pp more likely to then create a summary (39% vs 33%).",
+    stats: [
+      { num: "213 / 658", label: "Appt creators adding questions (32%)", color: "accent" },
+      { num: "315", label: "Manually-written questions (44%)", color: "accent" },
+      { num: "91", label: "Users adding 3+ questions", color: "accent" },
+      { num: "3.4", label: "Avg questions per user", color: "" }
+    ],
+    takeaway: "This is the sleeper hit of the quarter. It deserves more surface area in onboarding and reminders."
+  },
+  {
+    kicker: "💀 Question 4 of 5 · What Didn't Land",
+    q: "Three shipped features have near-zero weekly adoption despite being live for weeks. 👻 Pick the group that's essentially dead.",
+    options: [
+      "Recording, Doc scan, Manual appointment",
+      "Attachments, Notifications, Event notes",
+      "Reactions, Messages, Profile bio + questions",
+      "Follow requests, Invite links, Event shares"
+    ],
+    correct: 2,
+    insightTitle: "🦗 Reactions, messages, and profile enrichment — all shipped, all nearly empty.",
+    insight: "Care Circle reactions: <strong>2–4 users/wk</strong>. Messages: <strong>1–2 users/wk</strong>. Profile bio updated: <strong>41 events from 30 users</strong> in 30 days. Profile questions added: <strong>8 events from 7 users</strong> in 30 days. Follower profile questions viewed: <strong>2 events from 1 user</strong>. Compare to profile visibility toggle — <strong>433 events / 419 users</strong> — that one's working (because it's tied to onboarding). The push-notification plumbing that powers reactions/messages works fine — it's the underlying features that don't resonate.",
+    stats: [
+      { num: "2–4", label: "Reactions · users / wk", color: "wrong" },
+      { num: "8 events / 7 users", label: "Profile questions (30d)", color: "wrong" },
+      { num: "41 events / 30 users", label: "Profile bio (30d)", color: "warn" },
+      { num: "2 events / 1 user", label: "Follower profile Qs viewed (30d)", color: "wrong" }
+    ],
+    takeaway: "Kill, redesign, or reposition. 'Social feed' mechanics don't match the healthcare context. Async utility (reminders, updates) might."
+  },
+  {
+    kicker: "🕳️ Question 5 of 5 · Biggest Leak",
+    q: "Care Circle acceptance rates are below target. 💧 Where in the viral loop is the biggest leak — by volume lost?",
+    options: [
+      "Registered users → inviting (only 28% send)",
+      "Invite sent → invitee sends follow request (only 8%)",
+      "Follow request → accepted (only 17%)",
+      "Follower → creates their own content (only 5%)"
+    ],
+    correct: 1,
+    insightTitle: "🚨 The leak isn't acceptance. It's first touch — 92% of invitees never act.",
+    insight: "Post-v2: <strong>803 invite senders</strong> produced only <strong>64 follow requests</strong> (8%) and just <strong>13 accepted connections</strong> (2% end-to-end). The request-to-accepted step is actually healthy — <strong>59 of 344 requests</strong> got accepted (17%) and time-to-accept dropped from 2.2 days pre-v2 to <strong>14 hours</strong>. Meaning: the acceptance side is roughly working; the problem is landing-page / trust on the invitee's very first open.",
+    stats: [
+      { num: "64 / 803", label: "Invite → follow request (8%)", color: "wrong" },
+      { num: "13", label: "Invites → accepted connection", color: "wrong" },
+      { num: "14h", label: "Time-to-accept (was 2.2 days)", color: "accent" },
+      { num: "59 / 344", label: "Request → accepted (17%, flat)", color: "warn" }
+    ],
+    takeaway: "Before pushing more people to invite, fix what happens when they click the invite link. This is the single highest-leverage change."
+  }
+];
+
+let idx = 0;
+let answers = Array(QUESTIONS.length).fill(null);
+
+const main = document.getElementById('main');
+const progressBar = document.getElementById('progress');
+const progressLabel = document.getElementById('progressLabel');
+const restartBtn = document.getElementById('restartBtn');
+
+function renderIntro() {
+  restartBtn.style.display = 'none';
+  progressBar.style.width = '0%';
+  progressLabel.textContent = '0 / 5';
+  main.innerHTML = `
+    <div class="kicker">📊 Q1 2026 · release retrospective</div>
+    <h1>🧐 What did the last three months actually teach us?</h1>
+    <p class="lede">Five multiple-choice questions. No skipping. Some answers will be uncomfortable — that's the point. 🎯</p>
+    <div class="intro-features">
+      <div class="feature-pill"><div class="tag">🔧 Feb 3</div><strong>Manual appt activation fix</strong></div>
+      <div class="feature-pill"><div class="tag">👥 Mar 17</div><strong>Care Circle v2</strong></div>
+      <div class="feature-pill"><div class="tag">🏠 Mar 18</div><strong>Activation panel on home</strong></div>
+      <div class="feature-pill"><div class="tag">💬 Mar 28</div><strong>Appointment questions</strong></div>
+    </div>
+    <p style="color: var(--muted); font-size: 14px;">We'll cover: 📈 what moved the core metric · 🔗 where the viral loop actually works · 💀 which shipped features are dead · 🕳️ where the biggest leak hides.</p>
+    <div class="nav">
+      <span></span>
+      <button class="btn" onclick="startQuiz()">Start quiz →</button>
+    </div>
+  `;
+}
+
+function renderQuestion() {
+  restartBtn.style.display = 'none';
+  progressBar.style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  progressLabel.textContent = `${idx} / ${QUESTIONS.length}`;
+
+  const q = QUESTIONS[idx];
+  const picked = answers[idx];
+  const answered = picked !== null;
+
+  main.className = 'card fade-slide';
+  setTimeout(() => { main.className = 'card'; }, 450);
+
+  main.innerHTML = `
+    <div class="kicker">${q.kicker}</div>
+    <h2>${q.q}</h2>
+    <div class="options" id="opts">
+      ${q.options.map((opt, i) => {
+        let cls = 'option';
+        if (answered) {
+          if (i === q.correct) cls += ' correct';
+          else if (i === picked) cls += ' wrong';
+          else cls += ' dim';
+        }
+        const letter = ['A', 'B', 'C', 'D'][i];
+        return `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="pick(${i})">
+          <span class="marker">${letter}</span>
+          <span>${opt}</span>
+        </button>`;
+      }).join('')}
+    </div>
+    ${answered ? renderReveal(q, picked) : ''}
+    <div class="nav">
+      <button class="btn ghost" ${idx === 0 ? 'disabled' : ''} onclick="prev()">← Back</button>
+      <button class="btn" ${!answered ? 'disabled' : ''} onclick="next()">
+        ${idx === QUESTIONS.length - 1 ? 'See summary' : 'Next →'}
+      </button>
+    </div>
+  `;
+}
+
+function renderReveal(q, picked) {
+  const correct = picked === q.correct;
+  return `
+    <div class="reveal">
+      <div class="label">${correct ? '✅ Correct!' : '↪️ Here\'s the actual answer'}</div>
+      <h3>${q.insightTitle}</h3>
+      <p>${q.insight}</p>
+      <div class="data">
+        ${q.stats.map(s => `
+          <div class="stat">
+            <span class="num ${s.color}">${s.num}</span>
+            ${s.label}
+          </div>
+        `).join('')}
+      </div>
+      <p style="margin-top: 16px; color: var(--muted); font-size: 14px; font-style: italic;">→ ${q.takeaway}</p>
+    </div>
+  `;
+}
+
+function renderSummary() {
+  restartBtn.style.display = 'inline-block';
+  progressBar.style.width = '100%';
+  progressLabel.textContent = `${QUESTIONS.length} / ${QUESTIONS.length}`;
+
+  const score = answers.reduce((acc, a, i) => acc + (a === QUESTIONS[i].correct ? 1 : 0), 0);
+
+  main.innerHTML = `
+    <div class="kicker">🏁 Summary · 5 takeaways to act on</div>
+    <div class="score-banner">
+      <div class="big">${score} / 5 ${score >= 4 ? '🎯' : score >= 2 ? '💡' : '📚'}</div>
+      <div class="label">${score >= 4 ? 'Sharp — you\'re on the data.' : score >= 2 ? 'Some surprises — that\'s the value.' : 'All of this is worth a re-read.'}</div>
+    </div>
+    <h2>📋 What the quarter actually said</h2>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="idx">1️⃣</div>
+        <div>
+          <h4>🚀 Care Circle v2 was the real activation win.</h4>
+          <p>+8pp lift on summary viewing — twice the manual-appointment fix. Social > nudges.</p>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="idx">2️⃣</div>
+        <div>
+          <h4>🔗 The viral loop works. 141 of 665 followers (21%) become inviters within 1.8 days.</h4>
+          <p>Care Circle is a genuine growth engine, not just a retention feature.</p>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="idx">3️⃣</div>
+        <div>
+          <h4>💬 Appointment questions is the sleeper hit. 213 users adopted, 315 manually-written questions.</h4>
+          <p>Users are composing real preparation. Surface it harder in onboarding and reminders.</p>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="idx">4️⃣</div>
+        <div>
+          <h4>💀 Reactions, messages, profile bio/questions are dead on arrival.</h4>
+          <p>Kill, redesign, or reposition. Social-feed mechanics don't fit the healthcare context.</p>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="idx">5️⃣</div>
+        <div>
+          <h4>🕳️ Only 64 of 803 invite senders produced a follow request — a 92% leak at first touch.</h4>
+          <p>Fix the landing page before pushing more people to invite. Highest-leverage change we can make.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" onclick="idx = QUESTIONS.length - 1; renderQuestion();">← Back to last question</button>
+      <button class="btn" onclick="restart()">🔄 Restart quiz</button>
+    </div>
+  `;
+}
+
+function startQuiz() { idx = 0; renderQuestion(); }
+function pick(i) { answers[idx] = i; renderQuestion(); }
+function next() {
+  if (idx < QUESTIONS.length - 1) { idx++; renderQuestion(); }
+  else renderSummary();
+}
+function prev() { if (idx > 0) { idx--; renderQuestion(); } }
+function restart() { idx = 0; answers = Array(QUESTIONS.length).fill(null); renderIntro(); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' && !document.querySelector('.btn:last-of-type')?.disabled) {
+    const btn = document.querySelector('.nav .btn:not(.ghost)');
+    if (btn && !btn.disabled) btn.click();
+  } else if (e.key === 'ArrowLeft') {
+    const btn = document.querySelector('.nav .btn.ghost');
+    if (btn && !btn.disabled) btn.click();
+  }
+});
+
+renderIntro();
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Professionals | Ditto Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D164F;--teal:#58B6D2;--gold:#E8B520;--gold-warm:#F0C840;--teal-light:#7DD4E8;--red:#D94F4F;--soft-bg:#F7F6F3;--white:#FFFFFF;--text:#0D164F;--text-light:#6B7094;--text-muted:#9BA0B8;--heading:'Bricolage Grotesque',sans-serif;--body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--radius:20px;--max-width:1200px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--body);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}.pro-bar{background:var(--navy);color:rgba(255,255,255,0.7);text-align:center;padding:8px 20px;font-size:13px;font-weight:500}.pro-bar a{color:var(--teal-light);text-decoration:none}.pro-bar a:hover{color:#fff}nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(13,22,79,0.06);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}.nav-logo img{height:22px}.nav-links{display:flex;align-items:center;gap:32px}.nav-links a{font-size:14px;font-weight:500;color:var(--text-light);text-decoration:none;transition:color 0.2s}.nav-links a:hover{color:var(--navy)}.nav-links a.active{color:var(--navy);font-weight:700}.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.25s;cursor:pointer}.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:#1a2570;transform:translateY(-1px)}.btn-secondary{background:transparent;color:var(--navy);border:1.5px solid rgba(13,22,79,0.15)}.btn-secondary:hover{border-color:var(--navy)}.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:#4aa3bf;transform:translateY(-1px)}section{padding:100px 48px}.container{max-width:var(--max-width);margin:0 auto}.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--teal);margin-bottom:16px}.section-heading{font-family:var(--heading);font-size:42px;font-weight:600;line-height:1.15;letter-spacing:-0.8px;color:var(--navy);max-width:700px}.section-sub{font-size:18px;color:var(--text-light);margin-top:16px;max-width:560px;line-height:1.65}.inset-image{padding:16px;background:var(--white)}.inset-frame{border-radius:var(--radius);overflow:hidden;position:relative;height:60vh;min-height:400px;display:flex;align-items:flex-end}.inset-frame img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}.inset-image .img-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(13,22,79,0.72) 0%,rgba(13,22,79,0.06) 55%)}.inset-image .img-content{position:relative;z-index:2;padding:48px 56px;color:#F8F7F4}.inset-image .img-content h2{font-family:var(--heading);font-size:36px;font-weight:600;line-height:1.2;max-width:560px}.inset-image .img-content p{font-size:16px;color:rgba(248,247,244,0.5);margin-top:10px}.hl-gold{color:var(--gold-warm)}footer{background:var(--navy);color:rgba(248,247,244,0.5);padding:64px 48px 32px}.footer-grid{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}.footer-brand img{height:24px;margin-bottom:16px}.footer-brand p{font-size:14px;line-height:1.6;max-width:280px}.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(248,247,244,0.25);margin-bottom:16px}.footer-col a{display:block;font-size:14px;color:rgba(248,247,244,0.5);text-decoration:none;margin-bottom:10px}.footer-col a:hover{color:rgba(248,247,244,0.8)}.footer-bottom{max-width:var(--max-width);margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(248,247,244,0.06);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(248,247,244,0.25)}
+
+/* Page-specific */
+.page-hero{padding:80px 48px 60px;max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;min-height:60vh}
+.page-hero-content{max-width:520px}
+.page-hero h1{font-family:var(--heading);font-size:48px;font-weight:700;line-height:1.08;letter-spacing:-1.5px;color:var(--navy)}
+.page-hero .subtitle{font-size:17px;color:var(--text-light);margin-top:20px;line-height:1.65}
+.page-hero .hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.page-hero .trust-line{margin-top:24px;font-size:13px;color:var(--text-muted);font-weight:500}
+.page-hero-photo{border-radius:var(--radius);overflow:hidden;height:480px}
+.page-hero-photo img{width:100%;height:100%;object-fit:cover}
+
+.stats-row{display:flex;gap:48px;margin-top:48px}
+.stat-block{flex:1;text-align:center;padding:32px;background:var(--soft-bg);border-radius:16px}
+.stat-block .stat-num{font-family:var(--heading);font-size:36px;font-weight:700;color:var(--navy)}
+.stat-block .stat-desc{font-size:13px;color:var(--text-muted);margin-top:4px}
+.stat-block .stat-src{font-size:11px;color:var(--text-muted);margin-top:8px;font-style:italic}
+
+.steps{margin-top:48px}
+.step{display:grid;grid-template-columns:60px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid rgba(13,22,79,0.06)}
+.step:last-child{border-bottom:none}
+.step-num{font-family:var(--heading);font-size:32px;font-weight:700;color:rgba(13,22,79,0.08)}
+.step h3{font-family:var(--heading);font-size:20px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.step p{font-size:15px;color:var(--text-light);line-height:1.6}
+
+.partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.partner-card{background:var(--soft-bg);padding:28px;border-radius:16px}
+.partner-card h3{font-family:var(--heading);font-size:18px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.partner-card .partner-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:8px}
+.partner-card p{font-size:14px;color:var(--text-light);line-height:1.5}
+
+.testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
+.testimonial{padding:32px;border-radius:16px;background:var(--soft-bg)}
+.testimonial-quote{font-size:15px;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:16px}
+.testimonial-author{font-size:13px;font-weight:600;color:var(--navy)}
+.testimonial-role{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+.privacy-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:32px}
+.privacy-item{text-align:center;padding:20px 12px;background:var(--soft-bg);border-radius:12px}
+.privacy-item .pi-icon{font-size:24px;margin-bottom:8px}
+.privacy-item .pi-text{font-size:12px;font-weight:600;color:var(--navy);line-height:1.4}
+
+.cta-section{background:var(--soft-bg);text-align:center}
+.cta-section h2{font-family:var(--heading);font-size:36px;font-weight:600;color:var(--navy);margin-bottom:12px}
+.cta-section p{font-size:16px;color:var(--text-light);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+
+@media(max-width:900px){.page-hero{grid-template-columns:1fr;min-height:auto;padding:60px 24px}.page-hero h1{font-size:34px}.page-hero-photo{height:300px}section{padding:60px 24px}.stats-row{flex-direction:column}.partners-grid,.testimonials{grid-template-columns:1fr}.privacy-summary{grid-template-columns:repeat(3,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.nav-links a:not(.btn){display:none}}
+</style>
+</head>
+<body>
+
+<div class="pro-bar">You're viewing the page for healthcare professionals. <a href="index.html">Go to patient page →</a></div>
+
+<nav>
+  <a class="nav-logo" href="index.html"><img src="../decks/logo/Ditto_darkblue.svg" alt="Ditto"></a>
+  <div class="nav-links">
+    <a href="professionals.html" class="active">For Professionals</a>
+    <a href="our-story.html">Our Story</a>
+    <a href="trust-privacy.html">Trust & Privacy</a>
+    <a href="help.html">Help</a>
+    <a href="index.html#download" class="btn btn-primary">Download Ditto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="section-label">For Healthcare Professionals</div>
+    <h1>Better-informed patients. Fewer repeated conversations.</h1>
+    <p class="subtitle">Ditto helps your patients understand what was discussed, remember what matters, and share it with their family — so they come back prepared, not confused.</p>
+    <div class="hero-ctas">
+      <a href="#cta" class="btn btn-teal">Talk to a fellow doctor →</a>
+      <a href="#how" class="btn btn-secondary">See how it works</a>
+    </div>
+    <div class="trust-line">75,000+ patients use Ditto · Recommended by hundreds of healthcare professionals</div>
+  </div>
+  <div class="page-hero-photo">
+    <img src="../decks/images/6a397c56d57ed464b03002d42f620716.jpg" alt="Doctor and patient">
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">The problem is well-documented</div>
+    <h2 class="section-heading">This isn't a patient problem. It's a communication problem.</h2>
+    <div class="stats-row">
+      <div class="stat-block">
+        <div class="stat-num">40-80%</div>
+        <div class="stat-desc">of medical information is forgotten immediately</div>
+        <div class="stat-src">Kessels, 2003; Watson & McKinstry, 2009</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">~50%</div>
+        <div class="stat-desc">of patients leave with significant misunderstandings</div>
+        <div class="stat-src">Engel et al., 2017</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" style="font-size:28px">Better adherence</div>
+        <div class="stat-desc">Informed patients have measurably better treatment outcomes</div>
+        <div class="stat-src">Stacey et al., Cochrane Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE -->
+<section class="inset-image">
+  <div class="inset-frame">
+    <img src="../decks/images/061b9b0b289cb231dc6009fac66d1fa3.jpg" alt="">
+    <div class="img-overlay"></div>
+    <div class="img-content">
+      <h2>Your patients deserve to <span class="hl-gold">understand</span> what you told them.</h2>
+      <p>Ditto helps close the gap between the consultation room and home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">What it means for your practice</div>
+    <h2 class="section-heading">Nothing changes for you. Everything changes for your patients.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><h3>Your patient records the consultation</h3><p>The patient opens Ditto and taps record. Nothing changes for you. No devices to set up, no integrations to configure, no workflow disruption.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><h3>AI generates a plain-language summary</h3><p>After the visit, Ditto produces a structured summary: what was discussed, what the diagnosis means, what the treatment plan is, what happens next. In language the patient understands.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div><h3>The patient's Care Circle stays informed</h3><p>Patients share their summary with family — reducing the "what did the doctor say?" phone calls. Each person receives information tailored to their role.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div><h3>Your next appointment starts better</h3><p>The patient comes back having reviewed their summary, prepared questions, and aligned with their family. Less time repeating, more time progressing.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="background:var(--soft-bg)">
+  <div class="container">
+    <div class="section-label">Who we work with</div>
+    <h2 class="section-heading">Partners & Collaboration</h2>
+    <p class="section-sub">Ditto partners with insurers, hospitals, and healthcare software providers.</p>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-type">Health Insurer</div>
+        <h3>Menzis</h3>
+        <p>2M+ members. Ditto is available to Menzis members as part of their health literacy commitment.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-type">Research Collaboration</div>
+        <h3>UMCG</h3>
+        <p>Joint research with the University Medical Center Groningen on patient communication and AI-assisted health literacy.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-type">Integration Partner</div>
+        <h3>Juvoly</h3>
+        <p>Ditto integrates with Juvoly's Quickconsult platform for seamless clinical workflows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="section-label">What your colleagues say</div>
+    <h2 class="section-heading">From skeptical to convinced.</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="testimonial-quote">"I was skeptical at first. Another app? But then patients started coming back differently — better prepared, calmer, with written questions. It genuinely improved the quality of our follow-up conversations."</div>
+        <div class="testimonial-author">[Name]</div>
+        <div class="testimonial-role">General Practitioner</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"For oncology patients especially, the amount of information is overwhelming. Knowing they can go home and re-read everything in plain language — it takes pressure off both of us."</div>
+        <div class="testimonial-author">[Name]</div>
+        <div class="testimonial-role">Oncologist</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section style="background:var(--soft-bg)">
+  <div class="container">
+    <div class="section-label">How we handle patient data</div>
+    <h2 class="section-heading">Privacy is architecture, not policy.</h2>
+    <div class="privacy-summary">
+      <div class="privacy-item"><div class="pi-icon">📱</div><div class="pi-text">On-device storage</div></div>
+      <div class="privacy-item"><div class="pi-icon">🇪🇺</div><div class="pi-text">EU servers only</div></div>
+      <div class="privacy-item"><div class="pi-icon">🗑️</div><div class="pi-text">Immediate deletion</div></div>
+      <div class="privacy-item"><div class="pi-icon">✅</div><div class="pi-text">GDPR compliant</div></div>
+      <div class="privacy-item"><div class="pi-icon">🔒</div><div class="pi-text">No data access</div></div>
+    </div>
+    <p style="text-align:center;margin-top:24px"><a href="trust-privacy.html" style="color:var(--teal);font-weight:600;text-decoration:none">Read our full approach to Trust & Privacy →</a></p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <h2>Talk to a fellow doctor</h2>
+    <p>Have questions about how Ditto works in your practice? Speak to a member of our medical team — no sales pitch, just a conversation between colleagues.</p>
+    <a href="#" class="btn btn-teal" style="font-size:16px;padding:14px 32px;">Book a conversation →</a>
+    <p style="margin-top:16px;font-size:13px;color:var(--text-muted)">Or <a href="#" style="color:var(--teal);text-decoration:none">explore our research →</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><img src="../decks/logo/Ditto_white.svg" alt="Ditto"><p>We turn medical conversations into clarity.</p></div>
+    <div class="footer-col"><h4>Product</h4><a href="index.html">How it works</a><a href="index.html#download">Download</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="our-story.html">Our Story</a><a href="professionals.html">For Professionals</a><a href="help.html">Contact</a></div>
+    <div class="footer-col"><h4>Trust</h4><a href="trust-privacy.html">Trust & Privacy</a><a href="#">Terms</a><a href="#">Privacy Policy</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Ditto Care B.V. · Rotterdam</span><span>press@ditto.care</span></div>
+</footer>
+</body>
+</html>

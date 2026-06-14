@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Brain — Three Interface Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --page-bg: #f4f2ee;
+    --page-text: #1a1a1a;
+    --muted: #6b6b6b;
+    --phone-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.06);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--page-bg);
+    color: var(--page-text);
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+    line-height: 1.5;
+  }
+
+  .page-header {
+    max-width: 1400px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 500;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .page-header .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .page-header .scenario {
+    max-width: 640px;
+    margin: 24px auto 0;
+    padding: 16px 20px;
+    background: white;
+    border: 1px solid #e3e1dd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #444;
+    text-align: left;
+  }
+  .page-header .scenario strong { color: #1a1a1a; }
+
+  .stage {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  @media (max-width: 1100px) {
+    .stage { grid-template-columns: 1fr; gap: 64px; }
+  }
+
+  .direction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .direction .label {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .direction .label .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .direction .label h2 {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .direction .label .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 360px;
+    height: 740px;
+    background: #1a1a1a;
+    border-radius: 44px;
+    padding: 8px;
+    box-shadow: var(--phone-shadow);
+    position: relative;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+  }
+  .status-bar {
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: inherit;
+  }
+  .status-bar .dots::before { content: "• • •"; letter-spacing: 2px; }
+
+  .screen {
+    display: none;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .screen.active { display: flex; flex-direction: column; }
+  .screen::-webkit-scrollbar { display: none; }
+
+  /* Stepper */
+  .stepper {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    align-items: center;
+  }
+  .stepper button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #d0cdc6;
+    background: white;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    transition: all 0.15s ease;
+  }
+  .stepper button.active {
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+  }
+  .stepper button:hover:not(.active) {
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+  }
+  .stepper .flow-label {
+    margin-left: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================================ */
+  /* DIRECTION α — LIVING PAPER */
+  /* ============================================================ */
+  .alpha .phone-screen {
+    background: #f7f4ed;
+    color: #1a1a1a;
+    font-family: 'Spectral', Georgia, serif;
+  }
+  .alpha .status-bar { color: #3a3a3a; }
+
+  .alpha .masthead {
+    padding: 20px 28px 18px;
+    border-bottom: 1px solid #d9d3c5;
+    text-align: center;
+  }
+  .alpha .masthead .wordmark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: #8a7f62;
+    text-transform: uppercase;
+  }
+  .alpha .masthead .title {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    margin-top: 6px;
+    letter-spacing: -0.01em;
+  }
+  .alpha .masthead .volume {
+    font-size: 11px;
+    color: #8a7f62;
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+
+  .alpha .weight-indicator {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #a88b58;
+    text-align: center;
+    padding: 8px 0 14px;
+    text-transform: uppercase;
+  }
+
+  .alpha .lead-story {
+    padding: 12px 28px 24px;
+    border-bottom: 1px solid #d9d3c5;
+  }
+  .alpha .lead-story .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #8a7f62;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .alpha .lead-story .headline {
+    font-family: 'Spectral', serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+  .alpha .lead-story .byline {
+    font-size: 13px;
+    color: #6b6248;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .alpha .lead-story .excerpt {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #2a2a2a;
+  }
+  .alpha .lead-story .cta {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #8a7f62;
+    border-bottom: 1px solid #8a7f62;
+    padding-bottom: 2px;
+  }
+
+  .alpha .standing-sections {
+    padding: 20px 28px 28px;
+  }
+  .alpha .standing-sections .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #8a7f62;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .alpha .standing-sections .section-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e6dfce;
+    font-size: 14px;
+  }
+  .alpha .standing-sections .section-row:last-child { border-bottom: none; }
+  .alpha .standing-sections .section-row .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #a09676;
+  }
+
+  /* α detail */
+  .alpha .back-link {
+    padding: 14px 28px;
+    font-size: 13px;
+    font-style: italic;
+    color: #8a7f62;
+    border-bottom: 1px solid #d9d3c5;
+  }
+  .alpha .article {
+    padding: 28px;
+    flex: 1;
+  }
+  .alpha .article h1 {
+    font-family: 'Spectral', serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .alpha .article .byline-full {
+    font-size: 13px;
+    color: #6b6248;
+    font-style: italic;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d9d3c5;
+  }
+  .alpha .article .pullquote {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.35;
+    color: #2a2a2a;
+    padding: 18px 0 22px;
+    margin: 8px 0 24px;
+    border-left: 2px solid #a88b58;
+    padding-left: 20px;
+  }
+  .alpha .article .pullquote .attribution {
+    display: block;
+    font-style: normal;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #8a7f62;
+    margin-top: 10px;
+    letter-spacing: 0.06em;
+  }
+  .alpha .article p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #2a2a2a;
+    margin-bottom: 14px;
+  }
+  .alpha .share-cta {
+    margin-top: 28px;
+    padding: 14px 20px;
+    background: #1a1a1a;
+    color: white;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  /* α share */
+  .alpha .share-screen {
+    padding: 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .alpha .share-screen h2 {
+    font-family: 'Spectral', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .alpha .share-screen .share-sub {
+    font-size: 13px;
+    color: #6b6248;
+    margin-bottom: 24px;
+  }
+  .alpha .share-screen .recipients {
+    margin-bottom: 24px;
+  }
+  .alpha .share-screen .recipient {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e6dfce;
+    font-size: 14px;
+  }
+  .alpha .share-screen .recipient:last-child { border-bottom: none; }
+  .alpha .share-screen .recipient .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #d9c8a3;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Spectral', serif;
+    font-size: 14px;
+    color: #5a4e2f;
+  }
+  .alpha .share-screen .recipient .name { flex: 1; }
+  .alpha .share-screen .recipient .role {
+    font-size: 11px;
+    color: #a09676;
+    font-style: italic;
+  }
+
+  .alpha .pullquote-card {
+    background: #fbf7ed;
+    border: 1px solid #d9c8a3;
+    border-radius: 4px;
+    padding: 24px 22px;
+    margin-top: 8px;
+  }
+  .alpha .pullquote-card .mark {
+    font-family: 'Spectral', serif;
+    font-size: 42px;
+    line-height: 0.6;
+    color: #a88b58;
+  }
+  .alpha .pullquote-card .quote {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 6px 0 18px;
+  }
+  .alpha .pullquote-card .signoff {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #8a7f62;
+  }
+
+  /* ============================================================ */
+  /* DIRECTION β — HOME FEED */
+  /* ============================================================ */
+  .beta .phone-screen {
+    background: #fbf7f3;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+  .beta .status-bar { color: #3a3a3a; }
+
+  .beta .welcome {
+    padding: 16px 20px 12px;
+    font-size: 15px;
+    color: #3a3a3a;
+    font-weight: 500;
+  }
+  .beta .welcome strong { color: #8f4a3a; }
+
+  .beta .circle-strip {
+    padding: 8px 16px 14px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .beta .circle-strip::-webkit-scrollbar { display: none; }
+  .beta .circle-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    color: #6b5f57;
+    flex-shrink: 0;
+    gap: 4px;
+  }
+  .beta .circle-member .avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #e8d3c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #8f4a3a;
+    border: 2px solid transparent;
+  }
+  .beta .circle-member.self .avatar { border-color: #8f4a3a; }
+  .beta .circle-member.add .avatar {
+    background: transparent;
+    border: 1.5px dashed #c8b4a3;
+    color: #c8b4a3;
+    font-size: 20px;
+  }
+
+  .beta .story-ring {
+    padding: 8px 16px 12px;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .beta .story-ring::-webkit-scrollbar { display: none; }
+  .beta .story {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    color: #6b5f57;
+    gap: 6px;
+  }
+  .beta .story .circle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(135deg, #e8bfa3, #a87b7a);
+  }
+  .beta .story .circle .inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fbf7f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .beta .feed {
+    padding: 8px 16px 24px;
+  }
+  .beta .post {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(143, 74, 58, 0.06);
+  }
+  .beta .post .cover {
+    height: 120px;
+    background: linear-gradient(135deg, #e8bfa3 0%, #a87b7a 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 14px 16px;
+    color: white;
+  }
+  .beta .post .cover .post-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .beta .post .body {
+    padding: 14px 16px 12px;
+  }
+  .beta .post .meta {
+    font-size: 12px;
+    color: #8a7a70;
+    margin-bottom: 8px;
+  }
+  .beta .post .excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #2a2a2a;
+    margin-bottom: 12px;
+  }
+  .beta .post .reactions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    color: #8a7a70;
+  }
+  .beta .post .reactions .btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .beta .post.note {
+    background: linear-gradient(135deg, #fdf1e6, #f9e3d1);
+    padding: 16px 18px;
+  }
+  .beta .post.note .from {
+    font-size: 12px;
+    color: #8f4a3a;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .beta .post.note .message {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #3a2a24;
+    line-height: 1.45;
+  }
+
+  /* β detail */
+  .beta .detail-cover {
+    height: 180px;
+    background: linear-gradient(135deg, #e8bfa3, #a87b7a);
+    padding: 60px 24px 20px;
+    color: white;
+    position: relative;
+  }
+  .beta .detail-cover .back {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+  .beta .detail-cover .title {
+    font-family: 'Spectral', serif;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .beta .detail-body {
+    padding: 20px 24px;
+    flex: 1;
+  }
+  .beta .detail-body .doctor-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee0d3;
+    margin-bottom: 16px;
+  }
+  .beta .detail-body .doctor-row .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e8d3c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #8f4a3a;
+  }
+  .beta .detail-body .doctor-row .info .name { font-weight: 600; font-size: 14px; }
+  .beta .detail-body .doctor-row .info .sub { font-size: 12px; color: #8a7a70; }
+  .beta .detail-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2a2a2a;
+    margin-bottom: 14px;
+  }
+  .beta .detail-body .scene-quote {
+    background: #fdf1e6;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #3a2a24;
+  }
+  .beta .replies {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #eee0d3;
+  }
+  .beta .replies .reply-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #8a7a70;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .beta .replies .reply {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .beta .replies .reply .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e8d3c2;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #8f4a3a;
+    font-size: 11px;
+  }
+  .beta .replies .reply .msg {
+    background: #f6ebe0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    line-height: 1.4;
+  }
+  .beta .share-btn {
+    margin: 20px 24px 24px;
+    background: #8f4a3a;
+    color: white;
+    padding: 14px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* β share */
+  .beta .share-head {
+    padding: 20px 24px 8px;
+  }
+  .beta .share-head h2 {
+    font-family: 'Spectral', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .beta .share-head .sub {
+    font-size: 13px;
+    color: #8a7a70;
+  }
+  .beta .letters {
+    padding: 8px 20px 24px;
+  }
+  .beta .letter {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(143, 74, 58, 0.06);
+  }
+  .beta .letter .to {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #8f4a3a;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .beta .letter .to .avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e8d3c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #8f4a3a;
+  }
+  .beta .letter .content {
+    font-family: 'Spectral', serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #2a2a2a;
+    margin-bottom: 12px;
+  }
+  .beta .letter .tag {
+    font-size: 11px;
+    color: #a87b7a;
+    font-style: italic;
+  }
+  .beta .send-letters {
+    margin: 4px 20px 24px;
+    background: #8f4a3a;
+    color: white;
+    padding: 14px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* ============================================================ */
+  /* DIRECTION γ — ATELIER */
+  /* ============================================================ */
+  .gamma .phone-screen {
+    background: #fafafa;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+  .gamma .status-bar { color: #3a3a3a; }
+
+  .gamma .intent-bar {
+    padding: 14px 16px;
+    background: white;
+    border-bottom: 1px solid #ececec;
+  }
+  .gamma .intent-bar .search {
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #8a8a8a;
+  }
+  .gamma .intent-bar .search .kbd {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: white;
+    padding: 3px 6px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    color: #8a8a8a;
+  }
+
+  .gamma .section-title {
+    padding: 20px 20px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #8a8a8a;
+    text-transform: uppercase;
+  }
+
+  .gamma .cards {
+    padding: 0 16px 20px;
+  }
+  .gamma .card {
+    background: white;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .gamma .card .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .gamma .card .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #6b6b6b;
+    text-transform: uppercase;
+  }
+  .gamma .card .card-meta {
+    font-size: 11px;
+    color: #8a8a8a;
+  }
+  .gamma .card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .gamma .card .card-body {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+  }
+  .gamma .card .card-cta {
+    font-size: 12px;
+    color: #2e6b4c;
+    font-weight: 500;
+  }
+
+  .gamma .card.severity-ok { border-left: 3px solid #2e6b4c; }
+  .gamma .card.severity-warn { border-left: 3px solid #b37c2e; }
+  .gamma .card.severity-info { border-left: 3px solid #2e5ab3; }
+
+  .gamma .card.severity-ok .card-tag { color: #2e6b4c; }
+  .gamma .card.severity-warn .card-tag { color: #b37c2e; }
+  .gamma .card.severity-info .card-tag { color: #2e5ab3; }
+
+  /* γ detail board */
+  .gamma .board-head {
+    padding: 14px 16px;
+    border-bottom: 1px solid #ececec;
+    background: white;
+  }
+  .gamma .board-head .back {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #8a8a8a;
+    margin-bottom: 8px;
+  }
+  .gamma .board-head .board-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .gamma .board-cards { padding: 16px; }
+  .gamma .board-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .gamma .mini-card {
+    background: white;
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .gamma .mini-card .mini-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .gamma .mini-card .mini-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .gamma .mini-card .mini-sub {
+    font-size: 11px;
+    color: #6b6b6b;
+    line-height: 1.4;
+  }
+  .gamma .mini-card.stopping { border-top: 2px solid #d0807a; }
+  .gamma .mini-card.starting { border-top: 2px solid #7aa8d0; }
+
+  .gamma .full-card {
+    background: white;
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .gamma .full-card.check {
+    background: #f0f7f2;
+    border-color: #c8e2d0;
+  }
+  .gamma .full-card .tag-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .gamma .full-card .check-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #2e6b4c;
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gamma .full-card .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #2e6b4c;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .gamma .full-card .stmt {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .gamma .full-card .source {
+    font-size: 11px;
+    color: #6b6b6b;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .gamma .quote-card {
+    background: white;
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .gamma .quote-card .quote-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #3a3a3a;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .gamma .quote-card .audio-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #6b6b6b;
+  }
+  .gamma .quote-card .play {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    padding-left: 2px;
+  }
+
+  .gamma .actions-bar {
+    padding: 12px 16px 20px;
+    display: flex;
+    gap: 8px;
+  }
+  .gamma .actions-bar .btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .gamma .actions-bar .btn.primary {
+    background: #1a1a1a;
+    color: white;
+  }
+  .gamma .actions-bar .btn.secondary {
+    background: white;
+    color: #1a1a1a;
+    border: 1px solid #ddd;
+  }
+
+  /* γ share */
+  .gamma .share-sheet {
+    padding: 20px;
+  }
+  .gamma .share-sheet h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .gamma .field-row {
+    margin-bottom: 18px;
+  }
+  .gamma .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .gamma .chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .gamma .chip {
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    background: white;
+  }
+  .gamma .chip.selected {
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+  }
+  .gamma .chip.add {
+    color: #8a8a8a;
+    border-style: dashed;
+  }
+  .gamma .preview-card {
+    background: white;
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 8px;
+  }
+  .gamma .preview-card .preview-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .gamma .preview-card .preview-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #2a2a2a;
+  }
+  .gamma .send-btn {
+    margin-top: 20px;
+    background: #1a1a1a;
+    color: white;
+    padding: 14px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  /* Common bits */
+  .home-indicator {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 2px;
+  }
+  .beta .home-indicator { background: rgba(143, 74, 58, 0.3); }
+  .alpha .home-indicator { background: rgba(138, 127, 98, 0.4); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>The Care Brain — Three Interface Directions</h1>
+  <div class="subtitle">Mobile mockups · a simple flow for each direction · tap the numbers to step through</div>
+  <div class="scenario">
+    <strong>Scenario:</strong> Mara, 55, just left her oncology appointment with Dr. de Jong.
+    The scan showed her current medication (capecitabine) isn't working. She's being switched to
+    oxaliplatin. She opens Ditto in the lobby. She needs to understand, then tell her husband Pim
+    and daughter Lotte (in London). Flow: home → detail → share.
+  </div>
+</div>
+
+<div class="stage">
+
+  <!-- =========================== -->
+  <!-- DIRECTION α — LIVING PAPER  -->
+  <!-- =========================== -->
+  <div class="direction alpha" data-direction="alpha">
+    <div class="label">
+      <div class="tag">Direction α</div>
+      <h2>The Living Paper</h2>
+      <div class="tagline">Ive × Bierut × Headspace · editorial · presence</div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-screen">
+
+        <!-- Screen 1: Home -->
+        <div class="screen active" data-screen="1">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="masthead">
+            <div class="wordmark">Ditto · Care Journal</div>
+            <div class="title">Mara</div>
+            <div class="volume">Vol. 4 · April 15, 2026</div>
+          </div>
+          <div class="weight-indicator">— heavy news today —</div>
+          <div class="lead-story">
+            <div class="eyebrow">From today's visit</div>
+            <div class="headline">A change in your treatment.</div>
+            <div class="byline">With Dr. de Jong · Borstkanker Centrum · 2:15 PM</div>
+            <div class="excerpt">
+              The scan confirmed what we discussed in February. Dr. de Jong is moving
+              you from capecitabine to oxaliplatin. It is a responsive adjustment,
+              not a setback.
+            </div>
+            <div class="cta">Read the full summary →</div>
+          </div>
+          <div class="standing-sections">
+            <div class="section-label">Standing sections</div>
+            <div class="section-row"><span>The Doctor Said</span><span class="count">3 new</span></div>
+            <div class="section-row"><span>Questions Outstanding</span><span class="count">2</span></div>
+            <div class="section-row"><span>Looking Back</span><span class="count">— timeline</span></div>
+            <div class="section-row"><span>What's Next</span><span class="count">Apr 21</span></div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+        <!-- Screen 2: Article -->
+        <div class="screen" data-screen="2">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="back-link">← Back to Journal</div>
+          <div class="article">
+            <h1>A change in your treatment.</h1>
+            <div class="byline-full">With Dr. de Jong · April 15, 2026 · 2:15 PM</div>
+            <div class="pullquote">
+              The scan results are why we're switching. The side-effect profile
+              is different, but manageable, and we'll watch you closely.
+              <span class="attribution">— Dr. de Jong, in conversation</span>
+            </div>
+            <p>Today covered three things.</p>
+            <p>The scan from Tuesday showed the tumor had stopped responding
+              to capecitabine. Dr. de Jong recommended moving to oxaliplatin.</p>
+            <p>She emphasized this is a common next step, not a setback.</p>
+            <p>The side effects will differ from what you've experienced so far.
+              We'll walk through them together before your first dose on Tuesday.</p>
+            <div class="share-cta">Share this with your circle</div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+        <!-- Screen 3: Share (pullquote card) -->
+        <div class="screen" data-screen="3">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="back-link">← Back</div>
+          <div class="share-screen">
+            <h2>Who should know?</h2>
+            <div class="share-sub">A letter in your voice, adapted to each.</div>
+            <div class="recipients">
+              <div class="recipient">
+                <div class="avatar">P</div>
+                <div class="name">Pim <div class="role">your husband · full</div></div>
+              </div>
+              <div class="recipient">
+                <div class="avatar">L</div>
+                <div class="name">Lotte <div class="role">your daughter, London · softened</div></div>
+              </div>
+              <div class="recipient">
+                <div class="avatar">W</div>
+                <div class="name">Work <div class="role">one line · professional</div></div>
+              </div>
+            </div>
+            <div class="pullquote-card">
+              <div class="mark">"</div>
+              <div class="quote">Dr. de Jong is moving me to a different medication.
+                The scan is why. She thinks this is the right step, and I trust her.</div>
+              <div class="signoff">— MARA · APRIL 15</div>
+            </div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="stepper">
+      <button class="active" data-step="1">1</button>
+      <button data-step="2">2</button>
+      <button data-step="3">3</button>
+      <span class="flow-label">Home · Article · Share</span>
+    </div>
+  </div>
+
+  <!-- =========================== -->
+  <!-- DIRECTION β — HOME FEED     -->
+  <!-- =========================== -->
+  <div class="direction beta" data-direction="beta">
+    <div class="label">
+      <div class="tag">Direction β</div>
+      <h2>The Home Feed</h2>
+      <div class="tagline">Gebbia × Spalter × Kare · hospitality · circle</div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-screen">
+
+        <!-- Screen 1: Home -->
+        <div class="screen active" data-screen="1">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="welcome">
+            Welcome back, <strong>Mara</strong>. Come in.
+          </div>
+          <div class="circle-strip">
+            <div class="circle-member self"><div class="avatar">M</div><span>You</span></div>
+            <div class="circle-member"><div class="avatar">P</div><span>Pim</span></div>
+            <div class="circle-member"><div class="avatar">L</div><span>Lotte</span></div>
+            <div class="circle-member"><div class="avatar">J</div><span>Joost</span></div>
+            <div class="circle-member add"><div class="avatar">+</div><span>Add</span></div>
+          </div>
+          <div class="story-ring">
+            <div class="story"><div class="circle"><div class="inner">📝</div></div><span>Today</span></div>
+            <div class="story"><div class="circle"><div class="inner">🌅</div></div><span>Tomorrow</span></div>
+            <div class="story"><div class="circle"><div class="inner">💬</div></div><span>Pim</span></div>
+            <div class="story"><div class="circle"><div class="inner">📖</div></div><span>Journey</span></div>
+          </div>
+          <div class="feed">
+            <div class="post">
+              <div class="cover"><div class="post-title">Today with<br>Dr. de Jong</div></div>
+              <div class="body">
+                <div class="meta">2:15 PM · Borstkanker Centrum</div>
+                <div class="excerpt">Dr. de Jong shared the scan results and a change in your treatment. You listened well.</div>
+                <div class="reactions">
+                  <div class="btn">♡ Pim · 2</div>
+                  <div class="btn">💬 1 reply</div>
+                  <div class="btn" style="margin-left:auto">↗ Share</div>
+                </div>
+              </div>
+            </div>
+            <div class="post note">
+              <div class="from">From Pim, just now</div>
+              <div class="message">"I love you. I'm here. Tell me what you need."</div>
+            </div>
+            <div class="post">
+              <div class="cover" style="background: linear-gradient(135deg, #c8d4b8, #7a9978)"><div class="post-title">Tomorrow 9:00<br>Radiologie</div></div>
+              <div class="body">
+                <div class="meta">Prepping now · 3 questions ready</div>
+                <div class="excerpt">Your prep card is written. Open it when you're ready.</div>
+              </div>
+            </div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+        <!-- Screen 2: Post detail -->
+        <div class="screen" data-screen="2">
+          <div class="status-bar" style="background:transparent;color:white;position:absolute;top:0;left:0;right:0;z-index:2">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="detail-cover">
+            <div class="back">←</div>
+            <div class="title">Today with<br>Dr. de Jong</div>
+          </div>
+          <div class="detail-body">
+            <div class="doctor-row">
+              <div class="avatar">DJ</div>
+              <div class="info">
+                <div class="name">Dr. de Jong</div>
+                <div class="sub">Borstkanker Centrum · 2:15 PM</div>
+              </div>
+            </div>
+            <p>Today's conversation was about the scan and what it tells us.
+              Dr. de Jong recommended moving from capecitabine to oxaliplatin.</p>
+            <div class="scene-quote">"This isn't a setback. It's a responsive adjustment.
+              The scan showed us it was time."</div>
+            <p>The side effects will be different but manageable. You'll walk through
+              them with her before Tuesday's first dose.</p>
+            <div class="replies">
+              <div class="reply-label">From your circle</div>
+              <div class="reply">
+                <div class="avatar">P</div>
+                <div class="msg">I'm here. Want me to come over tonight?</div>
+              </div>
+              <div class="reply">
+                <div class="avatar">L</div>
+                <div class="msg">Can I call later, Mum?</div>
+              </div>
+            </div>
+          </div>
+          <div class="share-btn">↗ Share with someone else</div>
+          <div class="home-indicator"></div>
+        </div>
+
+        <!-- Screen 3: Share (letters) -->
+        <div class="screen" data-screen="3">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="share-head">
+            <h2>Who should hear this?</h2>
+            <div class="sub">Three letters, adapted for each.</div>
+          </div>
+          <div class="letters">
+            <div class="letter">
+              <div class="to"><div class="avatar">P</div> For Pim · your husband</div>
+              <div class="content">"Dr. de Jong changed my treatment today. The scan showed capecitabine stopped working, so I'm starting oxaliplatin on Tuesday. I'm okay. I'd love to see you tonight."</div>
+              <div class="tag">Full detail · adapted for a partner</div>
+            </div>
+            <div class="letter">
+              <div class="to"><div class="avatar">L</div> For Lotte · your daughter, London</div>
+              <div class="content">"Mum had her appointment with Dr. de Jong today. Her treatment is being adjusted because the scan showed it was time. She's okay. She'll call you tonight if she's up for it."</div>
+              <div class="tag">Softened · adapted for an adult child</div>
+            </div>
+            <div class="letter">
+              <div class="to"><div class="avatar">W</div> For work</div>
+              <div class="content">"Mara has an update from her oncology care. She'll need a lighter load for the next two weeks. She'll be back in touch Monday."</div>
+              <div class="tag">One line · professional tone</div>
+            </div>
+          </div>
+          <div class="send-letters">Send these letters</div>
+          <div class="home-indicator"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="stepper">
+      <button class="active" data-step="1">1</button>
+      <button data-step="2">2</button>
+      <button data-step="3">3</button>
+      <span class="flow-label">Feed · Post · Letters</span>
+    </div>
+  </div>
+
+  <!-- =========================== -->
+  <!-- DIRECTION γ — ATELIER       -->
+  <!-- =========================== -->
+  <div class="direction gamma" data-direction="gamma">
+    <div class="label">
+      <div class="tag">Direction γ</div>
+      <h2>The Atelier</h2>
+      <div class="tagline">Rams × Saarinen × Yuan · system · operator</div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-screen">
+
+        <!-- Screen 1: Home -->
+        <div class="screen active" data-screen="1">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="intent-bar">
+            <div class="search">
+              <span>⌕</span>
+              <span>What do you need?</span>
+              <span class="kbd">⌘K</span>
+            </div>
+          </div>
+          <div class="section-title">— For you now</div>
+          <div class="cards">
+            <div class="card severity-info">
+              <div class="card-head">
+                <span class="card-tag">Summary</span>
+                <span class="card-meta">30 min ago · Dr. de Jong</span>
+              </div>
+              <div class="card-title">Medication switch: capecitabine → oxaliplatin</div>
+              <div class="card-body">Scan showed non-response. Moving to oxaliplatin IV every 2 weeks, first dose Tuesday Apr 21.</div>
+              <div class="card-cta">Open board →</div>
+            </div>
+            <div class="card severity-ok">
+              <div class="card-head">
+                <span class="card-tag">Interaction check · Clear</span>
+                <span class="card-meta">auto</span>
+              </div>
+              <div class="card-title">No conflicts with your other medications</div>
+              <div class="card-body">Oxaliplatin checked against atorvastatin, lansoprazole. Source: Dutch pharmacy registry.</div>
+              <div class="card-cta">View detail →</div>
+            </div>
+            <div class="card severity-warn">
+              <div class="card-head">
+                <span class="card-tag">Unresolved</span>
+                <span class="card-meta">from Mar 22</span>
+              </div>
+              <div class="card-title">You mentioned fatigue — not addressed</div>
+              <div class="card-body">Dr. Bakker didn't pick up on this in your last visit. Worth raising.</div>
+              <div class="card-cta">Add to next prep →</div>
+            </div>
+            <div class="card severity-info">
+              <div class="card-head">
+                <span class="card-tag">Upcoming</span>
+                <span class="card-meta">Tomorrow 9:00</span>
+              </div>
+              <div class="card-title">Radiologie · Dr. Bakker</div>
+              <div class="card-body">Prep card ready. 3 questions outstanding.</div>
+              <div class="card-cta">Open prep →</div>
+            </div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+        <!-- Screen 2: Board detail -->
+        <div class="screen" data-screen="2">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="board-head">
+            <div class="back">← Home</div>
+            <div class="board-title">Medication switch</div>
+          </div>
+          <div class="board-cards">
+            <div class="board-row">
+              <div class="mini-card stopping">
+                <div class="mini-tag">Stopping</div>
+                <div class="mini-title">Capecitabine</div>
+                <div class="mini-sub">1250 mg/m² · 2× daily<br>Since Feb 3 · today</div>
+              </div>
+              <div class="mini-card starting">
+                <div class="mini-tag">Starting</div>
+                <div class="mini-title">Oxaliplatin</div>
+                <div class="mini-sub">IV · every 2 weeks<br>First: Tue Apr 21</div>
+              </div>
+            </div>
+            <div class="full-card check">
+              <div class="tag-row">
+                <div class="check-icon">✓</div>
+                <div class="tag">Interaction check</div>
+              </div>
+              <div class="stmt">No conflicts with your current regimen.</div>
+              <div class="source">atorvastatin · lansoprazole · aspirin · Dutch pharmacy registry</div>
+            </div>
+            <div class="quote-card">
+              <div class="quote-text">"The scan results are why we're switching. The side-effect profile is different but manageable…"</div>
+              <div class="audio-row">
+                <div class="play">▶</div>
+                <span>00:47 from today's recording</span>
+              </div>
+            </div>
+            <div class="full-card">
+              <div class="tag-row">
+                <div class="tag" style="color:#8a8a8a">Suggested for next visit</div>
+              </div>
+              <div class="stmt" style="font-weight:400;font-size:13px">"How will I know if the new medication is working?"</div>
+              <div class="source" style="color:#2e5ab3;margin-top:6px">+ Add to prep</div>
+            </div>
+          </div>
+          <div class="actions-bar">
+            <div class="btn secondary">Pin to home</div>
+            <div class="btn primary">Share ↗</div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+        <!-- Screen 3: Share sheet -->
+        <div class="screen" data-screen="3">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="dots"></span>
+          </div>
+          <div class="board-head">
+            <div class="back">← Board</div>
+            <div class="board-title">Share</div>
+          </div>
+          <div class="share-sheet">
+            <div class="field-row">
+              <div class="field-label">To</div>
+              <div class="chips">
+                <div class="chip selected">Pim ·</div>
+                <div class="chip selected">Lotte ·</div>
+                <div class="chip add">+ Add</div>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-label">Format</div>
+              <div class="chips">
+                <div class="chip">Detailed</div>
+                <div class="chip selected">Summary</div>
+                <div class="chip">One-liner</div>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-label">Preview for Pim</div>
+              <div class="preview-card">
+                <div class="preview-label">— Summary format</div>
+                <div class="preview-text">Mara's oncologist moved her from capecitabine to oxaliplatin today. The scan showed the previous medication wasn't working. No interaction issues with her other meds. First dose Tuesday.</div>
+              </div>
+            </div>
+            <div class="send-btn">Send to 2 people</div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="stepper">
+      <button class="active" data-step="1">1</button>
+      <button data-step="2">2</button>
+      <button data-step="3">3</button>
+      <span class="flow-label">Home · Board · Share</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.direction').forEach(dir => {
+    const buttons = dir.querySelectorAll('.stepper button');
+    const screens = dir.querySelectorAll('.screen');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = btn.dataset.step;
+        buttons.forEach(b => b.classList.toggle('active', b.dataset.step === step));
+        screens.forEach(s => s.classList.toggle('active', s.dataset.screen === step));
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

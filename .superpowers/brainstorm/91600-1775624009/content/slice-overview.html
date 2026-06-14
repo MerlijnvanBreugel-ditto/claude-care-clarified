@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Brain — Sprint Timeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; padding: 24px; }
+  h1 { font-size: 1.6em; margin-bottom: 4px; }
+  .subtitle { color: #8b949e; margin-bottom: 24px; font-size: 0.95em; }
+
+  .timeline { position: relative; width: 100%; overflow-x: auto; }
+  .timeline-grid { display: grid; grid-template-columns: 140px repeat(12, 1fr); gap: 0; min-width: 900px; }
+
+  .header-cell { padding: 8px 4px; text-align: center; font-size: 0.75em; color: #8b949e; border-bottom: 1px solid #30363d; font-weight: 600; }
+  .header-cell.label { text-align: right; padding-right: 12px; }
+  .sprint-header { background: #161b22; border-radius: 4px 4px 0 0; }
+  .sprint-header span { display: block; font-size: 0.65em; color: #58a6ff; margin-top: 2px; }
+
+  .track { display: contents; }
+  .track-label { padding: 10px 12px 10px 0; text-align: right; font-size: 0.8em; font-weight: 600; color: #c9d1d9; border-bottom: 1px solid #21262d; white-space: nowrap; }
+  .cell { padding: 4px 2px; border-bottom: 1px solid #21262d; position: relative; min-height: 44px; display: flex; align-items: center; }
+
+  .bar { border-radius: 4px; padding: 4px 8px; font-size: 0.7em; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: center; }
+
+  /* Slice colors */
+  .bar.slice1 { background: #1f6feb33; border: 1px solid #1f6feb; color: #58a6ff; }
+  .bar.slice2 { background: #8b5cf633; border: 1px solid #8b5cf6; color: #a78bfa; }
+  .bar.slice3 { background: #f0883e33; border: 1px solid #f0883e; color: #f0883e; }
+  .bar.polish { background: #3fb95033; border: 1px solid #3fb950; color: #3fb950; }
+  .bar.research { background: #f778ba33; border: 1px solid #f778ba; color: #f778ba; }
+  .bar.design { background: #d2a8ff33; border: 1px solid #d2a8ff; color: #d2a8ff; }
+  .bar.gate { background: #f8514933; border: 1px solid #f85149; color: #f85149; font-weight: 700; }
+  .bar.infra { background: #79c0ff33; border: 1px solid #79c0ff; color: #79c0ff; }
+
+  /* Span multiple columns */
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  .span-6 { grid-column: span 6; }
+  .span-12 { grid-column: span 12; }
+
+  .legend { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75em; color: #8b949e; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+  .gate-markers { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .gate-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 12px; }
+  .gate-card h3 { font-size: 0.85em; color: #f85149; margin-bottom: 6px; }
+  .gate-card p { font-size: 0.75em; color: #8b949e; line-height: 1.4; }
+  .gate-card ul { font-size: 0.75em; color: #c9d1d9; margin-top: 6px; padding-left: 16px; }
+  .gate-card li { margin-bottom: 3px; }
+
+  .slice-summary { margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .slice-card { background: #161b22; border-radius: 8px; padding: 16px; }
+  .slice-card h3 { font-size: 0.9em; margin-bottom: 8px; }
+  .slice-card.s1 { border-left: 3px solid #1f6feb; }
+  .slice-card.s1 h3 { color: #58a6ff; }
+  .slice-card.s2 { border-left: 3px solid #8b5cf6; }
+  .slice-card.s2 h3 { color: #a78bfa; }
+  .slice-card.s3 { border-left: 3px solid #f0883e; }
+  .slice-card.s3 h3 { color: #f0883e; }
+  .slice-card.s4 { border-left: 3px solid #3fb950; }
+  .slice-card.s4 h3 { color: #3fb950; }
+  .slice-card p { font-size: 0.75em; color: #8b949e; line-height: 1.5; }
+  .slice-card ul { font-size: 0.75em; color: #c9d1d9; margin-top: 8px; padding-left: 16px; }
+  .slice-card li { margin-bottom: 3px; }
+</style>
+</head>
+<body>
+
+<h1>Care Brain MVP — 12-Week Sprint Timeline</h1>
+<p class="subtitle">Vertical slices with parallel UX research and design tracks. Gates at slice boundaries.</p>
+
+<div class="timeline">
+  <div class="timeline-grid">
+    <!-- Header row: weeks -->
+    <div class="header-cell label">Track</div>
+    <div class="header-cell sprint-header">Wk 1<span>S1</span></div>
+    <div class="header-cell sprint-header">Wk 2<span>S1</span></div>
+    <div class="header-cell sprint-header">Wk 3<span>S2</span></div>
+    <div class="header-cell sprint-header">Wk 4<span>S2</span></div>
+    <div class="header-cell sprint-header">Wk 5<span>S3</span></div>
+    <div class="header-cell sprint-header">Wk 6<span>S3</span></div>
+    <div class="header-cell sprint-header">Wk 7<span>S4</span></div>
+    <div class="header-cell sprint-header">Wk 8<span>S4</span></div>
+    <div class="header-cell sprint-header">Wk 9<span>S5</span></div>
+    <div class="header-cell sprint-header">Wk 10<span>S5</span></div>
+    <div class="header-cell sprint-header">Wk 11<span>S6</span></div>
+    <div class="header-cell sprint-header">Wk 12<span>S6</span></div>
+
+    <!-- UX Research Track -->
+    <div class="track-label">UX Research</div>
+    <div class="cell span-2"><div class="bar research">Personas + Heuristics</div></div>
+    <div class="cell span-2"><div class="bar research">Synth. Patient Tests (S1)</div></div>
+    <div class="cell span-2"><div class="bar research">Synth. Patient Tests (S2)</div></div>
+    <div class="cell span-2"><div class="bar research">Usability Review (S2)</div></div>
+    <div class="cell span-2"><div class="bar research">Synth. Patient Tests (S3)</div></div>
+    <div class="cell span-2"><div class="bar research">Final Usability Audit</div></div>
+
+    <!-- Design Track -->
+    <div class="track-label">Design</div>
+    <div class="cell span-2"><div class="bar design">S1: Summary + Suggestions UI</div></div>
+    <div class="cell span-2"><div class="bar design">S1: Q&A + Answer expansion</div></div>
+    <div class="cell span-2"><div class="bar design">S2: Profile + Voice Input</div></div>
+    <div class="cell span-2"><div class="bar design">S2: Document + S3: Prep</div></div>
+    <div class="cell span-2"><div class="bar design">S3: Sharing Adaptation</div></div>
+    <div class="cell span-2"><div class="bar design">Polish + Micro-interactions</div></div>
+
+    <!-- Infrastructure Track -->
+    <div class="track-label">Infrastructure</div>
+    <div class="cell span-2"><div class="bar infra">Event bus + Worker framework</div></div>
+    <div class="cell span-2"><div class="bar infra">Profile Store + API layer</div></div>
+    <div class="cell span-2"><div class="bar infra">Cache + SSE streaming</div></div>
+    <div class="cell"><div class="bar infra">Voice API</div></div>
+    <div class="cell"><div class="bar infra">Doc API</div></div>
+    <div class="cell span-2"><div class="bar infra">Prep pipeline + Calendar</div></div>
+    <div class="cell span-2"><div class="bar infra">Load testing + Hardening</div></div>
+
+    <!-- Engineering: Pipelines Track -->
+    <div class="track-label">Eng: Pipelines</div>
+    <div class="cell span-2"><div class="bar slice1">summarize + extract workers</div></div>
+    <div class="cell span-2"><div class="bar slice1">suggest + answer workers</div></div>
+    <div class="cell span-2"><div class="bar slice2">voice_input pipeline</div></div>
+    <div class="cell span-2"><div class="bar slice2">document pipeline</div></div>
+    <div class="cell span-2"><div class="bar slice3">prep + adapt workers</div></div>
+    <div class="cell span-2"><div class="bar polish">Bug fixes + Edge cases</div></div>
+
+    <!-- Engineering: Mobile Track -->
+    <div class="track-label">Eng: Mobile (iOS)</div>
+    <div class="cell span-2"><div class="bar slice1">Summary view + chips UI</div></div>
+    <div class="cell span-2"><div class="bar slice1">Q&A expansion + streaming</div></div>
+    <div class="cell span-2"><div class="bar slice2">Profile tab + Voice input</div></div>
+    <div class="cell span-2"><div class="bar slice2">Document capture + explain</div></div>
+    <div class="cell span-2"><div class="bar slice3">Prep screen + Sharing preview</div></div>
+    <div class="cell span-2"><div class="bar polish">Polish + Accessibility</div></div>
+
+    <!-- Prompt Engineering Track -->
+    <div class="track-label">Prompt Eng.</div>
+    <div class="cell span-2"><div class="bar slice1">summarize + extract prompts</div></div>
+    <div class="cell span-2"><div class="bar slice1">suggest + answer prompts</div></div>
+    <div class="cell"><div class="bar slice1">Eval harness</div></div>
+    <div class="cell"><div class="bar slice2">Voice extract</div></div>
+    <div class="cell span-2"><div class="bar slice2">Doc explain + extract</div></div>
+    <div class="cell span-2"><div class="bar slice3">Prep + Adapt prompts</div></div>
+    <div class="cell span-2"><div class="bar polish">Regression testing</div></div>
+
+    <!-- QA Track -->
+    <div class="track-label">QA / Eval</div>
+    <div class="cell span-2"><div class="bar slice1">10 sample conversations</div></div>
+    <div class="cell"><div class="bar slice1">Quality eval</div></div>
+    <div class="cell"><div class="bar gate">GATE 1</div></div>
+    <div class="cell span-3"><div class="bar slice2">Profile accuracy + Voice edge cases</div></div>
+    <div class="cell"><div class="bar gate">GATE 2</div></div>
+    <div class="cell span-2"><div class="bar slice3">Prep + Adapt quality</div></div>
+    <div class="cell"><div class="bar gate">GATE 3</div></div>
+    <div class="cell"><div class="bar polish">Final audit</div></div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#1f6feb;"></div>Slice 1: Core Brain</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6;"></div>Slice 2: Living Memory</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0883e;"></div>Slice 3: Proactive Intelligence</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3fb950;"></div>Polish & Hardening</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f778ba;"></div>UX Research</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d2a8ff;"></div>Design</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#79c0ff;"></div>Infrastructure</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f85149;"></div>Quality Gate</div>
+</div>
+
+<div class="gate-markers">
+  <div class="gate-card">
+    <h3>Gate 1 — End of Week 4</h3>
+    <p>Can a patient record, get a summary with suggestions, tap a suggestion, and get a grounded answer?</p>
+    <ul>
+      <li>Summary quality ≥ 95% on 10 sample conversations</li>
+      <li>Suggestions are specific, not generic (manual review)</li>
+      <li>Answers are grounded with source attribution</li>
+      <li>End-to-end latency: summary &lt;10s, answer first token &lt;3s</li>
+      <li>Health profile populated from extraction</li>
+      <li>Event bus traces full pipeline with correlation IDs</li>
+    </ul>
+  </div>
+  <div class="gate-card">
+    <h3>Gate 2 — End of Week 8</h3>
+    <p>Does the brain accumulate knowledge? Can a patient update their profile by voice and photo?</p>
+    <ul>
+      <li>Profile accuracy ≥ 90% after 3+ recordings (medication, conditions)</li>
+      <li>Voice input correctly extracts and confirms updates</li>
+      <li>Document processing explains letters and lab results</li>
+      <li>Profile versioning and audit log working</li>
+      <li>Conflict detection and user resolution flow works</li>
+      <li>Cross-appointment context in suggestions and answers</li>
+    </ul>
+  </div>
+  <div class="gate-card">
+    <h3>Gate 3 — End of Week 11</h3>
+    <p>Does the brain proactively help and adapt for different audiences?</p>
+    <ul>
+      <li>Appointment prep generates relevant, grounded prep docs</li>
+      <li>Sharing adaptation produces meaningfully different versions per role</li>
+      <li>Translated content preserves medical accuracy</li>
+      <li>Elderly-friendly: passes usability heuristics audit</li>
+      <li>Full pipeline tracing, no orphan events</li>
+      <li>All prompts pass regression eval suite</li>
+    </ul>
+  </div>
+</div>
+
+<div class="slice-summary">
+  <div class="slice-card s1">
+    <h3>Slice 1: Core Brain</h3>
+    <p>Weeks 1–4 (Sprints 1–2)</p>
+    <ul>
+      <li>Event bus + worker framework</li>
+      <li>Recording pipeline (summarize + extract)</li>
+      <li>Suggestion generation</li>
+      <li>Q&A answer pipeline with streaming</li>
+      <li>Health Profile Store (initial)</li>
+      <li>Summary UI with suggestion chips</li>
+      <li>Inline answer expansion</li>
+      <li>10-conversation eval harness</li>
+    </ul>
+  </div>
+  <div class="slice-card s2">
+    <h3>Slice 2: Living Memory</h3>
+    <p>Weeks 5–8 (Sprints 3–4)</p>
+    <ul>
+      <li>Full Profile Store with versioning</li>
+      <li>Voice input pipeline + confirmation UI</li>
+      <li>Document processing pipeline</li>
+      <li>Profile tab in app</li>
+      <li>Conflict detection + resolution</li>
+      <li>Cross-appointment context</li>
+      <li>Audit log + diff engine</li>
+      <li>Cache layer for answers</li>
+    </ul>
+  </div>
+  <div class="slice-card s3">
+    <h3>Slice 3: Proactive Intel</h3>
+    <p>Weeks 9–11 (Sprints 5–6a)</p>
+    <ul>
+      <li>Appointment prep pipeline</li>
+      <li>Prep screen in app</li>
+      <li>adapt_worker for audience roles</li>
+      <li>translate_worker</li>
+      <li>Sharing preview UI (patient-side)</li>
+      <li>"What your partner would see"</li>
+      <li>Prompt regression suite</li>
+    </ul>
+  </div>
+  <div class="slice-card s4">
+    <h3>Polish & Ship</h3>
+    <p>Week 12 (Sprint 6b)</p>
+    <ul>
+      <li>Final usability audit</li>
+      <li>Accessibility pass (elderly focus)</li>
+      <li>Performance optimization</li>
+      <li>Edge case fixes</li>
+      <li>Documentation for handoff</li>
+      <li>Demo preparation</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

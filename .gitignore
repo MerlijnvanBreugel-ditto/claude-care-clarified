@@ -1,9 +1,7 @@
-# Environment files
+# Environment & secrets
 .env
 .env.local
 .env.*.local
-
-# API keys
 *.key
 *.pem
 secrets.json
@@ -11,22 +9,37 @@ secrets.json
 # OS files
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Editor files
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
 
 # Node
 node_modules/
 
-# Personal configs (if any)
+# Office documents (binary, don't belong in git)
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Temp & log files
+*.tmp
+*.log
+*.bak
+pm-workspace/tmp/
+
+# Personal & private
 personal/
 private/
-
-# Session templates (not committed)
-examples/sessions/*.tmp
-
-# Local drafts
-marketing/

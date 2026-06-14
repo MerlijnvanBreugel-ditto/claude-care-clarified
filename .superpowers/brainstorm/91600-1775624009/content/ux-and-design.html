@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Brain — UX Research & Design Principles</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; padding: 24px; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 4px; }
+  h2 { font-size: 1.2em; margin: 32px 0 12px; color: #58a6ff; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+  h3 { font-size: 1em; margin: 16px 0 8px; color: #c9d1d9; }
+  .subtitle { color: #8b949e; margin-bottom: 24px; font-size: 0.9em; }
+  p { font-size: 0.85em; color: #8b949e; line-height: 1.6; margin-bottom: 8px; }
+
+  .personas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 16px 0; }
+  .persona { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; }
+  .persona-avatar { font-size: 2em; margin-bottom: 8px; }
+  .persona h4 { font-size: 0.85em; color: #e6edf3; margin-bottom: 4px; }
+  .persona .age { font-size: 0.75em; color: #58a6ff; margin-bottom: 8px; }
+  .persona p { font-size: 0.72em; }
+  .persona .tag { display: inline-block; background: #21262d; color: #8b949e; font-size: 0.65em; padding: 2px 6px; border-radius: 3px; margin-top: 6px; margin-right: 4px; }
+
+  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0; }
+  .principle { background: #161b22; border-radius: 8px; padding: 16px; border-left: 3px solid #3fb950; }
+  .principle h4 { font-size: 0.9em; color: #3fb950; margin-bottom: 6px; }
+  .principle p { font-size: 0.8em; }
+  .principle .do { color: #3fb950; font-size: 0.75em; margin-top: 8px; }
+  .principle .dont { color: #f85149; font-size: 0.75em; }
+
+  .heuristics { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; margin: 16px 0; }
+  .heuristic-grid { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 0; font-size: 0.78em; }
+  .heuristic-grid .h-header { padding: 8px; font-weight: 600; color: #58a6ff; border-bottom: 1px solid #30363d; }
+  .heuristic-grid .h-cell { padding: 8px; border-bottom: 1px solid #21262d; color: #c9d1d9; }
+  .heuristic-grid .h-cell.dim { color: #8b949e; }
+
+  .trust-signals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+  .trust-signal { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; text-align: center; }
+  .trust-signal .icon { font-size: 1.5em; margin-bottom: 6px; }
+  .trust-signal h4 { font-size: 0.8em; color: #e6edf3; margin-bottom: 4px; }
+  .trust-signal p { font-size: 0.72em; text-align: left; }
+
+  .risk-grid { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: 0; font-size: 0.78em; margin: 16px 0; background: #161b22; border-radius: 8px; overflow: hidden; }
+  .risk-grid .r-header { padding: 10px; font-weight: 600; color: #58a6ff; background: #0d1117; }
+  .risk-grid .r-cell { padding: 10px; border-bottom: 1px solid #21262d; color: #c9d1d9; }
+  .risk-grid .sev-crit { color: #f85149; font-weight: 600; }
+  .risk-grid .sev-high { color: #f0883e; font-weight: 600; }
+  .risk-grid .sev-med { color: #d29922; }
+
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+  .metric-card { background: #161b22; border-radius: 8px; padding: 16px; }
+  .metric-card.primary { border: 1px solid #58a6ff; }
+  .metric-card h4 { font-size: 0.85em; color: #58a6ff; margin-bottom: 6px; }
+  .metric-card .number { font-size: 1.8em; font-weight: 700; color: #e6edf3; }
+  .metric-card .unit { font-size: 0.75em; color: #8b949e; }
+  .metric-card p { font-size: 0.72em; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Care Brain — UX, Design & Risk Framework</h1>
+<p class="subtitle">Synthetic patient personas, design principles for elderly trust, evaluation heuristics, risk register, and success metrics.</p>
+
+<h2>Synthetic Patient Personas</h2>
+<p>Five personas used across all UX research. Each represents a distinct care journey, tech comfort level, and emotional state. All testing uses these personas to evaluate comprehension, trust, and utility.</p>
+
+<div class="personas">
+  <div class="persona">
+    <div class="persona-avatar">👵</div>
+    <h4>Mara (68)</h4>
+    <div class="age">Colon cancer, stage 3b</div>
+    <p>Retired teacher. Lives with partner Hans. Moderate smartphone use (WhatsApp, photos). Anxious about treatment changes. Wants to understand everything but forgets after appointments. Hans handles logistics.</p>
+    <div><span class="tag">oncology</span><span class="tag">elderly</span><span class="tag">partner-involved</span></div>
+  </div>
+  <div class="persona">
+    <div class="persona-avatar">👴</div>
+    <h4>Jan (74)</h4>
+    <div class="age">Diabetes type 2 + cardiac</div>
+    <p>Widower, lives alone. Daughter Sanne checks in weekly. Minimal tech: calls and basic apps. Multiple medications, multiple specialists. Forgets which doctor said what. Needs things simple and big.</p>
+    <div><span class="tag">chronic multi</span><span class="tag">low-tech</span><span class="tag">solo</span></div>
+  </div>
+  <div class="persona">
+    <div class="persona-avatar">👩</div>
+    <h4>Aysel (52)</h4>
+    <div class="age">Breast cancer, remission monitoring</div>
+    <p>Turkish-Dutch, bilingual. Mother (76) speaks only Turkish, wants updates. Aysel translates everything herself currently. Works full-time, managing care for herself AND coordinating with elderly mother's doctors.</p>
+    <div><span class="tag">multilingual</span><span class="tag">dual-care</span><span class="tag">working</span></div>
+  </div>
+  <div class="persona">
+    <div class="persona-avatar">👨</div>
+    <h4>Pieter (45)</h4>
+    <div class="age">Father caring for wife with MS</div>
+    <p>Tech-savvy product manager. Wife Lisa (43) has relapsing MS. Pieter attends appointments, coordinates with neurologist, manages medication schedule. Wants structured data, not just stories. Two young kids.</p>
+    <div><span class="tag">caregiver</span><span class="tag">tech-savvy</span><span class="tag">complex-meds</span></div>
+  </div>
+  <div class="persona">
+    <div class="persona-avatar">👩‍🦳</div>
+    <h4>Corrie (81)</h4>
+    <div class="age">Early cognitive decline + hip replacement</div>
+    <p>Lives in assisted living. Son manages everything. Uses iPad with large text. Gets confused by new interfaces. Trusts "the app her son set up." Needs maximum simplicity. Doesn't know what AI is and shouldn't need to.</p>
+    <div><span class="tag">cognitive</span><span class="tag">assisted</span><span class="tag">max-simple</span></div>
+  </div>
+</div>
+
+<h2>Design Principles: Magic, Not AI</h2>
+<p>The interface must feel like "Ditto understands me," never "I'm using artificial intelligence." Every principle serves the 50+ audience who didn't grow up with technology.</p>
+
+<div class="principles">
+  <div class="principle">
+    <h4>1. Intelligence is Invisible</h4>
+    <p>The AI never announces itself. No "AI-generated," no robot icons, no loading spinners that say "AI is thinking." The output just appears, like a knowledgeable friend wrote it.</p>
+    <div class="do">✓ "Ditto prepared this for you" / "Based on your conversation"</div>
+    <div class="dont">✗ "Our AI analyzed your transcript" / "Generated by Claude"</div>
+  </div>
+  <div class="principle">
+    <h4>2. Suggest, Don't Demand</h4>
+    <p>The brain offers. The patient chooses. Suggestion chips are invitations, not obligations. Nothing happens without the patient's tap. No auto-actions on medical data.</p>
+    <div class="do">✓ Suggestion chips below content / Confirmation cards for voice input</div>
+    <div class="dont">✗ Auto-updating medications without confirmation / Chat-style "How can I help?"</div>
+  </div>
+  <div class="principle">
+    <h4>3. Source Everything</h4>
+    <p>Every piece of intelligence traces back to a real source. "Dr. van der Berg mentioned..." not "According to our analysis." Trust comes from attribution, not capability.</p>
+    <div class="do">✓ "From your appointment on April 4" / Doctor name + date on every answer</div>
+    <div class="dont">✗ Floating medical facts with no origin / Generic health information</div>
+  </div>
+  <div class="principle">
+    <h4>4. Big, Clear, Calm</h4>
+    <p>Minimum 16pt body text. High contrast. Generous whitespace. One primary action per screen. No information density that requires scrolling to understand the gist. Calm colors, no urgency red unless truly urgent.</p>
+    <div class="do">✓ Card-based layouts / Single-column / Large tap targets (min 44pt)</div>
+    <div class="dont">✗ Dense tables / Small toggles / Multi-column layouts / Hamburger menus</div>
+  </div>
+  <div class="principle">
+    <h4>5. Progressive Depth</h4>
+    <p>Surface layer is simple. Detail is one tap away. A summary is scannable in 15 seconds. Tap a suggestion to go deeper. Tap a profile item to see its history. Never force depth on someone who just wants the headline.</p>
+    <div class="do">✓ Summary → tap for explanation → tap for source quote</div>
+    <div class="dont">✗ Everything visible at once / Expandable sections with no visual cue</div>
+  </div>
+  <div class="principle">
+    <h4>6. Familiar Patterns Only</h4>
+    <p>Use patterns the audience already knows: lists, cards, buttons. No gestures beyond tap and scroll. No swipe-to-dismiss, no long-press, no drag. If Corrie (81) can't figure it out in 3 seconds, redesign it.</p>
+    <div class="do">✓ Tap buttons / Scroll lists / Back arrow / Clear labels</div>
+    <div class="dont">✗ Swipe actions / Floating action buttons / Gesture-driven navigation</div>
+  </div>
+</div>
+
+<h2>Trust Signals for 65+ Users</h2>
+<div class="trust-signals">
+  <div class="trust-signal">
+    <div class="icon">🏥</div>
+    <h4>Doctor Attribution</h4>
+    <p>Every summary, answer, and suggestion names the doctor and date. The brain's authority comes from the doctor's words, not its own.</p>
+  </div>
+  <div class="trust-signal">
+    <div class="icon">🔒</div>
+    <h4>Your Data, Your Control</h4>
+    <p>Profile shows exactly what Ditto knows. Patient can correct anything. "Ditto got this from your conversation" vs. "Ditto thinks this."</p>
+  </div>
+  <div class="trust-signal">
+    <div class="icon">⚕️</div>
+    <h4>Medical Humility</h4>
+    <p>Every answer ends with "For medical advice, contact your care team." The brain never says "you should" about treatment. It explains, it doesn't prescribe.</p>
+  </div>
+  <div class="trust-signal">
+    <div class="icon">✅</div>
+    <h4>Confirmation Before Action</h4>
+    <p>Voice input shows what it heard before updating. Document extraction asks "Is this right?" Profile changes show what changed and why.</p>
+  </div>
+  <div class="trust-signal">
+    <div class="icon">📍</div>
+    <h4>Source Transparency</h4>
+    <p>Every profile item shows its source: "From your appointment on April 4" or "You told Ditto on March 15." Nothing appears from nowhere.</p>
+  </div>
+  <div class="trust-signal">
+    <div class="icon">🤝</div>
+    <h4>Consistent Tone</h4>
+    <p>Warm, clear, never clinical. The same "voice" across all surfaces. Like a trusted friend who happens to have been at all your appointments.</p>
+  </div>
+</div>
+
+<h2>Elderly Usability Heuristics</h2>
+<p>10-point checklist applied at every gate review. Each item scored pass/fail per screen.</p>
+<div class="heuristics">
+  <div class="heuristic-grid">
+    <div class="h-header">#</div>
+    <div class="h-header">Heuristic</div>
+    <div class="h-header">Test Method</div>
+
+    <div class="h-cell">1</div><div class="h-cell">Text ≥ 16pt body, ≥ 20pt headings</div><div class="h-cell dim">Automated scan</div>
+    <div class="h-cell">2</div><div class="h-cell">Contrast ratio ≥ 4.5:1 (WCAG AA)</div><div class="h-cell dim">Automated scan</div>
+    <div class="h-cell">3</div><div class="h-cell">Tap targets ≥ 44x44pt with ≥ 8pt spacing</div><div class="h-cell dim">Layout inspection</div>
+    <div class="h-cell">4</div><div class="h-cell">One primary action per screen</div><div class="h-cell dim">Design review</div>
+    <div class="h-cell">5</div><div class="h-cell">No gesture beyond tap and scroll</div><div class="h-cell dim">Interaction audit</div>
+    <div class="h-cell">6</div><div class="h-cell">Loading state visible within 500ms</div><div class="h-cell dim">Performance test</div>
+    <div class="h-cell">7</div><div class="h-cell">Error messages in plain language with next step</div><div class="h-cell dim">Error state review</div>
+    <div class="h-cell">8</div><div class="h-cell">Navigation: always clear where I am and how to go back</div><div class="h-cell dim">3-second test with persona</div>
+    <div class="h-cell">9</div><div class="h-cell">Medical content readable without domain knowledge</div><div class="h-cell dim">Flesch reading ease ≥ 60</div>
+    <div class="h-cell">10</div><div class="h-cell">VoiceOver announces all interactive elements correctly</div><div class="h-cell dim">Screen reader test</div>
+  </div>
+</div>
+
+<h2>Risk Register</h2>
+<div class="risk-grid">
+  <div class="r-header">Risk</div><div class="r-header">Impact & Likelihood</div><div class="r-header">Mitigation</div><div class="r-header">Detection</div>
+
+  <div class="r-cell sev-crit">Medical hallucination</div>
+  <div class="r-cell">Patient acts on fabricated medical information. Catastrophic if it happens even once. Likelihood: medium without strict grounding.</div>
+  <div class="r-cell">Strict grounding rules in every worker prompt. Source attribution required. "Cannot answer from available data" fallback. Eval harness checks grounding on every prompt change.</div>
+  <div class="r-cell">Automated grounding check in CI. Manual review of 50 random answers/week post-launch.</div>
+
+  <div class="r-cell sev-crit">Silent wrong profile update</div>
+  <div class="r-cell">Brain updates medication incorrectly without patient knowing. Could cause medication error. Likelihood: low with confirmation flow.</div>
+  <div class="r-cell">All voice/document extractions require user confirmation. Low-confidence extractions flagged, never auto-applied. user_verified fields survive future extraction.</div>
+  <div class="r-cell">Audit log review. Automated check: no profile mutation without corresponding confirmation event.</div>
+
+  <div class="r-cell sev-high">Extraction accuracy degrades</div>
+  <div class="r-cell">Dutch medical terminology, code-switching, specialist abbreviations cause extraction failures. Likelihood: high for edge cases.</div>
+  <div class="r-cell">Eval harness with diverse Dutch medical conversations. Extraction worker tested against labeled ground truth. Confidence scoring: low-confidence items require confirmation.</div>
+  <div class="r-cell">Weekly eval run. Accuracy dashboard per entity type (medications, conditions, care team).</div>
+
+  <div class="r-cell sev-high">Model API downtime/latency</div>
+  <div class="r-cell">Claude/Anthropic API goes down, summaries and answers stop working. Likelihood: low but unpredictable.</div>
+  <div class="r-cell">Graceful degradation: recording saved, summary generated when API recovers. Queue-based retry. User sees "Processing your recording, we'll notify you when ready."</div>
+  <div class="r-cell">Health check endpoint. Alert on >5s average latency or >1% error rate.</div>
+
+  <div class="r-cell sev-high">Prompt regression</div>
+  <div class="r-cell">Prompt improvement for one worker degrades another. Or model update changes behavior. Likelihood: medium, increases with prompt complexity.</div>
+  <div class="r-cell">Prompt regression eval suite run on every change. Version-controlled prompts. Model pinning (specific model version, not "latest").</div>
+  <div class="r-cell">CI pipeline: prompt change triggers full eval suite. No merge without passing.</div>
+
+  <div class="r-cell sev-med">Over-reliance on brain</div>
+  <div class="r-cell">Patient trusts Ditto answers more than they should. Stops asking doctor questions. Likelihood: low in MVP, increases at scale.</div>
+  <div class="r-cell">Medical disclaimer on every answer. "Contact your care team" language. Brain explicitly says "I don't know" when context is insufficient. Never uses imperative language about treatment.</div>
+  <div class="r-cell">Track: ratio of "could not answer" responses. If near 0%, grounding rules may be too loose.</div>
+
+  <div class="r-cell sev-med">Scope creep in 3-month window</div>
+  <div class="r-cell">Feature additions push timeline beyond 12 weeks. Likelihood: high in any ambitious project.</div>
+  <div class="r-cell">Slice boundaries are hard cuts. Gate criteria are pass/fail. Scope that doesn't fit a slice moves to post-MVP backlog. Product owner enforces at gates.</div>
+  <div class="r-cell">Weekly scope review against sprint plan. Any unplanned work tracked as "unplanned" in sprint.</div>
+
+  <div class="r-cell sev-med">3-month timeline too aggressive</div>
+  <div class="r-cell">Infrastructure or prompt engineering takes longer than estimated. Likelihood: medium.</div>
+  <div class="r-cell">Slices are priority-ordered. If timeline slips, Slice 3 features (prep, sharing adaptation) are the cut candidates. Slice 1 + 2 = a viable product alone.</div>
+  <div class="r-cell">Gate reviews include timeline assessment. If Gate 1 is late, re-scope Slice 3.</div>
+</div>
+
+<h2>Success Metrics</h2>
+<p>Measured internally with synthetic patients and internal testers during MVP. Production metrics post-launch.</p>
+
+<div class="metrics">
+  <div class="metric-card primary">
+    <h4>North Star</h4>
+    <div class="number">20%+</div>
+    <div class="unit">of summary viewers tap at least 1 suggestion</div>
+    <p>Proves the brain adds value beyond summarization. If patients don't engage with suggestions, the brain concept fails.</p>
+  </div>
+  <div class="metric-card primary">
+    <h4>Profile Accuracy</h4>
+    <div class="number">90%+</div>
+    <div class="unit">correct medications/conditions after 3+ recordings</div>
+    <p>The brain's memory must be trustworthy. If profile is wrong, everything built on it (prep, suggestions, sharing) is wrong.</p>
+  </div>
+  <div class="metric-card primary">
+    <h4>Answer Grounding</h4>
+    <div class="number">100%</div>
+    <div class="unit">of answers reference source material (zero hallucination)</div>
+    <p>Non-negotiable. A single hallucinated medical fact destroys trust permanently.</p>
+  </div>
+  <div class="metric-card">
+    <h4>Summary Latency</h4>
+    <div class="number">&lt;10s</div>
+    <div class="unit">from recording complete to summary visible</div>
+    <p>Including extraction and suggestion generation running in parallel.</p>
+  </div>
+  <div class="metric-card">
+    <h4>Answer Speed</h4>
+    <div class="number">&lt;3s</div>
+    <div class="unit">to first token when tapping a suggestion</div>
+    <p>Streaming makes the wait feel shorter. First token matters more than total time.</p>
+  </div>
+  <div class="metric-card">
+    <h4>Elderly Usability</h4>
+    <div class="number">8/10</div>
+    <div class="unit">heuristic checklist items pass per screen</div>
+    <p>Tested against Corrie persona (81, cognitive decline, iPad with large text).</p>
+  </div>
+  <div class="metric-card">
+    <h4>Summary Revisits</h4>
+    <div class="number">+15%</div>
+    <div class="unit">increase in summary revisit rate within 7 days</div>
+    <p>Brain gives a reason to come back. Q&A drives revisits.</p>
+  </div>
+  <div class="metric-card">
+    <h4>Voice Adoption</h4>
+    <div class="number">15%</div>
+    <div class="unit">of active users use voice input within 30 days</div>
+    <p>Voice is the second input channel. If nobody uses it, the brain has only one ear.</p>
+  </div>
+  <div class="metric-card">
+    <h4>Prep Utility</h4>
+    <div class="number">70%+</div>
+    <div class="unit">of prep documents rated "helpful" by internal testers</div>
+    <p>Prep must feel personalized, not generic. If it reads like a template, it's worthless.</p>
+  </div>
+</div>
+
+</body>
+</html>

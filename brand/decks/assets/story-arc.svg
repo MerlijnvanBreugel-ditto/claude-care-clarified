@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" fill="none">
+  <style>
+    text { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+  <!-- Arc path -->
+  <path d="M60 240 Q200 240 280 120 Q320 60 350 60 Q380 60 420 120 Q500 240 640 240" stroke="#58B6D2" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Tension zone -->
+  <circle cx="60" cy="240" r="6" fill="#0D164F"/>
+  <text x="60" y="270" text-anchor="middle" font-weight="700" fill="#0D164F" font-size="12">Tension</text>
+  <text x="60" y="284" text-anchor="middle" font-weight="500" fill="#0D164F" opacity="0.5" font-size="10">Patients confused</text>
+  <!-- Rising -->
+  <circle cx="200" cy="175" r="6" fill="#D94F4F"/>
+  <text x="200" y="158" text-anchor="middle" font-weight="700" fill="#D94F4F" font-size="12">Villain</text>
+  <text x="200" y="145" text-anchor="middle" font-weight="500" fill="#0D164F" opacity="0.5" font-size="10">The system</text>
+  <!-- Peak — the hero -->
+  <circle cx="350" cy="56" r="8" fill="#D4A832"/>
+  <text x="350" y="35" text-anchor="middle" font-weight="800" fill="#0D164F" font-size="14">Hero</text>
+  <text x="350" y="18" text-anchor="middle" font-weight="500" fill="#0D164F" opacity="0.5" font-size="10">The patient (not Ditto)</text>
+  <!-- Gift -->
+  <circle cx="500" cy="175" r="6" fill="#58B6D2"/>
+  <text x="500" y="158" text-anchor="middle" font-weight="700" fill="#58B6D2" font-size="12">Gift</text>
+  <text x="500" y="145" text-anchor="middle" font-weight="500" fill="#0D164F" opacity="0.5" font-size="10">Clarity + Connection</text>
+  <!-- Resolution -->
+  <circle cx="640" cy="240" r="6" fill="#0D164F"/>
+  <text x="640" y="270" text-anchor="middle" font-weight="700" fill="#0D164F" font-size="12">Resolution</text>
+  <text x="640" y="284" text-anchor="middle" font-weight="600" fill="#0D164F" font-size="11">Care. Clarified.</text>
+  <!-- Ditto label -->
+  <rect x="290" y="80" width="120" height="28" rx="14" fill="rgba(88,182,210,0.15)" stroke="#58B6D2" stroke-width="1"/>
+  <text x="350" y="99" text-anchor="middle" font-weight="600" fill="#58B6D2" font-size="11">Ditto = the guide</text>
+</svg>

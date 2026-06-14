@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Conversation Explainer AI Improvements — Cycle 2</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --panel: #ffffff;
+    --ink: #111111;
+    --muted: #5b6266;
+    --line: #e3e5e8;
+    --line-soft: #eef0f2;
+    --accent: #1f6feb;
+    --accent-soft: #e7f0fe;
+    --good: #1a7f37;
+    --good-soft: #ddf4e4;
+    --warn: #9a6700;
+    --warn-soft: #faf3d0;
+    --bad: #cf222e;
+    --bad-soft: #ffebe9;
+    --ship: #6f42c1;
+    --ship-soft: #f0e6ff;
+    --code: #f6f8fa;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+  header.top {
+    display: flex; flex-direction: column; gap: 8px;
+    border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 28px;
+  }
+  header.top .crumbs { color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  header.top h1 { font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -.01em; }
+  header.top .sub { color: var(--muted); }
+  header.top .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 500;
+    background: var(--line-soft); color: var(--ink);
+  }
+  .chip.live { background: var(--good-soft); color: var(--good); }
+  .chip.open { background: var(--accent-soft); color: var(--accent); }
+  .chip.gate { background: var(--warn-soft); color: var(--warn); }
+  .chip.ship { background: var(--ship-soft); color: var(--ship); }
+  .chip a { color: inherit; text-decoration: none; }
+  .chip a:hover { text-decoration: underline; }
+
+  section { margin-top: 36px; }
+  section h2 {
+    font-size: 16px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.005em;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  section h2 .n { color: var(--muted); font-weight: 500; }
+  section .lede { color: var(--muted); margin: 0 0 16px; max-width: 760px; }
+
+  /* Milestone roadmap */
+  .roadmap {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    margin-top: 8px;
+  }
+  .ms {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 14px 16px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden;
+  }
+  .ms .tag {
+    font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ms .title { font-size: 14px; font-weight: 600; line-height: 1.35; }
+  .ms .when {
+    font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted);
+  }
+  .ms .pill {
+    align-self: flex-start; font-size: 11px; padding: 2px 7px; border-radius: 4px;
+    background: var(--line-soft); color: var(--ink); font-weight: 500;
+  }
+  .ms.ship .pill { background: var(--ship-soft); color: var(--ship); }
+  .ms.gate .pill { background: var(--warn-soft); color: var(--warn); }
+  .ms.final .pill { background: var(--accent-soft); color: var(--accent); }
+  .ms ul { margin: 6px 0 0; padding-left: 18px; }
+  .ms ul li { font-size: 12.5px; color: var(--ink); margin: 3px 0; }
+  .ms ul li .id { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; margin-right: 4px; }
+
+  /* Sequencing constraint callout */
+  .callout {
+    border: 1px solid var(--warn); background: var(--warn-soft); border-radius: 8px;
+    padding: 12px 14px; margin: 20px 0 0;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .callout .label {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--warn); white-space: nowrap; padding-top: 1px;
+  }
+  .callout p { margin: 0; color: #5e4a00; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  thead th { text-align: left; font-weight: 600; padding: 9px 12px; background: #f4f6f8; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); letter-spacing: .02em; text-transform: uppercase; }
+  tbody td { padding: 9px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  td.id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
+  td a, .ms a { color: var(--accent); text-decoration: none; }
+  td a:hover, .ms a:hover { text-decoration: underline; }
+
+  /* Eval comparison */
+  .grid2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; }
+  @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } .roadmap { grid-template-columns: 1fr 1fr; } }
+
+  .delta-pos { color: var(--good); font-weight: 600; }
+  .delta-neg { color: var(--bad); font-weight: 600; }
+  .delta-flat { color: var(--muted); }
+  .within-noise { color: var(--muted); font-style: italic; font-size: 12px; }
+
+  /* Inline bar */
+  .bar-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line-soft); }
+  .bar-row:last-child { border-bottom: none; }
+  .bar-row .name { width: 160px; font-size: 12.5px; color: var(--ink); }
+  .bar-wrap { flex: 1; position: relative; height: 22px; background: var(--line-soft); border-radius: 4px; }
+  .bar { position: absolute; top: 0; bottom: 0; left: 0; background: var(--accent); border-radius: 4px; }
+  .bar.v2 { background: #cbd5df; }
+  .bar.v5c { background: var(--accent); }
+  .bar-row .val { width: 60px; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); text-align: right; }
+
+  /* PR board */
+  .pr-list { display: flex; flex-direction: column; gap: 6px; }
+  .pr {
+    display: grid; grid-template-columns: 90px 100px 1fr 130px; gap: 12px; align-items: center;
+    padding: 8px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  }
+  .pr .num { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .pr .state { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .pr .state.merged { color: var(--ship); }
+  .pr .state.open { color: var(--accent); }
+  .pr .state.closed { color: var(--muted); }
+  .pr .title { font-size: 13px; color: var(--ink); }
+  .pr .who { color: var(--muted); font-size: 12px; text-align: right; }
+
+  /* Pipeline diagram */
+  .pipe {
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin: 12px 0 0;
+  }
+  .pipe .node {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px; font-size: 11.5px; line-height: 1.3;
+    display: flex; flex-direction: column; gap: 4px; align-items: flex-start;
+  }
+  .pipe .node .stage { font-weight: 600; font-size: 11px; }
+  .pipe .node .think {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px; padding: 1px 5px; border-radius: 3px;
+    background: var(--line-soft); color: var(--muted);
+  }
+  .pipe .node .think.min { background: var(--good-soft); color: var(--good); }
+  .pipe .node .think.med { background: var(--accent-soft); color: var(--accent); }
+  .pipe .node .think.high { background: var(--warn-soft); color: var(--warn); }
+  .pipe .node .think.cap { background: var(--bad-soft); color: var(--bad); }
+  @media (max-width: 900px) { .pipe { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Iteration timeline */
+  .iter-row td.headline { font-weight: 500; }
+  .iter-row.bad { background: var(--bad-soft); }
+  .iter-row.warn { background: var(--warn-soft); }
+  .iter-row.good { background: var(--good-soft); }
+
+  /* Footer */
+  footer { color: var(--muted); font-size: 12px; margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); }
+
+  /* Two-col PR + tests */
+  .stat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .stat .big { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat .lab { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="crumbs">Ditto Care · Cycle 2 · Conversation Explainer AI Improvements</div>
+  <h1>Conversation Explainer AI Improvements</h1>
+  <div class="sub">Cycle 2 of the AI pipeline loop. Promote Gemini 3.5 Flash to primary, A/B-test a better transcription, shift evaluators, then roll out new guardrails. Five milestones, gated.</div>
+  <div class="meta">
+    <span class="chip live">Project live · 2026-05-22 → 2026-06-19</span>
+    <span class="chip"><a href="https://linear.app/ditto-care/project/conversation-explainer-ai-improvements-ac236bd50b60" target="_blank">Linear project</a></span>
+    <span class="chip">Lead: Merlijn</span>
+    <span class="chip open"><a href="https://github.com/DittoCare/ditto-ai-core/pull/313" target="_blank">PR #313 (experiment)</a></span>
+    <span class="chip open"><a href="https://github.com/DittoCare/ditto-ai-core/pull/316" target="_blank">PR #316 (shadow on all traffic)</a></span>
+    <span class="chip">Source: Canada session with Iman &amp; Jasper</span>
+  </div>
+</header>
+
+<!-- ROADMAP -->
+<section>
+  <h2>Five milestones <span class="n">· decision-gated, strict sequencing on M5</span></h2>
+  <p class="lede">Each milestone either ships or makes a go/no-go call. M5 is intentionally undated: it ships only after M2 to M4 finish their pipeline comparisons.</p>
+
+  <div class="roadmap">
+    <div class="ms ship">
+      <div class="tag">M1 · Today</div>
+      <span class="pill">Ship</span>
+      <div class="title">CE v2 + Gemini 3.5 Flash fallback live; shadow launched</div>
+      <div class="when">2026-05-22</div>
+      <ul>
+        <li><span class="id">PRO-513</span>Push CE v2 to prod</li>
+        <li><span class="id">PRO-514</span>Enable Gemini 3.5 Flash fallback</li>
+        <li><span class="id">PRO-515</span>Launch shadow with optimised prompts</li>
+      </ul>
+    </div>
+
+    <div class="ms gate">
+      <div class="tag">M2 · Next week</div>
+      <span class="pill">Decision gate</span>
+      <div class="title">Promote Gemini 3.5 Flash to primary</div>
+      <div class="when">2026-06-05 · ship if quality holds</div>
+      <ul>
+        <li><span class="id">PRO-516</span>Shadow quality review vs CE v2</li>
+        <li><span class="id">PRO-517</span>Promote optimised prompts to primary</li>
+      </ul>
+    </div>
+
+    <div class="ms ship">
+      <div class="tag">M3 · Next week</div>
+      <span class="pill">Build</span>
+      <div class="title">Transcription A/B (Juvile · Resonate · Gemini STT)</div>
+      <div class="when">2026-06-05</div>
+      <ul>
+        <li><span class="id">PRO-518</span>Spec the A/B</li>
+        <li><span class="id">PRO-519</span>Provider abstraction + routing</li>
+        <li><span class="id">PRO-520</span>Resonate integration</li>
+        <li><span class="id">PRO-521</span>Gemini 3.5 Flash STT path</li>
+      </ul>
+    </div>
+
+    <div class="ms gate">
+      <div class="tag">M4 · Week after</div>
+      <span class="pill">Decision gate</span>
+      <div class="title">Shifted eval criteria running in shadow</div>
+      <div class="when">2026-06-12 · until significance</div>
+      <ul>
+        <li><span class="id">PRO-522</span>Draft shifted eval criteria</li>
+        <li><span class="id">PRO-523</span>Run in shadow across pipelines</li>
+        <li><span class="id">PRO-524</span>Significance check</li>
+      </ul>
+    </div>
+
+    <div class="ms final">
+      <div class="tag">M5 · After M4</div>
+      <span class="pill">Final</span>
+      <div class="title">New evaluators + guardrails rolled out</div>
+      <div class="when">No date · strictly gated</div>
+      <ul>
+        <li><span class="id">PRO-45</span>Update guardrail prompts (PR open)</li>
+        <li><span class="id">PRO-525</span>Promote evaluators + guardrails</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="label">Sequencing</span>
+    <p>M5 cannot ship until M2 to M4 finish. The evaluators <em>are</em> the comparison instrument: promote them mid-cycle and we stop comparing apples to apples between pipelines.</p>
+  </div>
+</section>
+
+<!-- TODAY'S STATE -->
+<section>
+  <h2>What's shipping today <span class="n">· M1 status from GitHub</span></h2>
+  <p class="lede">Three coordinated changes go to production. The shadow is the validation step before M2's promotion decision.</p>
+
+  <div class="stat-grid">
+    <div class="stat">
+      <div class="lab">CE v2 to served</div>
+      <div class="big">Merged</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px"><a href="https://github.com/DittoCare/ditto-ai-core/pull/309" target="_blank">PR #309</a> · 2026-05-19 · Merlijn</div>
+    </div>
+    <div class="stat">
+      <div class="lab">Gemini 3.5 Flash fallback</div>
+      <div class="big">Merged</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px"><a href="https://github.com/DittoCare/ditto-ai-core/pull/311" target="_blank">PR #311</a> · 2026-05-19 · validated via dev drill <a href="https://github.com/DittoCare/ditto-ai-core/pull/314" target="_blank">#314</a>/<a href="https://github.com/DittoCare/ditto-ai-core/pull/315" target="_blank">#315</a> today</div>
+    </div>
+    <div class="stat">
+      <div class="lab">Shadow on all traffic</div>
+      <div class="big">PR open</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px"><a href="https://github.com/DittoCare/ditto-ai-core/pull/316" target="_blank">PR #316</a> · 2026-05-22 · 706/706 tests · Jasper</div>
+    </div>
+    <div class="stat">
+      <div class="lab">Shadow-ready experiment</div>
+      <div class="big">PR open</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px"><a href="https://github.com/DittoCare/ditto-ai-core/pull/313" target="_blank">PR #313</a> · 2026-05-20 · 31/31 + 68/68 tests · Merlijn</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVAL RESULTS -->
+<section>
+  <h2>How good are the new Gemini 3.5 Flash main prompts? <span class="n">· paired n=52 vs V2</span></h2>
+  <p class="lede">Source: PR #313 manifest card (v5c, 2026-05-21). Validated on <code>260310_mixed_validation_data</code>. Quality matches V2 within noise, grounding improves, p50 latency drops 9%. Evaluators are unchanged from V2 and still run on Azure GPT — those get updated separately in M5.</p>
+
+  <div class="grid2">
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Evaluator</th>
+            <th class="num">V2 (GPT-4.1)</th>
+            <th class="num">v5c (Gemini 3.5 Flash)</th>
+            <th class="num">Δ</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>understandability (LLM judge)</td>
+            <td class="num">0.905</td>
+            <td class="num">0.899</td>
+            <td class="num delta-flat">−0.006</td>
+            <td><span class="within-noise">within noise</span></td>
+          </tr>
+          <tr>
+            <td>actionability</td>
+            <td class="num">0.895</td>
+            <td class="num">0.885</td>
+            <td class="num delta-flat">−0.009</td>
+            <td><span class="within-noise">within noise</span></td>
+          </tr>
+          <tr>
+            <td>completeness</td>
+            <td class="num">0.922</td>
+            <td class="num">0.924</td>
+            <td class="num delta-pos">+0.002</td>
+            <td>match</td>
+          </tr>
+          <tr>
+            <td>grounding</td>
+            <td class="num">0.942</td>
+            <td class="num">0.958</td>
+            <td class="num delta-pos">+0.016</td>
+            <td><strong>improved</strong></td>
+          </tr>
+          <tr>
+            <td>flesch_kincaid (lower easier)</td>
+            <td class="num">7.35</td>
+            <td class="num">7.31</td>
+            <td class="num delta-pos">−0.04</td>
+            <td>slightly easier</td>
+          </tr>
+          <tr>
+            <td>latency p50</td>
+            <td class="num">93.6s</td>
+            <td class="num">79.1s</td>
+            <td class="num delta-pos">−8.3s (−9%)</td>
+            <td><strong>faster</strong></td>
+          </tr>
+          <tr>
+            <td>latency mean</td>
+            <td class="num">113.4s</td>
+            <td class="num">114.4s</td>
+            <td class="num delta-flat">+1.0s</td>
+            <td>flat</td>
+          </tr>
+          <tr>
+            <td>guardrail · hallucination pass</td>
+            <td class="num">1.000</td>
+            <td class="num">1.000</td>
+            <td class="num delta-flat">—</td>
+            <td>match</td>
+          </tr>
+          <tr>
+            <td>guardrail · medicine verification</td>
+            <td class="num">0.000</td>
+            <td class="num">0.000</td>
+            <td class="num delta-flat">—</td>
+            <td>match</td>
+          </tr>
+          <tr>
+            <td>pipeline errors (of 100)</td>
+            <td class="num">0–1</td>
+            <td class="num">4</td>
+            <td class="num delta-neg">+3–4</td>
+            <td><span style="color:var(--warn)">acceptable for shadow</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="stat" style="margin-bottom:14px">
+        <div class="lab">LLM judge — V2 vs v5c</div>
+        <div style="margin-top:10px">
+          <div class="bar-row"><div class="name">understandability</div><div class="bar-wrap"><div class="bar v2" style="width:90.5%"></div></div><div class="val">0.905</div></div>
+          <div class="bar-row"><div class="name">&nbsp;</div><div class="bar-wrap"><div class="bar v5c" style="width:89.9%"></div></div><div class="val">0.899</div></div>
+          <div class="bar-row"><div class="name">actionability</div><div class="bar-wrap"><div class="bar v2" style="width:89.5%"></div></div><div class="val">0.895</div></div>
+          <div class="bar-row"><div class="name">&nbsp;</div><div class="bar-wrap"><div class="bar v5c" style="width:88.5%"></div></div><div class="val">0.885</div></div>
+          <div class="bar-row"><div class="name">completeness</div><div class="bar-wrap"><div class="bar v2" style="width:92.2%"></div></div><div class="val">0.922</div></div>
+          <div class="bar-row"><div class="name">&nbsp;</div><div class="bar-wrap"><div class="bar v5c" style="width:92.4%"></div></div><div class="val">0.924</div></div>
+          <div class="bar-row"><div class="name">grounding</div><div class="bar-wrap"><div class="bar v2" style="width:94.2%"></div></div><div class="val">0.942</div></div>
+          <div class="bar-row"><div class="name">&nbsp;</div><div class="bar-wrap"><div class="bar v5c" style="width:95.8%"></div></div><div class="val"><strong>0.958</strong></div></div>
+        </div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:8px;display:flex;gap:14px">
+          <span><span style="display:inline-block;width:10px;height:10px;background:#cbd5df;border-radius:2px;vertical-align:middle"></span> V2 (Azure GPT-4.1 + Gemini 2.5 Pro)</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px;vertical-align:middle"></span> v5c (Gemini 3.5 Flash)</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="lab">Latency p50 · seconds, lower better</div>
+        <div style="margin-top:10px">
+          <div class="bar-row"><div class="name">V2</div><div class="bar-wrap"><div class="bar v2" style="width:78%"></div></div><div class="val">93.6s</div></div>
+          <div class="bar-row"><div class="name">v5c</div><div class="bar-wrap"><div class="bar v5c" style="width:66%"></div></div><div class="val">79.1s</div></div>
+        </div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:8px">−8.3s · −9% at p50. Mean is flat (a few thinking-token tail outliers).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPT + THINKING DESIGN -->
+<section>
+  <h2>What's in the new prompts <span class="n">· per-node thinking levels are the lever</span></h2>
+  <p class="lede">8 new Langfuse prompts at <code>production/conversation/Gemini/3.5_flash/&lt;step&gt;</code> v1. Trimmed 40 to 68% versus the prior Gemini prompts: no chain-of-thought scaffolding (thinking is native), no redundant allow/deny lists, no JSON schema repetition. Variables and Pydantic contracts preserved exactly.</p>
+
+  <div class="pipe">
+    <div class="node"><span class="stage">01 classification</span><span class="think min">MINIMAL</span></div>
+    <div class="node"><span class="stage">02 medical extraction</span><span class="think med">MEDIUM</span></div>
+    <div class="node"><span class="stage">04 action extraction</span><span class="think med">MEDIUM</span></div>
+    <div class="node"><span class="stage">05 summary.core</span><span class="think high">HIGH</span></div>
+    <div class="node"><span class="stage">05 title</span><span class="think min">MINIMAL</span></div>
+    <div class="node"><span class="stage">06 qualitycheck</span><span class="think med">MEDIUM</span></div>
+    <div class="node"><span class="stage">06 error_extraction</span><span class="think cap">budget 8192</span></div>
+    <div class="node"><span class="stage">06 rewriting</span><span class="think high">HIGH</span></div>
+  </div>
+
+  <p style="margin-top:16px"><strong>Key finding:</strong> latency on Gemini 3.5 Flash is dominated by thinking-token generation (about 85 to 90% of per-node latency), not by input length. Token/latency correlation across iterations was 0.93 to 0.99 with thinking tokens, only 0.07 to 0.73 with input tokens. Prompt-trim wins are real but small. Per-node thinking is the high-leverage lever.</p>
+
+  <ul style="color:var(--ink);margin-top:8px">
+    <li><strong>HIGH on summary.core and rewriting.</strong> Dropping to MEDIUM did not save latency but cost ~0.034 understandability. Kept at HIGH.</li>
+    <li><strong>budget=8192 on error_extraction.</strong> Uncapped HIGH caused outliers up to 940s (3 × 300s timeout cascades). Median HIGH usage was ~6000 tokens, so 8192 bounds the tail without hurting typical quality.</li>
+    <li><strong>MINIMAL on classification and title.</strong> No reasoning needed. 3 to 4s saved per node.</li>
+    <li><strong>Single-provider chain, permissive circuit breaker.</strong> Strict breaker thresholds caused full-dataset cascade failure in v1.</li>
+  </ul>
+</section>
+
+<!-- ITERATION HISTORY -->
+<section>
+  <h2>Iteration history <span class="n">· v1 → v5c, five days</span></h2>
+  <p class="lede">Five iterations took the pipeline from total cascade failure to shadow-ready parity with V2. The valuable insight is what each iteration disproved.</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:60px">Iter</th>
+        <th style="width:100px">Date</th>
+        <th>Change</th>
+        <th class="num">Pass</th>
+        <th>Headline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="iter-row bad">
+        <td><strong>v1</strong></td><td>2026-05-19</td>
+        <td>All-Gemini chain, 60s timeout, strict circuit breaker</td>
+        <td class="num">0/100</td>
+        <td class="headline">HIGH-thinking timeout cascaded via strict breaker. Every subsequent item hit "all circuit breakers open".</td>
+      </tr>
+      <tr class="iter-row warn">
+        <td><strong>v2</strong></td><td>2026-05-19</td>
+        <td>300s timeout, permissive breaker, HIGH on heavy nodes</td>
+        <td class="num">52/100</td>
+        <td class="headline">Langfuse stalled at 52. Best quality observed so far. Becomes the in-experiment baseline.</td>
+      </tr>
+      <tr class="iter-row warn">
+        <td><strong>v3</strong></td><td>2026-05-20</td>
+        <td>HIGH → MEDIUM on heavy nodes; LOW on qualitycheck</td>
+        <td class="num">100/100</td>
+        <td class="headline">Understandability dropped 0.034 vs v2. Latency on summary/rewriting did not improve. Thinking-level dropping is non-linear.</td>
+      </tr>
+      <tr class="iter-row warn">
+        <td><strong>v4</strong></td><td>2026-05-20</td>
+        <td>budget=8192 on 3 heavy nodes; 120s timeout</td>
+        <td class="num">90/100</td>
+        <td class="headline">p50 −12s vs v2 paired. Still 0.034 down on understandability. 120s was too tight a timeout.</td>
+      </tr>
+      <tr class="iter-row good">
+        <td><strong>v5c</strong></td><td>2026-05-20</td>
+        <td>HIGH on summary+rewriting; budget=8192 on error_extr; 180s timeout</td>
+        <td class="num">93/100</td>
+        <td class="headline"><strong>Shadow-ready.</strong> Quality recovered to V2 parity within noise. p50 −8.3s vs V2 paired. Mean −14.4s vs v4.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ALL ISSUES TABLE -->
+<section>
+  <h2>All 13 issues <span class="n">· copy of the Linear catalog</span></h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:80px">Issue</th>
+        <th style="width:90px">Milestone</th>
+        <th>Title</th>
+        <th style="width:80px">Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-513" target="_blank">PRO-513</a></td><td>M1</td><td>Push Conversation Explainer v2 to production</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-514" target="_blank">PRO-514</a></td><td>M1</td><td>Enable Gemini 3.5 Flash as production fallback for CE v2</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-515" target="_blank">PRO-515</a></td><td>M1</td><td>Launch shadow run: Gemini 3.5 Flash with optimised prompts</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-516" target="_blank">PRO-516</a></td><td>M2</td><td>Shadow quality review: Gemini 3.5 Flash optimised vs CE v2 (GPT-4.1)</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-517" target="_blank">PRO-517</a></td><td>M2</td><td>Promote Gemini 3.5 Flash optimised prompts to primary</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-518" target="_blank">PRO-518</a></td><td>M3</td><td>Spec the transcription A/B test (Juvile vs Resonate vs Gemini Flash STT)</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-519" target="_blank">PRO-519</a></td><td>M3</td><td>Implement transcription A/B test plumbing in ditto-ai-core</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-520" target="_blank">PRO-520</a></td><td>M3</td><td>Resonate transcription provider integration</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-521" target="_blank">PRO-521</a></td><td>M3</td><td>Gemini 3.5 Flash speech-to-text path</td><td>Medium</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-522" target="_blank">PRO-522</a></td><td>M4</td><td>Draft shifted evaluation criteria for next-gen quality bar</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-523" target="_blank">PRO-523</a></td><td>M4</td><td>Run shifted evals in shadow against Gemini 3.5 Flash pipeline (old + new transcription)</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-524" target="_blank">PRO-524</a></td><td>M4</td><td>Decision: shifted evaluator significance check</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-45" target="_blank">PRO-45</a></td><td>M5</td><td>Update guardrail prompts for Gemini 3.5 (PR already in review)</td><td>High</td></tr>
+      <tr><td class="id"><a href="https://linear.app/ditto-care/issue/PRO-525" target="_blank">PRO-525</a></td><td>M5</td><td>Promote new evaluators + guardrails to production</td><td>High</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PR BOARD -->
+<section>
+  <h2>Relevant PRs <span class="n">· ditto-ai-core, last 3 weeks</span></h2>
+  <div class="pr-list">
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/316" target="_blank">#316</a></div><div class="state open">open</div><div class="title">feat(gemini): shadow Gemini 3.5 Flash on all production traffic</div><div class="who">Jasper · today</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/315" target="_blank">#315</a></div><div class="state merged">merged</div><div class="title">Revert dev-drill: restore real Azure endpoints in response-path manifests</div><div class="who">Jasper · today</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/314" target="_blank">#314</a></div><div class="state merged">merged</div><div class="title">test(dev-drill): break Azure endpoints to validate Gemini 3.5 Flash fallback</div><div class="who">Jasper · today</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/313" target="_blank">#313</a></div><div class="state open">open</div><div class="title">feat(experiment): conversation explainer on Gemini 3.5 Flash (shadow-ready)</div><div class="who">Merlijn · 2026-05-20</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/311" target="_blank">#311</a></div><div class="state merged">merged</div><div class="title">chore(gemini): consolidate all Gemini models on 3.5 Flash</div><div class="who">Jasper · 2026-05-19</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/309" target="_blank">#309</a></div><div class="state merged">merged</div><div class="title">Promote conversation explainer V2 to served</div><div class="who">Merlijn · 2026-05-19</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/297" target="_blank">#297</a></div><div class="state open">open</div><div class="title">feat(llmops): A/B comparison analyzer for shadow-pipeline traces</div><div class="who">Merlijn · 2026-05-08</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/304" target="_blank">#304</a></div><div class="state merged">merged</div><div class="title">fix(manifests): add Gemini fallback to document safety_verification step</div><div class="who">Jasper · 2026-05-12</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/300" target="_blank">#300</a></div><div class="state merged">merged</div><div class="title">feat(DP-139): provider-aware prompts via explicit shapes (take two)</div><div class="who">Jasper · 2026-05-11</div></div>
+    <div class="pr"><div class="num"><a href="https://github.com/DittoCare/ditto-ai-core/pull/288" target="_blank">#288</a></div><div class="state merged">merged</div><div class="title">DP-60: A/B test old vs new AI pipelines with Langfuse trace routing</div><div class="who">Iman · 2026-04-21</div></div>
+  </div>
+</section>
+
+<!-- WHAT'S STILL OPEN -->
+<section>
+  <h2>What's still open before promoting Gemini 3.5 Flash to primary</h2>
+  <p class="lede">These are the gates PR #313's manifest card explicitly leaves uncleared. They map onto M2's shadow review.</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:32px">#</th>
+        <th>Gate</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>3-run stability test (cross-run SD ≤ 0.03 on each metric, &lt; 10% unstable items)</td><td>Not run. Deferred. Required before served.</td></tr>
+      <tr><td>2</td><td>Switch Vertex auth from Direct API to service-account</td><td>Pending, parallel work</td></tr>
+      <tr><td>3</td><td>Fallback strategy: reintroduce Azure GPT fallback or accept single-provider risk</td><td>Open call</td></tr>
+      <tr><td>4</td><td>Investigate the 4 erroring items vs V2 production traces</td><td>Pending</td></tr>
+      <tr><td>5</td><td>DPA sign-off on <code>europe-west4</code> → <code>eu</code> multi-region data residency (PR #311)</td><td>In flight</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- LIMITATIONS -->
+<section>
+  <h2>Known limitations <span class="n">· from the manifest card</span></h2>
+  <ul>
+    <li><strong>No fallback in the experiment manifest.</strong> If Vertex EU is unavailable, the pipeline hard-fails. Acceptable for shadow, not served. The live A/B wrapper (PR #316) still keeps Azure-V2 as primary, so user-facing traffic is safe.</li>
+    <li><strong>Outlier items (3 to 5%) still hit the 180s timeout</strong> on the patient-language nodes. End up as guardrail-style 400 responses, not bad outputs.</li>
+    <li><strong>Token uncertainty is unavailable on Gemini</strong> (no logprobs). The <code>token_uncertainty</code> guardrail returns 0.0 for this pipeline. Already true in V2's Gemini fallback path. PR #316 added <code>score=None</code> semantics so this no longer contaminates comparisons with fake zeros.</li>
+    <li><strong>Iteration validation used the Direct API</strong> (api_key); production manifest now points at Vertex. The validated artifact is the prompt + thinking-level config, which is provider-independent, but smoke-test on Vertex before shadow → served.</li>
+  </ul>
+</section>
+
+<footer>
+  Built 2026-05-22 from PR #313 manifest card (<code>ditto-ai-core/.claude/worktrees/gemini-3.5-flash-experiment/llmops/manifests/yaml/experiments/conversation_explainer/MANIFEST_CARD_gemini_3_5_flash.md</code>), the open <a href="https://github.com/DittoCare/ditto-ai-core/pull/313" target="_blank">PR #313</a> and <a href="https://github.com/DittoCare/ditto-ai-core/pull/316" target="_blank">PR #316</a> descriptions, and the Linear project at <a href="https://linear.app/ditto-care/project/conversation-explainer-ai-improvements-ac236bd50b60" target="_blank">conversation-explainer-ai-improvements</a>. Granola notes from the Canada session: <a href="https://notes.granola.ai/t/46c035e1-e640-4c91-b84a-e24c06c8cc24-008umkv4" target="_blank">link</a>.
+</footer>
+
+</div>
+</body>
+</html>

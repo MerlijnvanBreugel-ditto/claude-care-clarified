@@ -1,0 +1,101 @@
+TOTAL shipped: 259
+MONTH: {'2026-03': 2, '2026-04': 112, '2026-05': 145}
+
+=== PILLAR (count | % | effort L/M/S/XS) ===
+  Clarity        46 (17%)  L11 M4 S27 XS4
+  Connection     32 (12%)  L7 M3 S18 XS4
+  Convenience    61 (23%)  L8 M19 S32 XS2
+  Fundamentals  120 (46%)  L11 M20 S79 XS10
+
+=== OKR primary (count | linked/projmap/inferred/BAU) ===
+  O2-KR2   56  linked:14 projmap:15 inferred:27 bau:0
+  O2-KR3   34  linked:23 projmap:2 inferred:9 bau:0
+  O2-KR4   33  linked:18 projmap:7 inferred:8 bau:0
+  O2-KR1    4  linked:0 projmap:4 inferred:0 bau:0
+  O1-KR2   26  linked:5 projmap:18 inferred:3 bau:0
+  O1-KR3    6  linked:0 projmap:2 inferred:4 bau:0
+  O1-KR4   13  linked:8 projmap:0 inferred:5 bau:0
+  —        87  linked:0 projmap:0 inferred:0 bau:87
+
+=== INVESTMENT ===
+   39  Bug fix
+   26  Team/internal ops
+   26  AI agents
+   21  Research/discovery
+   20  Lifecycle/CRM
+   17  Design system
+   16  New feature
+   15  Analytics/tracking
+   14  Infra/platform
+   13  Process/tooling
+   12  Compliance/privacy
+   10  AI quality
+    9  Improvement
+    7  Content/creative
+    6  B2B/partner ops
+    3  Release ops
+    3  Design polish
+    2  Maintenance
+
+=== PROJECT ROLLUP (shipped issues per project) ===
+   18 | Connection   | O2-KR3(Line) | 2026-04-16..2026-05-22 | Care Circle 3.0                            | https://linear.app/ditto-care/project/care-circle-30-55ab95ddb320
+   18 | Clarity      | O1-KR2(Proj) | 2026-05-22..2026-05-22 | B2B Outreach POC                           | 
+   11 | Fundamentals | —     (None) | 2026-04-07..2026-05-28 | UI / LEGO maintenance                      | https://linear.app/ditto-care/project/ui-lego-maintenance-897e0e77f9de
+   11 | Convenience  | O2-KR2(Line) | 2026-04-09..2026-05-30 | Calendar Integration                       | https://linear.app/ditto-care/project/calendar-integration-d7be6e880b53
+    8 | Convenience  | O2-KR2(Proj) | 2026-04-02..2026-05-12 | Dedicated Discover Tab                     | https://linear.app/ditto-care/project/dedicated-discover-tab-bd005ca0f7de
+    8 | Fundamentals | O2-KR4(Line) | 2026-04-16..2026-05-13 | Implement Survicate                        | https://linear.app/ditto-care/project/implement-survicate-76685d419334
+    7 | Convenience  | O2-KR2(Proj) | 2026-03-31..2026-04-16 | Customer.io — Marketing Automation & Push  | https://linear.app/ditto-care/project/customerio-marketing-automation-and-push-notifications-83a3b426ab1f
+    7 | Clarity      | O2-KR4(Proj) | 2026-04-13..2026-05-21 | AI Quality — Tune Evals and Guardrails     | 
+    7 | Fundamentals | —     (None) | 2026-05-08..2026-05-27 | Growth: Team Way of Working (WoW)          | https://linear.app/ditto-care/project/growth-team-way-of-working-wow-38f78290ccf8
+    5 | Fundamentals | O2-KR4(Line) | 2026-04-15..2026-05-22 | Improved analytics data on personas and li | https://linear.app/ditto-care/project/improved-analytics-data-on-personas-and-life-moment-audiences-203ad2e547fc
+    5 | Fundamentals | O1-KR4(Line) | 2026-05-26..2026-05-28 | Analytics Foundations                      | https://linear.app/ditto-care/project/analytics-foundations-807340995185
+    4 | Clarity      | O1-KR2(Line) | 2026-05-22..2026-05-28 | 15 FTE AI agents                           | https://linear.app/ditto-care/project/15-fte-ai-agents-93ca13ac7cba
+    3 | Convenience  | O2-KR2(Line) | 2026-04-14..2026-04-15 | Website | lead generation pages            | https://linear.app/ditto-care/project/website-or-lead-generation-pages-d58e1e8ad7ae
+    3 | Clarity      | O2-KR4(Line) | 2026-05-08..2026-05-20 | Appointment Preparation                    | https://linear.app/ditto-care/project/appointment-preparation-96ae98bcaa31
+    3 | Fundamentals | O1-KR4(Line) | 2026-05-28..2026-05-29 | Ship at 80%: Experiment Velocity Engine    | https://linear.app/ditto-care/project/ship-at-80percent-experiment-velocity-engine-411f3367198c
+    2 | Connection   | O2-KR3(Proj) | 2026-04-08..2026-04-10 | Care Circle V2                             | 
+    2 | Fundamentals | —     (None) | 2026-04-09..2026-05-04 | Move to Liquid Glass UI (iOS 26+)          | https://linear.app/ditto-care/project/move-to-liquid-glass-ui-ios-26-0099644d4380
+    2 | Fundamentals | O2-KR3(Line) | 2026-04-20..2026-05-04 | Migrate Away from Auth0                    | https://linear.app/ditto-care/project/migrate-away-from-auth0-946ffdc58304
+    2 | Convenience  | O2-KR4(Line) | 2026-05-04..2026-05-04 | Growth: Customer.io                        | https://linear.app/ditto-care/project/growth-customerio-81a70e30e380
+    2 | Fundamentals | O2-KR1(Proj) | 2026-05-19..2026-05-19 | EXP-B2B: A2 — one project, 3 milestones    | 
+    2 | Connection   | O2-KR3(Line) | 2026-05-21..2026-05-28 | Remove confirmation from Care Circle invit | https://linear.app/ditto-care/project/remove-confirmation-from-care-circle-invite-flow-2f864e508b16
+    2 | Fundamentals | O1-KR3(Proj) | 2026-05-26..2026-05-27 | UK launch                                  | https://linear.app/ditto-care/project/uk-launch-2827551d00ad
+    1 | Fundamentals | —     (None) | 2026-04-17..2026-04-17 | Security Improvements                      | https://linear.app/ditto-care/project/security-improvements-e18cfc82583f
+    1 | Fundamentals | O1-KR2(Line) | 2026-05-11..2026-05-11 | 15ftes: Person Research                    | https://linear.app/ditto-care/project/15ftes-person-research-22a7173bb77b
+    1 | Connection   | O2-KR3(Line) | 2026-05-12..2026-05-12 | Multi-profile / Managed accounts           | https://linear.app/ditto-care/project/multi-profile-managed-accounts-e8b227c28563
+    1 | Fundamentals | —     (None) | 2026-05-18..2026-05-18 | Staging Backend Environment                | https://linear.app/ditto-care/project/staging-backend-environment-aa46ac0cbaa9
+    1 | Fundamentals | O2-KR1(Proj) | 2026-05-19..2026-05-19 | EXP-B2B: A3 Step 1 — Company Research      | 
+    1 | Fundamentals | O2-KR1(Proj) | 2026-05-19..2026-05-19 | EXP-B2B: A3 Step 2 — People Research       | 
+
+  (none/loose issues): 121
+       28 Bug fix
+       12 Lifecycle/CRM
+       11 Team/internal ops
+       11 Design system
+       11 Compliance/privacy
+        9 Infra/platform
+        7 Analytics/tracking
+        7 New feature
+        5 Improvement
+        5 Process/tooling
+        4 Research/discovery
+        3 AI agents
+        2 Maintenance
+        2 Release ops
+        2 Content/creative
+        1 Design polish
+        1 B2B/partner ops
+
+=== AI STACK items (Investment in AI quality / AI agents) ===
+  PRO-34   L | Automatic fallback to alternative AI providers
+  PRO-59   L | Initialize Google AI provider and register as fallback
+  PRO-60   L | Configure and run A/B test between old and new AI pipelines
+  PRO-126  L | Improve conversation explainer quality (actionability, term 
+  PRO-187  L | Publish conversation categorization metadata to Azure Event 
+  PRO-29   L | Upgrade doc explainer with best practices conversation
+  PRO-164  L | Design: Smart Answer Entry for Preparation Questions
+  PRO-139  L | Make Gemini-improved prompts for both pipelines
+  PRO-390  M | Spec follow-up data contract on the conversation explainer r
+  PRO-439  M | Build daily briefing agent — Wouter template (POC)
+  PRO-440  M | Build B2B outreach automation — Olli single-user POC
+  PRO-257  M | Workshop: Agentic way of working (May 18)

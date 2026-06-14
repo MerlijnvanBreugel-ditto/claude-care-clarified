@@ -1,0 +1,98 @@
+{
+ "version": "1.0",
+ "last_updated": "2026-06-10",
+ "description": "Mewtwo's own backlog. Items are added during workflows when gaps, opportunities, or maintenance needs are spotted. Reviewed during periodic reviews or on request.",
+ "items": [
+  {
+   "id": "bl-001",
+   "type": "setup",
+   "title": "Fill product-context.md TODOs",
+   "description": "North star metric, technical stack details, and team structure are undefined. These are needed for accurate impact assessments and multi-perspective reviews.",
+   "priority": "high",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-002",
+   "type": "workflow",
+   "title": "Create user-research-synthesis workflow",
+   "description": "Merlijn identified this as a key recurring workflow. Needs: ingesting research notes, pattern identification, mapping to features, prioritization.",
+   "priority": "medium",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-003",
+   "type": "workflow",
+   "title": "Create mixpanel-analysis workflow",
+   "description": "Correlating product analytics with user feedback to improve feature ideas. Requires Mixpanel MCP integration.",
+   "priority": "medium",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-004",
+   "type": "workflow",
+   "title": "Create design-review workflow",
+   "description": "Structured process for reviewing designs against specs, user research, and product principles.",
+   "priority": "low",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-005",
+   "type": "integration",
+   "title": "Set up Confluence templates",
+   "description": "Standardized templates for feature documentation in Confluence: research, insights, scoping, phasing, prioritization, learnings.",
+   "priority": "medium",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-006",
+   "type": "integration",
+   "title": "Configure Atlassian MCP for Jira + Confluence",
+   "description": "Required for direct read/write to Jira tickets and Confluence pages from Mewtwo workflows.",
+   "priority": "high",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-007",
+   "type": "integration",
+   "title": "Configure Mixpanel MCP",
+   "description": "Required for pulling analytics data during research and analysis workflows.",
+   "priority": "medium",
+   "added": "2026-02-17",
+   "source": "initial-setup"
+  },
+  {
+   "id": "bl-008",
+   "type": "artifact",
+   "title": "Rewrite source 10 (core action) as v2 with the new writing rules",
+   "description": "Merlijn feedback 2026-06-04 while reading: strip jargon ('trust artifact', 'crystallization', 'single-player utility'); two registers only (visionary-plain or concrete); fix overstated claim (on-treatment oncology appointments fire ~weekly, so the summary already has near-weekly cadence and an accumulating record; the frequency gap is between visits, lighter segments, post-treatment); downgrade '20 interviews = hard requirement' to strongly-preferred evidence, not a gate; label ideation as ideation. He may add more feedback as he reads; produce v2 after.",
+   "priority": "high",
+   "added": "2026-06-04",
+   "source": "feedback-source-10",
+   "notes": " ADDED 2026-06-04 (Merlijn while reading): structure v2 around the three eigenquestions (which core actions / which problems / who is the primary user); use the frequency reframe (disease is top-of-mind daily; the question is which jobs fire and where we can support, see source 11); follower-side 'send something thoughtful' is a candidate core action but weaker (reply in the loop, not the opening move); wearables are not a route, they enrich the daily note (HR/sleep/strain auto-added to symptom+med+feeling entries)."
+  },
+  {
+   "id": "bl-009",
+   "date": "2026-06-04",
+   "source": "Merlijn feedback while reading source 10",
+   "observation": "Adoption-depth North Star refinement ('every other NL oncology patient uses Ditto within a week of diagnosis' style metrics) parked for later. Merlijn: 'super interesting' but not now.",
+   "suggested_action": "Revisit after the core-action decision lands; define the depth metric against the chosen beachhead.",
+   "priority": "low",
+   "status": "open"
+  },
+  {
+   "id": "bl-010",
+   "date": "2026-06-10",
+   "source": "PAR-242 kanker.nl competitive analysis",
+   "observation": "Installs driven by the kanker.nl Appstore listing are invisible: the store links to Ditto carry no UTM/attribution, and kanker.nl click data was never requested. Channel value (distribution lever vs trust badge) is unquantified.",
+   "suggested_action": "Ask kanker.nl (appstore@kanker.nl) for listing click stats and whether UTM-tagged store links are allowed; fold into the broader Adjust/Mixpanel attribution work.",
+   "priority": "medium",
+   "status": "open"
+  }
+ ]
+}

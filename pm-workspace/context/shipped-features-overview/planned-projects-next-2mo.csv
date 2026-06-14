@@ -1,0 +1,38 @@
+Project,Status,Pillar,OKR_primary,OKR_link,Start,Target,Near2mo,Link
+Staging Backend Environment,In Progress,Fundamentals,—,None (BAU/foundational),2026-04-28,2026-05-05,Y,https://linear.app/ditto-care/project/staging-backend-environment-aa46ac0cbaa9
+Calendar Integration,In Progress,Convenience,O2-KR2,Linear-linked,2026-03-25,2026-05-29,Y,https://linear.app/ditto-care/project/calendar-integration-d7be6e880b53
+Remove confirmation from Care Circle invite flow,In Progress,Connection,O2-KR3,Linear-linked,2026-05-25,2026-05-29,Y,https://linear.app/ditto-care/project/remove-confirmation-from-care-circle-invite-flow-2f864e508b16
+Triage Cleanup,In Progress,Fundamentals,O1-KR4,Linear-linked,2026-05-11,2026-05-29,Y,https://linear.app/ditto-care/project/triage-cleanup-daecb747ad53
+Customer.io Post-Summary Flow,In Progress,Clarity,O2-KR2,Linear-linked,2026-05-19,2026-05-30,Y,https://linear.app/ditto-care/project/customerio-post-summary-flow-a53293b661bf
+Implement Survicate,In Progress,Fundamentals,O2-KR4,Linear-linked,2026-04-28,2026-06-05,Y,https://linear.app/ditto-care/project/implement-survicate-76685d419334
+Analytics Foundations,In Progress,Fundamentals,O1-KR4,Linear-linked,2026-05-26,2026-06-09,Y,https://linear.app/ditto-care/project/analytics-foundations-807340995185
+Ship at 80%: Experiment Velocity Engine,In Progress,Fundamentals,O1-KR4,Linear-linked,2026-05-26,2026-06-09,Y,https://linear.app/ditto-care/project/ship-at-80percent-experiment-velocity-engine-411f3367198c
+Conversation Explainer AI Improvements,In Progress,Clarity,O2-KR4,Inferred,2026-05-22,2026-06-19,Y,https://linear.app/ditto-care/project/conversation-explainer-ai-improvements-ac236bd50b60
+15 FTE AI agents,In Progress,Fundamentals,O1-KR2,Linear-linked,2026-04-29,2026-06-30,Y,https://linear.app/ditto-care/project/15-fte-ai-agents-93ca13ac7cba
+Care Circle 3.0,In Progress,Connection,O2-KR3,Linear-linked,2026-04-09,2026-07-02,Y,https://linear.app/ditto-care/project/care-circle-30-55ab95ddb320
+Appointment Preparation,In Progress,Clarity,O2-KR4,Linear-linked,2026-04-20,,Y,https://linear.app/ditto-care/project/appointment-preparation-96ae98bcaa31
+Calendar Pull,In Progress,Convenience,O2-KR2,Inferred,2026-05-29,,Y,https://linear.app/ditto-care/project/calendar-pull-3651c2dc696b
+Explore Ditto for Pets,In Progress,Fundamentals,—,None (BAU/foundational),2026-05-29,,Y,https://linear.app/ditto-care/project/explore-ditto-for-pets-5f72470bf553
+Migrate Away from Auth0,In Progress,Fundamentals,O2-KR3,Linear-linked,2026-04-20,,Y,https://linear.app/ditto-care/project/migrate-away-from-auth0-946ffdc58304
+Show first-time recorder test script and guidance,In Progress,Fundamentals,—,None (BAU/foundational),2026-05-29,,Y,https://linear.app/ditto-care/project/show-first-time-recorder-test-script-and-guidance-7018572dd3af
+UI / LEGO maintenance,In Progress,Fundamentals,—,None (BAU/foundational),2026-04-13,,Y,https://linear.app/ditto-care/project/ui-lego-maintenance-897e0e77f9de
+AI Answer Suggestions,Planned,Clarity,O2-KR4,Linear-linked,2026-05-13,,Y,https://linear.app/ditto-care/project/ai-answer-suggestions-0c14cc1a4c25
+Post-Ship Evaluation & Verdict Ritual,Backlog,Fundamentals,O1-KR4,Linear-linked,2026-06-09,2026-06-16,Y,https://linear.app/ditto-care/project/post-ship-evaluation-and-verdict-ritual-1db8c041e584
+Customer.io Profile Completion Flow,Backlog,Convenience,O2-KR2,Linear-linked,2026-06-15,2026-06-19,Y,https://linear.app/ditto-care/project/customerio-profile-completion-flow-b8cd866c363a
+Beyond Appointments: Expanding Activation Paths,Backlog,Convenience,O2-KR2,Linear-linked,2026-06-01,2026-06-30,Y,https://linear.app/ditto-care/project/beyond-appointments-expanding-activation-paths-3cfb081e09bc
+Concurrent Experiment Operations,Backlog,Fundamentals,O1-KR4,Linear-linked,2026-06-16,2026-06-30,Y,https://linear.app/ditto-care/project/concurrent-experiment-operations-1187d1a9c236
+Create an aha moment during onboarding,Backlog,Convenience,O2-KR2,Inferred,2026-06-05,2026-06-30,Y,https://linear.app/ditto-care/project/create-an-aha-moment-during-onboarding-1f9846675129
+Log out and account deletion behaviour,Backlog,Fundamentals,—,None (BAU/foundational),2026-06-08,2026-07-03,Y,https://linear.app/ditto-care/project/log-out-and-account-deletion-behaviour-f897a66efa9f
+Experimentation Engine,Backlog,Fundamentals,O1-KR4,Inferred,2026-05-01,2026-09-30,,https://linear.app/ditto-care/project/experimentation-engine-35fabea5f18b
+HCP Persona Experience,Backlog,Convenience,O2-KR1,Linear-linked,2026-04-01,2026-09-30,,https://linear.app/ditto-care/project/hcp-persona-experience-f6f374209752
+Medical Data Vault,Backlog,Fundamentals,O2-KR4,Linear-linked,2026-07-01,2026-09-30,Y,https://linear.app/ditto-care/project/medical-data-vault-4d988fd2d4d8
+15ftes: Person Research,Backlog,Fundamentals,O1-KR2,Linear-linked,,,,https://linear.app/ditto-care/project/15ftes-person-research-22a7173bb77b
+Architecture cleanup,Backlog,Fundamentals,—,None (BAU/foundational),,,,https://linear.app/ditto-care/project/architecture-cleanup-005904bb828b
+Care journeys (mobile visualization),Backlog,Connection,O2-KR4,Linear-linked,,,,https://linear.app/ditto-care/project/care-journeys-mobile-visualization-7cc5a70ab4d9
+Geofencing,Backlog,Convenience,O2-KR4,Linear-linked,2026-07-01,,Y,https://linear.app/ditto-care/project/geofencing-2f8e970b0ea2
+Growth: Team Way of Working (WoW),Backlog,Fundamentals,O1-KR4,Inferred,,,,https://linear.app/ditto-care/project/growth-team-way-of-working-wow-38f78290ccf8
+Language Expansion,Backlog,Convenience,O1-KR3,Inferred,2026-07-01,,Y,https://linear.app/ditto-care/project/language-expansion-d4da14f3c332
+Multi-profile / Managed accounts,Backlog,Connection,O2-KR3,Linear-linked,2026-04-28,,,https://linear.app/ditto-care/project/multi-profile-managed-accounts-e8b227c28563
+Personalized Discovery page,Backlog,Convenience,O2-KR4,Linear-linked,,,,https://linear.app/ditto-care/project/personalized-discovery-page-f6ae8f0410b7
+UK launch,Backlog,Convenience,O1-KR3,Inferred,,,,https://linear.app/ditto-care/project/uk-launch-2827551d00ad
+Wearable Integration,Backlog,Convenience,O2-KR4,Linear-linked,,,,https://linear.app/ditto-care/project/wearable-integration-e2565fa12466

@@ -1,0 +1,1653 @@
+{
+ "results": [
+  {
+   "mission": "week:day-reconstruction",
+   "key_findings": [
+    {
+     "finding": "The infusion day itself is largely passive and sedating, not active: pre-meds (IV steroids + Benadryl + anti-nausea) make patients wired for the first 1-2 hours, then they doze through most of a 6-8 hour infusion, and need to be driven home.",
+     "evidence": "\"On chemo day, I received IV steroids through my port, along with Benadryl and anti-nausea drugs. Initially, I was wide awake for the first hour or two of chemo due to the steroids. Then, I drifted into a deep nap for a few hours.\" Another: \"loaded up with Benadryl and mostly doze for the next 6 hours.\"",
+     "source_url": "https://www.bezzybc.com/discover/navigating-treatment/health-what-to-expect-first-chemo-infusion/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "A chemo cycle has a predictable shape: the infusion day and day 1-2 are buffered by steroids, the crash hits around days 4-5 when steroids wear off but sickness remains, then gradual recovery to a near-normal final week before the next cycle.",
+     "evidence": "TCHP patient Irishgirl16: \"Days 4 and 5 were the worst for me, the steroids had worn off but the sickness was there then.\" General guidance: \"The worst days after a chemotherapy infusion tend to be days 3-5. This often coincides with stopping the corticosteroids.\"",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/general/291048/chemotherapy---what-days-are-the-worst",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "On a take-home-pump regimen (e.g. FOLFOX-style), the week splits into a non-functional block (infusion day + ~46h pump = Mon-Wed) and a single usable week, with Thursday a recovering-but-rough day.",
+     "evidence": "Kris (stomach cancer): infusion \"six to eight hours\"; take-home \"chemo purse, which runs for 46 additional hours. So all day Tuesday and most of Wednesday\"; \"you don't really feel that great on Thursday. I typically go to work on Thursday, but you don't feel that good\"; \"Then you just have the next week, where you can do something.\"",
+     "source_url": "https://thepatientstory.com/patient-stories/stomach-cancer/signet-ring-cell-carcinoma/metastatic-signet-ring-cell-carcinoma/kris-m/",
+     "geography": "US (Ohio)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Morning fatigue and evening fatigue are statistically DISTINCT phenomena with different triggers, meaning the same patient can have a workable morning and a wiped-out evening (or vice versa) - the day is not uniformly tired.",
+     "evidence": "Miaskowski 582-patient study: morning fatigue classes Low 31.8% / High 51.4% / Very High 16.8%; evening fatigue Moderate 20.0% / High 21.8% / Very High 58.2%. \"a higher number of comorbid conditions was associated with more severe morning fatigue, whereas caring for children at home was associated with more severe evening fatigue.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5473960/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Evening fatigue is far more prevalent and persistent than morning fatigue: ~80% of patients hit clinically meaningful evening fatigue vs ~67% morning, and morning fatigue oscillates with the treatment cycle (peaks weeks 1 and 3) while evening fatigue stays elevated throughout.",
+     "evidence": "\"80% of the patients in this study experienced clinically meaningful levels of evening fatigue\" vs 67% for morning fatigue. Morning fatigue showed \"oscillating pattern with peaks at weeks 1 and 3 post-treatment\"; evening fatigue \"remained persistently elevated.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5473960/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Within a single day, fatigue tends to rise as the day progresses and peaks at bedtime rather than mid-afternoon - the morning is the relatively good window, and anxious mood and difficulty thinking specifically worsen in the afternoon/evening.",
+     "evidence": "\"within-day fluctuations in fatigue were lowest during mid-morning or early afternoon, and increased as the day progressed, peaking at bedtime.\" EMA breast cancer study: \"Afternoon and evening symptoms of anxious mood increased slightly\" and evening difficulty thinking worsened (p=0.01); \"Morning active mood improved significantly (p<0.01).\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4185252/",
+     "geography": "US (MD Anderson, Houston)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The mid-morning is the recommended and lived 'good window' for getting things done; patients and clinicians schedule demanding tasks then and plan a short early-afternoon nap, treating the afternoon dip as a known event.",
+     "evidence": "\"schedule the most demanding tasks—appointments, paperwork, or chores—when feeling most alert, usually mid-morning.\" Naps \"should be limited to 20-30 minutes and scheduled early in the afternoon to avoid disrupting nighttime rest.\"",
+     "source_url": "https://honcology.com/blog/7-practical-tips-for-reducing-chemotherapy-induced-fatigue-and-boosting-daily-energy",
+     "geography": "US/general",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Steroid-driven insomnia is a named, dreaded feature of the early-cycle nights: roughly 45% of dexamethasone-treated patients report moderate-severe insomnia, and patients name days 1-2 as their worst specifically because steroids wreck their sleep, not because of nausea.",
+     "evidence": "\"Patients receiving dexamethasone reported moderate–severe problems with insomnia (45%), in the week following chemotherapy.\" SusanHB: \"My worst days are days 1 and 2, mainly because my sleep is impacted by the steroids.\"",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2361221/",
+     "geography": "UK/EU",
+     "confidence": "high"
+    },
+    {
+     "finding": "Fragmented night sleep with a 3-4 hour ceiling and early-morning waking is common; about half of patients report frequent night awakenings and early awakenings, and many can paradoxically sleep better in the day than at night.",
+     "evidence": "\"frequent night awakenings (49%–56%)... early awakenings (49%–65%)\"; \"nearly 80% of cancer patients report sleep problems.\" And: patients \"report altered diurnal rhythms, the ability to sleep better during the day, or being able to sleep for only 3 or 4 h before awakening.\"",
+     "source_url": "https://ncbi.nlm.nih.gov/pmc/articles/PMC3593248",
+     "geography": "US/general",
+     "confidence": "high"
+    },
+    {
+     "finding": "The night after infusion can be punctuated by clockwork vomiting episodes (midnight and 3am) - acute nausea peaks 5-6 hours post-infusion and delayed nausea peaks 48-72h, with a subset peaking on day 3.",
+     "evidence": "Dutch diary: \"om 12 uur en 3 uur liggen kotsen, voelde me echt hondsberoerd\" (vomited at midnight and 3 AM, felt absolutely terrible). Clinical: acute nausea \"maximal intensity after 5–6 hours\"; delayed nausea \"peaking at 48-72 hours... sometimes peaking on day 3.\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/het-dagboek-van-een-muts-met-borstkanker/eerste-chemo-en-de-week-erna",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "On crash days the body fails at basic vertical movement: stairs and short walks to the kitchen become the limiting activity, and the day collapses to bed/couch with brief upright windows.",
+     "evidence": "Dutch diary: \"zelfs de trap op lopen ging bijna niet\" (could barely walk up the stairs); \"misselijk, gevoel van zware griep, krachtverlies\" (nauseous, feeling of heavy flu, loss of strength). Gary (Jersey): \"half an hour ago I made the slow and short walk to the kitchen to sort a cuppa\" was notable effort.",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/het-dagboek-van-een-muts-met-borstkanker/eerste-chemo-en-de-week-erna",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Upright social/active windows are short and rationed - patients can manage roughly 90-minute bouts before needing to lie down, and one diarist's day structure was an afternoon sleep block plus the night.",
+     "evidence": "Gary (Jersey, UK): activity windows of \"90 minute catch-ups\" with visitors before needing rest; sleep \"Usually 1pm to 5pm/6pm and then overnight from 8pm to 5am.\"",
+     "source_url": "https://garyschemodiary.wordpress.com/",
+     "geography": "UK (Jersey)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "The post-infusion days produce a cyclical nausea-and-immobility loop where eating shrinks to a handful of bland items and any errand requires being dragged through it; the day is organized around managing the puke-or-feel-like-puking baseline.",
+     "evidence": "Sylvia Soo (Canada): \"When I wasn't puking, I felt like puking. When I didn't feel like puking, it was extremely hard to muster enough energy to move.\" Day after: \"only managed to eat about eight crackers\"; described self as \"a fish whose stomach had been gutted out.\"",
+     "source_url": "https://rethinkbreastcancer.com/articles/cancer-fabulous-diaries",
+     "geography": "Canada",
+     "confidence": "high"
+    },
+    {
+     "finding": "Cumulative toxicity reshapes the day across cycles: later infusions hit harder, and patients map a 'steroid crash' day (e.g. day 9 on EC, or breathlessness emerging day 5 on docetaxel) that did not exist in early cycles.",
+     "evidence": "Lovely Louis (UK): EC \"first 3 days, ie slightly nauseous, headache and aches\" but \"The steroid crash on day 9 was awful\"; docetaxel \"I was fine for the first 4 days, then it took my breath away\" with days 5-12 \"breathless, racing heart, mouth ulcers, diarrhoea.\"",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/general/291048/chemotherapy---what-days-are-the-worst",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Even when a patient stays functional, the day is re-engineered around symptom timing rather than taken off entirely - flexible scheduling (no early calls, buffer for bad nights) matters more than full days off.",
+     "evidence": "Irishgirl16 (TCHP, 6 cycles): worked from home and \"never took a full day off\" but avoided early morning calls \"to give me a chance to sleep if I had a bad night.\"",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/general/291048/chemotherapy---what-days-are-the-worst",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Beyond symptoms, the cancer day is heavily consumed by logistics: patients spend a median of ~7 hours/week managing cancer, do at least one care-related home task on 80% of days, and travel/wait time (median 35 min travel; 14% of visits wait >1h) often exceeds time actually receiving care.",
+     "evidence": "\"they spent a median of 400 minutes—or nearly seven hours—per week managing their cancer\"; \"did at least one cancer-related task at home on 80% of study days\"; \"the median travel time was 35 minutes... 14% of care episodes involved a wait time of more than an hour.\"",
+     "source_url": "https://www.healio.com/news/hematology-oncology/20260121/consumed-by-health-care-study-offers-new-insights-into-time-toxicity-of-cancer-treatment",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Objective actigraphy confirms the lived day shape: lower daytime activity than healthy controls, and during chemo specifically more time awake at night and more activity at night (i.e. the day-night rhythm inverts and flattens as treatment progresses).",
+     "evidence": "\"Cancer patients presented lower daytime activity than healthy controls\"; \"During chemotherapy, patients had lower sleep efficiency, more time awake, and higher activity levels at night.\" Breast cancer patients show \"progressively impaired sleep-wake activity rhythms during chemotherapy.\"",
+     "source_url": "https://pubmed.ncbi.nlm.nih.gov/34624895/",
+     "geography": "EU/international",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Pre-chemo sleep quality sets the tone for the whole 3-week cycle: patients who slept poorly the night before infusion (~55% of one sample) reported greater fatigue and more anxious mood across the entire cycle, so the night before is a leverage point for the days after.",
+     "evidence": "\"Those with poor pre-CT sleep (PSQI ≥5, 55% of sample) reported greater fatigue and 'less calm/more anxious mood' throughout the 3-week cycle\"; good pre-chemo sleep showed \"a buffering effect against anxious mood in early post-infusion days.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4185252/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Within the NL context, the recovery week is non-linear and explicitly tracked by patients as 'two steps forward': improvement starts a few days post-infusion and feels near-complete by about day 7, when normal activities (drives, jogging attempts) resume.",
+     "evidence": "\"Vanaf zaterdag ging het ietsje beter, 2 stapjes vooruit\" (from Saturday it got a bit better, two steps forward) after a Tuesday infusion; cycle 4: \"Na een week voelde ik me gelukkig weer een stuk beter\" (after a week I felt considerably better again), then a jogging attempt with a single song on repeat.",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/dream-it-believe-it-achieve-it/de-weken-rond-chemokuur-4",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Chemo brain compounds the bad hours: up to ~75% of patients have cognitive dysfunction during treatment - word-finding loss, short attention, mental fog - which worsens in the afternoon/evening alongside fatigue and degrades the same windows fatigue already takes.",
+     "evidence": "\"up to 75 percent of cancer patients experience some form of cognitive dysfunction during treatment\"; symptoms include \"struggling to find the right words... short attention span... feeling sluggish, mentally tired or drained.\" EMA study found evening \"difficulty thinking worsened (p=0.01).\"",
+     "source_url": "https://my.clevelandclinic.org/health/diseases/21032-chemo-brain",
+     "geography": "US/general",
+     "confidence": "high"
+    }
+   ],
+   "surprises": [
+    "The day is NOT uniformly tired - morning fatigue and evening fatigue are statistically distinct phenotypes with different causes, and within-day fatigue is lowest mid-morning and peaks at BEDTIME, not mid-afternoon as commonly assumed. The morning is reliably the best window. A daily companion should treat mid-morning as the action window and front-load anything cognitively or physically demanding there.",
+    "The infusion day is sedating, not active: patients are wired for 1-2 hours on steroids then sleep through most of a 6-8 hour drip on Benadryl. The hard part is not the chair - it is days 4-5 when the steroid buffer drops out. This decouples 'treatment day' from 'worst day' entirely.",
+    "Steroids are a double villain on a delay: they buffer you (you feel deceptively okay days 1-2) AND they cause the insomnia that wrecks the night-before/night-of sleep (~45% moderate-severe insomnia), and then their withdrawal produces a named 'steroid crash' (day 9 on EC, days 4-5 on TCHP). Patients track the crash day as a distinct calendar event.",
+    "Pre-infusion sleep quality predicts fatigue and mood for the ENTIRE 3-week cycle, not just the next day. The night before chemo is a high-leverage intervention point that a companion could target days in advance.",
+    "Patients already run a sophisticated internal scheduling model - 90-minute upright windows, no early-morning calls, naps capped early afternoon, 'never took a full day off but restructured the day.' The unmet need is less 'tell me what's happening' and more 'help me allocate my rationed good hours and protect them.'",
+    "The regimen architecture dictates the week's shape more than the cancer type: a 46-hour take-home pump (FOLFOX-style) carves the week into a dead Mon-Wed block plus one usable week, which is a completely different day-planning problem than a one-shot infusion every 3 weeks."
+   ],
+   "gaps_or_caveats": [
+    "Source skew is heavily US, then UK, with two NL/Dutch primary voices (kanker.nl) and one Canadian. I found Dutch diaries with verbatim quotes but did not find NL ecological-momentary or time-use studies; the quantified diurnal/fatigue-class numbers are all US (Miaskowski/MD Anderson cohorts). EU generalizability of the exact percentages is unverified.",
+    "Most quantified diurnal data is from breast and mixed solid-tumor cohorts (Miaskowski), not specifically oncology beachhead severe paths; FOLFOX/take-home-pump day shape comes from individual patient narratives (Kris) rather than time-use studies.",
+    "True minute-by-minute hour-by-hour reconstructions are scarce in published form; most first-person sources narrate by day ('day 4 was worst') rather than by clock hour. The clock-time texture (midnight/3am vomiting, 1pm-6pm nap block, mid-morning good window) is assembled from several partial sources rather than one continuous validated log.",
+    "Several richer first-person sources (Cancer Health 'A Short Day in the Life', LiveStrong chemo diaries, Mayo Connect sleepiness thread, CSN 1:30am thread, a YouTube chemo-weekend vlog) returned 403/404/redirect/empty and could not be fully extracted; their detailed timelines are partially captured only via search-result snippets, not verified primary text.",
+    "Anti-emetic regimens have improved markedly, so older studies showing low overall nausea (e.g. the EMA breast cancer cohort) may understate nausea in less-controlled real-world or severe-path settings; conversely some vivid diary accounts may predate current anti-emetic standards. Timing of nausea relative to current prophylaxis should be re-validated for the specific regimens Ditto's oncology users are on.",
+    "I did not separately reconstruct the caregiver's day (the care circle), which is core to Ditto's growth thesis; sources noted caregivers average ~8h/day of care but I did not gather hour-by-hour caregiver-day texture in this pass."
+   ]
+  },
+  {
+   "mission": "week:emotional-cycle",
+   "key_findings": [
+    {
+     "finding": "Steroid (dexamethasone) mood follows a predictable weekly cycle tied to dose day: a 1-2 day high/euphoria, then a crash with irritability and low mood roughly 40 hours later.",
+     "evidence": "\"I would take it on Mondays so that I would have high energy for the first few days...crash would come around Wednesday afternoon or Thursday\" (Eric Hofacket). Separately, a Beacon column: dosed Wednesday night → dex high Thursday → insomnia Thursday night → crash by Friday afternoon, \"about 40 hours after taking the medication.\"",
+     "source_url": "https://myelomabeacon.org/forum/fatigue-after-dexamethasone-dex-t5364.html",
+     "geography": "US (multiple myeloma forum, English-language)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Dex day is named and recognized by families as a behavioral event; the patient becomes hyper-irritable and 'barks orders,' and the crash days bring intense anger, confusion and meanness.",
+     "evidence": "\"Dex Day! They knew on Mondays he would come in like a bear barking orders.\" Caregivers at a seminar: \"I want my husband back!\" and \"I may kill him if the multiple myeloma doesn't kill him first!\" A spouse described \"the following four days of him coming down from that 'high' and intense anger and confusion and meaness.\"",
+     "source_url": "https://myelomabeacon.org/headline/2010/09/09/pats-place-dealing-with-dexamethasone-side-effects/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Dex insomnia is total on the dose night and patients fill the small hours with quiet busywork; sleep debt compounds across 3-4 nights before the crash.",
+     "evidence": "\"On Mondays, when I receive 40 mg, I am almost guaranteed not to sleep for the night, maybe for 2 hours at most... I usually read, organize a few papers, pet my dog, and tie up loose ends\" (Joseph Schutz). \"By the third night, I am crashing\" (willow75). Pat: \"I would wake up at 4 a.m. the following morning like clock-work.\"",
+     "source_url": "https://myelomabeacon.org/forum/dexamethasone-insomnia-t682-20.html",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Steroid energy is channeled into compulsive overnight cleaning/organizing; the energy is real but unsustainable and ends in a crash.",
+     "evidence": "Forum reports: \"usually on Monday (even though don't sleep Sunday night) all I want to do is clean, wash clothes, change sheets, etc\"; patients advised to \"organize those photo albums. Clean the garage.\" Pattern: dex \"makes most patients hyper, leading them to go and go and go, only to crash in a few days.\"",
+     "source_url": "https://myelomabeacon.org/forum/best-time-of-day-multiple-myeloma-treatments-t10637.html",
+     "geography": "US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "The chemo cycle has a recognized emotional/physical low at days 3-5, which coincides with the steroid wearing off; patients then recover and feel almost normal in the third week, just in time to dread the next round.",
+     "evidence": "\"Days 4 and 5 were the worst for me, the steroids had worn off but the sickness was there then\" (Irishgirl16, UK). Another: nearly three weeks after round 3, \"the first they felt almost normal, yet they were absolutely dreading the next treatment.\" Mood swings/anxiety \"most intense...around days 5-10 after the infusion.\"",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/general/291048/chemotherapy---what-days-are-the-worst",
+     "geography": "UK (and US blogs)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Night is the single hardest emotional window: when the lights go off and distraction stops, thoughts go straight to cancer and death.",
+     "evidence": "\"One of the toughest times I have is when I go to bed at night. After I turn off the lights and am in the dark, my thoughts go immediately to my cancer and possibly dying from it.\" NPR My Cancer blog: \"those dark hours in the night when it can feel like all we have is fear.\"",
+     "source_url": "https://www.cancercare.org/blog/tips-on-getting-to-sleep-when-cancer-is-keeping-you-awake",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Scanxiety has a measurable timing envelope: fear of recurrence peaks in roughly the 6 days before a surveillance scan, with the highest worry on results-disclosure day; the night before is reliably the worst.",
+     "evidence": "EMA study: \"Fear of cancer recurrence (FCR) peaked in the 6 days before surveillance scans compared to 5 days after receiving results (p<0.001)... highest worry on the day of the appointment when results were disclosed.\" FightCRC patients: \"My anxiety starts up about a week before scans\" (Lara Lambert); \"The night before is the worst. I usually don't sleep\" (Leticia Alvarenga).",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9545782/",
+     "geography": "US (EMA study + FightCRC patients)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Scanxiety is experienced as countdown-to-verdict dread, not fear of the scan itself; patients fixate on the waiting interval and put life on hold.",
+     "evidence": "Tweets analyzed: \"every 3 months, cancer makes me feel like a death row prisoner hoping for a stay of execution\"; \"It is only 96 hours, 47 minutes, and 34 seconds\"; \"I will not be making plans until I know whether I get to have my next 3 months\"; \"we've entered the 'rip off all my cuticles' phase of scanxiety.\"",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10157462/",
+     "geography": "US/global (English Twitter)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Identity loss is acute and recurring: patients describe ceasing to be themselves and becoming 'a patient,' wanting to feel like their own name again rather than a sick body.",
+     "evidence": "Dutch patient Deborah: \"Me gewoon even Deborah voelen in plaats van dat zieke, vermoeide hoopje mens\" (\"Just feel like Deborah for a moment instead of this sick, exhausted heap of a person\"). US: \"When I became a patient, I felt this identity slipping away. Immediately the focus was on my illness and treatment.\"",
+     "source_url": "https://hdi.nl/het-verhaal-van-deborah/",
+     "geography": "NL (Deborah, Helen Dowling Instituut) + US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Profound daily fatigue is itself an emotional event: it strips dignity and reframes naps from luxury to survival, leaving patients unable to perform trivial acts.",
+     "evidence": "Deborah (NL): \"Je staat 'geslooptmoe' op en je gaat meerdere malen per dag 'kapotmoe' naar bed\" (\"You wake up utterly wrecked and go to bed several times a day completely drained\"). Another NL patient: lay watching mindless TV \"enkel omdat de afstandsbediening net buiten mijn bereik lag en ik van oververmoeidheid de beweging om dat ding te pakken niet kon maken\" (couldn't reach the remote from exhaustion).",
+     "source_url": "https://hdi.nl/het-verhaal-van-deborah/",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Numbness and emotional flatness are common; patients function on autopilot, going to appointments and signing forms while feeling 'nothing' and dissociated.",
+     "evidence": "Linda (UK): \"I didn't cry. I didn't scream... I felt… nothing. Just numb.\" \"I moved through everything in a fog. I went to appointments, signed forms, listened to doctors... I smiled politely and nodded while inside I felt like I was floating outside my body.\" Another UK survivor: \"I was just numb. I would shuffle about all day.\"",
+     "source_url": "https://community.macmillan.org.uk/cancer-blogs/b/lind-a-cancer-2/posts/the-emotional-rollercoaster-of-a-cancer-diagnosis-from-numbness-to-strength",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Maternal guilt is concrete and daily: guilt over fatigue stealing afternoons with kids and having to explain 'sad Mommy,' plus grief for an imagined future.",
+     "evidence": "Mother named Morris (NPR): \"I felt so guilty at first for how much we were going to have to go through as a family,\" guilty for \"losing afternoons to fatigue after treatments, or having to explain being 'sad Mommy' to her toddler.\" Another mother: \"I was grieving for the loss of the future...that I had in my head.\"",
+     "source_url": "https://www.npr.org/2025/03/17/nx-s1-5327584/cancer-diagnosis-parents-parenting-mothers",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Patients withhold their pain from family specifically to avoid being a burden, choosing to talk to counselors instead of loved ones.",
+     "evidence": "\"Many clients tell counselors they appreciate talking with a counselor rather than their friends/family because they 'don't want to burden them' with their painful journey all the time.\" Dutch sources echo guilt \"because others are suffering as a result of your situation.\"",
+     "source_url": "https://curechildhoodcancer.org/blog/emotional-burden-of-childhood-cancer/",
+     "geography": "US + NL",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Anger is a real but under-discussed daily emotion; patients need permission to rage and feel betrayed by their own bodies and by recurrence.",
+     "evidence": "LBBC blogger: \"I needed someone to allow me the space to rage. I needed someone to scream 'it's not fair' over and over with, cursing our genetics.\" \"That anger, for me, was a gift.\" \"it's infuriating to constantly fear it will find you again.\"",
+     "source_url": "https://www.lbbc.org/blog/losing-my-temper-embracing-anger-after-a-breast-cancer-diagnosis",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Dark/gallows humor is an active daily coping tool, framed as living in a 'whack-a-mole' where the hammer can fall any time; it bonds the cancer community but can alienate outsiders.",
+     "evidence": "Patients describe living with chronic cancer as \"being stuck in the upright position in a whack-a-mole game\" where \"the hammer could come down at any time.\" \"The jokes make me feel better\" (Beth Caldwell). One patient joked to her oncologist \"about starting a life of crime and he became upset\" - humor not always shared.",
+     "source_url": "https://blood-cancer.com/living/gallows-humor",
+     "geography": "US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Moments of normalcy fire during mundane sensory domestic acts (dishes, warm water, family sounds), but are explicitly experienced as fragile 'illusion' over constant disease-awareness.",
+     "evidence": "Metastatic breast cancer blogger: \"Sometimes I stand at the sink, hot water running, bubbles rising, dishes clinking together, and for a moment, it feels like life is ordinary again.\" \"beneath the illusion of normalcy lives a constant awareness: I have metastatic breast cancer... ever present in my body, in my thoughts, in the way I move through every day.\"",
+     "source_url": "https://blogs.webmd.com/breast-cancer/20260220/the-illusion-of-normalcy-doing-dishes-with-metastatic-breast-cancer",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Daily life is experienced as a continuous, granular loss - especially loss of choice and independence - not a single dramatic event; mornings tend to be the better-functioning window.",
+     "evidence": "Advanced cancer patients (Canada study): \"The loss is daily. It is the loss of...choice\" (Chris). \"For me, just to be able to do a couple of dishes, put my hands in the warm water...\" (Jessica). \"In the morning I feel better, so it's like a different kind of socialising\" (Melissa).",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10503259/",
+     "geography": "Canada (rural Rocky Mountains)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Nights are spent in fragmented stages of sleep punctuated by pain and rumination, with hours awake in the dark - a recurring nightly pattern, not a one-off.",
+     "evidence": "Dutch palliative patient (ROAR blog): \"'s Nachts lig ik vaak wakker van de pijn of slaap ik in etappes: 2 à 3 uur slapen, minimaal een uur wakker, weer in slaap\" (\"At night I often lie awake from pain or sleep in stages: 2-3 hours, at least an hour awake, then back to sleep\").",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/roar/kanker-moe",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Physical reminders make forgetting cancer impossible even on calm days; the body itself (scars, port, missing breasts) re-triggers patient identity constantly.",
+     "evidence": "Search-surfaced from CURE 'The Impossibility of Forgetting Cancer': author notes having no breasts, \"scars all over their chest and back,\" and a \"little port scar,\" while wanting to forget and get \"back to the business of daily life\" - but cannot. (Full article 403-blocked; summary only.)",
+     "source_url": "https://www.curetoday.com/view/the-impossibility-of-forgetting-cancer",
+     "geography": "US",
+     "confidence": "low"
+    }
+   ],
+   "surprises": [
+    "The steroid (dexamethasone) emotional cycle is the most precisely-timed and family-disruptive pattern in the entire dataset - families literally name and brace for 'Dex Day,' and the crash hits on a near-clockwork ~40-hour delay (Monday dose → Wednesday/Thursday crash; Wednesday dose → Friday crash). This is a calendar-predictable emotional event an AI companion could anticipate and pre-empt, unlike most cancer emotions.",
+    "Scanxiety is quantifiably anticipatory: fear peaks in the ~6 days BEFORE the scan, not after, and the dread is about the waiting verdict rather than the scan procedure ('death row prisoner hoping for a stay of execution'). The intervention window is the pre-scan week and the results-wait, both predictable from a calendar.",
+    "Patients describe the worst emotional collapse not at diagnosis but when treatment ENDS ('some women process it when they get the news, but others, like me, face it all when the treatment is done. And that's when it gets hard') - the quiet weeks are harder than the busy ones.",
+    "Moments of normalcy are triggered by deeply mundane sensory domestic acts - hands in warm dishwater, a child laughing in the next room - and patients consistently frame them as a fragile 'illusion' rather than relief. The everyday is both the refuge and the reminder.",
+    "Patients actively hide distress from their own family to avoid being a burden and prefer a neutral third party - a strong signal that an AI companion's non-judgmental, no-burden availability could fill a real emotional gap that loved ones structurally cannot."
+   ],
+   "gaps_or_caveats": [
+    "Reddit (r/cancer, r/CancerFamilySupport) is fully blocked to the search agent, removing one of the richest sources of raw, unfiltered daily verbatims. Findings skew toward curated blogs, foundation patient-story pages, and forums that survive crawling.",
+    "Several high-value first-person sources were 403-blocked or paywalled via fetch (CURE Magazine articles, Inspire and Mayo Clinic Connect forums, Tandfonline qualitative study), so some findings rest on search-snippet summaries rather than fully verified full-text quotes - flagged at lower confidence.",
+    "Steroid-timing verbatims are overwhelmingly from multiple myeloma patients (weekly oral dex regimens), where the rhythm is most pronounced. The oncology beachhead (e.g. solid tumors with dex as a chemo pre-med) likely shows a similar but cycle-bound pattern; timing detail there is thinner and partly inferred.",
+    "Geography skews US, then UK, with a solid NL/Belgium thread (Kanker.nl, Helen Dowling Instituut, Belgian EMA studies). Genuinely Dutch first-person DAILY-texture verbatims with explicit timing are scarcer than US/UK ones - worth deeper NL-language hunting for the local market.",
+    "Much first-person writing online is from metastatic/advanced and survivor populations who write publicly; the 'ordinary Tuesday' of someone mid-treatment but not blogging is under-represented and may differ. The explicit 'what do I need emotionally on a normal Tuesday' question is answered more by inference (normalcy triggers, no-burden listening, anticipating predictable bad days) than by patients stating it directly.",
+    "Identity-loss and numbness quotes cluster around diagnosis and treatment-end transitions rather than steady-state ordinary weeks; the steady-state ordinary-week emotional texture is best captured by the fatigue, night-rumination, and normalcy-illusion findings."
+   ]
+  },
+  {
+   "mission": "week:practical-admin",
+   "key_findings": [
+    {
+     "finding": "Patients in active systemic therapy spend a median of 400 minutes (6.7 hours) per week on cancer-related tasks, with the top of the range hitting 603 minutes (10+ hours) per week.",
+     "evidence": "Participants spent a median (IQR) of 400 (266-603) minutes per week on cancer-related tasks.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12709373/",
+     "geography": "US (Univ. of Minnesota + Univ. of Alabama at Birmingham; 60 metastatic breast/advanced ovarian patients, Dec 2023-Sep 2024)",
+     "confidence": "high"
+    },
+    {
+     "finding": "More than half of that weekly load is invisible at-home admin: medication management, scheduling appointments, medical bills, symptom monitoring, info-seeking and arranging help/transport take a median 209 min/week (up to 355 min in the top quartile).",
+     "evidence": "At-Home Tasks: Median 209 minutes (IQR: 121-355 minutes/week) ... medications, scheduling, medical bills, symptom management, health monitoring, information-seeking, arranging support.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12709373/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "For every 1 hour of actual treatment, patients spend roughly 2 hours traveling and waiting, so the logistics of getting care exceed the care itself.",
+     "evidence": "Participants spent roughly 2 hours on travel/waiting for every 1 hour of direct care ... 'For many patients, the hours spent traveling, waiting, or managing care at home far exceed the time spent in actual treatment.' (co-author Helen Parsons)",
+     "source_url": "https://www.sph.umn.edu/news/new-study-reveals-the-hidden-time-burden-faced-by-medical-patients/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "The lead researcher names the load directly: managing cancer is 'like a part-time job' and now there is objective time-tracking data to back what patients have said for years.",
+     "evidence": "'For years, patients have been telling us that managing cancer is like a part-time job—and now we have the objective data to support that.' (lead author Rachel Vogel)",
+     "source_url": "https://www.sph.umn.edu/news/new-study-reveals-the-hidden-time-burden-faced-by-medical-patients/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Cancer admin disrupts ordinary daily life on most days: 35% of patients reported tasks interfered with self-care, chores, work or socializing on more than half of study days.",
+     "evidence": "35% of participants (21 of 60) reported cancer tasks disrupted daily activities—self-care, chores, work, or socializing—on more than 50% of study days.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12709373/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "A single bad admin day can swallow four hours across driving, care coordination, and fighting insurance — captured in a patient's own words.",
+     "evidence": "'Today was a good day. I only spent two hours driving to appointments, another hour coordinating care and a final hour on the phone with insurance.'",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11972685/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "US insurance prior-authorization is a massive, concentrated time sink that lands on patients and families: when directly involved, 51% lost up to a full business day, 27% lost 2-3 days, and 12% lost a full business week or more per single authorization.",
+     "evidence": "When patients or families got directly involved in authorizations ... 51% lost up to a full business day, 27% lost up to 2-3 business days, and 12% lost a full business week or more to dealing with a single authorization request.",
+     "source_url": "https://www.cancercare.org/press/releases/267-2025_06_10",
+     "geography": "US (CancerCare national survey, 1,201 patients, Sep-Dec 2024)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Prior authorization is near-universal in US cancer care and mostly pointless friction: 85% faced it, 40% had treatment delayed, yet 95% of requests were eventually approved.",
+     "evidence": "85% had their insurance companies require prior authorization ... 40% had treatment delayed because of this red tape, despite 95% of authorization requests eventually being approved.",
+     "source_url": "https://www.cancercare.org/press/releases/267-2025_06_10",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Caregivers carry an enormous parallel time load: an estimated 6.1 million US cancer caregivers average 33 hours/week, a quarter exceed 40 hours/week, and intensity peaks at ~66 hours/week in the patient's last year of life.",
+     "evidence": "6.1 million caregivers of people with cancer are spending, on average, 33 hours per week caregiving ... approximately one-quarter ... spend in excess of 40 hours a week ... 66 hours per week during the patient's last year of life.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9664173/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Childcare is a hidden point of failure: nearly 50% of cancer patients with children rescheduled oncology appointments due to lack of childcare, and 1 in 7 radiotherapy patients missed appointments for childcare reasons.",
+     "evidence": "Nearly 50% of cancer patients with children still rescheduled oncology appointments due to lack of childcare ... One in seven patients on radiotherapy missed appointments for childcare reasons.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11782393/",
+     "geography": "US/Canada/Sweden (narrative review, North American focus)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The childcare safety net is thin and itself overloaded: family and friends supply 80%+ of childcare for parents in treatment, but 90% of those helpers have their own jobs and over half have their own dependent children.",
+     "evidence": "Family and friends account for more than 80% of childcare support systems ... 90% of support networks had their own jobs; over half had dependent children.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11782393/",
+     "geography": "US/Canada/Sweden",
+     "confidence": "high"
+    },
+    {
+     "finding": "Medication management is a logistics problem in itself: some cancer patients take up to 20 pills a day and must call the pharmacy 5+ days before running out, juggling standing vs as-needed (anti-nausea) refills.",
+     "evidence": "Cancer treatment usually involves taking a lot of medications ... with some patients taking up to 20 pills a day ... Remember to call 5 or more days before you run out of medications.",
+     "source_url": "https://ohcare.com/tips-cancer-medication-refills/",
+     "geography": "US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "A Dutch breast cancer patient's diary shows the practical load is family-wide and runs on top of treatment: getting everyone to their appointments, filling stomachs at night, keeping the house presentable, all while coming home exhausted daily.",
+     "evidence": "'Ik zorg in het dagelijks leven voor mijn mannen. Dat iedereen optijd bij zijn afspraken zijn.' ... 'Alle maagjes savonds gevuld zijn...Dat het huis op zich toonbaar is.' ... 'Moe, uitgeput kom ik iedere dag uit het ziekenhuis.'",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/dagboek-van-een-beginnende-kankerpatient",
+     "geography": "NL (31-year-old woman, married, one son, breast cancer dx Jan 2023)",
+     "confidence": "high"
+    },
+    {
+     "finding": "A chemo day is effectively a full workday consumed: in two first-person accounts (UK and US), patients are collected at 7:15-7:20am and are not home until after 3pm, ~7-8 hours door-to-door, much of it bloodwork, cannula attempts, and waiting.",
+     "evidence": "UK: 'Start hydrating ... 7:15 ... Treatment starts. Infusion of Taxol lasts an hour ... I'm actually out of there around 3pm.' US: 'My day begins with my lovely friend picking me up at 7:20.'",
+     "source_url": "https://one-step-training.com/blog/a-day-in-the-life-of-chemo",
+     "geography": "UK (Fran Whitfield) and US (Alabama, Donna Brooks at medium.com/@donnaeichbrooks)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Treatment patients lean on others just to move: the chemo day depends on a friend driving both ways, and patients rotate multiple drivers to avoid burning out any one person.",
+     "evidence": "'My amazing trusty friend picks me up from Kirklin and takes me home.' ... patients have 'multiple people taking turns to avoid caregiver burnout.'",
+     "source_url": "https://medium.com/@donnaeichbrooks/a-day-at-chemo-d38b7eeb32d8",
+     "geography": "US (Alabama)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "In the NL, the return-to-work / sick-leave system is a slow, poorly-guided admin track: only 45% of survivors were actually guided by a bedrijfsarts/insurance physician, and those guided rated that guidance just 4.6/10.",
+     "evidence": "Only 45 percent were guided by an occupational or insurance physician ... patients feeling misunderstood and giving the occupational physician guidance a rating of 4.6.",
+     "source_url": "https://nfk.nl/themas/kanker-en-werk/informatie-voor-werknemers",
+     "geography": "NL (NFK 'Doneer je Ervaring' survey, ~3,500 survivors + 602 relatives)",
+     "confidence": "high"
+    },
+    {
+     "finding": "NL re-integration is structurally delayed because the problem analysis and reintegration plan are typically postponed until after treatment ends, stretching the trajectory by roughly a year.",
+     "evidence": "The problem with cancer is that the treatment makes you sick, so the problem analysis and reintegration plan are often postponed until after treatments, meaning a year passes.",
+     "source_url": "https://www.kanker.nl/gevolgen-van-kanker/werk-en-kanker/werk-en-kanker/werk-en-kanker",
+     "geography": "NL",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Money admin is a long-tail burden in the NL: 75-76% of (ex-)cancer patients report adverse financial consequences, half saw income drop within a year of diagnosis, and for half of 2,391 patients the situation had not recovered after five years.",
+     "evidence": "76% van de mensen met of na kanker ervaart nadelige financiële gevolgen ... de helft ... zagen hun inkomen dalen, vaak binnen een jaar na diagnose. Bij de helft van 2391 patiënten was de financiële situatie na vijf jaar nog niet hersteld.",
+     "source_url": "https://www.hematon.nl/nieuwsberichten/door-kanker-ook-geldzorgen-of-achterstand-inkomen",
+     "geography": "NL (NFK survey)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Even within the NL's covered system, recurring out-of-pocket admin grinds: the annual eigen risico is consumed by routine controls, and costs like parking, transport and partially-reimbursed aids are the patient's own — and only 3% got financial help via a care professional.",
+     "evidence": "'Elk jaar moet ik nog op controle in het ziekenhuis. Daar gaat mijn eigen risico al aan op.' ... Parkeerkosten zijn altijd voor eigen rekening ... Slechts 3 procent kreeg hulp via de zorgprofessional.",
+     "source_url": "https://nfk.nl/actueel/blog/maak-financi%C3%ABle-gevolgen-van-kanker-bespreekbaar",
+     "geography": "NL (NFK 'Doneer Je Ervaring', 4,675 patients)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The admin/logistics burden now has a clinical name — 'logistic toxicity' — distinct from financial toxicity, capturing care coordination, insurance navigation, and scheduling as a treatment side effect in their own right.",
+     "evidence": "The article explicitly introduces 'logistic toxicity' as a term describing the administrative and coordination burdens cancer survivors face—distinct from financial toxicity ... 'a real burden to individuals at a time when they would prefer to focus on living.'",
+     "source_url": "https://canceradvocacy.org/logistic-toxicity-and-administrative-burdens-for-cancer-survivors-and-caregivers/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Coordinating care is described by patients/caregivers as 'a crash course in juggling' multiple specialties, scans, bloodwork and biopsies, with ripple effects onto families, work and personal life.",
+     "evidence": "Caring for someone with cancer feels like a crash course in juggling ... keep track of appointments between multiple specialties, like radiation oncology or surgical oncology, and testing ... multiple scans, bloodwork, or biopsies.",
+     "source_url": "https://www.cancertodaymag.org/cancer-talk/coordinating-care/",
+     "geography": "US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Working patients feel the time burden most acutely, and a personal calendar starts to mirror a work calendar in density.",
+     "evidence": "'My personal calendar started to look as busy as my work calendar.' ... Working participants were significantly more likely than retired ones to prioritize time reduction (58% vs. 36.5% for travel time).",
+     "source_url": "https://www.lbbc.org/blog/balancing-act-juggling-chemo-work-and-family-during-breast-cancer",
+     "geography": "Scotland/UK (LBBC blog) + US (PMC12128304 OOCAT study, n=224)",
+     "confidence": "high"
+    },
+    {
+     "finding": "When fatigue hits, the practical fallout is that basics — showering, dressing, cooking, housework — become the things that get dropped, and patients are explicitly advised to outsource cooking/housework and lower standards.",
+     "evidence": "Everyday activities like showering, dressing and cooking can be a major challenge ... ask for help from others or home care with other activities (such as cooking and housework) ... windows don't necessarily need to be cleaned monthly.",
+     "source_url": "https://www.borstkanker.nl/leven-met-borstkanker/gevolgen/vermoeidheid",
+     "geography": "NL",
+     "confidence": "medium"
+    }
+   ],
+   "surprises": [
+    "The biggest single time-sink in the US data is not treatment or even travel — it is fighting one's own insurer: 12% of patients (or their family) lost a full business week or more on a SINGLE prior-authorization request, and 95% of those requests were approved anyway. That is pure deadweight admin a daily companion could attack directly.",
+    "The 2-to-1 ratio is stark and underused as a framing: patients spend ~2 hours traveling and waiting for every 1 hour of actual treatment. The 'medical' part of cancer is the minority of the time cost.",
+    "Childcare is a silent driver of MISSED treatment, not just stress: nearly half of parents with cancer rescheduled oncology appointments over childcare and 1 in 7 radiotherapy patients missed appointments for it. Logistics failures translate directly into worse clinical outcomes.",
+    "The informal support network is structurally fragile by the numbers: 80%+ of childcare comes from family/friends, but 90% of those helpers have their own jobs and half have their own kids. The 'care circle' Ditto bets on is real but already maxed out — a tool that reduces coordination load on the circle, not just adds tasks, is the wedge.",
+    "Even in the heavily-insured NL system, financial damage is durable: for half of patients it had not recovered after FIVE years. The admin burden is not an acute-phase problem that ends with treatment — it has a years-long tail (eigen risico every year, re-integration, income).",
+    "The NL re-integration system is almost a mirror-image of the US insurance problem: instead of too many forced authorizations, the failure mode is too little guidance — only 45% got a bedrijfsarts at all, rated 4.6/10, with the plan deliberately postponed ~a year until after treatment.",
+    "There is already a clinical/advocacy vocabulary for this — 'logistic toxicity' (NCCS) and 'time toxicity' — which means a product positioned as reducing logistic/time toxicity can plug into an existing, credible narrative rather than inventing a category."
+   ],
+   "gaps_or_caveats": [
+    "The single best quantitative time-use study (median 400 min/week, the 2:1 travel:treatment ratio, 35% disruption) is US-only, n=60, and limited to metastatic breast and advanced ovarian cancer women (median age 59, 77% White). It maps well onto Ditto's severe/oncology beachhead but does NOT give an NL number for hours/week — I found no equivalent Dutch time-use study quantifying weekly admin hours.",
+    "The prior-authorization numbers (51%/27%/12% time loss, 85% prevalence) are intrinsically US: they reflect private/Medicare utilization management. The NL equivalent burden is structured completely differently (eigen risico, UWV/bedrijfsarts re-integration, regiotaxi/zittend ziekenvervoer reimbursement), so US insurance-admin figures should NOT be transplanted to the NL roadmap.",
+    "Most granular task-level breakdowns (e.g. 'minutes per week on scheduling vs bills vs transport') collapse into a single 'at-home tasks' bucket of 209 min/week. The earlier search snippet claimed a 'median 13 min/week on scheduling/bills/transport with top quartile 1hr+', but I could not confirm that exact split in the full paper text I retrieved — treat that specific sub-figure as low confidence.",
+    "Dutch first-person texture is solid on the family/household/exhaustion dimension (kanker.nl diary) and on finances (NFK), but I could not find an NL diary that walks through the weekly APPOINTMENT-CALENDAR-COORDINATION load across departments in verbatim detail — that texture came from US/UK sources. A targeted NL forum dig (kanker.nl communities, Olijf, Hematon) would strengthen this.",
+    "Several rich primary sources were paywalled or blocked (Medscape 402, the JCO abstract 403, Susannah Fox caregiver essay 403, Donna Brooks Medium partially). The chemo-day timelines and the JCO 'distress' quantification are therefore reconstructed from search snippets and adjacent open sources rather than full-text.",
+    "Meal/nausea-specific time-use is thin: searches surfaced recipe/advice content rather than lived 'I couldn't cook this week' verbatims with numbers. The cooking-when-nauseous load is well-attested qualitatively (borstkanker.nl) but I have no time figure for it.",
+    "The medication '20 pills a day' figure comes from an oncology clinic's patient-tips page, not a study — directionally useful for texture, but not a research-grade prevalence number."
+   ]
+  },
+  {
+   "mission": "week:social-relational",
+   "key_findings": [
+    {
+     "finding": "Asking for help is one of the hardest parts of cancer: nearly half of UK patients struggle to ask friends, family or colleagues, and fear of pity is the top reason.",
+     "evidence": "47% of cancer patients found it difficult asking for help from friends, family and colleagues; 43% of those feared being pitied; 30% cited pressure to stay strong. Survey of 500 UK adults with cancer (Censuswide for Cancer Research UK/Race for Life, April 2019).",
+     "source_url": "https://news.cancerresearchuk.org/2019/05/06/almost-half-of-people-diagnosed-with-cancer-find-it-hard-to-ask-for-help-as-many-fear-being-pitied/",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "The asking-for-help barrier is sharply gendered: women find it far harder to reach out than men, and take longer to even disclose the diagnosis to loved ones.",
+     "evidence": "58% of female cancer patients found it hard to reach out vs 36% of male patients. Women took an average of 10 days to discuss their diagnosis with loved ones, men 6 days.",
+     "source_url": "https://news.cancerresearchuk.org/2019/05/06/almost-half-of-people-diagnosed-with-cancer-find-it-hard-to-ask-for-help-as-many-fear-being-pitied/",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Patients frame not asking for help as a refusal to burden others, identity-rooted in being 'the helper' not the helped.",
+     "evidence": "Chris (31, lung cancer): \"I didn't want them to carry my burden.\" Esther (56, breast cancer): \"I felt I needed to stay strong for my family.\" Meta-synthesis verbatim: \"I have been the one who liked to support people, so I have never managed to be the one who needs help...Very difficult.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12573976/",
+     "geography": "UK + multi-country (20-study meta-synthesis)",
+     "confidence": "high"
+    },
+    {
+     "finding": "'Cancer ghosting' is widespread: a majority of patients report friends or family withdrawing after diagnosis, and the abandonment lands as a second wound on top of the illness.",
+     "evidence": "One survey found 65% of respondents experienced cancer ghosting; more than 75% said friends or family withdrew since diagnosis. Georgie Swallow (27, UK): \"For that to stop, and your friends to stop even coming to see you, it's just another hit that you take when you're already going through so much.\"",
+     "source_url": "https://www.refinery29.com/en-gb/2020/02/9407894/cancer-and-friendship",
+     "geography": "UK (quotes); US survey",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Friends withdraw because the patient reminds them of death, not from lack of care, and the silence is never explained.",
+     "evidence": "Yamour Yapici (25, UK): \"Some of my friends just didn't know how to handle it. They felt quite afraid, so they avoided seeing me because I reminded them of death.\" \"They didn't want to be emotionally traumatised by the whole process of watching me deteriorate.\"",
+     "source_url": "https://www.refinery29.com/en-gb/2020/02/9407894/cancer-and-friendship",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Loneliness coexists with attention: patients feel alone in a full house and believe no one without the lived experience can understand.",
+     "evidence": "Meta-synthesis verbatim (USA): \"There could be everybody home in my house and I still feel really alone.\" Another: \"I want to see no one because I feel nobody can understand.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12573976/",
+     "geography": "USA + multi-country",
+     "confidence": "high"
+    },
+    {
+     "finding": "Most patients default to silence about their cancer to avoid misunderstanding or to protect others, and many never initiate the conversation at all.",
+     "evidence": "Meta-synthesis: 80% of patients choose silence, primarily fearing misunderstanding or to protect others; 35% never initiate discussion about the illness and 24% only discuss it when prompted.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12573976/",
+     "geography": "Multi-country (incl. Netherlands, USA, UK)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Repeatedly updating everyone is a recurring weekly drain; patients describe being 'sick and tired' of retelling the story and resort to a single point-person or group post to survive it.",
+     "evidence": "\"I got sick and tired of repeating the same story every time someone asked.\" Patients found \"telling the basic story once via social media and group email was easier, emotionally, than the difficult and exhausting process of many, many phone calls.\"",
+     "source_url": "https://www.cancer.org/cancer/diagnosis-staging/telling-others-about-your-cancer.html",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Patients tire of being defined by cancer in every interaction and feel the relationship has become one-directional.",
+     "evidence": "Ellen: \"I'm so tired of the discussion being about me all the time.\" Michele: \"Even with support, I feel alone because I just CAN'T talk about it.\" Tara: \"When active treatment is complete, it's over for them. It's never really over for us.\"",
+     "source_url": "https://www.ihadcancer.com/cant-talk-about-cancer-with-friends-family-anymore",
+     "geography": "US platform (geography per-quote not stated)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The visit economy carries a hosting cost: managing friendships while sick is itself exhausting labour, separate from the illness.",
+     "evidence": "Shine Cancer Support blog (UK): \"managing your friendships can be exhausting when you're also managing your health, and worrying about the future.\" ACS guidance notes patients can emotionally handle only \"one or two reveals\" of the diagnosis a day before it feels \"exhausting and very blue.\"",
+     "source_url": "https://shinecancersupport.wordpress.com/2019/09/26/ive-got-cancer-wheres-my-casserole/",
+     "geography": "UK",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Being the focus of concern can itself feel othering, turning the patient into a spectacle rather than a person.",
+     "evidence": "Meta-synthesis verbatim: \"It got to the point where I was beginning to find it rather strange to be the focus of so much attention, I felt like a freak.\" And from Iran: \"I hurt to meet people's pitying look...I hate to hear this word.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12573976/",
+     "geography": "Multi-country (incl. Iran)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Intimacy and sex collapse during treatment, and partner withdrawal is experienced as humiliation and a loss of gender identity.",
+     "evidence": "Meta-synthesis verbatims: \"After having a mastectomy, my ex-husband didn't sleep with me and didn't touch me at all. I was humiliated.\" \"He just pulled away...I was furious [You] cannot just disappear when things get difficult!\" \"Prostatectomy affected my sexual relationship...She told me I was no longer a man.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12573976/",
+     "geography": "Multi-country",
+     "confidence": "high"
+    },
+    {
+     "finding": "Sexuality becomes an active, painful effort rather than a given; desire vanishes and intercourse hurts, requiring patients to 'fight for' it.",
+     "evidence": "Cervical cancer survivor (divorced, 46, Israel): \"You need to fight for your sexuality...You don't feel like it, it hurts, it does not bring you pleasure, all of your sexuality is gone.\" Another (married, 41): \"I have no desire for it...they took away my joy in life.\"",
+     "source_url": "https://www.cambridge.org/core/journals/palliative-and-supportive-care/article/kaleidoscope-of-relationships-cervical-cancer-survivors-perspectives-on-their-intimate-relationships-a-qualitative-study/4BCF51015B513E7C7655E296914A2672",
+     "geography": "Israel",
+     "confidence": "high"
+    },
+    {
+     "finding": "Partners are often present for logistics but emotionally absent, creating a specific loneliness inside the couple.",
+     "evidence": "Cervical cancer survivor (married, 45, Israel): \"My husband will do everything that is necessary...But that's it...for anything related to emotions, to closeness, he's simply not there.\"",
+     "source_url": "https://www.cambridge.org/core/journals/palliative-and-supportive-care/article/kaleidoscope-of-relationships-cervical-cancer-survivors-perspectives-on-their-intimate-relationships-a-qualitative-study/4BCF51015B513E7C7655E296914A2672",
+     "geography": "Israel",
+     "confidence": "high"
+    },
+    {
+     "finding": "Sexual dysfunction is near-universal for young women in treatment, the physical substrate behind the relational strain.",
+     "evidence": "Sexual dysfunction in at least one domain was reported by 68% of young women with breast cancer; high reproductive concerns in at least one dimension by 58%.",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6585728/",
+     "geography": "US study",
+     "confidence": "high"
+    },
+    {
+     "finding": "The daily school run is where a mother's cancer becomes socially visible and isolating, set against other parents' apparent normalcy.",
+     "evidence": "Ann Coxon (London): \"As other mothers breezily arrived at the Reception classroom door, pushing buggies with months-old younger siblings in tow, it also dawned on me that I may well be the only menopausal mother at the school gate.\" Describes \"juggling school book bags, water bottles, school trip forms, my own work bag\" on the 15-minute walk to school.",
+     "source_url": "https://breastcancernow.org/about-us/news-personal-stories/only-menopausal-mum-school-gate",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Chemo weeks remove the mother from family life for days at a time, and accepting help to fill the gap triggers guilt.",
+     "evidence": "Stella (UK): \"I was completely zapped by chemotherapy. I couldn't be present for my family like I usually was. I was in bed more often than not\" and \"out of it for close to a week\" per cycle. Marije: \"When my husband's parents stepped in to help, I felt guilty about it.\"",
+     "source_url": "https://breastcancernow.org/about-us/news-personal-stories/what-its-have-breast-cancer-mother",
+     "geography": "UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "Parents script the diagnosis for kids around routine and reassurance, using calendars to show who does drop-off/pickup and metaphors children grasp.",
+     "evidence": "Lilly Ribner: \"I explained that my port was the fairy door through which minions (their favorite movie at the time) traveled to deliver the medicine\"; daughter responded \"Bye bye, cancer! I don't like you, cancer!\" Guidance: \"use a calendar to show your kids what to expect each day - from who is doing school drop-off and pick-up to what treatments you're having.\"",
+     "source_url": "https://www.lbbc.org/blog/parenting-through-a-breast-cancer-diagnosis-telling-my-children",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Returning to work means navigating awkward colleague dynamics, fear of being smothered with sympathy, and a lasting stigma of unreliability.",
+     "evidence": "Cited survivor: \"I told only a few colleagues about my diagnosis. I couldn't handle being smothered in sympathy every time I walked down the hall.\" zeppogirl: \"I feel like I do have the stigma of being unreliable, like, 'Hmm, maybe she'll get sick again and can we trust her with more responsibility.'\"",
+     "source_url": "https://journeyingbeyondbreastcancer.com/2013/02/20/returning-to-work-after-cancer-how-to-deal-with-co-workers/",
+     "geography": "US (one quote Ireland)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Friendships are binary under cancer: some intensify, many simply go silent, with no explanation given.",
+     "evidence": "Meta-synthesis (USA): \"all my other friends, I never hear from them. I call them, they don't call me back.\" \"You know through this sickness, almost all my people changed.\" Refinery29 (UK), Lydia Brain on a close friend: \"I never felt like she was there for me...she was just gone.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12573976/",
+     "geography": "USA + UK",
+     "confidence": "high"
+    },
+    {
+     "finding": "The patient's cancer reshapes the wider family's relationships too, including adult children who feel shut out and lack their own support.",
+     "evidence": "Sally (London): \"people who receive the news together often form a tightly bonded club. I know this is true of my parents, and I felt left on the outside\"; \"I was desperate for his emotional support, but unsure of how to ask for it\"; \"I didn't feel that there was enough support for me. The focus at the clinic...was on my mum.\"",
+     "source_url": "https://breastcancernow.org/about-us/news-personal-stories/mums-breast-cancer-diagnosis-changed-our-whole-family-dynamic",
+     "geography": "UK",
+     "confidence": "high"
+    }
+   ],
+   "surprises": [
+    "The asking-for-help barrier is driven specifically by fear of PITY (43%), not fear of rejection or logistics - patients would rather go without than be looked at with sympathy. This reframes the product opportunity: low-friction, dignity-preserving help-coordination matters more than the help itself.",
+    "Loneliness is strongest INSIDE the home and inside the couple, not from absence of people. 'There could be everybody home in my house and I still feel really alone' and partners who 'do everything necessary' but are emotionally 'simply not there.' Attention does not equal connection.",
+    "Updating everyone is a distinct, recurring weekly labour that patients actively dread and engineer around (one point-person, group posts). This is a concrete, repeatable JTBD that fires every treatment cycle, not a one-time event.",
+    "The visit economy has a real hosting cost the patient pays: managing friendships and 'reveals' is exhausting work layered on top of being sick, and being the focus of concern can make patients feel like 'a freak.' Support can be experienced as a tax.",
+    "Several patients describe relationships ending in silence with NO explanation ever given - the ambiguity itself is part of the wound, suggesting value in tools that reduce the social awkwardness others feel around reaching out.",
+    "Cancer's relational damage extends a ring outward: adult children of patients report feeling shut out of the 'club' and having no support of their own because clinical focus is on the patient and primary caregiver - a care-circle gap Ditto's model could address."
+   ],
+   "gaps_or_caveats": [
+    "The brief's '45-60% need support more often than they ask' framing maps best to the Cancer Research UK 2019 survey (47% find it hard to ask; 58% of women), but I did not find a source using that exact 45-60% range or that exact phrasing - treat it as a paraphrase of adjacent UK survey figures.",
+    "Most strong first-person verbatims are UK and US; explicit NL/Dutch primary voices are thin. One quoted mother ('Marije') and the meta-synthesis (which lists the Netherlands among nine source countries) are the closest Dutch-context signals. Oncology-specific Dutch patient diaries were not surfaced.",
+    "The 65%/75% cancer-ghosting figures come via a secondary report (Refinery29 citing a survey); I could not open the primary CURE/breastcancer.org survey writeups (HTTP 403) to confirm sample size and methodology, so confidence on those exact numbers is medium.",
+    "Several high-value sources blocked WebFetch (403): CURE, Today.com, Young Survival Coalition, Mayo Clinic Connect, Cancer Today, CSN forum. Forum-level raw verbatims (Reddit, CSN, Mayo Connect threads) are under-sampled because search/fetch could not reach them; the texture leans on curated blogs and qualitative studies rather than unfiltered forum chatter.",
+    "Quantified 'cost per week' of maintaining relationships is largely absent in patients' own words - they describe it qualitatively (exhausting, a full-time job, days lost per chemo cycle) rather than in hours or money. The closest concrete unit is 'close to a week' of being non-functional per chemo cycle (Stella, UK) and the 'one or two reveals per day' ceiling.",
+    "The intimacy/sex verbatims skew female (breast, cervical) and toward heterosexual partnerships; male-patient and same-sex partner relational texture is thin, with prostate cancer represented by a single quote."
+   ]
+  },
+  {
+   "mission": "week:cognitive-physical-micro",
+   "key_findings": [
+    {
+     "finding": "Chemo brain isn't just slow word-recall; people lose the thread of their own sentence while speaking and can't name an object they're looking at.",
+     "evidence": "\"With chemo brain, I can forget what I'm even talking about while I'm talking about it. I can't find common words, like tree, as I'm looking at one!\"",
+     "source_url": "https://livingmylifein10days.wordpress.com/2020/05/12/chemical-fog/",
+     "geography": "US (Stage 4 pancreatic cancer patient blog)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Reading collapses within a single paragraph: comprehension is lost between the first sentence and the last, and simple recipes become unfollowable.",
+     "evidence": "\"by the time I got to the last sentence in a paragraph, I could not remember what I had read in the first sentence.\" and \"after chemo, I couldn't even follow a simple recipe.\"",
+     "source_url": "https://www.webmd.com/cancer/features/blog-chemo-brain",
+     "geography": "US (WebMD first-person blog)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Chemo brain fires as concrete daily errors: forgetting items repeatedly mid-errand, losing the parked car, leaving rooms empty-handed. These are discrete failure events, not a vague fog.",
+     "evidence": "\"The grocery store...took two and a half hours because I forgot my wallet, my bag, my keys, then finally the list.\" (Carol); \"I couldn't remember where I put my car. It took me over an hour.\" (M.E. Henitz); \"I go upstairs to get the laundry and I'll come down without it.\" (Cathy)",
+     "source_url": "https://www.heraldopenaccess.us/openaccess/the-lived-experience-of-chemo-brain-in-early-stage-breast-cancer-in-women-50-and-under",
+     "geography": "US (qualitative study, women with early-stage breast cancer)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The dominant chemo-brain workaround is external memory offloading: pocket lists added to throughout the day, and a fixed daily alarm specifically to trigger medication.",
+     "evidence": "\"I make lists and carry them in my pocket so I can add to them.\" (Julie); \"I set my alarm every day at the same time.\" (Cathy, for medication)",
+     "source_url": "https://www.heraldopenaccess.us/openaccess/the-lived-experience-of-chemo-brain-in-early-stage-breast-cancer-in-women-50-and-under",
+     "geography": "US (qualitative study)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Word-finding failure interrupts ordinary conversation at the dinner table, with the person stalling on a single everyday word ('salt') they need repeatedly.",
+     "evidence": "\"I'd be sat at the dinner table, saying, 'Can you pass me the…um…um…?' and the word wouldn't come out.\" / \"I would just stop mid-conversation because I couldn't think of the right word.\"",
+     "source_url": "https://lymphoma-action.org.uk/information-and-support/side-effects-lymphoma-and-treatment/chemo-brain-cancer-related-cognitive-impairment",
+     "geography": "UK (Lymphoma Action patient quotes)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Taste loss is progressive and ends in a metallic baseline where food vanishes entirely as a flavor, not just tastes 'off'.",
+     "evidence": "\"Then the taste of food disappeared altogether, and everything started tasting like metal.\" (Glen Haubold)",
+     "source_url": "https://www.mdanderson.org/cancerwise/10-chemotherapy-tips-from-cancer-patients-who-ve-been-there.h00-159303834.html",
+     "geography": "US (MD Anderson patient tips)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Specific foods flip from safe to repulsive in ways that are idiosyncratic and texture/acid-driven: bread turns bitter, tomato becomes ammonia or paste, red meat and coffee become inedible.",
+     "evidence": "\"Bread for example was really bitter\"; \"Spaghetti tasted like tomato paste, watermelon like ammonia.\" (Bette); \"Coffee was foul\"; \"Went off red meats\"",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/questions-about-diagnosis-and-treatment/274022/everything-tastes-disgusting-and-feels-awful-in-my-mouth-due-to-chemo",
+     "geography": "UK (Macmillan forum) + US (iHadCancer)",
+     "confidence": "high"
+    },
+    {
+     "finding": "What people actually manage to eat clusters around cold, sweet, acidic, and frozen items: ice lollies, sorbet, vanilla ice cream, cold melon/grapes, tinned fruit, yoghurt, custard, cola. Cold and sweet survive when hot and savory don't.",
+     "evidence": "\"Lemonade ice lollies, lemon sorbet and vanilla ice cream\"; \"melon chunks (if you can get them really cold)\"; \"Yoghurts, smoothies, milkshakes, cereal, custard, rice pudding\"; \"Sweet things taste vaguely normal so I try to eat by alternating a mouthful of food with a slug of Ribena.\" (SamKatz)",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/questions-about-diagnosis-and-treatment/274022/everything-tastes-disgusting-and-feels-awful-in-my-mouth-due-to-chemo",
+     "geography": "UK (Macmillan forum)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Cooking smells, not just taste, are a primary daily barrier to eating; hot/savory food smells trigger nausea so people retreat to cold sandwiches, tinned fruit, and sweet drinks.",
+     "evidence": "\"I have no appetite to speak of and can't stand the smell of food cooking.\" / \"It's mainly hot / savoury food I can't stand. But even sandwiches turn my stomach.\" (ColinD)",
+     "source_url": "https://cancerchat.cancerresearchuk.org/f/living-with-cancer/76020/aversion-to-the-smell-of-food",
+     "geography": "UK (Cancer Research UK Cancer Chat)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Eating becomes a clock-driven defensive routine: some patients learn they must eat on a fixed interval to prevent symptom collapse, turning food into scheduled maintenance rather than meals.",
+     "evidence": "\"We learned that I have to eat every two hours or the shit hits the fan.\"",
+     "source_url": "https://sothenthishappened.blogspot.com/2013/05/the-chemo-diaries-week-1-debrief.html",
+     "geography": "US (chemo diary blog, breast cancer, mother of young kids)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Steroids drive a manic-then-crash micro-cycle: nights of 3-4 hours sleep followed by frantic daytime activity (deep-cleaning the house), then an emotional collapse despite feeling physically fine.",
+     "evidence": "\"I only got 3 and 1/2 hours sleep last night... I went crazy with the housework in the afternoon... the steroids must be working overtime\" and \"physically I am feeling fine, mentally I am broken into pieces\"",
+     "source_url": "https://community.macmillan.org.uk/cancer-blogs/b/weblog826/posts/the-day-after-chemotherapy",
+     "geography": "UK (Macmillan chemo diary, dated 26 Nov 2016)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Sleep architecture is destroyed in fragments, not just shortened: floaty pre-sleep states, two-hour sleep blocks, and hypnic jerks that yank the body awake at the threshold of sleep.",
+     "evidence": "\"Felt slightly out of body, floaty...went to bed at around 6pm...slept for perhaps two hours at a time\" (Macmillan diary, Day 1); \"Every time that you're about to fall asleep, it feels like someone is startling you awake–except it's your own body... my legs would jerk or my arms would twitch.\"",
+     "source_url": "https://rounding30.wordpress.com/2015/03/13/a-hard-days-night-chemotherapy/",
+     "geography": "US (rounding30 blog) + UK (Macmillan diary)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Energy is budgeted in discrete, countable units (the 'spoon' frame is widely adopted), and in heavy treatment a whole day's allowance may be one or two acts: getting out of bed, or a shower.",
+     "evidence": "\"Wake up and fix breakfast, one spoon; take a shower, one spoon; get dressed, one spoon...\" and \"maybe I had two spoons—one for getting out of bed and moving to the sofa, and a second spoon for going to bed at night.\"",
+     "source_url": "https://www.ihadcancer.com/h3-blog/06-02-2016/the-spoon-theory-helps-me-deal-with-life-after-cancer",
+     "geography": "US (iHadCancer first-person)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The 'shower-as-achievement' phenomenon is real and quantified by patients as one-of-three: they can do a single discretionary activity per day and must choose between hygiene, errands, or social contact.",
+     "evidence": "\"I typically had enough energy to do one thing each day—take a shower, or go to Target, or go to lunch with a friend—but I couldn't do all three.\"",
+     "source_url": "https://www.ihadcancer.com/h3-blog/06-02-2016/the-spoon-theory-helps-me-deal-with-life-after-cancer",
+     "geography": "US (iHadCancer)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Neuropathy registers as a constant phantom-sock barrier between the body and the world: the floor can't be felt, causing trips and stumbles on flat carpet.",
+     "evidence": "\"It felt like she was wearing socks all the time, even when she was barefoot. 'I couldn't always tell when my foot was touching the ground,' she says. 'I was tripping over the carpet at times.'\" (patient Oehler)",
+     "source_url": "https://www.cancertodaymag.org/winter-2023-2024/controlling-peripheral-neuropathy/",
+     "geography": "US (Cancer Today)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Neuropathy makes fingers feel painfully frozen though they're warm to the touch, and patients ration phone use and improvise hand tools to cope with the constant sensation.",
+     "evidence": "\"my fingers are numb and feel painfully freezing to me, although not cold to touch\"; workarounds: \"limit phone use\", \"finger massage ring\", \"squeezing a rubber toy ball\", washing-up gloves for tepid water",
+     "source_url": "https://forum.breastcancernow.org/t/help-chemotherapy-induced-peripheral-neuropathy-pain/115830",
+     "geography": "UK (Breast Cancer Now forum)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Cold becomes weaponized by neuropathy (especially oxaliplatin/taxanes): touching cold objects is crippling, forcing patients to wear mittens for routine tasks like opening the fridge.",
+     "evidence": "\"Cold sensations would cripple me (so I had mittens for everything).\" (Theresa); \"I really struggled with smells while on Taxanes and also when on Platins.\"",
+     "source_url": "https://www.ihadcancer.com/h3-blog/04-02-2018/what-its-really-like-difficult-chemotherapy-health-stories-project",
+     "geography": "US (iHadCancer Health Stories Project)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Self-managed oral care is a multiple-times-daily ritual to keep mouth sores survivable; baking-soda rinses recur as the most-cited DIY protocol.",
+     "evidence": "\"I rinsed my mouth out with a mixture of baking soda and water multiple times a day.\" (Connie Porter, Ph.D.)",
+     "source_url": "https://www.mdanderson.org/cancerwise/10-chemotherapy-tips-from-cancer-patients-who-ve-been-there.h00-159303834.html",
+     "geography": "US (MD Anderson)",
+     "confidence": "high"
+    },
+    {
+     "finding": "A single day-by-day diary shows how fast symptoms rotate: taste gone by Day 2 (couldn't taste bacon), heartburn-driven food elimination by Day 6-9, mouth feeling 'strange' Day 4, hair loss Day 8 - the daily companion target changes within one cycle.",
+     "evidence": "Day 2: \"Bacon, couldn't taste it!\"; Day 6: \"Had strawberry yoghurt closely followed by Diet Coke and got heartburn\"; Day 9: \"First day with no heartburn as a result of avoiding all fruit\"; Day 4: \"Mouth still strange.\"",
+     "source_url": "https://community.macmillan.org.uk/cancer-blogs/b/weblog985/posts/my-chemo-diary",
+     "geography": "UK (Macmillan 'My Chemo Diary', FEC regimen)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Dutch (NL) patient voices mirror the same micro-reality: night-waking to eat, appetite arriving 'in waves', taste changing daily, and trivial acts (picking up coat and shoes) feeling exhausting.",
+     "evidence": "\"vannacht ben ik opgestaan om mijn maag te vullen met een bakje skyr, ik kon niet slapen\" (got up at night to fill my stomach with skyr, couldn't sleep); \"De trek komt in golven\" (appetite comes in waves); \"alleen al het pakken van mijn jas en schoenen voelde zo uitputtend\" (just getting my coat and shoes felt so exhausting); \"elke dag was mijn smaak anders\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/wie-ik/afwachten",
+     "geography": "EU/NL (Kanker.nl patient blog 'Afwachten')",
+     "confidence": "high"
+    },
+    {
+     "finding": "Time-keeping itself breaks down as a chemo-brain symptom, independent of memory: patients become chronically, structurally late and miss scheduled calls.",
+     "evidence": "\"I cannot make it anywhere on time.\" (Carol); \"We started about 10 minutes ago and we didn't want to call and bother you.\" (Sherry, on missing a work call)",
+     "source_url": "https://www.heraldopenaccess.us/openaccess/the-lived-experience-of-chemo-brain-in-early-stage-breast-cancer-in-women-50-and-under",
+     "geography": "US (qualitative study)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Mornings are reported as the worst window of the day, with patients winded within minutes of waking while trying to maintain a child's routine.",
+     "evidence": "\"Mornings seem to be the hardest. I wake up and try to tend to the kids for their own sense of normalcy and my own, but then I am quickly winded.\"",
+     "source_url": "https://sothenthishappened.blogspot.com/2013/05/the-chemo-diaries-week-1-debrief.html",
+     "geography": "US (chemo diary blog)",
+     "confidence": "medium"
+    }
+   ],
+   "surprises": [
+    "The 'shower-as-achievement' phenomenon is concretely quantified by patients themselves as a one-of-three daily tradeoff (shower OR errand OR a friend), not just generic tiredness. A daily companion that helped people pre-spend their single 'spoon' wisely would map directly onto how patients already think.",
+    "Eating becomes clock-driven defense, not appetite: at least one patient learned she must eat every two hours 'or the shit hits the fan.' This reframes the food battle as a timed-reminder problem (when to eat) as much as a what-can-I-eat problem.",
+    "Steroids create a predictable manic-up / crash-down micro-cycle within each chemo cycle (sleepless wired night, frantic 4pm cleaning, then emotional collapse the next day). This is rhythmic and forecastable per-cycle, which is exactly the kind of pattern a daily AI companion could anticipate rather than react to.",
+    "Taste isn't a single stable deficit; it changes day to day ('elke dag was mijn smaak anders' / 'every day my taste was different'), so any food guidance must be re-asked daily, not stored once. The 'safe food' list has a 24-hour shelf life.",
+    "Chemo brain manifests as discrete, nameable failure EVENTS (forgot wallet then bag then keys then list at one shop; lost the car for an hour; came downstairs without the laundry) rather than a constant haze. These are the moments an in-the-moment assistant could intercept.",
+    "Neuropathy degrades the exact input channel an app relies on: numb/painfully-cold fingers make people 'limit phone use' and struggle to type. A daily companion for this population may need large touch targets, voice-first input, and cold-tolerant interaction, or it fails precisely when needed most.",
+    "Cold and sweet foods survive when nothing else does (ice lollies, sorbet, vanilla ice cream, cold melon/grapes), and acid (lemon, Ribena/blackcurrant) is used as a taste-reset trick. There is a recurring, near-universal 'safe palette' that could be packaged as concrete daily suggestions."
+   ],
+   "gaps_or_caveats": [
+    "Most rich verbatims are US and UK; only one strong NL/EU primary source (Kanker.nl) was captured. Dutch-language patient diaries and forums (kanker.nl, borstkanker.nl) likely hold far more EU-specific texture and should be mined directly, ideally via the user-researcher/NotebookLM path or native Dutch search, since US-only web search under-surfaces them.",
+    "Several high-yield first-person sources (Sharsheret mucositis essay, Cancer Health 'Dozen Chemo Thoughts', Lungevity and Cancer Survivors Network steroid threads, Cancer Today neuropathy) returned 403/redirect and could not be quoted; verbatims for steroid-night detail and mouth-sore meal-by-meal accounts are thinner than the other categories as a result.",
+    "Medication-mistake specifics (took the wrong pill, double dose) were inferred from clinical sources and the 'forgot which pill' framing but I could not capture a clean first-person 'I took the wrong dose' verbatim; this exact failure mode needs a dedicated forum dig to confirm with a real quote.",
+    "Cancer type skews to breast cancer and a few GI/blood/pancreatic voices; oncology beachhead specifics (e.g., the daily reality on weekly oncology regimens, or head/neck where mouth sores dominate) are under-represented and worth a targeted pass.",
+    "Forum verbatims are self-selected and skew toward people well enough to post; the sickest days (bedridden, 'two spoons total') are described in retrospect, so the absolute worst-day texture is likely undercounted relative to its frequency.",
+    "Quotes were extracted via a summarizing fetch model; before any are used externally, re-verify each verbatim against the source page for exact wording and attribution."
+   ]
+  },
+  {
+   "mission": "week:nl-voices",
+   "key_findings": [
+    {
+     "finding": "The night before every scan result reactivates acute fear on a fixed cycle, and patients explicitly say it never gets routine even after being declared cured.",
+     "evidence": "\"Die laatste dag, die laatste avond voor een uitslag komt de spanning terug, maar ook de angst.\" and \"De komende twee jaar zal ik nog elke drie maanden in spanning zitten. Dat is wat kanker is.\" and \"Wachten op een uitslag. Ik denk dat het nooit zal wennen.\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/opstaan-en-weer-doorgaan/21-de-avond-voor-de-uitslag",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Treatment is experienced as a relentless cycle where recovery never completes before the next cure starts, collapsing any sense of a normal week.",
+     "evidence": "\"Ziekenhuisbezoek na ziekenhuisbezoek, chemo na chemo. Er lijkt geen einde.\" and \"Als je net opgeknapt bent, begint volgende kuur alweer.\" (Jade Kops, breast cancer)",
+     "source_url": "https://www.mijnlevenmetkanker.eu/blog",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "The body itself becomes the daily clock: ordinary actions like climbing the stairs or sitting on the couch register fatigue, and patients track their decline through these micro-failures.",
+     "evidence": "\"De trap oplopen werd uiteindelijk ook een uitdaging. Ik was kapot als ik boven was.\" and \"Ik was zelfs moe als ik op de bank zat. Zo raar.\" and \"Dat soort kleine dingen, daarin merk je dat je achteruit gaat.\" (Annemijn van Leek, 25, breast cancer)",
+     "source_url": "https://www.ze.nl/artikel/250186-kankerdagboek-11",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Taste collapse turns daily rituals into aversions: coffee, a normal morning pleasure, becomes repulsive in the days after a cure.",
+     "evidence": "\"Vóór de kuur genoot ik nog van mijn kop koffie, de dagen daarna moest ik niet meer aan koffie denken.\" and \"Je smaak is ineens heel erg vies. Dat vond ik zo irritant.\"",
+     "source_url": "https://www.ze.nl/artikel/250186-kankerdagboek-11",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "The hardest part is not treatment but life AFTER it ends: the 'zwarte gat' where the patient feels physically worse and less recovered emotionally than during treatment, while everyone assumes they are done.",
+     "evidence": "\"Ik dacht: ik wandel het ziekenhuis uit na mijn laatste behandeling en ben weer gezond. Maar eigenlijk voelde het fysiek precies tegenovergesteld.\" and \"Na het ziekenhuis begint het pas, hoor ik van veel ex-patiënten.\" and \"Ik bleek veel minder ver te zijn in mijn verwerking dan ik dacht.\" (Marleen)",
+     "source_url": "https://www.linda.nl/lifestyle/gezondheid/marleen-nazorg-kanker/",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Cognitive damage (chemobrein) and sensory overstimulation are felt DAILY for many months and force a hidden re-engineering of life that is invisible to outsiders.",
+     "evidence": "\"Gevolgen van de behandelingen voel ik nog dagelijks.\" and \"Je bent heel snel overprikkeld en hebt een slechte concentratie.\" and \"Voor de buitenwereld ziet het eruit alsof ik gewoon doorga, maar eigenlijk heb ik m'n hele leven erop aangepast.\" and \"Ik ben een veranderd mens in hetzelfde leven.\" (Linda Hakeboom; reported 18 months of severe chemobrein)",
+     "source_url": "https://www.linda.nl/persoonlijk/interview/linda-hakeboom-leven-borstkanker-wereldkankerdag/",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "A specific recurring social friction is the phrase 'wat zie je er nog goed uit' — well-meant but cutting, because it implies cancer must mean visibly bedridden and pale, and forces the patient to manage others' mental image.",
+     "evidence": "\"Wat zie je er nog goed uit ??? verbazing alom. Hoe kan dat nou, jij hebt toch kanker ???\" and \"waarom dan het woordje 'nog'?\" and \"Als je maar al te goed weet dat ze dat mechanisch zeggen, omdat het een standaardzin is, dan is het eerder kwetsend dan helpend.\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/de-plek/wat-zie-je-er-nog-goed-uit",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Patients would rather people say clumsy or stupid things than avoid them; social avoidance (people crossing the street, hiding in the supermarket) is experienced as worse than awkward questions.",
+     "evidence": "\"Ik heb liever dat mijn omgeving ''domme'' dingen tegen me zegt, dan dat ze me negeren en zelfs niet meer ''durven'' komen.\" and \"Hij stak zijn hand op met de woorden: hé leef jij nog?\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/de-plek/wat-zie-je-er-nog-goed-uit",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "The casual Dutch greeting 'hoe gaat het?' is itself a daily burden: there is no good answer, the patient does not want to tell everyone the truth, yet the honest answer is just 'slecht'.",
+     "evidence": "\"En op de vraag hoe gaat het ermee kan je eigenlijk maar 1 ting zeggen: Slecht.\" and \"Je wil ook niet iederéén vertellen hoe het werkelijk met je gaat.\" and \"Liefst zou ik hebben dat ze niet vragen hoe gaat het, maar actief helpen.\" (partner/caregiver)",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/partner-van-0/hoe-gaat-het-nu-met-je",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "The caregiver day has its own breaking point separate from the patient: the partner reaches moments of being unable to even listen, and wants practical help over questions.",
+     "evidence": "\"Ik ben er zó klaar mee. Ik kan en wíl hem even niet horen.\" and \"Ik hoef deze vraag nu even niet ik kan er niets mee.\" and \"Liefst zou ik hebben dat ze niet vragen hoe gaat het, maar actief helpen.\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/partner-van-0/hoe-gaat-het-nu-met-je",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "The diagnosis splits time into a hard before/after with a literal start date the patient counts toward, and the infusion schedule becomes the only certainty in life.",
+     "evidence": "\"Het is zaterdag, en alles is anders... Maandag begint er een nieuw, onzeker leven voor mij. Vanaf maandag lig ik 54 weken aan het infuus. Dat is het enige zekere dat ik nog heb.\" (Sophie van der Stap, Meisje met negen pruiken)",
+     "source_url": "https://uitgeverijprometheus.nl/boeken/meisje-met-negen-pruiken-e-boek/",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "On a chemo day the burden is split between managing one's own fear and managing the family's day, especially shielding a child going to school for a test.",
+     "evidence": "\"Angst verdriet alles doet mee deze ochtend.\" and \"Hup zoon lief naar school. Balen voor dat ventje een toets en een moeder die vandaag naar de Oncologie moet.\" and \"Al die tijd kan ik beter aan mijn zoon besteden. Huiswerk, ijsje eten iets. Niet voor mijn haar.\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/dagboek-van-een-beginnende-kankerpatient/de-dag-van-de-eerste-chemo",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "For younger patients the dominant daily emotion is social exile and loss of role: not looking sick, yet having no future perspective and being cut out of working society.",
+     "evidence": "\"Het is het soms gewoon ontzettend eenzaam, je maakt geen deel meer uit van de maatschappij.\" and \"Ik zie er namelijk niet ziek uit, maar heb ook geen toekomstperspectief.\" and \"Mijn werk mis ik echt enorm.\" (Sorsha, 30)",
+     "source_url": "https://www.linda.nl/persoonlijk/sorsha-jong-kanker-ziek-chemo-eenzaam/",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Distinctly Dutch: home care (thuiszorg) and the portable chemo pump mean treatment physically continues inside the home and handbag, blurring hospital and daily life.",
+     "evidence": "\"Met mijn chemopomp in mijn handtas, moet ik proberen te accepteren.\" and \"Na thuiszorg afgelopen dinsdag... chemopomp aangesloten.\" (Jade Kops)",
+     "source_url": "https://www.mijnlevenmetkanker.eu/blog",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "The practical/admin load is a documented week-to-week machine: insurance coverage checks, regiotaxi/zittend ziekenvervoer reimbursement, packing hospital bags, rosters of helpers, online groceries, notifying employer/school — a parallel job alongside being ill.",
+     "evidence": "Kanker.nl checklist lists verbatim tasks incl. \"Vergoeding voor een regiotaxi of zittend ziekenvervoer\", \"Ga met je partner of naaste mee naar het ziekenhuis\", rosters for household help, online grocery delivery, and notifying school/employer.",
+     "source_url": "https://www.kanker.nl/algemene-onderwerpen/voor-naasten/zorgen-voor-je-naaste-mantelzorg/checklist-praktische-zaken",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "For advanced/metastatic patients the daily texture is explicit oscillation between good and bad moments, with self-soothing rituals scheduled around medical procedures.",
+     "evidence": "\"De goede momenten maar ook de slechte momenten.\" and \"even mijn hart luchten vandaag had ik de lumbaal punctie\" and \"Hier zit ik dan nu in een heerlijk geurend bad, kaarsjes aan muziekje aan te stressen!\" (Embraced by Nathalie / Dagboek van een onbekende)",
+     "source_url": "https://www.embracedbynathalie.nl/c-6616602/blog-22-de-impact-van-kanker-19-10-2022/",
+     "geography": "NL",
+     "confidence": "medium"
+    },
+    {
+     "finding": "The world physically shrinks day by day for chronically/terminally ill patients, who track being incrementally more tired each day and feel moedeloos at small undone tasks like the garden.",
+     "evidence": "\"mijn wereld steeds een beetje kleiner wordt, dat ik elke dag een stukje moeier word\" and \"de tuin roept…. Kom, je wordt blij van ons…Moedeloos word ik ervan… ik wil zo graag\" and \"ik vind de jaarlijkse controle zo verschrikkelijk confronterend\"",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/geen-idee-we-doen-maar-wat-dagboek-van-mijn-diagnose?page=1",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Repetitive medical identity-verification rituals become a grinding daily marker of patienthood, said with weariness.",
+     "evidence": "\"Voor de tienduizendste keer noem ik mijn geboortedatum.\" and \"Ik sta er mee op en ik ga er mee naar bed... Geen minuut voorbij.\" (Jade Kops)",
+     "source_url": "https://www.mijnlevenmetkanker.eu/blog",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Embodied grief for the pre-cancer body is a recurring daily emotion, distinct from fear of death.",
+     "evidence": "\"Ik mis mijn oude lichaam... hier kan ik niet zoveel moois van maken.\" and \"Kilo na kilo, traan na traan. Het was niet meer te doen.\" (Jade Kops)",
+     "source_url": "https://www.mijnlevenmetkanker.eu/blog",
+     "geography": "NL",
+     "confidence": "high"
+    },
+    {
+     "finding": "Distinctly Dutch: the huisarts (GP) is woven into the cancer and end-of-life journey as a continuous figure, surfaced in mainstream NPO/KRO-NCRV documentary culture about living and dying with cancer.",
+     "evidence": "KRO-NCRV documentary 'Dying to Live' follows Mirjam Willemsen, a huisarts who guides terminally ill patients while herself being incurably ill with lung cancer, including the moment a CT scan shows the cancer returned.",
+     "source_url": "https://kro-ncrv.nl/programmas/documentaires/ongeneeslijk-zieke-huisarts-begeleidt-mensen-bij-euthanasie-ik-ben-niet",
+     "geography": "NL",
+     "confidence": "medium"
+    }
+   ],
+   "surprises": [
+    "The single most repeated daily/weekly friction point in Dutch primary voices is not a medical symptom but a social-linguistic one: the casual greeting 'hoe gaat het?' and the compliment 'wat zie je er nog goed uit' are described as actively painful because they force the patient to manage other people's mental image of cancer. This is a distinctly Dutch surface (the directness and the obligatory polite question) and is a clear product opening for a companion that helps patients script or deflect these encounters.",
+    "Patients overwhelmingly report that the WORST period is AFTER treatment ends (the 'zwarte gat'), not during it — the opposite of the public assumption. The app's center of gravity arguably should extend past the last chemo, exactly when hospital touchpoints (and current summary products) drop to zero.",
+    "Multiple patients say they would rather people say clumsy/stupid things than avoid them entirely; social avoidance (people crossing the street, hiding behind toilet rolls in the supermarket) is experienced as worse than any awkward question. The care circle's failure mode is silence, not saying the wrong thing.",
+    "The chemo pump in the handbag (chemopomp in mijn handtas) via thuiszorg means treatment is literally carried through daily life in NL — a concrete, distinctly Dutch home-care detail that dissolves the hospital/home boundary the summary product assumes.",
+    "Caregivers hit their own daily breaking point ('Ik ben er zó klaar mee. Ik kan en wíl hem even niet horen') and explicitly prefer practical help over emotional check-ins — pointing to a care-circle coordination job (rosters, groceries, transport) rather than another emotional-support surface."
+   ],
+   "gaps_or_caveats": [
+    "WebFetch returned quotes via a summarizer model; while instructed to quote verbatim, exact punctuation/spelling of some Dutch quotes (especially typo-laden raw blog text) should be re-verified against the source before any are used in product copy or quoted publicly.",
+    "The Sophie van der Stap and Maarten van der Weijden book quotes come from publisher/retailer pages and secondary summaries, not the primary book text; the Van der Weijden 'elke dag' angle could not be sourced to a direct passage (only the 'geluk/pech' framing was confirmed).",
+    "Instagram NL cancer accounts (e.g. @mijnlevenmetkanker_ ~448K followers per search, @lindahakeboom, @MaudvanOossanen, @steephy.breastcancer, @kimgringhuis, @noshameinmyscargame) were identified but not directly scraped — individual daily-life captions/verbatims from these feeds were not captured and would be a high-value next pass.",
+    "Most strong verbatims skew toward breast cancer and younger female patients (the dominant NL blogging/columnist demographic). Oncology beachhead voices for other tumor types, older patients, and male patients are underrepresented in this pass.",
+    "Stichting OOK and inloophuizen descriptions of 'what people come in with' were not obtained as verbatim first-person texture; searches surfaced only generic descriptions and Belgian inloophuis pages. A targeted pass on NL inloophuis intake themes is still open.",
+    "Geography flag: all primary daily-life voices captured here are NL (some Belgian/Flemish support pages appeared in results but were excluded). No US contamination in the cited findings."
+   ]
+  },
+  {
+   "mission": "week:phase-contrast",
+   "key_findings": [
+    {
+     "finding": "In the diagnosis-to-treatment limbo, the waiting itself, not the treatment, is named as the worst part of the whole process, and a fast hospital callback is read as bad news.",
+     "evidence": "\"Time runs slow when you are waiting\" (Participant 4); \"I received my call from the hospital already on the following Monday. It scared me because this had to be serious\" (Participant 4)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8256611/",
+     "geography": "EU (Norway)",
+     "confidence": "high"
+    },
+    {
+     "finding": "During limbo, proactive communication about delays (even bad news like 'results aren't in yet') actively reduces distress, while unexplained gaps between urgent action and waiting are disturbing.",
+     "evidence": "\"They called me and told me that 'I am sorry that we haven't received your results...it might be a few days more to wait'. This was good to know\" (Participant 3); \"a change of pace between urgent action and prolonged periods of waiting were disturbing\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8256611/",
+     "geography": "EU (Norway)",
+     "confidence": "high"
+    },
+    {
+     "finding": "In the limbo phase a single ambiguous word from a clinician becomes the object of obsessive rumination and catastrophic imagery; the dominant activity is fighting one's own intrusive thoughts.",
+     "evidence": "\"Dat ene woordje, 'daar doelde hij vast op een slechte uitslag, op kanker'\" (That single word, he must have meant a bad result, cancer); \"De doembeelden nemen plaats in je hoofd en daarmee komt ook het verdriet\" (Catastrophic images take hold in your mind, bringing grief with them)",
+     "source_url": "https://www.kanker.nl/ervaringen-van-anderen/blogs/opstaan-en-weer-doorgaan/21-de-avond-voor-de-uitslag",
+     "geography": "EU (Netherlands)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Active treatment runs on a predictable intra-cycle rhythm: a 'couch day' / crash 2-4 days after infusion, then gradual recovery, so the week is structured around a known dip rather than diffuse illness.",
+     "evidence": "\"The second day, I felt tired. The third day, I felt completely sick and immobilized. That lasted for 3 or 4 days. Then, gradually, I got better.\" (Heather Millar); a forum patient: \"chemo on a Wednesday, red face day Thursday, then general feeling sick till Sunday\"",
+     "source_url": "https://www.webmd.com/cancer/features/blog-chemo-lessons-learned",
+     "geography": "US (California) + UK (Macmillan forum)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Side effects are cumulative across cycles, so the same activity gets measurably harder cycle over cycle, and the worst crash can come after treatment ends, not during it.",
+     "evidence": "\"For the first three cycles, I could make it to the top. But by the last cycle, it took me an hour just to get one-third of the way... The month after chemo was the hardest of all. I felt like I'd been run over by a truck.\" (Heather Millar)",
+     "source_url": "https://www.webmd.com/cancer/features/blog-chemo-lessons-learned",
+     "geography": "US (California)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The off-week between cycles follows a three-beat pattern on a 21-day cycle (rough week, slightly-better week, near-normal week), and the brief return to 'human' is immediately shadowed by the countdown to the next infusion.",
+     "evidence": "\"one week feeling rough and totally exhausted, followed by one week of feeling a little better, then finally a week when I actually feel up to leaving the house... before tackling the next session\"; \"just before he starts a new round he feels almost like himself again in a 21-day cycle\"",
+     "source_url": "https://community.macmillan.org.uk/cancer_types/breast-cancer-forum/f/general/291048/chemotherapy---what-days-are-the-worst",
+     "geography": "UK",
+     "confidence": "medium"
+    },
+    {
+     "finding": "The end of treatment triggers an emotional fallout: the structure and reassurance of three-weekly hospital contact vanishes, leaving patients feeling left to fate exactly when they finally process what happened to them.",
+     "evidence": "\"you go to the hospital every three weeks, you come out of that chemo miserable, someone says: it's going well, hang on. And then that's done, then you no longer...\" (Man, 46, 3 months post-treatment); \"when the check-ups are done you are just left to fate\" (Woman, 52, 4 years post-treatment)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11717179/",
+     "geography": "EU (Netherlands)",
+     "confidence": "high"
+    },
+    {
+     "finding": "In the first year post-treatment, the support network's help evaporates the moment treatment ends; offers of help do not convert to actual help, and friends/family revert to pre-cancer behaviour while celebrating that it's 'over'.",
+     "evidence": "\"The people around me, my friends, said: 'If you need help, we will be there for you!' But actually, if I would need something, no one comes to help me.\" (Woman, 48, 9 months post-treatment); from NZ study: \"they get to the end of treatment, and family and friends are celebrating...relationships often go back to how they were pre-cancer\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11717179/",
+     "geography": "EU (Netherlands) + New Zealand",
+     "confidence": "high"
+    },
+    {
+     "finding": "Re-entry survivors carry a 'gratitude burden': they feel they should be grateful to be alive and are reluctant to voice distress, which suppresses help-seeking in the exact window when support has dropped off.",
+     "evidence": "\"'I'm living, and I should be grateful, but I just want to cry. I'm anxious, I'm overwhelmed and really emotional. What's wrong with me?'\"; \"They are often reluctant to seek help because they feel ungrateful for bringing those kinds of things up.\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10248989/",
+     "geography": "New Zealand",
+     "confidence": "high"
+    },
+    {
+     "finding": "Survivors explicitly miss the on-demand safety net of active treatment; the loss of an easy channel to ask 'is this normal / should I worry' is itself a distinct unmet need.",
+     "evidence": "\"I know when I was in treatment, I could ring the ward... Whereas now... what do I do if I'm worried about something?\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10248989/",
+     "geography": "New Zealand",
+     "confidence": "high"
+    },
+    {
+     "finding": "For metastatic/chronic patients the dominant unit of time is scan-to-scan: the brief post-scan 'free' window of relative calm, then escalating dread building for days/weeks toward the next scan, repeating indefinitely.",
+     "evidence": "\"My next control is in March, but before that it's just like I'm free, you know, a period in which I can somehow relax, before I begin to dread the next CT.\" (metastatic GIST patient); \"held their breath 'for 72 hours every 3 months'\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7559492/",
+     "geography": "EU (Norway) + scanxiety study (56% North America, 33% UK)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Scanxiety persists for years and does not habituate with repetition; the gap between scan and result is the acute peak, and it costs whole weeks of functional life.",
+     "evidence": "\"86 times and I still get scanxiety\"; \"the last month has been lost to scanxiety\"; Dutch metastatic patient: \"De vijf werkdagen tussen scan en uitslag zijn veel zwaarder\" (The five working days between scan and results are much harder)",
+     "source_url": "https://cancer.jmir.org/2023/1/e43609",
+     "geography": "Scanxiety study (56% North America, 33% UK); Dutch quote = Netherlands",
+     "confidence": "high"
+    },
+    {
+     "finding": "Metastatic patients cannot make ordinary plans because every horizon is contingent on the next scan; life shrinks to short conditional windows and decisions like quitting work get framed against survival statistics.",
+     "evidence": "\"You can't plan ahead because you don't know what is gonna happen to the next scans.\" (Kathy, UK); \"do I do that on the basis that the stats tell me I'll probably be dead...\" (Robyn, UK); \"The average life expectancy is three years, so I have had two of those years already, does that mean that I'm going to die next year?\" (Holly, UK)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7612890/",
+     "geography": "EU/UK + France",
+     "confidence": "high"
+    },
+    {
+     "finding": "Living with metastatic cancer is described as a full-time job of ongoing, indefinite treatment layered on top of normal life duties (kids, mortgage, income); treatment is not an interruption but the permanent backdrop.",
+     "evidence": "\"if you're living with metastatic cancer, you're living from treatment to treatment, from scan to scan\"; \"I have to be on some type of treatment to keep that cancer at bay so that it doesn't grow\"; \"Life doesn't stop when you get diagnosed with cancer. I have a family to take care of\" (Jamil Rivers)",
+     "source_url": "https://www.cancer.gov/news-events/cancer-currents-blog/2021/living-with-metastatic-cancer",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Long-term metastatic patients run on a rationed-energy economy and develop deliberate emotional-compartmentalization routines to function day to day around family.",
+     "evidence": "\"I function like a second-rate cell phone. When it has just been charged, it's fine for a short time, but then the batteries run down.\"; \"I entered the grief room when my boys were at school... But once I saw the boys come through the door, I put on my smile... and went into the joy room.\" (metastatic GIST patients, mean 6 years on treatment)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7559492/",
+     "geography": "EU (Norway)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Daily metastatic coping crystallizes into a concrete maintenance script: take the tablets, attend appointments, treat each new ache pragmatically rather than catastrophically, and protect time for things that bring joy in between.",
+     "evidence": "\"Take your tablets, turn up for appointments, and between those times find things that make you happy.\" (Leapfrog); \"Yes, I still worry over every new ache and pain, but take a pain pill and get on with my life.\" (NMJanet); \"You will be surprised at how quickly you adapt and build your life around it.\" (Dita)",
+     "source_url": "https://www.breastcancer.org/types/metastatic/life-with-metastatic/advice-for-newly-diagnosed",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "The care-circle burden is large and sustained, not episodic: in a Dutch advanced-cancer study, informal caregivers gave a median of 15 hours/week, with 11% reporting high burden, alongside coordinating appointments, meds, and household.",
+     "evidence": "\"The eQuiPe study involved 746 relatives of advanced cancer patients in the Netherlands, where 54% reported being informal caregivers with a median of 15 hours of caregiving per week, and 11% experienced high caregiver burden.\"",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8549961/",
+     "geography": "EU (Netherlands)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Scan-result waiting drives concrete avoidant behaviors with real-life cost: not making plans, social withdrawal, dropped chores, and delaying the very appointments that would resolve the uncertainty.",
+     "evidence": "\"I will not be making plans until I know whether I get to have my next 3 months\"; \"I disappear for a while to deal with my emotions\"; \"sink filled with dirty dishes that I didn't do\"; study noted \"delayed health care appointments for scan results\"",
+     "source_url": "https://cancer.jmir.org/2023/1/e43609",
+     "geography": "Scanxiety study (56% North America, 33% UK)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Even in long-term remission, metastatic patients live with existential dread of drug resistance, and the day-to-day mental task is suppression of negative thought rather than any practical problem.",
+     "evidence": "\"The thought of drug resistance is the same as thinking about death.\"; \"The most difficult thing is keeping negative thoughts at bay.\" (metastatic GIST, long-term remission)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7559492/",
+     "geography": "EU (Norway)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Metastatic patients describe a contraction of life-world from participant to spectator, with social and physical reach shrinking markedly.",
+     "evidence": "\"I feel like [my life] has shrunk, it was very expansive before and now, it's just tiny, I barely walk up the road...\" (Abby, UK); \"I feel now that I just look at the world. I watch others rather than participate.\" (Mary, UK)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7612890/",
+     "geography": "EU/UK",
+     "confidence": "high"
+    }
+   ],
+   "surprises": [
+    "The end of treatment is repeatedly described as harder than treatment itself. The crash often peaks the month after the last infusion, and the loss of the three-weekly hospital rhythm produces an emotional fallout precisely when the support network is celebrating and disappearing. Weekly support is arguably most needed in the phase where it most evaporates.",
+    "Fast responsiveness from the care system reads as a danger signal during limbo: a quick hospital callback scared patients into assuming the worst. This inverts the usual product assumption that faster = better; communication framing matters more than speed.",
+    "Scanxiety does not habituate. A patient at their 86th scan still gets it, and survivors 17+ years out still feel it. This is a recurring, lifelong trigger event, not a one-time onboarding moment, which fits a persistent companion far better than a one-off summary tool.",
+    "The 'gratitude burden' actively suppresses help-seeking: survivors feel ungrateful voicing distress, so the people who most need weekly support are the least likely to ask for it. A proactive, low-friction check-in (vs. a tool you must open and admit a need to) may be the only way to reach them.",
+    "Patients spontaneously describe their own intra-cycle rhythm in calendar terms ('chemo Wednesday, sick till Sunday'; 'rough week / better week / human week'). This rhythm is individual but stable per person, which is highly learnable and a natural anchor for timed, anticipatory weekly support."
+   ],
+   "gaps_or_caveats": [
+    "The richest verbatim sources skew US, UK, and Norway. Dutch primary voices were found (kanker.nl, uitgezaaideborstkanker.nl) and one NL caregiver study (eQuiPe), but I did not surface deep NL day-in-the-life patient diaries for the active-treatment and off-week phases specifically. The Dutch context for those two phases is inferred from comparable EU/UK/US material.",
+    "The metastatic evidence over-indexes on breast cancer and GIST (the segments that blog and study most). Oncology-beachhead-relevant solid tumors with rougher trajectories (lung, pancreatic, ovarian) are thinner on multi-year 'daily texture' because median survival is shorter and patients write less; treat the 'living for years scan-to-scan' picture as most valid for indolent/treatable metastatic disease.",
+    "Two strong-looking primary sources (CURE 'Waiting Is the Hardest Part' essay; Inspire ovarian limbo forum thread) returned 403/forbidden and could not be fetched; the limbo-phase patient-voice texture leans on the Norway study and the Dutch kanker.nl blog instead.",
+    "Quantitative caregiver figures (15 hrs/week median, 11% high burden) came via search summary of the eQuiPe paper, not a direct fetch of the source; verify the exact numbers before citing externally.",
+    "'Weekly support' is not directly defined by patients in these sources. The phase-specific support implications (anticipatory pre-scan check-ins, post-treatment safety-net replacement, intra-cycle crash-day prep) are my synthesis of what the verbatims imply, not claims patients made about a product."
+   ]
+  },
+  {
+   "mission": "ai:companion-retention",
+   "key_findings": [
+    {
+     "finding": "The pre-AI baseline is precise: a 2024 scoping review of 525,824 participants found a median ~70% abandonment rate within the first 100 days for lifestyle/mental-health apps, with sharper drop-off right after install then a slowing curve.",
+     "evidence": "\"over half of the users discontinued app use within the first 100 days, with a median abandonment rate of approximately 70%\" from 18 studies, 525,824 participants, 2014-2022",
+     "source_url": "https://www.jmir.org/2024/1/e56897",
+     "geography": "US/Canada/UK/Germany (predominant)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Youper (AI mental-health chatbot) showed a measurably better retention curve than the pre-AI baseline: 90.75% active week 1, 60.44% week 2, 51.78% week 3, 42.66% week 4 among 4,517 paying subscribers.",
+     "evidence": "\"90.75% (n=4099)... week 1\"; \"60.44% (n=2730)... week 2\"; \"51.78% (n=2339)... week 3\"; \"42.66% (n=1927) were using in week 4 after subscription\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8423345/",
+     "geography": "Global (US-based vendor, observational study)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Youper engagement frontloads sharply then thins: users averaged 6.50 conversations in week 1 falling to 2.04 by week 4 (mean 13.98 over the 4 weeks) - the daily-touch promise decays to roughly twice-a-week within a month.",
+     "evidence": "\"Week 1: 6.50 conversations... Week 4: 2.04 conversations... users engaged in an average of 13.98 conversations (SD 16.89)\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8423345/",
+     "geography": "Global (US vendor)",
+     "confidence": "high"
+    },
+    {
+     "finding": "The general mental-health-app industry comparator is brutally low: across 93 apps, median daily open rate was 4.0%, 15-day retention 3.9%, 30-day retention 3.3% - so any double-digit week-4 retention is an order of magnitude better.",
+     "evidence": "\"median 4.0%\" daily open rate; \"15-day... median 3.9%\"; \"30-day... median 3.3%\" across 93 apps with median 100,000 installs",
+     "source_url": "https://www.jmir.org/2019/9/e14567/",
+     "geography": "US (panel-based, Android)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Wysa (AI mental-health) chronic-pain trial hit 70% 30-day retention and a median 51-day retention period, with 20% still engaged past the 8-week study - but this is vendor-affiliated research with no control group.",
+     "evidence": "\"30-day retention rate: 70%\"; \"median user retention period... of 51 days\"; \"20% of users remained engaged beyond the 8-week study\"; 2 of 3 authors hold Wysa equity",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9171603/",
+     "geography": "Global (UK/India-based vendor)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "A morning daily-check-in feature was the single biggest retention driver in the Wysa trial (hazard ratio 0.89, p=.001) - direct evidence that a daily ritual hook, not content volume, extends engagement.",
+     "evidence": "\"Morning check-in feature usage significantly extended retention (hazard ratio=0.89, P=.001)\"",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9171603/",
+     "geography": "Global (vendor)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "In real-world large-N Wysa data, engagement is far thinner than trials suggest: 4,541 COVID-era users averaged 18.85 sessions (median 13) and ~29 conversations over 15 days - heavy frontloading, long tail.",
+     "evidence": "\"Mean sessions: 18.85 per user... Median sessions: 13.00\"; over 15 days \"an average of 29 conversations and interventions\"; n=4,541",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9885755/",
+     "geography": "UK, US, India",
+     "confidence": "high"
+    },
+    {
+     "finding": "Woebot's RCT showed near-daily use during a 2-week window: mean 12.14 sessions across ~12 unique days, with only 9% attrition in the Woebot arm vs 31% in the information-only control.",
+     "evidence": "\"average of 12.14 (SD 2.23) times over the study period\"; \"almost all check-ins occurring on unique days\"; \"Woebot condition had 9% attrition while the control group experienced 31%\"; n=70",
+     "source_url": "https://mental.jmir.org/2017/2/e19/",
+     "geography": "US (Stanford-affiliated)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Woebot postpartum RCT (n=184) saw lower-cadence engagement: participants averaged nearly 5 interactions per week, not daily - cadence varies sharply by population and life-stage.",
+     "evidence": "\"participants averaging nearly five interactions per week\"; 184 participants within 6 months of childbirth",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8074987/",
+     "geography": "US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Replika (AI companion) is the clearest AI-era retention outlier on the downside, settling near ~20% retention at 90 days despite 40M+ installs and ~14 min average daily use - large reach, weak long-tail stickiness.",
+     "evidence": "\"Replika's user retention rate is approximately 20% after 90 days\"; \"14 minutes of average daily use\"; \"40 million-plus by 2025\"",
+     "source_url": "https://nikolaroza.com/replika-ai-statistics-facts-trends/",
+     "geography": "Global (mostly US)",
+     "confidence": "low"
+    },
+    {
+     "finding": "Character.AI represents the AI-era engagement ceiling: ~93 minutes average daily use (Sensor Tower, Sept 2024) and ~17-18 min per session - roughly 8x ChatGPT and longer than TikTok.",
+     "evidence": "\"the average user on Character.AI spent 93 minutes a day... according to global data from market intelligence firm Sensor Tower\"; \"17 minutes and 23 seconds per session\"",
+     "source_url": "https://english.news.cn/20241207/717e29debc0941348ff2363a6b685b52/c.html",
+     "geography": "Global (US-led)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "AI companions show a consistent week-three engagement plateau/drop-off across architectures, with survivors past ~10 weeks settling into ~6.1 sessions/week routine use - a recognizable curve shape, not a flat line.",
+     "evidence": "\"two to three weeks of high engagement, then a measurable dip between weeks six and ten... users who pass the ten-week mark tend to settle into routine use averaging 6.1 sessions per week\"",
+     "source_url": "https://www.roborhythms.com/ai-companion-week-three-plateau/",
+     "geography": "Global",
+     "confidence": "low"
+    },
+    {
+     "finding": "ChatGPT health use is the largest signal of daily-touch behavior, but it is task-driven not relationship-driven: 40M+ people ask health questions daily and ~1 in 4 of 800M weekly users asks a health prompt each week (~200M).",
+     "evidence": "\"More than 40 million people ask ChatGPT healthcare questions every day\" (OpenAI report, Jan 6 2026); \"1 in 4 submits a prompt about healthcare every week\"",
+     "source_url": "https://www.healthcaredive.com/news/40-million-use-chatgpt-health-questions-openai/808861/",
+     "geography": "Global (OpenAI-reported)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Slingshot's Ash (AI built for therapy) real-world study (n=305, 10 weeks, NYU) reported 75% of users said Ash 'came to mind when they felt distressed' - an internalization/top-of-mind metric, but the study disclosed NO session frequency, retention curve, or daily-use data.",
+     "evidence": "\"75% of users reported that Ash came to mind when they felt distressed\"; \"305 participants\"; \"47% who didn't complete all assessments\"; no sessions/week or retention disclosed",
+     "source_url": "https://thehemingwayreport.beehiiv.com/p/78-reflections-on-slingshot-s-real-world-study",
+     "geography": "US (single-arm, vendor-funded)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Belong.Life's Dave (AI oncology mentor, closest analog to Ditto's space) claims 'exceptionally high engagement' across hundreds of thousands of cancer patients but discloses NO named engagement/retention numbers - only 91.8% clinician-validation of responses.",
+     "evidence": "\"hundreds of thousands of cancer patients... exceptionally high levels of engagement\"; \"432 out of 471... (91.8%) received positive validation\"; no usage frequency disclosed",
+     "source_url": "https://belong.life/press/belong-life-launches-dave-worlds-first-real-time-conversational-ai-oncology-mentor/",
+     "geography": "Global (US/Israel vendor)",
+     "confidence": "low"
+    },
+    {
+     "finding": "Limbic (AI mental-health, NHS) shows AI reduces drop-out in clinical pathways: patients referred via Limbic Access were less likely to drop out, and Limbic Care users attended 42% more sessions with 25% higher recovery vs historical comparators.",
+     "evidence": "\"less likely to drop out of treatment\"; \"patients supported by the tool attended 42% more sessions and showed 25% higher recovery rates\" (JMIR Jan 2025)",
+     "source_url": "https://www.limbic.ai/research/closing-accessibility-gap",
+     "geography": "UK (NHS, real-world)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "AI journaling apps (Rosebud, Mindsera, Stoic) disclose almost no engagement numbers - only scale signals (Mindsera ~80,000 users; Rosebud '3M+ words journaled') and anecdotal streaks (one user 110-day streak), making this category a data gap.",
+     "evidence": "\"Mindsera has 80,000 users\"; Rosebud \"Over 3 million words journaled\"; \"one user maintaining a streak of around 110 days\" - no DAU/retention disclosed",
+     "source_url": "https://blog.mylifenote.ai/the-8-best-ai-journaling-apps-in-2026/",
+     "geography": "Global",
+     "confidence": "low"
+    },
+    {
+     "finding": "Wysa at scale reports 6M+ users across 95 countries and 'over half a billion AI chat conversations,' claiming 4x engagement vs business-as-usual - useful for scale framing but vendor-reported and not a retention curve.",
+     "evidence": "\"over 6 million people across 95 countries\"; \"over half a billion AI chat conversations... 4x engagement and 10x access to mental health vs business as usual\"",
+     "source_url": "https://www.wysa.com/",
+     "geography": "Global (UK/India vendor)",
+     "confidence": "low"
+    }
+   ],
+   "surprises": [
+    "The single best-documented retention DRIVER across the AI-native studies was not the AI's intelligence or content depth - it was a daily morning check-in ritual (Wysa hazard ratio 0.89, p=.001). The hook is the cadence, not the cleverness.",
+    "AI-native therapy products show a SHALLOWER decay curve than pre-AI apps (Youper held 42.66% at week 4 vs the ~3.3% industry 30-day median, a 10x+ gap), but the curve shape is identical: sharp frontload then steep drop. AI raises the floor and ceiling but has not flattened the curve.",
+    "Slingshot's Ash, a $93M-raised a16z-backed product explicitly built around 'healthy disengagement,' deliberately frames users LEAVING as success ('users naturally disengaged after improvement') - the opposite of a daily-companion retention thesis, and a warning that 'therapeutic' goals can be anti-retention by design.",
+    "Character.AI's ~93 min/day blows past every health app and even TikTok - proving AI companions CAN achieve obsessive daily engagement, but it comes from para-social entertainment, not health utility. The engagement is real; the question is whether a care companion can borrow the mechanic without the para-social hook.",
+    "The closest direct analog to Ditto (Belong.Life's Dave, AI oncology mentor) publishes zero hard engagement numbers despite years of operation and being the obvious benchmark - suggesting either the numbers aren't flattering or the category genuinely lacks published daily-touch retention data.",
+    "ChatGPT is quietly the largest daily-touch health product in existence (40M+ daily health users) and it has no streaks, no check-ins, no companion persona - pure on-demand utility. This challenges the assumption that a care companion needs engineered daily rituals to earn daily return."
+   ],
+   "gaps_or_caveats": [
+    "Almost all named retention numbers are from MENTAL-HEALTH AI (Wysa, Youper, Woebot, Ash, Limbic), not chronic-illness or cancer companions. The cancer-specific analogs (Belong.Life Dave, Livestrong Ellis, Kin, Hedy) disclose NO named engagement/retention figures - this is the central data gap for Ditto's exact use case.",
+    "Geography skews heavily US plus UK/India (Wysa). No NL/EU-specific AI daily-health-companion retention data was found. Limbic (UK/NHS) is the closest EU signal.",
+    "Most AI-vendor figures are self-reported and from single-arm or observational studies with no control group (Youper, Wysa, Ash, Limbic Care). Truly independent app-analytics retention (Sensor Tower/Apptopia) exists mainly for consumer companions (Replika, Character.AI), not clinical tools.",
+    "The Replika ~20% 90-day, Character.AI 50-60% D1 / 13-18% D30, and 'week-three plateau' figures come from secondary aggregator blogs, not primary Sensor Tower exports - confidence is low and exact methodology is unverified. Treat as directional.",
+    "Engagement metrics are not standardized across studies: 'sessions,' 'conversations,' 'check-ins,' 'interactions,' and 'days active' are used interchangeably, so cross-product comparison of cadence is approximate, not apples-to-apples.",
+    "No study isolated whether the AI/LLM layer itself (vs the daily-ritual UX) caused better retention. The pre-AI vs AI-era comparison conflates product era with product design - a confounder the synthesis pipeline should flag rather than treat as causal proof that 'AI improves retention.'",
+    "I could not retrieve the underlying Slingshot Ash preprint or the Replika arxiv app-update study text (PDF parse/403 failures), so internalization and companion-bond figures rest on secondary summaries."
+   ]
+  },
+  {
+   "mission": "ai:voice-symptom-extraction",
+   "key_findings": [
+    {
+     "finding": "Acoustic voice biomarkers add little to nothing over transcribed words: for depression and PTSD classification, audio+text actually UNDERPERFORMED text-only by ~2-4% across the best LLMs.",
+     "evidence": "Text-only best Deepseek_R1 79.8% BA / 0.78 F1 vs audio+text best Gemini 2.5 Pro 77.8% BA / 0.77 F1; PTSD text-only 77% BA vs audio+text 73.6% BA, '~3-4% degradation'. 'acoustic voice characteristics did not reliably enhance classification beyond what transcribed language provided.'",
+     "source_url": "https://arxiv.org/html/2412.10417",
+     "geography": "research (multi)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Kintsugi, the highest-profile voice-biomarker depression company, shut down commercial operations in Feb 2026 after raising ~$28-30M, citing FDA cost/timeline and a distressed market (it open-sourced its tech rather than failing on science alone).",
+     "evidence": "'Mental Health Voice Biomarker Kintsugi Closes, Makes All Technology and Research Public'; 'the high cost and lengthy timeline of FDA regulatory hurdles ultimately made the venture-backed business model unsustainable'; 'chose the integrity of the science over the limitations of a distressed market.'",
+     "source_url": "https://bhbusiness.com/2026/02/11/mental-health-voice-biomarker-kintsugi-closes-makes-all-technology-and-research-public/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Kintsugi's largest independent validation hit only 71.3% sensitivity / 73.5% specificity for moderate-severe depression, far below its marketed '80% accuracy', with a severe gender bias (men 59.3% sensitivity vs women 74.0%).",
+     "evidence": "Sensitivity 71.3% (95% CI 69.0-73.5), specificity 73.5%; 'Sensitivity for men was 59.3% versus 74.0% for women'; validation set 4,456 of 14,898 enrolled; AUC not reported.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11772039/",
+     "geography": "US/Canada",
+     "confidence": "high"
+    },
+    {
+     "finding": "The most directly on-point oncology-adjacent test of talk-instead-of-type largely FAILED: extracting palliative-care symptoms (IPOS) from conversational voice scored all F1 below 0.5, and patient speech transcribed at only 55.6% accuracy.",
+     "evidence": "F1: anxiety 0.46, depression 0.45, feeling-at-peace 0.43, pain 0.36, practical matters 0.31 (all <0.5); patient-speech transcription 55.6% (SD 12.1%) vs provider 82.2%; 'still requires further improvements to be applied in clinical practice.'",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11707305/",
+     "geography": "Japan",
+     "confidence": "high"
+    },
+    {
+     "finding": "The high LLM symptom-extraction accuracy people cite (GPT-4 F1 ~91-94%) is from clean PHYSICIAN clinical notes, not patient natural speech, so it does not transfer to a voice-diary product.",
+     "evidence": "GPT-4 F1 91.4% (test) / 94.0% (validation) vs ICD-10 45.1%; 11 symptoms; 'Data source: Physician notes from emergency departments, not patient-generated speech.'",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12313083/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Dutch ASR for elderly speakers is poor out-of-the-box: Whisper hits 28.73% word error rate on native elderly Dutch (42% for non-native adults), only dropping to ~9% after fine-tuning on the JASMIN-CGN corpus.",
+     "evidence": "'Whisper achieved a WER of 28.73% on native elderly Dutch speech and 42.07% on non-native adult speech'; after fine-tuning: elderly 9.11%, non-native 14.01%.",
+     "source_url": "https://arxiv.org/html/2502.17284v1",
+     "geography": "Netherlands",
+     "confidence": "high"
+    },
+    {
+     "finding": "Voice-biomarker validation overall is a field-wide translation failure: across systematic reviews only 1 of 89 (and 1 of 308) models was ever considered for clinical implementation, with diagnostic accuracy ranging wildly from 21% to 100%.",
+     "evidence": "'out of 89 models included in the review...one was considered for implementation'; 'out of 308 models, one had its potential utility formally assessed'; 'diagnostic accuracy ranges from 21% to 100%'; '94% of published studies on depression involve fewer than 100 participants.'",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12267164/",
+     "geography": "research (multi)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Dutch hospitals already run voice-to-structured-report in the consultation room (mProve / Jeroen Bosch Ziekenhuis), transcribing the doctor-patient conversation and auto-summarizing side effects, with clinician review before the record. This is doctor-led capture, not patient self-tracking.",
+     "evidence": "'Six top clinical hospitals in the Netherlands use voice-guided AI solutions'; system 'used to discuss with patients how they are doing and especially whether prescribed medications have side effects'; 'an algorithm then generates a summary, which clinicians review before adding to the electronic patient record'; patients can opt out.",
+     "source_url": "https://www.jeroenboschziekenhuis.nl/ai-in-de-spreekkamer-automatische-spraakherkenning",
+     "geography": "Netherlands",
+     "confidence": "high"
+    },
+    {
+     "finding": "Sonde Health's voice biomarker is explicitly positioned as a 'mental wellbeing thermometer,' not diagnostic; it only reaches a meaningful signal when AGGREGATED over weeks and falls apart with single samples or low engagement.",
+     "evidence": "Relative Risk 2.00 (1.21-3.30) aggregated over 2 weeks; single voice samples RR only 1.53; low-engagement group RR <1.0; authors: 'not a diagnostic or screening instrument' but a 'mental wellbeing thermometer'; anxiety/PTSD 'inconsistent... non-significant.' n=104, Pittsburgh.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10948552/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Voice biomarkers generalize poorly across language/culture, which directly threatens any Dutch deployment trained on English data: a cognitive-impairment study saw 23% speech-metric variation in the Indian cohort vs only 4% in the US cohort.",
+     "evidence": "'23% variation in the Indian and 4% in the US cohort'; cognitive impairment effect 'statistically significant (p<0.01) in India only.' India n=157 (Kerala), US n=57 (Bronx).",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11716075/",
+     "geography": "US/India",
+     "confidence": "high"
+    },
+    {
+     "finding": "Canary Speech (cognitive, not symptom) shows the strongest validated voice-biomarker signal of the bunch, detecting mild cognitive impairment from ~3 min of conversation at AUC 0.88-0.89, beating demographics-only models (0.78-0.80).",
+     "evidence": "'AUC scores of 0.88 and 0.89... outperformed traditional models based only on age, sex, and education (AUCs 0.78-0.80)'; 1,461 adults in Japan, 36% impaired; published in The Lancet Regional Health Western Pacific.",
+     "source_url": "https://canaryspeech.com/blog/voice-biomarkers-accurately-detect-mci/",
+     "geography": "Japan",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Voice biomarkers for chronic pain (highly relevant to oncology) remain early-stage: accuracies scatter 60-85% across only 25 mostly-tiny studies, with the few pain-vocal features failing to reach statistical significance.",
+     "evidence": "25 studies, accuracy 60-85%; pain vocalizations showed longer durations/increased jitter but 'these features did not reach statistical significance'; mostly 'studies under 100 participants'; 'lack the standardization and validation necessary for reliable clinical deployment.'",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12833082/",
+     "geography": "research (multi: US, Brazil, EU, Israel)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Voice/automated symptom check-ins in elderly chronic care show modest, soft adherence benefit, not strong evidence: a voice-assistant medication reminder study found 82-100% adherence but median 55-min latency and only 14.6% of doses taken within 5 min of the cue.",
+     "evidence": "Adherence 82-100% across 5 participants; mean latency 55 min (SD 100); within 5 min 14.6% (25/168), within 30 min 63.7%; 'Voice assistant reminders may help cue patients... but the timing of medication use may vary.' n=15, Midwest US.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8512193/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Even FORM-based (not voice) digital symptom monitoring in real-world oncology struggles with sustained engagement: a German metastatic-NSCLC pilot saw 85% access once but 32% premature discontinuation and only 38% completing the separate PRO questionnaires.",
+     "evidence": "85.1% accessed Kaiku Health at least once; 31.9% (15/47) prematurely discontinued; 'Only 38.3% submitted PRO questionnaires'; recruited only 47 of 100 planned over 17 months; input was form-based, no voice.",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12268122/",
+     "geography": "Germany",
+     "confidence": "high"
+    },
+    {
+     "finding": "For zero-shot symptom/mood extraction from patient text, top open and closed LLMs already exceed 90% F1/accuracy, confirming the language-content path is the strong one (vs acoustics).",
+     "evidence": "'Three out of five LLMs demonstrated... over 90% of F-1 and accuracy, with Llama 3.1 405B achieving 93%' for depression/anxiety from patient messages (zero-shot).",
+     "source_url": "https://arxiv.org/pdf/2503.11384",
+     "geography": "research",
+     "confidence": "medium"
+    },
+    {
+     "finding": "A 2024 review found voice biomarkers underperform the cheap PHQ-9 form they aim to replace, and depression-specificity of vocal features has never been systematically established.",
+     "evidence": "'A 2024 review found that the efficacy of vocal biomarkers as indicators for depression is below that of the PHQ-9 form'; 'the degree to which changes in vocal features are specific to depression has not been systematically studied'; Lancet editorial: 'still a long way to go before AI-powered vocal biomarkers can be endorsed by the clinical community.'",
+     "source_url": "https://www.axios.com/2022/10/20/voice-biomarkers-depression-anxiety-ai-telehealth",
+     "geography": "research / US",
+     "confidence": "medium"
+    }
+   ],
+   "surprises": [
+    "The signal lives in WORDS, not VOICE. Multiple LLM studies show audio biomarkers add ~0% (or hurt by 2-4%) over the transcript. The entire 'voice biomarker' acoustic premise (prosody, pitch, jitter) is largely a distraction for symptom/mood capture; the leverage is ASR + LLM on what the patient actually says. This collapses the build decision from 'do we need a voice-biomarker partner' to 'do we need good Dutch ASR plus an LLM extractor.'",
+    "Kintsugi, the category's flagship and FDA-De-Novo-pathway leader, is DEAD as of Feb 2026 and gave its IP away. The single most-cited proof point for 'voice-based mental health works as a product' is now a cautionary tale about regulatory cost killing the business model.",
+    "The one study that tested exactly Ditto's use case (extract oncology/palliative symptoms from conversational patient speech) failed across the board (all F1 <0.5), and the failure was driven by patient-speech transcription collapsing to 55.6% accuracy. Sick, tired, soft-spoken patients are the hardest ASR population, the opposite of the clean speech these models are trained on.",
+    "Dutch elderly speech breaks general ASR (28.7% WER with Whisper). A 28% word error rate means roughly 1 in 4 words wrong before any symptom logic runs. Fine-tuning fixes it (~9%) but that requires a Dutch elderly/patient speech corpus Ditto would have to build or license.",
+    "The genuinely strong, reproducible voice signal is for COGNITIVE decline (Canary Speech AUC ~0.88), not for mood/symptom/medication capture. The validated science points at a different problem than the one being scoped."
+   ],
+   "gaps_or_caveats": [
+    "No found study tested LLM symptom/mood extraction from patient natural SPEECH in DUTCH specifically. The Dutch evidence is ASR word-error-rate only (JASMIN-CGN); the symptom-extraction evidence is all English/clinical-text. The combined Dutch-patient-speech-to-symptom pipeline is unvalidated.",
+    "Vendor-reported numbers (Sonde 'accurately identifies', Canary 'detect Alzheimer's in 40 seconds') are PR framing; the peer-reviewed versions are consistently weaker and hedged (risk ratios, 'thermometer not diagnostic', interim findings). Treat any single marketed accuracy figure as a ceiling, not an expectation.",
+    "Almost no head-to-head adherence/engagement data exists for VOICE check-ins vs typed/tapped forms in oncology specifically. The adherence numbers found are from tiny elderly-pain feasibility studies (n=5-15) or form-based oncology pilots, none isolating the talk-vs-type variable that Ditto cares about.",
+    "Kintsugi's shutdown reason is contested: company PR frames it as FDA cost + market, not science. The independent evidence (71% sensitivity, gender bias) suggests the science was also marginal, but I could not find a clean published statement attributing closure to efficacy failure.",
+    "The Canary Speech MCI AUC 0.88-0.89 (Lancet) is reported via the company blog/press, not read from the primary Lancet paper directly; confidence is medium pending the journal source. The separately fetched US/India cognitive study is independent (Alzheimer's & Dementia), not Canary, and showed poor cross-culture generalization.",
+    "Most validation samples are US, female-skewed, white-skewed, and English. Generalization to a Dutch oncology population (older, sicker, mixed L1, often soft/fatigued voices) is the single biggest unproven risk and the cross-culture data (23% vs 4% variation) suggests it will degrade meaningfully."
+   ]
+  },
+  {
+   "mission": "ai:checkin-design-evidence",
+   "key_findings": [
+    {
+     "finding": "Hinge Health identified an early 'habit point': members who complete six exercise-therapy sessions in the first two weeks are far more likely to stick long-term, defining the activation window for a daily/near-daily companion.",
+     "evidence": "members who complete six exercise therapy sessions in the first two weeks are more likely to reach a 'habit point' and stick to the program long-term, as well as experience greater initial pain relief as a result (5th annual State of MSK Care Report, Jan 2025)",
+     "source_url": "https://www.businesswire.com/news/home/20250108560125/en/Hinge-Health-Unveils-2025-State-of-Musculoskeletal-Care-Report",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Hinge Health's 1-on-1 coaching drove a 73% 12-week completion rate with an average of 35 exercise-therapy sessions completed per participant (roughly 3 per week over 12 weeks), the cadence that produced their best outcomes.",
+     "evidence": "1-on-1 coaching model helped drive the industry's highest 12-week completion rate, 73%, with each participant completing an average of 35 exercise therapy sessions",
+     "source_url": "https://www.hingehealth.com/resources/clinical-studies/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Sword Health sustains an 81% care-completion rate (about double the ~50% in-person dropout), and notably 42% of sessions happen outside the workday and 23% on weekends, suggesting check-ins must fit the user's own rhythm rather than impose a fixed clinic-style schedule.",
+     "evidence": "81% adherence rate ... 42% of sessions happen outside the standard workday, and 23% on weekends ... more than 50% of patients quit after just four sessions [in traditional PT]",
+     "source_url": "https://swordhealth.com/articles/employee-retention",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Virta achieves 83% retention at 1 year and 74% at 2 years in type-2 diabetes, attributed substantially to daily biomarker logging that returns immediate self-tracked feedback multiple times a day, not just periodic coaching.",
+     "evidence": "retention rates of 83% at one year and 74% at two years ... daily biomarkers from blood glucose and blood ketones provide feedback multiple times a day ... immediate feedback from their biomarkers and their health coach",
+     "source_url": "https://www.virtahealth.com/blog/diabetes-reversal-patient-retention-rate",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Virta's own breakdown of why it retains lists 'quick results,' 'daily feedback & empowerment,' 'sustainability,' and 'proactive outreach' via software (Spark) that flags at-risk patients so clinicians reach out at the right time, i.e. proactivity is system-triggered, not on a fixed calendar.",
+     "evidence": "Virta uses a proprietary software, Spark, to inform clinicians who is at risk ... reach out to patients at the right time ... patients track their biomarkers daily, and they're able to get immediate feedback",
+     "source_url": "https://www.virtahealth.com/blog/diabetes-reversal-patient-retention-rate",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Livongo's model is the cleanest example of automatic reciprocity: members checked glucose ~1.8x/day and every check triggered an immediate two-way message back, with the explicit design goal of being present 'at the decision point.'",
+     "evidence": "members using the Livongo glucose meter to measure their BG levels an average of 1.8 times per day ... delivers messages back to the individual in real time ... there at the decision point to nudge the person if blood glucose strays out of range",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5527250/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "In Noom's engagement study (N=11,252), weigh-ins were the single most predictive engagement behavior for weight loss (adjusted R2=0.17), narrowly ahead of meal logging (0.16); the highest-loss users weighed in only once per week, not daily.",
+     "evidence": "Weigh-ins: adjusted R2 = 0.17 at 9-16 weeks; Meals logged: adjusted R2 = 0.16 ... high weight loss group: Logged 24 meals per week ... Weighed in once per week ... Messaged coach once every 2 weeks (N=11,252)",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8663454/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Noom engagement decays across nearly all behaviors over 52 weeks, yet the gap between engaged and disengaged users on outcomes persists even as absolute engagement falls, suggesting early intensity matters more than sustaining peak frequency.",
+     "evidence": "means of the following engagement measures decreased over time across all weight groups: days with at least 1 meal logged, articles read ... differences between each weight loss category and stable weight were maintained even as engagement decreased over time",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8663454/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Noom's dose-response is concrete: at week 40 the top engagement quartile lost 8.3 lbs more (about 25% more) than the bottom quartile, and 77.8% of its GLP-1 companion users stayed engaged 4+ weeks, with D30 engagement at 43.6% (~10x typical health-app retention).",
+     "evidence": "At week 40, the difference between the top and bottom quartiles was an additional 8.3 lbs of weight loss—about 25% more weight loss ... At 30 days, 43.6% of users engaged with the app ... nearly 80% (77.8%) of all Microdose GLP-1Rx users stayed engaged ... for 4 or more weeks",
+     "source_url": "https://www.noom.com/in-the-news/people-who-use-noom-the-most-also-lose-the-most-weight/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Omada's 3-year data shows voluntary engagement (logins + group participation) was the only factor predicting weight loss, while passive lesson completion alone did not predict outcomes once other behaviors were controlled, arguing reciprocal/social check-ins beat content consumption.",
+     "evidence": "Only the logins and group participation factor was a significant predictor of weight loss ... neither the present study nor those studies just cited have identified online lesson module completion as a significant predictor of weight loss once other program behaviors ... had been taken into account",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5595194/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Omada engagement and data submission decline steeply after the structured curriculum ends: weight-measurement participation fell from 73% at 1yr to 66% at 2yr to 46% at 3yr once active coaching and weekly curriculum stopped, a warning that removing structured cadence collapses engagement.",
+     "evidence": "1 year: 161 participants (73%) ... 2 years: 145 (66%) ... 3 years: 102 (46%) ... engagement was substantially reduced [in years 2-3 due to] lack of continuing curriculum and active coaching",
+     "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5595194/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Respiratory adherence (Hailie/Propeller smart inhaler) reminders plus tracking drove a 59% increase in controller-medication adherence in adults, an 80% reduction in pediatric hospital admissions, and a 45% reduction in rescue inhaler use, showing scheduled medication check-ins with visible trend feedback work.",
+     "evidence": "a 59% increase in controller medication adherence in adults using the Hailie sensor, an 80% reduction in hospital admissions in children ... 45% reduction in rescue medication use in children",
+     "source_url": "https://dtxalliance.org/products/propeller/",
+     "geography": "US",
+     "confidence": "high"
+    },
+    {
+     "finding": "Pregnancy apps are the strongest consumer daily-health-habit category because of a built-in weekly anticipation hook (week-by-week baby development and shareable fruit/size comparisons) that gives the user something new and emotionally rewarding each open without any data entry required.",
+     "evidence": "every week right when I open the app there's a comparison to a familiar fruit, so it's easy for me to visualize how big my baby is ... The Bump is described as 'the original home of the cute fruit' ... in a way that's fun and easy to share with friends and family",
+     "source_url": "https://apps.apple.com/us/app/the-bump-baby-pregnancy-app/id568940747",
+     "geography": "US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Flo built daily story-format content (WhatsApp/Instagram-style) that lifted app opens 30%+ for freemium users and hit a 61.42% watch rate among 480,000+ pregnant women, plus a self-reinforcing data loop where logging improves predictions, so the user gets a sharper personalized payoff each time they log.",
+     "evidence": "daily content in a story format ... saw a 30%+ increase in app opens, with the content deployed to over 480,000+ pregnant women achieving a 61.42% watch rate ... the more a woman uses Flo, the more it can accurately guide her",
+     "source_url": "https://growthcasestudies.com/p/flo-growth-case-study",
+     "geography": "Global (Flo HQ in EU/Lithuania, US user base)",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Practitioner synthesis of health-app retention says the daily loop must be tiny (under 60 seconds, ideally 30 seconds) with an immediate reward (streak count or health insight), capped at 2 notifications/day, and that an accountability partner yields 2-3x higher 90-day retention.",
+     "evidence": "make the desired behavior tiny (30-second daily check-in vs 45-minute workout) ... immediate reward (streak count, health insight) ... Maximum 2 notifications per day ... Users with an accountability partner have 2-3x higher 90-day retention",
+     "source_url": "https://productgrowth.in/insights/healthtech/health-app-retention-guide/",
+     "geography": "Global/US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "The same source pins the month-3 cliff: AI/automated nudges retain well only 30-60 days, and beyond month 3 (3-12 months) human accountability coaches significantly outperform pure-app retention, against an average D90 of just 6-10% (top fitness apps 15-20%).",
+     "evidence": "AI and automated nudges retain well for 30-60 days ... For long-term habit change (3-12 months), human accountability coaches significantly outperform pure-app retention ... D90 performance drops to 6-10% for average apps",
+     "source_url": "https://productgrowth.in/insights/healthtech/health-app-retention-guide/",
+     "geography": "Global/US",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Proactive coaching beats reactive coaching on engagement with hard numbers: proactive/personalized coaching produced 19.37 vs 8.55 coach messages and 49.31 vs 40.06 app-open days, though the 16-week weight-loss difference (10.1% vs 8.9%) was not statistically significant.",
+     "evidence": "the proactive group sent an average of 19.37 messages compared to 8.55 in the reactive group, and opened the app an average of 49.31 days versus 40.06 days ... 16-week weight loss was 10.1% in the proactive group compared to 8.9% ... not statistically significant",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11585375/",
+     "geography": "EU (UK)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Streaks backfire badly in emotionally sensitive health contexts: only 0.90% of users who lose a 2-3 day streak return to rebuild it (1.42% for a 4-7 day streak), so punitive streak mechanics risk total abandonment after the first miss for cancer patients.",
+     "evidence": "Only 0.90% of users who lose a streak of two to three days return to rebuild it, and for users who lose a streak of four to seven days, the figure is 1.42% ... a break can feel like failure",
+     "source_url": "https://blog.cohorty.app/the-psychology-of-streaks-why-they-work-and-when-they-backfire/",
+     "geography": "Global",
+     "confidence": "medium"
+    },
+    {
+     "finding": "Foundational habit science (Lally/UCL, N=96 over 12 weeks) found automaticity takes a median 66 days (range 18-254), simpler behaviors form fastest (water before breakfast ~18-20 days), and crucially 'missing a single day did not reduce the chance of forming a habit' - direct evidence against perfection-based streaks.",
+     "evidence": "it takes an average of 66 days for a new behavior to become automatic ... from 18 days at the fast end to 254 days at the slow end ... Missing a single day did not reduce the chance of forming a habit",
+     "source_url": "https://www.ucl.ac.uk/news/2009/aug/how-long-does-it-take-form-habit",
+     "geography": "EU (UK)",
+     "confidence": "high"
+    },
+    {
+     "finding": "CGM/real-time biofeedback works because feedback is instantaneous: a meta-analysis of 25 RCTs found CGM-based feedback reduced HbA1c by 0.28% and increased time-in-range by 7.4%, attributed to immediate feedback raising the likelihood the user acts in the moment.",
+     "evidence": "Interventions incorporating CGM-based feedback reduced HbA1c by 0.28% and increased time in range by 7.4% ... the instantaneous feedback increases the likelihood that patients will take action",
+     "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11668089/",
+     "geography": "Global (meta-analysis)",
+     "confidence": "high"
+    },
+    {
+     "finding": "Wearable daily-habit products (Oura, Whoop) anchor the open to a single morning reward delivered with zero input: a color-coded readiness/recovery score plus a strain target, available immediately on waking - the no-friction reciprocity that a passive daily companion could mimic.",
+     "evidence": "both devices provide users with a color-coded verdict on how their body is doing each morning ... Oura Ring provides sleep and readiness scores almost immediately upon waking ... Whoop gives users a Recovery percentage each morning, plus a Target Strain for the day ... Oura ... doesn't require users to log anything",
+     "source_url": "https://ouraring.com/blog/readiness-score/",
+     "geography": "Global (Oura HQ in EU/Finland)",
+     "confidence": "medium"
+    }
+   ],
+   "surprises": [
+    "Weigh-ins, not meal logging or coach messages, were Noom's single most predictive engagement behavior (R2=0.17), and the highest-loss users weighed in only once a week - evidence that the most powerful check-in may be a low-frequency self-measurement, not a daily one.",
+    "Across Noom, Omada and Hinge, engagement DECLINES over time for everyone, yet the gap between engaged and disengaged users on outcomes persists. This reframes the goal: don't fight inevitable decay, front-load intensity in the first two weeks to clear the 'habit point.'",
+    "The pregnancy-app daily hook requires zero data entry - the reciprocity is delivered content (this week your baby is the size of a lime), not feedback on logged data. This is the opposite of the diabetes/MSK 'log-then-get-feedback' loop and may be the better model for emotionally exhausted cancer patients.",
+    "Lally's canonical habit research directly contradicts streak design: missing one day did not hurt habit formation, while real streak data shows <1% of users return after breaking a 2-3 day streak. Punitive streaks may actively destroy the habit they claim to build.",
+    "Proactive coaching produced more than 2x the coach messages and meaningfully more app-open days than reactive coaching, but did NOT produce statistically significant better weight loss at 16 weeks - proactivity drives engagement metrics more reliably than it drives the clinical outcome.",
+    "Omada's lesson completion (passive content consumption) did not predict outcomes once social participation and logins were controlled - a caution that an AI companion serving educational content without a reciprocal/social loop may generate vanity engagement."
+   ],
+   "gaps_or_caveats": [
+    "Almost all retention disclosures (Sword, Hinge, Virta, Omada, Noom, Livongo) are US-based and run inside employer/payer-sponsored programs, where the user did not pay and often has an external incentive. EU/NL consumer-pay daily-habit benchmarks are thin; pregnancy apps (Flo is EU-HQ'd) are the closest consumer analogue but publish marketing metrics, not audited retention curves.",
+    "Company-published retention figures (Sword '100% client retention,' Hinge '98% client retention') are CLIENT/enterprise retention, not individual-user daily-engagement retention - they say nothing about whether an individual still opens the app at month 3. Treat these as commercial, not behavioral, metrics.",
+    "Almost none of these products are a pure daily companion; they bundle hardware (CGM, smart inhaler, motion sensors) or a structured clinical curriculum. The reciprocity often comes from a device returning real data, which a software-only cancer companion cannot replicate without an equivalent 'new information each day' source.",
+    "No source gave a clean, isolated month-3 individual retention number for a software-only daily check-in; the strongest month-3 evidence (productgrowth synthesis) is a practitioner blog, not peer-reviewed, so its specific numbers should be treated as medium-confidence directional guidance.",
+    "Cancer-specific daily/weekly companion engagement data was not found in this pass - all findings are transferred from MSK, diabetes, respiratory, weight-loss and pregnancy. The emotional load and unpredictable, episodic burden of cancer (treatment weeks vs recovery weeks) may break the fixed-cadence assumptions that work in chronic metabolic disease.",
+    "Streak-backfire return rates (0.90% / 1.42%) come from a single vendor blog citing aggregate app data without methodology; directionally consistent with Lally but should be verified before being used as a hard design constraint.",
+    "The arxiv fitness habit-formation study (2501.01779) could not be parsed in this pass, so its specific cadence/phase thresholds are unverified - only Lally's 66-day finding is confirmed."
+   ]
+  }
+ ],
+ "critic": {
+  "uncovered_hours": [
+   "MISSING 10th AGENT / CAREGIVER DAY: The brief says '10-agent sweep' but only 9 missions are shown, and none reconstruct the care-circle member's hour-by-hour week. Two agents flag this explicitly (day-reconstruction gap: 'I did not separately reconstruct the caregiver's day... core to Ditto's growth thesis'; nl-voices: 'partner reaches moments of being unable to even listen'). We have caregiver TIME aggregates (33h/wk US; 15h/wk median NL eQuiPe; ~66h/wk in last year of life) but ZERO clock-hour texture: what does the caregiver do at 7am, during the 6-8h infusion wait, on a crash evening, on a near-normal day? For a product whose growth engine IS the care circle, the entire B-side of every day is a hole.",
+   "THE 'NEAR-NORMAL' WEEK (days 14-20 of a 21-day cycle): Every week-mission narrates the crash (days 3-5) in rich texture but treats the recovery/near-normal week as a single phrase ('feels near-complete by day 7', 'near-normal week before next infusion'). We cannot account for the hours of a GOOD day mid-cycle: does the patient work? Exercise? Catch up on the admin backlog? Have sex? This is precisely the window a daily companion must earn its keep in — if there is no symptom to manage, what is the daily hook? Explicitly flagged: emotional-cycle gap ('the ordinary Tuesday of someone mid-treatment but not blogging is under-represented'); phase-contrast gap ('did not surface deep NL day-in-the-life for active-treatment and off-week phases specifically').",
+   "WEEKEND vs WEEKDAY STRUCTURE: All day-reconstruction is implicitly weekday-shaped (clinic access, work calendar, school run, no-early-calls). No agent isolates how Saturday/Sunday differ — when clinic/helpline is closed, partner is home all day, kids have no school anchor, and the 'is this normal / should I worry' channel (named as a distinct unmet need in phase-contrast) is unavailable. The check-in-design evidence even shows 42% of Sword sessions are outside workday and 23% on weekends, so weekend rhythm is a live product variable that lived-reality coverage never touched.",
+   "THE 3am-to-7am DEAD ZONE, AWAKE: Multiple agents establish patients are AWAKE at night (steroid insomnia ~45%, 3-4h sleep ceiling, midnight/3am vomiting, actigraphy shows MORE activity at night during chemo, 'fill the small hours with quiet busywork', night = hardest emotional window for rumination). But what the patient actually DOES in those waking small hours hour-by-hour — beyond 'cleaning' and 'rumination' — is thin. This is the single most product-relevant uncovered window: a daily AI companion's strongest theoretical wedge is the 3am awake-and-afraid hour, yet we have almost no texture on what would actually be wanted then vs. resented.",
+   "ORAL-THERAPY / NON-INFUSION REGIMENS: The entire week-reconstruction is built around the IV infusion cycle (infusion day, steroid pre-meds, 21-day shape, take-home pump). Oncology is increasingly oral targeted therapy / daily pills with no infusion-day anchor and a flat-but-grinding daily side-effect profile. Steroid-timing verbatims even over-index on myeloma weekly oral dex (flagged in emotional-cycle gap). The day-shape of a patient on daily oral therapy — no couch-day rhythm, no recovery week, just continuous low-grade — is essentially uncovered, and it may be the fastest-growing segment of Ditto's beachhead.",
+   "INTER-APPOINTMENT 'NOTHING SCHEDULED' DAYS: Coverage is dense on appointment/infusion/scan days (the events) and crash days (the symptoms), but the genuinely empty day — no clinic, no crash, no scan looming — is barely textured except as 'normalcy illusion.' For retention modeling this matters: the days with no external trigger are exactly where a daily companion either creates its own reason to open or gets abandoned. We cannot currently say what fills a structurally empty mid-cycle Wednesday.",
+   "MEALTIMES AND THE EATING CLOCK on non-crash days: We have rich crash-day eating texture (cold/sweet/frozen foods, smell aversion, scheduled defensive eating) but the eating rhythm of an ordinary on-treatment day — breakfast with kids, whether appetite returns by week 2, family dinner dynamics — is uncovered. Eating is a 3x/day clock event and a natural check-in anchor; we only see it when it is broken.",
+   "MEDICATION-ADMINISTRATION CLOCK across the full day: We know fixed alarms trigger meds and patients juggle standing vs as-needed anti-nausea, take up to 20 pills/day, call pharmacy 5+ days out. But the actual within-day medication schedule (morning steroid taper, anti-emetic timing relative to meals, bedtime meds) as a recurring daily-clock structure is fragmentary — and it is the most obvious, lowest-creativity daily companion hook, so its texture is load-bearing for the build decision."
+  ],
+  "claims_to_verify": [
+   "EVENING vs MORNING FATIGUE ARE DISTINCT (~80% evening vs ~67% morning; morning oscillates peaking weeks 1&3, evening stays elevated). LOAD-BEARING because it directly dictates check-in TIMING — if true, an evening check-in catches the worse, more persistent state but a morning one catches the only reliably-functional window. SURPRISING because it contradicts the naive 'tired all day' model. Verify the exact Miaskowski cohort percentages, that the morning/evening split is statistically distinct (not just two cutoffs on one scale), and the cycle-week oscillation claim — all flagged as US breast/mixed-tumor, EU-unverified.",
+   "MORNING DAILY CHECK-IN WAS THE SINGLE BIGGEST RETENTION DRIVER in the Wysa chronic-pain trial (hazard ratio 0.89, p=.001). This is arguably the most decision-relevant single number in the entire AI corpus — it is the closest thing to direct evidence that the daily-ritual hook (not content) extends engagement. SURPRISING/SUSPECT: HR 0.89 is a SMALL effect, the study is vendor-affiliated with NO control group, and 'morning' here may be an artifact of how the feature was deployed. Verify the HR direction/magnitude, what outcome it predicts, and whether 'morning' is causal or incidental before this anchors any product timing decision.",
+   "VOICE/AUDIO ADDS NOTHING OVER TEXT and the on-point oncology test FAILED (palliative IPOS extraction all F1 < 0.5, patient speech transcribed at 55.6% accuracy; audio+text UNDERPERFORMED text-only by 2-4%). LOAD-BEARING because it kills or keeps the 'talk to your companion' modality. SURPRISING because the whole voice-biomarker category was hyped. Verify the IPOS F1<0.5 and 55.6% ASR figures against the primary palliative-care paper, and confirm the audio-underperforms-text result is on patient (not clinician) speech — this single finding could veto a voice-first design.",
+   "DUTCH ASR FOR ELDERLY SPEAKERS IS 28.73% WORD ERROR RATE out-of-the-box (Whisper), only dropping to ~9% after JASMIN-CGN fine-tuning. DIRECTLY DECISION-RELEVANT for an NL oncology product whose users are older, fatigued, soft-voiced. Verify the 28.73% figure and that ~9% post-fine-tuning number, because a 29% WER on the actual target population is a build-blocker for any voice input in the home market.",
+   "STREAKS BACKFIRE: only 0.90% of users who break a 2-3 day streak return (1.42% for 4-7 day). LOAD-BEARING AND SURPRISING because it inverts the default gamification playbook and is especially damning for cancer patients who WILL miss days during crashes. But the critic flags it comes from 'a single vendor blog citing aggregate app data without methodology.' Verify or replace with a methodologically sound source before it becomes a hard design constraint — currently the strongest anti-streak evidence rests on the weakest source.",
+   "REPLIKA SETTLES NEAR ~20% RETENTION AT 90 DAYS despite 40M+ installs and ~14 min/day use; Character.AI ~93 min/day. These bracket the AI-companion retention ceiling and floor and would heavily shape Ditto's retention assumptions. SURPRISING that the highest-engagement AI products still bleed to ~20% at D90. Flagged as coming from 'secondary aggregator blogs, not primary Sensor Tower exports — confidence is low.' Verify against primary app-analytics before using as a planning anchor.",
+   "PRE-CHEMO SLEEP SETS THE TONE FOR THE ENTIRE 3-WEEK CYCLE: patients who slept poorly the night before infusion (~55% of sample) reported greater fatigue and more anxious mood ACROSS THE WHOLE CYCLE. LOAD-BEARING because it identifies a specific, single, predictable LEVERAGE POINT (the night before infusion) where a companion intervention could plausibly change the next 21 days — the rare causal-looking, actionable claim. Verify the cohort, the 55% figure, and that the association holds across the full cycle (not just days 1-2).",
+   "MEDIAN ~7 HOURS/WEEK (400 min) MANAGING CANCER, with a 2:1 travel-and-wait-to-treatment ratio and 35% of patients reporting disruption on >half of study days. This is the headline quantification of the 'invisible admin job' that justifies an admin-assistant companion surface. SURPRISING in magnitude and the 2:1 ratio. But it is US-only, n=60, metastatic breast + advanced ovarian, 77% White, median age 59 — verify the numbers and ruthlessly check transferability to NL (where prior-auth doesn't exist and the admin structure is entirely different), since the build case for an admin surface partly rests on this single small study."
+  ],
+  "contradictions": [
+   "MORNING IS BEST vs MORNING IS WORST. Most missions converge that mid-morning is the 'good window' and afternoon/evening is the dip (day-reconstruction: 'mid-morning is the recommended and lived good window'; emotional-cycle: 'mornings tend to be the better-functioning window'). But cognitive-physical-micro states the opposite: 'Mornings are reported as the worst window of the day, with patients winded within minutes of waking.' This is a direct conflict on the single most product-critical variable (when to check in). Likely reconciled by symptom-type (fatigue/cognition favor morning; breathlessness/physical-deconditioning and acute on-crash-days favor evening) and by treatment phase, but it is currently an unresolved contradiction that any timing decision must adjudicate.",
+   "DAILY-TOUCH CADENCE IS THE GOAL vs DAILY CADENCE DECAYS TO ~TWICE-WEEKLY IS NORMAL AND FINE. The checkin-design and companion-retention agents are internally inconsistent: one stream treats a daily ritual as the retention driver (Wysa morning check-in HR; Livongo 1.8x/day; 'daily loop under 60 seconds'), while the same corpus shows the best real-world products settle BELOW daily (Noom's highest-loss users weighed in ONCE A WEEK; Woebot postpartum ~5x/week not daily; Youper decays to 2.04 conversations/week by week 4; survivors plateau at ~6/week). The evidence does not actually support 'daily' as the winning cadence — it supports 'early intensity then a sustainable lower cadence.' This is a contradiction the synthesis must resolve before committing to a DAILY surface specifically.",
+   "AI IMPROVES RETENTION vs THE COMPARISON IS CONFOUNDED. companion-retention presents AI products beating the ~70% / 100-day abandonment baseline as if AI is the cause, then its OWN gaps section retracts it: 'No study isolated whether the AI/LLM layer itself (vs the daily-ritual UX) caused better retention... a confounder the pipeline should flag rather than treat as causal.' The headline finding and the caveat directly oppose each other on whether 'build AI' is supported by the retention data.",
+   "NAUSEA IS THE DEFINING CRASH SYMPTOM vs STEROIDS (NOT NAUSEA) ARE WHY DAYS 1-2 ARE WORST vs MODERN ANTI-EMETICS MAKE NAUSEA OVERSTATED. day-reconstruction simultaneously holds: clockwork midnight/3am vomiting and a 'puke-or-feel-like-puking baseline' organizing the day; AND 'patients name days 1-2 as their worst specifically because steroids wreck their sleep, not because of nausea'; AND its own gap that improved anti-emetics mean 'older studies may understate nausea' while 'vivid diary accounts may predate current anti-emetic standards.' The actual prevalence and timing of nausea for Ditto's current-regimen users is internally unsettled — it cannot be both the organizing axis of the day and a possibly-dated symptom.",
+   "WORST PART IS THE WAITING/LIMBO (pre-treatment) vs WORST PART IS AFTER TREATMENT ENDS (the 'zwarte gat'). phase-contrast: in diagnosis-to-treatment limbo 'the waiting itself, not the treatment, is named as the worst part of the whole process.' nl-voices: 'The hardest part is not treatment but life AFTER it ends: the zwarte gat.' Both are stated as 'the hardest part.' Not necessarily false (different phases, different patients) but presented without reconciliation — and it matters because it points the product's emotional-support emphasis at opposite ends of the journey.",
+   "EU PERCENTAGES ARE TRANSFERABLE vs THEY ARE NOT. Across missions the US-derived quantified findings (diurnal fatigue classes, 400 min/week admin, prior-auth time loss) are used as the texture of 'the cancer week,' while every gap section warns they are US-only and structurally non-transferable to NL (different anti-emetics, no prior-auth, eigen-risico/UWV system, JASMIN ASR degradation). The corpus leans on numbers it simultaneously says don't apply to the actual market — a pervasive tension rather than a single clean contradiction."
+  ],
+  "thinnest_evidence": [
+   "CANCER-SPECIFIC / CHRONIC-ILLNESS AI COMPANION RETENTION: This is the single thinnest spot relative to the build decision. Every named retention curve is from MENTAL-HEALTH AI (Wysa, Youper, Woebot, Ash, Limbic). The exact analogs — Belong.Life Dave (oncology), Livestrong Ellis, Kin, Hedy — disclose ZERO named engagement/retention numbers. The decision 'build a daily AI companion for cancer' is being made on retention evidence borrowed entirely from a different disease context with a different daily burden profile (cancer's episodic, crash-driven, unpredictable load may break the fixed-cadence assumptions that work in metabolic disease — flagged explicitly). We literally have no retention number for the actual product category.",
+   "WHETHER THE 'AI' IS WHAT RETAINS (vs the daily-ritual UX, the reciprocity device, or the human coach). The corpus repeatedly shows the retention wins are attributable to NON-AI mechanics: a fixed morning ritual, a device returning real data (CGM, smart inhaler, glucose), or human accountability coaches (which 'significantly outperform pure-app retention beyond month 3'). The checkin-design gaps note 'none of these products is a pure daily companion; the reciprocity often comes from a device returning real data, which a software-only cancer companion cannot replicate.' So the strongest retention evidence may argue for the OPPOSITE of an AI-software-only surface — and there is no evidence isolating the AI layer's contribution. For the build/no-build call, this is the weakest link.",
+   "VOICE/TALK-VS-TYPE IN ONCOLOGY SPECIFICALLY: 'Almost no head-to-head adherence/engagement data exists for VOICE check-ins vs typed/tapped forms in oncology.' The only on-point voice-symptom test FAILED, and the only adherence numbers are from n=5-15 elderly-pain feasibility studies. If the daily companion's differentiator is conversational/voice input, the evidence base for that modality in this population is near-empty and what exists is negative.",
+   "DUTCH-PATIENT-SPEECH-TO-SYMPTOM PIPELINE END-TO-END: 'No found study tested LLM symptom/mood extraction from patient natural SPEECH in DUTCH.' The Dutch evidence is ASR-error-rate only; the symptom-extraction evidence is all English clinical TEXT. The combined pipeline for the actual home market is completely unvalidated — a build risk with zero direct evidence either way.",
+   "MONTH-3+ INDIVIDUAL RETENTION FOR A SOFTWARE-ONLY DAILY CHECK-IN: 'No source gave a clean, isolated month-3 individual retention number for a software-only daily check-in.' The month-3-cliff guidance and the streak-backfire constraint both rest on a single practitioner blog with no methodology. The two findings most likely to shape the retention model and the gamification design are the two with the weakest sourcing.",
+   "NL/EU AI DAILY-HEALTH-COMPANION RETENTION (any condition): 'No NL/EU-specific AI daily-health-companion retention data was found' — Limbic (UK/NHS) is the closest. Consumer-pay daily-habit benchmarks in the EU are thin; almost all disclosures are US employer/payer-sponsored programs where the user didn't pay and had external incentive, which inflates engagement vs a consumer-pay Dutch product. The retention assumptions are being imported across both disease AND market boundaries.",
+   "DOES VOICE/ACOUSTIC BIOMARKER SURVIVE AT ALL: The category leader Kintsugi SHUT DOWN (Feb 2026) with marginal independent validation (71.3% sensitivity, severe gender bias), and field-wide only 1 of 89 / 1 of 308 models reached clinical-implementation consideration. If any part of the proposed companion leans on passive acoustic mood/symptom sensing, the evidence base is not just thin — it is actively a graveyard, and that should be weighed against the build case directly."
+  ]
+ }
+}

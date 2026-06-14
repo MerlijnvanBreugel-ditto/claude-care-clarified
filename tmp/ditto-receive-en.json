@@ -1,0 +1,2672 @@
+{
+    "CFBundleDisplayName": "Ditto",
+    "CFBundleName": "Ditto",
+    "NSCameraUsageDescription": "We need camera access is to scan documents.",
+    "NSDocumentsFolderUsageDescription": "Access to documents is needed to save and view your medical attachments.",
+    "NSFaceIDUsageDescription": "We use FaceID to protect the app",
+    "NSMicrophoneUsageDescription": "We need access to your microphone to record conversations.",
+    "NSPhotoLibraryAddUsageDescription": "This allows you to save photos in Ditto.",
+    "NSPhotoLibraryUsageDescription": "Access to photos is needed to save image attachments.",
+    "NSSpeechRecognitionUsageDescription": "We need access to speech recognition to transcribe your audio recordings",
+    "eventDetail": {
+        "kEventDetails": "Event details",
+        "kFiles": "Files",
+        "kFilesAttached": "%lld files",
+        "kYourNote": "Notes",
+        "kDelete": "Delete",
+        "kEdit": "Edit",
+        "kAddFileFromDevice": "Add a file from your device",
+        "kTakePhoto": "Take a photo",
+        "kAddPhotoFromLibrary": "Add a photo from your library",
+        "kStartRecording": "Start recording",
+        "kDeleteEvent": "Delete all",
+        "kEditEventDetails": "Edit details",
+        "kDeleteEventConfirm": "Delete all",
+        "kDeleteNoteConfirm": "Delete note",
+        "kDeleteFileConfirm": "Delete file",
+        "kNoRestore": "This will permanently delete any recording, notes and files.",
+        "kAddDocumentation": "Add a file",
+        "kEventActions": "Actions",
+        "kSummary": "Summary",
+        "kShowOriginal": "Show Original",
+        "note": {
+            "removed": "Note has been removed",
+            "saved": "Note has been saved",
+            "edit": "Edit",
+            "tips": "⚡️ Tips:\nWhat exactly do you feel?\nWhere in/on your body?\nWhen did the symptoms start?\nWhen does it get better or worse?\nWhat have you already done to feel better?"
+        },
+        "file": {
+            "saved": "File has been saved"
+        },
+        "error": {
+            "generic": "Something went wrong",
+            "title": "Error",
+            "deleteEvent": "Failed to delete event",
+            "tts": {
+                "title": "Cannot read text",
+                "languageNotDetected": "Could not detect the language of this text",
+                "languageNotSupported": "Text-to-speech is not supported for %@",
+                "generic": "An error occurred while trying to read the text"
+            }
+        },
+        "sensitivity": {
+            "markSensitive": "Mark as sensitive",
+            "markNonSensitive": "Mark as non-sensitive"
+        },
+        "transcription": {
+            "saved": "Transcription saved successfully",
+            "failed": "Failed to save transcription"
+        },
+        "simplifiedVersion": "Simplified version:",
+        "simplifying": "Simplifying...",
+        "attachments": {
+            "notAdded": "Not added"
+        },
+        "kOriginalSummary": "Original Summary",
+        "aiDisclaimer": "This summary was created with the help of AI and does not constitute medical advice. Your healthcare provider is not responsible for the quality of this summary. If in doubt, we recommend reviewing the information together with your healthcare provider.",
+        "readAloud": "Read aloud",
+        "simplify": "Simplify",
+        "addFile": "Add file",
+        "addNote": "Add note",
+        "aiFeedback": {
+            "title": "AI Feedback",
+            "question": "Was this summary helpful?",
+            "tellUsMore": "tell us more",
+            "positive": {
+                "message": "We would like to hear how we can improve your Ditto summary.",
+                "comment": "Please give us more context on how we can improve."
+            },
+            "negative": {
+                "message": "We're sorry the summary wasn't helpful. Please let us know how we can improve.",
+                "comment": "Please give us more context on how we can improve."
+            },
+            "option": {
+                "inaccurate": "The summary was inaccurate",
+                "missing": "Important information was missing",
+                "tooShort": "The summary was too short",
+                "other": "Other reason"
+            },
+            "confirm": "Submit Feedback",
+            "fullFeedback": "Thank you for the feedback! We'd love to hear from you in case you'd like to ",
+            "step1": "Share your feedback (1/2)",
+            "step2": "Share your feedback (2/2)",
+            "multipleAnswers": "Multiple answers possible.",
+            "placeholder": "Start typing",
+            "contextSubtitle": "Please give us more context on how we can improve."
+        },
+        "feedback": {
+            "saved": "Feedback saved",
+            "detailed": {
+                "saved": "Detailed feedback saved"
+            }
+        },
+        "loading": "Loading...",
+        "addEditNote": "Add/edit notes",
+        "title": {
+            "appointment": "Appointment",
+            "recording": "Recording",
+            "medicalDocument": "Medical Document"
+        },
+        "translation": {
+            "saved": "Translation saved successfully",
+            "failed": "Failed to save translation"
+        },
+        "kNoRestoreNote": "This will permanently remove your note.",
+        "aiDisclaimerRecording": "This AI-generated summary does not constitute medical advice. Your healthcare provider is not responsible for its quality. If in doubt, refer to the recording or discuss it with your healthcare provider.",
+        "aiDisclaimerDocument": "This AI-generated summary does not constitute medical advice. Your healthcare provider is not responsible for its quality. If in doubt, refer to the original document or discuss it with your healthcare provider.",
+        "sharingStatus": {
+            "private": "Private",
+            "sharing": "Sharing...",
+            "shared": "Shared",
+            "failed": "Share failed"
+        },
+        "stopSharing": "Stop sharing",
+        "tab": {
+            "preparation": "Preparation",
+            "summary": "Summary",
+            "files": "Files"
+        },
+        "kStopSharing": "Stop sharing",
+        "questions": {
+            "title": "Questions",
+            "emptyState": "Add questions from our library or your own."
+        },
+        "hcp": {
+            "unknown": "Type of care"
+        },
+        "institution": {
+            "unknown": "Institution"
+        },
+        "files": {
+            "emptyState": "Add letters or pictures related to your appointment."
+        },
+        "summary": {
+            "emptyTitle": "No summary yet",
+            "emptyMessage": "Record your appointment to generate summary.",
+            "editedBadge": "Edited by you",
+            "copied": "Summary section copied",
+            "contextMenu": {
+                "copy": "Copy",
+                "edit": "Edit",
+                "revert": "Original version"
+            },
+            "edit": {
+                "title": "Edit summary",
+                "placeholder": "Edit this section",
+                "autoSaved": "Auto-saved"
+            },
+            "editIntro": {
+                "title": "About edited summaries",
+                "body": "We always keep the original AI version. Followers will see the edited version when you share.",
+                "confirm": "Got it"
+            },
+            "revert": {
+                "title": "Revert to original summary",
+                "body": "This action will delete all edits you've made.",
+                "confirm": "Yes, revert back",
+                "cancel": "No, continue editing"
+            }
+        },
+        "addAttachment": "+ add",
+        "record": "Record",
+        "addingAttachments": "Adding attachments...",
+        "unavailable": {
+            "title": "No longer available",
+            "message": "This event is no longer available. Access may have been revoked."
+        },
+        "addToCalendar": "Add to calendar"
+    },
+    "note": {
+        "kAddYourNote": "Add notes",
+        "kEditYourNote": "Edit your note",
+        "kPlaceThought": "Place your thought here",
+        "kConfirmNote": "Save note",
+        "secureNotes": "Secure Notes",
+        "addSecureNote": "Add Secure Note",
+        "editSecureNote": "Edit Secure Note",
+        "titlePlaceholder": "Title (optional)",
+        "noNotes": "You don't have any secure notes yet",
+        "addFirst": "Add your first note",
+        "delete": "Delete",
+        "save": "Save",
+        "search": "Search notes...",
+        "saveConfirmation": {
+            "title": "Save Empty Note?",
+            "message": "The note content is empty. Do you still want to save this note?"
+        },
+        "toolbarHint": "⚡️ Tip: add notes about how you are feeling in the days leading up to your appointment.",
+        "autoSaved": "Auto-saved",
+        "startTyping": "Start typing..."
+    },
+    "attachments": {
+        "fileNotSupported": "File not supported",
+        "retry": "Retry",
+        "download": "Download"
+    },
+    "languageSelection": {
+        "title": "Choose language settings",
+        "language": "Language",
+        "level": "Level",
+        "simplify": "Simplify",
+        "options": "Options",
+        "translationQuestion": "Which language would you like to translate this document to?",
+        "simplifyDocument": "Simplify this document",
+        "simplifyButton": "Explain document",
+        "simplified": "Simplified",
+        "standard": "Standard",
+        "textTranslationQuestion": "Which language would you like to translate this text to?",
+        "translate": "Translate summary"
+    },
+    "preview": {
+        "saveToDevice": "Save to device",
+        "share": "Share",
+        "imageToText": "Image to Text (OCR)",
+        "delete": "Delete"
+    },
+    "audio": {
+        "transcript": "Transcript",
+        "transcribing": "Transcribing...",
+        "saveToFiles": "Save to files",
+        "delete": "Delete",
+        "transcribe": "Transcribe",
+        "selectLanguage": "Select Language",
+        "done": "Done",
+        "errorFileNotFound": "Could not locate audio file",
+        "transcriptionHeader": "Transcription",
+        "language": "Language",
+        "originalFile": "Original file",
+        "date": "Date",
+        "simplify": "Explain",
+        "simplifying": "Explaining...",
+        "showOriginal": "Show Original",
+        "summarize": {
+            "button": "Summarize recording",
+            "inProgress": "Summarizing...",
+            "processing": "Processing recording..."
+        },
+        "error": {
+            "speechPermission": "Speech recognition permission is required"
+        },
+        "transcription": {
+            "completed": {
+                "title": "Transcription Complete",
+                "message": "Your recording has been transcribed and summarized"
+            },
+            "processing": "We're creating an overview of your conversation.\nIt will be ready shortly.",
+            "part1": "We're creating an overview of your conversation.",
+            "part2": "It will be ready shortly.",
+            "error": {
+                "title": "Transcription Error",
+                "message": "There was an issue processing your recording"
+            },
+            "retry": {
+                "title": "Error",
+                "failed": "We could not make a summary",
+                "button": "Try again",
+                "getHelp": "Get help"
+            },
+            "readMore": "Read more"
+        },
+        "translation": {
+            "part1": "We're translating your summary.",
+            "part2": "Keep the app open until this is finished.",
+            "completed": {
+                "title": "Translation Complete",
+                "message": "Your recording has been translated"
+            },
+            "error": {
+                "title": "Translation Error",
+                "message": "Failed to translate recording",
+                "processing": "Failed to process translation",
+                "noActiveConsultation": "No active translation session found"
+            },
+            "retry": {
+                "title": "Translation Error",
+                "audioExpired": "Audio file is no longer available for translation",
+                "button": "Retry Translation"
+            },
+            "validation": {
+                "badge": "Summary not possible",
+                "message": "The conversation contains information that Ditto cannot process. You can still listen to the recording. On our website you can learn more about which conversations Ditto can process."
+            },
+            "network": {
+                "badge": "Connection issues",
+                "message": "Connection issues"
+            }
+        },
+        "translate": "Translate",
+        "validation": {
+            "badge": "Summary not possible",
+            "message": "The conversation contains information that Ditto cannot process. You can still listen to the recording. On our website you can learn more about which conversations Ditto can process."
+        },
+        "network": {
+            "badge": "No internet",
+            "message": "Ditto could not make a summary as connection was lost. Try again while keeping the app open."
+        }
+    },
+    "imagePicker": {
+        "cameraAccessTitle": "Camera Access Required",
+        "cameraAccessMessage": "Please enable camera access in Settings to take photos.",
+        "openSettings": "Open settings",
+        "photoLibraryAccessTitle": "Photo Library Access Required",
+        "photoLibraryAccessMessage": "Please enable photo library access in Settings to select photos."
+    },
+    "onboarding": {
+        "next": "Continue",
+        "finish": "Finish",
+        "prev": "Prev",
+        "page1": {
+            "title": "Record medical conversations",
+            "description": "Everything discussed in one overview"
+        },
+        "page2": {
+            "title": "Scan or upload documents",
+            "description": "Explanation of a difficult medical letter"
+        },
+        "page3": {
+            "title": "Share with friends and family",
+            "description": "Keep your circle updated on what's happening"
+        },
+        "page4": {
+            "title": "Sharing",
+            "description": "Share your summaries to keep people up to date."
+        },
+        "welcome": {
+            "title": "Welcome to Ditto",
+            "description": "I help you capture,\nexplain and share your\nhealthcare journey",
+            "getStarted": "That brings you smart\ncare, pocket sized"
+        },
+        "privacy": {
+            "title": "Your health, your data",
+            "description": "Your medical data belongs to you. That's why your privacy matters to us. We follow European privacy laws (GDPR), and even go a step further:",
+            "readTerms": "Read the terms and conditions",
+            "dataOnDevice": "Your data stays on your phone. We can't see it.",
+            "dataInEU": "If you use our AI, your data is processed within the EU and immediately deleted afterwards.",
+            "gdpr": "We never use your data to train our AI.",
+            "accept": "I accept"
+        },
+        "termsAndConditions": {
+            "title": "Terms and conditions",
+            "download": "Download as pdf",
+            "accept": "I accept",
+            "back": "Back",
+            "fulltext": "Welcome to Ditto Care! We want you to understand your rights and our rights relating to the use of our app. Please review them carefully.\n\nHere's a summary of some key terms:\n\n1. Your data stays on your device - Your medical data is stored securely on your device, not on our servers.\n\n2. Not medical advice - Ditto is a health self-management tool, not a medical device. Always consult healthcare professionals for medical advice.\n\n3. Your data is yours - We don't train our AI on your data or use it for any purpose other than providing you the service.\n\n4. AI processing - When you use AI features, your data is temporarily processed on secure EU servers and deleted immediately afterward.\n\n5. Minimum age - You must be at least 16 years old to use the Ditto app.\n\n6. You control sharing - Any sharing of your medical data is initiated by you manually.\n\n7. Cancel anytime - You can delete your account at any time through the app settings.\n\n8. AI quality and liability – We strive to make AI summaries as accurate as possible, but they may contain errors. Neither Ditto nor your healthcare professional is responsible for decisions made based on them.\n\n9. We can suspend accounts - We may suspend accounts that violate our terms.\n\n10. Dutch law applies - Any disputes will be resolved under Dutch law in Rotterdam courts.",
+            "externalTermsLink": "Terms and Conditions",
+            "externalPrivacyLink": "Privacy Policy"
+        },
+        "authenticate": {
+            "reason": "Please authenticate to secure your data",
+            "action": "Enable"
+        },
+        "settings": "Settings",
+        "cancel": "Cancel",
+        "continue": "Continue",
+        "securitySetup": "Security Setup",
+        "secureData": {
+            "title": "Let's secure your data",
+            "passcode": "Set up face recognition, fingerprint, or choose a passcode.",
+            "biometric": "Set up face recognition, fingerprint, or choose a passcode.",
+            "passcodeRequired": {
+                "title": "Device Passcode Required",
+                "message": "For your security, Ditto requires your device to have a passcode. This helps protect your sensitive medical information. Please set up a passcode in your device settings to continue."
+            },
+            "biometricRecommended": {
+                "title": "Biometric Authentication Recommended",
+                "message": "For faster and more secure access to your medical data, we recommend setting up biometric authentication. You can still use Ditto with just a passcode."
+            },
+            "usePasscode": "Use device passcode instead"
+        },
+        "oneMoreThing": "Almost there.\nJust one more thing.",
+        "account": {
+            "title": "Create an account",
+            "description": "With a Ditto account you can safely store your medical data locally on your device.",
+            "explainWithDitto": "Explain with Ditto",
+            "createOrSignIn": "Create an account or sign in",
+            "exploreWithout": "Continue without an account",
+            "skipConfirmation": {
+                "title": "Are you sure?",
+                "message": "With an account you can use Ditto’s smart features",
+                "confirm": "Skip for now",
+                "cancel": "Create an account"
+            }
+        },
+        "notifications": {
+            "title": "Allow Ditto to keep you up to date",
+            "description": "When your summary is ready, reminders to use Ditto and app updates.",
+            "example": "The summary of your consultation is ready ✨",
+            "enable": "Enable notifications",
+            "skip": "Not now",
+            "personalize": {
+                "title": "Personalize your Ditto",
+                "subtitle": "We want Ditto to be as helpful and relevant to you as possible, by:"
+            },
+            "bullet1": "Sending you updates when a summary is ready",
+            "bullet2": "Reminding you about upcoming doctor's appointments",
+            "personalization": {
+                "title": "Personalization",
+                "description": "To make Ditto smarter for you, we invite you to share anonymous usage data. This way we can personalize your experience. Your medical information will still remain private in your Ditto app."
+            },
+            "continue": "Continue",
+            "trackingConsent": {
+                "title": "Personalize your Ditto",
+                "description": "We'd like to know how you discovered Ditto so we can personalize the app and improve it for you. This does not involve your health data — we never see or share that.",
+                "allow": "Allow",
+                "dontAllow": "Don't Allow"
+            }
+        },
+        "profile": {
+            "title": "What would you like to use Ditto for?",
+            "subtitle": "This way Ditto can help you better.",
+            "option": {
+                "ownCare": "My own care",
+                "othersCare": "Follow someone",
+                "patientCare": "Care for my patient(s)",
+                "caregiver": "As a caregiver",
+                "preferNot": "I prefer not to say"
+            },
+            "skip": "Skip",
+            "next": "Next"
+        },
+        "login": {
+            "letsGetStarted": "Let's get started",
+            "profile": {
+                "name": "Merlijn",
+                "feature1": "Make use of Ditto's smart features",
+                "feature2": "Ditto does not save your data"
+            },
+            "title": "Clarity when it matters",
+            "checkInLink": "💌 Send a digital card"
+        },
+        "referral": {
+            "title": "Where do you know Ditto from?",
+            "subtitle": "Multiple choice",
+            "option": {
+                "friendFamily": "Friend / family",
+                "healthcareProvider": "Care provider",
+                "flyerBrochure": "Flyer / brochure",
+                "publicTransitPoster": "Bus / tram poster",
+                "onlineAd": "Online advertisement",
+                "articleBlog": "Article / blog",
+                "other": "Other",
+                "invitation": "Invitation from someone",
+                "preferNot": "I prefer not to say"
+            },
+            "skip": "Skip"
+        },
+        "featureTutorial": {
+            "title": "How it works",
+            "follower": {
+                "card1": {
+                    "label": "Follow your loved ones",
+                    "headline": "Send a follow request and stay connected with the health updates of the people you care about."
+                },
+                "card2": {
+                    "label": "React and support",
+                    "headline": "Show your support by reacting to shared health updates."
+                },
+                "card3": {
+                    "label": "Stay notified",
+                    "headline": "Receive push notifications so you never miss an important update."
+                }
+            }
+        },
+        "lovedOnesInvite": {
+            "title": "Share care updates and follow loved ones",
+            "subtitle": "Have you already received an invitation to use Ditto? Click on the link to accept the invitation."
+        },
+        "persona": {
+            "title": "What describes your situation?",
+            "subtitle": "Multiple choice",
+            "save": "Save",
+            "option": {
+                "ownDiagnosis": "I have a serious condition",
+                "caregiver": "I care for someone regularly",
+                "lovedOne": "A loved one is seriously ill",
+                "expecting": "I'm expecting or have a baby",
+                "hcp": "I'm a healthcare professional",
+                "preferNotToSay": "I'd rather not say",
+                "other": "Other (free text)"
+            },
+            "other": {
+                "placeholder": "Other (free text)..."
+            }
+        },
+        "intent": {
+            "title": "What would help you the most?",
+            "option": {
+                "appointmentSummaries": "Summarize my medical conversations",
+                "shareWithFamily": "Share health updates with family",
+                "explainMedicalLetters": "Understand medical letters",
+                "medicalOverview": "My medical history in one place",
+                "trackSymptoms": "Track symptoms and side effects",
+                "understandCondition": "Understand a condition better",
+                "medicationReminders": "Medication and check-up reminders",
+                "healthFitnessData": "Track health and fitness data",
+                "coordinateCare": "Coordinate care with others",
+                "prepQuestions": "Prepare questions for appointments",
+                "trackDocuments": "Track medical documents and results",
+                "childMilestones": "Track pregnancy and child milestones",
+                "hcpPatientSummaries": "Give patients a conversation summary",
+                "hcpFamilySharing": "Help patients share updates with family",
+                "hcpTranslateDocuments": "Help patients understand medical documents",
+                "hcpValidateQuality": "Check the quality of Ditto's summaries",
+                "hcpReduceDocumentation": "Reduce my documentation time",
+                "hcpRecommend": "Recommend Ditto to my patients",
+                "other": "Other (free text)"
+            },
+            "subtitle": "Multiple choice",
+            "save": "Save",
+            "other": {
+                "placeholder": "Other (free text)..."
+            }
+        }
+    },
+    "timeline": {
+        "welcome": "Welcome to Ditto",
+        "noEvents": "Have an appointment coming up?",
+        "noEventsDescription": "Use Ditto to record your conversation or scan a medical document.",
+        "noMatches": "No events match the selected filters",
+        "now": "NOW, %@",
+        "yourEvents": "Overview",
+        "scanner": "Scanner",
+        "today": "NOW, %@",
+        "startAddingBy": "Start adding:",
+        "recordConversation": "Recording a conversation",
+        "scanDocument": "Scan a document",
+        "prepareEvent": "A recording",
+        "addAppointment": "Add an empty appointment",
+        "scanMedicalDocument": "Scan medical document",
+        "startRecording": "Start a recording",
+        "actions": "Actions",
+        "getStarted": "Get started",
+        "readSummary": "Read summary",
+        "prepareQuestions": "Prepare questions",
+        "saveAppointment": "Save appointment",
+        "details": "Details",
+        "editAppointment": "Edit appointment",
+        "updateAppointment": "Update appointment"
+    },
+    "search": {
+        "title": "Search",
+        "placeholder": "Search in titles/summaries/notes",
+        "found": "Found",
+        "inTitles": "In titles",
+        "inSummaries": "In Summaries",
+        "inNotes": "In Notes"
+    },
+    "main": {
+        "tabs": {
+            "yourJourney": "Carepath",
+            "more": "More",
+            "home": "Home",
+            "settings": "Settings",
+            "share": "Loved ones",
+            "profile": "Profile",
+            "discover": "Discover"
+        },
+        "dittoMe": "Ditto me",
+        "auth": {
+            "tagline": "Care. Clarified.",
+            "unlock": "Unlock Ditto"
+        },
+        "autoEventCreate": "Do you want to add %@ to your journey?"
+    },
+    "dittoMe": {
+        "createEvent": "Add an event",
+        "addToEvent": "Add to this event",
+        "emptyEvent": "Add",
+        "startRecording": "Record",
+        "scanQR": "Document"
+    },
+    "import": {
+        "title": "Add to Event",
+        "addToEvent": "Add to event",
+        "fileToImport": "File to import:",
+        "searchPlaceholder": "Search events",
+        "error": {
+            "title": "Error",
+            "ok": "OK"
+        },
+        "searchExistingEvent": "Search existing appointment",
+        "addToExistingEvent": "Add to appointment"
+    },
+    "confirmation": {
+        "clearAll": {
+            "title": "Clear selection",
+            "message": "Are you sure you want to clear all selected text?",
+            "confirm": "Yes, clear"
+        },
+        "save": {
+            "title": "Save selected text",
+            "toSummary": {
+                "message": "Do you want to add selected text to the event summary?"
+            },
+            "toNote": {
+                "message": "Do you want to add selected text to your event note?"
+            },
+            "confirm": "Yes, save"
+        }
+    },
+    "error": {
+        "fileNotFound": "Could not locate audio file",
+        "transcriptionFailed": "No transcription result",
+        "authFailed": "Authentication failed. Please try again.",
+        "authLockout": "Too many failed attempts. Please try again.",
+        "authNoPasscode": "Please set up a device passcode in Settings to continue.",
+        "authNotEnrolled": "Please set up device security in Settings to continue.",
+        "audio": {
+            "durationTooShort": "The recording is too short. Therefore, Ditto can’t create a summary for you. Please make sure to record a medical conversation of at least 20 seconds."
+        },
+        "validation": {
+            "classificationFailed": "Ditto didn’t detect medical information in this conversation. Therefore, we are unable to create a summary for you.",
+            "contentPolicyViolated": "Ditto cannot provide a reliable summary of this conversation. However, you can view the full transcript. We are happy to explain why.",
+            "guardrailFailed": "Ditto automatically checks the quality of the summary. Unfortunately, it was not possible to create a high-quality summary of this conversation."
+        },
+        "securityRemoved": {
+            "title": "Device Security Removed",
+            "message": "Your device security (PIN/fingerprint) has been removed. For your safety, Ditto's app lock has been disabled. You can re-enable it in Settings after setting up device security again.",
+            "openSettings": "Open Settings",
+            "disableAppLock": "Disable App Lock"
+        },
+        "fetchQuestions": {
+            "message": "Unable to load questions. Using offline cache."
+        },
+        "saveAppointment": {
+            "message": "Failed to save appointment. Please try again."
+        }
+    },
+    "eventCreator": {
+        "title": {
+            "create": "Create event",
+            "edit": "Edit event"
+        },
+        "eventName": {
+            "label": "Event Name",
+            "placeholder": "Enter event name"
+        },
+        "date": {
+            "label": "Date",
+            "placeholder": "Select date"
+        },
+        "summary": {
+            "label": "Summary",
+            "placeholder": "Enter event summary"
+        },
+        "hcp": {
+            "name": {
+                "label": "Specialist's Name",
+                "placeholder": "Enter specialist's name"
+            },
+            "type": {
+                "label": "Type of care",
+                "placeholder": "Select type"
+            },
+            "institution": {
+                "label": "Institution Name",
+                "placeholder": "Enter institution name"
+            }
+        },
+        "note": {
+            "title": "Notes",
+            "delete": "Delete",
+            "edit": "Edit"
+        },
+        "sensitivity": {
+            "title": "Sensitivity",
+            "sensitive": "Sensitive",
+            "nonSensitive": "Non-sensitive"
+        },
+        "save": "Save",
+        "button": {
+            "create": "Create event",
+            "save": "Save changes"
+        },
+        "error": {
+            "nameRequired": "Event name is required"
+        }
+    },
+    "filter": {
+        "title": "Filters",
+        "apply": "Apply filters",
+        "cancel": "Cancel",
+        "sensitivity": {
+            "sensitive": "Sensitive",
+            "nonSensitive": "Non-sensitive"
+        },
+        "type": {
+            "hcp": "Specialist's Type",
+            "institution": "Institution",
+            "sensitivity": "Sensitivity"
+        }
+    },
+    "datePicker": {
+        "title": "Select date",
+        "placeholder": "Select date",
+        "confirm": "Confirm"
+    },
+    "button": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "retry": "Try again"
+    },
+    "audioRecording": {
+        "title": "Show notes",
+        "status": {
+            "recording": "Recording...",
+            "start": "Start recording"
+        },
+        "delete": {
+            "title": "Discard recording",
+            "message": "This will close the recording without saving it",
+            "confirm": "Yes, close and delete"
+        },
+        "saving": "Updating summary...",
+        "save": {
+            "title": "Save recording",
+            "message": "This ends the recording. Do you want to save this now?",
+            "confirm": "Yes, save it"
+        },
+        "newRecording": "New recording",
+        "pause": "Pause",
+        "stopAndSave": "Stop and save",
+        "microphoneAccess": {
+            "title": "Microphone Access Required",
+            "message": "Please enable microphone access in Settings to record audio.",
+            "openSettings": "Open Settings"
+        },
+        "continue": "Continue",
+        "continueRecording": "No, continue recording",
+        "deleteButton": "Delete",
+        "maxAudioLength": "You have reached the maximum recording length of %lld minutes",
+        "silenceWarning": {
+            "title": "Not recording properly.",
+            "message": "It seems like the microphone is already in use."
+        },
+        "paused": "Paused",
+        "microphoneInUse": {
+            "label": "Recorder",
+            "title": "Recording conversation is not possible",
+            "message": "It seems like the microphone is already in use (for example, by a phone call). Unfortunately, this is not possible in Ditto at this moment.",
+            "close": "Close"
+        },
+        "pausedNotification": {
+            "title": "Your recording is paused",
+            "body": "It looks like your microphone is in use by another app."
+        }
+    },
+    "eventShare": {
+        "text": "I would like to share something about my health with you:\n\n%@\n%@\n%@\n\nThis summary was created with the Ditto app. If you want to track and explain your own healthcare journey, visit https://ditto.care.",
+        "error": {
+            "fileNotFound": "File not found"
+        },
+        "customization": {
+            "subtitle": "Choose what you want to share",
+            "shareButton": "Share with followers",
+            "note": "Notes",
+            "emptyWarning": "Select at least one item to share",
+            "appointmentInfo": "Appointment information",
+            "questions": "Questions",
+            "personalMessage": {
+                "title": "Personal message",
+                "placeholder": "Write a message for your care circle..."
+            }
+        },
+        "textFollowRequest": "I would like to share a healthcare update with you:\n\n%@\n\nWant to stay in the loop? Follow my care updates on Ditto: %@"
+    },
+    "ocr": {
+        "error": {
+            "imageNotFound": "Could not locate image file",
+            "loadFailed": "Failed to load image: %@",
+            "simplifying": "Error simplifying text. Please try again."
+        },
+        "info": {
+            "title": "Info",
+            "description": "Image to Text (OCR) allows you to detect text from an image.\\n\\nStep 1) After entering this feature the system recognizes texts from the image\\n\\nStep 2) After completing the process from point 1) you can tap on the texts detected by the system or tap on \\\"Select All\\\" button to select whole text\\n\\nStep 3) You can save the recognized text. It will be located in \\\"Summary\\\" in the Details of your event"
+        },
+        "button": {
+            "close": "Close",
+            "selectAll": "Select all",
+            "deselectAll": "Deselect all",
+            "save": "Save",
+            "simplify": "Simplify",
+            "showOriginal": "Show Original"
+        },
+        "text": {
+            "analyzing": "Analyzing image...",
+            "updating": "Updating summary...",
+            "simplifying": "Simplifying...",
+            "tapToSelect": "Tap on rectangles to select detected text",
+            "simplifiedVersion": "Simplified Version"
+        }
+    },
+    "documentPicker": {
+        "success": "File saved successfully",
+        "cancelled": "Save cancelled",
+        "error": {
+            "audioAccess": "Failed to access audio file",
+            "audioPrepare": "Failed to prepare audio file"
+        }
+    },
+    "auth": {
+        "reason": "Unlock the app",
+        "error": {
+            "failed": "Authentication failed"
+        },
+        "welcome": {
+            "title": "Welcome to Ditto",
+            "subtitle": "Please sign in to use all Ditto features",
+            "signIn": "Sign In with Ditto",
+            "or": "or",
+            "continueWithout": "Quick Start",
+            "signingIn": "Signing in..."
+        },
+        "buttons": {
+            "signIn": "Sign in",
+            "createAccount": "Create Account"
+        }
+    },
+    "event": {
+        "default": {
+            "name": "New Event"
+        }
+    },
+    "hcp": {
+        "type": {
+            "gp": "General Practitioner",
+            "specialist": "Specialist",
+            "nurse": "Nurse",
+            "dentist": "Dentist",
+            "physio": "Physiotherapist",
+            "pharmacist": "Pharmacist",
+            "maternity": "Maternity Caregiver",
+            "midwife": "Midwife",
+            "other": "Other",
+            "hospital": "Hospital"
+        }
+    },
+    "attachment": {
+        "defaultName": "URL Link Attachment",
+        "added": {
+            "single": {
+                "audio": "Audio file saved",
+                "image": "Image saved",
+                "document": "Document saved"
+            },
+            "multiple": "%lld files saved"
+        },
+        "removed": {
+            "single": "File has been removed",
+            "multiple": "%lld files removed"
+        },
+        "type": {
+            "recording": "Recording",
+            "image": "Image",
+            "document": "Document",
+            "note": "Note",
+            "transcript": "Transcript",
+            "file": "File"
+        }
+    },
+    "more": {
+        "about": "About Ditto",
+        "demo": "Demo Setup",
+        "version": "App version",
+        "profile": {
+            "title": "Profile",
+            "createAccount": "Create Account"
+        },
+        "feedback": "Give Feedback",
+        "help": "Help"
+    },
+    "common": {
+        "destructive": "Yes, delete it",
+        "errors": {
+            "network": "Something went wrong as connection was lost. Try again while keeping the app open.",
+            "unknown": "An unexpected error occurred. Please try again.",
+            "ok": "OK",
+            "error": "Error",
+            "unauthorized": "Please log in to use this feature",
+            "loginRequired": "You must be logged in to use Ditto's smart features"
+        },
+        "read_more": "Read more",
+        "read_less": "Read less",
+        "ok": "OK",
+        "close": "Close",
+        "empty": "(Empty)",
+        "delete": {
+            "\u0000": "Delete",
+            "confirm": {
+                "title": "Delete",
+                "message": "Are you sure you want to delete?"
+            }
+        },
+        "cancel": "Cancel",
+        "save": "Save"
+    },
+    "app_name": "Ditto",
+    "app": {
+        "name": {
+            "debug": "Ditto -D",
+            "staging": "Ditto -S"
+        }
+    },
+    "autoCreate": {
+        "message": "Your event has now been added to your Ditto overview",
+        "confirmAction": "Great!",
+        "rejectAction": "This was a mistake"
+    },
+    "welcome": {
+        "timeline": "Go to your journey",
+        "scan": "Receive summary",
+        "record": "Record an appointment",
+        "title": "Welcome back!"
+    },
+    "home": {
+        "recentEvents": "Recent",
+        "subtitle": "What would you like to do?",
+        "title": "Hello",
+        "allEvents": "Show overview",
+        "welcome": "Hello, %@",
+        "feedback": {
+            "title": "We need\nyour help",
+            "description": "We'd like to hear from you how we could improve Ditto.",
+            "button": "Help us"
+        },
+        "createAccount": {
+            "title": "Create a Ditto account",
+            "description": "To make use of Ditto's smart features.",
+            "button": "Create account"
+        },
+        "addEvent": {
+            "title": "Doctor's appointment coming up?",
+            "description": "Ditto will help you prepare!",
+            "button": "Add appointment"
+        },
+        "accountCreated": {
+            "title": "You've joined the Ditto team",
+            "description": "You are ready to use Ditto's smart features."
+        },
+        "gettingStarted": "Getting started with Ditto",
+        "insights": "Ditto insights",
+        "recordingInfo": {
+            "title": "Am I allowed to record a doctor's appointment?",
+            "description": "In the Netherlands you are allowed to record a conversation with your doctor as long as you are part of the conversation. This can help you remember important medical information.",
+            "button": "Learn more",
+            "heading": "Ditto insights",
+            "explanation": "In the Netherlands you are allowed to record a conversation with your doctor as long as you are part of the conversation. This can help you remember important medical information.",
+            "bestPractice": "However, it is best to talk to your doctor first. You can say something like:",
+            "script": "\"I have trouble remembering all the details. Would it be okay if I record our conversation for personal use?\"",
+            "importantThings": "Important things to know",
+            "bullet1": "You can record for personal use",
+            "bullet2": "You cannot share the recording with others without permission",
+            "bullet3": "Open communication with your doctor helps build trust",
+            "finalNote": "If you have any questions, feel free to ask your doctor!"
+        },
+        "welcomeCard": {
+            "title": "Get started with Ditto in 3 steps",
+            "description": "Ditto transforms medical confusion into clarity in one simple app.",
+            "button": "Get started"
+        },
+        "preparationInfo": {
+            "title": "Prepare an appointment",
+            "description": "How to get the most out of your doctor's visit.",
+            "button": "Read more"
+        },
+        "meetTeam": {
+            "heading": "Ditto insights",
+            "title": "Welcome to Ditto",
+            "description": "We're super happy you've downloaded our app. We hope Ditto gives you the confidence to understand, manage, and share your health journey.",
+            "tipsButton": "Tips from our team",
+            "tip1": {
+                "title": "Don't miss important information",
+                "description": "Use Ditto to record your doctor's appointment. You'll get a clear summary afterward."
+            },
+            "tip2": {
+                "title": "Understand what your doctor says",
+                "description": "Doctors often use complex medical terms, especially in documents. Ditto explains these terms in simple language."
+            }
+        },
+        "youtubeVideos": {
+            "title": "Get started with Ditto in 3 steps",
+            "description": "We're super happy you've downloaded our app. We hope Ditto helps you understand, manage, and share your health journey better. Learn how to make the most out of Ditto with these videos.",
+            "video1": {
+                "title": "Record conversations",
+                "description": "Learn how to record your doctor's appointments and get clear summaries."
+            },
+            "video2": {
+                "title": {
+                    "\u0000": "Scan documents",
+                    "android": "Scan documents (coming soon)",
+                    "ios": "Scan documents"
+                },
+                "description": "Understand how to scan and simplify medical documents."
+            },
+            "video3": {
+                "title": "Share summaries",
+                "description": "Discover how to share your summaries with family and healthcare providers."
+            }
+        },
+        "profileSelection": {
+            "title": "What are you using Ditto for?",
+            "description": "Share with us why you are using Ditto.",
+            "button": "Let us know",
+            "save": "Save",
+            "subtitle": "This way Ditto can help you better",
+            "sheetTitle": "Happy with Ditto?"
+        },
+        "sharedWithYou": {
+            "\u0000": "Shared with you",
+            "title": "Shared with you",
+            "shared": "Shared",
+            "sharedToday": "Shared today",
+            "sharedYesterday": "Shared yesterday",
+            "emptyTitle": "No updates yet",
+            "emptyMessage": "Once you start following loved ones their updates will appear here",
+            "upcoming": "Upcoming",
+            "summary": "Summary"
+        },
+        "learnDitto": {
+            "title": "Learn how to use Ditto",
+            "watch": "Watch"
+        },
+        "resources": {
+            "card": {
+                "useDitto": {
+                    "category": "Help center",
+                    "title": "Learn how to use Ditto"
+                },
+                "bouquet": {
+                    "category": "Support tools",
+                    "title": "Send a Ditto bouquet"
+                },
+                "record": {
+                    "category": "Tutorials",
+                    "title": "Recording an appointment"
+                },
+                "preparation": {
+                    "category": "Tutorials",
+                    "title": "Preparing an appointment"
+                },
+                "feedback": {
+                    "category": "Feedback",
+                    "title": "We'd love to hear your feedback"
+                },
+                "nomination": {
+                    "category": "Nomination",
+                    "title": "Vote for Ditto 🎉",
+                    "navTitle": "Vote for Ditto",
+                    "heading": "Help Ditto win the National Healthcare Innovation Prize 🎉",
+                    "body1": "Great news: Ditto is a national finalist! After winning our regional competition, we're now up for the biggest healthcare innovation award in the Netherlands of Zorginnovatie.nl.",
+                    "body2": "There's a public vote, and yours would mean the world to us. After all, we build Ditto for you. See the pitch by co-founder Tobias that we submitted.",
+                    "howToVote": {
+                        "title": "How to vote",
+                        "body": "Visit Zorginnovatie.nl, find Ditto among the finalists, and enter your email address. After submitting, you need to confirm your email.",
+                        "deadline": "Voting closes April 14 at 5:00 PM. Don't forget to confirm your vote via email."
+                    },
+                    "button": "Vote now"
+                },
+                "checkIn": {
+                    "category": "Support tools",
+                    "title": "Send a free card to a loved one 💌"
+                }
+            }
+        },
+        "test": {
+            "test": "Pain in the left leg"
+        }
+    },
+    "userInfo": {
+        "title": "Fill in your details",
+        "subtitle": "We only need your name and profile photo to create your Ditto profile.",
+        "firstName": {
+            "label": "First Name",
+            "placeholder": "Enter your first name"
+        },
+        "lastName": {
+            "label": "Last Name",
+            "placeholder": "Enter your last name"
+        },
+        "dateOfBirth": {
+            "label": "Date of Birth",
+            "placeholder": "Select your date of birth"
+        },
+        "phone": {
+            "label": "Phone Number",
+            "placeholder": "123456789",
+            "help": "Include country code, e.g. +31"
+        },
+        "validation": {
+            "required": "Required",
+            "phoneShort": "Too short"
+        },
+        "button": {
+            "submit": "Submit",
+            "submitting": "Submitting...",
+            "logout": "Logout",
+            "continue": "Continue"
+        },
+        "fetchFailed": {
+            "title": "Failed to Load Profile",
+            "message": "We couldn't load your profile information. Please try again or contact support if the problem persists.",
+            "retry": "Try Again",
+            "retrying": "Loading..."
+        },
+        "countryCode": {
+            "title": "Select Country Code",
+            "placeholder": "Country code"
+        }
+    },
+    "profile": {
+        "title": "User Profile",
+        "guest": "Guest",
+        "createAccount": "Create account or login",
+        "email": "Email",
+        "dateOfBirth": "Date of Birth",
+        "phone": "Phone",
+        "accessToken": "Access Token",
+        "tokenCopied": "Token copied to clipboard",
+        "signOut": "Sign Out",
+        "yourProfile": "Your profile",
+        "apnsToken": "APNS Token",
+        "referFriend": "Happy with Ditto? Refer a friend 💌",
+        "referralShareText": "I've been using the Ditto app to keep track of my doctor's advice—it makes things much clearer. Want to try it? https://www.dittocare.com/?utm_source=referral_loved_ones",
+        "completion": {
+            "title": "Complete profile",
+            "description": "We're almost there!",
+            "button": "Complete",
+            "dashboard": {
+                "title": "Your profile",
+                "accountCreated": "Create an account",
+                "referralSource": {
+                    "title": "How do you know Ditto?",
+                    "subtitle": "Where do you know Ditto from?"
+                },
+                "goal": {
+                    "title": "Set your goal",
+                    "subtitle": "What will you use Ditto for?"
+                },
+                "inviteLoved": {
+                    "title": "Invite loved ones",
+                    "subtitle": "Share care updates safely."
+                }
+            }
+        },
+        "shareProfile": "Share profile",
+        "aboutMe": {
+            "title": "About me",
+            "empty": "Describe your needs so your loved ones know what's important to you. Think about:\n\n• How are you feeling?\n• What do you need?",
+            "placeholder": "Write something about yourself...",
+            "edit": {
+                "title": "About me"
+            },
+            "description": "Tell us something about yourself that your care team should know"
+        },
+        "faq": {
+            "title": "Questions and answers",
+            "empty": "Nothing added yet.",
+            "filled": {
+                "subtitle": "questions and answers"
+            },
+            "list": {
+                "title": "Questions and answers"
+            },
+            "question": {
+                "label": "Question",
+                "placeholder": "Type your question..."
+            },
+            "answer": {
+                "label": "Answer",
+                "placeholder": "Type your answer..."
+            },
+            "add": {
+                "title": "Add a question"
+            },
+            "edit": {
+                "title": "Edit question"
+            },
+            "intro": {
+                "title": "Questions and answers",
+                "description": "Answering questions from your loved ones can sometimes be a lot. Add them to your profile and answer them all at once.",
+                "benefit1": "Create a shared list of questions so your loved ones stay informed",
+                "benefit2": "Communicate what you need",
+                "addQuestion": "Add a question",
+                "benefit3": "Build better communication with your healthcare providers",
+                "sample1": "What symptoms do I have?",
+                "sample2": "How can you support me?",
+                "sample3": "What are the next steps?"
+            },
+            "contextMenu": {
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "delete": {
+                "title": "Delete question",
+                "message": "Are you sure you want to delete this question?",
+                "confirm": "Yes, delete"
+            },
+            "viewAll": "View all questions"
+        },
+        "share": {
+            "intro": {
+                "title": "Share your profile",
+                "description": "Share your profile with your care circle so they can better understand your care situation.",
+                "benefit1": "Your care team can see your preferences",
+                "benefit2": "Your data is securely encrypted",
+                "button": "Share profile",
+                "benefit3": "Control who sees your information"
+            },
+            "button": "Share profile",
+            "stopButton": "Stop sharing",
+            "stopSharing": {
+                "title": "Stop sharing",
+                "message": "Are you sure you want to stop sharing your profile?",
+                "confirm": "Yes, stop sharing"
+            }
+        },
+        "stopSharing": {
+            "title": "Your profile",
+            "action": "Make profile private"
+        },
+        "edit": {
+            "title": "Edit"
+        }
+    },
+    "disclaimer": {
+        "1": "We are thrilled to have you as user on board and learn from your feedback as we continue to evolve and improve Ditto.",
+        "2": "We recommend carefully reviewing its outputs. Ditto is not a substitute for professional medical advice or diagnosis.",
+        "continue": "Continue"
+    },
+    "soap": {
+        "s": "Reason for visit",
+        "o": "Findings",
+        "a": "Conclusions",
+        "p": "Plan",
+        "medicalSummary": "Medical Summary"
+    },
+    "scanner": {
+        "preview": {
+            "title": {
+                "single": "Scanned document",
+                "multiple": "Scanned documents",
+                "photo": "Photo preview"
+            },
+            "addMore": "Add extra page",
+            "simplify": "Simplify with Ditto",
+            "discard": {
+                "title": "Remove document",
+                "message": "Are you sure you want to remove this photo?",
+                "confirm": "Yes, remove",
+                "cancel": "Cancel"
+            },
+            "photo": {
+                "discard": {
+                    "title": "Discard Photo",
+                    "message": "Are you sure you want to discard this photo?",
+                    "confirm": "Discard",
+                    "cancel": "Keep Photo"
+                }
+            },
+            "next": "Next"
+        },
+        "errors": {
+            "noText": "No text found in document",
+            "processing": "Error processing document",
+            "limitExceeded": "This document exceeds Ditto's processing limit. Try uploading fewer pages.",
+            "validation": "Ditto could not process this document, unfortunately.",
+            "notMedical": {
+                "title": "Can't continue",
+                "message": "We couldn't summarize this document\n\nThis document can't be summarized. Please scan another medical document or try again."
+            },
+            "unauthorized": "Please log in to use this feature",
+            "noInternet": {
+                "title": "No internet",
+                "message": "You can't make a summary without internet\n\nYou can only scan a document. Try again when you have an internet connection."
+            },
+            "textTooLong": "This document contains too much text. Try a smaller document with less text."
+        },
+        "selection": {
+            "title": "Open Camera",
+            "message": "Which scanner would you like to use?",
+            "qr": "Photo",
+            "document": "Document Scanner"
+        },
+        "progress": {
+            "detectingText": "Detecting text...",
+            "thinking": "Processing document...",
+            "saving": "Creating summary..."
+        },
+        "cameraAccess": {
+            "title": "Camera Access Required",
+            "message": "Please enable camera access in Settings to use the scanner.",
+            "openSettings": "Open Settings"
+        },
+        "menu": {
+            "delete": "Delete",
+            "edit": "Edit"
+        },
+        "title": "Take a photo",
+        "edit": {
+            "adjustCorners": "Adjust corners",
+            "save": "Save",
+            "dragHint": "Place your finger near the circle"
+        },
+        "close": {
+            "title": "Close scanner",
+            "message": "If you close the scanner, you'll need to start over.",
+            "confirm": "Understood, close",
+            "cancel": "Cancel"
+        },
+        "firstTime": {
+            "title": "Explain medical documents",
+            "heading": "Simple explanation of complex documents",
+            "description": "With this functionality you get an easy-to-understand explanation of a complex medical documents. Ditto can also give you the explanation in another language.",
+            "howItWorksWithSteps": "**Three ways to choose a document**\n• Scan a document with your camera\n• Upload one or more existing photos\n• Upload a pdf document",
+            "button": "Continue",
+            "howItWorks": "Three ways to choose a document",
+            "steps": [
+                "Scan a document with your camera",
+                "Upload one or more existing photos",
+                "Upload a pdf document",
+                "Ditto creates a summary that's easy to understand"
+            ],
+            "languageOption": "Choose a language for your explanation",
+            "comingSoon": {
+                "title": "Ditto document scanner",
+                "banner": "Available soon",
+                "heading": "We are working on it",
+                "description": "The Ditto document scanner for Android is almost ready! Keep an eye out on the Play Store updates to see when it is available ✨.",
+                "button": "Close"
+            }
+        },
+        "processing": {
+            "images": "Processing images..."
+        },
+        "source": {
+            "title": "Choose source",
+            "camera": "Scan with Camera",
+            "gallery": "Choose from Gallery",
+            "file": "Choose File"
+        },
+        "sourceSelection": {
+            "title": "Select Image Source",
+            "camera": "Scan with Camera",
+            "gallery": "Choose from Gallery"
+        },
+        "authRequired": {
+            "title": "Account Required",
+            "message": "You need an account to use Ditto smart features.",
+            "login": "Log In",
+            "createAccount": "Create Account"
+        }
+    },
+    "summary": {
+        "reason": "Reason for your visit",
+        "conclusion": "What the doctor saw",
+        "plan": "Plan moving forward",
+        "actions": "What you can do",
+        "details": "Additional details",
+        "empty": "The conversation contains information that Ditto cannot process. You can still listen to the recording. On our website you can learn more about which conversations Ditto can process."
+    },
+    "dismiss": {
+        "button": "Dismiss"
+    },
+    "recordingInfo": {
+        "heading": "Ditto insights",
+        "title": "Am I allowed to record a doctor's appointment?",
+        "explanation": "In the Netherlands you are allowed to record a conversation with your doctor as long as you are part of the conversation. This can help you remember important medical information.",
+        "bestPractice": "However, it is best to talk to your doctor first. You can ask the following:",
+        "script": "\"I have trouble remembering all the details. Would it be okay if I record our conversation for personal use?\"",
+        "importantThings": "Important things to know",
+        "bullet1": "You can record for personal use",
+        "bullet2": "You cannot share the recording with others without permission",
+        "bullet3": "Open communication with your doctor helps build trust",
+        "finalNote": "If you have any questions, feel free to ask your doctor!",
+        "description": "In the Netherlands you are allowed to record a conversation with your doctor as long as you are part of the conversation. This can help you remember important medical information.",
+        "button": "Learn more"
+    },
+    "appointment": {
+        "title": "When is your next appointment?",
+        "description": "We will send you a reminder to record your conversation.",
+        "dateTime": "Date and time",
+        "name": "Title",
+        "namePlaceholder": "Of the appointment",
+        "medicalCenter": "Organization",
+        "medicalCenterPlaceholder": "Optional",
+        "reminder": {
+            "title": "Appointment Reminder",
+            "body": "Reminder: Prepare your upcoming appointment with Ditto."
+        },
+        "firstTime": {
+            "title": "Appointments",
+            "heading": "Prepare your next appointment",
+            "description": "Manually add your upcoming appointments and start preparing your questions.",
+            "benefits": {
+                "prepare": "Write down your notes",
+                "remind": "We will send you a notification when your appointment is coming up, so you don't forget to start your recording!"
+            },
+            "button": "Add appointment",
+            "notification": {
+                "sender": "Ditto",
+                "time": "14:03",
+                "message": "Record the conversation with your Doctor via Ditto."
+            }
+        },
+        "morning": {
+            "reminder": {
+                "title": "Ditto is here to help",
+                "body": "Good luck with your appointment today. Use Ditto to record your consultation and receive an instant summary."
+            }
+        },
+        "headerTitle": "Add an appointment",
+        "prepare": {
+            "body": "Prepare for your appointment. Add notes and questions."
+        },
+        "save": "Save",
+        "skipForNow": "Skip for now",
+        "addToCalendar": "Add a reminder to my personal calendar",
+        "defaultName": "Medical appointment",
+        "calendarSync": {
+            "header": "Share with your own calendar",
+            "subheader": "Add your Ditto appointment to your personal calendar",
+            "body": "We help you prepare your appointments in advance. We also send a reminder to record your appointment.",
+            "addButton": "Add to personal calendar",
+            "skipButton": "Skip"
+        },
+        "noAppointment": "I have no appointment planned"
+    },
+    "recorder": {
+        "firstTime": {
+            "title": "Recorder",
+            "heading": "Recording a conversation",
+            "benefits": {
+                "summary": "Always inform your healthcare provider that you want to record the conversation",
+                "remember": "Recording a telephone conversation is not yet possible, not even with speakerphone.",
+                "test": "If you want to test the recording function, speak about a medical situation for at least 20 seconds."
+            },
+            "note": "If you want to test the recorder at home, describe a medical situation for at least 20 seconds.",
+            "button": "Start recording",
+            "languageOption": "Set a language for your summary"
+        },
+        "start": "Start"
+    },
+    "preparationInfo": {
+        "heading": "Ditto insights",
+        "title": "How to prepare for your doctor's appointment",
+        "explanation": "Being prepared for your doctor's appointment helps you get better care and the most out of your visit.",
+        "tipsTitle": "Preparation tips",
+        "tip1": "Write down what symptoms you have, when they started, and any changes you've noticed",
+        "tip2": "Bring a list of all medications you're taking, including supplements",
+        "tip3": "Prepare specific questions you want to ask",
+        "tip4": "Use Ditto to record your conversation and get a clear summary",
+        "benefitsTitle": "Why you should prepare",
+        "benefit1": "You can explain better what is going on",
+        "benefit2": "Your doctor can give you better advice",
+        "benefit3": "You'll remember to ask important questions",
+        "finalNote": "Ditto can help you prepare for appointments and record conversations so you don't miss any details."
+    },
+    "settings": {
+        "feedback": "Give us feedback 💙",
+        "privacyTerms": "Privacy & Terms of use",
+        "help": {
+            "\u0000": "Help",
+            "email": "Send us an email",
+            "whatsapp": "Contact on Whatsapp"
+        },
+        "appVersion": "App version",
+        "profile": {
+            "title": "Your profile",
+            "edit": "Edit details",
+            "removeAccount": "Delete account",
+            "deleteConfirmation": "Are you sure you want to permanently delete your account? This can't be undone.",
+            "removing": "Deleting account",
+            "removingMessage": "Please wait while we delete your account..."
+        },
+        "language": {
+            "title": "Language settings",
+            "summaryLanguage": "Language of the recording summary",
+            "documentLanguage": "Language of the document explanation",
+            "appLanguage": "Language of the Ditto app"
+        },
+        "analytics": {
+            "share": "Share analytics data",
+            "helpImprove": "Help improve Ditto"
+        },
+        "personalData": {
+            "title": "Personal data"
+        },
+        "referFriend": "Recommend Ditto to a friend 💌",
+        "preferences": {
+            "title": "Preferences",
+            "settings": "Settings",
+            "permissions": "Permissions",
+            "language": "Language",
+            "calendarPermissionDenied": {
+                "title": "Calendar access needed",
+                "message": "Enable calendar access in system settings to sync appointments to your calendar.",
+                "openSettings": "Open Settings"
+            }
+        },
+        "calendarSync": {
+            "title": "Add appointments to calendar",
+            "subtitle": "Appointments will be automatically added to your personal calendar"
+        },
+        "privacyPolicy": "Privacy Policy"
+    },
+    "account": {
+        "title": "Use Ditto's smart features",
+        "description": "Understand your health better with summaries of doctor conversations and explanations of complex documents."
+    },
+    "update": {
+        "available": {
+            "title": "Update Available"
+        },
+        "required": {
+            "title": "Update Required"
+        },
+        "new_version_title": "There is a new version of the Ditto app",
+        "major_update_required": "You cannot use this version of the app anymore. Download the new version to keep your data secure.",
+        "minor_update_available": "A new version of Ditto is available with various improvements. We recommend updating.",
+        "patch_update_available": "A new version with minor improvements is available.",
+        "update_now": "Update Now",
+        "download_new_version": "Download the new version",
+        "later": "Later"
+    },
+    "languageScreenTitle": "Choose a language",
+    "loader": {
+        "gettingConversationDetails": "Getting conversation details",
+        "creatingSummary": "Creating a summary",
+        "finalisingSummary": "Finalising summary",
+        "readingQRCode": "Reading QR code",
+        "thinking": "Thinking",
+        "writingSummary": "Writing summary",
+        "checkingQuality": "Checking quality",
+        "finishingTouches": "Finishing touches"
+    },
+    "pdfViewer": {
+        "title": "Add a PDF",
+        "processingButton": "Continue"
+    },
+    "share": {
+        "title": "Share",
+        "referFriend": {
+            "heading": "Happy with Ditto?",
+            "description": "Recommend the app!",
+            "button": "Share Ditto 💌"
+        },
+        "loopInLovedOnes": {
+            "heading": "Loop in your loved ones",
+            "description": "Soon you can invite others to follow you on Ditto to share your health updates safely. We'd love to hear your thoughts.",
+            "button": "Share your feedback"
+        },
+        "inviteText": {
+            "fullText": "I'd like to keep you up to date about how I am doing. Ditto is an app that lets me share health updates with the people close to me. I'd like to invite you as a follower.\n\nHow it works:\n1. Download the Ditto app %@\n2. Create an account\n3. Accept my invite via the link above"
+        },
+        "flowers": {
+            "title": "Send a Ditto bouquet",
+            "button": "Read more",
+            "sheet": {
+                "title": "Ditto insights"
+            },
+            "heading": "Send a Ditto bouquet",
+            "description": "Let your loved ones know you're thinking of them with a digital bouquet. Choose flowers they love and add a personal message.",
+            "send": "Send a bouquet",
+            "disclaimer": "You will continue on the Ditto website."
+        },
+        "sheet": {
+            "title": "Share with your followers",
+            "subtitle": "You only share the summary, no recordings and files.",
+            "primary": "Share",
+            "signal": "Signal",
+            "whatsapp": "WhatsApp",
+            "copy": "Copy",
+            "other": "Other",
+            "loading": {
+                "title": "Sharing",
+                "subtitle": "Preparing"
+            },
+            "success": {
+                "title": "Success!",
+                "subtitle": "Shared with your followers"
+            },
+            "empty": {
+                "title": "Invite your loved ones and share health updates in Ditto's",
+                "subtitle": "By sharing your care with loved ones you keep them in the loop.",
+                "invite": "Invite"
+            },
+            "alreadyShared": {
+                "title": "This update has already been shared once",
+                "subtitle": "Do you have a new follower? Share your summary again.",
+                "button": "Share again"
+            },
+            "customize": "Customize what to share"
+        },
+        "tab": {
+            "following": "Following",
+            "followers": "Sharing with"
+        },
+        "status": {
+            "waitingAccess": "Waiting for access",
+            "blocked": "Blocked",
+            "invitationPending": "Wants you to follow their health updates",
+            "noFollowingYet": "You're not following any Ditto users yet",
+            "noFollowersYet": "No one is following you yet",
+            "requestToFollow": "Wants to follow your health updates"
+        },
+        "action": {
+            "clearLocalStorage": "Clear Local Storage",
+            "approve": "Approve",
+            "reject": "Reject",
+            "acceptRequest": "Accept",
+            "declineRequest": "Decline",
+            "followBack": "Follow back",
+            "removeFollower": "Remove as follower",
+            "leaveCircle": "Leave circle",
+            "sendFollowRequest": "I want to follow someone",
+            "follow": "Follow"
+        },
+        "dialog": {
+            "errorTitle": "Error",
+            "successTitle": "Success",
+            "clearStorageTitle": "Clear Storage",
+            "clearStorageMessage": "Are you sure you want to clear all local care circle data? This cannot be undone.",
+            "clearAllData": "Clear All Data",
+            "cancel": "Cancel",
+            "ok": "OK"
+        },
+        "navigation": {
+            "shareTitle": "Share",
+            "cryptoTesting": "Crypto Testing",
+            "done": "Done"
+        },
+        "actionSheet": {
+            "followerTitle": "Follower",
+            "circleTitle": "Circle"
+        },
+        "requestToJoin": {
+            "title": "Request to Join",
+            "yourUserId": "Your User ID",
+            "copied": "Copied",
+            "copy": "Copy",
+            "inviteLinkCopied": "Invite Link Copied!",
+            "generateInviteLink": "Generate Invite Link",
+            "userIdPlaceholder": "User ID",
+            "request": "Request"
+        },
+        "button": "Share",
+        "emptyState": {
+            "following": {
+                "title": "Not following anyone yet",
+                "description": "Once you follow someone in Ditto you can see their health updates here.",
+                "button": "I want to follow someone"
+            },
+            "followers": {
+                "title": "Share your health updates",
+                "description": "Once you invite someone to follow you in Ditto you can start sharing health updates with them.",
+                "button": "Invite a new follower"
+            }
+        },
+        "error": {
+            "title": "Sharing Failed",
+            "network": {
+                "title": "No Internet Connection",
+                "message": "Please check your internet connection and try again."
+            }
+        },
+        "christmas": {
+            "title": "Create your own Ditto Christmas piece",
+            "button": "Read more 🎄",
+            "sheet": {
+                "badge": "New!",
+                "heading": "Create your own Christmas piece",
+                "description": "Let your loved ones know you care. Send them a handmade digital Christmas piece.",
+                "button": "Create your Christmas piece 🎄"
+            },
+            "video": {
+                "title": "Christmas with Ditto"
+            },
+            "disclaimer": "You will continue on the Ditto website."
+        },
+        "actionDialog": {
+            "inviteFollower": "Invite new follower",
+            "sendFollowRequest": "I want to follow someone"
+        },
+        "followingCard": {
+            "nothingNew": "Nothing new"
+        }
+    },
+    "followerActions": {
+        "title": "Following",
+        "stopFollowing": "Stop following",
+        "inviteToFollow": "Invite to follow you",
+        "requestToJoin": "Invite to follow you",
+        "unfollowConfirm": {
+            "title": "Stop following?",
+            "message": "You will no longer receive updates from this person. This cannot be undone."
+        },
+        "unfollowing": "Unfollowing..."
+    },
+    "careCircle": {
+        "confirmation": {
+            "acceptRequest": {
+                "title": "%@ and you",
+                "message": "This person is following you and sees only your shared updates. Do you also want to receive health updates? Send a follow request.",
+                "confirm": "I want to follow someone"
+            },
+            "declineRequest": {
+                "title": "Are you sure?",
+                "message": "If you decline the request you must send a new invitation to share health updates.",
+                "confirm": "Yes, decline",
+                "cancel": "No, accept"
+            },
+            "removeFollower": {
+                "title": "Delete follower",
+                "message": "Are you sure you want to delete this follower?",
+                "confirm": "Yes, delete",
+                "cancel": "Cancel",
+                "submessage": "You will have to send a new invitation to share health updates."
+            },
+            "leaveCircle": {
+                "title": "Leave circle",
+                "message": "You will no longer receive updates from this person.",
+                "confirm": "Yes, leave circle",
+                "cancel": "Cancel"
+            },
+            "followBack": {
+                "title": "%@ and you",
+                "message": "This person is following you and sees only your shared updates. Do you also want to receive health updates? Send a follow request.",
+                "confirm": "I want to follow someone"
+            }
+        },
+        "invitation": {
+            "error": "Error",
+            "close": "Close",
+            "requestAccepted": "Request accepted!",
+            "followerAcceptedMessage": "can now see your shared health updates.",
+            "invitationConfirmed": "Invitation confirmed!",
+            "waitForOwnerApproval": "Wait for",
+            "waitForOwnerApprovalSuffix": "to grant you access.",
+            "okClose": "OK, close",
+            "sendInvitation": "Send invitation",
+            "confirm": "Confirm",
+            "confirmShort": "Confirm",
+            "reject": "Reject",
+            "inviteSomeoneTitle": "Invite someone to follow you on Ditto",
+            "inviteFollowersFeature": "Invite followers",
+            "inviteFollowersDescription": "Invite followers and decide for yourself who has access.",
+            "chooseWhatToShareFeature": "Choose what you share",
+            "chooseWhatToShareDescription": "Choose what you share. Your updates are private until you share them.",
+            "addPersonalMessageFeature": "Add a personal message",
+            "addPersonalMessageDescription": "Add a personal message to your update.",
+            "invitePersonTitle": "Invite",
+            "invitePersonTitleSuffix": "to follow you on Ditto",
+            "ownerInvitesYouTitle": "invites you to follow on Ditto",
+            "automaticUpdatesFeature": "Automatic health updates",
+            "automaticUpdatesDescription": "When something is shared with you, you can immediately see it in the Ditto app.",
+            "completeInfoFeature": "Complete information",
+            "completeInfoDescription": "Stay fully informed about your loved one's health situation.",
+            "loading": "Loading...",
+            "followRequestDescription": "Wants to follow your health updates. You choose what to share and when.",
+            "sendFollowRequest": {
+                "title": "I want to follow someone",
+                "feature1": "Share a request link with your loved one",
+                "feature2": "Wait until they accept your request",
+                "feature3": "Once they share updates, you will be able to see them here.",
+                "button": "I want to follow someone"
+            }
+        },
+        "eventsRemoved": {
+            "title": "Events Removed",
+            "message": "Events from {name} have been removed. You are no longer connected in their care circle."
+        },
+        "noAccess": {
+            "title": "No Access",
+            "message": "You no longer have access to this user's events. You are not connected in their care circle."
+        },
+        "eventRemoved": {
+            "title": "Event Removed",
+            "message": "This event was removed by {name}."
+        },
+        "auth": {
+            "dialog": {
+                "title": "Ditto account",
+                "description": "Create an account and follow someone in Ditto",
+                "createAccount": "Create account",
+                "continueWithout": "Continue without account",
+                "subdescription": "This keeps your family or friend's medical information safe in Ditto.",
+                "invite": {
+                    "title": "Create an account",
+                    "message": "Looks like you don't have an account yet.",
+                    "description": "To be able to invite someone, you need to create an account."
+                },
+                "follower": {
+                    "description": "To be able to follow someone in Ditto, you need to first create a Ditto account."
+                }
+            }
+        },
+        "error": {
+            "invalidLink": {
+                "title": "Invalid invitation",
+                "message": "This invitation link is not working. Please ask for a new invitation."
+            },
+            "alreadyMember": {
+                "title": "Already connected",
+                "message": "You are already part of this Care Circle."
+            },
+            "alreadyPending": {
+                "title": "Request already Sent",
+                "message": "Wait for your loved one to approve your access."
+            },
+            "cannotJoinOwn": {
+                "title": "Followers",
+                "message": "You can' invite yourself as a follower."
+            },
+            "network": {
+                "title": "No internet",
+                "message": "Please check your internet connection and try again."
+            },
+            "timeout": {
+                "title": "Connection lost",
+                "message": "The connection was lost for too long. Please try again."
+            },
+            "server": {
+                "title": "Something is not working",
+                "message": "Please come back later to try again."
+            },
+            "userNotFound": {
+                "title": "Can't find user",
+                "message": "We can't find this user, it could be that you need a new invitation link. "
+            },
+            "action": {
+                "retry": "Try again",
+                "dismiss": "Close"
+            },
+            "invitationNotFound": {
+                "title": "Invitation no longer available",
+                "message": "This follow request is no longer available. The person may have cancelled it or you may have already responded to it.",
+                "button": "OK, close"
+            }
+        },
+        "invitationInstructions": {
+            "title": "Do you want to follow someone in Ditto?",
+            "subtitle": "Click on the invitation you received to follow your loved one",
+            "skip": "Skip"
+        },
+        "followRequest": {
+            "inviteText": "I'd like to stay up to date on how you're doing. Ditto is an app that lets you share health updates with the people close to you. Tap this link to add me as a follower %@"
+        },
+        "followers": {
+            "cancelled": {
+                "toast": "Invitation cancelled"
+            },
+            "cancelRequest": {
+                "confirm": {
+                    "action": "Yes, cancel",
+                    "cancel": "No, keep it",
+                    "message": "We'll withdraw your follow-back request. You can send a new request at any time.",
+                    "title": "Cancel invitation?"
+                }
+            },
+            "error": {
+                "generic": "Something went wrong. Please try again."
+            },
+            "pending": {
+                "menu": {
+                    "cancelRequest": "Cancel request",
+                    "sendReminder": "Send reminder"
+                }
+            },
+            "reminderSent": {
+                "toast": "Reminder sent"
+            }
+        }
+    },
+    "followingTimeline": {
+        "empty": {
+            "title": "No events yet",
+            "message": "You haven't received any events from this person"
+        },
+        "newBadge": "New",
+        "inviteText": {
+            "intro": "I'd like to invite you to follow me on Ditto, so I can safely share my updates with you and you'll automatically get a notification whenever I share something new with you.",
+            "howItWorks": "How it works:",
+            "step1": "1. Download Ditto",
+            "step2": "2. Create an account",
+            "step3": "3. Click this link to accept:"
+        },
+        "section": {
+            "upcoming": "Upcoming"
+        },
+        "tab": {
+            "about": "About",
+            "updates": "Updates"
+        },
+        "about": {
+            "empty": "Nothing shared yet"
+        }
+    },
+    "unshare": {
+        "error": {
+            "title": "Unshare failed"
+        },
+        "button": "Share"
+    },
+    "profileSetup": {
+        "progress": {
+            "step": "Step",
+            "of": "of"
+        },
+        "button": {
+            "skip": "Skip",
+            "continue": "Continue",
+            "complete": "Complete",
+            "submitting": "Submitting...",
+            "backToLogin": "Back to login"
+        },
+        "firstName": {
+            "title": "What's your first name?",
+            "subtitle": "We'll use this to personalize your Ditto experience",
+            "placeholder": "Enter your first name"
+        },
+        "lastName": {
+            "title": "What's your last name?",
+            "subtitle": "Optional - you can skip this step",
+            "placeholder": "Enter your last name"
+        },
+        "dateOfBirth": {
+            "title": "When were you born?",
+            "subtitle": "This helps us provide age-appropriate content",
+            "placeholder": "Select your date of birth"
+        },
+        "phoneNumber": {
+            "title": "What's your phone number?",
+            "subtitle": "Optional - we'll only use this for important updates",
+            "placeholder": "123456789"
+        },
+        "validation": {
+            "required": "This field is required",
+            "nameTooShort": "Name is too short",
+            "nameTooLong": "Name is too long (max 50 characters)",
+            "phoneTooLong": "Phone number is too long",
+            "phoneInvalid": "Please enter a valid phone number",
+            "dateInFuture": "Date cannot be in the future",
+            "invalidDate": "Please enter a valid date",
+            "ageTooHigh": "Please enter a valid date of birth"
+        }
+    },
+    "shared": {
+        "skip": {
+            "\u0000": "Skip",
+            "forNow": "Skip for now"
+        },
+        "next": "Next"
+    },
+    "profileCompletion": {
+        "goal": {
+            "title": "What will you use Ditto for?",
+            "subtitle": "Multiple choice"
+        },
+        "referral": {
+            "title": "Where do you know Ditto from?",
+            "subtitle": "Multiple choice"
+        },
+        "dashboard": {
+            "allSet": "You're all set!"
+        }
+    },
+    "appReview": {
+        "title": "Happy with Ditto?",
+        "description": "Give us a rating and let other know that Ditto is helpful!",
+        "button": "Give a rating ⭐"
+    },
+    "videoActivation": {
+        "dashboard": {
+            "title": "Ditto's stories"
+        },
+        "card": {
+            "title": "Discover Ditto stories",
+            "button": "Learn more"
+        },
+        "actionCell": {
+            "title": "Discover Ditto's stories"
+        },
+        "getStarted": {
+            "title": "Start yourself with Ditto",
+            "sheetTitle": "Get started with Ditto",
+            "inviteLoved": {
+                "title": "Invite loved ones",
+                "subtitle": "Share care updates securely."
+            },
+            "prepare": {
+                "title": "Prepare an appointment",
+                "subtitle": "Questions and notes"
+            },
+            "document": {
+                "title": "Explain a document",
+                "subtitle": "Scan or upload"
+            },
+            "record": {
+                "title": "Record a conversation",
+                "subtitle": "And summarize"
+            }
+        },
+        "henriette": {
+            "quote": "We don't forget the important information"
+        },
+        "aaron": {
+            "quote": "By sharing the conversations it's easier to explain"
+        },
+        "ellie": {
+            "quote": "It gives me peace of mind and an overview"
+        },
+        "doctorDitto": {
+            "quote": "Try a conversation with Doctor Ditto"
+        },
+        "dittoInOneMinute": {
+            "quote": "Ditto explained in 1 minute"
+        },
+        "recordingTutorial": {
+            "quote": "Recording a medical conversation"
+        },
+        "docScannerTutorial": {
+            "quote": "Explanation of a medical document"
+        },
+        "appointmentPrepTutorial": {
+            "quote": "Prepare your next appointment"
+        },
+        "sharingCare": {
+            "quote": "Sharing care with loved ones"
+        }
+    },
+    "question": {
+        "add": {
+            "title": "Add Question"
+        },
+        "edit": {
+            "title": "Edit Question"
+        },
+        "placeholder": "Enter your question...",
+        "source": {
+            "manual": "Manual",
+            "library": "Library",
+            "ai": "AI Generated"
+        },
+        "added": "Question added",
+        "updated": "Question updated",
+        "deleted": "Question deleted",
+        "delete": {
+            "confirm": {
+                "title": "Delete question",
+                "message": "Are you sure you want to delete this question?"
+            }
+        },
+        "category": {
+            "careNeeds": "Care needs",
+            "tests": "Tests",
+            "treatment": "Treatment",
+            "recovery": "Recovery",
+            "followUp": "Follow-up",
+            "healthComplaint": "Health complaint",
+            "lifestyleAdvice": "Life-style advice",
+            "results": "Results",
+            "procedures": "Procedures",
+            "exercises": "Exercises"
+        },
+        "library": {
+            "1": "What is going on?",
+            "2": "Why am I in pain?",
+            "3": "What is the name of my illness?",
+            "4": "Is additional testing (e.g., blood test or an X-ray) needed?",
+            "5": "How should I prepare for the tests?",
+            "6": "When will I receive the results?",
+            "7": "What treatment options are available?",
+            "8": "What are possible side effects of the treatment?",
+            "9": "Can it get better on its own?",
+            "10": "How long will the recovery take?",
+            "11": "What can I do myself to get rid of it?",
+            "12": "What should I do if it gets worse?",
+            "13": "Do I need to come back for a follow-up appointment?",
+            "14": "Can you refer me to a specialist at the hospital?",
+            "15": "Where can I find more information about my illness?",
+            "16": "What is the name of my condition?",
+            "17": "Is additional testing (e.g., blood tests or a CT scan) needed?",
+            "18": "Is there a patient organization for people with the same illness as me?",
+            "19": "What is the name of my problem?",
+            "20": "Is additional testing (e.g., an X-ray or an ultrasound) needed?",
+            "21": "What exercises can I do?",
+            "22": "What should I watch out for while doing the exercises?",
+            "23": "Are there other options besides exercises to promote recovery?",
+            "24": "Should I see my general practitioner about this?",
+            "25": "Where can I find more information about my problem?",
+            "26": "Is what I'm feeling normal?",
+            "27": "Is it dangerous for the baby if I get sick?",
+            "28": "What signs should I watch out for?",
+            "29": "What should I pay attention to regarding nutrition?",
+            "30": "Am I still allowed to exercise normally?",
+            "31": "What tasks in and around the house should I avoid?",
+            "32": "How often are there follow-up appointments?",
+            "33": "When will I get an ultrasound?",
+            "34": "What is the NIPT blood test?",
+            "35": "What do the test results mean?",
+            "36": "What is the name of my diagnosis?",
+            "37": "Is this something I should be worried about?",
+            "38": "How should I prepare for the procedure?",
+            "39": "What are possible complications?",
+            "40": "How long does recovery take after the procedure?",
+            "41": "I saw in the hospital portal that there were more abnormalities - what does that mean?",
+            "42": "Can I go home right after the procedure, or do I need to stay in the hospital?",
+            "43": "Are there additional exercises I can do?",
+            "44": "I can't get to all the exercises, which ones are most important?",
+            "45": "Can you explain this exercise again?",
+            "46": "The recovery isn't going as hoped, what could be causing that?",
+            "47": "Should I take more rest?",
+            "48": "When is the next appointment?"
+        }
+    },
+    "superuserInvite": {
+        "title": "A personal invitation",
+        "description": "We appreciate you using Ditto for your care. That's why we'd love to talk to you personally to learn how we can make Ditto even better.",
+        "cta": "Contact us via WhatsApp if you'd like to contribute.",
+        "founder": {
+            "name": "Merlijn",
+            "role": "Founder of Ditto"
+        },
+        "button": "Send a message",
+        "whatsappMessage": "Hi! I just received an invitation in Ditto to share my experiences. I'd love to participate! When could we schedule a conversation?"
+    },
+    "help": {
+        "summaryNotPossible": {
+            "title": "Why is a summary not possible now?",
+            "body": "With every recorded conversation, Ditto checks whether a reliable summary is possible. For sensitive topics such as sexuality, self-harm, or end-of-life issues, we take extra care to prevent misunderstandings. Your audio recording and the transcript will always be available.",
+            "whatsapp": "Contact via Whatsapp",
+            "email": "Contact via e-mail",
+            "title2": "Help from Doctor Ditto",
+            "body2": "Sometimes Ditto is unnecessarily cautious. We understand that this can be frustrating. Therefore, Doctor Ditto can personally create a summary for you via WhatsApp. Please make sure to send the transcript of the conversation along with it.",
+            "bullet1": "By contacting us you give consent to use your transcript to help you. Read more in our privacy policy",
+            "bullet2": "The transcript will be deleted after 10 days and personal data will not be retained.",
+            "disclaimer": "Sharing a transcript can now only be done via WhatsApp.",
+            "transcriptButton": "Attach transcript",
+            "step1": "First, press \"Help via Whatsapp\" to start a chat with Doctor Ditto. ",
+            "step2": "Then, reopen the Ditto app and share your transcript from there.",
+            "shareTip": "To get help from Doctor Ditto you can share this transcript with us via Whatsapp. Tap the share Button, select Whatsapp and contact Ditto.",
+            "transcriptShareButton": "Transcript share",
+            "body2ios": "Sometimes Ditto is unnecessarily cautious. We understand that this can be frustrating. Therefore, Doctor Ditto can personally create a summary for you via WhatsApp.",
+            "bottomDisclaimer": "By using this service, you give consent for a Ditto doctor to create a summary. Your transcript will be deleted after 7 days and personal data will not be retained. This summary is not medical advice."
+        },
+        "transcriptNotAvailable": {
+            "title": "No transcript",
+            "body": "It seems that no transcript is available. Click on try again to create a transcript.",
+            "retryButton": "Try again"
+        }
+    },
+    "profilePicture": {
+        "dialog": {
+            "title": "Profile photo",
+            "edit": "Edit profile photo",
+            "delete": "Delete profile photo"
+        },
+        "deleteConfirmation": {
+            "title": "Delete profile photo",
+            "message": "Are you sure you want to delete this photo?",
+            "confirm": "Yes, delete"
+        }
+    },
+    "imageCrop": {
+        "title": "Move and Scale",
+        "choose": "Choose"
+    },
+    "inbox": {
+        "title": "Notifications",
+        "deleteMessage": {
+            "title": "Delete Message",
+            "message": "Are you sure you want to delete this message?"
+        },
+        "emptyState": {
+            "title": "You're all caught up",
+            "message": "Your notifications appear here"
+        },
+        "badge": {
+            "new": "New"
+        },
+        "timestamp": {
+            "seconds": "s",
+            "minutes": "m",
+            "hours": "h"
+        },
+        "summaryReady": {
+            "body": "Your appointment summary is ready: %@"
+        },
+        "careCircleUpdate": {
+            "body": "You have received health care update!"
+        },
+        "reviewPrompt": {
+            "body": "Do you enjoy Ditto? Leave a review!"
+        },
+        "appUpdate": {
+            "body": "There is a new version of the app, update now."
+        },
+        "followRequest": {
+            "bodyWithName": "%@ wants to follow your care updates in Ditto.",
+            "bodyAnonymous": "Someone wants to follow your care updates in Ditto."
+        },
+        "reaction": {
+            "body": "%@ reacted %@ to your update"
+        },
+        "menu": {
+            "markAllAsRead": "Mark all as read",
+            "clearAll": "Clear all"
+        },
+        "toast": {
+            "markedAsRead": "All marked as read",
+            "cleared": "All notifications deleted"
+        }
+    },
+    "prepare": {
+        "button": {
+            "title": "Prepare"
+        },
+        "action": {
+            "title": "Prepare Appointment",
+            "prepareNew": "Prepare new appointment",
+            "prepareFollowUp": "Prepare follow-up appointment",
+            "addWithout": "Add without preparation"
+        },
+        "firstTime": {
+            "badge": "New!",
+            "title": "Prepare for a conversation",
+            "description": "Ditto helps you get ready for your appointment with tailored appointment tips",
+            "button": "Try out"
+        }
+    },
+    "step1": {
+        "title": "What type of care will you receive?",
+        "next": {
+            "button": "Next"
+        }
+    },
+    "step2": {
+        "title": "What questions do you want to ask?",
+        "subtitle": "Select questions or add your own",
+        "save": {
+            "button": {
+                "withCount": "Save (%d)"
+            }
+        },
+        "addCustom": {
+            "label": "Add your own question",
+            "placeholder": "Type your question..."
+        },
+        "emptyState": {
+            "title": "Select a category to see questions"
+        }
+    },
+    "step3": {
+        "title": "Appointment Details",
+        "save": {
+            "button": "Save Appointment"
+        }
+    },
+    "questions": {
+        "category": {
+            "diagnosis": "Diagnosis",
+            "treatment": "Treatment",
+            "followUp": "Follow-up",
+            "recovery": "Recovery",
+            "procedure": "Procedure"
+        }
+    },
+    "discard": {
+        "changes": {
+            "title": "Discard Changes?",
+            "message": "You have unsaved changes. Are you sure you want to discard them?"
+        },
+        "button": "Discard"
+    },
+    "newFeature": {
+        "heading": "What's new",
+        "title": "What's new in Ditto",
+        "subtitle": "Let us introduce newly added features that will make Ditto even more helpful.",
+        "bullet1": "Select questions from our library",
+        "bullet2": "Questions are organized by your type of care",
+        "bullet3": "Add and edit your own questions",
+        "bullet4": "All questions are saved with your appointment",
+        "bullet5": "Review your questions before you go",
+        "bullet6": "",
+        "bullet7": "",
+        "inbox": {
+            "body": "New in the app: share more and easier with loved ones"
+        },
+        "card1": {
+            "title": "Profile Page",
+            "subtitle": "You can now access your Profile from the top-left corner of the app with extended features and settings."
+        },
+        "card2": {
+            "title": "About me & FAQ's",
+            "subtitle": "Share your Profile page, including your About Me section and answers to common questions about your health care."
+        },
+        "card3": {
+            "title": "Loved Ones",
+            "subtitle": "Updates from Loved Ones are now more visible on Home so you will never miss what's important."
+        },
+        "card4": {
+            "title": "Personal message",
+            "subtitle": "When sharing an event with someone, you can now also include a personal message to let them know what's on your mind."
+        },
+        "card5": {
+            "title": "Reactions",
+            "subtitle": "Show and receive support on health care appointment updates with the new reactions feature."
+        },
+        "card6": {
+            "title": "",
+            "subtitle": ""
+        },
+        "card7": {
+            "title": "",
+            "subtitle": ""
+        },
+        "button": "Got it",
+        "swipeHint": "Swipe to see more"
+    },
+    "activation": {
+        "title": "Start with Ditto",
+        "skipped": "Skipped",
+        "step": {
+            "1": {
+                "label": "Step 1",
+                "title": "Create an account"
+            },
+            "2": {
+                "label": "Step 2",
+                "title": "Add an appointment"
+            },
+            "3": {
+                "label": "Step 3",
+                "title": "Invite loved ones"
+            },
+            "4": {
+                "label": "Step 4",
+                "title": "A sample conversation",
+                "sheet": {
+                    "title": "Use of Ditto in the doctor's practice"
+                },
+                "activeTitle": "Try a conversation with Doctor Ditto",
+                "complete": "Complete step"
+            },
+            "discoverLovedOnes": {
+                "follower": {
+                    "title": "Discover loved ones"
+                },
+                "generic": {
+                    "title": "Discover loved ones"
+                }
+            }
+        },
+        "completed": {
+            "title": "You're all set!"
+        },
+        "infographic": {
+            "scroll": {
+                "hint": "Scroll to learn more"
+            },
+            "howItWorks": {
+                "title": "How does Ditto work?",
+                "description": "It starts with recording a medical conversation. Appointments can be set in Ditto beforehand, so you always receive a reminder to record the conversation."
+            },
+            "recording": {
+                "title": "Record your conversation",
+                "description": "Simply tap record during your appointment. Ditto captures the audio and creates a transcription automatically.",
+                "card": {
+                    "description": "This is a recording of a conversation with the general practitioner, try it out."
+                }
+            },
+            "analysis": {
+                "title": "AI-powered insights",
+                "description": "Ditto's AI analyzes your conversation to extract key points, action items, and important medical information."
+            },
+            "summary": {
+                "title": "What you get",
+                "item1": "Complete audio recording and transcription",
+                "item2": "AI-generated summary with key points",
+                "item3": "Easy sharing with family and caregivers",
+                "created": "And then a clear summary is created",
+                "what": {
+                    "you": {
+                        "can": {
+                            "do": "What you can do"
+                        }
+                    }
+                },
+                "treatment": {
+                    "title": "Continue treatment",
+                    "description": "We will keep working on relieving the tension in your lower back muscles."
+                },
+                "tools": {
+                    "title": "Use of aids",
+                    "description": "Try the massage balls you received to relax the muscles."
+                },
+                "specialist": {
+                    "title": "Consider a specialist",
+                    "description": "If the complaints persist, a consultation with an orthomanual physician may be useful."
+                }
+            },
+            "research": {
+                "description": "Ditto listens to the conversation and looks for the following information:"
+            },
+            "checkpoint": {
+                "reason": "Reason for your visit",
+                "observed": "What the doctor observed",
+                "next": "What will happen next"
+            }
+        },
+        "careCircle": {
+            "title": "Loved ones",
+            "follower": {
+                "subtitle": "Invite your loved ones to Ditto and start following their health updates.",
+                "row1": "I want to follow someone",
+                "row2": "Easily receive health updates",
+                "button": "I want to follow someone"
+            },
+            "generic": {
+                "subtitle": "Invite your loved ones to Ditto and share your health updates.",
+                "row1": "Invite a loved one",
+                "row2": "Share your health updates",
+                "button": "Invite a loved one"
+            },
+            "empty": "Nothing to show yet",
+            "invite": "Invite"
+        },
+        "bottomCta": {
+            "follower": {
+                "title": "I want to follow someone"
+            },
+            "generic": {
+                "title": "Invite a loved one"
+            }
+        }
+    },
+    "preparation": {
+        "addAppointmentTitle": "Add details"
+    },
+    "rootAddAppointment": {
+        "title": "Add appointment"
+    },
+    "privacy": {
+        "private": "Private profile",
+        "shared": "Shared profile"
+    },
+    "followerEventDetail": {
+        "personalMessage": {
+            "title": "Message"
+        },
+        "appointmentInfo": "Appointment information"
+    },
+    "careCircleActivation": {
+        "follower": {
+            "navTitle": "Loved ones",
+            "whatIsThis": {
+                "title": "Discover Ditto loved ones",
+                "subtitle": "With Ditto your parent, partner or good friend can privately share health updates with you.",
+                "quote": "Our children asked us to use Ditto to stay better involved"
+            },
+            "benefits": {
+                "follow": {
+                    "title": "Follow a loved one",
+                    "description": "First you need to follow someone in Ditto. Easily send them a follow request."
+                },
+                "updates": {
+                    "title": "Receive health updates",
+                    "description": "As soon as an update is shared with you, you can see it immediately in the Ditto app."
+                },
+                "reactions": {
+                    "title": "Show your support",
+                    "description": "With Ditto you can quickly show your support by sharing reactions to their health updates."
+                },
+                "notifications": {
+                    "title": "Useful notifications",
+                    "description": "If you have turned on notifications, Ditto will notify you of any new updates."
+                }
+            },
+            "invite": {
+                "title": "Ditto Care Circle",
+                "description": "Invite someone you care about to Ditto now and start supporting their health journey.",
+                "sendButton": "Send follow request"
+            },
+            "directInvite": {
+                "title": "I want to follow someone",
+                "row1": "Share a request link with your loved one",
+                "row2": "Wait until they accept your request",
+                "row3": "Once they share updates, you will be able to see them here.",
+                "button": "Send follow request"
+            }
+        },
+        "generic": {
+            "navTitle": "Loved ones",
+            "whatIsThis": {
+                "title": "Discover Ditto loved ones",
+                "subtitle": "If you invite people to follow you in Ditto you can safely and easily share health updates",
+                "quote": "How I used Ditto for my own care journey"
+            },
+            "benefits": {
+                "follow": {
+                    "title": "Follow a loved one",
+                    "description": "First you need to add someone as follower in Ditto. Easily send them an invitation."
+                },
+                "updates": {
+                    "title": "Share health updates",
+                    "description": "For each summary you can decide which parts you share and add a personal note."
+                },
+                "faqs": {
+                    "title": "Most common questions",
+                    "description": "You can not only share events but also your profile page with an FAQ section"
+                },
+                "reactions": {
+                    "title": "Receive support",
+                    "description": "Your loved ones can share their support with you."
+                }
+            },
+            "invite": {
+                "title": "Ditto Care Circle",
+                "description": "Invite a loved one to follow you on Ditto and start sharing your health updates.",
+                "sendButton": "Send invitation"
+            },
+            "directInvite": {
+                "title": "Invite someone to follow you on Ditto",
+                "row1": "Invite followers and decide for yourself who has access.",
+                "row2": "Choose what you share. Your updates are private until you share them.",
+                "row3": "Add a personal message to your update.",
+                "button": "Send invitation"
+            }
+        }
+    },
+    "reactions": {
+        "title": "Reactions"
+    },
+    "calendar": {
+        "sync": {
+            "checkboxLabel": "Add a reminder to my personal calendar",
+            "title": "Sync with your calendar",
+            "subtitle": "Add your Ditto appointments to your personal calendar",
+            "description": "We will help you prepare your appointments beforehand and remind you to start recording when the time is right.",
+            "addToCalendar": "Add to personal calendar",
+            "skip": "Skip",
+            "ftue": {
+                "checkboxLabel": "Add a reminder to my personal calendar",
+                "checkboxDescription": "Appointments will be automatically added to your personal calendar",
+                "tryItOut": "Try it out"
+            }
+        },
+        "event": {
+            "description": "Added via Ditto. Prepare your appointment with the right questions, record it, and get a summary you can share with loved ones.",
+            "openInDitto": "Open in Ditto"
+        },
+        "permission": {
+            "title": "Calendar access required",
+            "message": "Please enable calendar access in Settings to add this appointment.",
+            "openSettings": "Open Settings"
+        }
+    },
+    "updateLabel": {
+        "newUpdate": "%d new update",
+        "newUpdates": "%d new updates",
+        "waitingForAccess": "Waiting for access"
+    },
+    "nomination": {
+        "inbox": {
+            "body": "Ditto has been nominated for the Zorginnovatieprijs. Help us with your vote. 🎉"
+        }
+    },
+    "discover": {
+        "title": "Discover",
+        "hero": {
+            "subtitle": "Share care",
+            "title": "Together you care better, invite loved ones to Ditto"
+        },
+        "basics": {
+            "header": "Ditto Basics",
+            "card": {
+                "explained": {
+                    "category": "Tutorial",
+                    "title": "Ditto explained in 1 minute",
+                    "duration": "0:52"
+                },
+                "shareHealth": {
+                    "category": "Tutorial",
+                    "title": "Share health with loved ones",
+                    "badge": "Shared",
+                    "duration": "0:57"
+                },
+                "prepare": {
+                    "category": "Tutorial",
+                    "title": "Prepare your first appointment",
+                    "badge": "Preparation",
+                    "duration": "1:13"
+                },
+                "record": {
+                    "category": "Tutorial",
+                    "title": "Record a medical conversation",
+                    "duration": "1:07"
+                },
+                "explain": {
+                    "category": "Tutorial",
+                    "title": "Explain a medical document",
+                    "duration": "0:52"
+                }
+            }
+        },
+        "highlight": {
+            "bouquet": {
+                "title": "Send a digital Bouquet to your loved one",
+                "button": "Send"
+            },
+            "feedback": {
+                "title": "We'd love to hear how we can improve Ditto",
+                "button": "Share feedback"
+            }
+        },
+        "userStories": {
+            "header": "User stories",
+            "story1": {
+                "title": "Most Doctors already know Ditto",
+                "duration": "0:13"
+            },
+            "story2": {
+                "title": "I use Ditto for my allergies",
+                "duration": "0:15"
+            },
+            "story3": {
+                "title": "I can easily look back at home",
+                "duration": "0:15"
+            },
+            "allTitle": "User stories"
+        },
+        "viewAll": "View all",
+        "articles": {
+            "header": "Articles",
+            "article1": {
+                "source": "AI and privacy",
+                "title": "AI that respects privacy. Read about our privacy promises.",
+                "readTime": "5 min read"
+            },
+            "article2": {
+                "source": "Collaboration",
+                "title": "Menzis and Ditto collaborate on understandable health information",
+                "readTime": "3 min read"
+            }
+        },
+        "tutorials": {
+            "title": "Tutorials"
+        },
+        "videoList": {
+            "cta": "Start yourself with Ditto"
+        }
+    },
+    "privacyPolicy": {
+        "inbox": {
+            "body": "Updated Privacy Policy — we've added a new tool that helps us send you useful updates about the app via email. Your data stays in the EU and is never linked to your identity."
+        }
+    },
+    "mumcFeedback": {
+        "title": "Share your experience",
+        "description": "You recently used Ditto during an appointment at Maastricht UMC+. We'd love to hear about your experience and what we can improve.",
+        "cta": "Give feedback"
+    }
+}
