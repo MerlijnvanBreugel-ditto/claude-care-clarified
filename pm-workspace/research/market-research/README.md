@@ -32,9 +32,13 @@ A holistic, cited, reusable view of *what is happening in the market* — across
 | [`findings/M13-partnerships-eu-scribes-eu-block.md`](findings/M13-partnerships-eu-scribes-eu-block.md) | Marquee partnerships · EU scribes + the EHDS-summary threat · why ChatGPT Health is EU-blocked |
 | [`findings/M14-ai-mental-health-therapy.md`](findings/M14-ai-mental-health-therapy.md) | AI therapy chapter: LLM-as-therapist trend & risks · Ash/Slingshot, Wysa, Limbic, Therabot, Woebot · EU regs |
 | [`findings/M15-winners-losers-why.md`](findings/M15-winners-losers-why.md) | Winners vs losers & **why**: symptom checkers (Ada/Babylon) · coaches (Hinge/Omada vs Noom) · trackers |
+| **Findings (round 3 — the proven-mechanics playbook)** | |
+| [`findings/M16-solution-catalogue.md`](findings/M16-solution-catalogue.md) | **152-product catalogue** in 16 categories (incl. non-health exemplars) — each tagged with mechanism, why-it-works, traction, adopt/innovate flag |
+| [`findings/M17-table-stakes-mechanisms.md`](findings/M17-table-stakes-mechanisms.md) | The **10 table-stakes mechanisms** (definition · cited evidence · exemplars · failure mode · adopt-as-is vs innovate verdict) |
 | **Synthesis** | |
 | [`synthesis/S1-market-framework-and-direction.md`](synthesis/S1-market-framework-and-direction.md) | The lens + "where the puck is going" |
 | [`synthesis/S2-implications-for-ditto.md`](synthesis/S2-implications-for-ditto.md) | Opportunities, watch-list, what-to-avoid, the strategic question |
+| [`synthesis/S3-proven-mechanics-playbook.md`](synthesis/S3-proven-mechanics-playbook.md) | **The Pincus "proven → better" playbook**: adopt-as-is vs innovate-with-ditto for each mechanism, mapped to the market research + ditto's roadmap loop |
 | [`sources.md`](sources.md) | Consolidated bibliography (all URLs, by tier) |
 | [`reused/`](reused/) | Mirrored reference material from the prior healthcare-strategy round (see `reused/README.md`) |
 

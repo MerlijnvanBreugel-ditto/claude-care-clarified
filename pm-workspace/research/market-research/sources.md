@@ -82,6 +82,18 @@ This is a consolidated index of the most load-bearing sources. **Each findings f
 - IntuitionLabs 2025 — AI medical devices: EU AI Act + MDR — https://intuitionlabs.ai/articles/ai-medical-devices-regulation-2025 · **T2**
 - Nir Eyal — the Hook Model — https://www.nirandfar.com/how-to-manufacture-desire/ · **T1 (framework)**
 
+## Proven-mechanics playbook (M16, M17, S3)
+- J Med Syst — mobile health & medication adherence meta-analysis (OR 2.34, 29 studies), 2024 — https://link.springer.com/article/10.1007/s10916-024-02135-2 · **T1**
+- JMCP — mobile apps & medication adherence (OR 2.12), 2020 — https://www.jmcp.org/doi/10.18553/jmcp.2020.26.4.550 · **T1** *(snippet-sourced)*
+- Lenny's Newsletter — How Duolingo reignited growth (streak mechanics; Streak Freeze +10% retention), 2022 — https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth · **T2**
+- Deconstructor of Fun — Finch retention (54%/37% D1/D7), 2024 — https://www.deconstructoroffun.com/blog/x0hd2ssr80y5n7gv0w967pg7hwd7tl · **T3**
+- arXiv 2111.03756 — voice assistants for older adults (voice 3× faster, 20.4% fewer errors), 2021 — https://arxiv.org/pdf/2111.03756 · **T1**
+- PMC — mobile apps for family caregivers: scoping review, 2022 — https://pmc.ncbi.nlm.nih.gov/articles/PMC8829719/ · **T1**
+- Age and Ageing — medication-reminder tech for home-dwelling older adults, 2026 — https://academic.oup.com/ageing/article/55/2/afag007/8464951 · **T1**
+- Business of Apps — Strava statistics (~76M customers), 2026 — https://www.businessofapps.com/data/strava-statistics/ · **T3**
+- Eyal — Hooked / Hook Model, 2014 — https://www.nirandfar.com/how-to-manufacture-desire/ · **T1 (framework)**
+- *M16 (152-product catalogue) and M17 (10 mechanisms) carry their own full, tier-grouped source lists; many figures are reused from the vetted M7/M10/M11 corpus.*
+
 ---
 
-*For the complete per-claim bibliography, see the `## Sources` section at the foot of each findings file (`findings/M1`–`M8`). Reused reference material retains its original citations in `reused/`.*
+*For the complete per-claim bibliography, see the `## Sources` section at the foot of each findings file (`findings/M1`–`M17`). Reused reference material retains its original citations in `reused/`.*
