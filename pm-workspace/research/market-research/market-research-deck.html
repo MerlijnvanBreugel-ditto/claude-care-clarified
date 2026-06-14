@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ditto — Market Research 2026 · Healthcare · Health Tech · Consumer Health</title>
+<style>
+  :root{
+    --ink:#16252b; --ink-soft:#3c5560; --muted:#6c8893;
+    --paper:#f6f4ef; --card:#fffdfa; --line:#dfe6e6;
+    --teal:#0f8a8d; --teal-deep:#0a5d63; --coral:#e2674d; --amber:#d99a2b;
+    --indigo:#3b4d8f; --green:#3f7a3a;
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  #deck{height:100vh;width:100vw;position:relative}
+  .slide{
+    position:absolute;inset:0;display:none;
+    padding:5.5vh 6.5vw 8vh; overflow-y:auto;
+    animation:fade .35s ease;
+  }
+  .slide.active{display:flex;flex-direction:column;justify-content:center}
+  .slide .inner{max-width:var(--maxw);margin:0 auto;width:100%;position:relative}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .kicker{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:.9rem}
+  h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;letter-spacing:-.02em;font-weight:800}
+  h2{font-size:clamp(1.4rem,3.2vw,2.25rem);line-height:1.12;letter-spacing:-.015em;font-weight:780;margin-bottom:.9rem}
+  h3{font-size:1.02rem;font-weight:720;color:var(--teal-deep);margin:.2rem 0 .4rem}
+  p{font-size:clamp(.97rem,1.45vw,1.13rem);color:var(--ink-soft);margin-bottom:.7rem}
+  .lead{font-size:clamp(1.1rem,2vw,1.45rem);color:var(--ink);font-weight:500}
+  strong{color:var(--ink);font-weight:680}
+  em{color:var(--teal-deep);font-style:normal;font-weight:640}
+  ul{list-style:none;margin:.4rem 0}
+  li{position:relative;padding-left:1.35rem;margin-bottom:.5rem;font-size:clamp(.95rem,1.35vw,1.08rem);color:var(--ink-soft)}
+  li::before{content:"";position:absolute;left:0;top:.58em;width:.48rem;height:.48rem;border-radius:50%;background:var(--teal)}
+  a{color:var(--teal-deep);text-decoration:none;border-bottom:1px solid rgba(15,138,141,.35)}
+  a:hover{border-bottom-color:var(--teal)}
+  .src{font-size:.78rem;color:var(--muted);margin-top:1rem;border-top:1px solid var(--line);padding-top:.6rem}
+  .src b{color:var(--ink-soft)}
+  .src a{color:var(--muted);border-bottom:1px dotted var(--line)}
+  .src a:hover{color:var(--teal-deep)}
+
+  .grid{display:grid;gap:.9rem;margin-top:.9rem}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:1rem 1.1rem}
+  .card h3{margin-top:0}
+  .card p{font-size:.93rem;margin-bottom:0}
+  .stat{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:850;color:var(--teal-deep);letter-spacing:-.02em;line-height:1}
+  .stat-l{font-size:.88rem;color:var(--muted);margin-top:.3rem}
+  .pill{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.18rem .55rem;border-radius:999px;background:#e7f1f0;color:var(--teal-deep);margin-bottom:.5rem}
+  .pill.warn{background:#fbeee6;color:var(--coral)}
+  .pill.ok{background:#eaf3e9;color:#3f7a3a}
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  .ba .before{background:#f3eeea;border:1px solid #e7ddd4;border-radius:13px;padding:1rem 1.1rem}
+  .ba .after{background:#e9f3f2;border:1px solid #cfe6e3;border-radius:13px;padding:1rem 1.1rem}
+  .big-quote{font-size:clamp(1.3rem,2.9vw,2rem);font-weight:740;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+  .big-quote .hl{color:var(--coral)}
+  table{width:100%;border-collapse:collapse;margin-top:.7rem;font-size:.88rem}
+  th,td{text-align:left;padding:.42rem .55rem;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+  th{color:var(--teal-deep);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+  td b{color:var(--ink)}
+  .tag{font-size:.7rem;padding:.1rem .45rem;border-radius:6px;background:#eef2f1;color:var(--ink-soft)}
+
+  /* section dividers */
+  .divider{background:linear-gradient(135deg,#0a5d63,#0f8a8d)}
+  .divider .inner{color:#eafafa}
+  .divider .kicker{color:#9fe0e1}
+  .divider h2{color:#fff;font-size:clamp(1.8rem,4.4vw,3rem)}
+  .divider .partno{font-size:clamp(3rem,9vw,6rem);font-weight:850;color:rgba(255,255,255,.22);line-height:.9;letter-spacing:-.03em}
+  .divider p{color:#dff3f2}
+  .divider li{color:#dff3f2}.divider li::before{background:#9fe0e1}
+  .divider .lead{color:#fff}
+
+  /* deep-dive button + modal */
+  .dd-btn{position:absolute;top:-1.2rem;right:0;display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--card);color:var(--teal-deep);padding:.34rem .7rem;border-radius:999px;cursor:pointer;font-size:.74rem;font-weight:700;letter-spacing:.03em;z-index:6}
+  .dd-btn:hover{border-color:var(--teal);box-shadow:0 2px 12px rgba(15,138,141,.18)}
+  .dd-btn .i{display:inline-grid;place-items:center;width:1rem;height:1rem;border-radius:50%;background:var(--teal);color:#fff;font-size:.68rem;font-weight:800;font-style:italic}
+  .dd{display:none}
+  #ddmodal{position:fixed;inset:0;z-index:50;display:none;background:rgba(10,28,31,.55);backdrop-filter:blur(3px)}
+  #ddmodal.open{display:block}
+  #ddpanel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(840px,93vw);max-height:88vh;overflow-y:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.8rem 2rem 2.2rem;box-shadow:0 24px 70px rgba(0,0,0,.32)}
+  #ddpanel h3{font-size:1.25rem;color:var(--ink);margin:0 0 .2rem}
+  #ddpanel .ddk{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:.5rem}
+  #ddpanel p{font-size:.98rem}
+  #ddpanel table{font-size:.85rem}
+  #ddpanel h4{font-size:.95rem;color:var(--teal-deep);margin:1rem 0 .3rem}
+  .dd-src{margin-top:1rem;border-top:1px solid var(--line);padding-top:.7rem;font-size:.84rem;color:var(--muted)}
+  .dd-src b{color:var(--ink-soft);display:block;margin-bottom:.3rem;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+  .dd-src a{display:block;margin-bottom:.3rem;color:var(--teal-deep)}
+  #ddclose{position:sticky;top:0;float:right;margin:-.6rem -.6rem 0 0;border:1px solid var(--line);background:var(--paper);width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:1.1rem;color:var(--ink-soft);line-height:1}
+  #ddclose:hover{border-color:var(--coral);color:var(--coral)}
+
+  #bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-deep));z-index:30;transition:width .35s ease}
+  #nav{position:fixed;bottom:16px;right:22px;z-index:30;display:flex;gap:8px;align-items:center;font-size:.8rem;color:var(--muted)}
+  #nav button{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1rem}
+  #nav button:hover{border-color:var(--teal);color:var(--teal-deep)}
+  #count{min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+  .foot{position:fixed;bottom:16px;left:22px;z-index:30;font-size:.72rem;color:var(--muted);letter-spacing:.02em}
+  .logo{font-weight:850;letter-spacing:-.04em;color:var(--teal-deep)}
+  .two-col{columns:2;column-gap:2.2rem}
+  @media(max-width:780px){.g2,.g3,.g4,.ba{grid-template-columns:1fr}.two-col{columns:1}#nav{bottom:10px;right:10px}.dd-btn{position:static;display:inline-flex;margin-bottom:.6rem}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="deck">
+
+  <!-- 1 — COVER -->
+  <section class="slide active"><div class="inner">
+    <div class="kicker">ditto · market research · 2026-06-10</div>
+    <h1>What's happening in the market</h1>
+    <p class="lead" style="margin-top:1.1rem;max-width:840px">A holistic, cited view of <em>healthcare, health tech & consumer health</em> — built to read through, dive into, and trust. Every claim is sourced; every slide has a <strong>ⓘ Deep dive</strong> with the reasoning and links.</p>
+    <p class="src" style="max-width:840px"><b>Basis:</b> 15 fresh research pipelines (M1–M15) + the prior healthcare-strategy round. EU-anchored (NL + DACH) with US & global benchmarks. Navigate with ← → / Space · open any <b>ⓘ Deep dive</b> · Esc closes.</p>
+  </div></section>
+
+  <!-- 2 — HOW TO READ -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">How to read this deck</div>
+    <h2>Pyramid structure — and depth on demand</h2>
+    <div class="grid g3">
+      <div class="card"><h3>① Governing message</h3><p>Each part opens with a divider stating the one thing that matters. Read just the dividers for the 10-minute version.</p></div>
+      <div class="card"><h3>② Supporting slides</h3><p>Each message is backed by 2–5 slides with the named players and the numbers behind the claim.</p></div>
+      <div class="card"><h3>③ ⓘ Deep dive</h3><p>Every detail slide has an info button → an overlay with the reasoning, "what's included," and <strong>clickable sources</strong>. Nothing is hand-waved.</p></div>
+    </div>
+    <p style="margin-top:.8rem">Sourcing is tiered (T1 official/peer-reviewed · T2 reputable press · T3 blog/self-report, flagged) with confidence levels and US→EU flags. Figures we couldn't verify are marked, not guessed.</p>
+    <div class="dd">
+      <div class="ddk">How to read · methodology</div>
+      <h3>Sourcing, confidence, and the honest caveats</h3>
+      <p>This corpus is built from 15 parallel research pipelines, each writing a fully-cited findings file (in <span class="tag">pm-workspace/research/market-research/findings</span>). The deck is the headline layer; the findings + two synthesis docs are the evidence.</p>
+      <h4>Source tiers</h4>
+      <ul>
+        <li><b>T1</b> — official / peer-reviewed / named analyst (Rock Health, Galen Growth, EC/EHDS, gematik, JAMA, NEJM AI, JMIR)</li>
+        <li><b>T2</b> — reputable trade & general press (STAT, TechCrunch, Fierce, CNBC, Sifted)</li>
+        <li><b>T3</b> — blog / SEO-vendor / company self-report — used for texture only, flagged inline</li>
+      </ul>
+      <h4>Honesty controls</h4>
+      <p>Every claim carries a confidence level and a US→EU applicability flag. Competitor self-claims (funding, MAU, retention) are treated as T3 unless independently corroborated. The widely-quoted "ChatGPT 40M/week health" figure was re-verified as <strong>per day</strong>. Several primary pages (OpenAI, some app stores, journals) blocked automated fetch; those figures are triangulated across multiple independent reports and flagged.</p>
+      <p class="dd-src"><b>The corpus</b>
+        <a>README.md · 00-research-plan.md · synthesis/S1 & S2 · sources.md (in the repo)</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 3 — CONTENTS -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">Contents · the argument in nine parts</div>
+    <h2>The shape of the story</h2>
+    <div class="grid g2">
+      <ul>
+        <li><strong>1 · The market & the money</strong> — where capital actually flows</li>
+        <li><strong>2 · The forces reshaping demand</strong> — patients, AI, grounding, partnerships</li>
+        <li><strong>3 · The data side</strong> — access is solved, comprehension isn't</li>
+        <li><strong>4 · The competitive landscape</strong> — Big Tech, scribes, companions</li>
+        <li><strong>5 · Direct competitors</strong> — Kin & the closest rivals</li>
+      </ul>
+      <ul>
+        <li><strong>6 · Where the puck is going</strong> — the five vectors</li>
+        <li><strong>7 · Feature-direction traction</strong> — what's working, what isn't (the deep part)</li>
+        <li><strong>8 · Consumer-health retention</strong> — why some win and most churn</li>
+        <li><strong>9 · Synthesis & implications</strong> — where to play, watch, avoid</li>
+      </ul>
+    </div>
+    <p style="margin-top:.6rem;color:var(--muted)">~50 slides. Read the part dividers for the executive version; open ⓘ Deep dive anywhere you want the evidence.</p>
+  </div></section>
+
+  <!-- 4 — GOVERNING THESIS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">The answer first</div>
+    <h2>The market in one slide</h2>
+    <p class="lead" style="max-width:880px">Demand for understanding is overwhelming, but the system never built it — and the players who could are racing in from two sides. The defensible space is an <em>EU-native, trust-first, caregiver-inclusive comprehension layer.</em></p>
+    <div class="grid g4" style="margin-top:1rem">
+      <div class="card"><div class="stat">40M/day</div><div class="stat-l">people ask ChatGPT health questions — yet the system answers in jargon</div></div>
+      <div class="card"><div class="stat">~3.6%</div><div class="stat-l">of Germans use their ePA — access was solved, comprehension wasn't</div></div>
+      <div class="card"><div class="stat">EU-blocked</div><div class="stat-l">ChatGPT Health barred from the EU on GDPR/MDR — a ~18–36mo window</div></div>
+      <div class="card"><div class="stat">empty</div><div class="stat-l">the caregiver-comprehension cell of the market — nobody owns it</div></div>
+    </div>
+    <div class="dd">
+      <div class="ddk">The answer first · the pyramid apex</div>
+      <h3>The governing logic, in five steps</h3>
+      <ul>
+        <li><b>1. Demand is enormous and unmet.</b> ~40M people/day use ChatGPT for health (OpenAI, Jan 2026); &gt;5% of all its messages are health-related; 32% of US consumers used an AI health chatbot in 2025.</li>
+        <li><b>2. The money is on the clinician side.</b> Every top 2025 raise (Abridge $5.3B, Ambience $1.25B) and both IPOs (Hinge, Omada) are B2B/B2B2C; women's health gets &lt;2% of VC.</li>
+        <li><b>3. Access is solved; comprehension isn't.</b> EHDS, NL BGZ/PGO and DE ePA make records available — but ~3.6% of Germans open their ePA and NL PGO uptake is low. MedMij itself now lists "more understandable" as a 2026 goal.</li>
+        <li><b>4. The category is validated and contested — but the leaders are EU-blocked.</b> Five US giants launched record-ingesting health AIs in Q1 2026; ChatGPT Health is barred from the EU on GDPR + MDR grounds. Scribes (Dragon Copilot in NL; Nabla) already ship patient summaries.</li>
+        <li><b>5. The defensible space.</b> EU-native trust + the caregiver as co-user (empty cell) + cross-provider longitudinal comprehension + grounded/cited answers in patient language — monetised B2B2C, retained by a daily compounding loop.</li>
+      </ul>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.healthcaredive.com/news/40-million-use-chatgpt-health-questions-openai/808861/" target="_blank">40M/day — OpenAI via Healthcare Dive, 2026</a>
+        <a href="https://www.joeplangeinstitute.org/data_and_health/electronic-patient-record-germany/" target="_blank">ePA ~3.6% active — Joep Lange Institute, 2026</a>
+        <a href="https://www.heise.de/en/news/ChatGPT-Health-OpenAI-launches-AI-health-assistant-11134998.html" target="_blank">ChatGPT Health EU-blocked — heise, 2026</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 5 — DIVIDER PART 1 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">01</div>
+    <div class="kicker">Part one</div>
+    <h2>The market & the money</h2>
+    <p class="lead" style="max-width:820px">Demand sits with patients; capital sits with clinicians. The consumer side didn't collapse — it bifurcated toward wearables, longevity and validated women's health.</p>
+    <p style="margin-top:.8rem">In this part: three markets sized · EU vs US · the 2026 funding rebound · where capital concentrates · the consumer leaderboards (2024–26).</p>
+  </div></section>
+
+  <!-- 6 — THREE MARKETS SIZING -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">1 · macro sizing</div>
+    <h2>Three markets, three very different scales</h2>
+    <div class="grid g3">
+      <div class="card"><div class="stat">$6.8T</div><div class="stat-l">Global wellness economy (2024) — ~4× pharma; mostly out-of-pocket</div></div>
+      <div class="card"><div class="stat">~$350–420B</div><div class="stat-l">Global digital-health market (2025), ~11–17% CAGR</div></div>
+      <div class="card"><div class="stat">$7–40B</div><div class="stat-l">Consumer health-app TAMs — an order of magnitude smaller</div></div>
+    </div>
+    <p style="margin-top:.9rem">The reimbursed money sits <em>inside</em> the healthcare system; the wellness giant is mostly fitness/nutrition/beauty out-of-pocket spend; consumer apps are the smallest ring — and attract the least venture capital.</p>
+    <p class="src"><b>Confidence:</b> High on wellness/spend, Med on digital-health TAM (estimates vary 2–3×). <b>See</b> findings/M1.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · "how can wellness be $6.8 trillion?"</div>
+      <h3>What's actually inside the $6.8T wellness economy</h3>
+      <p>The Global Wellness Institute (the standard reference) defines "wellness" expansively — it is <strong>consumer out-of-pocket spending across 11 sectors</strong>, not a software market. That's why it dwarfs digital health. The big sectors:</p>
+      <table>
+        <tr><th>Sector</th><th>~Size</th></tr>
+        <tr><td>Personal care & beauty</td><td>~$1.1T</td></tr>
+        <tr><td>Healthy eating, nutrition & weight loss</td><td>~$1.1T</td></tr>
+        <tr><td>Physical activity</td><td>~$0.9T</td></tr>
+        <tr><td>Wellness tourism</td><td>~$0.9T</td></tr>
+        <tr><td>Public health, prevention & personalized medicine</td><td>~$0.6T</td></tr>
+        <tr><td>Traditional & complementary medicine, mental wellness, spas, thermal, real estate, workplace wellness</td><td>remainder</td></tr>
+      </table>
+      <p>So "wellness" includes gyms, supplements, cosmetics and spa holidays — almost none of it is the reimbursed, software-mediated care ditto operates in. Digital health (~$350–420B) and consumer health <em>apps</em> ($7–40B) are the relevant, far smaller rings. Treat app TAMs as order-of-magnitude only — they come from SEO research-mills with 2–3× disagreement.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://globalwellnessinstitute.org/press-room/press-releases/the-global-wellness-economy-hits-a-record-6-8-trillion-and-is-forecast-to-reach-9-8-trillion-by-2029/" target="_blank">Global Wellness Institute — $6.8T, 11 sectors (2025)</a>
+        <a href="https://www.grandviewresearch.com/industry-analysis/digital-health-market" target="_blank">Grand View — digital health market (research-mill, flagged)</a>
+        <a href="https://www.fortunebusinessinsights.com/mhealth-apps-market-102020" target="_blank">Fortune Business Insights — mHealth apps (flagged)</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 7 — HEALTHCARE OCEAN EU vs US -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">1 · the outer ring</div>
+    <h2>The healthcare system is the ocean — and EU ≠ US</h2>
+    <div class="ba">
+      <div class="before"><h3>United States</h3><p><strong>$5.3T</strong> health spend (2024), <strong>18% of GDP</strong>, ~$14.9k/capita. Fragmented multi-payer, fee-for-service. You sell to employers, payers, health systems.</p></div>
+      <div class="after"><h3>EU (incl. NL + DACH)</h3><p>Universal coverage, ~half the US per-capita spend. You navigate national reimbursement pathways. NL, DE, AT, CH among top EU spenders.</p></div>
+    </div>
+    <p style="margin-top:.9rem">This "who pays" divergence dictates go-to-market — and is <em>why</em> digital-health VC is so US-skewed (roughly double the per-head spend).</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.healthaffairs.org/doi/10.1377/hlthaff.2025.01683" target="_blank">Health Affairs 2025</a> · <a href="https://www.healthsystemtracker.org/chart-collection/health-spending-u-s-compare-countries/" target="_blank">Peterson-KFF</a>. <b>Confidence:</b> High. See M1 §1, §5.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · what "who pays" means for go-to-market</div>
+      <h3>The EU's only mature patient-facing reimbursement on-ramp: DiGA</h3>
+      <p>In the US you sell to employers/payers/health systems with clear ROI. In the EU there is no single national "app pathway" — except <strong>Germany's DiGA</strong>, where physicians prescribe BfArM-approved apps and statutory insurance pays.</p>
+      <table>
+        <tr><th>DiGA metric</th><th>Figure</th></tr>
+        <tr><td>Apps listed (Feb 2026)</td><td>61</td></tr>
+        <tr><td>Prescriptions (to end-2024)</td><td>&gt;1M</td></tr>
+        <tr><td>Cumulative GKV spend (2020–24)</td><td>€234M</td></tr>
+        <tr><td>Top category</td><td>Mental health</td></tr>
+        <tr><td>Addressable lives</td><td>73M statutory-insured</td></tr>
+      </table>
+      <p>DiGA is a credibility/reimbursement anchor but small in absolute terms (€234M over 4+ years). The Netherlands reimburses digital care on par with in-person but has <strong>no DiGA-equivalent app formulary</strong>. Read-through: a B2B2C or DiGA-anchored route beats pure D2C.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.bfarm.de/EN/Medical-devices/Tasks/DiGA-and-DiPA/Digital-Health-Applications/Interesting-facts/_artikel.html" target="_blank">BfArM — DiGA facts</a>
+        <a href="https://mtrconsult.com/news/gkv-report-utilization-and-development-digital-health-application-diga-care-germany" target="_blank">MTRC — DiGA GKV report</a>
+        <a href="https://www.healthcare-now.org/euhealthcare/" target="_blank">EU vs US health-system structure</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 8 — FUNDING REBOUND Q1 2026 -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">1 · the money · recency</div>
+    <h2>Funding rebounded — Q1 2026 was the strongest Q1 since 2021</h2>
+    <div class="grid g4">
+      <div class="card"><div class="stat">$4.0B</div><div class="stat-l">US digital-health VC, Q1 2026 (110 deals, ~+33% YoY)</div></div>
+      <div class="card"><div class="stat">59%</div><div class="stat-l">of Q1 2026 dollars in mega-deals (≥$100M) — concentration</div></div>
+      <div class="card"><div class="stat">$28.8B</div><div class="stat-l">global 2025 (+9%); Europe fastest at +15% (~$6.2B)</div></div>
+      <div class="card"><div class="stat">table&nbsp;stakes</div><div class="stat-l">AI — Rock Health retired its "AI deal" tracker in Q1 2026</div></div>
+    </div>
+    <p style="margin-top:.9rem">Capital is <em>concentrating</em>, not broadening — a "two markets" dynamic where branded, AI- or hardware-backed players raise mega-rounds and the rest consolidate.</p>
+    <p class="src"><b>Sources:</b> <a href="https://rockhealth.com/insights/q1-2026-funding-overview-capital-continues-concentrating-and-four-other-market-signals/" target="_blank">Rock Health Q1 2026</a> · <a href="https://www.galengrowth.com/digital-health-funding-2025/" target="_blank">Galen Growth 2025</a>. <b>Confidence:</b> High. See M9.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · Q1 2026 + the recency caveat</div>
+      <h3>The most recent prints (and what isn't published yet)</h3>
+      <p>Rock Health (US-only): <strong>$4.0B / 110 deals in Q1 2026</strong>, up from $3.0B in Q1 2025 (~+33%), average deal $36.7M — the highest since Q4 2021; 12 mega-deals = 59% of dollars. Galen Growth (global scope) puts US Q1 2026 at $5.34B = 76% of global.</p>
+      <p>Named Q1 2026 mega-deals: <strong>Whoop $575M</strong> ($10.1B val), <strong>OpenEvidence $250M</strong> ($12B), Qualified Health $125M, Garner $118M, Cognito $105M, <strong>Midi Health $100M</strong> (women's-health unicorn). Most of the largest cheques went to enterprise/clinician AI; Whoop and Midi are the consumer standouts.</p>
+      <p><b>Recency caveat:</b> as of 2026-06-10 only Q1 2026 full prints exist — no consolidated H1 2026 report yet. Full-2025 anchor: US $14.2B/482 deals (+35%); global ~$28.8B (+9%), Europe the fastest-growing region.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://rockhealth.com/insights/q1-2026-funding-overview-capital-continues-concentrating-and-four-other-market-signals/" target="_blank">Rock Health — Q1 2026 overview</a>
+        <a href="https://www.galengrowth.com/the-american-powerplay-u-s-digital-health-funding-in-q1-2026/" target="_blank">Galen Growth — US Q1 2026</a>
+        <a href="https://www.fiercehealthcare.com/digital-health/digital-health-startups-raked-4b-q1-12-megadeals-driving-investment-rock-health" target="_blank">Fierce — $4B Q1, 12 megadeals</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 9 — CAPITAL CONCENTRATES CLINICIAN -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">1 · follow the money</div>
+    <h2>Capital concentrates on the clinician, not the patient</h2>
+    <table>
+      <tr><th>Company</th><th>What</th><th>2025–26</th><th>Valuation</th></tr>
+      <tr><td><b>Abridge</b></td><td>AI scribe (clinician)</td><td>$300M Series E</td><td><b>$5.3B</b></td></tr>
+      <tr><td><b>Ambience</b></td><td>AI scribe (clinician)</td><td>$243M</td><td><b>$1.25B</b></td></tr>
+      <tr><td><b>OpenEvidence</b></td><td>Clinical decision support</td><td>$250M Series D</td><td><b>$12B</b></td></tr>
+      <tr><td><b>Hippocratic AI</b></td><td>Patient-facing voice agents</td><td>$126M Series C</td><td>$3.5B</td></tr>
+    </table>
+    <p style="margin-top:.8rem"><strong>Every</strong> top-tier raise is clinician/enterprise-facing. Women's health — the closest consumer proxy — gets <strong>&lt;2% of all global VC</strong>. ditto's summary lands on the under-capitalised <em>patient</em> side.</p>
+    <p class="src"><b>Sources:</b> <a href="https://techcrunch.com/2025/06/24/in-just-4-months-ai-medical-scribe-abridge-doubles-valuation-to-5-3b/" target="_blank">TechCrunch</a> · <a href="https://www.galengrowth.com/femtechs-rise-and-roadblocks-digital-health-funding-growth-and-gaps/" target="_blank">Galen Growth Femtech</a>. See M1 §2.4.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the structural split</div>
+      <h3>Why the money is on the clinician/payer side</h3>
+      <div class="ba">
+        <div class="before"><h3>Clinician / payer (B2B & B2B2C)</h3><p>Dominant share of VC. Clear ROI buyer (saves clinician time / chronic-care cost), reimbursable. All mega-rounds and both 2025 IPOs (Hinge $2.6B, Omada).</p></div>
+        <div class="after"><h3>Patient / consumer (D2C)</h3><p>Minority of dollars. Diffuse willingness to pay, subscription churn, no automatic reimbursement.</p></div>
+      </div>
+      <p>The two proven routes to revenue: (a) sell the clinician/system the value and surface the patient summary as a feature; or (b) anchor to a reimbursement pathway (DiGA; bundled NL care). Pure D2C subscription is the hardest-funded path — but note (next slide) the consumer side is recovering selectively.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://rockhealth.com/insights/2025-year-end-digital-health-funding-overview-a-tale-of-two-markets/" target="_blank">Rock Health — a tale of two markets</a>
+        <a href="https://www.statnews.com/2025/07/29/ambience-healthcare-ai-scribe-new-fundraise/" target="_blank">STAT — Ambience $243M / $1.25B</a>
+        <a href="https://news.crunchbase.com/venture/openevidence-ai-doctors-doubles-valuation-seriesd/" target="_blank">Crunchbase — OpenEvidence $12B</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 10 — CONSUMER BIFURCATION + LEADERBOARDS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">1 · the consumer side</div>
+    <h2>Consumer funding didn't collapse — it bifurcated</h2>
+    <p style="max-width:880px">The "−40% consumer-app funding" story is outdated. Money fled <em>undifferentiated tracking apps</em> (femtech's share roughly halved 2020→2024) and rotated into <strong>wearables, longevity and validated women's health</strong>. Investors "began backing D2C again in 2025."</p>
+    <div class="grid g3" style="margin-top:.6rem">
+      <div class="card"><h3>2024</h3><p>Flo $200M (first EU femtech unicorn) · Maven $150M</p></div>
+      <div class="card"><h3>2025</h3><p>Oura $900M (~$11B) · Function Health $298M · Neko $260M</p></div>
+      <div class="card"><h3>2026 YTD</h3><p>Whoop $575M ($10.1B) · Midi Health $100M (unicorn)</p></div>
+    </div>
+    <p class="src"><b>Sources:</b> <a href="https://rockhealth.com/insights/2025-year-end-digital-health-funding-overview-a-tale-of-two-markets/" target="_blank">Rock Health</a> · <a href="https://tech.eu/2026/05/07/healthtech-10-companies-that-raised-the-most-in-2025/" target="_blank">Tech.eu</a>. See M9.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · consumer leaderboards & Europe's top-10</div>
+      <h3>Who actually raised — and where the Netherlands sits</h3>
+      <h4>Biggest-funded consumer/patient-facing health, by year</h4>
+      <table>
+        <tr><th>Year</th><th>Leaders</th></tr>
+        <tr><td>2024</td><td>Flo $200M (UK/LT, $1B+ unicorn) · Maven $150M · Midi $63M</td></tr>
+        <tr><td>2025</td><td>Oura $900M (FI, ~$11B) · Function Health $298M ($2.5B, D2C labs) · Neko $260M (SE)</td></tr>
+        <tr><td>2026 YTD</td><td>Whoop $575M ($10.1B) · Midi Health $100M ($1B unicorn, women's health)</td></tr>
+      </table>
+      <h4>Europe's most-funded digital-health companies, 2025</h4>
+      <table>
+        <tr><th>#</th><th>Company</th><th>Amount</th><th>Country</th></tr>
+        <tr><td>1</td><td>Oura</td><td>$900M</td><td>Finland</td></tr>
+        <tr><td>2</td><td>Neko Health</td><td>$260M</td><td>Sweden</td></tr>
+        <tr><td>3</td><td>Ortivity</td><td>€200M</td><td>Germany</td></tr>
+        <tr><td>4</td><td>Cera</td><td>$150M</td><td>UK</td></tr>
+        <tr><td>5</td><td>Distalmotion</td><td>$150M</td><td>Switzerland</td></tr>
+      </table>
+      <p><b>NL white-space signal:</b> Dutch healthtech raised only ~$177M across ~10 rounds in 2025 (biggest: Vitestro $70M) — <strong>no Dutch company in Europe's top-10</strong>. The category is being funded all around the Netherlands, not in it.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://news.crunchbase.com/venture/wearable-fitness-tech-ai-whoop-seriesg-funding/" target="_blank">Crunchbase — Whoop $575M</a>
+        <a href="https://tech.eu/2026/05/07/healthtech-10-companies-that-raised-the-most-in-2025/" target="_blank">Tech.eu — Europe's top-10 (2025)</a>
+        <a href="https://siliconcanals.com/dutch-healthtech-startups-funding-in-2025/" target="_blank">Silicon Canals — Dutch healthtech 2025</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 11 — DIVIDER PART 2 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">02</div>
+    <div class="kicker">Part two</div>
+    <h2>The forces reshaping demand</h2>
+    <p class="lead" style="max-width:820px">Patients act like consumers, AI is the new front door, "grounded & cited" is the trust bar, and distribution is rotating to B2B2C. But comprehension itself is still unbuilt.</p>
+    <p style="margin-top:.8rem">In this part: consumerization (substantiated) · Dr Google vs Dr ChatGPT · the diagnostic-trust gap · grounded & cited · partnerships · value-based care & the data moat.</p>
+  </div></section>
+
+  <!-- 12 — CONSUMERIZATION -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">2 · patient power</div>
+    <h2>Patients behave like consumers — but plain language is still aspirational</h2>
+    <div class="grid g2">
+      <div class="card"><h3>The shift is real & measurable (EU too)</h3><p><strong>Doctolib</strong> ~80M patient accounts across FR/DE/IT/NL; the <strong>NHS App</strong> passed 40M users with 62.3M logins in one month (Nov 2025). Self-service, same-day, mobile-first is the new baseline.</p></div>
+      <div class="card"><h3>…but "plain language" is not achieved</h3><p>A 2025 review of 29,424 patient materials found readability <strong>did not improve 2001→2022</strong>; ~47.6% of EU adults have limited health literacy (NL best at 28.7%). The need is real and unmet.</p></div>
+    </div>
+    <p style="margin-top:.8rem">Consumerization is a genuine demand-side engine — and the gap between "patients want to understand" and "materials are still jargon" is the core of ditto's thesis.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.england.nhs.uk/2025/12/record-numbers-using-nhs-app-to-manage-health/" target="_blank">NHS England 2025</a> · <a href="https://www.sciencedirect.com/science/article/pii/S0738399125000230" target="_blank">Patient Educ Couns 2025</a>. See M12.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · access shift + the plain-language reality check</div>
+      <h3>What changed in scheduling — and why "plain language" is mostly aspirational</h3>
+      <h4>Access & convenience (substantiated)</h4>
+      <ul>
+        <li><b>Doctolib</b> (✅EU): ~80M patient accounts, ~400–500K professionals across FR/DE/IT/NL; €348M ARR 2024. NL penetration still nascent (fragmented across local players).</li>
+        <li><b>NHS App</b> (✅EU/UK): 40M+ users; Nov 2025 alone saw 62.3M logins (+43%), 20.8M record views, 6.3M repeat prescriptions.</li>
+        <li><b>Zocdoc</b> (⚑US signal): 35% of appointments booked within 48h, 51% within 4 days, 68% on mobile (2025).</li>
+      </ul>
+      <h4>Plain language — be critical</h4>
+      <p>A 2025 systematic review of systematic reviews (29,424 materials, 438 studies) found most patient material exceeds the recommended 6th–8th-grade level and <strong>readability did not improve over two decades</strong>. ~47.6% of EU adults have limited health literacy. The EU HTA Regulation (Jan 2025) mandates patient <em>consultation</em> but treats plain-language summaries as best-practice, not a hard output — so the mandate bites the process, not the artifact. Frame plain language as an <strong>unmet need with regulatory tailwinds</strong>, not a solved shift.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.mobihealthnews.com/news/emea/doctolib-now-used-300000-doctors-and-health-workers-across-europe" target="_blank">Doctolib scale — MobiHealthNews</a>
+        <a href="https://www.england.nhs.uk/2025/12/record-numbers-using-nhs-app-to-manage-health/" target="_blank">NHS App record usage — NHS England, 2025</a>
+        <a href="https://www.sciencedirect.com/science/article/pii/S0738399125000230" target="_blank">Readability unchanged 1990–2022 — Patient Educ Couns, 2025</a>
+        <a href="https://link.springer.com/article/10.1007/s11606-020-06407-8" target="_blank">EU low health literacy ~47.6% — JGIM, 2021</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 13 — DR GOOGLE VS CHATGPT -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">2 · the AI front door</div>
+    <h2>Dr. Google still wins on volume — but the front door flipped to AI answers</h2>
+    <div class="grid g2">
+      <div class="card"><div class="stat">~1B/day</div><div class="stat-l">health questions to <b>Google</b> (~5–7% of searches) — still ~20–25× ChatGPT</div></div>
+      <div class="card"><div class="stat">40M/day</div><div class="stat-l">people asking <b>ChatGPT</b> health questions; &gt;5% of all its messages</div></div>
+    </div>
+    <p style="margin-top:.8rem">You're right that Google dominates volume. But the <em>experience</em> changed: AI Overviews now trigger on ~88% of health queries, and ChatGPT is a credible #2 building a health vertical — and in the EU both are degraded or absent.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.beckershospitalreview.com/healthcare-information-technology/google-receives-more-than-1-billion-health-questions-every-day/" target="_blank">Becker's (Google ~1B/day)</a> · <a href="https://www.axios.com/2026/01/05/chatgpt-openai-health-insurance-aca" target="_blank">Axios (ChatGPT 40M/day)</a>. See M11 §1.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the real scale comparison</div>
+      <h3>Volume vs. format — and why the EU is the opening</h3>
+      <table>
+        <tr><th>Dimension</th><th>Dr. Google</th><th>Dr. ChatGPT</th></tr>
+        <tr><td>Daily health volume</td><td><b>~1B/day</b> (~5–7% of searches)</td><td><b>~40M users/day</b></td></tr>
+        <tr><td>Relative scale</td><td>~20–25× larger</td><td>smaller, compounding fast</td></tr>
+        <tr><td>Format</td><td>search → AI Overviews (~88% of health queries)</td><td>conversational, multi-turn</td></tr>
+        <tr><td>Citation quality</td><td>weak — YouTube most-cited (~4.4%), journals ~0.48%</td><td>variable; ChatGPT Health adds grounding</td></tr>
+        <tr><td>EU availability</td><td>search yes; AI Overviews lagging</td><td><b>ChatGPT Health excluded from EEA/CH/UK</b></td></tr>
+      </table>
+      <p>Even Google <strong>pulled AI Overviews from some medical queries in Jan 2026</strong> after misinformation scrutiny — a sign the giants are uncertain about answering health generatively. The strategic risk isn't ChatGPT overtaking Google; it's that <em>both</em> giants now answer health questions directly, and in the EU both do so in a degraded/absent form — room for a local, grounded entrant.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.axios.com/2026/01/05/chatgpt-openai-health-insurance-aca" target="_blank">ChatGPT 40M/day — Axios, 2026</a>
+        <a href="https://www.beckershospitalreview.com/healthcare-information-technology/google-receives-more-than-1-billion-health-questions-every-day/" target="_blank">Google ~1B health questions/day — Becker's</a>
+        <a href="https://techcrunch.com/2026/01/11/google-removes-ai-overviews-for-certain-medical-queries/" target="_blank">Google pulls AI Overviews on some medical queries — TechCrunch, 2026</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 14 — DIAGNOSTIC TRUST GAP -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">2 · trust vs. accuracy</div>
+    <h2>The trust gap: models are benchmark-brilliant yet unsafe for unsupervised patients</h2>
+    <div class="ba">
+      <div class="before"><h3>Capability is high</h3><p><strong>GPT-4 alone scored ~92%</strong> on diagnostic reasoning vs ~74–76% for physicians (JAMA Network Open RCT, 2024) — yet giving doctors the tool barely improved them.</p></div>
+      <div class="after"><h3>…but patient-grade safety isn't</h3><p>A 2026 npj Digital Medicine study found <strong>5–13% of LLM answers to patient questions were outright "unsafe"</strong>, plus high guideline-omission and adversarial-hallucination rates.</p></div>
+    </div>
+    <p style="margin-top:.8rem">The gap that's "opening" is between <em>what models can do in benchmarks</em> and <em>what's safe to hand an unsupervised patient</em> — precisely the grounding/safety problem ditto must solve.</p>
+    <p class="src"><b>Sources:</b> <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2825395" target="_blank">Goh et al., JAMA Netw Open 2024</a> · <a href="https://www.nature.com/articles/s41746-026-02428-5" target="_blank">npj Digital Medicine 2026</a>. See M11 §3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the diagnostic-accuracy research, both sides</div>
+      <h3>Read both halves before quoting "AI beats doctors"</h3>
+      <h4>The "LLMs are good" evidence</h4>
+      <ul>
+        <li><b>Goh/Rodman/Chen, JAMA Network Open 2024 (RCT, 50 physicians):</b> GPT-4 alone ~92%; physicians with GPT-4 ~76%, with conventional resources ~74% — the AI alone beat humans, but adding it barely moved physicians (~2 pts, n.s.). The famous "usage gap, not capability gap" study.</li>
+        <li>Frontier LLMs reach correct diagnosis in top-3 for ~98.6% of structured cases (JMIR 2024).</li>
+      </ul>
+      <h4>The counter-evidence</h4>
+      <ul>
+        <li><b>npj Digital Medicine 2026:</b> problematic responses 21.6% (Claude) to 43.2% (Llama); <strong>outright unsafe 5% (Claude) to 13% (GPT-4o/Llama)</strong>, some judged capable of serious harm.</li>
+        <li>Clinical-guideline accuracy 46% (GPT-4.1) down to ~3% (DeepSeek-V3); LLMs "highly vulnerable to adversarial hallucination attacks" (Communications Medicine 2025).</li>
+      </ul>
+      <p>Honest framing: on clean structured cases top models match/exceed physicians; on messy patient-phrased questions a non-trivial minority of answers are unsafe, and unsupervised consumers lack clinicians' guardrails.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2825395" target="_blank">Goh et al. — JAMA Network Open RCT, 2024</a>
+        <a href="https://www.nature.com/articles/s41746-026-02428-5" target="_blank">Unsafe answers to patient questions — npj Digital Medicine, 2026</a>
+        <a href="https://www.nature.com/articles/s43856-025-01021-3" target="_blank">Adversarial hallucination — Communications Medicine, 2025</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 15 — GROUNDED & CITED -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">2 · the new trust bar</div>
+    <h2>"Grounded & cited" is solved for clinicians — and open for patients</h2>
+    <div class="grid g2">
+      <div class="card"><div class="stat">$1B → $12B</div><div class="stat-l"><b>OpenEvidence</b> valuation Feb 2025 → Jan 2026; &gt;40% of US physicians; ~20M consultations/mo</div></div>
+      <div class="card"><h3>The white space</h3><p>OpenEvidence (NEJM/JAMA-licensed, cited, refuses-when-unsure) is <strong>clinician-only</strong>; Perplexity Health is the closest patient-facing grounded engine; ChatGPT Health is EU-blocked. <strong>No one owns grounded + cited + patient-facing + EU-available.</strong></p></div>
+    </div>
+    <p style="margin-top:.8rem">You're right: grounded-and-cited looks <em>solved</em> — the exact technology, in patient language and EU-legal, is the opening.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.cnbc.com/2026/01/21/openevidence-chatgpt-for-doctors-doubles-valuation-to-12-billion.html" target="_blank">CNBC 2026</a> · <a href="https://www.perplexity.ai/hub/blog/introducing-perplexity-health" target="_blank">Perplexity Health</a>. See M6 §2, M11 §4.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the consumer grounded-and-cited landscape</div>
+      <h3>Who does it best — and the four-corner gap</h3>
+      <table>
+        <tr><th>Engine</th><th>Cited?</th><th>Patient-facing?</th><th>EU-available?</th><th>Grounded in your records?</th></tr>
+        <tr><td>OpenEvidence</td><td>Yes (NEJM/JAMA)</td><td><b>No (clinicians)</b></td><td>Limited</td><td>No</td></tr>
+        <tr><td>Perplexity Health</td><td>Yes</td><td><b>Yes</b></td><td>Partial/unclear</td><td>Yes (b.well)</td></tr>
+        <tr><td>Google AI Overviews</td><td>Partial (weak)</td><td>Yes</td><td>Lagging</td><td>No</td></tr>
+        <tr><td>ChatGPT Health</td><td>Yes</td><td><b>Yes</b></td><td><b>No (excluded)</b></td><td>Yes (b.well, US)</td></tr>
+      </table>
+      <p>OpenEvidence licenses premium evidence (NEJM Feb 2025, JAMA Jun 2025, 18+ journals) and grounds every answer with inline citations + refusal-when-unsure — the corpus, not the model, is the moat. Medical-RAG research (MedTrust-RAG, MEGA-RAG) converges on citation-traceability + principled refusal, but warns shallow grounding makes RAG "a dangerous medical communicator." <strong>The intersection — grounded + cited + patient-language + EU-available + personalized — is unoccupied.</strong></p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://news.crunchbase.com/venture/openevidence-ai-doctors-doubles-valuation-seriesd/" target="_blank">OpenEvidence $12B, &gt;40% of physicians — Crunchbase</a>
+        <a href="https://www.openevidence.com/announcements/openevidence-and-nejm" target="_blank">OpenEvidence × NEJM licensing</a>
+        <a href="https://www.perplexity.ai/hub/blog/introducing-perplexity-health" target="_blank">Perplexity Health</a>
+        <a href="https://arxiv.org/pdf/2502.14898" target="_blank">"RAG can be dangerous medical communicators" — arXiv 2025</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 16 — B2B2C PARTNERSHIPS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">2 · go-to-market</div>
+    <h2>Distribution is rotating from D2C to B2B2C partnerships</h2>
+    <div class="grid g3">
+      <div class="card"><div class="stat">2,675→4,051</div><div class="stat-l">disclosed digital-health partnerships, 2021→2024</div></div>
+      <div class="card"><div class="stat">~40%</div><div class="stat-l">of active investors are now strategic/corporate VCs</div></div>
+      <div class="card"><div class="stat">B2B2C</div><div class="stat-l">the durable model: a consumer experience + a distribution/reimbursement partner</div></div>
+    </div>
+    <p style="margin-top:.8rem">In NL/DACH the counterparties are <em>zorgverzekeraars, hospital groups, GP cooperatives, pharma</em> — not US PBMs/employers.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.galengrowth.com/digital-health-exits-navigating-2025s-shifting-tides-towards-maturity/" target="_blank">Galen Growth 2025</a>. See M2 §4, M13.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · marquee partnerships (the count, named)</div>
+      <h3>The deals behind "2,675 → 4,051"</h3>
+      <table>
+        <tr><th>Partners</th><th>Axis</th><th>What</th></tr>
+        <tr><td><b>Viz.ai × Sanofi/Regeneron</b></td><td>pharma × digital-health</td><td>AI triage to find high-risk COPD patients (May 2025)</td></tr>
+        <tr><td><b>OpenAI for Healthcare</b> × ~8 US systems</td><td>big-tech × health-system</td><td>HIPAA-compliant enterprise workspace (Cedars-Sinai, UCSF, Boston Children's, HCA…), Jan 2026</td></tr>
+        <tr><td><b>Abridge × Availity</b></td><td>payer × AI</td><td>real-time prior authorization at the point of conversation (JPM26)</td></tr>
+        <tr><td><b>Suki × Google Cloud</b></td><td>big-tech × scribe</td><td>patient summarization + clinical Q&A (Dec 2024)</td></tr>
+        <tr><td><b>UHS / University Hospitals × Hippocratic AI</b></td><td>provider × patient AI</td><td>post-discharge patient phone calls at scale</td></tr>
+        <tr><td><b>AstraZeneca</b> (40 partnerships + AZ Direct)</td><td>pharma × D2C</td><td>pharma building direct-to-patient channels (2022–25)</td></tr>
+      </table>
+      <p>The count growth is enterprise-AI-driven — and three of these are explicitly patient-facing (Suki, Hippocratic, Abridge), confirming the encroachment is already here.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.businesswire.com/news/home/20250520566222/en/Viz.ai-Announces-Collaboration-With-Sanofi-and-Regeneron-to-Improve-Management-and-Care-of-Chronic-Obstructive-Pulmonary-Disease-COPD" target="_blank">Viz.ai × Sanofi/Regeneron — Businesswire</a>
+        <a href="https://openai.com/index/openai-for-healthcare/" target="_blank">OpenAI for Healthcare</a>
+        <a href="https://www.abridge.com/press-release/abridge-availity-collaboration-announcement" target="_blank">Abridge × Availity prior-auth</a>
+        <a href="https://www.businesswire.com/news/home/20241218566553/en/Suki-Launches-Patient-Summarization-and-Clinical-QA-for-Doctors-With-Google-Cloud" target="_blank">Suki × Google — patient summaries</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 17 — VBC + DATA MOAT -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">2 · outcomes & data</div>
+    <h2>Comprehension is a precursor to adherence — and the data moat is real but softening</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Comprehension → adherence → outcomes</h3><p>Health literacy correlates with adherence (r≈0.14); literacy interventions raise adherence (r≈0.16). A <em>modifiable upstream lever</em> in value-based care — necessary, not sufficient.</p></div>
+      <div class="card"><h3>The Oura/Whoop data moat</h3><p>Oura (~$11B, ~80% year-1 renewal) and Whoop (~$10B, 7.9M days of data) prove passive longitudinal data + subscription create switching costs — but the moat is migrating from <em>hardware</em> to the <em>interpreted, multi-source layer</em>.</p></div>
+    </div>
+    <p style="margin-top:.8rem">As aggregators (ChatGPT Health) ingest any source, value moves to whoever owns the <em>interpreted, longitudinal, EU-legal</em> story — exactly where ditto can defend.</p>
+    <p class="src"><b>Sources:</b> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4912447/" target="_blank">HL↔adherence meta-analysis</a> · <a href="https://www.cnbc.com/2025/10/14/oura-ringmaker-valuation-fundraise.html" target="_blank">CNBC (Oura $11B)</a>. See M12 §3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · is the data moat real, and does comprehension move outcomes?</div>
+      <h3>Two honest, evidence-based answers</h3>
+      <h4>Comprehension → adherence</h4>
+      <p>Meta-analyses: health literacy is positively but <em>modestly</em> associated with adherence (r≈0.14), stronger for non-medication regimens and cardiovascular samples; literacy interventions raise both literacy (r≈0.22) and adherence (r≈0.16). A 2025 study links higher literacy to better antihypertensive adherence via understanding-the-rationale + self-efficacy. So comprehension is a genuine, modifiable precursor — frame it as a contributing lever, not a silver bullet.</p>
+      <h4>The data moat — real but softening</h4>
+      <p><b>Real:</b> Oura (~$11B, ~$1B revenue 2025, ~80% renewal) and Whoop (~$10B; published a study on 7.9M days of wearable data + 300k+ monthly surveys) show years of passive data create a baseline + switching cost. <b>Softening:</b> hardware is commoditizing (Apple Watch, cheap rings); aggregators (ChatGPT Health ingests any source) erode device lock-in; patent litigation signals a narrowing hardware edge. The durable moat is the <strong>interpreted, longitudinal, multi-source, EU-legal</strong> layer — ditto's natural ground.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4912447/" target="_blank">Health literacy ↔ adherence (r≈0.14; interventions r≈0.16) — PMC</a>
+        <a href="https://www.nature.com/articles/s41598-025-30399-2" target="_blank">Literacy → antihypertensive adherence — Scientific Reports, 2025</a>
+        <a href="https://www.cnbc.com/2025/10/14/oura-ringmaker-valuation-fundraise.html" target="_blank">Oura $11B / ~80% renewal — CNBC, 2025</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 18 — DIVIDER PART 3 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">03</div>
+    <div class="kicker">Part three</div>
+    <h2>The data side: access is solved, comprehension isn't</h2>
+    <p class="lead" style="max-width:820px">Regulation is making patient data available (EHDS, NL BGZ/PGO, DE ePA) — yet almost nobody opens it. That gap is ditto's reason to exist, admitted from inside the national systems.</p>
+    <p style="margin-top:.8rem">In this part: the access-vs-comprehension reconciliation · the EHDS timeline · the Netherlands & Germany reality.</p>
+  </div></section>
+
+  <!-- 19 — ACCESS VS COMPREHENSION -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">3 · the core reconciliation</div>
+    <h2>"Comprehension isn't built in" and "plain language is rising" are both true</h2>
+    <p class="lead" style="max-width:880px">AI explainers are being <em>bolted on top</em> of records (Epic Emmie, ChatGPT Health + Apple Health) — but comprehension is still not a native, cross-provider, caregiver-aware, EU-legal, longitudinal property of the data itself.</p>
+    <p style="margin-top:.8rem">So both slides hold: explainers proliferate (US-centric, single-user, on top of one record), while the <em>structural</em> comprehension layer remains unbuilt — especially in the EU's fragmented, multi-portal reality.</p>
+    <p class="src"><b>Confidence:</b> High. <b>See</b> M12 §2 (this resolves the inconsistency you flagged).</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · concede what exists, then name the gap (critical)</div>
+      <h3>What's already happening — and what's genuinely missing</h3>
+      <h4>Already happening (concede it)</h4>
+      <ul>
+        <li><b>ChatGPT Health + Apple Health</b> (US, Jan 2026): connect records, upload lab PDFs, get plain-language summaries. In the US, Apple Health aggregates records and AI can read them.</li>
+        <li><b>Epic "Emmie"</b>: 24/7 MyChart assistant explaining labs in plain language; Epic building ~200 AI features that rewrite clinician text.</li>
+        <li>LLMs measurably improve readability of patient-education materials (JMIR 2025).</li>
+      </ul>
+      <h4>Still genuinely missing (the wedge)</h4>
+      <ul>
+        <li><b>Cross-provider, longitudinal aggregation</b> — US leans on a connected Apple Health/Epic ecosystem the EU lacks; EHDS interoperability is 2029/2031.</li>
+        <li><b>Caregiver / proxy comprehension</b> — current explainers are single-user, consumer-initiated.</li>
+        <li><b>EU-legal handling</b> — GDPR/EHDS/MDR make a compliant EU layer genuinely different, not a copy-paste.</li>
+        <li><b>Comprehension as a native record property</b> — today it's an afterthought layer (ask an AI to explain a PDF), not built into capture/storage/handoff.</li>
+      </ul>
+      <p><b>The reconciliation sentence:</b> "Plain-language explainers are proliferating on top of records (Epic Emmie, ChatGPT Health), but comprehension is still not a built-in, cross-provider, caregiver-aware, EU-legal, longitudinal property of health data — it's bolted on, US-centric, and single-user."</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://openai.com/index/introducing-chatgpt-health/" target="_blank">ChatGPT Health + Apple Health — OpenAI, 2026</a>
+        <a href="https://www.cnbc.com/2024/08/21/epic-systems-ugm-2024-ai-tools-in-mychart-cosmos-.html" target="_blank">Epic Emmie explains labs — CNBC</a>
+        <a href="https://www.jmir.org/2025/1/e69955" target="_blank">LLMs improve readability — JMIR, 2025</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 20 — EHDS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">3 · EU data-rights backbone</div>
+    <h2>EHDS: the right exists; the rails are national until 2029+</h2>
+    <table>
+      <tr><th>When</th><th>What</th></tr>
+      <tr><td><b>Mar 2025</b></td><td>EHDS in force (Reg. EU 2025/327); patient access + portability rights established</td></tr>
+      <tr><td><b>~Mar 2027</b></td><td>Implementing acts + the FHIR-based EU exchange format (EEHRxF)</td></tr>
+      <tr><td><b>Mar 2029</b></td><td>Cross-border Patient Summaries + ePrescriptions <b>mandatory</b></td></tr>
+      <tr><td><b>Mar 2031</b></td><td>Images, lab results, discharge reports</td></tr>
+    </table>
+    <p style="margin-top:.8rem">EHDS recognises <strong>"digital representatives"</strong> (caregiver hook) and granular consent. <strong>For 2026–2028, build on national rails; don't wait for EHDS</strong> — and consume the EHDS summary as an input, not compete with it.</p>
+    <p class="src"><b>Sources:</b> <a href="https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en" target="_blank">EC EHDS</a>. See M3 §1, M13.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · what EHDS grants — and the scribe-summary threat</div>
+      <h3>EHDS turns the patient summary into a commodity inside the record</h3>
+      <p>From March 2029, standardized Patient Summaries become the first mandatory cross-border data category, surfaced in national patient portals. If a scribe (e.g. <b>Nabla, which already auto-generates multilingual patient "Patient Instructions"</b> written back to the EHR) writes the summary into the EHDS-linked record, the patient receives it natively — no separate app required.</p>
+      <p>So the durable edge for ditto is <strong>not generating the summary</strong> but owning the comprehension + longitudinal-continuity + patient-trust layer, and being an early EHDS data-<em>consumer</em>. Position as "we make your whole, cross-provider record understandable over time," not "we generate summaries."</p>
+      <p>Patient rights granted: access + portability (Arts. 3, 5–7), granular restriction (Art. 8), primary-use opt-out where legislated (Art. 10), digital representatives / caregiver access (Art. 4(2)), secondary-use opt-out anytime (Art. 71).</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en" target="_blank">European Commission — EHDS timeline & rights</a>
+        <a href="https://eur-lex.europa.eu/eli/reg/2025/327/oj/eng" target="_blank">Regulation (EU) 2025/327 (EUR-Lex)</a>
+        <a href="https://help.nabla.com/en/articles/769346" target="_blank">Nabla auto-generates patient "Patient Instructions"</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 21 — NL + DE -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">3 · NL & DE · the proof</div>
+    <h2>The flagship national systems prove the comprehension gap</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Netherlands — world-class plumbing, low use</h3><p><strong>BGZ</strong> (a ~26-zib FHIR patient summary) is now exchangeable to <strong>PGOs</strong>; <strong>Wegiz</strong> forces BGZ exchange. But PGO uptake is low — and MedMij's 2026 roadmap commits to making PGOs "more understandable" (an admission they aren't).</p></div>
+      <div class="card"><h3>Germany — universal coverage, near-zero use</h3><p><strong>ePA "für alle"</strong> auto-created records for <strong>~70M</strong> people; mandatory for providers since Oct 2025. Yet only <strong>~3.6% actively use</strong> it; ~48% find digital health tools "too complex."</p></div>
+    </div>
+    <p style="margin-top:.8rem">FHIR is the through-line (NL zibs/BGZ · DE MIOs · EU EEHRxF). Build the data model on FHIR/IPS once, map everywhere. <strong>Caregiver/proxy access is legally supported</strong> (NL DigiD Machtigen, DE ePA, EHDS).</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.nictiz.nl/informatiestandaarden/basisgegevensset-zorg/" target="_blank">Nictiz (BGZ)</a> · <a href="https://www.joeplangeinstitute.org/data_and_health/electronic-patient-record-germany/" target="_blank">Joep Lange Institute (ePA 3.6%)</a>. See M3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · BGZ, PGO, Wegiz, ePA explained</div>
+      <h3>The Dutch & German rails, precisely</h3>
+      <ul>
+        <li><b>BGZ (Basisgegevensset Zorg):</b> a clinical <em>dataset standard</em> — the minimal set of patient data relevant across specialisms, ~26 zibs (healthcare information building blocks), all built as HL7 FHIR profiles. The Dutch analogue of the International Patient Summary. Now fully exchangeable to PGOs.</li>
+        <li><b>PGO / MedMij:</b> the patient-facing app to view/manage/share one's data; a MedMij label certifies security/interoperability so providers release data. VWS selected 3 PGO providers (Curavista, HCI, Topicus) in 2025. Uptake remains low.</li>
+        <li><b>Wegiz:</b> the law forcing standardized electronic exchange; BGZ between medical-specialist institutions is phasing to mandatory through 2025–26.</li>
+        <li><b>DE ePA "für alle":</b> opt-out for ~70M; mandatory provider use since Oct 2025; ~3.6% active use early 2026; populated by MIOs (FHIR + IHE).</li>
+      </ul>
+      <p><b>The signal:</b> the EU is giving patients access for free; the understanding layer is not built into it. NL MedMij explicitly naming "more understandable" as a goal is the gap confirmed from inside.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.nictiz.nl/informatiestandaarden/basisgegevensset-zorg/" target="_blank">Nictiz — BGZ standard</a>
+        <a href="https://medmij.nl/wat-is-een-pgo/" target="_blank">MedMij — what is a PGO</a>
+        <a href="https://www.icthealth.nl/nieuws/geactualiseerde-medmij-roadmap-voor-beter-gevulde-pgos" target="_blank">MedMij roadmap toward "understandable" PGOs (2026)</a>
+        <a href="https://www.joeplangeinstitute.org/data_and_health/electronic-patient-record-germany/" target="_blank">Germany ePA ~3.6% active — Joep Lange Institute</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 22 — DIVIDER PART 4 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">04</div>
+    <div class="kicker">Part four</div>
+    <h2>The competitive landscape</h2>
+    <p class="lead" style="max-width:820px">The category is validated and contested — Big Tech entered, scribes are encroaching, companions stay oncology-locked — but the EU-legal, caregiver-inclusive cell is still unowned.</p>
+    <p style="margin-top:.8rem">In this part: the 2026 Big Tech wave (EU-blocked) · scribes as the right user + the EHDS threat · companions & the caregiver gap · the whitespace map.</p>
+  </div></section>
+
+  <!-- 23 — BIG TECH WAVE -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">4 · the 2026 shift</div>
+    <h2>Big Tech went D2C on health AI — but not in the EU</h2>
+    <table>
+      <tr><th>Player</th><th>Launch</th><th>EU availability</th></tr>
+      <tr><td><b>OpenAI — ChatGPT Health</b></td><td>Jan 2026</td><td><b style="color:var(--coral)">Blocked in EU/UK/CH</b> (GDPR + MDR)</td></tr>
+      <tr><td><b>Anthropic — Claude for Healthcare</b></td><td>Jan 2026</td><td>US-first; enterprise tilt</td></tr>
+      <tr><td><b>Amazon — One Medical Health AI</b></td><td>Jan–Mar 2026</td><td>US only</td></tr>
+      <tr><td><b>Google — Gemini Health Coach</b></td><td>May 2026</td><td>US records; wellness-led</td></tr>
+      <tr><td><b>Microsoft — Copilot Health</b></td><td>Mar 2026</td><td>US-first</td></tr>
+    </table>
+    <p style="margin-top:.8rem">Five US giants launched record-ingesting comprehension assistants in one quarter — <strong>validating the category</strong> — while the leader being EU-blocked hands ditto a ~18–36mo regulatory window.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.heise.de/en/news/ChatGPT-Health-OpenAI-launches-AI-health-assistant-11134998.html" target="_blank">heise 2026</a> · <a href="https://www.jmir.org/2026/1/e99230" target="_blank">JMIR 2026 (risks)</a>. See M4 §2, M13 §3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · why is ChatGPT Health blocked in the EU?</div>
+      <h3>Three independent legal mechanisms — each sufficient to block it</h3>
+      <ul>
+        <li><b>1. GDPR Art. 9 (special-category health data).</b> Processing health data requires a narrow exception (explicit consent), DPIAs, and — for US transfers — "particularly strict" scrutiny even under the Data Privacy Framework. This forces EU data residency/localization.</li>
+        <li><b>2. EU AI Act high-risk classification.</b> Medical-use AI is auto-high-risk (Art. 6(1) via MDR/Annex III): transparency, explainability, reproducibility, human oversight, conformity assessment — hard for a probabilistic chatbot. Obligations phase in Aug 2026 / Aug 2027.</li>
+        <li><b>3. MDR medical-device risk + liability.</b> Individualized health advice likely meets the medical-device definition → CE marking, a Notified Body, clinical evaluation, and elevated liability. The expected pattern is a single CE mark with two declarations of conformity (MDR + AI Act).</li>
+      </ul>
+      <p>OpenAI's own framing: Health is available "excluding the EEA, Switzerland and the UK," attributed to "more restrictive local health and data regulations." <b>Durability:</b> robust near-term — clearing one regime leaves the others. Realistic localized EU entry by US giants: <strong>2027–2028</strong>, behind compliant-by-construction EU incumbents. A closing window.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.euronews.com/next/2026/01/08/open-ai-launches-dedicated-chatgpt-health-feature-with-medical-record-integrations" target="_blank">ChatGPT Health EU exclusion — Euronews, 2026</a>
+        <a href="https://www.heise.de/en/news/ChatGPT-Health-OpenAI-launches-AI-health-assistant-11134998.html" target="_blank">GDPR Art. 9 / US-transfer scrutiny — heise, 2026</a>
+        <a href="https://tandemhealth.ai/resources/knowledge/eu-healthcare-ai-regulations-mdr-gdpr-ai-act" target="_blank">AI Act / MDR / CE mechanics — Tandem Health, 2026</a>
+        <a href="https://www.doctors.net.uk/news/chatgpt-health-likely-to-be-regulated-as-medical-device-in-the-uk" target="_blank">"Likely a medical device" (MHRA) — doctors.net.uk</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 24 — SCRIBES RIGHT USER -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">4 · clinician side · reframed</div>
+    <h2>Scribes have the <span style="color:var(--teal-deep)">right</span> user — and they're shipping patient summaries</h2>
+    <p class="lead" style="max-width:880px">They're well-funded, fast-growing, and healthcare-AI adoption has never been higher. The threat isn't that they have the wrong user — it's that they already auto-generate patient after-visit summaries, and once those flow into EHDS, the artifact is commoditised.</p>
+    <div class="grid g3" style="margin-top:.6rem">
+      <div class="card"><h3>Adoption velocity</h3><p>Kaiser 24,600 physicians · Mayo 2,000+ · Nabla 85k clinicians / 20M+ encounters/yr · Corti 250k interactions/day</p></div>
+      <div class="card"><h3>Already patient-facing</h3><p><strong>Nabla</strong> auto-generates multilingual patient "Patient Instructions"; <strong>Suki</strong> ships patient summaries; <strong>Dragon Copilot</strong> (with after-visit summaries) lands in NL early 2026</p></div>
+      <div class="card"><h3>So what's ditto's edge?</h3><p>Not capture. <em>Comprehension + cross-provider continuity + patient trust</em>, consuming EHDS as a feed</p></div>
+    </div>
+    <p class="src"><b>Sources:</b> <a href="https://help.nabla.com/en/articles/769346" target="_blank">Nabla Patient Instructions</a> · <a href="https://www.statnews.com/2025/06/17/nabla-raises-70-million-ambient-market-heats-up/" target="_blank">STAT 2025</a>. See M13 §2.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · EU scribes as serious rivals + the EHDS-summary threat</div>
+      <h3>The right user, and the bundling threat</h3>
+      <table>
+        <tr><th>Scribe</th><th>Funding</th><th>Traction</th><th>Patient summary?</th></tr>
+        <tr><td><b>Nabla</b> (FR)</td><td>$120M</td><td>85k clinicians, 20M+ encounters/yr</td><td><b>Yes</b> — multilingual "Patient Instructions" into the EHR</td></tr>
+        <tr><td><b>Corti</b> (DK)</td><td>~$95M</td><td>250k interactions/day; NHS + DACH</td><td>Indirect — powers docs/summarization for partners</td></tr>
+        <tr><td><b>Tortus</b> (UK)</td><td>NHS-backed</td><td>NHS study: 9 sites, 17,000 encounters; £834M/yr potential</td><td>Note-centric; patient recap a natural next step</td></tr>
+      </table>
+      <p>The threat is not "scribes do summaries" — it's <em>where they land</em>. For a clinician already paying for Nabla, the patient summary is a free included feature; and from March 2029 EHDS surfaces standardized summaries in national portals. So a standalone "we aggregate the record" wedge erodes. ditto's defensible edges: comprehension & longitudinal continuity (not single-visit capture); patient-side trust/UX/engagement (EHDS gives access, not a delightful experience); EHDS as a <em>feed</em>, not a competitor; cross-source aggregation beyond one EHR.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://help.nabla.com/en/articles/769346" target="_blank">Nabla — patient "Patient Instructions"</a>
+        <a href="https://www.statnews.com/2025/06/17/nabla-raises-70-million-ambient-market-heats-up/" target="_blank">Nabla traction — STAT, 2025</a>
+        <a href="https://www.digitalhealth.net/2025/09/major-nhs-ai-scribe-trial-shows-transformative-patient-benefits/" target="_blank">Tortus NHS study — Digital Health, 2025</a>
+        <a href="https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en" target="_blank">EHDS patient summaries from 2029 — EC</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 25 — COMPANIONS + CAREGIVER GAP -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">4 · patient & caregiver side</div>
+    <h2>Companions are oncology-locked; caregiver tools have no clinical brain</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Patient companions = oncology</h3><p>Outcomes4Me (+Mika/Fosanis, German DiGA), Jasper, Belong, Vinehealth are real and EU-active — but <strong>condition-locked to cancer</strong>. Heart-failure, neuro, rare-disease, multimorbid patients have no equivalent.</p></div>
+      <div class="card"><h3>Caregiver tools = logistics</h3><p>CaringBridge, Lotsa coordinate people but understand nothing medical. They tell the family <em>that</em> there was an appointment — not <em>what it meant</em>.</p></div>
+    </div>
+    <p style="margin-top:.8rem"><strong>Not one</strong> of the 2026 Big Tech assistants models the caregiver as a first-class user. <em>The caregiver-comprehension cell is empty.</em></p>
+    <p class="src"><b>Sources:</b> <a href="https://outcomes4me.com/press-release/outcomes4me-acquires-germanys-mika-health-app-to-accelerate-ai-driven-patient-empowerment-globally/" target="_blank">Outcomes4Me/Mika</a>. See M4 §3–5.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · oncology companion value propositions</div>
+      <h3>What the cancer companions actually do</h3>
+      <table>
+        <tr><th>Player</th><th>Value proposition</th><th>EU / reimbursement</th></tr>
+        <tr><td><b>Outcomes4Me</b> (US)</td><td>Cancer navigation: guideline-matched options, clinical-trial matching, symptom tracking; ~280k patients</td><td>Expanding to EU via Mika acquisition</td></tr>
+        <tr><td><b>Mika / Fosanis</b> (DE)</td><td>Cancer ePRO + psycho-oncology coaching</td><td><b>German DiGA — prescribable, reimbursed</b>; MDR IIa</td></tr>
+        <tr><td><b>Jasper Health</b> (US)</td><td>Cancer navigation + caregiver support; US payer/Medicare channel</td><td>US</td></tr>
+        <tr><td><b>Belong.Life</b> (IL/US)</td><td>Cancer community + AI mentor "Dave"; now extending to MS, weight</td><td>Limited EU</td></tr>
+        <tr><td><b>Vinehealth</b> (UK)</td><td>Cancer self-management; CE Class I; absorbed into Sciensus (pharma services)</td><td>UK/EU</td></tr>
+      </table>
+      <p>All are condition-locked to oncology and focused on tracking/trials/coaching — not on making each appointment understood, and not cross-condition. The German DiGA + French PECAN reimbursement paths are the obvious EU monetization rails. <strong>No cross-condition, caregiver-first companion exists.</strong></p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://outcomes4me.com/press-release/outcomes4me-acquires-germanys-mika-health-app-to-accelerate-ai-driven-patient-empowerment-globally/" target="_blank">Outcomes4Me acquires Mika (DiGA)</a>
+        <a href="https://www.fiercehealthcare.com/digital-health/belonglife-maker-social-network-cancer-patients-launches-ai-mentor" target="_blank">Belong.Life AI mentor — Fierce</a>
+        <a href="https://pharmaphorum.com/news/vinehealth-earns-ce-marks-for-cancer-management-apps" target="_blank">Vinehealth CE marks — pharmaphorum</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 26 — LANDSCAPE MAP -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">4 · the whitespace map</div>
+    <h2>Who is served × what is delivered</h2>
+    <table>
+      <tr><th>&nbsp;</th><th>Raw data / logistics</th><th>Comprehension / companion</th></tr>
+      <tr><td><b>Clinician</b></td><td>EHR docs, RCM/coding</td><td>AI scribes (Abridge, Nabla, Corti…) — richest signal, wrong user</td></tr>
+      <tr><td><b>Patient</b></td><td>EHR AVS; PHR (PGO, ePA, Apple); lab-explainers</td><td>Big Tech AI (US-only, EU-blocked); Epic Emmie (single-EHR); oncology companions (locked)</td></tr>
+      <tr><td><b>Caregiver</b></td><td>CaringBridge, Lotsa; Birdie (B2B)</td><td><b style="color:var(--coral)">— essentially empty —</b></td></tr>
+      <tr><td><b>Patient + caregiver, cross-condition, EU-legal, longitudinal</b></td><td>—</td><td><b style="color:var(--teal-deep)">ditto's target cell — unowned</b></td></tr>
+    </table>
+    <p style="margin-top:.8rem">Capability clusters top-right (scribes) and a new patient-comprehension cluster appeared in 2026 (Big Tech) — but <strong>no occupant is simultaneously EU-legal, caregiver-modelled, condition-agnostic and built on the appointment loop.</strong></p>
+    <p class="src"><b>Confidence:</b> Medium-High (negative finding). See M4 map & whitespace.</p>
+  </div></section>
+
+  <!-- 27 — DIVIDER PART 5 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">05</div>
+    <div class="kicker">Part five</div>
+    <h2>Direct competitors: Kin & the closest rivals</h2>
+    <p class="lead" style="max-width:820px">ditto is not first. Kin is a near-mirror — same wedge, same roadmap, real VC. The contest is won on geography and trust, not features.</p>
+    <p style="margin-top:.8rem">In this part: the direct set · Kin's profile · Kin vs ditto feature-by-feature · Kin's structural weakness · Hedy / Patiently / Abridge.</p>
+  </div></section>
+
+  <!-- 28 — DIRECT SET OVERVIEW -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">5 · the direct set</div>
+    <h2>The players closest to ditto's exact wedge</h2>
+    <div class="grid g4">
+      <div class="card"><h3>Kin Health <span class="pill warn">closest</span></h3><p>Record visit → plain-English summary + action items → role-tiered "care circle." US, $9M seed (May 2026).</p></div>
+      <div class="card"><h3>Hedy AI</h3><p>Real-time jargon translation, 30+ languages, GDPR docs — the most EU-credible patient-side rival.</p></div>
+      <div class="card"><h3>Patiently</h3><p>"Medical Memory" — capture, explain, family-share. US, free-in-beta.</p></div>
+      <div class="card"><h3>Abridge (patient summaries)</h3><p>Clinician-side, but ships real-time 8th-grade <em>patient</em> summaries with health-system distribution.</p></div>
+    </div>
+    <p style="margin-top:.8rem">Plus the <strong>Big Tech</strong> Q&A layer and the <strong>EU scribes</strong> (Nabla/Corti). The category is crowding fast — ditto is <em>not</em> first, which means the playbook is to differentiate, not to claim the idea.</p>
+    <p class="src"><b>Sources:</b> See M5, M13.</p>
+  </div></section>
+
+  <!-- 29 — KIN PROFILE -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">5 · direct competitor · deep dive</div>
+    <h2>Kin Health — ditto's near-mirror</h2>
+    <div class="grid g2">
+      <div class="card"><h3>What it is</h3><p>A patient's "personal health assistant": one-tap records any visit → plain-English summary + concrete next steps → invite family to a <strong>"care circle"</strong> (Manager vs Viewer roles). Built for patients with complex care and their relatives.</p></div>
+      <div class="card"><h3>The numbers</h3><p><strong>$9M seed</strong> led by Maveron, May 2026. Physician-CEO + a HeyDoctor (GoodRx exit) co-founder. Roadmap: a longitudinal <strong>"health graph"</strong> aggregating EHR notes — <em>i.e. ditto's roadmap.</em></p></div>
+    </div>
+    <p style="margin-top:.8rem">Site: <a href="https://www.meetkin.com/" target="_blank">meetkin.com</a>. Kin validates the wedge <em>and</em> the destination, with real money — same start, same intended end.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.businesswire.com/news/home/20260518890468/en/Kin-Health-Raises-$9M-To-Give-Patients-a-Record-of-Their-Own-Care" target="_blank">BusinessWire 2026</a> · <a href="https://techcrunch.com/2026/05/18/kin-health-raises-9m-to-build-an-ai-notetaker-for-patients/" target="_blank">TechCrunch 2026</a>. See M5 §1.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · Kin Health, in full (disambiguated)</div>
+      <h3>The analyzed product, features, model, and gaps</h3>
+      <p><b>Which Kin:</b> <a href="https://www.meetkin.com/" target="_blank">Kin Health / meetkin.com</a> (iOS id6756894542; Android com.meetkin.android) — the patient visit-recorder. NOT "Kin: Personal AI Advisors" (mykin.ai), "Kin Wellness & Support," or KinHealthApp.com.</p>
+      <h4>Features & AI pipeline</h4>
+      <ul>
+        <li>One-tap recording (in-person + telehealth) → transcribe → clinical narrative → user-facing summary with action items (prescriptions, labs, specialists, follow-ups).</li>
+        <li>Appointment prep (organize questions); assembling a longitudinal record "grounded in actual physician conversations."</li>
+        <li><b>Care circle</b> with role-based access: Manager (can help manage care) vs Viewer (stays informed).</li>
+        <li>Specialized medical models for transcription; multi-stage output evaluation.</li>
+      </ul>
+      <h4>Model & structural weakness</h4>
+      <p>Free-forever, monetized by <b>referrals</b> to specialists/labs. US-anchored, English-only, <b>not HIPAA-certified</b>, with documented questions about third-party processing of appointment audio. A referral model on health data faces stiff EU GDPR / anti-kickback scrutiny — unlikely to transplant cleanly to NL.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.meetkin.com/" target="_blank">Kin Health — meetkin.com</a>
+        <a href="https://techcrunch.com/2026/05/18/kin-health-raises-9m-to-build-an-ai-notetaker-for-patients/" target="_blank">TechCrunch — $9M, AI notetaker, roadmap</a>
+        <a href="https://labusinessjournal.com/healthcare/kin-health-raises-9-million-in-seed-funding/" target="_blank">LA Business Journal — founders/investors</a>
+        <a href="https://www.newsbytesapp.com/news/business/kin-health-raises-9-million-to-transcribe-and-summarize-doctor-visits/tldr" target="_blank">NewsBytes — privacy questions</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 30 — KIN VS DITTO MATRIX -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">5 · head-to-head</div>
+    <h2>Kin vs ditto — feature by feature</h2>
+    <table>
+      <tr><th>Capability</th><th>Kin</th><th>ditto</th></tr>
+      <tr><td>Appointment capture + plain-language summary</td><td>✅</td><td>✅ <span class="tag">core</span></td></tr>
+      <tr><td>Action items / next steps</td><td>✅</td><td>⚠️ confirm structured extraction</td></tr>
+      <tr><td>Caregiver / family sharing</td><td>✅ Manager/Viewer roles</td><td>✅ <span class="tag">core promise</span></td></tr>
+      <tr><td>Longitudinal record / health graph</td><td>⚠️ roadmap</td><td>⚠️ roadmap</td></tr>
+      <tr><td>Multi-language</td><td>❌ English-only</td><td>✅ <b>EU necessity</b></td></tr>
+      <tr><td>EU data residency / GDPR-native</td><td>❌ US-hosted</td><td>✅ <b>strongest moat</b></td></tr>
+      <tr><td>Business model</td><td>Free + <b>referral</b></td><td>Likely SaaS / B2B2C</td></tr>
+    </table>
+    <p style="margin-top:.6rem">Feature-twins on the wedge; roadmap-twins on the destination. ditto is <em>behind</em> on funding & care-circle maturity, <em>ahead</em> structurally on EU residency, multilingual, regulation, and a trust-aligned model.</p>
+    <p class="src"><b>Note:</b> ditto cells reflect the brief + roadmap; some aspirational (confirm internally). See M5 §2.</p>
+  </div></section>
+
+  <!-- 31 — KIN WEAKNESS / DIFFERENTIATION -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">5 · so what</div>
+    <h2>Compete on geography & trust — not a feature race</h2>
+    <div class="ba">
+      <div class="before"><h3>Kin's structural weakness</h3><p>US-anchored, English-only, <strong>not HIPAA-certified</strong>, monetised by <strong>referrals</strong> — with questions about third-party processing of appointment audio. The referral model won't transplant cleanly to the GDPR/EU.</p></div>
+      <div class="after"><h3>ditto's defensible edge</h3><p>EU/NL data residency, GDPR-native consent, AI Act/MDR posture, multilingual by necessity, and a <strong>non-referral</strong> model ("we don't monetise your medical conversations"). The position: <em>the EU-anchored, trust-first version of Kin.</em></p></div>
+    </div>
+    <p style="margin-top:.8rem"><strong>Near-term gaps to close:</strong> match Kin's care-circle role tiers and ship structured action-item extraction.</p>
+    <p class="src"><b>Sources:</b> <a href="https://hitconsultant.net/2026/05/21/kin-health-raises-9m-seed-patient-ambient-ai/" target="_blank">HIT Consultant 2026</a>. See M5 §4.</p>
+  </div></section>
+
+  <!-- 32 — HEDY / PATIENTLY / ABRIDGE -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">5 · the rivals to watch</div>
+    <h2>Hedy, Patiently & Abridge</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Hedy AI — EU-credible</h3><p>Real-time jargon translation, <strong>8 free / 30+ paid languages</strong>, SOC 2 + GDPR docs. Closest to ditto on the multilingual/EU-trust axis. <a href="https://www.hedy.ai/patient-ai-tool" target="_blank">hedy.ai</a></p></div>
+      <div class="card"><h3>Patiently — "Medical Memory"</h3><p>Records visits, explains jargon, builds a Medical Memory, family sharing; free-in-beta, E2E-encrypted. US. <a href="https://www.patiently.me/" target="_blank">patiently.me</a></p></div>
+      <div class="card"><h3>Abridge — distribution threat</h3><p>Clinician-side but ships real-time 8th-grade <em>patient</em> summaries inside health systems (~1/3 of UCHealth's ~6,000 clinicians). <a href="https://www.abridge.com/" target="_blank">abridge.com</a></p></div>
+    </div>
+    <p style="margin-top:.8rem">Hedy is the EU-trust rival; Abridge's threat is distribution (patients get the summary from their hospital). ditto's counter: patient ownership <em>across all providers</em> + family.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.uchealth.org/today/ai-note-taking-tool-helps-doctors-focus-fully-on-patients/" target="_blank">UCHealth 2025</a>. See M5 §3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · Patiently profile</div>
+      <h3>Patiently — the closest US "Medical Memory" rival</h3>
+      <p><a href="https://www.patiently.me/" target="_blank">patiently.me</a> (iOS id6748413070). A patient-side app that "records your visits, explains the jargon, and builds your <strong>Medical Memory</strong>." Press-record or import existing recordings; transcribes and extracts diagnoses/medications/follow-ups in under a minute, organized into Health Topics. <strong>Family/caregiver sharing</strong> for kids, aging parents, self.</p>
+      <ul>
+        <li><b>Model:</b> free during beta, later subscription ("Founder pricing" for early users).</li>
+        <li><b>Privacy:</b> Face ID/Touch ID, end-to-end encryption, no data sale/ads, delete anytime — a more privacy-forward posture than Kin's referral model.</li>
+        <li><b>vs ditto:</b> near-identical wedge (capture → plain-language → Medical Memory → share); same gap as Kin — US-centric, no EU residency/multilingual evidence. Geography/funding unconfirmed.</li>
+      </ul>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.patiently.me/" target="_blank">Patiently — patiently.me</a>
+        <a href="https://apps.apple.com/us/app/patiently-medical-ai-notes/id6748413070" target="_blank">Patiently — App Store</a>
+        <a href="https://www.hedy.ai/patient-ai-tool" target="_blank">Hedy AI — patient tool</a>
+        <a href="https://www.abridge.com/blog/patient-visit-summaries--now-generated-in-real-time" target="_blank">Abridge — real-time patient summaries</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 33 — DIVIDER PART 6 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">06</div>
+    <div class="kicker">Part six</div>
+    <h2>Where the puck is going</h2>
+    <p class="lead" style="max-width:820px">The market is collapsing toward two poles — clinician-side scribe superplatforms reaching into patient summaries, and consumer-AI giants reaching into comprehension. ditto sits in the contested middle.</p>
+    <p style="margin-top:.8rem">In this part: the five vectors · capture→workflow→revenue (landing in NL) · single→platform, plumbing→comprehension, D2C→B2B2C.</p>
+  </div></section>
+
+  <!-- 34 — FIVE VECTORS -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">6 · the migrations</div>
+    <h2>Five vectors of the market</h2>
+    <ul class="two-col">
+      <li><strong>1. Capture → workflow → revenue.</strong> Scribes move from notes into coding, orders, prior-auth — and wrap patient summaries in.</li>
+      <li><strong>2. Single-utility → life-stage / multi-condition platform.</strong> Flo, Belong reuse one engine across cohorts.</li>
+      <li><strong>3. Data plumbing → comprehension.</strong> Aggregation commoditises; value moves up to understanding.</li>
+      <li><strong>4. D2C → B2B2C.</strong> Everyone routes through pharma / payer / provider distribution.</li>
+      <li><strong>5. Consumer-AI giants entering top-down.</strong> ChatGPT Health normalises "ask AI about my records."</li>
+    </ul>
+    <p style="margin-top:.8rem">The defensible space between the two poles is the <strong>EU-native, trust-and-regulation-anchored, longitudinal patient-comprehension layer</strong>.</p>
+    <p class="src"><b>Confidence:</b> High. See M8.</p>
+  </div></section>
+
+  <!-- 35 — VECTOR 1 NL THREATS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">6 · the gravitational center</div>
+    <h2>Capture → workflow → revenue — and it's landing in NL</h2>
+    <p style="max-width:880px">Every leading scribe migrated from transcription into coding/orders/prior-auth/RCM within ~18 months — and <strong>patient after-visit summaries are now a feature <em>inside</em> the scribe envelope</strong>. Two encroachment signals land in ditto's exact lane:</p>
+    <div class="grid g2" style="margin-top:.6rem">
+      <div class="card"><h3><span class="pill warn">NL</span> Dragon Copilot</h3><p>Microsoft/Nuance's scribe — with <strong>referral letters + after-visit summaries</strong> — confirmed rolling into the <strong>Netherlands in early 2026</strong>.</p></div>
+      <div class="card"><h3>Epic "Emmie"</h3><p>Epic's patient-facing assistant explains <strong>labs/visits in plain language inside MyChart</strong> — in the portal patients already have.</p></div>
+    </div>
+    <p class="src"><b>Sources:</b> <a href="https://www.techtarget.com/revcyclemanagement/news/366626555/Gen-AI-company-Abridge-raises-300M-targets-revenue-cycle" target="_blank">TechTarget 2025</a>. See M8 V1.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · how scribes monetize everything downstream of capture</div>
+      <h3>capture → note → code → orders → prior-auth → patient summary</h3>
+      <ul>
+        <li><b>Abridge</b> ($5.3B) expanded from notes into AI-generated medical <em>codes</em>, outpatient orders, inpatient ("Abridge Inside" in Epic), nursing docs (with Mayo), and real-time prior-auth (Availity, Jan 2026).</li>
+        <li><b>Nabla</b> ("Adaptive Agentic Platform"): coding agent, order agent, nurse/inpatient agent — and patient "Patient Instructions."</li>
+        <li><b>Ambience</b>: end-to-end coding (claims beating physician ICD-10 accuracy) + inpatient CDI.</li>
+        <li><b>Suki</b>: ambient order staging + CPT/E&M coding + patient summarization & Q&A.</li>
+        <li><b>Dragon Copilot</b> (Microsoft/Nuance): referral letters, after-visit summaries, ICD-10 + order suggestions; EU rollout to AT/FR/DE/IE (Oct 2025), <b>BE/NL early 2026</b>.</li>
+      </ul>
+      <p>Patient summaries are increasingly a <em>feature inside the scribe envelope</em>, not a standalone category — the competitive-encroachment risk ditto must define a defensible patient-side wedge against (longitudinal, daily, cross-encounter comprehension vs. a single after-visit note).</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.techtarget.com/revcyclemanagement/news/366626555/Gen-AI-company-Abridge-raises-300M-targets-revenue-cycle" target="_blank">Abridge → revenue cycle/coding — TechTarget</a>
+        <a href="https://www.suki.ai/press-releases/suki-unveils-industry-first-ambient-orders-staging-for-its-ai-assistant/" target="_blank">Suki — ambient orders + patient summaries</a>
+        <a href="https://www.healthcaredive.com/news/dax-copilot-nuance-automated-doctor-tool-artificial-intelligence-healthcare/694818/" target="_blank">Dragon Copilot EU/NL rollout — Healthcare Dive</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 36 — OTHER VECTORS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">6 · vectors 2–4</div>
+    <h2>Platforms, comprehension, and B2B2C</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Single → platform</h3><p><strong>Flo</strong>: period → perimenopause → menopause (€1B+). <strong>Belong</strong>: cancer → MS → weight. One engine, many cohorts. <em>ditto's path runs through a beachhead, not all conditions at once.</em></p></div>
+      <div class="card"><h3>Plumbing → comprehension</h3><p><strong>b.well</strong> went from PHR aggregator to a "Health AI SDK" — now powering ChatGPT Health. Aggregators climb up, AI giants reach down, ditto sits in the middle.</p></div>
+      <div class="card"><h3>D2C → B2B2C</h3><p><strong>Ada</strong> (Berlin) → enterprise care-nav SaaS for pharma/payers. <strong>Oviva/Sidekick</strong> → DiGA prescription. Pharma/payer/provider is the survivable EU channel.</p></div>
+    </div>
+    <p class="src"><b>Sources:</b> <a href="https://flo.health/newsroom/flo-for-perimenopause-is-launching-to-empower-the-1-billion-women-who-experience-perimenopause-without-the-support-they-deserve" target="_blank">Flo perimenopause</a>. See M8 V2–V5.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the migration map (player → from → to)</div>
+      <h3>Where named players are heading</h3>
+      <table>
+        <tr><th>Player</th><th>From</th><th>To</th></tr>
+        <tr><td>Flo</td><td>period tracker</td><td>female life-stage platform (perimenopause Jul 2025, menopause)</td></tr>
+        <tr><td>Belong.Life</td><td>cancer companion</td><td>MS, weight, trial-matching (multi-indication)</td></tr>
+        <tr><td>b.well</td><td>PHR aggregation</td><td>"Health AI SDK" powering ChatGPT Health</td></tr>
+        <tr><td>Ada Health</td><td>consumer symptom checker</td><td>enterprise care-nav SaaS (Bayer/Novartis/Pfizer)</td></tr>
+        <tr><td>Oviva / Sidekick</td><td>wellness coaching</td><td>DiGA prescription therapeutics</td></tr>
+        <tr><td>Ro / Hims</td><td>D2C Rx</td><td>chronic care + payer/employer credibility</td></tr>
+        <tr><td>Commure + Athelas</td><td>scribe + RCM</td><td>"CommureOS" superplatform (Augmedix, Memora acquisitions)</td></tr>
+      </table>
+      <p>Net: aggregation commoditizes into infrastructure; understanding is the value layer; pure consumer economics push everyone toward B2B2C; and consumer-AI giants normalize "ask AI about my records" top-down.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.prnewswire.com/news-releases/openai-selects-bwell-to-power-secure-health-data-connectivity-for-ai-driven-health-experiences-in-chatgpt-302655598.html" target="_blank">b.well powers ChatGPT Health — PR Newswire</a>
+        <a href="https://www.fiercebiotech.com/medtech/symptom-checking-platform-ada-health-inks-partnerships-takeda-sanofi-alnylam" target="_blank">Ada → enterprise B2B2C — Fierce Biotech</a>
+        <a href="https://www.diga-verzeichnis.de/en/diga/oviva-direkt-fuer-adipositas" target="_blank">Oviva DiGA prescription</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 37 — DIVIDER PART 7 (scorecard) -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">07</div>
+    <div class="kicker">Part seven · the deep part</div>
+    <h2>Feature-direction traction: what's working, what isn't</h2>
+    <p class="lead" style="max-width:860px">For every direction ditto is weighing — who wins, who fails, and <em>why</em>.</p>
+    <div class="grid g3" style="margin-top:.6rem">
+      <div class="card" style="background:#114a44;border-color:#1b6157"><h3 style="color:#9fe0e1">Strong / open lane</h3><p style="color:#dff3f2">Grounded & cited in patient language · a daily compounding loop anchored to the appointment</p></div>
+      <div class="card" style="background:#5a4a1e;border-color:#7a6428"><h3 style="color:#f3d489">Contested / decaying</h3><p style="color:#f6ecd2">General AI assistants (LLMs own it) · digital coaches (engagement decay) · AI therapy (lawsuits + regulation)</p></div>
+      <div class="card" style="background:#5a2e26;border-color:#7a3e32"><h3 style="color:#ffc7b8">Weak / cautionary</h3><p style="color:#fbe3da">Stand-alone symptom tracking & open-ended logging — low accuracy <em>and</em> retention</p></div>
+    </div>
+    <p style="margin-top:.6rem;color:#dff3f2">Slides follow: AI assistants · grounded/cited · coaches · AI mental-health & therapy · symptom tracking · journaling.</p>
+  </div></section>
+
+  <!-- 38 — AI ASSISTANTS WINNERS/LOSERS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">7 · AI health assistants</div>
+    <h2>General LLMs own it — and the winners went B2B, the losers chased consumers</h2>
+    <div class="grid g2">
+      <div class="card"><h3>The default is set</h3><p>74% of AI-health users reach for general tools (ChatGPT 23%, Gemini 15%); only 5% use provider bots, 4% payer bots. You compete against a free, ubiquitous default.</p></div>
+      <div class="card"><h3>The specialist winners pivoted to B2B</h3><p><strong>Ada</strong> (EU) hit profitability + ~260% YoY growth selling validated triage to systems/payers/pharma; <strong>Babylon</strong> died chasing consumers on broken capitated economics.</p></div>
+    </div>
+    <p style="margin-top:.8rem">Lesson: treat the consumer surface as a trust/funnel; anchor revenue + defensibility in clinical validation + institutional distribution.</p>
+    <p class="src"><b>Sources:</b> <a href="https://rockhealth.com/insights/the-tortoise-and-the-hare-of-care-health-ai-insights-from-rock-healths-2025-consumer-adoption-survey/" target="_blank">Rock Health 2025</a> · <a href="https://sifted.eu/articles/the-rise-and-fall-of-babylon" target="_blank">Sifted (Babylon)</a>. See M11 §1, M15 §1.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · symptom-checker winners & losers, and WHY</div>
+      <h3>The split is B2B-clinical vs consumer-hype</h3>
+      <table>
+        <tr><th>Player</th><th>Win/Lose</th><th>WHY</th></tr>
+        <tr><td><b>Ada Health</b> (🇪🇺 DE)</td><td>Winner</td><td>Pivoted to B2B (pharma/payer/system), clinically validated; profitable, ~260% YoY; $90M Bayer-led round; 40M+ assessments</td></tr>
+        <tr><td><b>Infermedica/Symptomate</b> (🇪🇺 PL)</td><td>Winner</td><td>Pure B2B triage API; Symptomate is a free credibility funnel</td></tr>
+        <tr><td><b>K Health</b> (🇺🇸)</td><td>Winner</td><td>AI intake → clinician; Cedars-Sinai/Mayo deals; ~$900M val</td></tr>
+        <tr><td><b>Babylon</b> (🇬🇧)</td><td>Loser (bankrupt)</td><td>Consumer overreach + NHS capitation losing money/patient + Lancet/MHRA-disputed accuracy + adversarial PR → Chapter 7, 2023</td></tr>
+      </table>
+      <p><b>The pattern:</b> won on B2B/enterprise distribution (Ada, Infermedica, K Health); won on clinical validation/regulatory lens; used free checkers as a funnel, not a business; died from overreach + broken unit economics + regulation. <b>Ada & Infermedica are EU comps — directly relevant to ditto's MDR/GDPR path.</b></p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.mobihealthnews.com/news/emea/ai-based-assessment-platform-ada-health-joins-forces-pharma-giant-bayer" target="_blank">Ada × Bayer / B2B pivot — MobiHealthNews</a>
+        <a href="https://infermedica.com/" target="_blank">Infermedica — B2B triage API</a>
+        <a href="https://medcitynews.com/2024/07/primary-care-funding-round-ai/" target="_blank">K Health $50M / ~$900M — MedCity</a>
+        <a href="https://techcrunch.com/2021/03/05/uks-mhra-says-it-has-concerns-about-babylon-health-and-flags-legal-gap-around-triage-chatbots/" target="_blank">MHRA concerns on Babylon — TechCrunch</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 39 — GROUNDED/CITED (patient lane) -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">7 · grounded & cited</div>
+    <h2>The solved problem — pointed at the wrong audience</h2>
+    <p class="big-quote" style="max-width:880px">OpenEvidence proved grounded-and-cited works ($12B, &gt;40% of US physicians). The same technology, <span class="hl">in patient language and EU-legal</span>, is the opening.</p>
+    <p style="margin-top:1rem;max-width:860px">Medical-RAG converges on citation-traceability + refuse-when-unsure; the corpus (licensed NEJM/JAMA) is the moat, not the model. The clinician lane is solved; the <em>patient</em> lane is not — and no grounded engine is simultaneously patient-facing <em>and</em> EU-available.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.openevidence.com/announcements/openevidence-and-nejm" target="_blank">OpenEvidence×NEJM</a> · <a href="https://arxiv.org/pdf/2510.14400" target="_blank">MedTrust-RAG 2025</a>. See M6 §2.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · how grounding actually works</div>
+      <h3>The architecture ditto can borrow for patients</h3>
+      <ul>
+        <li><b>Licensed evidence corpus.</b> OpenEvidence signed multi-year deals with NEJM (Feb 2025) and JAMA (Jun 2025), drawing on 18+ peer-reviewed journals + NCCN/Cochrane. The paywalled, vetted corpus — not the LLM — is the differentiator.</li>
+        <li><b>Inline citation-traceability.</b> Every reasoning statement links to a retrieved document (MedTrust-RAG); answers cite the corpus.</li>
+        <li><b>Principled refusal.</b> "Negative knowledge assertions" — refuse/defer when evidence is insufficient rather than synthesizing (the antidote to hallucination).</li>
+        <li><b>The caution.</b> Peer-reviewed work warns RAG can be "a dangerous medical communicator" when retrieval is shallow — grounding is necessary, not sufficient; corpus quality + safety design matter.</li>
+      </ul>
+      <p>Borrow the architecture (licensed evidence + inline citations + refusal) for a <em>patient-language</em> register OpenEvidence deliberately doesn't serve, grounded additionally in the patient's own record — the four-corner white space (grounded + cited + patient + EU).</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://news.crunchbase.com/venture/openevidence-ai-doctors-doubles-valuation-seriesd/" target="_blank">OpenEvidence $12B, usage — Crunchbase</a>
+        <a href="https://www.openevidence.com/announcements/openevidence-and-nejm" target="_blank">NEJM licensing</a>
+        <a href="https://arxiv.org/pdf/2510.14400" target="_blank">MedTrust-RAG (citation-traceability + refusal)</a>
+        <a href="https://arxiv.org/pdf/2502.14898" target="_blank">"RAG can be dangerous medical communicators"</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 40 — COACHES -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">7 · digital health coaches</div>
+    <h2>Coaches: winners are reimbursed B2B2C with a human in the loop</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Why the winners scale</h3><p><strong>Hinge</strong> (IPO, 98% client retention, 117% NDR), <strong>Omada</strong> (IPO, 90% retention), <strong>Sword</strong> ($4B), <strong>Virta</strong> — all B2B2C, hard clinical + claims-cost outcomes, human-in-the-loop.</p></div>
+      <div class="card"><h3>Why engagement decays</h3><p>~70% of health-app users quit within 100 days. Pure-AI/DTC coaching (Noom layoffs; Dario strategic review; Lark fully-automated) is exposed; "shallow, transactional engagement" is the unsolved core.</p></div>
+    </div>
+    <p style="margin-top:.8rem">Antidotes: tie engagement to a <em>reimbursed clinical outcome</em>, a <em>human</em>, a <em>medication the patient is committed to</em> (GLP-1), or <em>passive data</em>.</p>
+    <p class="src"><b>Sources:</b> <a href="https://sacra.com/c/hinge-health/" target="_blank">Sacra (Hinge)</a> · <a href="https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2025.1536416/full" target="_blank">Frontiers 2025</a>. See M6 §3, M15 §2.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · coaching winners & losers + why engagement decays</div>
+      <h3>The named scorecard</h3>
+      <table>
+        <tr><th>Player</th><th>Win/Lose</th><th>WHY</th></tr>
+        <tr><td><b>Hinge Health</b> (MSK)</td><td>Winner (IPO)</td><td>Employer/payer distribution + outcomes; 98% client retention, 117% NDR, ~81% gross margin</td></tr>
+        <tr><td><b>Omada</b> (cardiometabolic)</td><td>Winner (IPO)</td><td>Reimbursed chronic care; 90% retention; GLP-1 engagers lose 1.7× weight</td></tr>
+        <tr><td><b>Sword Health</b> (MSK, EU roots)</td><td>Winner</td><td>AI "Phoenix" + human PTs; $4B val; bought Kaia to lock Europe</td></tr>
+        <tr><td><b>Virta</b> (diabetes/GLP-1)</td><td>Winner</td><td>Outcome guarantees; ~$158M ARR; ARPC ~$290k</td></tr>
+        <tr><td><b>Noom</b> (DTC weight)</td><td>Struggling</td><td>DTC subscription; multiple 2024 layoffs as original program shrank</td></tr>
+        <tr><td><b>Dario</b> (multi-condition)</td><td>Struggling</td><td>Sub-scale ($27M rev); strategic review Sep 2025</td></tr>
+        <tr><td><b>Lark</b> (fully-automated AI)</td><td>Mixed</td><td>No humans = scalable but engagement-decay exposed; leans on CDC DPP/MDPP reimbursement</td></tr>
+      </table>
+      <p><b>Why decay happens:</b> ~70% abandon within 100 days; mental-health apps retain ~4%; drivers are UX/privacy/weak content/cost/"evolving goals." <b>What sustains:</b> reimbursed outcome + payer relationship (institutional stickiness beyond personal motivation), human accountability, a committed medication/condition anchor, and passive capture.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://sacra.com/c/hinge-health/" target="_blank">Hinge financials — Sacra</a>
+        <a href="https://www.mobihealthnews.com/news/omada-health-aims-11b-valuation-ipo" target="_blank">Omada IPO/retention — MobiHealthNews</a>
+        <a href="https://www.mobihealthnews.com/news/digital-weight-loss-company-noom-confirms-another-round-layoffs" target="_blank">Noom layoffs — MobiHealthNews</a>
+        <a href="https://www.jmir.org/2024/1/e56897" target="_blank">~70% abandon within 100 days — JMIR 2024</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 41 — AI MENTAL HEALTH & THERAPY (new chapter) -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">7 · AI mental health & therapy</div>
+    <h2>The "AI therapist" is mostly ChatGPT — and it's collecting lawsuits</h2>
+    <div class="grid g2">
+      <div class="card"><h3>The trend is real & risky</h3><p>~48.7% of LLM-using adults with mental-health conditions use them for support; ~1 in 8 teens. But 2025–26 brought wrongful-death lawsuits (Character.AI settled Jan 2026), a formal <strong>APA Health Advisory</strong>, "AI psychosis," and US state bans on AI-only therapy.</p></div>
+      <div class="card"><h3>Validated lane vs. cautionary lane</h3><p><strong>Therabot</strong> (Dartmouth NEJM AI RCT), <strong>Wysa</strong> (FDA Breakthrough, NHS), <strong>Limbic</strong> (Class IIa) win on validation + B2B + human-in-loop. <strong>Ash/Slingshot</strong> (~$93M) markets as "wellness," <strong>pulled out of the UK Jan 2026</strong>; <strong>Woebot</strong> shut down 2025.</p></div>
+    </div>
+    <p style="margin-top:.8rem">For ditto: position as support/comprehension <em>between</em> human care, route crisis to humans, never "AI therapist" — Limbic's Class IIa is the model; Ash's UK exit is the anti-pattern.</p>
+    <p class="src"><b>Sources:</b> <a href="https://ai.nejm.org/doi/full/10.1056/AIoa2400802" target="_blank">NEJM AI (Therabot)</a> · <a href="https://www.statnews.com/2026/01/21/slingshot-therapy-chatbot-ash-uk-regulatory-concerns/" target="_blank">STAT (Ash UK exit)</a>. See M14.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the AI mental-health chapter</div>
+      <h3>Players, evidence, and the win-vs-fail line</h3>
+      <table>
+        <tr><th>Player</th><th>Funding</th><th>Evidence / regulatory</th></tr>
+        <tr><td><b>Slingshot "Ash"</b> (🇺🇸)</td><td>~$93M</td><td>"Foundation model for psychology"; markets as wellness (not a device); thin safety data; <b>exited UK Jan 2026</b></td></tr>
+        <tr><td><b>Wysa</b> (🇮🇳/🇬🇧)</td><td>$20M+NIH</td><td>FDA Breakthrough; 30+ studies; NHS; alliance ≈ human</td></tr>
+        <tr><td><b>Limbic</b> (🇬🇧)</td><td>$14M</td><td><b>World-first Class IIa UKCA</b>; NHS triage; 60k+ referral audit (+53% recovery)</td></tr>
+        <tr><td><b>Therabot</b> (Dartmouth)</td><td>academic</td><td><b>NEJM AI RCT, n=210</b> — first generative-AI therapy RCT; significant symptom reductions</td></tr>
+        <tr><td><b>Woebot</b> (🇺🇸)</td><td>~$114M</td><td><b>Shut app Jun 2025</b> — FDA cost + LLM reg uncertainty + no business model</td></tr>
+        <tr><td><b>Clare&Me</b> (🇩🇪 EU)</td><td>€3.7M + EU grants</td><td>Building an empathic clinical LLM — the EU-native analogue</td></tr>
+      </table>
+      <p><b>Macro + risk:</b> general LLMs are the de-facto largest "provider"; OpenAI's own study puts "relationships/personal reflection" at 1.9% of conversations (~342M/week). Risks now dominate: Character.AI/OpenAI teen-suicide lawsuits, the APA's Nov 2025 Health Advisory, sycophancy/"AI psychosis," and US state bans (Utah, Nevada, Illinois WOPR Act). EU AI Act restricts emotion-recognition + imposes transparency.</p>
+      <p><b>Win vs fail:</b> winners = clinical validation + B2B/NHS/payer + human-in-loop + a regulatory pathway; losers = consumer-only/unvalidated or trapped between "wellness" marketing and "treatment" reality. Retention is brutal (~3.3% at 30 days).</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://ai.nejm.org/doi/full/10.1056/AIoa2400802" target="_blank">Therabot RCT — NEJM AI, 2025</a>
+        <a href="https://www.statnews.com/2026/01/21/slingshot-therapy-chatbot-ash-uk-regulatory-concerns/" target="_blank">Ash pulls out of UK — STAT, 2026</a>
+        <a href="https://limbic.ai/blog/class-ii-a" target="_blank">Limbic — Class IIa UKCA</a>
+        <a href="https://www.statnews.com/2025/07/02/woebot-therapy-chatbot-shuts-down-founder-says-ai-moving-faster-than-regulators/" target="_blank">Woebot shutdown — STAT, 2025</a>
+        <a href="https://www.news-medical.net/news/20251113/APA-urges-safeguards-for-using-AI-in-mental-health.aspx" target="_blank">APA Health Advisory, 2025</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 42 — SYMPTOM TRACKING -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">7 · symptom tracking & checkers</div>
+    <h2>The weakest stand-alone bet — except when it isn't</h2>
+    <div class="grid g4">
+      <div class="card"><div class="stat">~55%</div><div class="stat-l">symptom-checker triage accuracy — flat over 5 years</div></div>
+      <div class="card"><div class="stat">~71%</div><div class="stat-l">of mHealth users disengage within 90 days</div></div>
+      <div class="card"><div class="stat">Flo</div><div class="stat-l">works — tracking buys a <b>prediction</b> users return for</div></div>
+      <div class="card"><div class="stat">ePRO</div><div class="stat-l">works — <b>prescribed</b>, EMR-integrated, survival benefit; 67–94% retention</div></div>
+    </div>
+    <p style="margin-top:.8rem">Generic manual tracking fails on accuracy <em>and</em> retention. The exceptions all break the mold: passive capture, a valued prediction, or a clinician-prescribed pathway.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9131144/" target="_blank">Symptom-checker accuracy (PMC)</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9750604/" target="_blank">ePRO retention (PMC)</a>. See M6 §4, M15 §3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · failures vs surprising successes</div>
+      <h3>Why generic trackers fail — and exactly why the exceptions work</h3>
+      <p><b>Why generic trackers are low-value:</b> two compounding problems. <em>Accuracy</em> — symptom-checker median triage accuracy ~55.8% (2020) vs 59.1% (2015), flat and worse in some emergency decisions; correct-diagnosis-first only ~34% (BMJ 2015). <em>Retention</em> — ~71% disengage within 90 days; ~3.3% 30-day retention for unguided mental-health apps. A generic tracker asks daily manual input, gives low-confidence output, and offers no accountability — the worst combination.</p>
+      <h4>The exceptions, and the mechanism</h4>
+      <ul>
+        <li><b>Tied to a prediction — Flo.</b> Cycle/ovulation forecast gives a scheduled reason to open; unicorn on a $200M raise.</li>
+        <li><b>Passive / wearable capture — Oura & Whoop.</b> Data arrives without effort; Oura ~$1B revenue 2025; wearables now pivoting from tracking to <em>predicting outcomes</em>.</li>
+        <li><b>Prescribed & clinical — oncology ePRO (Basch).</b> Prolonged survival, fewer hospitalizations; real-world retention 94%/88%/73%/67% at 3/6/9/12 months — and <em>older</em> patients retained better, because it's prescribed, EMR-integrated, and tied to a life-or-death outcome.</li>
+      </ul>
+      <p><b>Lesson for ditto:</b> avoid the "yet another symptom diary" trap. If tracking is in scope, anchor it to a prediction, a wearable feed, or a clinician-prescribed pathway with a human on the other end.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9131144/" target="_blank">Symptom-checker accuracy 5-yr — PMC</a>
+        <a href="https://www.jmir.org/2024/1/e56897" target="_blank">App abandonment ~70%/100 days — JMIR 2024</a>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9750604/" target="_blank">Oncology ePRO retention 67–94% — PMC</a>
+        <a href="https://www.bloomberg.com/news/features/2026-05-11/fitbit-oura-whoop-see-predicting-health-outcomes-as-new-aim-for-trackers" target="_blank">Wearables pivot to prediction — Bloomberg, 2026</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 43 — JOURNALING & LOGGING -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">7 · journaling & logging</div>
+    <h2>Journaling splits sharply: gamified companions retain, clinical loggers churn</h2>
+    <div class="ba">
+      <div class="before"><h3>Retainers</h3><p><strong>Finch</strong> (self-care pet) ~10M MAU, ~$30M ARR, <strong>54%/37% D1/D7</strong> — Duolingo-class. <strong>Daylio</strong> (one-tap), <strong>Stoic</strong> (ritual + AI) win on near-zero effort or gamified investment.</p></div>
+      <div class="after"><h3>Churners</h3><p><strong>Bearable</strong> (~900K), <strong>MindDoc</strong> (~3M) are genuinely useful for chronic-illness/mood but demand effortful structured logging for a deferred, abstract payoff.</p></div>
+    </div>
+    <p style="margin-top:.8rem">The lesson: gamify the investment, eliminate the effort tax, or wrap logging in a daily ritual with feedback — never open-ended manual logging with no loop.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.deconstructoroffun.com/blog/x0hd2ssr80y5n7gv0w967pg7hwd7tl" target="_blank">Finch retention (DoF)</a>. See M10 §3.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · journaling & symptom-logging apps</div>
+      <h3>Who retains, who churns — and the mechanism</h3>
+      <table>
+        <tr><th>App</th><th>Scale</th><th>Retain / churn</th><th>Why</th></tr>
+        <tr><td><b>Finch</b> (US)</td><td>~10M MAU, ~$30M ARR (no VC)</td><td>Retains (54%/37% D1/D7)</td><td>Self-care nurtures a virtual pet — the pet is a living, compounding streak</td></tr>
+        <tr><td><b>Daylio</b> (CZ)</td><td>~18M downloads, 4.75★</td><td>Retains (qualitatively)</td><td>One-tap mood+activity — the only logger that beats the effort tax</td></tr>
+        <tr><td><b>Stoic</b> (DE)</td><td>~4M+ users</td><td>Retains</td><td>Morning/evening prompted ritual + AI pattern insights</td></tr>
+        <tr><td><b>How We Feel</b> (US)</td><td>Yale-backed, award</td><td>Mixed</td><td>Emotion-granularity + social check-ins; non-profit limits scale</td></tr>
+        <tr><td><b>Bearable</b> (UK)</td><td>~700–900K</td><td>Churn-prone</td><td>Powerful symptom/med correlation but high logging effort, deferred payoff</td></tr>
+        <tr><td><b>MindDoc</b> (DE)</td><td>~3M</td><td>Churn-prone</td><td>CBT mood monitoring; clinically credible but assessment-heavy</td></tr>
+      </table>
+      <p>Many are EU-rooted (Daylio CZ, Stoic DE, MindDoc DE, Bearable UK). The split is structural: gamified/ritualized/low-effort apps close the Hook loop; effortful clinical loggers leave the reward deferred and abstract — the exact trap an episodic record product can fall into.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.deconstructoroffun.com/blog/x0hd2ssr80y5n7gv0w967pg7hwd7tl" target="_blank">Finch retention — Deconstructor of Fun</a>
+        <a href="https://finchcare.com/" target="_blank">Finch</a> <a href="https://daylio.net/" target="_blank">Daylio</a> <a href="https://www.getstoic.com/" target="_blank">Stoic</a>
+        <a href="https://bearable.app/" target="_blank">Bearable</a> <a href="https://minddoc.com/" target="_blank">MindDoc</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 44 — DIVIDER PART 8 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">08</div>
+    <div class="kicker">Part eight</div>
+    <h2>Consumer-health retention: why some win and most churn</h2>
+    <p class="lead" style="max-width:820px">Retention is a category property, not an execution property. The winners pair a daily-relevant, anticipatory question with compounding personal data.</p>
+    <p style="margin-top:.8rem">In this part: cycle & pregnancy (the strongest category) · meditation's decay + fitness super-apps/wearables · the 7-gate checklist for ditto.</p>
+  </div></section>
+
+  <!-- 45 — CYCLE/PREGNANCY -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">8 · the strongest category</div>
+    <h2>Why cycle & pregnancy tracking wins — and it's EU-rooted</h2>
+    <div class="grid g3">
+      <div class="card"><div class="stat">~60%</div><div class="stat-l">of Flo's MAU use it &gt;1 year — ~2× the Health & Fitness norm (~77M MAU)</div></div>
+      <div class="card"><div class="stat">1M</div><div class="stat-l">Clue paid subscribers (Berlin) — doubled in ~a year</div></div>
+      <div class="card"><div class="stat">FDA</div><div class="stat-l">Natural Cycles (Sweden) — daily logging gates a cleared contraceptive claim</div></div>
+    </div>
+    <p style="margin-top:.8rem">Three of the four leaders are EU-rooted — the most transferable benchmark for ditto. They win on a <strong>daily-relevant, anticipatory question whose answer changes</strong>, <strong>compounding data</strong>, and <strong>life-stage urgency</strong>.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.businessofapps.com/data/flo-statistics/" target="_blank">Business of Apps (Flo)</a> · <a href="https://helloclue.com/articles/about-clue/clue-reaches-1-million-paid-subscribers-cementing-position-as-leading-data-driven-women-s-health-intelligence-platform" target="_blank">Clue</a>. See M10 §1.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the cycle/pregnancy leaders</div>
+      <h3>Profiles + the retention mechanism</h3>
+      <table>
+        <tr><th>App</th><th>Scale</th><th>Why it wins</th></tr>
+        <tr><td><b>Flo</b> (UK/LT)</td><td>~77M MAU, ~5M subs, ~$275M rev, $1B unicorn</td><td>Daily cycle prediction + AI assistant; anticipatory "is this normal"; data compounds per cycle</td></tr>
+        <tr><td><b>Clue</b> (Berlin)</td><td>10M+ MAU, 1M paid subs, 530M+ cycles</td><td>Science/privacy-led trust moat (refused to disclose data to US authorities); research dataset</td></tr>
+        <tr><td><b>Natural Cycles</b> (Sweden)</td><td>3M+ users; FDA-cleared</td><td>Usage <em>is</em> the product — daily temperature gates a regulated contraceptive claim</td></tr>
+        <tr><td><b>Ovia</b> (US, Labcorp)</td><td>22M+ journeys; B2B2C</td><td>Employer/payer distribution moat rather than D2C habit</td></tr>
+      </table>
+      <p><b>The mechanism:</b> (1) daily internal trigger (an anxiety-charged question that recurs); (2) anticipatory reward (forecasts something not yet known — the literal definition of a variable reward); (3) life-stage urgency (TTC/pregnancy compresses the effort-to-payoff calculus); (4) compounding data (each cycle is a switching cost). US→EU flag: low — Flo, Clue, Natural Cycles are all EU.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://flo.health/" target="_blank">Flo</a> <a href="https://helloclue.com/" target="_blank">Clue</a> <a href="https://www.naturalcycles.com/" target="_blank">Natural Cycles</a> <a href="https://www.oviahealth.com/" target="_blank">Ovia</a>
+        <a href="https://www.businessofapps.com/data/flo-statistics/" target="_blank">Flo scale — Business of Apps</a>
+        <a href="https://www.newsweek.com/period-tracking-app-refuses-disclose-data-american-authorities-1982841" target="_blank">Clue privacy stance — Newsweek</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 46 — MEDITATION + FITNESS/WEARABLES -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">8 · meditation & fitness</div>
+    <h2>Meditation retains-but-decays; wearables win on passive capture</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Meditation peaked</h3><p><strong>Calm</strong> (~3.5M subs, ~$210M rev, −24% YoY) and <strong>Headspace</strong> (DAU/MAU ~17%) win on ritual + immediate reward — but the reward is replaceable and data doesn't compound, so they decay. The pivot is AI companions (Headspace "Ebb").</p></div>
+      <div class="card"><h3>Wearables: the real data moat</h3><p><strong>Whoop</strong> ($10.1B, &gt;50% daily-use at 18mo) and <strong>Oura</strong> ($11B, &gt;80% year-1 renewal) win on passive capture + a daily anticipatory score + a subscription. <strong>Fitbit</strong> is the counter-example: a device without a loop erodes.</p></div>
+    </div>
+    <p style="margin-top:.8rem">Super-apps win differently: <strong>Strava</strong> (180M, social graph) and <strong>MyFitnessPal</strong> (~220M, food-database moat). The moat is the recurring interpreted insight + switching cost — not the sensor.</p>
+    <p class="src"><b>Sources:</b> <a href="https://www.cnbc.com/2025/10/14/oura-ringmaker-valuation-fundraise.html" target="_blank">CNBC (Oura)</a> · <a href="https://www.businessofapps.com/data/calm-statistics/" target="_blank">Business of Apps (Calm)</a>. See M10 §2, §4.</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · fitness super-apps & wearables (the data-moat answer)</div>
+      <h3>Does the "data moat" work like Oura/Whoop? Yes — with structure</h3>
+      <table>
+        <tr><th>App</th><th>Scale (2025)</th><th>Retention</th><th>Moat</th></tr>
+        <tr><td><b>Whoop</b></td><td>2.5M+ members, ~$1B run-rate, $10.1B</td><td>&gt;50% daily-use at 18mo</td><td>Subscription-only → switching cost; passive 24/7 capture</td></tr>
+        <tr><td><b>Oura</b></td><td>5.5M+ rings, ~$1B rev, $11B</td><td>&gt;80% year-1 renewal</td><td>Passive sleep/readiness + daily Readiness Score; ~52% ring share</td></tr>
+        <tr><td><b>Strava</b></td><td>180M registered, ~$500M ARR, ~$2.2B</td><td>network effects</td><td>Social graph + segments = identity & accountability</td></tr>
+        <tr><td><b>MyFitnessPal</b></td><td>~220M registered, 30M+ MAU</td><td>logged-data history</td><td>Largest food database (declining)</td></tr>
+        <tr><td><b>Fitbit</b></td><td>app MAU sliding ~48M→~42M</td><td>eroding</td><td>Counter-example: ubiquitous hardware, weak insight/subscription loop</td></tr>
+      </table>
+      <p><b>The mechanism:</b> passive capture removes the effort tax; the daily score is an anticipatory reward (unknown until you check); longitudinal data compounds into personalization + switching cost; a subscription locks in recurring re-engagement. Fitbit proves the device alone isn't the moat — the recurring interpreted insight is.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.cnbc.com/2025/10/14/oura-ringmaker-valuation-fundraise.html" target="_blank">Oura $11B / ~80% renewal — CNBC</a>
+        <a href="https://finance.yahoo.com/sectors/healthcare/articles/whoop-raises-575-million-10-204207038.html" target="_blank">Whoop $10.1B — Yahoo Finance</a>
+        <a href="https://www.businessofapps.com/data/strava-statistics/" target="_blank">Strava — Business of Apps</a>
+        <a href="https://www.businessofapps.com/data/fitbit-statistics/" target="_blank">Fitbit decline — Business of Apps</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 47 — RETENTION CHECKLIST -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">8 · the transferable lesson</div>
+    <h2>The 7-gate retention test for every ditto feature</h2>
+    <p style="max-width:860px">Fail the first three and a feature inherits the 90-day churn curve, not the cycle-tracker curve.</p>
+    <ul class="two-col" style="margin-top:.6rem">
+      <li><strong>1. Daily-relevant question</strong> the user already re-asks</li>
+      <li><strong>2. Changing answer</strong> day to day (static dashboards fail)</li>
+      <li><strong>3. Effort ≤ reward, felt today</strong> — passive capture, not manual logging</li>
+      <li><strong>4. Compounding data</strong> — each day improves tomorrow's answer</li>
+      <li><strong>5. Life-stage / salience hook</strong> (post-diagnosis, med change)</li>
+      <li><strong>6. Social / reassurance loop</strong> (caregiver/partner sharing)</li>
+      <li><strong>7. Identity, not illness</strong> — frame around agency</li>
+    </ul>
+    <p style="margin-top:.6rem">The translation: <em>"given your last appointment and what's changed since, here's what to watch / do / ask today"</em> — refreshed daily, smarter every visit. The cycle-tracker pattern, applied to clinical care.</p>
+    <p class="src"><b>Sources:</b> JMIR meta-analyses; Hook Model (Eyal). See M7 §3.</p>
+  </div></section>
+
+  <!-- 48 — DIVIDER PART 9 -->
+  <section class="slide divider"><div class="inner">
+    <div class="partno">09</div>
+    <div class="kicker">Part nine</div>
+    <h2>Synthesis & implications</h2>
+    <p class="lead" style="max-width:820px">Where the market is going, and what ditto should do about it — where to play, what to watch, what to avoid.</p>
+  </div></section>
+
+  <!-- 49 — WHERE THE MARKET IS GOING -->
+  <section class="slide"><div class="inner">
+    <div class="kicker">9 · synthesis</div>
+    <h2>Where the market is going — in one read</h2>
+    <p class="lead" style="max-width:880px">Demand for understanding is overwhelming (40M ChatGPT health questions a day), but capital, products and exits cluster on the <em>clinician</em> side, and general LLMs mop up consumer demand for free.</p>
+    <p style="margin-top:1rem;max-width:880px">Regulation finally makes patient data <strong>available</strong> (EHDS, BGZ/PGO, ePA) — yet almost nobody opens it, because access was solved and <strong>comprehension was not</strong>. Big Tech validated the patient-comprehension category and is <strong>blocked from the EU</strong>; scribes and Epic reach into patient summaries from the visit (Dragon Copilot in NL, Emmie). The market is collapsing toward two poles — and the defensible space between them is a <strong>trust-anchored, EU-native, longitudinal, caregiver-inclusive patient-comprehension layer.</strong></p>
+    <p class="src"><b>See:</b> synthesis/S1. <b>Confidence:</b> High on the structural reading.</p>
+  </div></section>
+
+  <!-- 50 — IMPLICATIONS -->
+  <section class="slide"><div class="inner">
+    <button class="dd-btn" onclick="openDD(this)"><span class="i">i</span> Deep dive</button>
+    <div class="kicker">9 · implications for ditto</div>
+    <h2>Where to play · what to watch · what to avoid</h2>
+    <div class="grid g3">
+      <div class="card"><h3 style="color:#3f7a3a">Where to win</h3><p>EU-native trust & regulation · the <strong>caregiver as co-user</strong> (empty cell) · cross-provider longitudinal synthesis · grounded & cited in patient language · condition-agnostic for serious illness.</p></div>
+      <div class="card"><h3 style="color:var(--amber)">What to watch</h3><p><strong>Kin</strong> (EU move) · <strong>Dragon Copilot NL</strong> + <strong>Nabla</strong> patient summaries · <strong>Epic Emmie</strong> · Big Tech EU localisation (~2027–28) · <strong>Hedy</strong> · oncology companions going cross-condition.</p></div>
+      <div class="card"><h3 style="color:var(--coral)">What to avoid</h3><p>The <strong>medical-device trap</strong> (diagnosis/therapy claims — Babylon, Woebot, Ash) · pure D2C subscription · a standalone summary the scribes & EHDS commoditise · manual symptom logging.</p></div>
+    </div>
+    <p style="margin-top:.8rem"><strong>Model:</strong> B2B2C via NL payers / hospital groups / pharma, with DiGA-style reimbursement as the EU credibility anchor. <strong>Retention:</strong> turn the episodic summary into a daily, compounding, anticipatory question.</p>
+    <p class="src"><b>See:</b> synthesis/S2. Moat is time-bound (~18–36mo).</p>
+    <div class="dd">
+      <div class="ddk">Deep dive · the encroachment radar</div>
+      <h3>What to watch, and the trigger to act</h3>
+      <table>
+        <tr><th>Threat</th><th>Why it matters</th><th>Trigger to act</th></tr>
+        <tr><td><b>Kin</b></td><td>Near-mirror product + roadmap, well-funded</td><td>EU launch; any EU data-residency / multilingual move</td></tr>
+        <tr><td><b>Dragon Copilot (NL)</b> & <b>Nabla</b></td><td>Scribes shipping patient summaries into the EHR/EHDS</td><td>NL hospital deployments bundling patient summaries</td></tr>
+        <tr><td><b>Epic "Emmie"</b></td><td>Plain-language explanations in the portal patients already have</td><td>Cross-provider + caregiver features; EU rollout</td></tr>
+        <tr><td><b>Big Tech health AI</b></td><td>Owns Q&A/aggregation; validated demand</td><td>EU-compliant localisation (~2027–28)</td></tr>
+        <tr><td><b>Hedy AI</b></td><td>Most EU-credible patient-side rival (multilingual, GDPR docs)</td><td>Caregiver role tiers; NL traction</td></tr>
+        <tr><td><b>Oncology companions</b></td><td>MDR/DiGA base + expansion engine</td><td>Outcomes4Me/Mika launching non-oncology</td></tr>
+      </table>
+      <p>The defensible position one-liner: <em>the EU-anchored, GDPR-native, caregiver-inclusive, grounded-and-cited patient-comprehension layer</em> — the part neither the US scribes nor the US consumer-AI giants can own in the Netherlands today.</p>
+      <p class="dd-src"><b>Sources</b>
+        <a href="https://www.statnews.com/2026/01/21/slingshot-therapy-chatbot-ash-uk-regulatory-concerns/" target="_blank">The medical-device trap (Ash UK exit)</a>
+        <a href="https://help.nabla.com/en/articles/769346" target="_blank">Nabla patient summaries (encroachment)</a>
+        <a href="https://www.heise.de/en/news/ChatGPT-Health-OpenAI-launches-AI-health-assistant-11134998.html" target="_blank">EU regulatory window (ChatGPT Health blocked)</a>
+      </p>
+    </div>
+  </div></section>
+
+  <!-- 51 — THE BET -->
+  <section class="slide" style="background:#0a5d63"><div class="inner" style="color:#eafafa">
+    <div class="kicker" style="color:#9fe0e1">The question above all others</div>
+    <p class="big-quote" style="color:#fff;max-width:900px">Are we building a daily, caregiver-inclusive, EU-trust <span style="color:#ffd9cf">comprehension companion</span> that happens to start with summaries — or an excellent summary tool the scribes and Big Tech will <span style="color:#ffd9cf">absorb?</span></p>
+    <p style="color:#dff3f2;margin-top:1.4rem;max-width:840px;font-size:1.12rem">The market has validated the destination and is racing toward it from both sides. ditto's edge is the part the US incumbents structurally cannot copy in the Netherlands: <strong style="color:#fff">EU-native trust, the caregiver, cross-provider continuity, and reimbursement</strong> — earned one validated, daily, compounding loop at a time.</p>
+    <p style="margin-top:1.8rem;color:#9fe0e1"><span class="logo" style="color:#fff;font-size:1.4rem">ditto</span> &nbsp;·&nbsp; market research 2026 &nbsp;·&nbsp; full corpus: <i>README.md</i> · findings <i>M1–M15</i> · synthesis <i>S1 / S2</i> · <i>sources.md</i></p>
+  </div></section>
+
+</div>
+
+<!-- deep-dive modal -->
+<div id="ddmodal" onclick="if(event.target===this)closeDD()">
+  <div id="ddpanel">
+    <button id="ddclose" onclick="closeDD()" aria-label="Close">×</button>
+    <div id="ddbody"></div>
+  </div>
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="Previous">‹</button>
+  <span id="count">1 / 51</span>
+  <button id="next" aria-label="Next">›</button>
+</div>
+<div class="foot"><span class="logo">ditto</span> · Market Research · 2026-06-10 · grounded & cited · press <b>i</b> to dive in</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0; const bar=document.getElementById('bar'), count=document.getElementById('count');
+  const modal=document.getElementById('ddmodal'), ddbody=document.getElementById('ddbody');
+  let ddOpen=false;
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    bar.style.width=((i)/(slides.length-1)*100)+'%';
+    count.textContent=(i+1)+' / '+slides.length;
+    slides[i].scrollTop=0;
+  }
+  function openDD(btn){
+    const dd=btn.parentElement.querySelector('.dd');
+    if(!dd) return;
+    ddbody.innerHTML=dd.innerHTML;
+    modal.classList.add('open'); ddOpen=true; ddbody.parentElement.scrollTop=0;
+  }
+  function closeDD(){ modal.classList.remove('open'); ddOpen=false; }
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  document.addEventListener('keydown',e=>{
+    if(ddOpen){ if(e.key==='Escape') closeDD(); return; }
+    if(['ArrowRight','ArrowDown','PageDown'].includes(e.key)){e.preventDefault();show(i+1);}
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(i-1);}
+    else if(e.key===' '){e.preventDefault();show(i+1);}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(slides.length-1);}
+    else if(e.key==='i'||e.key==='I'){const b=slides[i].querySelector('.dd-btn'); if(b) openDD(b);}
+  });
+  show(0);
+</script>
+</body>
+</html>
