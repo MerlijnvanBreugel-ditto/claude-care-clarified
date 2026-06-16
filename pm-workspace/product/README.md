@@ -7,6 +7,7 @@ Two prototype directions the team is evaluating to *start* building the "Living 
 ## Start here
 
 - [`00-overview-and-comparison.md`](00-overview-and-comparison.md) — the two options side-by-side, shared non-negotiables, neutral decision criteria.
+- [`lessons-from-build-tony-fadell.md`](lessons-from-build-tony-fadell.md) — Tony Fadell's *Build* lessons applied to ditto & both prototypes (painkiller-not-vitamin, absorb-the-complexity, delete-friction, disrupt-one-axis, V1-to-learn, the "Fadell test" per prototype).
 
 ## The two prototypes
 
