@@ -1,0 +1,410 @@
+{
+  "contentRef": "brand-lead",
+  "hire": {
+    "name": "April",
+    "role": "Brand Lead",
+    "startDate": "2026-06-22",
+    "manager": "Merlijn",
+    "collaborators": ["Merlijn", "Ilayda", "Niek"]
+  },
+  "intro": {
+    "signedBy": "Merlijn",
+    "readyPrompt": "Ready to onboard?",
+    "readyCta": "Let's go",
+    "views": [
+      {
+        "id": "mission",
+        "title": "Welcome to Ditto, April",
+        "body": "My grandmother Riet used to say it plainly: \"I remember less than half of what the doctor said.\" So she brought one of her kids to every visit. Not because she couldn't cope, but because healthcare handed her information in the worst possible way and expected her to carry it home alone.\n\nThat's the problem we exist to fix. Ditto is building the consumer layer European healthcare has been missing: the right information, in the right format, at the right time, for you and the people who care about you. Today that's an app that clarifies every healthcare encounter and connects your people through the Care Circle. Tomorrow it's the platform you navigate your whole health journey with.\n\n**Care. Clarified.** That's the promise. Welcome to the team that's going to make it true."
+      },
+      {
+        "id": "why-role",
+        "title": "Why this role exists",
+        "body": "Healthcare has never had a great consumer brand. Not in Europe, not anywhere. Clinical portals feel clinical. Wellness apps feel shallow. Nobody has built something that earns trust when the stakes are highest and still feels warm, human, and beautiful.\n\nThat's the job. We believe you shouldn't have to choose between clinical-and-trusted and warm-and-shallow. The brand should be human without being soft, innovative without losing credibility, personal enough to sit with someone during a hard diagnosis, and universal enough to work across cultures and generations. It has to earn trust in living rooms, waiting rooms, and boardrooms alike.\n\nRight now our *why* is solid and our *how we show up* is wide open. That's not a gap we're embarrassed about. It's the canvas we hired you to paint."
+      },
+      {
+        "id": "why-you",
+        "title": "Why we're thrilled you're here",
+        "body": "We hired you to make Ditto undeniably Ditto, in every pixel, every word, and every market, and to push that bar further than we could ourselves.\n\nWhat we hope you bring: a brand strategist and architect who thinks in systems, not one-offs. A hands-on maker who can design the thing, not just brief it. A warp-speed creative who's comfortable when nothing is stable yet. Someone AI-forward, culturally fluent across our markets, and with a real point of view on what consumer health should feel like.\n\nWe expect full ownership, initiative, and pushback where it's warranted. We didn't hire you to execute someone else's vision. We hired you to define one.\n\nThis first month is about landing well, understanding deeply, and already starting to shape it. Excited to build with you."
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "id": "land-and-settle",
+      "title": "Land & Settle",
+      "blurb": "The practical things that make you feel at home, from team to family. Get these out of the way so your head is free for the real work.",
+      "items": [
+        {
+          "id": "s1-welcome-coffee",
+          "type": "action",
+          "title": "First-morning coffee with Merlijn",
+          "horizon": "day1",
+          "body": "Start day one with a coffee from the Moccamaster and a proper welcome. No agenda, just a warm landing. [confirm: who greets April and what time]"
+        },
+        {
+          "id": "s1-laptop",
+          "type": "task",
+          "title": "Set up your laptop",
+          "horizon": "day1",
+          "body": "Get your machine, sign in, and you're running. [confirm: IT setup process / who hands it over]"
+        },
+        {
+          "id": "s1-accounts",
+          "type": "task",
+          "title": "Set up your core accounts",
+          "horizon": "day1",
+          "body": "Slack, Google Workspace, Figma, and Linear are the daily four. [confirm: exact account list + who sends the invites]"
+        },
+        {
+          "id": "s1-slack-intro",
+          "type": "action",
+          "title": "Introduce yourself in Slack",
+          "horizon": "day1",
+          "body": "Drop a short hello in the main channel. A line on who you are and one thing people wouldn't guess. The team will come to you."
+        },
+        {
+          "id": "s1-email-signature",
+          "type": "task",
+          "title": "Set your email signature",
+          "horizon": "day1",
+          "body": "Use the standard template. [confirm: link to the signature template on Drive]"
+        },
+        {
+          "id": "s1-ns-card",
+          "type": "task",
+          "title": "Get your NS business travel card",
+          "horizon": "week1",
+          "body": "So getting to the Rotterdam office (and anywhere else for work) is sorted. [confirm: how we arrange the NS Business Card]"
+        },
+        {
+          "id": "s1-coffees",
+          "type": "action",
+          "title": "Coffee 1:1s with Merlijn, Ilayda, and Niek",
+          "horizon": "week1",
+          "body": "Your closest collaborators. Book a short 1:1 with each in week one. Ask them what they wish the brand did, and what they're afraid it might become."
+        },
+        {
+          "id": "s1-coffees-everyone",
+          "type": "action",
+          "title": "Coffee chat with every team member",
+          "horizon": "week1",
+          "body": "We're around 10 people. Schedule these yourself over the first week or two. Faces to names, and a sense of what everyone's carrying."
+        },
+        {
+          "id": "s1-team-lunch",
+          "type": "action",
+          "title": "Have lunch with the team",
+          "horizon": "week1",
+          "body": "Share a lunch and start putting faces to names."
+        },
+        {
+          "id": "s1-merch",
+          "type": "task",
+          "title": "Grab your welcome kit",
+          "horizon": "week1",
+          "body": "Including the Pokémon merch. Non-negotiable part of the culture. [confirm: where the welcome kit lives]"
+        },
+        {
+          "id": "s1-where-things-live",
+          "type": "reading",
+          "title": "Where everything lives",
+          "horizon": "week1",
+          "body": "**Slack** for day-to-day. **Linear** (linear.app/ditto-care) for product and project tracking across teams. **Figma** for design. **Google Drive** for finished assets, especially the `01. Brand` folder. **Granola** turns up in meeting notes. When in doubt, ask in Slack. Nobody here minds the question."
+        },
+        {
+          "id": "s1-experiment-tools",
+          "type": "action",
+          "title": "Experiment with our AI tools: Claude, Claude Design, Wispr",
+          "horizon": "week1",
+          "body": "Learning new things is great. Have a play with Claude, Claude Design, and Wispr. Ask Ilayda for a 15-minute onboarding on how she uses them. ❤️"
+        }
+      ]
+    },
+    {
+      "id": "get-to-know-ditto",
+      "title": "Get to Know Ditto",
+      "blurb": "The mission, the product, our users, the numbers, and the people. The context you need before you can shape how we show up.",
+      "items": [
+        {
+          "id": "s2-app",
+          "type": "action",
+          "title": "Use the Ditto app yourself",
+          "horizon": "day1",
+          "body": "Download it and go through a summary end to end. You can't lead the brand for a product you haven't felt. [confirm: App Store link + a test account or sample to try]"
+        },
+        {
+          "id": "s2-story",
+          "type": "reading",
+          "title": "The Ditto story",
+          "horizon": "day1",
+          "readingRef": "readings/ditto-story.md"
+        },
+        {
+          "id": "s2-key-numbers",
+          "type": "reading",
+          "title": "Ditto by the numbers",
+          "horizon": "week1",
+          "readingRef": "readings/ditto-key-numbers.md"
+        },
+        {
+          "id": "s2-product-users",
+          "type": "reading",
+          "title": "The product, our users, and the market",
+          "horizon": "week1",
+          "readingRef": "readings/ditto-product-and-users.md"
+        },
+        {
+          "id": "s2-team-culture",
+          "type": "reading",
+          "title": "The team and how we work",
+          "horizon": "week1",
+          "readingRef": "readings/ditto-team-and-culture.md"
+        },
+        {
+          "id": "s2-okrs",
+          "type": "reading",
+          "title": "How we set goals: the OKR framework",
+          "horizon": "week1",
+          "body": "We work with an **OKR framework** to keep everyone aligned: 2 to 3 company objectives per quarter, each with up to three measurable Key Results, and every initiative traces back to one. Read it in two places:\n\n- The framework: [OKRs at Ditto](https://dittocare.atlassian.net/wiki/spaces/DG/pages/858882055/OKRs+at+Ditto)\n- This quarter, tracked live in Linear: [O1 (team & foundation)](https://linear.app/ditto-care/initiative/o1-build-the-right-team-habits-and-foundation-that-unlock-hyper-4084b08334b5) and [O2 (growth loop to 5K MAU)](https://linear.app/ditto-care/initiative/o2-build-the-growth-loop-that-compounds-into-5k-mau-by-june-30-c7c827cfa3f5)\n\nThe full written detail also lives on Confluence: [OKR — Q2 2026](https://dittocare.atlassian.net/wiki/spaces/DG/pages/882737162/OKR+-+Q2+2026)."
+        },
+        {
+          "id": "s2-company-docs",
+          "type": "reading",
+          "title": "Read the company-wide essentials",
+          "horizon": "week1",
+          "body": "Skim broadly, then prioritise these:\n\n- [Ways of Working](https://dittocare.atlassian.net/wiki/spaces/DG/folder/902135830)\n- [The office (Groothandelsgebouw)](https://dittocare.atlassian.net/wiki/spaces/DG/pages/868712449/Our+current+office+Groothandelsgebouw)\n- [Focus on Life Moments in Healthcare](https://dittocare.atlassian.net/wiki/spaces/DG/pages/873496592/Focus+on+Life+Moments+in+Healthcare)\n- [Product Strategy](https://dittocare.atlassian.net/wiki/spaces/DG/pages/821788674/Product+Strategy)\n- [Linear Standards](https://dittocare.atlassian.net/wiki/spaces/DP/pages/886079489/Linear+Standards)\n- [Security Guidelines for All](https://dittocare.atlassian.net/wiki/spaces/DG/pages/469925889/Security+Guidelines+for+All)\n\nAlso on file: [Data Breach Management Policy](https://dittocare.atlassian.net/wiki/spaces/DP/pages/469106692) and [Ditto Data Policy](https://dittocare.atlassian.net/wiki/spaces/DP/pages/287834119). (OKRs have their own card above.)"
+        },
+        {
+          "id": "s2-security-session",
+          "type": "action",
+          "title": "Security onboarding session",
+          "horizon": "week1",
+          "body": "Book the security onboarding session. [confirm: who runs it]"
+        },
+        {
+          "id": "s2-standups",
+          "type": "action",
+          "title": "Learn how we do standups, retros, and planning",
+          "horizon": "week1",
+          "body": "Sit in on the rhythm and ask how the design and brand work plugs into the weekly cadence (Monday sprint kickoff, mid-quarter pulse, end-of-quarter retro)."
+        },
+        {
+          "id": "s2-deck",
+          "type": "resource",
+          "title": "The latest Ditto deck",
+          "horizon": "week1",
+          "href": "https://docs.google.com/presentation/d/173WRmt954qZQFZFHmQndYLJAuhvYfyyNbGSbdHKzZh4/edit"
+        }
+      ]
+    },
+    {
+      "id": "understand-your-role",
+      "title": "Understand & Shape Your Role",
+      "blurb": "Why this role matters, an honest map of where the brand stands today, and the first conversations that start shaping how you'll own it. This is your canvas.",
+      "items": [
+        {
+          "id": "s3-role-doc",
+          "type": "resource",
+          "title": "The role, as we wrote it",
+          "horizon": "week1",
+          "href": "brand/brand-lead-role.md"
+        },
+        {
+          "id": "s3-brand-state",
+          "type": "reading",
+          "title": "The current state of the brand",
+          "horizon": "week1",
+          "readingRef": "readings/brand-current-state.md"
+        },
+        {
+          "id": "s3-brand-onboarding",
+          "type": "resource",
+          "title": "The brand so far, synthesized: old brandbook, deck iterations, website, mailings, marketing",
+          "horizon": "week1",
+          "href": "brand/brand-onboarding.md"
+        },
+        {
+          "id": "s3-app-review",
+          "type": "action",
+          "title": "Review the app from a brand perspective",
+          "horizon": "week1",
+          "body": "Go through the app as a brand person, not a user. Where does it feel like Ditto, where doesn't it? First impressions this week. The full review (app vs website vs marketing) is a month-one deliverable."
+        },
+        {
+          "id": "s3-open-decisions",
+          "type": "reading",
+          "title": "The open calls you'll own",
+          "horizon": "week1",
+          "body": "A short list of what's genuinely undecided and waiting for you:\n\n- An explicit, **user-facing positioning** statement (not the investor narrative).\n- The brand's **personality** (beyond \"positive, uplifting, present\"), and whether the register should be calmer.\n- The **one ownable visual idea** (the flexible \"o\" is the front-runner).\n- The **visual system**: photography on web, video on social, illustration's role in the app, colour and type.\n- Whether the **app itself feels like Ditto**. Never audited.\n\nYou don't have to solve these in week one. You do have to start forming a view."
+        },
+        {
+          "id": "s3-skills",
+          "type": "resource",
+          "title": "The four brand playbooks you inherit",
+          "horizon": "week1",
+          "href": "brand/skills/"
+        },
+        {
+          "id": "s3-who-are-you",
+          "type": "action",
+          "title": "\"Who are you\" conversation with Merlijn",
+          "horizon": "week1",
+          "body": "A week-one conversation with Merlijn about you, not just the role. Come prepared to talk through:\n\n- **What you're good at**, including beyond brand. If you see a way to add value in another domain, you're encouraged to.\n- **Where you want to grow, learn, and develop.**\n- **The most productive way for you to work.** This becomes a shared reference for you and the team.\n\nWe document it, share it, and keep it alive. It helps Ditto work with you, and helps you do your best work."
+        },
+        {
+          "id": "s3-priorities-session",
+          "type": "action",
+          "title": "Refine and sharpen your month-one priorities with Merlijn",
+          "horizon": "week1",
+          "body": "A week-one working session with Merlijn (and the founders) to refine and sharpen what matters most in your first month, and talk through the hard topics. What we want to think through together:\n\n- **Strategically shaping the brand** and creating consistency across everything we ship.\n- **A brand process** that's efficient and that everyone can actually use.\n- Becoming **more recognizable and unique**.\n- Becoming **more visible on social**.\n- **How product strategy and brand work together**: in tandem, or does one lead the other?\n\nThese are genuinely open. Merlijn is eager for your take, not a recap of ours."
+        },
+        {
+          "id": "s3-motivation",
+          "type": "task",
+          "title": "Write your motivation: why you joined Ditto",
+          "horizon": "week1",
+          "body": "By the end of week one, write a short, personal note on why you joined Ditto, and share it company-wide. It's how the team gets to know what drives you. For inspiration, read the founders' own motivation: [Ditto's Originals](https://dittocare.atlassian.net/wiki/spaces/DG/pages/96174097/Ditto+s+Originals)."
+        }
+      ]
+    },
+    {
+      "id": "hit-the-ground-running",
+      "title": "Hit the Ground Running",
+      "blurb": "Week one is for landing a first real contribution and meeting the people you'll create with. Momentum from day one.",
+      "items": [
+        {
+          "id": "s4-cancernl",
+          "type": "task",
+          "title": "A creative output for the kanker.nl collaboration",
+          "horizon": "week1",
+          "body": "Your first shipped thing: a creative asset for the kanker.nl collaboration, in week one. It doesn't have to be perfect. It has to be yours, and it has to ship. You'll demo it on Friday. [confirm: brief, contact, and deadline for kanker.nl]"
+        },
+        {
+          "id": "s4-design-team",
+          "type": "action",
+          "title": "Meet the design team",
+          "horizon": "week1",
+          "body": "You're joining a UX Lead and a part-time UI designer. Sit with them, understand what they own, and how brand and creative leadership fits alongside them. [confirm: their names]"
+        },
+        {
+          "id": "s4-playbooks",
+          "type": "reading",
+          "title": "Read the four brand operating playbooks (and push back)",
+          "horizon": "week1",
+          "body": "The brand strategist, brand designer, copywriter, and website-designer playbooks already exist in `brand/skills/`. Read them, then tell us where you'd push back. They're inherited, not sacred."
+        },
+        {
+          "id": "s4-friday-demo",
+          "type": "action",
+          "title": "Friday: demo your week-one output and prep a short retro",
+          "horizon": "week1",
+          "body": "Show the team what you made for kanker.nl. Then jot a quick retro: what went well, what was harder than expected, and what you'd change about this onboarding. Ask questions all week. Nobody expects you to figure everything out alone."
+        },
+        {
+          "id": "s4-linkedin",
+          "type": "task",
+          "title": "Update your LinkedIn to reflect your role at Ditto",
+          "horizon": "week1",
+          "body": "A small thing, but it makes the move real and helps the brand show up through its people."
+        }
+      ]
+    },
+    {
+      "id": "shape-and-deliver",
+      "title": "Shape & Deliver",
+      "blurb": "Month one is about concrete deliverables that create value now, plus a clear view of how you'll own brand. Not six months of detailed planning. Things will change. Real outputs that matter today.",
+      "items": [
+        {
+          "id": "s5-brand-review",
+          "type": "task",
+          "title": "Complete a review of brand outputs",
+          "horizon": "month1",
+          "body": "A full review comparing the app with the website and marketing assets, identifying where we can be more consistent and more on-brand. The synthesis of everything done on brand so far."
+        },
+        {
+          "id": "s5-interviews",
+          "type": "task",
+          "title": "Interview the team and a few users on the brand today",
+          "horizon": "month1",
+          "body": "Before proposing where the brand should go, capture where it is in people's heads. Short conversations with the team and a handful of users on what Ditto's brand means to them now. This feeds the workshop and the direction."
+        },
+        {
+          "id": "s5-workshop",
+          "type": "task",
+          "title": "Run a brand workshop with the founders, Niek, and Ilayda",
+          "horizon": "month1",
+          "body": "Within four weeks. Decision and output-oriented, focused on brand identity, content, and positioning. Not a talking shop. We should leave with calls made."
+        },
+        {
+          "id": "s5-brand-direction",
+          "type": "task",
+          "title": "A draft brand identity (v1)",
+          "horizon": "month1",
+          "body": "After roughly four weeks, a first, draft brand identity: strong enough to start experimenting with in month two and to translate into concrete deliverables. Plus a proposal for what Ditto as a brand should become, and which values and identity it should reflect."
+        },
+        {
+          "id": "s5-creative-cadence",
+          "type": "action",
+          "title": "Establish a weekly creative cadence",
+          "horizon": "month1",
+          "body": "At least one creative asset every week, with plenty of room to explore, experiment, and deviate from the current brand. Show us the range."
+        },
+        {
+          "id": "s5-social-plan",
+          "type": "task",
+          "title": "A concrete plan to build the brand on social",
+          "horizon": "month1",
+          "body": "With the performance marketeer (and the social media manager, an open vacancy), a concrete plan for our social presence, primarily Instagram and LinkedIn. Include 2+ experiments with social posts that position Ditto in different ways. Video has been getting good traction."
+        },
+        {
+          "id": "s5-ai-tooling",
+          "type": "task",
+          "title": "Proven, tested AI tooling workflows for brand design",
+          "horizon": "month1",
+          "body": "Establish proven, tested workflows for AI tooling in (brand) design, together with Ilayda and Inês. We've invested heavily here lately, there's a lot we haven't tested yet, and a lot we're still learning to use in a way that's genuinely on brand. Not testing for the sake of it: the bar is where a tool really speeds us up, lets us experiment more, or raises the quality of the work."
+        },
+        {
+          "id": "s5-logo-animation",
+          "type": "task",
+          "title": "A logo animation concept",
+          "horizon": "month1",
+          "body": "A concept for how the mark moves. A small thing that says a lot about where the brand is heading."
+        },
+        {
+          "id": "s5-ownership-plan",
+          "type": "task",
+          "title": "Your plan to own and shape the role",
+          "horizon": "month1",
+          "body": "A clear plan for how you'll shape brand and your brand lead role over the first three months. What you'll deliver, and when. Plus how ownership of brand work will be taken on, how the team should be involved, what they should know, and how quality control on brand exposure will work. We onboarded you to fully own brand, so please tell us how."
+        },
+        {
+          "id": "s5-longterm",
+          "type": "task",
+          "title": "A long-term brand perspective to year-end",
+          "horizon": "month1",
+          "body": "How the brand should develop through the end of the year, and how that connects to our high-level priorities: oncology, expansion, and product enrichment."
+        },
+        {
+          "id": "s5-3week-eval",
+          "type": "action",
+          "title": "3-week evaluation check-in",
+          "horizon": "month1",
+          "body": "A check-in with three people (Merlijn, a founder, and one cross-functional peer): what's gone well, what's been challenging, are we on track, any concerns from either side, and focus areas going forward."
+        },
+        {
+          "id": "s5-first-90-days",
+          "type": "reading",
+          "title": "The first 90 days: where this is heading",
+          "horizon": "month1",
+          "body": "Month one lands you and gets a first direction moving. The next two build on it. Roughly, by the end of three months:\n\n- A **brand identity, brandbook, and brand system** that establishes a solid core.\n- A **brand positioning localized** for one of our expansion countries.\n- A **branding campaign** in that country.\n- A **full team onboarding and alignment** process, so everyone can dream in, and leverage, the brand system.\n- A **recognizable, consistent brand on social** (primarily Instagram and LinkedIn).\n- A rhythm that's roughly **50/50 between strategy and hands-on creative output**.\n\nThis is direction, not a contract. It will change as you learn. (Source: the OPS-151 onboarding plan, which Merlijn is still refining.)"
+        }
+      ]
+    }
+  ],
+  "feedback": {
+    "title": "How can we onboard better?",
+    "blurb": "This page is yours, and it's a work in progress. Jot down anything as you go: a gap, a task that didn't fit, something you wish you'd known sooner, an idea to make this better for the next hire. Share it live with us when you can. This is the easy place to log it when you can't.",
+    "placeholder": "What would have made this smoother?"
+  }
+}

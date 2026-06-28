@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home "Today's Action" Cards — UI References (Mobbin)</title>
+<style>
+  :root{ --ditto-green:#1FA37A; --ink:#10221c; --muted:#5b6b64; --line:#e6ece9; --bg:#f6f8f7; --card:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+  header{padding:40px 24px 24px;max-width:1200px;margin:0 auto}
+  .back{font-size:13px;color:var(--ditto-green);text-decoration:none;font-weight:600}
+  h1{font-size:30px;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:15px;max-width:780px}
+  .takeaway{max-width:1200px;margin:18px auto 0;padding:16px 18px;background:#eef6f2;border:1px solid #d6e8e0;border-radius:14px;font-size:14px}
+  .takeaway b{color:var(--ink)}
+  main{max-width:1200px;margin:0 auto;padding:8px 24px 64px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px;margin-top:24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;text-decoration:none;color:inherit}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(16,34,28,.10)}
+  .card.pick{border-color:var(--ditto-green);box-shadow:0 0 0 2px rgba(31,163,122,.18)}
+  .shot{background:#0e1513}
+  .shot img{width:100%;display:block}
+  .meta{padding:14px 15px 16px}
+  .app{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ditto-green);margin-bottom:4px}
+  .pattern{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+  .pick-tag{display:inline-block;background:var(--ditto-green);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .note{font-size:13.5px;margin:0 0 12px}.note b{font-weight:650}
+  .open{font-size:12.5px;font-weight:600;color:var(--ditto-green)}
+  footer{max-width:1200px;margin:0 auto;padding:24px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  @media (max-width:520px){.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← back to UI references</a>
+  <h1>Home "Today's Action" Cards</h1>
+  <p class="sub">12 references for an inviting home card that pulls you into today's single action — jot a thought, do a check-in, meditate. For ditto: the "ditto today → tap to talk" entry point.</p>
+</header>
+<div class="takeaway">
+  <b>Pattern read:</b> the most inviting ones share four things — a <b>warm time-of-day greeting</b>, <b>one</b> hero card (not a list of options), a <b>plain-language reason</b> ("to refocus and find energy"), and a <b>single soft CTA</b> ("Begin" / "Start" / "How do you feel?"). For ditto, the orb can <i>be</i> the CTA. Three picks to anchor on are flagged green: <b>stoic.</b> (boldest single-action), <b>Bloom</b> (calm hero + personalised), <b>Insight Timer</b> (closest to a daily health check-in).
+</div>
+<main>
+  <div class="grid">
+
+    <a class="card pick" href="https://mobbin.com/screens/3d2bec7c-471f-4a3c-8b3d-9bf97ce8f75d" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h01-stoic-begin-checkin.webp" alt="stoic."></div>
+      <div class="meta"><div class="pattern">Bold single action</div><div class="app">stoic. <span class="pick-tag">PICK</span></div>
+      <p class="note"><b>"Begin check-in — to refocus and find energy through your day"</b> + a "How do you feel?" pill. One black hero card, one reason, one button. The cleanest "do today's thing" invitation here.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card pick" href="https://mobbin.com/screens/9458998c-7b18-4f31-886e-a71801105625" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h02-bloom-daily.webp" alt="Bloom"></div>
+      <div class="meta"><div class="pattern">Calm hero + personalised</div><div class="app">Bloom <span class="pick-tag">PICK</span></div>
+      <p class="note"><b>"Daily Bloom — get your personalized insights and advice / Start"</b>, a soft 3D hero over a calm gradient. Warm, premium, unhurried — the aesthetic register ditto wants.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card pick" href="https://mobbin.com/screens/0377e5da-7785-4697-9b67-210be327d6b2" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h05-insighttimer-checkin.webp" alt="Insight Timer"></div>
+      <div class="meta"><div class="pattern">Daily check-in row</div><div class="app">Insight Timer <span class="pick-tag">PICK</span></div>
+      <p class="note"><b>"Daily Check In — How are you feeling today? · Haven't checked in yet"</b> green smiley card. Closest to a daily health check-in: states the action, shows it's pending, no pressure.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/de590cd4-4006-4504-a451-7c5115348cfe" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h03-open-daily-orb.webp" alt="Open"></div>
+      <div class="meta"><div class="pattern">Dark calm + play orb</div><div class="app">Open</div>
+      <p class="note"><b>"Daily 12/07 — a new perspective, fresh every day"</b> with a glowing play <b>orb</b>. A home-card/orb crossover — the orb as today's action, on a calm dark canvas.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/8a01b107-7823-46ce-83c4-780bf0ee6108" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h04-balance-todays-pick.webp" alt="Balance"></div>
+      <div class="meta"><div class="pattern">Today's pick + progress</div><div class="app">Balance</div>
+      <p class="note"><b>"Today's pick — Day 1 of 10 / Start"</b> + a "Daily Meditation: 10-min for today's mood" row. Clean today-card with gentle program progress (the look-back's cousin).</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/ce74b474-c0cb-480a-888f-68f23836f63a" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h06-withings-healthcheck.webp" alt="Withings Health Mate"></div>
+      <div class="meta"><div class="pattern">Health action + missions</div><div class="app">Withings Health Mate</div>
+      <p class="note"><b>"Give yourself a quick health check"</b> illustrated card + "Today's Missions". A health-context daily action without feeling clinical — useful framing for ditto.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/383427ac-4b58-4d44-af80-82d2e9dcef66" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h07-tenpercent-session.webp" alt="Ten Percent Happier"></div>
+      <div class="meta"><div class="pattern">Bold colored session card</div><div class="app">Ten Percent Happier</div>
+      <p class="note"><b>"Today's Session — Just RELAX Already / Play"</b>, a big colored hero. Confident, single-focus card; tone is playful (ditto would dial this warmer/calmer).</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/02a8cc9b-b320-499d-aa1c-f9567a296638" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h08-headspace-startday.webp" alt="Headspace"></div>
+      <div class="meta"><div class="pattern">Featured + "start your day" list</div><div class="app">Headspace</div>
+      <p class="note"><b>Featured card + a "Start your day" section.</b> Shows how to lead with one hero and tuck secondary actions below — if ditto ever needs more than the single tap.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/3908dd21-ea9e-4f49-bbcc-3c878d1a8602" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h09-pliability-daily.webp" alt="pliability"></div>
+      <div class="meta"><div class="pattern">Today card + completion</div><div class="app">pliability</div>
+      <p class="note"><b>"Daily Sessions — 0 of 7 complete / Start"</b>. Adds a soft completion count to the today card — gentle continuity without streak-guilt.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/183d3e4b-51b2-4b1f-b3db-cdbca9f0554c" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h10-fabulous-plan.webp" alt="Fabulous"></div>
+      <div class="meta"><div class="pattern">Plan-for-today list</div><div class="app">Fabulous</div>
+      <p class="note"><b>"Your Plan for Today"</b> with a hero blue card + smaller follow-on actions and minute estimates. A more structured take if ditto's home ever holds multiple daily things.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/ba7e1d81-a0e9-48d6-abab-8a5208b9ce2c" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h11-bears-gratitude-prompt.webp" alt="Bears Gratitude"></div>
+      <div class="meta"><div class="pattern">Daily prompt → write</div><div class="app">Bears Gratitude</div>
+      <p class="note"><b>A full-card daily prompt ("Say Hi To Someone") + "Write!"</b>. The prompt-as-card pattern — relevant to ditto's deferred last-entry nudge / "stuck?" openers.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+    <a class="card" href="https://mobbin.com/screens/a35e2d20-fc2d-4d30-a7c3-adcfc2555d16" target="_blank" rel="noopener">
+      <div class="shot"><img src="images/h12-stoic-am-pm.webp" alt="stoic. AM/PM"></div>
+      <div class="meta"><div class="pattern">Morning / evening pair</div><div class="app">stoic.</div>
+      <p class="note"><b>"Ready to take on the day?" / "Time to clear your mind." — two Begin cards.</b> If ditto wants a gentle AM/PM rhythm later, this is the restrained way to do it.</p>
+      <span class="open">Open on Mobbin ↗</span></div></a>
+
+  </div>
+</main>
+<footer>
+  Curated from Mobbin · 2026-06-17 · home "today's action" cards for <b>Voice Daily Note (Prototype B)</b>. Images are local snapshots; open each on Mobbin for the full flow. <code>--ditto-green</code> is a placeholder — swap for the real brand token.
+</footer>
+</body>
+</html>

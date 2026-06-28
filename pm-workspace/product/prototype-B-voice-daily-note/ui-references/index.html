@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Daily Note — UI References (Mobbin)</title>
+<style>
+  :root{
+    --ditto-green:#1FA37A;        /* placeholder Ditto-green — replace with brand token */
+    --ink:#10221c; --muted:#5b6b64; --line:#e6ece9; --bg:#f6f8f7; --card:#fff;
+    --anchor:#1FA37A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.5}
+  header{padding:40px 24px 28px;max-width:1200px;margin:0 auto}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:15px;max-width:760px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted)}
+  .legend b{color:var(--ink)}
+  .anchor-tag{display:inline-block;background:var(--ditto-green);color:#fff;font-size:11px;font-weight:600;
+       padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:8px}
+  main{max-width:1200px;margin:0 auto;padding:0 24px 64px}
+  section{margin-top:40px}
+  .sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:20px}
+  .sec-head h2{font-size:19px;margin:0;letter-spacing:-.01em}
+  .sec-head .count{color:var(--muted);font-size:13px}
+  .sec-head .maps{color:var(--muted);font-size:13px;margin-left:auto;font-style:italic}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+        display:flex;flex-direction:column;transition:transform .12s ease, box-shadow .12s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(16,34,28,.10)}
+  .card.anchor{border-color:var(--ditto-green);box-shadow:0 0 0 2px rgba(31,163,122,.18)}
+  .shot{background:#0e1513;display:flex;align-items:center;justify-content:center}
+  .shot img{width:100%;display:block}
+  .meta{padding:14px 15px 16px}
+  .app{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ditto-green);margin-bottom:4px}
+  .app .num{color:var(--muted);font-weight:600}
+  .note{font-size:13.5px;color:var(--ink);margin:0 0 12px}
+  .note b{font-weight:650}
+  .open{font-size:12.5px;font-weight:600;color:var(--ditto-green);text-decoration:none}
+  .open:hover{text-decoration:underline}
+  footer{max-width:1200px;margin:0 auto;padding:24px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  @media (max-width:520px){.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Voice Daily Note — UI References</h1>
+  <p class="sub">20 curated screens from Mobbin, grouped by the prototype's surfaces, with what to borrow from each.
+  Images are local snapshots; "Open on Mobbin" links to the live screen. Tone target: calm + trustworthy health — not clinical-cold, not wellness-shallow.</p>
+  <div class="legend">
+    <span><span class="anchor-tag">ANCHOR</span> &nbsp;the three to design around: Spotify (orb), Visible (whole-app tone), Beside (understood sheet)</span>
+    <span>· <a href="home-cards.html" style="color:var(--ditto-green);font-weight:600">→ Home "today's action" cards (12)</a></span>
+  </div>
+</header>
+<main>
+
+  <section>
+    <div class="sec-head"><h2>🎙️ Orb + listening</h2><span class="count">4</span><span class="maps">→ middle band (audio-reactive orb, tap to stop)</span></div>
+    <div class="grid">
+      <a class="card anchor" href="https://mobbin.com/screens/5a62608d-754f-4449-94e5-49e8e1ca215c" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/01-spotify-orb.webp" alt="Spotify AI DJ"></div>
+        <div class="meta"><div class="app">Spotify AI DJ <span class="anchor-tag">ANCHOR</span></div>
+        <p class="note"><b>Green listening ring</b>, "Listening…", Cancel + a data-sensitivity line. Closest thing to your Ditto-green orb. Borrow the ring + quiet privacy note.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/fca8709b-7a3a-4ce9-995d-3bd6677c5dd4" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/02-meta-ai-orb.webp" alt="Meta AI"></div>
+        <div class="meta"><div class="app">Meta AI</div>
+        <p class="note"><b>Orb + live partial transcript + Stop pill</b> on one screen — exactly your top-transcript / centre-orb / stop relationship.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/dde18761-b196-4a1d-919e-10fbe3421871" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/03-copilot-listening.webp" alt="Microsoft Copilot"></div>
+        <div class="meta"><div class="app">Microsoft Copilot</div>
+        <p class="note"><b>"I'm listening" over a calm sky</b>, mic in a small pill. The restraint and unintimidating tone you want.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/d9a14bbf-8a4a-4536-ab0a-92a16d67fd6b" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/04-elevenreader-orb.webp" alt="ElevenReader"></div>
+        <div class="meta"><div class="app">ElevenReader</div>
+        <p class="note"><b>Soft pastel orb, lots of negative space.</b> Calm aesthetic reference for the orb's idle / connecting state.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>📝 Live transcript</h2><span class="count">2</span><span class="maps">→ top band (dim → solid, scrolls up)</span></div>
+    <div class="grid">
+      <a class="card" href="https://mobbin.com/screens/ed984262-40dd-4449-a378-fb7ed085759d" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/05-otter-transcript.webp" alt="Otter.ai"></div>
+        <div class="meta"><div class="app">Otter.ai</div>
+        <p class="note"><b>Transcript with key phrases highlighted inline</b> — a bridge between raw transcript and pills ("this bit became a fact").</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/8f395911-28da-47f4-a446-97b72958d3b8" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/06-pillowtalk-transcribe.webp" alt="pillowtalk"></div>
+        <div class="meta"><div class="app">pillowtalk</div>
+        <p class="note"><b>"transcribing audio…" with a soft blob animation</b>, text below. Low-emphasis treatment for the quiet top band.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>💊 Pills / extracted facts</h2><span class="count">4</span><span class="maps">→ bottom 33% (icon-first chips)</span></div>
+    <div class="grid">
+      <a class="card" href="https://mobbin.com/screens/9da5ab00-14db-40e3-839a-6a9b2f0ea208" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/07-howwefeel-chips.webp" alt="How We Feel"></div>
+        <div class="meta"><div class="app">How We Feel</div>
+        <p class="note"><b>"You link this with [Family][Home][Pets]"</b> — chips + warm phrasing. Proof chips can feel human, not clinical.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/26c751ee-3dff-4929-8250-0bf31f0af7e2" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/08-finch-insights.webp" alt="Finch Insights"></div>
+        <div class="meta"><div class="app">Finch — Insights</div>
+        <p class="note"><b>Emoji-led item list + reflection chips.</b> Icon-first chips that read as gentle, not data-entry.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/cad4e420-5616-406d-8dab-41855af5abdb" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/09-calmsleep-checkin.webp" alt="Calm Sleep"></div>
+        <div class="meta"><div class="app">Calm Sleep</div>
+        <p class="note"><b>Chip tray + a 7-day dot strip.</b> Two patterns at once: the pill tray <i>and</i> the look-back week-strip you backlogged.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/6a4a867c-2c78-4933-93dd-ebc2a5d5213d" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/10-imdb-ai-chips.webp" alt="IMDb"></div>
+        <div class="meta"><div class="app">IMDb</div>
+        <p class="note"><b>AI-extracted facet chips + an "AI-generated from…" line.</b> How to surface AI tags <i>and</i> their provenance disclosure.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>🗂️ "Here's what we understood" sheet</h2><span class="count">3</span><span class="maps">→ saved-by-default review, expand to source quote</span></div>
+    <div class="grid">
+      <a class="card anchor" href="https://mobbin.com/screens/4bb46a58-566c-47ff-ad19-a25d44892974" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/11-beside-summary-sheet.webp" alt="Beside"></div>
+        <div class="meta"><div class="app">Beside <span class="anchor-tag">ANCHOR</span></div>
+        <p class="note"><b>AI-summary card in a bottom sheet, "Transcript" pill, "See Transcription".</b> Near-perfect template for the review sheet with expand-to-source-quote.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/9505530d-a164-4173-95ef-97d40634deed" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/12-beside-financial.webp" alt="Beside Financial"></div>
+        <div class="meta"><div class="app">Beside — Overview</div>
+        <p class="note"><b>Summary bullets incl. a "Concern is raised…" item + action row.</b> Concern-type extraction and post-entry actions (your adjust / share).</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/c7ae3d0a-9c59-48f4-b8ed-608128ee17aa" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/13-naver-ai-summary.webp" alt="NAVER"></div>
+        <div class="meta"><div class="app">NAVER</div>
+        <p class="note"><b>AI summary popup with an inaccuracy note + "select to see full text".</b> Tap-to-verify pattern (but skip <i>global</i> "AI may be wrong" disclaimers — see research §5).</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>🩺 Calm health capture + home</h2><span class="count">5</span><span class="maps">→ tone-setters + Home + Timeline</span></div>
+    <div class="grid">
+      <a class="card anchor" href="https://mobbin.com/screens/33733594-cf11-453a-9186-835e3987819d" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/14-visible-checkin.webp" alt="Visible"></div>
+        <div class="meta"><div class="app">Visible <span class="anchor-tag">ANCHOR</span></div>
+        <p class="note"><b>Evening check-in: Symptoms / Exertion / Other + a free "Note" with Edit.</b> Your closest tonal twin (energy tracking) — calm, serious, never cutesy.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/f97f3994-4a60-4b79-96b5-ecb944e23697" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/15-stoic-home.webp" alt="stoic."></div>
+        <div class="meta"><div class="app">stoic.</div>
+        <p class="note"><b>"Ready to take on the day? [Begin]" + an evening chip recap.</b> Single-primary-action home card + chip recap = your Home + understood sheet.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/4ddcb17d-e1ed-45c5-a190-e5812fefd336" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/16-liven-log.webp" alt="Liven"></div>
+        <div class="meta"><div class="app">Liven</div>
+        <p class="note"><b>Big gradient ring "Log mood" + tidy quick-action tiles.</b> Another central-ring-as-action pattern, plus clean secondary tiles.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/76ac5a0c-780e-4bd0-a6c6-c469421eb18f" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/17-alanmind-daily.webp" alt="Alan Mind"></div>
+        <div class="meta"><div class="app">Alan Mind</div>
+        <p class="note"><b>"How are you feeling today?" daily-tracker card with emoji chips.</b> Warm home-card invitation without gamification pressure.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/8201aa7f-b5fa-4223-b3ec-621e8c582076" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/18-flo-symptoms.webp" alt="Flo"></div>
+        <div class="meta"><div class="app">Flo</div>
+        <p class="note"><b>Symptom-logging grid with one icon per category.</b> Reference for your 7-category icon taxonomy (medication / symptom / side-effect…).</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>🟢 Crisis / supportive card</h2><span class="count">2</span><span class="maps">→ the calm Ditto-green card below the orb</span></div>
+    <div class="grid">
+      <a class="card" href="https://mobbin.com/screens/3831e0f3-a0d5-47ec-977e-2b4e82775609" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/19-finch-breaths.webp" alt="Finch"></div>
+        <div class="meta"><div class="app">Finch</div>
+        <p class="note"><b>A green "Take 3 deep breaths" support card</b>, calm and warm. Closest match to the tone <i>and</i> colour you want — supportive, not alarming.</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+
+      <a class="card" href="https://mobbin.com/screens/a8f0513a-2cbf-4711-a2b0-271c883ae9dc" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="shot"><img src="images/20-wysa-affirmation.webp" alt="Wysa"></div>
+        <div class="meta"><div class="app">Wysa</div>
+        <p class="note"><b>Full-bleed calm gradient affirmation + a single soft "Done".</b> How to hold a serious-but-gentle moment with one quiet action (your <code>Reach us</code>).</p>
+        <span class="open">Open on Mobbin ↗</span></div></a>
+    </div>
+  </section>
+
+</main>
+<footer>
+  Curated from Mobbin · 2026-06-17 · for <b>Voice Daily Note (Prototype B)</b>. Images are local snapshots for offline reference; open each on Mobbin for the full flow.
+  Companion: <code>prototype-spec.md</code>, <code>CONTEXT.md</code>, <code>technical-research.md</code>. The <code>--ditto-green</code> here is a placeholder — swap for the real brand token.
+</footer>
+</body>
+</html>

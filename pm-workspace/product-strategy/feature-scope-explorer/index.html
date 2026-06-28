@@ -1,0 +1,800 @@
+<title>Ditto — Feature Scope Explorer</title>
+<script type="application/json" id="ditto-data">{"meta": {"title": "Ditto — Feature Scope Explorer", "subtitle": "Three product directions × the feature map, grounded in market evidence", "source": "Ditto - Product Vision Ponderings (2).pdf (pp.5-7, 17-18); market-deep-dive briefs F1-F8 + synthesis 15-18", "updated": "2026-06-26", "relevanceScale": ["essential", "adjacent", "nice", "none"], "relevanceLabels": {"essential": "Core", "adjacent": "Extra", "nice": "Nice to have", "none": "Out of scope"}, "badgeLegend": {"popularity": {"high": "Widely adopted / mature", "medium": "Established, not dominant", "low": "Nascent or a Ditto opportunity"}, "retention": {"strong": "Retains well", "engineered": "Retains only with a designed loop", "weak": "Poor retention", "episodic": "Used in bursts (crisis/decision)", "na": "Not applicable / no data"}, "reimbursed": {"yes": "Reimbursed", "conditional": "Reimbursed in some schemes", "no": "Not reimbursed", "na": "N/A"}, "regulatory": {"none": "No device burden", "ce-exempt": "Information only, CE-exempt", "class-iia-risk": "Individualised advice → MDR Class IIa risk", "is-regulation": "Is the regulation / public rail"}}}, "directions": [{"id": "companion", "num": 1, "name": "Intelligent care companion", "tagline": "Understand your care, then think along with you.", "composedOf": "Care Companion → Trusted Health Assistant, fuelled by the Patient-Owned Record", "gravity": "Comprehension that turns into intelligence. The patient at the centre.", "monetization": "Direct-to-consumer (people who want more control over their health), and reimbursement via health insurers — the most logical route.", "bestFitAreas": ["Oncology & hematology", "Other severe illnesses"]}, {"id": "social", "num": 2, "name": "Social care platform", "tagline": "Turn Ditto from single-player into multi-player.", "composedOf": "Care Coordination + Social Care Platform", "gravity": "The people around the patient carry the load: coordinate the circle, share the journey, find peers.", "monetization": "A harder revenue line — most likely B2C. (The indirect B2B-via-real-world-data angle looks weak, so it's dropped.)", "bestFitAreas": ["Neurodegenerative", "Pregnancy"]}, {"id": "navigation", "num": 3, "name": "EU healthcare navigation platform", "tagline": "The front door you open to do anything in care.", "composedOf": "The Front Door, on the Patient-Owned Record's data layer", "gravity": "The operational rails: scheduling, referrals, messaging, records, prescriptions.", "monetization": "Providers paying a usage / conduit model; a B2B model, and potentially governmental — you'd be filling a fundamental healthcare-infrastructure gap. Could also be insurance-reimbursed.", "bestFitAreas": []}], "therapyAreas": [{"name": "Oncology & hematology", "painNeed": "High", "comprehension": "High — dense jargon, multimodal, the Latin-letter problem", "complexity": "High — med/surgical/radiation, haematology, nurses, GP, tumour boards", "circle": "High — an active care circle that wants to help", "emotion": "Very high", "recording": "Growing — Ditto's wedge, strongest traction", "competition": "Med-high, rising — clinic ePRO (Resilience, Kaiku, Noona), consumer apps (Belong, Outcomes4Me), LLMs commoditise summaries", "monetization": "High — most spend; pharma RWD; exits", "bestFit": "companion", "bestFitNote": "Understanding and intelligence carry the value.", "fit": {"companion": "High", "social": "Medium", "navigation": "Medium"}}, {"name": "Neurodegenerative", "painNeed": "High", "comprehension": "High — but the caregiver understands, not the patient", "complexity": "Very high — fragmented, 13+ provider types, 62 networks, case managers", "circle": "Very high — caregivers are the care (~800k informal)", "emotion": "High — sustained over years", "recording": "Low at decline; caregiver may record", "competition": "Low-medium — big AI assistants miss declining users; few EU coordination players", "monetization": "Medium — Wlz/Wmo/Zvw; reimbursement unproven", "bestFit": "social", "bestFitNote": "Coordinating providers and caregivers is the job.", "fit": {"companion": "Medium", "social": "High", "navigation": "Medium"}}, {"name": "Other severe illnesses", "painNeed": "High", "comprehension": "High — a severe diagnosis, a lot to absorb", "complexity": "High — specialist + GP + allied; varies by condition", "circle": "Medium-high, varies by condition", "emotion": "High", "recording": "Low-medium", "competition": "Medium — few dedicated players; big tech and LLMs apply", "monetization": "Med-high — mirrors oncology; varies", "bestFit": "companion", "bestFitNote": "The oncology playbook, broadened.", "fit": {"companion": "High", "social": "Medium", "navigation": "Medium"}}, {"name": "Pregnancy", "painNeed": "Medium", "comprehension": "Lower — well-defined, less jargon", "complexity": "Medium — gynae, midwife, VSV, GP; well-defined", "circle": "High, positive — partner and family; joyful sharing", "emotion": "Medium — anxiety, not dread", "recording": "Low-medium", "competition": "High — Flo, Peanut, Ovia, midwife apps; crowded consumer", "monetization": "Medium — consumer-pay tilt; weak reimbursement", "bestFit": "social", "bestFitNote": "Low complexity; value is sharing and peers.", "fit": {"companion": "Low", "social": "High", "navigation": "Low"}}], "categories": ["Understanding", "Intelligence", "Sharing", "Management", "Integrations"], "features": [{"id": "consult-summary", "name": "Consult summary", "category": "Understanding", "why": "Visit turned into plain language", "relevance": {"companion": "essential", "social": "essential", "navigation": "nice"}, "evidence": {"desc": "The visit, turned into plain language the patient actually understands. Ditto's wedge today, and the door to everything else.", "players": [{"name": "Simply Onno (DE)", "metric": "B2C app that turns the visit into a patient summary; 60k+", "role": "core", "url": ""}, {"name": "Kin Health", "metric": "patient + care-circle app around the recorded visit (US)", "role": "core", "url": ""}, {"name": "Medcorder", "metric": "patients record & share doctor visits with family (US)", "role": "core", "url": "medcorder.com"}, {"name": "Epic MyChart / Ask Emmie", "metric": "after-visit summary + patient assistant in the portal", "role": "sideline", "url": "mychart.com"}], "popularity": {"level": "high", "note": "Commoditising from every direction; free patient summary likely standard-of-care in NL/BE ~2027-28."}, "retention": {"level": "episodic", "note": "Relevant around the appointment and a day after; a reason to open weekly at most."}, "reimbursed": {"level": "no", "note": "Not directly; heading toward free public-good in NL/BE."}, "whoPays": "Institution / EHR (becoming standard). Not patients.", "regulatory": {"level": "ce-exempt", "note": "Plain-language explanation of general info."}, "takeaway": "The way in, not the moat. Patient-initiated + cross-provider + recording-based + multilingual + oncology-deep is still unoccupied — but the artifact itself commoditises."}, "distinction": "THIS visit, in plain language. Different from Treatment explained (the whole treatment, audio/visual) and AI question-answering (ask anything)."}, {"id": "trusted-info", "name": "Trusted info & resources", "category": "Understanding", "why": "Reliable answers, not the open web", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "A trusted place to get reliable answers about your health — instead of the open web or a generic chatbot.", "players": [{"name": "ChatGPT Health", "metric": "OpenAI's health mode (Jan 2026); ~40M health questions/day on ChatGPT — the default people already reach for", "role": "core", "url": "chatgpt.com"}, {"name": "Perplexity", "metric": "AI answer engine with cited sources; increasingly used for health lookups", "role": "core", "url": "perplexity.ai"}, {"name": "Thuisarts.nl (NL)", "metric": "GP-backed national health-info site; very high reach and trust among Dutch patients", "role": "core", "url": "thuisarts.nl"}, {"name": "Ada Health", "metric": "symptom assessment + curated guidance; ~€37M FY24; MDR Class IIa", "role": "core", "url": "ada.com"}], "popularity": {"level": "high", "note": "A hot, crowded space: general AI assistants are now the default front door for health questions, alongside trusted national sites like Thuisarts.nl."}, "retention": {"level": "engineered", "note": "People ask health questions often, so this CAN be frequent — but the default is already ChatGPT/Perplexity. You only retain by being the more trusted, grounded source."}, "reimbursed": {"level": "no", "note": "A free, contested utility — nobody pays for answers."}, "whoPays": "Nobody pays for answers directly; the value is keeping people in Ditto rather than a general assistant.", "regulatory": {"level": "ce-exempt", "note": "General information."}, "takeaway": "Here we compete head-on with ChatGPT Health and Perplexity, plus trusted sources like Thuisarts.nl. The edge isn't having answers — it's being the trusted source grounded in YOUR actual care that people pick over a generic assistant."}, "distinction": "General reliable answers vs the open web / ChatGPT. Different from AI question-answering (grounded in YOUR care) and the Consult summary (your specific visit)."}, {"id": "treatment-explained", "name": "Treatment explained (audio/visual)", "category": "Understanding", "why": "Comprehension in a format that lands", "relevance": {"companion": "essential", "social": "nice", "navigation": "nice"}, "evidence": {"desc": "Your treatment explained in the format that actually lands — audio (podcast-style) or visual, not another dense letter.", "players": [{"name": "Kanker.nl", "metric": "plain-language treatment explainers for patients (NL)", "role": "core", "url": "kanker.nl"}, {"name": "YouTube / hospital patient videos", "metric": "what patients actually watch to understand treatment", "role": "sideline", "url": "youtube.com"}, {"name": "Mayo Clinic / NHS patient info", "metric": "trusted written explainers", "role": "sideline", "url": "mayoclinic.org"}], "popularity": {"level": "low", "note": "Barely a dedicated feature in market; mostly a Ditto opportunity."}, "retention": {"level": "na", "note": "Tied to the appointment moment."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "No established payer; would ride the companion's B2B line.", "regulatory": {"level": "ce-exempt", "note": "Explanation of general info."}, "takeaway": "A real differentiator on comprehension. No incumbent owns 'explain MY treatment' in audio/visual — strong fit with oncology's multimodal jargon problem."}, "distinction": "Your whole TREATMENT explained in audio/visual. Different from the single-visit Consult summary and free-form AI question-answering."}, {"id": "visit-prep", "name": "Visit preparation", "category": "Understanding", "why": "Walk in knowing what to ask", "relevance": {"companion": "essential", "social": "nice", "navigation": "adjacent"}, "evidence": {"desc": "Walk into the consult knowing what changed and the questions worth asking.", "players": [{"name": "OWise / Px HealthCare", "metric": "question prompts before consults; CE-marked, NHS-accredited; NL origin", "role": "sideline", "url": "owise.uk"}, {"name": "Outcomes4Me", "metric": "shared-decision navigation", "role": "sideline", "url": ""}], "popularity": {"level": "medium", "note": "A feature inside trackers, not a category of its own."}, "retention": {"level": "episodic", "note": "Tied to appointment cadence (can be weekly in oncology)."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "No standalone payer.", "regulatory": {"level": "ce-exempt", "note": ""}, "takeaway": "Natural extension of the understood conversation; ties this episodic moment to the next one — a frequency bridge."}}, {"id": "medical-diary", "name": "Medical diary", "category": "Understanding", "why": "Journal your own experience", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "Journal your own experience of the illness — symptoms, feelings, milestones.", "players": [{"name": "CaringBridge", "metric": "300k-400k daily users; nonprofit FY24 rev $10.7M; 25-yr brand", "role": "core", "url": "caringbridge.org"}, {"name": "Day One (Automattic)", "metric": "~200k subs + 15M lifetime downloads; Shared Journals up to 30", "role": "core", "url": "dayoneapp.com"}, {"name": "Finch", "metric": "~$30M ARR, ~9M DAU; journaling as game fuel; best-in-class D30", "role": "sideline", "url": "finchcare.com"}, {"name": "Rosebud", "metric": "AI journal $12.99/mo; $6M seed 2025; long-term memory", "role": "core", "url": ""}, {"name": "PatientsLikeMe", "metric": "$100M raised; data sold to pharma → UnitedHealth 2019", "role": "core", "url": ""}], "popularity": {"level": "high", "note": "Enormous demand, but as a paid business it barely survives."}, "retention": {"level": "engineered", "note": "Fragile standalone (median D15 ~3.9%, >80% gone by day 10). Works only with a guestbook (CaringBridge), a game (Finch), or AI memory (Rosebud)."}, "reimbursed": {"level": "no", "note": "The serious-illness narrative has never been a paid product."}, "whoPays": "Nobody directly — donations, charity, platform absorption, data-to-pharma, or a game wrapper.", "regulatory": {"level": "none", "note": ""}, "takeaway": "Don't build 'a journal.' Build what journaling fuels (the shared journey + AI memory). The one defensible asset is AI-held memory."}, "distinction": "What YOU write about your experience (manual, narrative). Different from the Self-updating health profile (automatic, structured)."}, {"id": "ai-qa", "name": "AI question-answering", "category": "Intelligence", "why": "Instant answers grounded in your care", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "Instant answers grounded in the patient's own care — not generic web answers.", "players": [{"name": "K Health", "metric": "~$900M val (2024); AI intake + clinician; Cedars-Sinai, Mayo, MGB, Northwell", "role": "core", "url": "khealth.com"}, {"name": "ChatGPT Health / Claude for Healthcare / Gemini Health Coach", "metric": "all three labs entered consumer health, Jan 2026", "role": "core", "url": ""}, {"name": "Doctolib Parents", "metric": "patient AI, early 2026; multi-LLM, EU-hosted, society-credentialed", "role": "sideline", "url": ""}, {"name": "Counsel Health", "metric": "$25M Series A (a16z, GV); >100k members; physician-supervised", "role": "core", "url": ""}], "popularity": {"level": "high", "note": "Frontier-hot: the three biggest AI labs entered consumer health within one week, Jan 2026."}, "retention": {"level": "engineered", "note": "People ask health questions often, so it can be frequent — but pure AI without grounding or a human attached doesn't hold them against ChatGPT/Gemini."}, "reimbursed": {"level": "no", "note": "Only via a clinician / device wrapper."}, "whoPays": "B2B health systems / insurers. 'Pure-consumer AI primary care didn't monetize; wrapping it in a provider brand did.'", "regulatory": {"level": "class-iia-risk", "note": "CE-exempt for generic Q&A; individualised advice crosses into Class IIa."}, "takeaway": "Grounded-in-YOUR-care Q&A is dead on-thesis, but retains and pays only with a human-in-loop wrapper. The giants answer generic; none owns 'what the doctor actually said.'"}, "distinction": "Ask anything, grounded in YOUR care. Different from general Trusted info & resources and the static Consult summary."}, {"id": "symptom-overview", "name": "Symptom overview + correlations", "category": "Intelligence", "why": "See patterns over time", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "See patterns and correlations across symptoms, treatments and triggers over time.", "players": [{"name": "Bearable", "metric": "consumer symptom + correlation tracker; 900k members", "role": "core", "url": "bearable.app"}, {"name": "CANKADO PRO-React Onco", "metric": "patient ePRO app; DiGA-reimbursed", "role": "core", "url": "cankado.com"}, {"name": "Flaredown", "metric": "patient chronic-illness symptom tracker", "role": "core", "url": "flaredown.com"}, {"name": "Visible", "metric": "patient daily symptom/energy tracker", "role": "sideline", "url": "makevisible.com"}], "popularity": {"level": "medium", "note": "Bearable is the consumer correlation reference; engaged daily users are a minority of installs."}, "retention": {"level": "engineered", "note": "Bearable's insight loop is the one tracking mechanic that retains without a clinician — but oncology ePRO is treatment-gated and decays after therapy."}, "reimbursed": {"level": "conditional", "note": "CANKADO via DiGA (Germany); Bearable none."}, "whoPays": "Bearable = patient subscription (caps at small-business scale); CANKADO = statutory payer.", "regulatory": {"level": "none", "note": "Self-tracking is fine; grading/advising crosses into Class IIa."}, "takeaway": "The one tracking mechanic that retains without a clinician — but patient-pay caps small. Pairs with the alert-to-responder loop to become clinical."}, "distinction": "The log and the patterns over time. Different from Symptom triage (what to flag now) and the Alert-to-responder loop (routing it to someone who acts)."}, {"id": "proactive-advice", "name": "Proactive care advice", "category": "Intelligence", "why": "Guidance on what you can control", "relevance": {"companion": "essential", "social": "nice", "navigation": "none"}, "evidence": {"desc": "Personalised guidance on the medical behaviour the patient can actually control.", "players": [{"name": "Omada Health", "metric": "$170M FY24 rev (+38%); IPO 2025 ~$1.1B; CVS Caremark, Cigna", "role": "core", "url": "omadahealth.com"}, {"name": "Lark", "metric": "AI-first coach; published RCT AI-vs-human parity; Elevance/BCBS; ~$185M+ raised", "role": "core", "url": ""}, {"name": "Sidekick Health / Pfizer", "metric": "pharma-sponsored programs (EU)", "role": "core", "url": ""}, {"name": "Google Health Premium", "metric": "$9.99/mo after 500k+ testers", "role": "sideline", "url": ""}], "popularity": {"level": "high", "note": "The only rung of the intelligence ladder with proven retention AND proven monetization."}, "retention": {"level": "strong", "note": "Strongest in the field — but bought via a (human-supervised) coach in loop (2-3× 90-day). Pure-AI nudges decay 30-60 days."}, "reimbursed": {"level": "conditional", "note": "DiGA / statutory insurer in EU but requires an MDR device; US employer/PMPM doesn't transplant to NL."}, "whoPays": "Employers / payers / PBMs (US); pharma + statutory insurers (EU). Never consumer as the engine.", "regulatory": {"level": "class-iia-risk", "note": "Individualised advice triggers MDR Class IIa + AI-Act high-risk — the money-rung is the device-rung."}, "takeaway": "Where the money lives — but only via coach-in-loop + B2B. The exact step that unlocks money crosses the device line; route around it with a human/circle in the loop."}}, {"id": "symptom-triage", "name": "Symptom triage", "category": "Intelligence", "why": "What to flag, when to call", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "What to flag and when to call — routing worry to the right level of care.", "players": [{"name": "Ada Health", "metric": "MDR Class IIa (Dec 2022); ~€37M FY24", "role": "core", "url": "ada.com"}, {"name": "K Health / Counsel Health", "metric": "AI intake + clinician closes the loop", "role": "core", "url": ""}, {"name": "NHS App", "metric": "AI triage pledged; full front door by 2028 (~40M registered)", "role": "sideline", "url": ""}], "popularity": {"level": "medium", "note": "Established job, episodic by nature; states are bolting AI triage onto free apps."}, "retention": {"level": "weak", "note": "Structurally episodic — no return loop."}, "reimbursed": {"level": "no", "note": "Only via clinician/device wrapper."}, "whoPays": "B2B enterprise / health system / insurer; states (free national apps).", "regulatory": {"level": "class-iia-risk", "note": "Individualised triage = MDR Class IIa (Rule 11) + AI-Act high-risk."}, "takeaway": "A credential-builder (CE moat) but episodic. Valuable as B2B navigation with a human owning the individualised step. The free state app is moving in."}, "distinction": "The judgement: what to flag and when to call. Different from the Symptom overview (the log) and the Alert-to-responder loop (who acts on it)."}, {"id": "lab-interpretation", "name": "Lab & result interpretation", "category": "Intelligence", "why": "Understand values and trends", "relevance": {"companion": "essential", "social": "nice", "navigation": "adjacent"}, "evidence": {"desc": "Understand lab and scan values, and how they trend over time — 'what changed since last scan.'", "players": [{"name": "Apple Health", "metric": "shows your labs to you (no interpretation)", "role": "sideline", "url": "apple.com/health"}, {"name": "ChatGPT", "metric": "patients paste lab results to get them explained", "role": "sideline", "url": "chatgpt.com"}, {"name": "Hello Heart", "metric": "interprets your own BP reading + feedback", "role": "core", "url": "helloheart.com"}], "popularity": {"level": "low", "note": "No standalone product owns it."}, "retention": {"level": "na", "note": "Would follow result/device cadence."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "No established payer; would follow the device/payer route.", "regulatory": {"level": "class-iia-risk", "note": "Interpreting an individual's results to recommend action = MDR Class IIa (MDCG 2019-11, Rule 11). 'The cliff.'"}, "takeaway": "Keep AI to explaining values; let a human own the 'what to do' step to stay off the device line.", "audienceNote": "No patient-facing product owns longitudinal lab interpretation; patients improvise with Apple Health + ChatGPT."}}, {"id": "medication-intelligence", "name": "Medication intelligence", "category": "Intelligence", "why": "Effects, interactions, adherence", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "adjacent"}, "evidence": {"desc": "What to expect from your meds — effects, interactions and adherence.", "players": [{"name": "Medisafe", "metric": "consumer medication manager; 10M+ users", "role": "core", "url": "medisafe.com"}, {"name": "MyTherapy", "metric": "consumer meds + adherence; 12M+ users", "role": "core", "url": "mytherapyapp.com"}, {"name": "mySugr", "metric": "consumer diabetes management; 3.5M+ users", "role": "core", "url": "mysugr.com"}], "popularity": {"level": "high", "note": "MyTherapy is the largest patient-facing engagement dataset in the field."}, "retention": {"level": "strong", "note": "Daily by design — the cue (pill times) recurs."}, "reimbursed": {"level": "conditional", "note": "Not the app directly; mySugr rides a reimbursed device bundle (Germany)."}, "whoPays": "Pharma (adherence ROI + RWD), not patients.", "regulatory": {"level": "class-iia-risk", "note": "Reminders are fine; interaction-checking that advises crosses into Class IIa."}, "takeaway": "Genuinely daily and pharma-funded (the most reachable EU patron) — but the patient is the product. Fits a pharma-sponsored oncology program."}, "distinction": "The brains: explains and watches your meds (effects, interactions, adherence). Different from the Always-current medication overview (the list) and Medication ordering & refills (the transaction)."}, {"id": "light-accountability", "name": "Light accountability", "category": "Intelligence", "why": "Did the follow-up happen", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "Did the advised follow-up actually happen? A gentle nudge that it did.", "players": [{"name": "Finch", "metric": "Accountability Buddies; ~$30M ARR, ~9M DAU; best-in-class D30", "role": "core", "url": "finchcare.com"}, {"name": "Omada / Lark / Hello Heart", "metric": "human coach is the retention engine (2-3× 90-day)", "role": "core", "url": ""}, {"name": "Visible", "metric": "daily pace score governs behaviour", "role": "core", "url": ""}], "popularity": {"level": "medium", "note": "Accountability-via-coach is the proven retention driver across disease-management apps."}, "retention": {"level": "strong", "note": "Strongest, most durable driver — via a human; streaks/gamification alone decay after 30-60 days."}, "reimbursed": {"level": "no", "note": "Not as a feature itself."}, "whoPays": "Rides the B2B coaching/payer model (Omada) or a game-sub (Finch).", "regulatory": {"level": "none", "note": ""}, "takeaway": "The single best retention unlock — but it works through a human (or the care circle) in the loop, not AI streaks."}}, {"id": "second-opinion-trial", "name": "Second-opinion & trial pathways", "category": "Intelligence", "why": "Awareness that better options exist", "relevance": {"companion": "essential", "social": "none", "navigation": "adjacent"}, "evidence": {"desc": "Routes to better options — second opinions and matching to fitting trials.", "players": [{"name": "Outcomes4Me", "metric": "trial-matching is the differentiated hook; 280k+ users; 7 of top-10 cancer pharma", "role": "core", "url": "outcomes4me.com"}, {"name": "Included Health (Grand Rounds)", "metric": "6M+ covered lives; changed diagnosis/treatment in 66% of cases", "role": "core", "url": ""}, {"name": "Medexo (DE)", "metric": "30+ insurer relationships; insurer-paid", "role": "core", "url": ""}], "popularity": {"level": "medium", "note": "Trial-matching is the standout; second-opinion is channel-dependent."}, "retention": {"level": "episodic", "note": "Decision-driven, around treatment decisions and scans."}, "reimbursed": {"level": "conditional", "note": "German statutory Zweitmeinungsverfahren for specified surgeries."}, "whoPays": "Pharma (trials) or insurer/employer (second opinion); rarely the patient.", "regulatory": {"level": "none", "note": "Information / navigation; consent-sensitive."}, "takeaway": "Strong differentiated hook in oncology; the money is pharma/insurer. The patient-facing 'is this right?' intelligence is plausible; owning the operations is not. (See the dedicated trial-matching engine.)"}, "distinction": "The awareness that better options or trials exist. Different from Trial / care-pathway matching (the engine) and Planning second opinions (the operations)."}, {"id": "self-updating-profile", "name": "Self-updating health profile", "category": "Intelligence", "why": "Living record, no manual effort", "relevance": {"companion": "essential", "social": "adjacent", "navigation": "adjacent"}, "evidence": {"desc": "A living health record that stays current with no manual effort — the journey remembers itself.", "players": [{"name": "Apple Health", "metric": "auto-updates from connected apps/providers", "role": "core", "url": "apple.com/health"}, {"name": "Rosebud", "metric": "long-term AI memory that reflects patterns back", "role": "core", "url": ""}, {"name": "MyTherapy", "metric": "keeps a longitudinal patient log", "role": "sideline", "url": "mytherapyapp.com"}], "popularity": {"level": "low", "note": "Not a standalone market; mostly a multiplier."}, "retention": {"level": "engineered", "note": "Indirect — AI memory is 'the one genuinely defensible journaling asset'; compounds + creates switching cost."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Not a revenue line — a multiplier that makes the paid product stickier.", "regulatory": {"level": "none", "note": ""}, "takeaway": "The compounding switch-cost asset Ditto is uniquely positioned to own. Frame as memory / multiplier, not a feature to sell."}, "distinction": "The curated, intelligent living profile. Different from Access to all medical data (the raw aggregation) and the Medical diary (your manual narrative)."}, {"id": "alert-responder-loop", "name": "Alert-to-responder loop", "category": "Intelligence", "why": "A graded report routes to someone who acts", "proposed": true, "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "A graded symptom report that routes to someone who acts — the care team or the care circle. The difference between a tracker and a clinical product.", "players": [{"name": "CANKADO", "metric": "patient ePRO that routes graded reports (DiGA)", "role": "core", "url": "cankado.com"}, {"name": "Visible", "metric": "patient app that alerts on overexertion", "role": "sideline", "url": "makevisible.com"}], "popularity": {"level": "high", "note": "The load-bearing mechanic of the entire ePRO evidence base in clinical oncology."}, "retention": {"level": "strong", "note": "The response (not the capture) is the value — proven QoL and fewer ER visits."}, "reimbursed": {"level": "conditional", "note": "Institutional ePRO (hospital) / DiGA (CANKADO)."}, "whoPays": "Hospital (institutional ePRO), pharma (RWD / patient-support).", "regulatory": {"level": "class-iia-risk", "note": "Class IIa if Ditto's AI does the grading/clinical routing; a human/circle responder keeps it off the device line."}, "takeaway": "F1's #1 implication: 'build the alert-to-action loop, not a tracker.' Ditto's responder can be the care circle + AI advice, not necessarily a Ditto nurse.", "audienceNote": "Mostly clinician-deployed — Kaiku & Noona run inside hospitals. No consumer-chosen product owns the alert-to-responder loop yet."}, "distinction": "The routing and the action. Different from the Symptom overview (the log) and Symptom triage (the judgement)."}, {"id": "human-in-loop", "name": "Human / care-circle in the loop", "category": "Intelligence", "why": "Someone owns the clinical call", "proposed": true, "relevance": {"companion": "adjacent", "social": "adjacent", "navigation": "adjacent"}, "evidence": {"desc": "A light human or care-circle layer that owns the clinical call — turning AI understanding into safe, individualised advice.", "players": [{"name": "Jasper Health", "metric": "oncology social workers; CMS navigation G-codes; ~$31M raised", "role": "core", "url": ""}, {"name": "K Health / Counsel Health", "metric": "clinician closes the loop on AI intake", "role": "core", "url": ""}, {"name": "Omada / Lark / Hello Heart", "metric": "(supervised) coach = the retention engine", "role": "core", "url": ""}, {"name": "Wellthy / Cariloop", "metric": "named human navigator owns the family's Care Project", "role": "core", "url": ""}], "popularity": {"level": "high", "note": "The pattern every survivor uses to deliver value at the advising rung."}, "retention": {"level": "strong", "note": "The strongest, most durable retention driver (2-3× 90-day)."}, "reimbursed": {"level": "conditional", "note": "US CMS nav codes / CMS GUIDE (dementia); EU via insurer / pharma programs."}, "whoPays": "Payer / employer / pharma. The human is what gets paid for.", "regulatory": {"level": "none", "note": "The mechanism that legally delivers Rung-2 advising without becoming a Class IIa device — the human owns the clinical step (buys time, not exemption)."}, "takeaway": "Strategically the biggest gap. The one move that simultaneously buys retention, regulatory headroom, and B2B money. The open fork: is the human a nurse, or the care circle?"}}, {"id": "trial-matching", "name": "Trial / care-pathway matching", "category": "Intelligence", "why": "Match to fitting trials and pathways", "proposed": true, "relevance": {"companion": "adjacent", "social": "nice", "navigation": "adjacent"}, "evidence": {"desc": "Match the patient to fitting clinical trials and care pathways on diagnosis, location and biomarkers.", "players": [{"name": "Outcomes4Me", "metric": "patient trial-matching on diagnosis/biomarkers; 280k+", "role": "core", "url": "outcomes4me.com"}, {"name": "Belong.Life", "metric": "cancer trial matching in a patient app; ~200k", "role": "core", "url": "belong.life"}, {"name": "Antidote.me", "metric": "patient-facing clinical-trial search", "role": "core", "url": "antidote.me"}, {"name": "ClinicalTrials.gov", "metric": "patients search trials directly", "role": "sideline", "url": "clinicaltrials.gov"}], "popularity": {"level": "medium", "note": "A standout differentiator in oncology — bigger draw than tracking for Outcomes4Me."}, "retention": {"level": "episodic", "note": "Decision-driven (around treatment choices)."}, "reimbursed": {"level": "no", "note": "Funded by pharma recruitment spend."}, "whoPays": "Pharma (trial recruitment — 'right patient at the right time').", "regulatory": {"level": "none", "note": "Navigation; but consent / GDPR sensitive."}, "takeaway": "The one capability with a clear pharma/RWD revenue line overlapping the oncology beachhead — but the patient is the product. Consent-first, and the US engine is hard to transplant to the EU."}, "distinction": "The engine that matches you to specific trials and pathways. Different from Second-opinion & trial pathways (the awareness) and Planning second opinions (the operations)."}, {"id": "shareable-updates", "name": "Shareable health updates", "category": "Sharing", "why": "Broadcast once, not ten times", "relevance": {"companion": "essential", "social": "essential", "navigation": "none"}, "evidence": {"desc": "Broadcast one update to the whole circle instead of repeating the news ten times.", "players": [{"name": "CaringBridge", "metric": "300k+ people/day, 1,600+ messages/hour; no EU equivalent at scale", "role": "core", "url": "caringbridge.org"}, {"name": "WhatsApp family group", "metric": "2B+ users — the actual default; no medical context", "role": "sideline", "url": ""}, {"name": "Caren / Nedap Ons (NL)", "metric": "family portal tethered to the Ons EHR; care org pays", "role": "core", "url": "carenzorgt.nl"}], "popularity": {"level": "high", "note": "Huge demand (CaringBridge 25 yrs) — but the default is still WhatsApp."}, "retention": {"level": "episodic", "note": "Crisis-driven; decays on recovery/death. 'A broadcast, not a network.'"}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Nobody directly (CaringBridge = donations).", "regulatory": {"level": "none", "note": ""}, "takeaway": "A bare update is a worse WhatsApp. Only defensible if it carries the medical comprehension WhatsApp can't — the plain-language summary, meds and next steps."}, "distinction": "Push one update to people you KNOW, on demand. Different from Light, frequent care updates (frequent, low-effort), the Care-circle acknowledgement loop (their reaction back), and Public sharing (to strangers)."}, {"id": "light-care-updates", "name": "Light, frequent care updates", "category": "Sharing", "why": "Keep the circle gently informed", "relevance": {"companion": "adjacent", "social": "essential", "navigation": "none"}, "evidence": {"desc": "Keep the circle gently informed with low-effort, frequent touches.", "players": [{"name": "Strava (precedent)", "metric": "Kudos: 14B+ in 2025; the proven witnessing mechanic; ~$500M ARR, $2.2B val", "role": "core", "url": "strava.com"}, {"name": "Flo (precedent)", "metric": "daily log is the habit; community amplifies; ~70-77M MAU", "role": "core", "url": "flo.health"}, {"name": "CaringBridge", "metric": "reactions on entries (crisis-episodic)", "role": "sideline", "url": ""}], "popularity": {"level": "medium", "note": "The loop is proven in fitness/femtech, not yet in serious illness."}, "retention": {"level": "engineered", "note": "The witnessing loop is the retention engine — but only on the circle side ('chemo round 4' is not a kudos moment)."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Users pay in fitness precedents; no care-update user-pay precedent.", "regulatory": {"level": "none", "note": ""}, "takeaway": "Copy the mechanic but flip the direction — frequency comes from the loved ones' low-effort presence, not the patient's heavy activity. (See the acknowledgement loop.)"}, "distinction": "Frequent, low-effort touches to your circle. Different from the one-off Shareable health update and the Care-circle acknowledgement loop (their reaction back)."}, {"id": "circle-acknowledgement", "name": "Care-circle acknowledgement loop", "category": "Sharing", "why": "One-tap reactions from many, lightly", "proposed": true, "relevance": {"companion": "adjacent", "social": "essential", "navigation": "none"}, "evidence": {"desc": "One-tap acknowledgement — 💚, 'thinking of you', 'dropped off a meal' — from many circle members. The reaction primitive, not the broadcast primitive.", "players": [{"name": "Strava (Kudos)", "metric": "14B+ kudos in 2025 (+20% YoY); group activities 95-121% more kudos; social streaks 5.69 vs 4.25 days", "role": "core", "url": "strava.com"}, {"name": "CaringBridge", "metric": "reactions on journal entries", "role": "sideline", "url": "caringbridge.org"}], "popularity": {"level": "high", "note": "A $2.2B business is built on this mechanic — but it is unproven in serious illness."}, "retention": {"level": "strong", "note": "The proven frequency engine — on the circle side."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Not a revenue line — a frequency / growth engine.", "regulatory": {"level": "none", "note": ""}, "takeaway": "F7's biggest unlock and the only way to falsify whether circle-side frequency is real for Ditto. The load-bearing half the broadcast feature is missing."}, "distinction": "The reaction FROM the circle (witnessing). Different from the updates the patient sends out (Shareable updates / Light updates)."}, {"id": "public-sharing", "name": "Public / lived-experience sharing", "category": "Sharing", "why": "Share the journey openly", "relevance": {"companion": "nice", "social": "adjacent", "navigation": "none"}, "evidence": {"desc": "Share the journey openly — lived-experience blogs and condition stories (kanker.nl-style), where people read and write what really happened.", "players": [{"name": "Facebook health groups", "metric": "where patients & families actually share openly", "role": "core", "url": "facebook.com"}, {"name": "Kanker.nl blogs", "metric": "lived-experience patient blogs (NL)", "role": "core", "url": "kanker.nl"}, {"name": "Inspire", "metric": "condition communities; 10M+ annual visitors", "role": "core", "url": "inspire.com"}, {"name": "PatientsLikeMe", "metric": "public structured illness stories", "role": "sideline", "url": ""}], "popularity": {"level": "high", "note": "Large and mature — but consolidating into data companies."}, "retention": {"level": "episodic", "note": "Diagnosis-spike then decay; community is a loyalty amplifier, not a frequency source."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Pharma / payers (for the data), charity (kanker.nl). No durable consumer-paid community.", "regulatory": {"level": "none", "note": "GDPR-sensitive (lived-experience health data, identified)."}, "takeaway": "Don't monetize the community directly — monetize what it produces (B2B2C / RWD). Kanker.nl already owns the NL 'patient + loved ones' lived-experience framing."}, "distinction": "Open, to strangers (lived-experience stories). Different from sharing with people you KNOW (Shareable / Light updates) and Anonymous mode (same, but pseudonymous)."}, {"id": "anonymous-mode", "name": "Anonymous mode", "category": "Sharing", "why": "Say what you'd never post under your name", "proposed": true, "relevance": {"companion": "nice", "social": "nice", "navigation": "none"}, "evidence": {"desc": "Let people share and ask under a pseudonym — the condition communities (e.g. breast-cancer groups, kanker.nl-style) where people say what they'd never post under their name.", "players": [{"name": "Reddit (r/cancer, r/ChronicIllness)", "metric": "anonymous patient communities at scale", "role": "core", "url": "reddit.com"}, {"name": "Flo", "metric": "Anonymous Mode + Secret Chats", "role": "core", "url": "flo.health"}, {"name": "Belong.Life", "metric": "anonymous cancer peer chat; ~200k", "role": "core", "url": "belong.life"}], "popularity": {"level": "medium", "note": "Anonymity unlocks participation in sensitive contexts — 'people share what they'd never post under their name.'"}, "retention": {"level": "engineered", "note": "An enabler of participation more than a frequency driver on its own."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Not a revenue line — an enabler.", "regulatory": {"level": "none", "note": "Strong EU / GDPR fit; privacy as a feature, not a liability."}, "takeaway": "The evidence-backed counterpart to public sharing. In a grim, sensitive category anonymity (not publicity) drives participation. Pairs with lived-experience communities."}, "distinction": "A privacy mode for public/community sharing — pseudonymous. Different from identified Public sharing and the Community building venue itself."}, {"id": "peer-finding", "name": "Peer finding", "category": "Sharing", "why": "Connect with similar patients", "relevance": {"companion": "adjacent", "social": "adjacent", "navigation": "none"}, "evidence": {"desc": "Connect with patients in a similar situation.", "players": [{"name": "PatientsLikeMe", "metric": "~830k members; 2,900+ conditions; → UnitedHealth/Optum 2019", "role": "core", "url": ""}, {"name": "Inspire", "metric": "10M+ annual visitors; 3,000+ conditions; pharma-funded → Thermo Fisher orbit", "role": "core", "url": "inspire.com"}, {"name": "Belong.Life", "metric": "~200k cancer patients; anonymous peer chat + trial matching", "role": "core", "url": "belong.life"}, {"name": "Peanut", "metric": "~1.6M users; life-stage matching; monetization 'still evolving' (cautionary)", "role": "core", "url": "peanut-app.io"}], "popularity": {"level": "high", "note": "Large and mature; the field has largely been rolled up into data companies."}, "retention": {"level": "episodic", "note": "'Am I normal?' spikes at diagnosis, decays. Strangers won't pay for episodic reassurance."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Pharma / payers buy the data, not users. Every durable stranger-community got acqui-hired.", "regulatory": {"level": "none", "note": "GDPR-sensitive."}, "takeaway": "Ditto is right to anchor on the family circle, not stranger peer-finding. If built, it monetizes only as data/RWD (oncology overlap with Belong is real)."}, "distinction": "A 1:1 match to a similar patient. Different from Community building (group spaces)."}, {"id": "community-building", "name": "Community building", "category": "Sharing", "why": "Support, and not alone", "relevance": {"companion": "nice", "social": "essential", "navigation": "none"}, "evidence": {"desc": "Spaces where patients support each other — so no one is alone.", "players": [{"name": "Facebook groups", "metric": "the default patient/family community venue", "role": "core", "url": "facebook.com"}, {"name": "Kanker.nl", "metric": "NL cancer community for patients & loved ones", "role": "core", "url": "kanker.nl"}, {"name": "Reddit", "metric": "large anonymous condition communities", "role": "core", "url": "reddit.com"}, {"name": "Inspire / Belong.Life", "metric": "dedicated patient communities", "role": "sideline", "url": "inspire.com"}], "popularity": {"level": "high", "note": "Mature but consolidating into data businesses."}, "retention": {"level": "engineered", "note": "A loyalty amplifier, not a frequency source (Flo: 'community deepened loyalty but did not create the habit'). Anonymity drives participation."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Pharma/payer data businesses, charity (kanker.nl), or under-monetized.", "regulatory": {"level": "none", "note": "GDPR-sensitive."}, "takeaway": "Don't monetize the social layer directly — monetize what it produces. Kanker.nl already occupies the NL framing."}, "distinction": "Group spaces with strangers. Different from 1:1 Peer finding and Public sharing (broadcasting your own story)."}, {"id": "shared-overview", "name": "Shared, factual overview", "category": "Management", "why": "One source of truth for the circle", "relevance": {"companion": "adjacent", "social": "essential", "navigation": "adjacent"}, "evidence": {"desc": "One factual source of truth for the whole circle.", "players": [{"name": "Caren (Nedap Ons)", "metric": "family/client portal families use (NL)", "role": "core", "url": "carenzorgt.nl"}, {"name": "OZOverbindzorg", "metric": "patient-controlled circle network (NL)", "role": "core", "url": ""}, {"name": "Lotsa Helping Hands", "metric": "family care-coordination space", "role": "core", "url": "lotsahelpinghands.com"}], "popularity": {"level": "medium", "note": "In NL already occupied and EHR-bundled."}, "retention": {"level": "weak", "note": "Stickiness comes from EHR bundling, not engagement."}, "reimbursed": {"level": "conditional", "note": "Indirectly — municipal/insurer budgets (OZOverbindzorg) or EHR seat (Caren)."}, "whoPays": "Care organizations or municipalities/insurers; never the family.", "regulatory": {"level": "none", "note": ""}, "takeaway": "Don't enter the NL shared-overview head-on — you'd fight Nedap's distribution and free-to-family economics. Ditto's wedge is patient-owned, conversation-derived understanding."}}, {"id": "agenda-tasks", "name": "Agenda, tasks & allocation", "category": "Management", "why": "Divide the caregiving load", "relevance": {"companion": "nice", "social": "essential", "navigation": "adjacent"}, "evidence": {"desc": "Divide the caregiving load — agenda, tasks and who does what. Also a free 'rally my circle' acquisition front door.", "players": [{"name": "ianacare", "metric": "free Caregiver Organizer ~50,000 caregivers; the viral hook; paid layer → CMS GUIDE", "role": "core", "url": "ianacare.com"}, {"name": "Lotsa Helping Hands", "metric": "task coordination (a known consumer 'graveyard' mechanic)", "role": "core", "url": ""}, {"name": "CaringBridge", "metric": "meal trains / help coordination", "role": "sideline", "url": ""}], "popularity": {"level": "medium", "note": "'A crowded feature graveyard at the consumer layer.'"}, "retention": {"level": "engineered", "note": "Circle-rallying / task pickup is the viral + frequency hook (low-effort pickup from many)."}, "reimbursed": {"level": "no", "note": "The tasks layer is free; ianacare's human-navigator layer migrates to CMS GUIDE."}, "whoPays": "Nobody for the tasks layer — it's free acquisition.", "regulatory": {"level": "none", "note": ""}, "takeaway": "A growth/virality feature, not a revenue line. Position it as a free top-of-funnel 'rally the circle' front door; make money elsewhere."}}, {"id": "managed-accounts", "name": "Managed accounts", "category": "Management", "why": "Act for someone who can't", "relevance": {"companion": "adjacent", "social": "essential", "navigation": "adjacent"}, "evidence": {"desc": "Act on behalf of someone who can't — proxy access for a caregiver.", "players": [{"name": "NHS App (proxy access)", "metric": "act for a family member who can't", "role": "core", "url": "nhs.uk"}, {"name": "Apple Health (family sharing)", "metric": "share a child's/parent's health data", "role": "sideline", "url": "apple.com/health"}, {"name": "Wellthy / Cariloop", "metric": "a human concierge runs the family's care project", "role": "core", "url": "wellthy.com"}], "popularity": {"level": "low", "note": "Not a software category on its own."}, "retention": {"level": "strong", "note": "Stickiness comes from the human, not the account structure: 'software is the wrapper, the human is the moat.'"}, "reimbursed": {"level": "no", "note": "Employer pays the concierge version."}, "whoPays": "Employer (for the human concierge); not the feature itself.", "regulatory": {"level": "none", "note": "Consent / authorization sensitive."}, "takeaway": "The briefs validate that the human managing the case is what gets paid for, not the account structure. Managed/proxy accounts are table-stakes plumbing, not a differentiator."}}, {"id": "circle-tiers", "name": "Close & wider circle tiers", "category": "Management", "why": "Control who sees what", "relevance": {"companion": "adjacent", "social": "essential", "navigation": "none"}, "evidence": {"desc": "Control who sees what — a close inner circle and a wider circle.", "players": [{"name": "OZOverbindzorg (NL)", "metric": "patient controls who joins — explicit permissioned tiering", "role": "core", "url": ""}, {"name": "CaringBridge", "metric": "implicitly tiered (circle vs wider well-wishers)", "role": "sideline", "url": ""}], "popularity": {"level": "low", "note": "A component of the care-graph, not a sold feature."}, "retention": {"level": "na", "note": ""}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Not monetized on its own.", "regulatory": {"level": "none", "note": "Privacy / consent relevant."}, "takeaway": "A validated need and part of the care-graph moat (patient + conditions + meds + events + circle + permissions) — but it doesn't monetize alone. Build it as part of the graph."}}, {"id": "family-accounts", "name": "Family accounts & shared profiles", "category": "Management", "why": "Manage care for children", "relevance": {"companion": "adjacent", "social": "essential", "navigation": "nice"}, "evidence": {"desc": "Family accounts with shared profiles — e.g. managing care for children.", "players": [{"name": "Caren (Nedap Ons)", "metric": "family shared portal (NL)", "role": "core", "url": "carenzorgt.nl"}, {"name": "Apple Health (family sharing)", "metric": "manage a child's/parent's health data", "role": "core", "url": "apple.com/health"}, {"name": "Familienet", "metric": "family-communication app (used by families, sold to facilities)", "role": "sideline", "url": "familienet.nl"}], "popularity": {"level": "medium", "note": "Mature as a low-ticket B2B facility add-on; not a patient-owned consumer category at scale."}, "retention": {"level": "strong", "note": "Durable B2B stickiness inside facilities (Familienet since 2005)."}, "reimbursed": {"level": "no", "note": "Paid by care orgs as operating cost."}, "whoPays": "Care organizations / facilities (Familienet €99/mo per location).", "regulatory": {"level": "none", "note": ""}, "takeaway": "Monetizes only as a cheap B2B facility add-on; the 'neutral family portal' seat is taken (Caren). Differentiate on patient-owned + conversation-derived."}}, {"id": "scheduling", "name": "Scheduling & appointments", "category": "Management", "why": "Book and manage visits", "relevance": {"companion": "nice", "social": "adjacent", "navigation": "essential"}, "evidence": {"desc": "Book and manage appointments.", "players": [{"name": "Doctolib", "metric": "80M patient accounts; €348M ARR 2024 (+22.5%); 99% from provider subs; €5.8B val; weak in NL", "role": "core", "url": "doctolib.fr"}, {"name": "DocPlanner Group", "metric": "13 countries; ~100M monthly users; profitable (Feb 2026); IPO-prep", "role": "core", "url": ""}, {"name": "Zocdoc (US)", "metric": "~6M monthly bookings; per-booking model caused provider churn (cautionary)", "role": "core", "url": ""}], "popularity": {"level": "high", "note": "The front door is already won in every EU geography that matters — per-country, not continentally."}, "retention": {"level": "weak", "note": "Provider daily; patient episodic ('you book when sick')."}, "reimbursed": {"level": "no", "note": "Provider SaaS."}, "whoPays": "Providers (~100% of ARR). 'Patients don't pay' is the law of this layer.", "regulatory": {"level": "none", "note": ""}, "takeaway": "A 16-person patient-side player can't win the provider supply war; scheduling is thin data. Integrate, don't build. Threat: Doctolib is climbing into patient AI."}}, {"id": "referral-management", "name": "Referral management", "category": "Management", "why": "Track and route referrals", "relevance": {"companion": "none", "social": "nice", "navigation": "essential"}, "evidence": {"desc": "Track and route referrals between providers.", "players": [{"name": "NHS App (e-Referrals)", "metric": "patients book a referred appointment", "role": "core", "url": "nhs.uk"}, {"name": "Zorgkaart Nederland", "metric": "patients find & pick a provider/specialist", "role": "sideline", "url": "zorgkaartnederland.nl"}], "popularity": {"level": "high", "note": "De-facto national standard (91% GP coverage)."}, "retention": {"level": "weak", "note": "Provider daily-operational; invisible to patients."}, "reimbursed": {"level": "no", "note": "System / provider SaaS."}, "whoPays": "The system / providers.", "regulatory": {"level": "none", "note": ""}, "takeaway": "Owns the most decision-dense moment in the severe-disease beachhead (referral into oncology). A partner / integration target, never a build target.", "audienceNote": "Patients rarely manage referrals themselves; ZorgDomein (91% of NL GPs) is the clinician-side rail."}}, {"id": "second-opinion-planning", "name": "Planning second opinions", "category": "Management", "why": "Organise a second view", "relevance": {"companion": "adjacent", "social": "nice", "navigation": "essential"}, "evidence": {"desc": "Organise a second opinion — find the right expert and route the records.", "players": [{"name": "Included Health (Grand Rounds)", "metric": "6M+ covered lives; changed diagnosis/treatment in 66% of cases; employer-paid", "role": "core", "url": ""}, {"name": "Medexo (DE)", "metric": "30+ statutory/private insurer relationships; insurer-paid, document-based", "role": "core", "url": ""}], "popularity": {"level": "medium", "note": "Established but channel-dependent."}, "retention": {"level": "episodic", "note": "High-stakes, one-off."}, "reimbursed": {"level": "conditional", "note": "German statutory Zweitmeinungsverfahren for specified surgeries."}, "whoPays": "Employer (US) / insurer (EU); rarely the patient.", "regulatory": {"level": "none", "note": ""}, "takeaway": "Closest operational job to Ditto's emotional moment ('is this diagnosis right?'); EU monetization is insurer/system + partly regulated."}, "distinction": "The operations: organise and route a second opinion. Different from Second-opinion & trial pathways (the awareness) and Trial / care-pathway matching (the engine)."}, {"id": "medication-ordering", "name": "Medication ordering & refills", "category": "Management", "why": "Order & refill (the transaction)", "relevance": {"companion": "nice", "social": "adjacent", "navigation": "essential"}, "evidence": {"desc": "Order and refill medication without friction.", "players": [{"name": "NHS App", "metric": "67.8M repeat prescriptions/yr", "role": "core", "url": ""}, {"name": "Kry / Livi", "metric": "scripts + pharmacy/lab referral fees", "role": "sideline", "url": ""}], "popularity": {"level": "high", "note": "A high-volume national-app job; not a standalone commercial category."}, "retention": {"level": "strong", "note": "Refills recur — a genuinely recurring actionable job."}, "reimbursed": {"level": "no", "note": "Taxpayer-funded in NHS."}, "whoPays": "The state (NHS); no clear EU patient-pay model.", "regulatory": {"level": "none", "note": "Pharmacy regulation applies."}, "takeaway": "Named in F3 as a must-have actionable job whose absence killed PHRs (Google Health had no refill/booking/messaging). Underexplored commercially — worth elevating from a sideline."}, "distinction": "The transaction: get medication without friction. Different from the Always-current medication overview (the list) and Medication intelligence (the brains)."}, {"id": "wearable", "name": "Wearable integration", "category": "Integrations", "why": "Signals in the context of care", "relevance": {"companion": "essential", "social": "nice", "navigation": "nice"}, "evidence": {"desc": "Wearable and sensor signals, read in the context of the patient's care — and a proven passive daily-return engine.", "players": [{"name": "Visible", "metric": "250k+ users; HRV → daily pace score → overexertion alerts; the best frequency engine in the brief", "role": "core", "url": "makevisible.com"}, {"name": "Hello Heart", "metric": "FDA-cleared BP cuff + app; $70M raised; Amwell distribution", "role": "core", "url": "helloheart.com"}, {"name": "Whoop / Oura / Apple", "metric": "consumer hardware hits ($10B+ vals) going B2B / clinical", "role": "core", "url": ""}], "popularity": {"level": "high", "note": "Established where a device fits the condition. The giants own 'what your body did.'"}, "retention": {"level": "strong", "note": "The device/measurement IS the habit — 'a connected device is a cheaper retention engine than a human coach.'"}, "reimbursed": {"level": "conditional", "note": "mySugr bundle reimbursed (Germany); Hello Heart BP feedback = Class IIa in EU."}, "whoPays": "Subscription + hardware bundle, or B2B employer/plan.", "regulatory": {"level": "class-iia-risk", "note": "BP/result feedback crosses into Class IIa."}, "takeaway": "Manufactures durable daily frequency cheaply — but needs a bundle, and result-feedback crosses the device line. None of the giants owns 'what the doctor said.'"}}, {"id": "messaging-professionals", "name": "Messaging professional systems", "category": "Integrations", "why": "Two-way contact with care team", "relevance": {"companion": "nice", "social": "adjacent", "navigation": "essential"}, "evidence": {"desc": "Two-way messaging with the care team, integrated with professional systems.", "players": [{"name": "Epic MyChart", "metric": "patients message their own care team", "role": "core", "url": "mychart.com"}, {"name": "MijnGezondheid.net", "metric": "NL patient–GP portal messaging", "role": "core", "url": "mijngezondheid.net"}, {"name": "Klara", "metric": "patient ↔ provider messaging", "role": "sideline", "url": "klara.com"}], "popularity": {"level": "medium", "note": "Mature among clinicians — the wrong side for a patient-first player."}, "retention": {"level": "strong", "note": "Daily for engaged clinical teams (clinician side)."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Free to clinicians; enterprise upsell to hospitals (provider/system pays).", "regulatory": {"level": "none", "note": ""}, "takeaway": "Standalone messaging is a feature / acquihire — and the buyer was the front-door incumbent. Clinician-side anyway. Integrate, don't build.", "audienceNote": "The patient-facing side is portal messaging (MyChart, MijnGezondheid). Clinician-to-clinician tools (Siilo) are a different market."}}, {"id": "all-medical-data", "name": "Access to all medical data", "category": "Integrations", "why": "Your records in one place", "relevance": {"companion": "adjacent", "social": "nice", "navigation": "essential"}, "evidence": {"desc": "All the patient's records in one place — the patient-owned record.", "players": [{"name": "Apple Health Records", "metric": "patient record aggregation on every iPhone", "role": "core", "url": "apple.com/health"}, {"name": "MedMij PGOs (Quli, Ivido)", "metric": "NL patient personal-health-record apps", "role": "core", "url": "medmij.nl"}, {"name": "Fasten Health", "metric": "open-source self-hosted patient record", "role": "core", "url": "fastenhealth.com"}], "popularity": {"level": "high", "note": "Aggregation is becoming standard infra; the consumer record is mature in reach but barely used."}, "retention": {"level": "weak", "note": "'Records = episodic, near-zero return visits.' The record does not retain."}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "Consumer vault = almost nobody. Infra layer = payers / systems / AI platforms.", "regulatory": {"level": "none", "note": "Data-protection heavy."}, "takeaway": "Owning the record is a graveyard. Integrate it as fuel — value accrues to the pipe and the AI on top, never the vault."}, "distinction": "Pull records IN, all in one place. Different from EHDS (the EU rail that delivers them), Patient-initiated data sharing (push them out) and the Self-updating health profile (the curated, living version)."}, {"id": "ehds", "name": "EHDS integration", "category": "Integrations", "why": "Pull records EU-wide", "relevance": {"companion": "adjacent", "social": "nice", "navigation": "essential"}, "evidence": {"desc": "Pull records EU-wide via the European Health Data Space.", "players": [{"name": "MedMij PGOs (Quli, Ivido)", "metric": "how NL patients actually pull their records", "role": "core", "url": "medmij.nl"}, {"name": "National patient portals (DigiD)", "metric": "the access point citizens use", "role": "sideline", "url": ""}, {"name": "MyHealth@EU", "metric": "the EU rail, reached via national portals", "role": "sideline", "url": ""}], "popularity": {"level": "low", "note": "EU-project-stage, not startup-stage; primary-use live ~Mar 2029 (Group 1), images/labs ~2031."}, "retention": {"level": "na", "note": "A rail, not a product."}, "reimbursed": {"level": "no", "note": "State-funded primary use; pharma pays HDABs for secondary."}, "whoPays": "Member states (primary); pharma/research (secondary use).", "regulatory": {"level": "is-regulation", "note": "It IS the regulation (EU 2025/327); penalties up to €20M / 4% of global turnover."}, "takeaway": "A 2029+ architecture signal, not a 2026 opportunity. Design EEHRxF-aware, do MedMij now, embed xShare later. Don't be a consent broker.", "audienceNote": "EHDS is infrastructure, not a product patients choose — they meet it through national portals and PGOs."}, "distinction": "The EU rail/standard for moving records. Different from the products that use it: Access to all medical data and Patient-initiated data sharing."}, {"id": "patient-data-sharing", "name": "Patient-initiated data sharing", "category": "Integrations", "why": "Share records with new providers", "relevance": {"companion": "nice", "social": "adjacent", "navigation": "adjacent"}, "evidence": {"desc": "Patient-initiated sharing of records with providers who don't already hold them.", "players": [{"name": "MedMij PGOs (Quli, Ivido)", "metric": "patient pulls a copy and shares it onward", "role": "core", "url": "medmij.nl"}, {"name": "Apple Health", "metric": "share health data with a provider/app", "role": "sideline", "url": "apple.com/health"}, {"name": "xShare 'Yellow Button'", "metric": "one-click patient record share (EU pilot)", "role": "core", "url": "xshare-project.eu"}], "popularity": {"level": "low", "note": "Weak consumer pull (NL PGOs ~207k vs the IZA goal of every citizen by end-2025)."}, "retention": {"level": "weak", "note": "The sharing primitive alone gives no reason to return; PGOs 'not loved.'"}, "reimbursed": {"level": "no", "note": "Publicly subsidized framework, not reimbursed per-use."}, "whoPays": "No working consumer monetization; PGOs free / subsidized.", "regulatory": {"level": "is-regulation", "note": "MedMij / EHDS frameworks; consent-heavy."}, "takeaway": "The consent/sharing rung is commoditizing into a public button apps embed. Embed it; don't be it. Own the product the rung feeds."}, "distinction": "Push your records OUT to a new provider. Different from Access to all medical data (pull them in) and EHDS (the rail)."}, {"id": "medication-overview", "name": "Always-current medication overview", "category": "Integrations", "why": "The current med list (data)", "relevance": {"companion": "adjacent", "social": "adjacent", "navigation": "essential"}, "evidence": {"desc": "A single, always-current overview of the patient's medication.", "players": [{"name": "Apple Health (medications)", "metric": "a current med list inside Health", "role": "core", "url": "apple.com/health"}, {"name": "Medisafe", "metric": "consumer-maintained medication list", "role": "core", "url": "medisafe.com"}, {"name": "Pharmacy apps (Service Apotheek e.a.)", "metric": "NL patients' medication overview", "role": "sideline", "url": ""}], "popularity": {"level": "low", "note": "Not a differentiated feature; a sub-element of the record / ePrescription rails."}, "retention": {"level": "na", "note": ""}, "reimbursed": {"level": "no", "note": ""}, "whoPays": "No standalone payer.", "regulatory": {"level": "none", "note": ""}, "takeaway": "A sub-element of the record/ePrescription rails. The data is a free input; the value is reasoning over it (interactions, adherence) — see medication intelligence."}, "distinction": "The list: just an accurate, current medication list (a data layer). Different from Medication intelligence (the brains) and Medication ordering & refills (the transaction)."}, {"id": "live-translation", "name": "Live translation for non-native speakers", "category": "Understanding", "why": "Medical info in your own language", "proposed": true, "relevance": {"companion": "essential", "social": "adjacent", "navigation": "adjacent"}, "evidence": {"desc": "Translate summaries, info and the conversation into the patient's own language — for migrants at home and for patients abroad.", "players": [{"name": "Google Translate / Interpreter mode", "metric": "what patients & families actually use, not clinical-grade", "role": "core", "url": "translate.google.com"}, {"name": "DeepL", "metric": "higher-quality general translation", "role": "core", "url": "deepl.com"}, {"name": "Cardmedic", "metric": "clinical-grade patient communication across 40+ languages", "role": "core", "url": "cardmedic.com"}], "popularity": {"level": "high", "note": "Big need — medical interpreting is a legal requirement in many systems — but few patient-facing apps do it at medical quality."}, "retention": {"level": "engineered", "note": "Recurs at every interaction for non-native users; a durable reason to return for that segment."}, "reimbursed": {"level": "conditional", "note": "Medical interpreting is often provider- or government-funded as a legal obligation."}, "whoPays": "Providers / governments fund interpreting; aligns with the B2B line. Patients don't pay.", "regulatory": {"level": "class-iia-risk", "note": "Mistranslation of clinical content is a safety risk — accuracy and disclaimers matter."}, "takeaway": "Ditto's multilingual summaries are already a differentiator; live translation extends the comprehension edge to migrants and cross-border care, where interpreting is often funded."}, "distinction": "Differs from Treatment explained (the format) — this is language access across native languages and borders."}, {"id": "care-timeline", "name": "Care timeline / journey view", "category": "Understanding", "why": "Your whole journey, visualised", "proposed": true, "relevance": {"companion": "adjacent", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "A chronological, visual view of the whole illness: appointments, scans, decisions, meds and milestones in one line.", "players": [{"name": "Apple Health", "metric": "a timeline of your records & metrics", "role": "core", "url": "apple.com/health"}, {"name": "Outcomes4Me / Belong.Life", "metric": "partial journey views in oncology apps", "role": "sideline", "url": "outcomes4me.com"}, {"name": "Tidepool", "metric": "a patient timeline done well in one condition", "role": "core", "url": "tidepool.org"}], "popularity": {"level": "medium", "note": "Partial implementations everywhere; nobody owns a true cross-provider patient journey."}, "retention": {"level": "engineered", "note": "A reference surface — people return around events (scan, new line of treatment)."}, "reimbursed": {"level": "no", "note": "Not reimbursed on its own."}, "whoPays": "Rides the companion's B2B line; the circle reads it too (coordination value).", "regulatory": {"level": "none", "note": "Visualisation of the patient's own data."}, "takeaway": "The visualisation flagship for comprehension, and no incumbent owns a true cross-provider journey. Strong companion fit; the circle uses it to stay oriented (coordination)."}, "distinction": "Differs from the Self-updating health profile (the data) and the Medical diary (your narrative) — this is the visual chronology."}, {"id": "side-effect-management", "name": "Side-effect & symptom self-management", "category": "Intelligence", "why": "How to handle this side effect", "proposed": true, "relevance": {"companion": "essential", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "Practical, treatment-specific guidance on managing side effects and symptoms (nausea, fatigue, skin, pain) day to day.", "players": [{"name": "CANKADO PRO-React Onco", "metric": "patient ePRO + self-management guidance (DiGA)", "role": "core", "url": "cankado.com"}, {"name": "Outcomes4Me", "metric": "side-effect guidance in a patient oncology app", "role": "core", "url": "outcomes4me.com"}, {"name": "OWise", "metric": "patient side-effect logging & tips", "role": "core", "url": "owise.uk"}], "popularity": {"level": "medium", "note": "Established in oncology ePRO and patient apps; content quality varies."}, "retention": {"level": "strong", "note": "Daily value in the active-treatment window — when side effects are live."}, "reimbursed": {"level": "conditional", "note": "Via DiGA / institutional ePRO."}, "whoPays": "Pharma (patient-support) and hospitals (ePRO).", "regulatory": {"level": "class-iia-risk", "note": "Advising an individual on managing symptoms can cross into Class IIa; keep it general or human-checked."}, "takeaway": "Daily, practical value in the active-treatment window; pairs with the alert-to-responder loop. Pharma/hospital funded."}, "distinction": "Differs from Symptom triage (what to flag now) and Proactive care advice (general behaviour) — this is how to cope with THIS side effect."}, {"id": "mental-support", "name": "Mental & emotional support", "category": "Intelligence", "why": "Cope with the emotional load", "proposed": true, "relevance": {"companion": "essential", "social": "adjacent", "navigation": "none"}, "evidence": {"desc": "Distress screening, coping tools, and signposting to a psychologist — for the emotional weight of serious illness.", "players": [{"name": "Wysa", "metric": "AI mental-health support; clinically studied; B2B to payers/employers", "role": "core", "url": "wysa.com"}, {"name": "Untire", "metric": "cancer-fatigue & wellbeing app; clinically studied", "role": "core", "url": "untire.me"}, {"name": "IPSO / Kanker.nl (NL)", "metric": "psychosocial cancer support (institutional/charity)", "role": "core", "url": "kanker.nl"}, {"name": "Woebot", "metric": "AI therapy pioneer — wound down (a caution case)", "role": "sideline", "url": ""}], "popularity": {"level": "medium", "note": "High need, mixed monetization; mental-health apps are crowded and several have struggled."}, "retention": {"level": "engineered", "note": "Distress recurs — daily check-ins are possible — but engagement needs a real loop."}, "reimbursed": {"level": "conditional", "note": "Mental health is reimbursed in NL (GGZ); some mental-health apps are DiGA-listed."}, "whoPays": "Payers/insurers (GGZ in NL); employers. Not patients as the engine.", "regulatory": {"level": "class-iia-risk", "note": "Clinical mental-health intervention is regulated; screen + signpost to a human."}, "takeaway": "Very high emotional charge in severe illness and badly under-served. Mental health has real reimbursement (GGZ) — but mind the device line: screen and signpost, don't treat."}, "distinction": "Differs from Community building (peers) — this is structured emotional support and distress screening."}, {"id": "nutrition-lifestyle", "name": "Nutrition & lifestyle during treatment", "category": "Intelligence", "why": "Diet, movement, sleep — tailored", "proposed": true, "relevance": {"companion": "essential", "social": "nice", "navigation": "none"}, "evidence": {"desc": "Condition-tailored nutrition, movement and sleep support to help the patient get through and recover from treatment.", "players": [{"name": "Omada Health", "metric": "lifestyle/behaviour coaching; $170M FY24; payer-funded", "role": "core", "url": "omadahealth.com"}, {"name": "Lark", "metric": "AI lifestyle coach; payer-funded; RCT parity", "role": "core", "url": "lark.com"}, {"name": "Untire", "metric": "activity/wellbeing for cancer fatigue", "role": "core", "url": "untire.me"}, {"name": "ZOE", "metric": "nutrition science, consumer-pay (different segment)", "role": "sideline", "url": "zoe.com"}], "popularity": {"level": "medium", "note": "A proven retention surface in coaching apps; a crowded consumer space."}, "retention": {"level": "strong", "note": "Daily logging/habit retains well when the loop is designed."}, "reimbursed": {"level": "conditional", "note": "Some lifestyle apps are DiGA-listed / payer-funded; general guidance is not."}, "whoPays": "Payers / employers / pharma. Consumer-pay only with a daily habit.", "regulatory": {"level": "ce-exempt", "note": "General lifestyle guidance is CE-exempt; clinical dosing crosses the line."}, "takeaway": "A proven retention surface, and in oncology treatment-window nutrition/movement is genuinely useful — but it's crowded and only retains with a designed daily loop."}, "distinction": "Differs from Proactive care advice (medical behaviour you can control) — this is diet, movement and sleep."}, {"id": "post-visit-plan", "name": "Post-visit action plan / checklist", "category": "Intelligence", "why": "Turn the visit into next steps", "proposed": true, "relevance": {"companion": "essential", "social": "adjacent", "navigation": "adjacent"}, "evidence": {"desc": "Auto-generate a concrete, personalised checklist after each visit: what to do, what to book, what to watch for.", "players": [{"name": "After-visit summary (MyChart / hospital)", "metric": "the plan patients get today, if any", "role": "sideline", "url": "mychart.com"}, {"name": "ChatGPT", "metric": "patients ask it to turn notes into a to-do list", "role": "sideline", "url": "chatgpt.com"}], "popularity": {"level": "medium", "note": "Emerging; nobody does it well patient-facing."}, "retention": {"level": "engineered", "note": "Recurs every visit — a natural frequency bridge between appointments."}, "reimbursed": {"level": "no", "note": "Not reimbursed directly."}, "whoPays": "Rides the companion's B2B line (adherence + comprehension value).", "regulatory": {"level": "ce-exempt", "note": "Restating the clinician's plan is fine; generating new clinical advice crosses into Class IIa."}, "takeaway": "Turns each understood visit into concrete next steps — a frequency bridge. Restate the clinician's plan to stay off the device line.", "audienceNote": "Mostly clinician-deployed (Memora texts patients on the provider's behalf); no patient-chosen product turns a visit into a plan."}, "distinction": "Differs from Light accountability (did it happen) and Proactive care advice (general) — this is the concrete per-visit to-do list."}, {"id": "cost-insurance", "name": "Cost & insurance navigation", "category": "Management", "why": "Coverage, costs, eigen risico", "proposed": true, "relevance": {"companion": "adjacent", "social": "nice", "navigation": "essential"}, "evidence": {"desc": "Help the patient understand what's covered, what it will cost, their eigen risico, and how to handle declaraties.", "players": [{"name": "Independer", "metric": "NL insurance comparison & guidance", "role": "core", "url": "independer.nl"}, {"name": "Zorgwijzer", "metric": "NL insurance comparison", "role": "core", "url": "zorgwijzer.nl"}, {"name": "Insurer apps (Zilveren Kruis, CZ)", "metric": "show eigen risico & claims", "role": "sideline", "url": ""}, {"name": "Nayya", "metric": "benefits/insurance navigation (employer-provided, US)", "role": "core", "url": "nayya.com"}], "popularity": {"level": "medium", "note": "Mostly US price-transparency + insurer apps; in NL it lives inside insurer apps and comparison sites."}, "retention": {"level": "weak", "note": "Episodic — checked at renewal or when a bill lands — though eigen-risico anxiety does recur."}, "reimbursed": {"level": "no", "note": "Not reimbursed; it's about cost, not a treatment."}, "whoPays": "Insurers (clearer cost = fewer calls, less confusion). Patients don't pay.", "regulatory": {"level": "none", "note": "Information / navigation."}, "takeaway": "A real NL pain (eigen risico, declaraties) that aligns cleanly with the insurer-reimbursement money line — but it's operational, so it sits on the navigation layer with the insurer as the natural payer."}, "distinction": "Differs from Medication ordering & refills (the transaction) — this is the coverage and money side of care."}, {"id": "provider-dashboard", "name": "Provider / clinician dashboard", "category": "Integrations", "why": "The institution's window in", "proposed": true, "relevance": {"companion": "adjacent", "social": "nice", "navigation": "essential"}, "evidence": {"desc": "A clinician-facing view of patient-reported data, comprehension and engagement — the B2B side that makes the patient value visible.", "players": [{"name": "Kaiku Health", "metric": "clinician ePRO dashboard (the model)", "role": "core", "url": "kaikuhealth.com"}, {"name": "Noona (Varian/Siemens)", "metric": "oncology clinician dashboard", "role": "core", "url": ""}, {"name": "Memora Health", "metric": "provider patient-monitoring dashboard", "role": "core", "url": "memorahealth.com"}], "popularity": {"level": "high", "note": "In clinical ePRO this dashboard IS the product the hospital buys."}, "retention": {"level": "strong", "note": "Clinicians use it in daily workflow (provider-side retention)."}, "reimbursed": {"level": "conditional", "note": "Sold via institutional contracts; can sit inside reimbursed pathways."}, "whoPays": "Hospitals / insurers — this is literally the B2B buyer's view.", "regulatory": {"level": "none", "note": "Provider tooling; data-governance applies."}, "takeaway": "This is what the B2B buyer actually pays for: the window that makes the patient value (comprehension, fewer crises, adherence) visible. Without it, the institution can't see what it's buying.", "audienceNote": "By design this is the institution-facing feature, so the competition is clinician-side, not patient-chosen."}, "distinction": "Differs from Messaging professional systems (communication) — this is monitoring and insight for the care team."}, {"id": "practical-financial", "name": "Practical-life & financial support", "category": "Management", "why": "Work, transport, benefits, childcare", "proposed": true, "relevance": {"companion": "nice", "social": "essential", "navigation": "adjacent"}, "evidence": {"desc": "Help with the non-medical burden of illness: work and benefits, transport to treatment, childcare, paperwork.", "players": [{"name": "Wellthy", "metric": "caregiver concierge; employer-funded (US)", "role": "core", "url": "wellthy.com"}, {"name": "Cariloop", "metric": "caregiver support platform; employer-funded", "role": "core", "url": "cariloop.com"}, {"name": "ianacare", "metric": "caregiver support + navigation; CMS GUIDE route", "role": "core", "url": "ianacare.com"}], "popularity": {"level": "medium", "note": "Established in the US employer market; in NL it lives in municipal Wmo/mantelzorg support."}, "retention": {"level": "engineered", "note": "Concierge relationships are sticky (the human is the moat)."}, "reimbursed": {"level": "no", "note": "No direct reimbursement; US employer-paid, NL municipal (Wmo)."}, "whoPays": "Employers (US) / municipalities (NL Wmo). Not a clean NL B2B line.", "regulatory": {"level": "none", "note": ""}, "takeaway": "The non-medical load (work, transport, benefits, childcare) is huge for caregivers — but the NL payer is municipal/Wmo, not a clean B2B contract. A real need with a fuzzy payer."}, "distinction": "Differs from Agenda, tasks & allocation (coordinating the circle) — this is navigating external practical and financial systems."}, {"id": "advance-care-planning", "name": "Advance care planning / wishes", "category": "Management", "why": "Document your treatment wishes", "proposed": true, "relevance": {"companion": "adjacent", "social": "adjacent", "navigation": "nice"}, "evidence": {"desc": "Capture the patient's treatment wishes, living will and who decides — especially for late-stage and declining conditions.", "players": [{"name": "Koda Health", "metric": "advance care planning platform; provider/payer-funded (US)", "role": "core", "url": "kodahealthcare.com"}, {"name": "MyDirectives", "metric": "digital advance directives (US)", "role": "core", "url": "mydirectives.com"}, {"name": "IKNL / Thuisarts (NL)", "metric": "wilsverklaring + ACP guidance (institutional)", "role": "core", "url": "thuisarts.nl"}], "popularity": {"level": "low", "note": "Growing but early; mostly US, institutionally driven."}, "retention": {"level": "episodic", "note": "Set once, revisited at decline or decision points."}, "reimbursed": {"level": "no", "note": "Not reimbursed directly; clinically encouraged."}, "whoPays": "Providers / payers — ACP reduces unwanted aggressive end-of-life care and cost.", "regulatory": {"level": "none", "note": "Legal-document sensitive (a wilsverklaring is a legal instrument)."}, "takeaway": "High value in neuro and late oncology; sensitive and sticky once set. The payer logic is that ACP reduces unwanted, costly end-of-life interventions."}, "distinction": "Differs from Managed accounts (acting for someone who can't) — this is documenting the patient's own wishes ahead of time."}], "competitorWatch": [{"name": "Doctolib in-visit AI scribe", "note": "Consultation Assistant (2025) transcribes the visit → structured notes; ~€115M/yr AI R&D. Adjacent to Ditto's exact wedge, but sold to the doctor. Encroaching from the provider side."}, {"name": "Doctolib Parents", "note": "Patient-facing medical Q&A by life-moment (early 2026); uses 80M-account distribution. The most direct understanding→advising encroachment, narrow + society-credentialed."}, {"name": "NHS App AI triage", "note": "Pledged AI triage, full front door by 2028 (~40M registered). The free state app is moving into intelligence."}, {"name": "Gravitate Health (G-Lens)", "note": "EU-funded literacy-adapted e-leaflets. Validates the comprehension job AND warns the concept is non-defensible."}, {"name": "Kin Health (US)", "note": "$9M, May 2026 — the closest direct analog (recorded-visit wedge + care-circle loop). Geography protects the EU for now."}]}</script>
+<style>
+  :root {
+    --ground: #FBFBF8;
+    --panel: #FFFFFF;
+    --panel-2: #F6F6F1;
+    --ink: #17211E;
+    --ink-2: #4C5C56;
+    --ink-3: #8A958F;
+    --line: #E5E6DF;
+    --line-2: #EEEFE8;
+    --brand: #0E7C7B;
+    --brand-deep: #0A5E5D;
+    /* relevance ordinal ramp (single hue) */
+    --r-essential: #0E7C7B;
+    --r-essential-ink: #FFFFFF;
+    --r-adjacent: #7FB7B4;
+    --r-adjacent-ink: #0A2E2D;
+    --r-nice: #DCEAE7;
+    --r-nice-ink: #2C4744;
+    --r-none-ink: #B6BCB5;
+    /* direction identity accents */
+    --d-companion: #0E7C7B;
+    --d-social: #C36A45;
+    --d-navigation: #3E6B8C;
+    /* semantic (evidence) — kept distinct from accent */
+    --good: #2E7D52;
+    --good-bg: #E6F1EA;
+    --warn: #B07A1E;
+    --warn-bg: #F6EEDD;
+    --bad: #B14A45;
+    --bad-bg: #F5E5E4;
+    --neutral: #7C857E;
+    --neutral-bg: #EEEFE9;
+    --proposed: #8A5BB0;
+    --proposed-bg: #F0E9F6;
+    --radius: 10px;
+    --shadow: 0 1px 2px rgba(20,30,28,.05), 0 8px 24px rgba(20,30,28,.06);
+    --shadow-lg: 0 12px 48px rgba(20,30,28,.18);
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 14px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  a { color: var(--brand-deep); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font-family: inherit; font-size: inherit; cursor: pointer; color: inherit; }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-3); }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------- Header ---------- */
+  header.top {
+    padding: 30px 24px 18px; max-width: 1280px; margin: 0 auto;
+  }
+  .brandrow { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .logo {
+    font-weight: 800; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brand-deep); display: inline-flex; align-items: center; gap: 7px;
+  }
+  .logo::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--brand); display: inline-block; }
+  header.top h1 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; margin-top: 12px; line-height: 1.08; }
+  header.top .sub { color: var(--ink-2); font-size: 15px; margin-top: 8px; max-width: 70ch; }
+  header.top .meta { color: var(--ink-3); font-size: 12px; margin-top: 10px; }
+
+  /* ---------- Direction cards ---------- */
+  .dcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+  .dcard {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 16px 14px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+    cursor: pointer; transition: border-color .15s, transform .12s; text-align: left; width: 100%;
+    border-top: 3px solid var(--accent);
+  }
+  .dcard:hover { transform: translateY(-2px); }
+  .dcard[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset, var(--shadow); }
+  .dcard .dnum {
+    font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent);
+  }
+  .dcard h3 { font-size: 17px; font-weight: 700; margin: 2px 0 4px; }
+  .dcard .role {
+    display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+    padding: 3px 7px; border-radius: 5px; background: var(--accent); color: #fff; margin-bottom: 8px;
+  }
+  .dcard .tag { color: var(--ink-2); font-size: 13px; margin-bottom: 10px; min-height: 2.6em; }
+  .dcard .counts { display: flex; gap: 6px; margin-bottom: 8px; }
+  .dcard .cpill {
+    font-size: 11px; font-variant-numeric: tabular-nums; padding: 3px 8px; border-radius: 20px;
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--ink-2); font-weight: 600;
+  }
+  .dcard .cpill b { color: var(--ink); }
+  .dcard .mon { font-size: 11.5px; color: var(--ink-3); line-height: 1.4; border-top: 1px solid var(--line-2); padding-top: 8px; }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    position: sticky; top: 0; z-index: 30; background: var(--ground);
+    padding: 14px 0 12px; margin-top: 26px; border-bottom: 1px solid var(--line);
+  }
+  .ctrow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .search {
+    flex: 1 1 220px; min-width: 180px; display: flex; align-items: center; gap: 8px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px;
+  }
+  .search input { border: 0; outline: 0; background: transparent; width: 100%; font-size: 14px; color: var(--ink); }
+  .search svg { flex: none; color: var(--ink-3); }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    font-size: 12.5px; font-weight: 600; padding: 7px 12px; border-radius: 20px;
+    background: var(--panel); border: 1px solid var(--line); color: var(--ink-2); transition: all .12s;
+  }
+  .chip:hover { border-color: var(--ink-3); }
+  .chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .chip.cat[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); }
+  .btn {
+    font-size: 12.5px; font-weight: 600; padding: 8px 13px; border-radius: 8px;
+    background: var(--panel); border: 1px solid var(--line); color: var(--ink-2);
+  }
+  .btn:hover { border-color: var(--ink-3); }
+  .btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+  .btn.primary:hover { background: var(--brand-deep); }
+  .spacer { flex: 1; }
+  .savestate { font-size: 11.5px; color: var(--ink-3); display: inline-flex; align-items: center; gap: 6px; }
+  .savestate .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); }
+  .savestate.dirty .dot { background: var(--warn); }
+
+  .legendbar { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 11px; align-items: center; }
+  .legend { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: var(--ink-3); }
+  .legend .swatches { display: flex; gap: 3px; }
+  .legend .sw { width: 26px; height: 14px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; }
+
+  /* ---------- Matrix ---------- */
+  .tablewrap { overflow-x: auto; margin-top: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+  table.matrix { border-collapse: collapse; width: 100%; min-width: 880px; }
+  table.matrix thead th { position: sticky; top: 0; z-index: 5; }
+  .matrix thead .mh {
+    background: var(--panel); border-bottom: 2px solid var(--line); padding: 12px 12px 10px;
+    text-align: left; vertical-align: bottom; font-weight: 600; color: var(--ink-2); font-size: 12px;
+  }
+  .matrix thead .mh.dir { text-align: center; width: 132px; }
+  .matrix thead .mh.dir .dlabel { font-weight: 700; color: var(--ink); font-size: 12.5px; display: block; }
+  .matrix thead .mh.dir .dunder { height: 3px; border-radius: 3px; background: var(--accent); margin: 7px auto 0; width: 70%; }
+  .matrix thead .mh.dir .dn { font-family: var(--mono); font-size: 10px; color: var(--accent); font-weight: 600; }
+  .matrix thead .mh.feat { min-width: 230px; }
+  .matrix thead .mh.ev { width: 188px; }
+
+  .catrow td {
+    background: var(--panel-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 8px 12px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-deep);
+  }
+  .catrow td .ccount { color: var(--ink-3); font-weight: 600; letter-spacing: 0; margin-left: 8px; text-transform: none; }
+
+  tr.frow { border-bottom: 1px solid var(--line-2); transition: background .1s; }
+  tr.frow:hover { background: #FAFCFB; }
+  tr.frow.dim { opacity: 0.38; }
+  td.fname { padding: 11px 12px; }
+  td.fname .fn { font-weight: 600; font-size: 13.5px; color: var(--ink); display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+  td.fname .fn:hover { color: var(--brand-deep); }
+  td.fname .why { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .ptag { font-size: 9px; font-weight: 800; letter-spacing: .06em; padding: 2px 5px; border-radius: 4px; background: var(--proposed-bg); color: var(--proposed); text-transform: uppercase; }
+
+  td.evid { padding: 10px 12px; }
+  .badges { display: flex; gap: 4px; flex-wrap: wrap; }
+  .badge {
+    font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 5px; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 3px; letter-spacing: .01em;
+  }
+  .badge.dots { background: var(--neutral-bg); color: var(--ink-2); font-family: var(--mono); letter-spacing: 1px; }
+  .b-good { background: var(--good-bg); color: var(--good); }
+  .b-warn { background: var(--warn-bg); color: var(--warn); }
+  .b-bad { background: var(--bad-bg); color: var(--bad); }
+  .b-neutral { background: var(--neutral-bg); color: var(--ink-2); }
+
+  td.rel { text-align: center; padding: 8px 10px; }
+  .relcell {
+    width: 100%; min-height: 38px; border-radius: 7px; border: 1px solid transparent;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .01em; padding: 7px 4px; transition: all .12s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .relcell:hover { transform: scale(1.04); box-shadow: var(--shadow); }
+  .rel-essential { background: var(--r-essential); color: var(--r-essential-ink); }
+  .rel-adjacent { background: var(--r-adjacent); color: var(--r-adjacent-ink); }
+  .rel-nice { background: var(--r-nice); color: var(--r-nice-ink); }
+  .rel-none { background: repeating-linear-gradient(45deg, #F6F6F1, #F6F6F1 6px, #F1F1EB 6px, #F1F1EB 12px); color: var(--r-none-ink); border-color: var(--line); }
+  td.rel.changed .relcell::after { content: ""; position: absolute; }
+  td.rel { position: relative; }
+  td.rel.changed::before { content: ""; position: absolute; top: 6px; right: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
+
+  /* ---------- Detail panel ---------- */
+  .scrim { position: fixed; inset: 0; background: rgba(20,30,28,.34); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 50; }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+  .panel {
+    position: fixed; top: 0; right: 0; height: 100%; width: min(460px, 92vw); background: var(--panel);
+    box-shadow: var(--shadow-lg); z-index: 51; transform: translateX(102%); transition: transform .26s cubic-bezier(.2,.7,.3,1);
+    display: flex; flex-direction: column;
+  }
+  .panel.open { transform: translateX(0); }
+  .panel .phead { padding: 20px 22px 14px; border-bottom: 1px solid var(--line); position: relative; }
+  .panel .pclose { position: absolute; top: 16px; right: 16px; width: 30px; height: 30px; border-radius: 7px; background: var(--panel-2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--ink-2); }
+  .panel .pcat { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand-deep); }
+  .panel h2 { font-size: 21px; font-weight: 800; margin: 6px 0 0; padding-right: 36px; line-height: 1.15; }
+  .panel .pbody { overflow-y: auto; padding: 18px 22px 40px; flex: 1; }
+  .panel .desc { font-size: 14.5px; color: var(--ink); line-height: 1.55; }
+  .sec { margin-top: 22px; }
+  .sec > .lbl { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 9px; }
+
+  .relpick { display: grid; gap: 8px; }
+  .relpick .rprow { display: flex; align-items: center; gap: 8px; }
+  .relpick .rpname { width: 96px; flex: none; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .relpick .rpname .ddot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+  .relpick .opts { display: flex; gap: 4px; flex: 1; }
+  .relpick .opt {
+    flex: 1; font-size: 10.5px; font-weight: 700; padding: 6px 2px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--panel-2); color: var(--ink-3); transition: all .1s; text-align: center;
+  }
+  .relpick .opt:hover { border-color: var(--ink-3); }
+  .opt[data-on="essential"][aria-pressed="true"] { background: var(--r-essential); color: #fff; border-color: var(--r-essential); }
+  .opt[data-on="adjacent"][aria-pressed="true"] { background: var(--r-adjacent); color: var(--r-adjacent-ink); border-color: var(--r-adjacent); }
+  .opt[data-on="nice"][aria-pressed="true"] { background: var(--r-nice); color: var(--r-nice-ink); border-color: #b9d6d2; }
+  .opt[data-on="none"][aria-pressed="true"] { background: var(--ink-2); color: #fff; border-color: var(--ink-2); }
+
+  .evgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .evbox { background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 8px; padding: 9px 11px; }
+  .evbox .ek { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .evbox .ev-badge { margin-top: 5px; }
+  .evbox .enote { font-size: 11.5px; color: var(--ink-2); margin-top: 5px; line-height: 1.4; }
+
+  .audnote { font-size: 11.5px; color: var(--warn); background: var(--warn-bg); border-radius: 7px; padding: 7px 10px; margin-bottom: 8px; line-height: 1.4; }
+  .players { display: flex; flex-direction: column; gap: 8px; }
+  .player { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-2); }
+  .player:last-child { border-bottom: 0; }
+  .player .pmain { flex: 1; }
+  .player .pn { font-weight: 700; font-size: 13px; }
+  .player a.pn-link { color: var(--brand-deep); text-decoration: none; display: inline-block; }
+  .player a.pn-link:hover { text-decoration: underline; }
+  .player a.pn-link .ext { color: var(--ink-3); font-weight: 400; }
+  .player .pm { font-size: 11.5px; color: var(--ink-2); margin-top: 1px; line-height: 1.4; }
+  .player .pl { font-size: 11px; margin-top: 3px; display: inline-block; }
+  .rolechip { font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 3px 6px; border-radius: 5px; flex: none; margin-top: 2px; }
+  .role-core { background: var(--brand); color: #fff; }
+  .role-sideline { background: var(--neutral-bg); color: var(--ink-2); }
+
+  .takeaway { background: linear-gradient(180deg, #EDF6F5, #F4FAF9); border: 1px solid #CFE5E2; border-left: 3px solid var(--brand); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  .distinction { font-size: 12.5px; color: var(--ink-2); background: #FBF7F0; border: 1px solid #ECE3D4; border-left: 3px solid #C8A24A; border-radius: 8px; padding: 10px 12px; line-height: 1.45; }
+  .reltag { color: var(--ink-3); font-size: 12px; cursor: help; font-weight: 700; }
+
+  .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -47%) scale(.98); width: min(700px, 93vw); max-height: 86vh; background: var(--panel); border-radius: 14px; box-shadow: var(--shadow-lg); z-index: 60; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s; }
+  .modal.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+  .modal .mhead { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 14px; border-bottom: 1px solid var(--line); }
+  .modal .mhead h3 { font-size: 16px; font-weight: 700; }
+  .modal .mhead .sub { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .mtabs { display: flex; gap: 6px; padding: 14px 18px 0; }
+  .mtab { font-size: 12px; font-weight: 600; padding: 7px 12px; border-radius: 7px 7px 0 0; border: 1px solid var(--line); border-bottom: 0; background: var(--panel-2); color: var(--ink-2); }
+  .mtab[aria-pressed="true"] { background: var(--brand); color: #fff; border-color: var(--brand); }
+  .mcontent { margin: 0 18px; flex: 1; min-height: 220px; resize: none; font-family: var(--mono); font-size: 11.5px; line-height: 1.5; border: 1px solid var(--line); border-radius: 8px; padding: 12px; color: var(--ink); background: var(--panel-2); white-space: pre; overflow: auto; }
+  .mactions { display: flex; align-items: center; gap: 10px; padding: 14px 18px 18px; }
+  .mhint { font-size: 12px; color: var(--good); font-weight: 600; }
+  .whopays { font-size: 13px; color: var(--ink); background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 8px; padding: 10px 12px; }
+
+  .notebox { width: 100%; min-height: 74px; resize: vertical; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-family: inherit; font-size: 13px; color: var(--ink); background: var(--panel); }
+  .notebox:focus { outline: 0; border-color: var(--brand); }
+
+  /* ---------- Therapy areas ---------- */
+  .section { margin-top: 40px; }
+  .section > h2 { font-size: 22px; font-weight: 800; }
+  .section > .sintro { color: var(--ink-2); font-size: 14px; margin-top: 6px; max-width: 75ch; }
+  .areawrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+  table.area { border-collapse: collapse; width: 100%; min-width: 760px; }
+  table.area th, table.area td { text-align: left; padding: 10px 12px; font-size: 12.5px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  table.area thead th { background: var(--panel-2); font-weight: 700; color: var(--ink); border-bottom: 2px solid var(--line); position: sticky; top: 0; }
+  table.area td.rowlbl { font-weight: 700; color: var(--ink-2); background: #FCFCFA; width: 150px; }
+  .fit { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; }
+  .fit-High { background: var(--r-essential); color: #fff; }
+  .fit-Medium { background: var(--r-adjacent); color: var(--r-adjacent-ink); }
+  .fit-Low { background: var(--r-nice); color: var(--r-nice-ink); }
+  .bestfit { font-size: 12px; color: var(--ink-2); }
+  .bestfit b { color: var(--ink); }
+
+  .watch { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 16px; }
+  .wcard { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--warn); border-radius: 8px; padding: 12px 14px; box-shadow: var(--shadow); }
+  .wcard .wn { font-weight: 700; font-size: 13px; }
+  .wcard .wnote { font-size: 12px; color: var(--ink-2); margin-top: 5px; line-height: 1.45; }
+
+  footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 12px; line-height: 1.6; }
+
+  @media (max-width: 760px) {
+    .dcards { grid-template-columns: 1fr; }
+    header.top { padding: 22px 18px 14px; }
+    .wrap { padding: 0 18px 80px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<header class="top">
+  <div class="brandrow">
+    <span class="logo">Ditto · Care Clarified</span>
+    <span class="eyebrow">Strategy tool · internal</span>
+  </div>
+  <h1 id="title">Feature Scope Explorer</h1>
+  <p class="sub" id="subtitle"></p>
+  <p class="meta" id="metaline"></p>
+  <div class="dcards" id="dcards"></div>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="ctrow">
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input id="search" type="search" placeholder="Search features, players, evidence…" autocomplete="off">
+      </label>
+      <div class="chips" id="catchips"></div>
+      <div class="spacer"></div>
+      <button class="chip" id="proposedToggle" aria-pressed="false">★ Proposed only</button>
+      <button class="btn" id="exportBtn">Export</button>
+      <button class="btn" id="resetBtn">Reset</button>
+    </div>
+    <div class="legendbar">
+      <div class="legend">
+        <span>Relevance</span>
+        <span class="swatches">
+          <span class="sw rel-essential" title="Core">C</span>
+          <span class="sw rel-adjacent" title="Extra">E</span>
+          <span class="sw rel-nice" title="Nice to have">N</span>
+          <span class="sw rel-none" title="Out of scope">—</span>
+        </span>
+        <span style="color:var(--ink-3)">click a cell to change</span>
+      </div>
+      <div class="legend">
+        <span>Evidence</span>
+        <span class="badge dots b-neutral">●●●</span> popularity
+        <span class="badge b-good">retains</span>
+        <span class="badge b-warn">reimb.</span>
+        <span class="badge b-bad">Class IIa</span>
+      </div>
+      <div class="spacer"></div>
+      <span class="savestate" id="savestate"><span class="dot"></span><span id="savetext">Baseline</span></span>
+    </div>
+  </div>
+
+  <div class="tablewrap">
+    <table class="matrix">
+      <thead><tr id="matrixhead"></tr></thead>
+      <tbody id="matrixbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Therapy areas × the three directions</h2>
+    <p class="sintro" id="areaIntro">Which direction leads in each therapeutic area. The companion leads where understanding carries the value (oncology, other severe illness); the social platform leads where the people around the patient carry the load (neurodegenerative coordination, pregnancy sharing); navigation leads nowhere as a wedge.</p>
+    <div class="areawrap">
+      <table class="area" id="fitTable"></table>
+    </div>
+    <div class="areawrap" style="margin-top:14px">
+      <table class="area" id="profileTable"></table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Competitor watch</h2>
+    <p class="sintro">Not Ditto features — encroachment and validation signals from the market research to keep in view.</p>
+    <div class="watch" id="watchCards"></div>
+  </div>
+
+  <footer id="footer"></footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" aria-hidden="true" aria-label="Feature detail"></aside>
+
+<div class="scrim" id="modalScrim"></div>
+<div class="modal" id="exportModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Export">
+  <div class="mhead">
+    <div><h3>Export your working state</h3><div class="sub">Copy the text below, or try Download. JSON pastes back into <code>data/features.json</code>.</div></div>
+    <button class="pclose" id="modalClose" aria-label="Close">✕</button>
+  </div>
+  <div class="mtabs">
+    <button class="mtab" data-fmt="json" aria-pressed="true">JSON (re-import)</button>
+    <button class="mtab" data-fmt="md" aria-pressed="false">Markdown summary</button>
+  </div>
+  <textarea class="mcontent" id="modalContent" readonly spellcheck="false"></textarea>
+  <div class="mactions">
+    <button class="btn primary" id="copyBtn">Copy to clipboard</button>
+    <button class="btn" id="dlBtn">Download file</button>
+    <span class="mhint" id="copyHint"></span>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("ditto-data").textContent);
+  var STORE_KEY = "ditto-feature-scope-v1";
+  var REL_ORDER = ["essential", "adjacent", "nice", "none"];
+  var REL_LABEL = DATA.meta.relevanceLabels;
+  var DIRS = DATA.directions;
+  var DIR_VAR = { companion: "--d-companion", social: "--d-social", navigation: "--d-navigation" };
+
+  // ---------- state ----------
+  var overrides = loadStore(); // { featureId: { relevance:{dir:val}, note:"" } }
+  function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
+  function saveStore() { try { localStorage.setItem(STORE_KEY, JSON.stringify(overrides)); } catch (e) {} updateSaveState(); }
+
+  function relOf(f, dir) {
+    var o = overrides[f.id];
+    if (o && o.relevance && o.relevance[dir] != null) return o.relevance[dir];
+    return f.relevance[dir];
+  }
+  function isChanged(f, dir) {
+    var o = overrides[f.id];
+    return !!(o && o.relevance && o.relevance[dir] != null && o.relevance[dir] !== f.relevance[dir]);
+  }
+  function noteOf(f) { var o = overrides[f.id]; return (o && o.note) || ""; }
+  function setRel(f, dir, val) {
+    var o = overrides[f.id] || (overrides[f.id] = {});
+    o.relevance = o.relevance || {};
+    if (val === f.relevance[dir]) { delete o.relevance[dir]; } else { o.relevance[dir] = val; }
+    cleanup(f.id); saveStore();
+  }
+  function setNote(f, val) {
+    var o = overrides[f.id] || (overrides[f.id] = {});
+    if (val) { o.note = val; } else { delete o.note; }
+    cleanup(f.id); saveStore();
+  }
+  function cleanup(id) {
+    var o = overrides[id]; if (!o) return;
+    if (o.relevance && !Object.keys(o.relevance).length) delete o.relevance;
+    if (!o.relevance && !o.note) delete overrides[id];
+  }
+  function dirtyCount() {
+    var n = 0; for (var k in overrides) { var o = overrides[k]; if (o.relevance) n += Object.keys(o.relevance).length; if (o.note) n += 1; } return n;
+  }
+
+  // ---------- filters ----------
+  var state = { search: "", cats: {}, focus: null, proposedOnly: false };
+  DATA.categories.forEach(function (c) { state.cats[c] = true; });
+
+  function featureVisible(f) {
+    if (state.proposedOnly && !f.proposed) return false;
+    if (!state.cats[f.category]) return false;
+    if (state.search) {
+      var q = state.search.toLowerCase();
+      var hay = (f.name + " " + f.why + " " + (f.evidence ? f.evidence.desc + " " + f.evidence.takeaway : "") + " " +
+        (f.evidence && f.evidence.players ? f.evidence.players.map(function (p) { return p.name; }).join(" ") : "")).toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+
+  // ---------- render: header ----------
+  document.getElementById("title").textContent = DATA.meta.title.replace("Ditto — ", "");
+  document.getElementById("subtitle").textContent = DATA.meta.subtitle;
+  document.getElementById("metaline").textContent = "Source: " + DATA.meta.source + " · Updated " + DATA.meta.updated;
+  document.getElementById("footer").innerHTML =
+    "Built from the long-term product vision (three directions + feature map) and the market deep-dive (briefs F1–F8, synthesis 15–18). " +
+    "Relevance values are the starting point from the vision doc; edit them freely — changes save in your browser. " +
+    "Evidence figures are research-informed and several are company-reported; re-verify before external use.";
+
+  function dirCount(dir, rel) {
+    return DATA.features.filter(function (f) { return relOf(f, dir) === rel; }).length;
+  }
+  function renderDCards() {
+    var host = document.getElementById("dcards"); host.innerHTML = "";
+    DIRS.forEach(function (d) {
+      var el = document.createElement("button");
+      el.className = "dcard"; el.style.setProperty("--accent", "var(" + DIR_VAR[d.id] + ")");
+      el.setAttribute("aria-pressed", state.focus === d.id ? "true" : "false");
+      el.innerHTML =
+        '<div class="dnum">Direction ' + d.num + '</div>' +
+        '<h3>' + d.name + '</h3>' +
+        '<div class="tag">' + d.tagline + '</div>' +
+        '<div class="counts">' +
+          '<span class="cpill"><b class="tnum">' + dirCount(d.id, "essential") + '</b> core</span>' +
+          '<span class="cpill"><b class="tnum">' + dirCount(d.id, "adjacent") + '</b> extra</span>' +
+          '<span class="cpill"><b class="tnum">' + dirCount(d.id, "nice") + '</b> nice</span>' +
+        '</div>' +
+        '<div class="mon"><b>Likely model:</b> ' + d.monetization + '</div>';
+      el.addEventListener("click", function () {
+        state.focus = (state.focus === d.id) ? null : d.id;
+        renderDCards(); renderMatrix();
+      });
+      host.appendChild(el);
+    });
+  }
+
+  // ---------- render: controls ----------
+  function renderCatChips() {
+    var host = document.getElementById("catchips"); host.innerHTML = "";
+    DATA.categories.forEach(function (c) {
+      var b = document.createElement("button");
+      b.className = "chip cat"; b.textContent = c; b.setAttribute("aria-pressed", state.cats[c] ? "true" : "false");
+      b.addEventListener("click", function () { state.cats[c] = !state.cats[c]; b.setAttribute("aria-pressed", state.cats[c] ? "true" : "false"); renderMatrix(); });
+      host.appendChild(b);
+    });
+  }
+
+  // ---------- render: matrix ----------
+  function badgeHTML(f) {
+    if (!f.evidence) return "";
+    var e = f.evidence, out = [];
+    var dots = { high: "●●●", medium: "●●○", low: "●○○" }[e.popularity.level] || "○○○";
+    out.push('<span class="badge dots b-neutral" title="Popularity: ' + e.popularity.level + '">' + dots + '</span>');
+    var r = e.retention.level;
+    if (r === "strong") out.push('<span class="badge b-good" title="' + esc(e.retention.note) + '">retains</span>');
+    else if (r === "engineered") out.push('<span class="badge b-warn" title="' + esc(e.retention.note) + '">loop-only</span>');
+    else if (r === "weak") out.push('<span class="badge b-bad" title="' + esc(e.retention.note) + '">low ret.</span>');
+    else if (r === "episodic") out.push('<span class="badge b-bad" title="' + esc(e.retention.note) + '">episodic</span>');
+    if (e.reimbursed.level === "yes") out.push('<span class="badge b-good">reimb.</span>');
+    else if (e.reimbursed.level === "conditional") out.push('<span class="badge b-warn" title="' + esc(e.reimbursed.note) + '">reimb.∗</span>');
+    if (e.regulatory.level === "class-iia-risk") out.push('<span class="badge b-bad" title="' + esc(e.regulatory.note) + '">Class IIa</span>');
+    else if (e.regulatory.level === "is-regulation") out.push('<span class="badge b-neutral" title="' + esc(e.regulatory.note) + '">EU rail</span>');
+    return '<div class="badges">' + out.join("") + '</div>';
+  }
+
+  function renderMatrixHead() {
+    var tr = document.getElementById("matrixhead"); tr.innerHTML = "";
+    tr.innerHTML = '<th class="mh feat">Feature</th><th class="mh ev">Market evidence</th>' +
+      DIRS.map(function (d) {
+        var op = state.focus && state.focus !== d.id ? ";opacity:.4" : "";
+        return '<th class="mh dir" style="--accent:var(' + DIR_VAR[d.id] + ')' + op + '">' +
+          '<span class="dn">' + d.num + '</span><span class="dlabel">' + d.name + '</span>' +
+          '<span class="dunder"></span></th>';
+      }).join("");
+  }
+
+  function renderMatrix() {
+    renderMatrixHead(); renderDCards();
+    var body = document.getElementById("matrixbody"); body.innerHTML = "";
+    DATA.categories.forEach(function (cat) {
+      var feats = DATA.features.filter(function (f) { return f.category === cat && featureVisible(f); });
+      if (!feats.length) return;
+      if (state.focus) {
+        feats.sort(function (a, b) { return REL_ORDER.indexOf(relOf(a, state.focus)) - REL_ORDER.indexOf(relOf(b, state.focus)); });
+      }
+      var ess = feats.filter(function (f) { return relOf(f, state.focus || "companion") === "essential"; }).length;
+      var crow = document.createElement("tr"); crow.className = "catrow";
+      crow.innerHTML = '<td colspan="' + (2 + DIRS.length) + '">' + cat +
+        '<span class="ccount">' + feats.length + ' feature' + (feats.length > 1 ? "s" : "") + '</span></td>';
+      body.appendChild(crow);
+
+      feats.forEach(function (f) {
+        var tr = document.createElement("tr"); tr.className = "frow";
+        var fcell = document.createElement("td"); fcell.className = "fname";
+        fcell.innerHTML = '<span class="fn">' + esc(f.name) + (f.proposed ? ' <span class="ptag">proposed</span>' : '') +
+          (f.distinction ? ' <span class="reltag" title="Overlaps with related features — open to see how it differs">&#8596;</span>' : '') + '</span>' +
+          '<div class="why">' + esc(f.why) + '</div>';
+        fcell.querySelector(".fn").addEventListener("click", function () { openPanel(f); });
+        tr.appendChild(fcell);
+
+        var ecell = document.createElement("td"); ecell.className = "evid"; ecell.innerHTML = badgeHTML(f);
+        ecell.style.cursor = "pointer"; ecell.addEventListener("click", function () { openPanel(f); });
+        tr.appendChild(ecell);
+
+        DIRS.forEach(function (d) {
+          var td = document.createElement("td"); td.className = "rel";
+          if (state.focus && state.focus !== d.id) td.classList.add("dim-col");
+          if (isChanged(f, d.id)) td.classList.add("changed");
+          var val = relOf(f, d.id);
+          var btn = document.createElement("button");
+          btn.className = "relcell rel-" + val; btn.textContent = REL_LABEL[val];
+          btn.title = "Click to cycle · " + d.name;
+          btn.addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            var next = REL_ORDER[(REL_ORDER.indexOf(relOf(f, d.id)) + 1) % REL_ORDER.length];
+            setRel(f, d.id, next); renderMatrix();
+            if (panelFeatureId === f.id) renderPanelRelpick(f);
+          });
+          td.appendChild(btn);
+          if (state.focus && state.focus !== d.id) td.style.opacity = ".4";
+          tr.appendChild(td);
+        });
+        if (state.focus && relOf(f, state.focus) === "none") tr.classList.add("dim");
+        body.appendChild(tr);
+      });
+    });
+    updateSaveState();
+  }
+
+  // ---------- detail panel ----------
+  var panelFeatureId = null;
+  function openPanel(f) {
+    panelFeatureId = f.id;
+    var e = f.evidence || {};
+    var p = document.getElementById("panel");
+    var playersHTML = (e.players || []).map(function (pl) {
+      var nameHTML = pl.url
+        ? '<a class="pn pn-link" href="https://' + esc(pl.url) + '" target="_blank" rel="noopener">' + esc(pl.name) + ' <span class="ext">↗</span></a>'
+        : '<div class="pn">' + esc(pl.name) + '</div>';
+      return '<div class="player"><div class="pmain">' + nameHTML +
+        '<div class="pm">' + esc(pl.metric) + '</div></div>' +
+        '<span class="rolechip role-' + (pl.role || "sideline") + '">' + (pl.role === "core" ? "Core" : "Sideline") + '</span></div>';
+    }).join("");
+
+    function evBox(k, lvl, note, legendMap) {
+      var cls = "b-neutral", txt = lvl;
+      if (k === "Retention") { cls = lvl === "strong" ? "b-good" : (lvl === "weak" || lvl === "episodic") ? "b-bad" : (lvl === "na" ? "b-neutral" : "b-warn"); }
+      if (k === "Reimbursed") { cls = lvl === "yes" ? "b-good" : lvl === "conditional" ? "b-warn" : "b-neutral"; }
+      if (k === "Regulatory") { cls = lvl === "class-iia-risk" ? "b-bad" : lvl === "is-regulation" ? "b-warn" : "b-good"; txt = lvl === "class-iia-risk" ? "Class IIa risk" : lvl === "is-regulation" ? "EU rail" : lvl === "ce-exempt" ? "CE-exempt" : "No burden"; }
+      if (k === "Popularity") { var dm = { high: "●●● widely adopted", medium: "●●○ established", low: "●○○ nascent" }; txt = dm[lvl] || lvl; cls = "b-neutral"; }
+      return '<div class="evbox"><div class="ek">' + k + '</div><div class="ev-badge"><span class="badge ' + cls + '">' + esc(txt) + '</span></div>' +
+        (note ? '<div class="enote">' + esc(note) + '</div>' : '') + '</div>';
+    }
+
+    p.innerHTML =
+      '<div class="phead">' +
+        '<button class="pclose" id="pclose" aria-label="Close">✕</button>' +
+        '<div class="pcat">' + esc(f.category) + (f.proposed ? ' · <span style="color:var(--proposed)">proposed addition</span>' : '') + '</div>' +
+        '<h2>' + esc(f.name) + '</h2>' +
+      '</div>' +
+      '<div class="pbody">' +
+        '<p class="desc">' + esc(e.desc || f.why) + '</p>' +
+        (f.distinction ? '<div class="sec"><div class="lbl">How it differs from related features</div><div class="distinction">' + esc(f.distinction) + '</div></div>' : '') +
+        '<div class="sec"><div class="lbl">Relevance per direction</div><div class="relpick" id="relpick"></div></div>' +
+        (e.takeaway ? '<div class="sec"><div class="lbl">So what for Ditto</div><div class="takeaway">' + esc(e.takeaway) + '</div></div>' : '') +
+        (e.popularity ? '<div class="sec"><div class="lbl">Market read</div><div class="evgrid">' +
+          evBox("Popularity", e.popularity.level, e.popularity.note) +
+          evBox("Retention", e.retention.level, e.retention.note) +
+          evBox("Reimbursed", e.reimbursed.level, e.reimbursed.note) +
+          evBox("Regulatory", e.regulatory.level, e.regulatory.note) +
+          '</div></div>' : '') +
+        (e.whoPays ? '<div class="sec"><div class="lbl">Who pays</div><div class="whopays">' + esc(e.whoPays) + '</div></div>' : '') +
+        (playersHTML ? '<div class="sec"><div class="lbl">What patients &amp; families use today</div>' + (e.audienceNote ? '<div class="audnote">' + esc(e.audienceNote) + '</div>' : '') + '<div class="players">' + playersHTML + '</div></div>' : '') +
+        '<div class="sec"><div class="lbl">Your note</div><textarea class="notebox" id="notebox" placeholder="Strategic notes, decisions, questions…">' + esc(noteOf(f)) + '</textarea></div>' +
+      '</div>';
+
+    renderPanelRelpick(f);
+    document.getElementById("pclose").addEventListener("click", closePanel);
+    var nb = document.getElementById("notebox");
+    nb.addEventListener("input", function () { setNote(f, nb.value); });
+
+    document.getElementById("scrim").classList.add("open");
+    p.classList.add("open"); p.setAttribute("aria-hidden", "false");
+  }
+  function renderPanelRelpick(f) {
+    var host = document.getElementById("relpick"); if (!host) return; host.innerHTML = "";
+    DIRS.forEach(function (d) {
+      var row = document.createElement("div"); row.className = "rprow";
+      var cur = relOf(f, d.id);
+      row.innerHTML = '<div class="rpname" style="--accent:var(' + DIR_VAR[d.id] + ')"><span class="ddot"></span>' + shortDir(d) + '</div>';
+      var opts = document.createElement("div"); opts.className = "opts";
+      REL_ORDER.forEach(function (r) {
+        var o = document.createElement("button");
+        o.className = "opt"; o.setAttribute("data-on", r); o.setAttribute("aria-pressed", cur === r ? "true" : "false");
+        o.textContent = REL_LABEL[r];
+        o.addEventListener("click", function () { setRel(f, d.id, r); renderPanelRelpick(f); renderMatrix(); });
+        opts.appendChild(o);
+      });
+      row.appendChild(opts); host.appendChild(row);
+    });
+  }
+  function shortDir(d) { return ({ companion: "Companion", social: "Social", navigation: "Navigation" })[d.id] || d.name; }
+  function closePanel() {
+    panelFeatureId = null;
+    document.getElementById("scrim").classList.remove("open");
+    var p = document.getElementById("panel"); p.classList.remove("open"); p.setAttribute("aria-hidden", "true");
+  }
+  document.getElementById("scrim").addEventListener("click", closePanel);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closePanel(); closeModal(); } });
+
+  // ---------- therapy areas ----------
+  function renderAreas() {
+    var areas = DATA.therapyAreas;
+    var ft = document.getElementById("fitTable");
+    var head = '<thead><tr><th class="rowlbl">Direction</th>' + areas.map(function (a) { return '<th>' + esc(a.name) + '</th>'; }).join("") + '</tr></thead>';
+    var rows = DIRS.map(function (d) {
+      return '<tr><td class="rowlbl">' + d.num + '. ' + esc(shortDir(d)) + '</td>' +
+        areas.map(function (a) { var v = a.fit[d.id]; return '<td><span class="fit fit-' + v + '">' + v + '</span></td>'; }).join("") + '</tr>';
+    }).join("");
+    var bestRow = '<tr><td class="rowlbl">Best-fit</td>' + areas.map(function (a) {
+      var d = DIRS.filter(function (x) { return x.id === a.bestFit; })[0];
+      return '<td class="bestfit"><b>' + esc(shortDir(d)) + '.</b> ' + esc(a.bestFitNote) + '</td>';
+    }).join("") + '</tr>';
+    ft.innerHTML = head + '<tbody>' + rows + bestRow + '</tbody>';
+
+    var pt = document.getElementById("profileTable");
+    var dims = [["painNeed", "Pain / need"], ["comprehension", "Comprehension"], ["complexity", "Care complexity"], ["circle", "Loved ones"], ["emotion", "Emotional charge"], ["recording", "Recording today"], ["competition", "Competition"], ["monetization", "Monetization"]];
+    var phead = '<thead><tr><th class="rowlbl">Area profile</th>' + areas.map(function (a) { return '<th>' + esc(a.name) + '</th>'; }).join("") + '</tr></thead>';
+    var pbody = dims.map(function (dm) {
+      return '<tr><td class="rowlbl">' + dm[1] + '</td>' + areas.map(function (a) { return '<td>' + esc(a[dm[0]]) + '</td>'; }).join("") + '</tr>';
+    }).join("");
+    pt.innerHTML = phead + '<tbody>' + pbody + '</tbody>';
+  }
+
+  function renderWatch() {
+    var host = document.getElementById("watchCards"); host.innerHTML = "";
+    (DATA.competitorWatch || []).forEach(function (w) {
+      var el = document.createElement("div"); el.className = "wcard";
+      el.innerHTML = '<div class="wn">' + esc(w.name) + '</div><div class="wnote">' + esc(w.note) + '</div>';
+      host.appendChild(el);
+    });
+  }
+
+  // ---------- save state + export ----------
+  function updateSaveState() {
+    var n = dirtyCount();
+    var el = document.getElementById("savestate"), tx = document.getElementById("savetext");
+    if (n > 0) { el.classList.add("dirty"); tx.textContent = n + " change" + (n > 1 ? "s" : "") + " saved locally"; }
+    else { el.classList.remove("dirty"); tx.textContent = "Baseline (no changes)"; }
+  }
+
+  function buildExport() {
+    var clone = JSON.parse(JSON.stringify(DATA));
+    clone.meta.exported = true;
+    clone.features.forEach(function (f) {
+      DIRS.forEach(function (d) { f.relevance[d.id] = relOf(f, d.id); });
+      var nt = noteOf(f); if (nt) f.note = nt;
+    });
+    return clone;
+  }
+  function buildMarkdown() {
+    var lines = ["# Ditto Feature Scope — working state", "", "_Exported from the Feature Scope Explorer._", ""];
+    DIRS.forEach(function (d) {
+      lines.push("## " + d.num + ". " + d.name);
+      ["essential", "adjacent"].forEach(function (rel) {
+        var fs = DATA.features.filter(function (f) { return relOf(f, d.id) === rel; });
+        if (fs.length) { lines.push("", "**" + REL_LABEL[rel] + ":** " + fs.map(function (f) { return f.name + (f.proposed ? " ✦" : ""); }).join(", ")); }
+      });
+      lines.push("");
+    });
+    var noted = DATA.features.filter(function (f) { return noteOf(f); });
+    if (noted.length) { lines.push("## Notes"); noted.forEach(function (f) { lines.push("- **" + f.name + "**: " + noteOf(f)); }); }
+    return lines.join("\n");
+  }
+  function download(name, text, type) {
+    var blob = new Blob([text], { type: type || "text/plain" });
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+  var modalFmt = "json";
+  function exportContent() { return modalFmt === "md" ? buildMarkdown() : JSON.stringify(buildExport(), null, 2); }
+  function refreshModal() {
+    document.getElementById("modalContent").value = exportContent();
+    [].forEach.call(document.querySelectorAll(".mtab"), function (t) { t.setAttribute("aria-pressed", t.getAttribute("data-fmt") === modalFmt ? "true" : "false"); });
+    document.getElementById("copyHint").textContent = "";
+  }
+  function openExportModal() {
+    modalFmt = "json"; refreshModal();
+    document.getElementById("modalScrim").classList.add("open");
+    var m = document.getElementById("exportModal"); m.classList.add("open"); m.setAttribute("aria-hidden", "false");
+  }
+  function closeModal() {
+    document.getElementById("modalScrim").classList.remove("open");
+    var m = document.getElementById("exportModal"); m.classList.remove("open"); m.setAttribute("aria-hidden", "true");
+  }
+  document.getElementById("exportBtn").addEventListener("click", openExportModal);
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  document.getElementById("modalScrim").addEventListener("click", closeModal);
+  [].forEach.call(document.querySelectorAll(".mtab"), function (t) {
+    t.addEventListener("click", function () { modalFmt = t.getAttribute("data-fmt"); refreshModal(); });
+  });
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var ta = document.getElementById("modalContent"), hint = document.getElementById("copyHint"), txt = ta.value;
+    ta.focus(); ta.select(); ta.setSelectionRange(0, txt.length);
+    function ok() { hint.textContent = "Copied ✓"; setTimeout(function () { hint.textContent = ""; }, 2500); }
+    function manual() { hint.textContent = "Selected — press " + (navigator.platform.indexOf("Mac") > -1 ? "⌘C" : "Ctrl+C"); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(ok).catch(function () { try { document.execCommand("copy") ? ok() : manual(); } catch (e) { manual(); } });
+    } else { try { document.execCommand("copy") ? ok() : manual(); } catch (e) { manual(); } }
+  });
+  document.getElementById("dlBtn").addEventListener("click", function () {
+    var name = modalFmt === "md" ? "ditto-feature-scope.md" : "ditto-feature-scope.json";
+    var type = modalFmt === "md" ? "text/markdown" : "application/json";
+    try { download(name, exportContent(), type); document.getElementById("copyHint").textContent = "Download started (if blocked, use Copy)"; }
+    catch (e) { document.getElementById("copyHint").textContent = "Download blocked here — use Copy instead"; }
+    setTimeout(function () { document.getElementById("copyHint").textContent = ""; }, 3000);
+  });
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    if (dirtyCount() === 0) return;
+    if (confirm("Reset all relevance changes and notes back to the vision-doc baseline?")) {
+      overrides = {}; saveStore(); renderMatrix(); if (panelFeatureId) { var f = DATA.features.filter(function (x){return x.id===panelFeatureId;})[0]; if (f) openPanel(f); }
+    }
+  });
+  document.getElementById("search").addEventListener("input", function (e) { state.search = e.target.value; renderMatrix(); });
+  document.getElementById("proposedToggle").addEventListener("click", function () {
+    state.proposedOnly = !state.proposedOnly;
+    this.setAttribute("aria-pressed", state.proposedOnly ? "true" : "false");
+    renderMatrix();
+  });
+
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  // ---------- init ----------
+  renderCatChips();
+  renderMatrix();
+  renderAreas();
+  renderWatch();
+  updateSaveState();
+})();
+</script>
